@@ -1,0 +1,96 @@
+\documentclass[twoside=false,fontsize=12pt,DIV=12,BCOR=0pt]{scrbook}
+\includeonly{turing}
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage{csquotes}
+\MakeOuterQuote{"}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{thmtools}
+\usepackage{stmaryrd}
+\usepackage[unicode]{hyperref}
+\usepackage[euler-digits]{eulervm}
+\usepackage{beton}
+\renewcommand{\bfdefault}{sbc}
+%\usepackage{concmath}
+%\usepackage[final]{microtype}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\usepackage{biblatex}
+\addbibresource{literatura.bib}
+\usepackage{mathtools}
+
+\declaretheorem[style=definition,qed=$\vartriangleleft$,parent=chapter]{definicija}
+\declaretheorem[sibling=definicija]{propozicija}
+\declaretheorem[sibling=definicija]{korolar}
+\declaretheorem[sibling=definicija]{lema}
+\declaretheorem[sibling=definicija]{teorem}
+\declaretheorem[sibling=definicija,style=definition,qed=$\vartriangleleft$]{primjer}
+\declaretheorem[sibling=definicija,style=definition,qed=$\vartriangleleft$]{napomena}
+
+%\usepackage{dsfont}
+\usepackage{mathbbol}
+\usepackage[defaultlines=3,all]{nowidow}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+\tikzset{->,>=stealth',
+node distance=3cm,
+%every state/.style={thick, fill=gray!10},
+initial text=$ $}
+
+\newcommand{\N}{{\mathbb N}}
+%\newcommand{\f}{\mathbold}
+\newcommand{\f}{\mathsf}
+\newcommand{\dom}[1]{\mathcal D_{#1}}
+\newcommand{\im}[1]{\mathcal I_{#1}}
+\newcommand{\graf}[1]{\mathcal G_{#1}}
+\newcommand{\reg}[1]{\mathcal R_{#1}}
+\newcommand{\inc}{\textsc{inc}}
+\newcommand{\dec}{\textsc{dec}}
+\newcommand{\goto}{\textsc{go\,to}}
+\newcommand{\incr}[1]{\inc\;\reg{#1}}
+\newcommand{\decr}[2]{\dec\;\reg{#1},#2}
+\newcommand{\remove}[2]{\textsc{remove}\;\reg{#1}\;\textsc{to}\;\reg{#2}}
+\newcommand{\move}[3]{\textsc{move}\;\reg{#1}\;\textsc{to}\;\reg{#2}\;\textsc{using}\;\reg{#3}}
+\newcommand{\pr}{\mathbin{\raisebox{1pt}{\textsc{\scriptsize{p\!r}}}}}
+\newcommand{\kompl}{\sp{\textup{\textsf c}}}
+\newcommand{\bl}{\t\textvisiblespace}
+
+\newenvironment{prog}{\left[\begin{array}{r@{\;}l}}{\end{array}\right]}
+
+\DeclareMathOperator{\card}{card}
+\DeclareTextFontCommand{\t}{\ttfamily\upshape}
+
+\DeclarePairedDelimiter{\knk}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\kins}{\ulcorner}{\urcorner}
+\DeclarePairedDelimiter{\kprog}{\ulcorner}{\lrcorner}
+\DeclarePairedDelimiter{\kf}{\t{\char`\{}}{\t{\char`\}}}
+\DeclarePairedDelimiter{\kr}{\langle}{\rangle}
+
+
+\begin{document}
+\title{Izra\v{c}unljivost za računarce}
+\author{Vedran Čačić}
+\date{2019}
+\maketitle
+
+\tableofcontents
+
+%\part{Modeli izračunljivosti}
+\include{uvod}
+\include{ram}
+\include{rek}
+\include{tmeq}
+\include{turing}
+
+%\part{Posljedice univerzalnosti}
+%\chapter{Teorem o parametru}
+\appendix
+\printbibliography
+
+\end{document}
