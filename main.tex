@@ -1,9 +1,23 @@
-\documentclass[twoside=false,fontsize=12pt,DIV=12,BCOR=0pt]{scrbook}
-\includeonly{turing}
+\documentclass[
+  twoside=semi,
+  open=any,
+  fontsize=12pt,
+  DIV=12,
+  BCOR=0pt,
+  headings=twolinechapter,
+  numbers=endperiod
+]{scrbook}
+%\includeonly{meta}
+\raggedbottom
+\pdfmapline{+dummy-space <dummy-space.pfb}
+\pdfinterwordspaceon
+%\usepackage{mmap}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[croatian]{babel}
 \usepackage{csquotes}
 \MakeOuterQuote{"}
+%\addtokomafont{sectionentry}{\bfseries}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{thmtools}
 \usepackage{stmaryrd}
@@ -12,7 +26,7 @@
 \usepackage{beton}
 \renewcommand{\bfdefault}{sbc}
 %\usepackage{concmath}
-%\usepackage[final]{microtype}
+\usepackage[final]{microtype}
 \usepackage{xcolor}
 \hypersetup{
     colorlinks,
@@ -23,6 +37,8 @@
 \usepackage{biblatex}
 \addbibresource{literatura.bib}
 \usepackage{mathtools}
+\usepackage{scrlayer-scrpage}
+%\pagestyle{plain.scrheadings}
 
 \declaretheorem[style=definition,qed=$\vartriangleleft$,parent=chapter]{definicija}
 \declaretheorem[sibling=definicija]{propozicija}
@@ -31,13 +47,14 @@
 \declaretheorem[sibling=definicija]{teorem}
 \declaretheorem[sibling=definicija,style=definition,qed=$\vartriangleleft$]{primjer}
 \declaretheorem[sibling=definicija,style=definition,qed=$\vartriangleleft$]{napomena}
+\declaretheorem[numbered=no,name={Church--\!Turingova teza}]{ctteza}
 
 %\usepackage{dsfont}
 \usepackage{mathbbol}
-\usepackage[defaultlines=3,all]{nowidow}
+%\usepackage[defaultlines=3,all]{nowidow}
 \usepackage{textcomp}
 \usepackage{tikz}
-\usetikzlibrary{automata, positioning, arrows}
+\usetikzlibrary{automata, positioning, arrows, cd}
 \tikzset{->,>=stealth',
 node distance=3cm,
 %every state/.style={thick, fill=gray!10},
@@ -58,8 +75,12 @@ initial text=$ $}
 \newcommand{\remove}[2]{\textsc{remove}\;\reg{#1}\;\textsc{to}\;\reg{#2}}
 \newcommand{\move}[3]{\textsc{move}\;\reg{#1}\;\textsc{to}\;\reg{#2}\;\textsc{using}\;\reg{#3}}
 \newcommand{\pr}{\mathbin{\raisebox{1pt}{\textsc{\scriptsize{p\!r}}}}}
-\newcommand{\kompl}{\sp{\textup{\textsf c}}}
+\newcommand{\kompl}{\sp{\,\textup{\textsf c}}}
 \newcommand{\bl}{\t\textvisiblespace}
+\newcommand{\dcup}{\mathbin{\dot\cup}}
+\newcommand{\bdcup}{\mathop{\dot\bigcup}}
+\newcommand{\conc}[1]{\mathbin{\renewcommand{\arraystretch}{0.1}\begin{array}{@{}c@{}}{\smallfrown}\\[-0.3ex]{\scriptstyle #1}\end{array}}}
+\newcommand{\rus}{\textit{$R\widetilde{usse}ll$}}
 
 \newenvironment{prog}{\left[\begin{array}{r@{\;}l}}{\end{array}\right]}
 
@@ -71,9 +92,10 @@ initial text=$ $}
 \DeclarePairedDelimiter{\kprog}{\ulcorner}{\lrcorner}
 \DeclarePairedDelimiter{\kf}{\t{\char`\{}}{\t{\char`\}}}
 \DeclarePairedDelimiter{\kr}{\langle}{\rangle}
-
+\DeclarePairedDelimiter{\dulj}{|}{|}
 
 \begin{document}
+%\tracingall
 \title{Izra\v{c}unljivost za računarce}
 \author{Vedran Čačić}
 \date{2019}
@@ -85,8 +107,11 @@ initial text=$ $}
 \include{uvod}
 \include{ram}
 \include{rek}
-\include{tmeq}
-\include{turing}
+\include{univ}
+\include{turing}%\include{tbroj}
+\include{neizr}%\include{church}
+\include{meta}
+\include{re}
 
 %\part{Posljedice univerzalnosti}
 %\chapter{Teorem o parametru}
