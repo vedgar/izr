@@ -1,4 +1,4 @@
-\section{Turing-izračunljivost jednomjesnih funkcija}
+\section{Turing-izračunljivost brojevnih funkcija}
 
 Sve dosad napravljeno može se iskazati u jednom vrlo općenitom obliku.
 
@@ -9,7 +9,7 @@ Neka je $\Sigma$ proizvoljna abeceda, i $\N\Sigma$ proizvoljno njeno kodiranje. 
 \begin{proof}
 Teorem~\ref{tm:tikp} (zajedno s teoremom~\ref{tm:pir}) kaže da za svaku $\varphi\in\TComp$ vrijedi $\N\varphi\in\mathcal Comp_1$. Dakle preslikavanje doista "ide kamo treba".
 
-Injektivnost je laka: neka su $\varphi_1,\varphi_2\in\TComp$ različite. Ako imaju različitu domenu, bez smanjenja općenitosti možemo pretpostaviti da postoji $w\in\dom{\varphi_1}\!\setminus\dom{\varphi_2}$. Tada je $\kr w\in\dom{\N\varphi_1}$, ali isto tako $\kr w\not\in\dom{\N\varphi_2}$ jer je kodiranje riječi injekcija, pa $\kr w$ ne može biti jednako nijednom $\kr{w'}$ za $w'\in\dom{\varphi_2}$. To znači da prateće funkcije $\N\varphi_1$ i $\N\varphi_2$ imaju različite domene, pa su različite.
+Injektivnost je lako dokazati: neka su $\varphi_1,\varphi_2\in\TComp$ različite. Ako imaju različitu domenu, bez smanjenja općenitosti možemo pretpostaviti da postoji $w\in\dom{\varphi_1}\!\setminus\dom{\varphi_2}$. Tada je $\kr w\in\dom{\N\varphi_1}$, ali isto tako $\kr w\not\in\dom{\N\varphi_2}$ jer je kodiranje riječi injekcija, pa $\kr w$ ne može biti jednak nijednom $\kr{w'}$ za $w'\in\dom{\varphi_2}$. To znači da prateće funkcije $\N\varphi_1$ i $\N\varphi_2$ imaju različite domene, pa su različite.
 
 Ako pak $\varphi_1$ i $\varphi_2$ imaju istu domenu $D$, ali se razlikuju na nekoj riječi $w\in D$, tada (opet po injektivnosti kodiranja riječi) vrijedi
 \begin{equation}
@@ -26,7 +26,7 @@ Precizno, imamo vezu
 \end{equation}
 te vrijedi $\N\,\N^{-1}\f F=F$ i $\N^{-1}\N\varphi=\varphi$.
 
-\begin{korolar}~\label{kor:pent}
+\begin{korolar}\label{kor:pent}
 Neka je $\Sigma$ abeceda s kodiranjem $\N\Sigma$, i $F^1$ brojevna funkcija. Tada je $F$ parcijalno rekurzivna ako i samo ako je $\N^{-1}F$ Turing-izračunljiva.
 \end{korolar}
 \begin{proof}
@@ -50,17 +50,17 @@ $\t\textbullet\f{factorial}\bigl(
 \t\textbullet)
 \bigr)=\t\textbullet\f{factorial}(
 \t{\textbullet\textbullet\textbullet})
-=\t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}$, jer je $p_1!=3\,!=6$. Za inicijalne funkcije, $\t\textbullet\f{Sc}(w)=w\t\textbullet$, a $\t\textbullet\f Z(w)=\varepsilon$ za sve $w\in\t\textbullet^*$. Za parcijalne funkcije, $\varepsilon\not\in\dom{\t\textbullet\f{Russell}}$, jer $0\not\in DR$.
+=\t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}$, jer je $p_1!=3\,!=6$. Za inicijalne funkcije, $\t\textbullet\f{Sc}(w)=w\t\textbullet$, a $\t\textbullet\f Z(w)=\varepsilon$ za sve $w\in\t\textbullet^*$. %Za parcijalne funkcije, $\varepsilon\not\in\dom{\t\textbullet\f{Russell}}$, jer $0\not\in DR$.
 \end{primjer}
 
-\begin{korolar}
+\begin{korolar}\label{kor:peuf}
 Neka je $F^1$\! brojevna funkcija. Tada je $F$ parcijalno rekurzivna ako i samo ako je $\t\textbullet F$ Turing-izračunljiva.
 \end{korolar}
 \begin{proof}
 Već rekosmo, ovo je specijalni slučaj korolara~\ref{kor:pent}, za unarnu abecedu.
 \end{proof}
 
-\section{Izračunljivost jezika}\label{sec:Todl}
+\subsection{Izračunljivost jezika}\label{sec:Todl}
 
 Neka je $\Sigma$ proizvoljna abeceda, s $b'$ znakova, $\N\Sigma$ njeno kodiranje, te $L\subseteq\Sigma^*$ jezik nad njom. Što bi značilo da je $L$ izračunljiv?
 
@@ -72,7 +72,7 @@ i prirodno je reći da $L$ ima neko svojstvo izračunljivosti (npr.\ da je primi
 
 Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}=\chi_\emptyset=\f Z$ primitivno rekurzivna (štoviše, inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
 
-U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. Očito, to treba biti Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) je jedan od konačno mnogo njih, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_{\mathit{true}}$ i $q_{\mathit{false}}$, te njima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
+U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. Očito, to treba biti Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_{\mathit{true}}$ i $q_{\mathit{false}}$, te njima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
 Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što je propisano da konfiguracija sa stanjem $q_{\mathit{false}}$ (kao i ona s $q_{\mathit{true}}$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja). Za takve strojeve kažemo da su \emph{odlučivači}. Svaki odlučivač $\mathcal T$ tako dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
@@ -93,10 +93,10 @@ Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $
 Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\not\in\{q_\mathit{true},q_\mathit{false}\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica~\eqref{eq:directiontable} imati dva retka jedinica, a ne samo jedan.
 
 I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$, imat ćemo funkciju zadanu sa
-\begin{equation}
+\begin{equation}\label{eq:stop'def}
     \f{stop}'(x):=\mu n\bigl(\f{State}(x,n)\in\{1,2\}\bigr)\text,
 \end{equation}
-za koju lako vidimo da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}), pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo mogli koristiti znak `:=' u definiciji) po definiciji odlučivača, jer ako je $x=\kr w$, tada mora postojati $n$ takav da je $\f{State}(x,n)\in\{1,2\}$, jer $\mathcal T$-izračunavanje s $w$ mora stati.
+za koju lako vidimo da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}), pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak `:=') po definiciji odlučivača: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$, za neki $n$ jer $\mathcal T$-izračunavanje s $w$ mora stati.
 Naravno, tada je $\f{stop}'(x)=\f{stop}'(\kr w)$ upravo broj koraka nakon kojeg to iz\-ra\-ču\-na\-va\-nje stane.
 
 Tvrdimo da je
@@ -122,32 +122,35 @@ Ako joj damo riječ $w\in\Sigma^*\setminus L$, tada (kodiranje riječi je injekc
 \begin{equation}
     \varphi(w)=(\N\Sigma^*)^{-1}\bigl(\,\chi_{\kr L}\bigl(\N\Sigma^*(w)\bigr)\bigr)=(\N\Sigma^*)^{-1}\bigl(\,\chi_{\kr L}(\kr w)\bigr)=(\N\Sigma^*)^{-1}(0)=\varepsilon\text.
 \end{equation}
-Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Kako je kodiranje injekcija, riječi unutar $L$ ne smije preslikavati u praznu riječ, a jer je $\varphi$ totalna, mora ih preslikavati u nešto. Dakle, $\varphi(w)$ je neprazna za svaku $w\in L$. Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju od $bool$ u $\Sigma^*$: prazna riječ je lažna, neprazne su istinite. Svi programski jezici koji definiraju istinitost stringova, definiraju je upravo na taj način.
+Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Kako je kodiranje injekcija, riječi unutar $L$ ne smije preslikavati u praznu riječ, a jer je $\varphi$ totalna, mora ih preslikavati nekamo. Dakle, $\varphi(w)$ je neprazna za svaku $w\in L$.
+Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju od $bool$ u $\Sigma^*$: prazna riječ je lažna, neprazne su istinite. Svi programski jezici koji definiraju istinitost stringova, definiraju je upravo na taj način.
 
 %Kako izvršavanje RAM-programa o kojem govorimo stane za svaki $\kr w$, po korolaru~\ref{kor:faza3} i napomeni~\ref{nap:snstane} slijedi da će Turingov stroj koji konstruiramo stati za svaki $w$ --- samo trebamo malo promijeniti način na koji stane, da ne komunicira izlaz putem trake nego putem završnog stanja.
 
-Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (zadnje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je povratna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti. Samo trebamo zamijeniti prijelaze~\eqref{d:88} i~\eqref{d:89} sa
+Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (zadnje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je povratna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti. Samo trebamo zamijeniti prijelaze~\eqref{d:88} i~\eqref{d:89} s
 \begin{gather}
 \label{eq:d88j}
-    \delta(q_9,\alpha_1):=(q_\mathit{true},\alpha_1,1)\text,\\
+    \delta(q_9,\alpha):=(q_\mathit{true},\alpha,1)\text{, za sve }\alpha\in\Sigma\text,\\
 \label{eq:d89j}
     \delta(q_9,\t\$):=(q_\mathit{false},\bl,-1)\text.
 \end{gather}
-Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučivači zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan, te će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_\mathit{true}$. Za $w\not\in L$, rezultat će biti $\varepsilon$, te će stroj doći do graničnika, obrisati ga i ući u stanje $q_\mathit{false}$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedno od tog dvojeg, zaključujemo da smo doista konstruirali odlučivač.
+Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučivači zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan, te će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_\mathit{true}$. Za $w\not\in L$, rezultat će biti $\varepsilon$, te će stroj doći do graničnika, obrisati ga i ući u stanje $q_\mathit{false}$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučivač.
 \end{proof}
+\vspace{-4mm}
 
 Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad \begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
 \node[state,above right of=q8] (q9) {$q_9$};
-\node[state,accepting,above right=0.1 and 2 of q9] (qt) {$q_\mathit{true}$};
-\node[state,accepting,below right=0.1 and 2 of q9] (qf) {$q_\mathit{false}$};
+\node[state,accepting,right of=q9] (qt) {$q_\mathit{true}$};
+\node[state,accepting,below right=0.5 and 1.6 of q9] (qf) {$q_\mathit{false}$};
 \draw
 %(q9) edge[dashed,loop left] node[left] {\t/:\bl} (q9)
-(q9) edge node[above] {$\alpha_1$} (qt)
+(q9) edge node[above] {$\Sigma$} (qt)
 (q9) edge[dashed] node[below] {\t\$:\bl} (qf)
 ;
-\end{tikzpicture}.
+\end{tikzpicture}\;.
+\vspace{-12mm}
 
-\section{Turing-izračunljivost višemjesnih funkcija}
+\subsection{Turing-izračunljivost višemjesnih funkcija}
 
 Dosadašnji rezultati pokazuju da je za jezične funkcije, i za \emph{jednomjesne} brojevne funkcije, svejedno računamo li ih na Turingovom stroju ili na nekom brojevnom modelu izračunavanja (npr.\ RAM-stroju). Možemo li to isto dokazati i za \emph{višemjesne} brojevne funkcije? Svakako, samo se prvo trebamo dogovoriti oko reprezentacije njihovog ulaza.
 
@@ -156,7 +159,7 @@ Dosadašnji rezultati pokazuju da je za jezične funkcije, i za \emph{jednomjesn
 Već smo u uvodu nagovijestili, koristit ćemo kontrakciju: u abecedu ćemo dodati separator \t/, te ćemo više ulaznih podataka razdvojiti separatorima: npr.\ $(1,0,5,0)$ prenijet ćemo kao \t{\textbullet//\textbullet\textbullet\textbullet\textbullet\textbullet/}.
 
 \begin{definicija}\label{def:beta}
-\emph{Binarna abeceda} je abeceda $\Sigma_\beta:=\{\t\textbullet,\t/\}$. Za svaki neprazni niz prirodnih brojeva $\vec x=(x_1,x_2,\dotsc,x_k)$, definiramo \emph{binarnu reprezentaciju} kao
+\emph{Binarna abeceda} je abeceda $\Sigma_\beta:=\{\t\textbullet,\t/\}$. Za svaki neprazni konačni niz prirodnih brojeva $\vec x=(x_1,x_2,\dotsc,x_k)$, definiramo \emph{binarnu reprezentaciju} kao
 \begin{equation}\label{eq:betadef}
     \beta(\vec x):=\t\textbullet^{x_1}\t/\t\textbullet^{x_2}\t/\dotsm\t/\t\textbullet^{x_k}\in\Sigma_\beta^*\text.
 \end{equation}
@@ -173,339 +176,333 @@ Najlakše je konstruirati inverznu funkciju, i pokazati da je to doista inverz. 
 
 Tvrdimo da je tako konstruirano preslikavanje desni inverz od $\beta$: odnosno, ako tako dobijemo niz $\vec x$, tada je $\beta(\vec x)=u$. Doista, te dvije riječi imaju isti broj separatora ($k-1$) i isti broj kružića ($\sum\vec x$), te se podudaraju na pozicijama svih separatora (malo pomaknute parcijalne sume od $\vec x$) --- što je dovoljno da zaključimo da su jednake.
 
-To je također i lijevi inverz: odnosno, ako primijenimo taj postupak na riječ $\upsilon(\vec x)$, dobit ćemo upravo $\vec x$: imat će točnu duljinu $k$, i točan svaki član, jer između $i$-tog i $(i+1)$-vog separatora u~\eqref{eq:betadef} ima točno $x_i$ kružića.
+To je također i lijevi inverz: odnosno, ako primijenimo taj postupak na riječ $\beta(\vec x)$, dobit ćemo upravo $\vec x$: imat će točnu duljinu $k$, i točan svaki član, jer između $i$-tog i $(i+1)$-vog separatora u~\eqref{eq:betadef} ima točno $x_i$ kružića.
 \end{proof}
 
-Za same funkcije, koristit ćemo istu ideju kao u~\eqref{eq:kodfidef}: reprezentaciju ulaza preslikamo u reprezentaciju izlaza (ako je izlaz definiran)., dok ne-reprezentacije preslikamo u "najmanju" ne-reprezentaciju ("najmanju" je pod navodnicima jer su reprezentacije riječi, ali vidjet ćemo da svejedno postoji prirodni izbor). Ovdje treba biti oprezan zbog propozicije~\ref{prop:upsilonbij}, ali brojevne funkcije imaju fiksnu mjesnost. Zato ćemo ne-reprezentacijama za funkciju $f^k$ proglasiti sve one riječi koje nisu reprezentacije $k$-torki (odnosno one koje jesu reprezentacije $l$-torki za $l\not=k$). Na isti način, na izlazu ćemo dati reprezentaciju samog broja ($k=1$), dakle riječ bez separatora $\upsilon(y)\in\upsilon[\N]=\im{\upsilon^1}=\{\text\textbullet\}^*$, ili ako ulaz nije bila reprezentacija odgovarajuće mjesnosti, "najmanju" (zapravo najkraću) riječ iz $(\{\text\textbullet\}^*)\kompl$, što je očito \t/.
+Za same funkcije, koristit ćemo istu ideju kao u~\eqref{eq:kodfidef}: reprezentaciju ulaza preslikamo u reprezentaciju izlaza (ako je izlaz definiran), dok ne-reprezentacije ne preslikamo nikamo. Ovdje treba biti oprezan zbog propozicije~\ref{prop:betabij}, ali brojevne funkcije imaju fiksnu mjesnost. Zato ćemo ne-reprezentacijama za funkciju $f^k$ proglasiti sve one riječi koje nisu reprezentacije $k$-torki (odnosno one koje su reprezentacije $l$-torki za $l\not=k$). Na isti način, na izlazu ćemo dati reprezentaciju samog broja ($k=1$), dakle riječ bez separatora $\t\textbullet^y=\beta(y)\in\beta[\N]=\im{\beta^1}=\t\textbullet^*$.
 
 \begin{definicija}
-Neka je $k\in\N_+$, i $f^k$ brojevna funkcija. Za jezičnu funkciju $\upsilon f$ zadanu s \begin{equation}\label{eq:upsilonf}
-    \upsilon f(u):\simeq\begin{cases}
-    \upsilon\bigl(f(\vec x)\bigr),&u=\upsilon(\vec x^k)\\
-    \t/,&\text{inače}
-    \end{cases}\text,
+Neka je $k\in\N_+$, i $f^k$ brojevna funkcija. Za jezičnu funkciju $\beta f$ zadanu s \begin{equation}\label{eq:betaf}
+    \beta f(u):\simeq\beta\bigl(f(\vec x)\bigr)\text{, za } u=\beta(\vec x^k)
 \end{equation}
-kažemo da je \emph{unarna reprezentacija} funkcije $f$.
+nad binarnom abecedom $\Sigma_\beta$, kažemo da je \emph{binarna reprezentacija} funkcije $f$.
 \end{definicija}
-\begin{primjer}
-$\upsilon\f{mul}^2(\t{\textbullet\textbullet/\textbullet\textbullet\textbullet\textbullet\textbullet})=\t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}$, jer je $2\cdot5=10$, dok je na primjer $\upsilon\f{mul}^2(\t{\textbullet})=\upsilon\f{mul}^2(\t{//})=\t/$, jer $(1)$ i $(0,0,0)$ nisu ulazi ispravne mjesnosti za $\f{mul}^2$.
-\end{primjer}
+%\begin{primjer}
+%$\beta\f{mul}^2(\t{\textbullet\textbullet/\textbullet\textbullet\textbullet\textbullet\textbullet})=\t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}$, jer je $2\cdot5=10$, dok $\t\textbullet$ i $\t{//}$ nisu u $\dom{\beta\f{mul}^2}$, jer $(1)$ i $(0,0,0)$ nisu ulazi ispravne mjesnosti za $\f{mul}^2$.
+%\end{primjer}
 
-Vjerojatno ste nekad u dosadašnjem obrazovanju napisali Turingov stroj koji računa funkciju $\upsilon\f{add}^2$ (možda samo na ispravnim reprezentacijama, odnosno na $\upsilon[\N^2]$), koristeći svojstvo $\upsilon\f{add}^2(u\t/v)=uv$, ako su $u,v\in\{\text\textbullet\}^*$. Ipak, već tada ste zasigurno vidjeli koliko je teško napisati $\upsilon\f{mul}^2$, a pogotovo $\upsilon\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\upsilon\f{prime}$?!) da i ne spominjemo.
+Vjerojatno ste nekad napisali Turingov stroj za $\beta\f{add}^2$, koristeći $\beta\f{add}^2(u\t/v)=uv$, ako su $u,v\in\t\textbullet^*$. Ipak, već tada ste zasigurno vidjeli koliko je teško napisati $\beta\f{mul}^2$, a pogotovo $\beta\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\beta\f{plog}$?!) da i ne spominjemo.
 
-Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (unarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Ipak, do tada ima još nekoliko tehničkih poteškoća, pa ćemo prvo dokazati obrat: brojevne funkcije, čije su unarne reprezentacije Turing-izračunljive, su parcijalno rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a mnoge dijelove dokaza moći ćemo upotrijebiti i u dokazu obrata.
+Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Ipak, prvo ćemo prvo dokazati obrat: brojevne funkcije, čije su binarne reprezentacije Turing-izračunljive, su parcijalno rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a mnoge dijelove dokaza moći ćemo upotrijebiti i u dokazu obrata.
 
-\subsection{Prateća funkcija unarne reprezentacije}
+%\subsection{Prateća funkcija binarne reprezentacije}
 
-Dakle, neka je $k\in\N_+$, i $f^k$ brojevna funkcija takva da je $\upsilon f$ Turing-izračunljiva. Ono što sada sigurno možemo zaključiti je da ako fiksiramo neko kodiranje od $\Sigma_\upsilon$ (čija je baza $b'=3$), funkcija $\N\upsilon f=\N(\upsilon f)$ jest parcijalno rekurzivna. Štoviše, korolar~\ref{kor:ikojiNSigma} kaže da je svejedno koje kodiranje uzmemo, pa određenosti radi, stavimo
-\begin{equation}\label{eq:kodSigmaups}
-    \N\Sigma_\upsilon(\text\textbullet):=1\text,\qquad
-    \N\Sigma_\upsilon(\t/):=2\,\text.
-\end{equation}
-Sada znamo, po teoremu~\ref{tm:tikp}, da je $\N\upsilon f$ parcijalno rekurzivna. Možemo li nekako iz toga dobiti da je $f$ parcijalno rekurzivna? Drugim riječima, $f^k$ i $(\N\upsilon f)^1$ su obje brojevne funkcije, ali su povezane preko jezične funkcije $\upsilon f$. Možemo li nekako naći brojevnu vezu između njih? Precizno, možemo li naći brojevne funkcije $g^1$ i $h^k$ takve da je $f=g\circ\N\upsilon f\circ h$? Ako bi $g$ i $h$ bile izračunljive i totalne (recimo primitivno rekurzivne), iz toga bi odmah slijedila parcijalna rekurzivnost od $f$, jer je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju.
+Dakle, neka je $k\in\N_+$, i $f^k$ brojevna funkcija takva da je $\beta f$ Turing-izračunljiva. Fiksirajmo neko kodiranje $\N\Sigma_\beta$ (pomaknuta baza $b'=2$) --- korolar~\ref{kor:ikojiNSigma} kaže da je svejedno koje kodiranje uzmemo, pa kako smo već definirali $\kr{\t\textbullet}=1$, samo dodefinirajmo $\kr{\t/}:=2$.
+Sada znamo, po teoremu~\ref{tm:tikp}, da je $\N\beta f$ parcijalno rekurzivna. Možemo li nekako iz toga dobiti da je $f$ parcijalno rekurzivna? Drugim riječima, $f^k$ i $(\N\beta f)^1$ su obje brojevne funkcije, ali su povezane preko jezične funkcije $\beta f$. Možemo li nekako naći brojevnu vezu između njih? Precizno, možemo li naći brojevne funkcije $g^1$ i $h^k$ takve da je $f=g\circ\N\beta f\circ h$? Ako bi $g$ i $h$ bile izračunljive i totalne (recimo primitivno rekurzivne), iz toga bi odmah slijedila parcijalna rekurzivnost od $f$, jer je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju.
 
 U traženju tih funkcija može pomoći dijagram.
-\begin{equation}\label{dia:Nupsilon}
+\begin{equation}\label{dia:Nbeta}
 \begin{tikzcd}
 \N^k
 \arrow[harpoon]{r}{f}
-\arrow{d}{\upsilon^k}
-\arrow[bend right=70,dotted]{dd}{\f u^k}
+\arrow{d}{\beta^k}
+\arrow[bend right=75,dotted]{dd}{\f{bin}^k}
 &\N
-\arrow{d}{\upsilon^1}
-\arrow[bend left=70,dotted]{dd}{\f u^1}
+\arrow{d}{\beta^1}
+\arrow[bend left=75,dotted]{dd}{\f{bin}^1}
 \\
-\Sigma_\upsilon^* 
-\arrow[harpoon]{r}{\upsilon f}
-\arrow{d}{\N\Sigma_\upsilon^*}
-& \Sigma_\upsilon^* 
-\arrow{d}{\N\Sigma_\upsilon^*}
+\Sigma_\beta^* 
+\arrow[harpoon]{r}{\beta f}
+\arrow{d}{\N\Sigma_\beta^*}
+& \t\textbullet^*\!\!\subset\!\Sigma_\beta^* 
+\arrow{d}{\N\Sigma_\beta^*}
 \\
 \N
-\arrow[harpoon]{r}{\N\upsilon f}
+\arrow[harpoon]{r}{\N\beta f}
 & \N
 \end{tikzcd}
 \qquad
 \begin{tikzcd}
 (3,1,2)
 \arrow[mapsto]{r}{\f{mul}^3}
-\arrow[mapsto]{d}{\upsilon^3}
+\arrow[mapsto]{d}{\beta^3}
 & 6
-\arrow[mapsto]{d}{\upsilon^1}
+\arrow[mapsto]{d}{\beta^1}
 \\
 \t{\textbullet\textbullet\textbullet/\textbullet/\textbullet\textbullet}
-\arrow[mapsto]{r}{\upsilon\f{mul}^3}
-\arrow[mapsto]{d}{\N\Sigma_\upsilon^*}
+\arrow[mapsto]{r}{\beta\f{mul}^3}
+\arrow[mapsto]{d}{\N\Sigma_\beta^*}
 & \t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet} 
-\arrow[mapsto]{d}{\N\Sigma_\upsilon^*}
+\arrow[mapsto]{d}{\N\Sigma_\beta^*}
 \\
-%\begin{array}{c}
-%(11121211)_3\\
-3370
-%\end{array}
-\arrow[mapsto]{r}{\N\upsilon\f{mul}^3}
+275
+\arrow[mapsto]{r}{\N\beta\f{mul}^3}
 &
-%\begin{array}{c}
-%(111111)_3\\
-364
-%\end{array}
+63
 \end{tikzcd}
 \end{equation}
-Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}^3$ na $(3,1,2)$). Brojevi na dnu primjera su razumljiviji zapisani u bazi $3$: $3370=(11121211)_3$, $364=(111111)_3$. Gornji pravokutnik predstavlja definiciju~\eqref{eq:upsilonf}, dok donji predstavlja~\eqref{eq:kodfidef} za specijalni slučaj unarne abecede, i jezične funkcije $\upsilon f$ nad njom.
+Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}^3$ na $(3,1,2)$). Brojevi desno dolje su razumljiviji u pomaknutoj bazi $2$: $275=(11121211)_2$, $63=(111111)_2$. Gornji pravokutnik predstavlja definiciju~\eqref{eq:betaf}, dok donji predstavlja~\eqref{eq:kodfidef} za specijalni slučaj binarne abecede, i jezične funkcije $\beta f$ nad njom.
 
 \begin{lema}\label{lm:pravkomut}
-Dijagram prikazan lijevo u~\eqref{dia:Nupsilon} (bez točkanih strelica) komutira.
+Dijagram prikazan lijevo u~\eqref{dia:Nbeta} (samo pune strelice) komutira.
 \end{lema}
 \begin{proof}
 Drugim riječima, za svaki od ta dva pravokutnika, pa onda i za veliki pravokutnik sastavljen od ta dva, je svejedno kojim putem dođemo od njegovog gornjeg lijevog do donjeg desnog vrha.
 
-Prvo, dakle, trebamo dokazati (gornji pravokutnik) da je $\upsilon f\circ\upsilon^k =\upsilon^1\circ f$. Domena desne funkcije je $\dom f$ jer je $\upsilon^1$ totalna, a domena lijeve funkcije je $\{\vec x\in\N^k\mid\upsilon^k(\vec x)\in\dom{\upsilon f}\}$, što je opet jednako $\dom f$ po definiciji domene $\dom{\upsilon f}$. Neka je sad $\vec x\in\dom f$ proizvoljan. Na njemu je lijeva funkcija $\upsilon f\bigl(\upsilon^k(\vec x)\bigr)$, što je po definiciji~\eqref{eq:upsilonf} jednako $\upsilon^1\bigl(f(\vec x)\bigr)$, što je upravo jednako $(\upsilon^1\circ f)(\vec x)$. Dakle, $\upsilon f\circ\upsilon^k$ i $\upsilon^1\circ f$ imaju istu domenu i na njoj se podudaraju, pa su to jednake funkcije.
+Prvo, dakle, trebamo dokazati (gornji pravokutnik) da je $\beta f\circ\beta^k =\beta^1\circ f$. Domena desne funkcije je $\dom f$ jer je $\beta^1$ totalna, a domena lijeve funkcije je $\{\vec x\in\N^k\mid\beta^k(\vec x)\in\dom{\beta f}\}$, što je opet jednako $\dom f$ po definiciji domene $\dom{\beta f}$. Neka je sad $\vec x\in\dom f$ proizvoljan. Na njemu je lijeva funkcija $\beta f\bigl(\beta^k(\vec x)\bigr)$, što je po definiciji~\eqref{eq:betaf} jednako $\beta^1\bigl(f(\vec x)\bigr)$, što je upravo jednako $(\beta^1\circ f)(\vec x)$. Dakle, $\beta f\circ\beta^k$ i $\beta^1\circ f$ imaju istu domenu i na njoj se podudaraju, pa su to jednake funkcije.
 
-Prilično analogno, koristeći~\eqref{eq:kodfidef}, bi se dokazalo $\N\upsilon f\circ\N\Sigma_\upsilon^*=\N\Sigma_\upsilon^*\circ\upsilon f$, odnosno donji pravokutnik također komutira. Sada iz toga slijedi
+Donji pravokutnik je puno jednostavniji jer je $\N\Sigma_\beta^*$ bijekcija: ako označimo $\varphi:=\beta f$,
+\begin{equation}
+    \N\beta f\circ\N\Sigma_\beta^*=\N\varphi\circ\N\Sigma_\beta^*=\N\Sigma_\beta^*\circ\varphi\circ(\N\Sigma_\beta^*)^{-1}\circ\N\Sigma_\beta^*=\N\Sigma_\beta^*\circ\varphi=\N\Sigma_\beta^*\circ\beta f\text.
+\end{equation}
+
+Sada iz te dvije jednakosti slijedi
 \begin{equation}\label{eq:pravkomut}
-    \N\Sigma_\upsilon^*\circ\upsilon^1\circ f=\N\Sigma_\upsilon^*\circ\upsilon f\circ\upsilon^k=\N\upsilon f\circ\N\Sigma_\upsilon^*\circ\upsilon^k\text,
+    \N\Sigma_\beta^*\circ\beta^1\circ f=\N\Sigma_\beta^*\circ\beta f\circ\beta^k=\N\beta f\circ\N\Sigma_\beta^*\circ\beta^k\text,
 \end{equation}
 odnosno čitav "\!vanjski okvir" komutira.
 \end{proof}
 
 Upravo dokazana jednakost je korisna, jer pruža način da se u potpunosti izbjegnu jezične funkcije. Naime, vrhovi vanjskog pravokutnika su sasvim brojevni, i njegove stranice se mogu opisati kao brojevne funkcije. Gornju i donju stranicu već imamo, još je preostalo precizirati lijevu i desnu.
 
-\subsection{Funkcije \texorpdfstring{$\f u^k$}{u}}
+\subsection{Funkcije \texorpdfstring{$\f{bin}^k$}{bin} --- binarno kodiranje}
 
-\begin{definicija}\label{def:uk}
-Za svaki $k\in\N_+$, definiramo $\f u^k:=\N\Sigma_\upsilon^*\circ\upsilon^k$.
+\begin{definicija}\label{def:bink}
+Za svaki $k\in\N_+$, definiramo $\f{bin}^k:=\N\Sigma_\beta^*\circ\beta^k$.
 \end{definicija}
 
-Te funkcije su brojevne, i na dijagramu su prikazane točkanim strelicama: lijeva stranica vanjskog pravokutnika je $\f u^k$, a desna $\f u^1$. Svaka $\f u^k$ je očito injekcija kao kompozicija dvije injekcije. Štoviše, funkcija $u^{\cdots}:=\N\Sigma_\upsilon^*\circ\upsilon$ (koja nije brojevna funkcija jer nema fiksnu mjesnost) predstavlja jednostavan način da u funkciju prenesemo varijabilan broj argumenata: za funkciju $f^{\cdots}$ koja prima \emph{varargs}, $\N\upsilon f^{\cdots}$ je jednomjesna brojevna funkcija koja dobro modelira sve aspekte izračunljivosti funkcije $f^{\cdots}$, pa bismo mogli reći da je $f^{\cdots}$ izračunljiva (u nekom smislu) ako je $\N\upsilon f^{\cdots}$ izračunljiva (u tom istom smislu). O tome ćemo reći nešto više malo kasnije --- zasad se usredotočimo na izračunljivost funkcija $\f u^k$.
+Te funkcije su brojevne, i na dijagramu su prikazane točkanim strelicama: lijeva stranica vanjskog pravokutnika je $\f{bin}^k$, a desna $\f{bin}^1$. Svaka $\f{bin}^k$ je očito injekcija kao kompozicija dvije injekcije. Jesu li izračunljive bez pozivanja na jezični model? %Štoviše, funkcija $bin^{\cdots}:=\N\Sigma_\beta^*\circ\beta$ (koja nije brojevna funkcija jer nema fiksnu mjesnost) predstavlja jednostavan način da u funkciju prenesemo varijabilan broj argumenata: za funkciju $f^{\cdots}$ koja prima \emph{varargs}, $\N\beta f^{\cdots}$ je jednomjesna brojevna funkcija koja dobro modelira sve aspekte izračunljivosti funkcije $f^{\cdots}$, pa bismo mogli reći da je $f^{\cdots}$ izračunljiva (u nekom smislu) ako je $\N\beta f^{\cdots}$ izračunljiva (u tom istom smislu). O tome ćemo reći nešto više malo kasnije --- zasad se usredotočimo na izračunljivost funkcija $\f{bin}^k$.
 
-Kako bismo mogli iz $(3,1,2)$ izračunati $(11121211)_3=3370$, ili iz $6$ izračunati $(111111)_3=364$, koristeći samo brojevne funkcije? Ovo drugo se svakako čini lakšim.
+Kako bismo iz $(3,1,2)$ izračunali $(11121211)_2=275$, ili iz $6$ izračunali $(111111)_2=63$, koristeći samo brojevne funkcije? Ovo drugo se svakako čini lakšim.
 
-\begin{lema}\label{lm:u1prn}
-Funkcija $\f u^1$ je primitivno rekurzivna.
+\begin{lema}\label{lm:bin1prn}
+Funkcija $\f{bin}^1$\! je primitivno rekurzivna.
 \end{lema}
 \begin{proof}
-Možemo direktno napisati točkovnu definiciju $\f u(x)=\sum_{i<x}3^i$, pa će primitivna rekurzivnost slijediti iz propozicije~\ref{lm:sumrek} --- ali možemo to čak i izračunati po formuli za sumu geometrijskog niza:
-\begin{equation}\label{eq:u1prn}
-    \f u(x)=\sum_{i=0}^{x-1}3^i=\frac{3^{x-1+1}-1}{3-1}=\frac{3^x-\,3^x\bmod 2}{2}=3^x\!\sslash2
-\end{equation}
-($3^x$ je uvijek neparan, pa razlomak upravo predstavlja cjelobrojno dijeljenje).
+Možemo direktno napisati točkovnu definiciju $\f{bin}(x)=\sum_{i<x}2^i$, pa će primitivna rekurzivnost slijediti iz propozicije~\ref{lm:sumrek} --- ali svaki računarac zna da to ima i zatvorenu formu:
+$\f{bin}(x)=2^x-1=\f{pd}\bigl(\f{pow}(2,x)\bigr)$ (jer je uvijek $2^x\ge 1$).
 \end{proof}
 
-Kako sada pomoću funkcije $\f u^1$ možemo dobiti $\f u^2$? Naravno, $\upsilon(x,y)=\text\textbullet^x\!\t/\text\textbullet^y$ je sastavljena od tri dijela: $\text\textbullet^x=\upsilon(x)$, $\t/$ i $\text\textbullet^y=\upsilon(y)$, čije kodove znamo --- to su $\f u(x)$, $2$ i $\f u(y)$. Dakle, da dobijemo njen kod, trebamo još konkatenaciju prikazati kao brojevnu funkciju na kodovima. Ovo je slično primjeru~\ref{pr:concat}, samo što umjesto konačnih nizova bilo kakvih brojeva ovdje imamo konačne nizove znamenaka u bazi $b$ (ovdje konkretno u bazi $3$).
-
-\begin{definicija}
-Za $x,y,b\in\N$ takve da je $b\ge 2$, s $x\conc by$ označimo broj čiji je zapis u bazi $b$ dobiven konkatenacijom takvih zapisa od $x$ i od $y$ --- s tim da (uobičajeno) ne promatramo vodeće nule, tako da je broj $0$ neutralni element operacije $\conc b$.
-\end{definicija}
-
-\begin{primjer}
-$23\conc{10}456=23\,456$, $3\conc25=(11\,101)_2=29$, $0\conc732=32$.
-\end{primjer}
-
-\begin{lema}\label{lm:Concatprn}
-Postoji primitivno rekurzivna funkcija $\f{Concat}^3$, takva da za sve brojeve $x,y,b\in\N$ takve da je $b\ge2$, vrijedi $x\conc by=\f{Concat}(x,y,b)$.
-\end{lema}
-
-\begin{proof}
-Možemo kombinirati tehnike iz lema~\ref{lm:recodeprn} i~\ref{lm:starprn}, i direktno pomoću $\f{Digit}$ ekstrahirati znamenke iz brojeva $x$ i $y$, i slagati ih u novi broj (pokušajte!), ali pokazuje se da postoji jednostavniji način: pomaknemo $x$ za onoliko mjesta udesno koliko $y$ ima znamenaka u bazi $b$, i dodamo $y$. Dakle, tvrdimo da
-\begin{equation}
-    \f{Concat}(x,y,b):=x\cdot b^{\f{Lh}(y,b)}+y
-\end{equation}
-zadovoljava specifikaciju (primitivno je rekurzivna po primjeru~\ref{pr:addmulpow} i lemi~\ref{lm:LhDigitcdprn}). Doista, ako napišemo $x=(x_{k-1}\dotsm x_1x_0)_b$ i $y=(y_{l-1}\dotsm y_1y_0)_b$ tako da ni $x_{k-1}$ ni $y_{l-1}$ nisu $0$, tada je (po lemi~\ref{lm:LhDigitcdprn}) $\f{Lh}(y,b)=l$, pa je
-\begin{multline}
-    \f{Concat}(x,y,b)=x\cdot b^l+y=\Bigl(\sum_{i<k}x_i\cdot b^i\Bigr)\cdot b^l+\sum_{i<l}y_i\cdot b^i
-    =\sum_{i<l}y_ib^i+\sum_{i<k}x_ib^{i+l}=
-    %=\sum_{i=0}^{l-1}y_ib^i+\sum_{i=l}^{\mathclap{k+l-1}}x_{i-l}b^l=
-    \\
-    =y_0b^0+y_1b^1+\dotsb+y_{l-1}b^{l-1}+x_0b^l+x_1b^{l+1}+\dotsb+x_{k-1}b^{k+l-1}=\\
-    =(x_{k-1}\dotsm x_1x_0y_{l-1}\dotsm y_1y_0)_b=(x_{k-1}\dotsm x_0)_b\conc b(y_{l-1}\dotsm y_0)_b=x\conc b y\text.
-\end{multline}
-Naravno, taj izvod nema smisla za $x=0$ ili $y=0$, ali lako se vidi da je $\f{Lh}(0,b)=0$, pa je
-$\f{Concat}(x,0,b)=x\cdot b^0+0=x$, i $\f{Concat}(0,y,b)=0\cdot b^{\f{Lh}(y,b)}+y=y$.
-\end{proof}
+Kako sada pomoću funkcije $\f{bin}^1$ možemo dobiti $\f{bin}^2$? Naravno, konkatenacijom. Riječ $\beta(x,y)=\text\textbullet^x\!\t/\text\textbullet^y$ je sastavljena od tri dijela: $\text\textbullet^x=\beta(x)$, $\t/$ i $\text\textbullet^y=\beta(y)$, čije kodove znamo --- to su redom $\f{bin}(x)$, $2$ i $\f{bin}(y)$. Dakle, da dobijemo njen kod, trebamo ih konkatenirati u pomaknutoj bazi $2$. Operacija je definirana s~\eqref{eq:defconcat}.
 
 \begin{propozicija}\label{pp:krkonkkr}
-Neka je $\Sigma$ abeceda, $\N\Sigma$ njeno kodiranje, te $b$ njena baza. Tada za sve $u,v\in\Sigma^*$ vrijedi
+Neka je $\Sigma$ abeceda, $\N\Sigma$ njeno kodiranje, te $b$ broj znakova u njoj. Tada za sve $u,v\in\Sigma^*$ vrijedi
     $\kr{uv}=\kr u\conc b\kr v$.
 \end{propozicija}
 \begin{proof}
 Uz oznake $u=\alpha_1\alpha_2\dotsm\alpha_{\left|u\right|}$ i $v=\beta_1\beta_2\dotsm\beta_{\left|v\right|}$, vrijedi
 \begin{multline}
-\kr{uv}=\kr{\alpha_1\alpha_2\dotsm\alpha_{\left|u\right|}\beta_1\beta_2\dotsm\beta_{\left|v\right|}}=\bigl(
-\N\Sigma(\alpha_{\left|u\right|})
-\dotsm
+\kr{uv}=\kr{\alpha_1\alpha_2\dotsm\alpha_{\dulj u}\beta_1\beta_2\dotsm\beta_{\dulj v}}=\bigl(
 \N\Sigma(\alpha_1)
-\N\Sigma(\beta_{\left|v\right|})
 \dotsm
+\N\Sigma(\alpha_{\dulj u})
 \N\Sigma(\beta_1)
+\dotsm
+\N\Sigma(\beta_{\dulj v})
 \bigr)_b=\\
 =\bigl(
-\N\Sigma(\alpha_{\left|u\right|})
-\dotsm
 \N\Sigma(\alpha_1)
-\bigr)_b\conc b\bigl(
-\N\Sigma(\beta_{\left|v\right|})
 \dotsm
+\N\Sigma(\alpha_{\dulj u})
+\bigr)_b\conc b\bigl(
 \N\Sigma(\beta_1)
+\dotsm
+\N\Sigma(\beta_{\dulj v})
 \bigr)_b=\\
-=\kr{\alpha_1\dotsm\alpha_{\left|u\right|}}\conc b\kr{\beta_1\dotsm\beta_{\left|v\right|}}=\kr u\conc b\kr v\text.
+=\kr{\alpha_1\dotsm\alpha_{\dulj u}}\conc b\kr{\beta_1\dotsm\beta_{\dulj v}}=\kr u\conc b\kr v\text.
 \end{multline}
-Za $u=\varepsilon$ ili $v=\varepsilon$ tvrdnja također vrijedi jer je $\varepsilon$ neutralni element za konkatenaciju, a $\kr\varepsilon=0$ neutralni element za $\conc b$.
+Za $u=\varepsilon$ ili $v=\varepsilon$ tvrdnja također vrijedi jer je $\varepsilon$ neutralni element za konkatenaciju, a lako se vidi da je $\kr\varepsilon=0$ neutralni element za $\conc b$:
+\begin{align}
+    0\conc bx&=\f{concat}(0,x,b)=0\cdot b^{\f{lh}(x,b)}+x=0+x=x\text,\\
+    x\conc b0&=\f{concat}(x,0,b)=x\cdot b^{\f{lh}(0,b)}+0=x\cdot b^0=x\text,
+\end{align}
+jer je $\f{lh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ zbog $\sum_{i\le0}b^i=b^0=1>0$.
+\end{proof}
+
+\begin{korolar}\label{kor:lhkonk=lh+lh}
+Za sve $x,y\in\N$, za sve $b\in\N_+$, vrijedi $\f{lh}(x\conc b y,b)=\f{lh}(x,b)+\f{lh}(y,b)$.
+\end{korolar}
+\begin{proof}
+Neka su $x,y,b$ proizvoljni ($b$ pozitivan). Abeceda $\Sigma_b:=[1..b]$ očito ima $b$ elemenata --- kodirajmo je identitetom.
+Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in\Sigma_b^*$ takve da je $x=\kr u$ i $y=\kr v$. Po definiciji $\f{lh}$, vrijedi $\f{lh}(\kr w,b)=\dulj w$ za sve $w\in\Sigma_b^*$, pa specijalno za $w=x$, $w=y$ i $w=xy$. Sada imamo
+\begin{multline}
+    \f{lh}(x,b)+\f{lh}(y,b)=
+    \f{lh}(\kr u,b)+\f{lh}(\kr v,b)=
+    \dulj u+\dulj v=
+    \dulj{uv}=
+    \f{lh}(\kr{uv},b)={}\\
+    \text{[propozicija \ref{pp:krkonkkr}]}{}=\f{lh}(\kr u\conc b\kr v,b)=
+    \f{lh}(x\conc b y,b)\text{\qedhere\;.}
+\end{multline}
 \end{proof}
 
 \begin{propozicija}\label{pp:concprn}
-Za svaki $b\ge 2$, $\conc b$ je primitivno rekurzivna asocijativna operacija.
+Za svaki $b\in\N_+$, $\conc b$ je primitivno rekurzivna asocijativna operacija.
 \end{propozicija}
 \begin{proof}
-Primitivna rekurzivnost slijedi direktno iz leme~\ref{lm:Concatprn}. Također iz njenog dokaza slijedi $\f{Lh}(x\conc b y,b)=\f{Lh}(x,b)+\f{Lh}(y,b)$, pa vrijedi
+Primitivna rekurzivnost slijedi direktno iz leme~\ref{lm:ldcpprn}. Za asocijativnost,
 \begin{multline}
-    \left(x\conc b y\right)\conc b z=\left(x\cdot b^{\f{Lh}(y,b)}+y\right)\cdot b^{\f{Lh}(z,b)}+z=\\[1mm]
-    =\left(x\cdot b^{\f{Lh}(y,b)}\cdot b^{\f{Lh}(z,b)}+y\cdot b^{\f{Lh}(z,b)}\right)+z=
-    x\cdot b^{\f{Lh}(y,b)+\f{Lh}(z,b)}+\left(y\cdot b^{\f{Lh}(z,b)}+z\right)=\\[-1mm]
-    =x\cdot b^{\f{Lh}\bigl(y\conc b z,b\bigr)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text,
+    \left(x\conc b y\right)\conc b z=\left(x\cdot b^{\f{lh}(y,b)}+y\right)\cdot b^{\f{lh}(z,b)}+z=\\[1mm]
+    =\left(x\cdot b^{\f{lh}(y,b)}\cdot b^{\f{lh}(z,b)}+y\cdot b^{\f{lh}(z,b)}\right)+z=
+    x\cdot b^{\f{lh}(y,b)\,+\,\f{lh}(z,b)}+\left(y\cdot b^{\f{lh}(z,b)}+z\right)=\\[-1mm]
+    \text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{lh}\bigl(y\conc b z\,,\,b\bigr)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
 \end{multline}
-odnosno asocijativnost.
 \end{proof}
-Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Primijetimo samo da je zapis nule praznom rječju umjesto znamenkom $0$ bitan i ovdje: kad bismo nulu pisali "uobičajeno", imali bismo $(1\conc{10}'0)\conc{10}'2=10\conc{10}'2=102\not=1\conc{10}'(0\conc{10}'2)=1\conc{10}'2=12$, pa asocijativnost ne bi vrijedila.
+Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Primijetimo samo da je za asocijativnost ključno da se radi o pomaknutoj bazi: recimo, u običnoj bazi 10 je $(1\conc{10}'0)\conc{10}'2=10\conc{10}'2=102\not=1\conc{10}'(0\conc{10}'2)=1\conc{10}'2=12$, pa ne vrijedi asocijativnost.
 
-Pomoću konkatenacije sada nije teško izračunati i ostale funkcije $\f u^k$.
-
-\begin{propozicija}\label{pp:ukprn}
-Za svaki $k\in\N_+$, funkcija $\f u^k$ je primitivno rekurzivna.
+\begin{propozicija}\label{pp:binkprn}
+Za svaki $k\in\N_+$, funkcija $\f{bin}^k$ je primitivno rekurzivna.
 \end{propozicija}
 \begin{proof}
-Matematičkom indukcijom po $k$. Za $k=1$ (baza), to je upravo lema~\ref{lm:u1prn}. Pretpostavimo da je $\f u^l$ primitivno rekurzivna za neki $l\in\N_+$. Tada je
-\begin{equation}
-    \f u^{l+1}(\vec x,y)=
-    \kr{\upsilon(\vec x,y)}=
+Matematičkom indukcijom po $k$. Za $k=1$ (baza), to je upravo lema~\ref{lm:bin1prn}. Pretpostavimo da je $\f{bin}^l$ primitivno rekurzivna za neki $l\in\N_+$. Tada je
+\begin{multline}
+    \f{bin}^{l+1}(\vec x,y)=
+    \kr{\beta(\vec x,y)}=
     \kr{\text\textbullet^{x_1}\!\t/\dotsm\t/\text\textbullet^{x_l}\!\t/\text\textbullet^y}=
-    \kr{\upsilon(\vec x)\t/\upsilon(y)}\text,
-\end{equation}
-što je po propoziciji~\ref{pp:krkonkkr} jednako
-\begin{equation}
-    \kr{\upsilon(\vec x)}\conc 3\kr{\t/}\conc 3\kr{\upsilon(y)}=
-    \f u^k(\vec x)\conc32\conc3\f u^1(y)\text,
-\end{equation}
-te primitivna rekurzivnost od $\f u^{l+1}$ slijedi iz pretpostavke indukcije, propozicije~\ref{pp:concprn} i leme~\ref{lm:u1prn}.
+    \kr{\beta(\vec x)\t/\beta(y)}={}\\
+    \text{[propozicija~\ref{pp:krkonkkr}]}{}=\kr{\beta(\vec x)}\conc 2\kr{\t/}\conc 2\kr{\beta(y)}=
+    \f{bin}^k(\vec x)\conc22\conc2\f{bin}^1(y)\text,
+\end{multline}
+te primitivna rekurzivnost od $\f{bin}^{l+1}$ slijedi iz pretpostavke indukcije, propozicije~\ref{pp:concprn} i leme~\ref{lm:bin1prn}.
 \end{proof}
 
-\subsection{Turing-izračunljive funkcije su parcijalno rekurzivne}
+%\subsection{Turing-izračunljive funkcije su parcijalno rekurzivne}
 
-Promotrimo sada dijagram lijevo u~\eqref{dia:Nupsilon}, u svjetlu definicije~\ref{def:uk}, odnosno gledajući i točkane strelice. Definicija~\ref{def:uk} zapravo kaže da "kružni isječak" sa svake strane tog dijagrama komutira, pa iz toga i leme~\ref{lm:pravkomut} slijedi da čitava "\!vanjska elipsa" također komutira.
+Promotrimo sada dijagram lijevo u~\eqref{dia:Nbeta}, u svjetlu definicije~\ref{def:bink}, odnosno gledajući i točkane strelice. Definicija~\ref{def:bink} zapravo kaže da "kružni odsječak" sa svake strane tog dijagrama komutira, pa iz toga i leme~\ref{lm:pravkomut} slijedi da čitav "\!vanjski oval" također komutira.
 
-\begin{korolar}\label{kor:uf=Nupsfu}
+\begin{korolar}\label{kor:binf=Nbetafbin}
 Neka je $k\in\N_+$, te $f^k$ funkcija. Tada vrijedi
-    $\f u^1\circ f=\N\upsilon f\circ\f u^k$.
+    $\f{bin}^1\!\circ f=\N\beta f\circ\f{bin}^k$.
 \end{korolar}
 \begin{proof}
-To je jednakost~\eqref{eq:pravkomut} u koju je uvrštena (s obje strane) definicija~\ref{def:uk}.
+To je jednakost~\eqref{eq:pravkomut} u koju je uvrštena (s obje strane) definicija~\ref{def:bink}.
 \end{proof}
 
-Sjetimo se, naš cilj je izraziti $f$ pomoću $\N\upsilon f$. S korolarom~\ref{kor:uf=Nupsfu} smo već jako blizu, treba nam samo još (izračunljiv) lijevi inverz za $\f u^1$. Kako možemo iz $364=(111111)_3=\f u(6)$ natrag dobiti $6$? Samo treba prebrojiti jedinice --- srećom, imamo pravu funkciju baš za to. Mogli bismo to zpisati kao $n=\f{cd}\bigl(\f u(n),1,3\bigr)$, ali zapravo možemo još lakše: budući da su sve znamenke jedinice, prebrojiti jedinice isto je kao i prebrojiti sve znamenke.
+\subsection{Inverz binarnog kodiranja}
 
-\begin{lema}\label{lm:Lh3}
-Definiramo funkciju $\f{Lh3}$ s $\f{Lh3}(n):=\f{Lh}(n,3)$. 
+Sjetimo se, naš cilj je izraziti $f$ pomoću $\N\beta f$. S korolarom~\ref{kor:binf=Nbetafbin} smo već jako blizu, treba nam samo još (izračunljiv) lijevi inverz za $\f{bin}^1$. Kako možemo iz $63=(111111)_2=\f{bin}(6)$ natrag dobiti $6$? Samo treba prebrojiti jedinice, odnosno znamenke.
 
-Funkcija $\f{Lh3}$ je primitivno rekurzivna, i vrijedi $\f{Lh3}\circ\f u^1=\f I_1^1$.
+\begin{lema}\label{lm:bitcount}
+Definiramo funkciju $\f{bitcount}$ s $\f{bitcount}(n):=\f{lh}(n,2)$. 
+
+Funkcija $\f{bitcount}$ je primitivno rekurzivna, i vrijedi $\f{bitcount}\circ\f{bin}^1\!=\f I_1^1$.
 \end{lema}
 \begin{proof}
-Primitivna rekurzivnost slijedi iz simboličke definicije $\f{Lh3}=\f{Lh}\circ(\f I_1^1,C_3^1)$, leme~\ref{lm:LhDigitcdprn} i propozicije~\ref{prop:konst}.
-
-Uzmimo sada $n\in\N$, i označimo $y:=\f u^1(n)=3^n\!\sslash2$. Tada je $\f{Lh3}(y)=(\mu t<y)(3^t>y)$, a očito vrijedi $1<2<3$ i $3^n>0$, iz čega $3^n=\frac{3^n}{1}>\frac{3^n}{2}>\frac{3^n}{3}=3^{n-1}$, odnosno $\frac{3^n}{2}\in\langle3^{n-1}..\,3^n\rangle$. Za $n>0$, krajevi toga intervala su cjelobrojni, pa je $y=3^n\!\sslash2=\left\lfloor\frac{3^n}{2}\right\rfloor\in[3^{n-1}..\,3^n\rangle$, odnosno $3^{n-1}\le y<3^n$: $n-1$ još nije takav $t$ da je $3^t>y$, a $n$ jest takav. Dakle, $n$ je upravo najmanji takav $t$, odnosno $n=\f{Lh3}(y)$. Za $n=0$ je $y=3^0\!\sslash2=1\sslash2=0$, pa je također $\f{Lh3}(y)=\f{Lh3}(0)=0=n$.
+Primitivna rekurzivnost slijedi iz simboličke definicije $\f{bitcount}=\f{lh}\circ(\f I_1^1,C_2^1)$, leme~\ref{lm:ldcpprn} i propozicije~\ref{prop:konst}.
+Za kompoziciju, uzmimo proizvoljni $n\in\N$, i računamo $\f{bitcount}\bigl(\f{bin}(n)\bigr)=\f{bitcount}(2^n-1)$. Relacija koju minimiziramo (po $t\le 2^n-1$) je
+\begin{equation}
+    \textstyle\sum_{i\le t}2^i>2^n-1
+    \Longleftrightarrow
+    2^{t+1}-1>2^n-1
+    \Longleftrightarrow
+    %2^{t+1}>2^n
+    %\Longleftrightarrow
+    t+1>n
+    \Longleftrightarrow
+    t\ge n
+\end{equation}
+pa je očito najmanji takav $t$ upravo $n=\f I_1^1(n)$.\qedhere
 \end{proof}
 
-Na komutirajućem dijagramu koji cijelo vrijeme promatramo, $\f{Lh3}$ bismo mogli prikazati kao strelicu prema gore, s desne strane pravokutnika, ispupčenu još više nego strelica $\f u^1$. Upravo dokazana lema pokazuje da tako dobiveni "polumjesec" također komutira, pa i "proširena elipsa" također komutira --- čime smo napokon prikazali $f$ pomoću $\N\upsilon f$.
+Na komutirajućem dijagramu koji cijelo vrijeme promatramo, $\f{bitcount}$ bismo mogli prikazati kao strelicu prema gore, s desne strane pravokutnika, ispupčenu još više nego strelica $\f{bin}^1$. Upravo dokazana lema pokazuje da tako dobiveni "polumjesec" također komutira, pa i "proširena elipsa" također komutira --- čime smo napokon prikazali $f$ pomoću $\N\beta f$.
 
-\begin{teorem}\label{tm:utip}
-Neka je $k\in\N_+$, i\, $\f f^k$ funkcija takva da je $\upsilon\f f$ Turing-izračunljiva. Tada je $\f f$ parcijalno rekurzivna.
+\begin{teorem}\label{tm:btip}
+Neka je $k\in\N_+$, i\, $\f f^k$\! funkcija takva da je $\beta\f f$ Turing-izračunljiva. Tada je $\f f$ parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
-Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\upsilon$, kodiranje~\eqref{eq:kodSigmaups} i funkciju $\upsilon\f f$, funkcija $\N\upsilon\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:Lh3} i korolara~\ref{kor:uf=Nupsfu} sada imamo
+Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\beta$, kodiranje $\t\textbullet\mapsto1,\t/\mapsto2$ i funkciju $\beta\f f$, funkcija $\N\beta\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:bitcount} i korolara~\ref{kor:binf=Nbetafbin} sada imamo
 \begin{equation}
-    \f f=\f I_1^1\circ\f f=\f{Lh3}\circ\f u^1\!\circ \f f=\f{Lh3}\circ\N\upsilon\f f\circ\f u^k\text,
+    \f f=\f I_1^1\circ\f f=\f{bitcount}\circ\f{bin}^1\!\circ\f f=\f{bitcount}\circ\N\beta\f f\circ\f{bin}^k\text,
 \end{equation}
-odnosno $f$ je dobivena kompozicijom iz tri funkcije, od kojih je srednja parcijalno rekurzivna, a prva i zadnja su primitivno rekurzivne (lema~\ref{lm:Lh3} i propozicija~\ref{pp:ukprn}), pa su rekurzivne (korolar~\ref{kor:prnrek}) a time i parcijalno rekurzivne. Kako je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju, $\f f$ je parcijalno rekurzivna.
+odnosno $\f f$ je dobivena kompozicijom iz tri funkcije, od kojih je srednja parcijalno rekurzivna, a prva i zadnja su primitivno rekurzivne (lema~\ref{lm:bitcount} i propozicija~\ref{pp:binkprn}), pa su rekurzivne (korolar~\ref{kor:prnrek}) a time i parcijalno rekurzivne. Kako je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju, $\f f$ je parcijalno rekurzivna.
 \end{proof}
 
-\subsection{Funkcije \texorpdfstring{$\f{arg}_i$}{arg} --- ekstrakcija argumenata}\label{sec:arg}
+%\subsection{Funkcije \texorpdfstring{$\f{arg}_i$}{arg} --- ekstrakcija argumenata}\label{sec:arg}
 
-Sad je jasno da isti komutirajući dijagram može poslužiti i za dokazivanje obrata teorema~\ref{tm:utip}. Jednadžba
+Sad je jasno da isti komutirajući dijagram može poslužiti i za dokazivanje obrata teorema~\ref{tm:btip}. Jednadžba
 \begin{equation}
-    \f u^1\!\circ f=\N\upsilon f\circ\f u^k
+    \f{bin}^1\!\circ f=\N\beta f\circ\f{bin}^k
 \end{equation}
-iz korolara~\ref{kor:uf=Nupsfu} može poslužiti i za dobivanje $\N\upsilon f$ iz $f$ --- samo trebamo umjesto desne obrnuti lijevu stranicu pravokutnika, odnosno naći desni inverz za $\f u^k$. Nažalost, to je iz tri razloga zapetljanije nego ovo što smo napravili u prethodnoj točki.
+iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$ iz $f$ --- samo trebamo umjesto desne obrnuti lijevu stranicu pravokutnika, odnosno naći desni inverz za $\f{bin}^k$. Nažalost, to je iz tri razloga zapetljanije nego ovo što smo napravili u prethodnoj točki.
 
-Prvi razlog je sasvim birokratski, i tiče se naše odluke sa samog početka, da ćemo promatrati brojevne funkcije s jednim izlaznim podatkom. Kako je $\dom{\f u^k}=\N^k$, traženi desni inverz bi morao imati $k$ izlaznih podataka, te ćemo ga reprezentirati kroz $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\upsilon f$. (Te funkcije bit će neovisne o $k$: recimo, $\f{arg}_2\bigl(\f u^2(x,y)\bigr)=\f{arg}_2\bigl(\f u^4(x,y,z,t)\bigr)=y$, pa ih nećemo morati označavati s dva broja, kao što smo recimo morali označavati koordinatne projekcije $\f I_n^k$.)
+Prvi razlog je sasvim birokratski, i tiče se naše odluke sa samog početka, da ćemo promatrati brojevne funkcije s jednim izlaznim podatkom. Kako je $\dom{\f{bin}^k}=\N^k$, traženi desni inverz bi morao imati $k$ izlaznih podataka, te ćemo ga reprezentirati kroz $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. (Te funkcije bit će neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih nećemo morati označavati s dva broja, kao što smo recimo morali označavati koordinatne projekcije $\f I_n^k$.)
 
-Drugi razlog je tehnički: koristit ćemo funkcije $\f{Lh3}$ i $\f{cd}$ u bazi $3$, ali svejedno će implementacija biti kompliciranija nego u lemi~\ref{lm:Lh3}. Na neki način, dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$, riječi nad dvočlanom abecedom imaju bogatiju strukturu, i za njeno raščlanjivanje treba nam neka vrst "standardne biblioteke" za rad sa stringovima. Ovdje ćemo napraviti samo minimum potreban za primitivnu rekurzivnost funkcija $\f{arg}_i$, ali lako je vidjeti kako tu ima puno mogućnosti za implementaciju raznih algoritama.
+Drugi razlog je tehnički: implementacija je bitno kompliciranija nego u lemi~\ref{lm:bitcount}. Na neki način, dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatiju strukturu, i za njeno raščlanjivanje treba nam neka vrst "standardne biblioteke" za rad sa stringovima. Ovdje ćemo napraviti samo minimum potreban za primitivnu rekurzivnost funkcija $\f{arg}_i$, ali lako je vidjeti kako tu ima puno mogućnosti za implementaciju raznih algoritama.
 
-Treći razlog, napokon, sasvim je stvaran i nije tako lako rješiv programskim tehnikama: funkcija $\f u^k$ nije surjekcija, i kao takva \emph{nema} totalni desni inverz. Ugrubo, imamo $\N\upsilon f\approx\f u^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, ali da bismo dobili jednakost, morat ćemo razmišljati o specijalnim slučajevima --- riječ \t/ za unarnu reprezentaciju, broj $b'$ za prateću funkciju --- u kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što nije u domeni od $f$, pa bi desna strana bila nedefinirana zbog marljive evaluacije, a lijeva bi bila definirana; recimo u slučaju kad $a$ ima znamenku $0$ u bazi $3$, vrijednost $\N\upsilon f(a)$ je definirana kao $3$. Srećom, imamo tehniku (teorem o grananju, parcijalno rekurzivna verzija) za zaobilaženje marljive evaluacije u tom slučaju.
+Treći razlog, napokon, sasvim je stvaran i nije tako lako rješiv programskim tehnikama: funkcija $\f{bin}^k$ nije surjekcija, i kao takva \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "krive mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana; 
+Recimo u slučaju kad $a$ ima $5$ znamenaka $2$ u pomaknutoj bazi $2$, vrijednost $\N\beta\f{mul}^3(a)$ nije definirana, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
 
-Krenimo s razvojem "minimalne standardne biblioteke" za rad sa stringovima (nad $\Sigma_\upsilon$). Za početak, za riječi $v,w\in\Sigma_\upsilon^*$ kažemo da je $v$ \emph{prefiks} od $w$ ako postoji riječ $u$ takva da je $w=vu$.
+\subsection{Standardna biblioteka za \texorpdfstring{$\Sigma_\beta^*$}{binarne stringove}}\label{sec:stdstring}
 
-\begin{propozicija}
-Relacija "prefiks" je refleksivni parcijalni uređaj na skupu $\Sigma_\upsilon^*$.
+\begin{propozicija}\label{pp:prefiksrpu}
+Za riječi $v,w\in\Sigma_\beta^*$ kažemo da je $v$ \emph{prefiks} od $w$ ako postoji riječ $u$ takva da je $w=vu$.
+Ta relacija je refleksivni parcijalni uređaj na skupu $\Sigma_\beta^*$.
 \end{propozicija}
 \begin{proof}
-Za refleksivnost, dovoljno je staviti $u:=\varepsilon$. Za tranzitivnost, samo treba iskoristiti asocijativnost kompozicije: ako je $w=vu$ i $v=v'u'$, tada je $w=(v'u')u=v'(u'u)$, pa je $v'$ prefiks od $w$.
+Za refleksivnost, dovoljno je staviti $u:=\varepsilon$. Za tranzitivnost, samo treba iskoristiti asocijativnost konkatenacije: ako je $w=vu$ i $v=v'u'$, tada je $w=(v'u')u=v'(u'u)$, pa je $v'$ prefiks od $w$.
 
 Za antisimetričnost, lako se vidi da je duljina konkatenacije zbroj duljina, pa ako je $w=vu$ i $v=wu'$, tada je kao za tranzitivnost $w=w(uu')$, te vrijedi $\dulj w=\dulj{w(uu')}=\dulj w+\dulj{uu'}$, iz čega $\dulj{uu'}=0$. Kako je $\varepsilon$ jedina riječ duljine $0$, imamo $uu'=\varepsilon$, i analogno $u=u'=\varepsilon$, dakle $w=vu=v\varepsilon=v$.
 \end{proof}
 
-\begin{lema}
-Dvomjesna brojevna relacija $\preceq_\upsilon$, zadana s
+\begin{korolar}\label{kor:preceqprnrpu}
+Dvomjesna brojevna relacija $\sqsubseteq_\beta$, zadana s
 \begin{equation}
-    x\preceq_\upsilon y:\Longleftrightarrow\text{"$x$ je kod prefiksa riječi čiji kod je $y$"}
+    x\sqsubseteq_\beta y:\Longleftrightarrow\text{"$x$ je kod nekog prefiksa riječi čiji kod je $y$"}
 \end{equation}
-(kodovi su s obzirom na $\N\Sigma_\upsilon^*$), primitivno je rekurzivna.
-\end{lema}
-Recimo, vrijedi $5=(12)_3=\kr{\text\textbullet\t/}\preceq_\upsilon\kr{\t{\textbullet/\textbullet\textbullet\textbullet}}=(12111)_3=148$.
-
+(kodovi su po $\N\Sigma_\beta^*$), primitivno je rekurzivan refleksivni parcijalni uređaj na $\N$.
+\end{korolar}
 \begin{proof}
-Mogli bismo se snalaziti s cjelobrojnim dijeljenjem ($y\sslash3^{\f{Lh3(y)\ominus Lh3(x)}}=x$, otprilike), ali možemo i samo pročitati definiciju. $\exists z\,(y=x\conc3z)$ je sasvim u redu (po propoziciji~\ref{pp:krkonkkr}), treba samo ograničiti ovaj $z$. Iz $y=x\cdot3^{\f{Lh3(z)}}+z\ge z$ slijedi $z\le y$, pa imamo
-\begin{equation}
-    x\preceq_\upsilon y\Longleftrightarrow\f{cd}(y,0,3)=0\land(\exists z\le y)(y=x\conc3z)\text,
-\end{equation}
-iz čega slijedi primitivna rekurzivnost. Prvi konjunkt je potreban da osiguramo da $y$ doista jest kod neke riječi iz $\Sigma_\upsilon^*$ --- ne trebamo pisati isti uvjet za $x$ jer po definiciji "prefiks" od $y$ ne može imati neku znamenku koju $y$ nema.
+Činjenica da se radi o parcijalnom uređaju slijedi iz propozicija~\ref{pp:prefiksrpu} i~\ref{pp:bijkr}, a
+primitivna rekurzivnost iz leme~\ref{lm:ldcpprn}: $x\sqsubseteq_\beta y\Longleftrightarrow x=\f{prefix}\bigl(y,\f{bitcount}(x),2\bigr)$.
 \end{proof}
 
-Za sljedeću lemu, trebat će nam \emph{uokvireni} brojevi: oni čiji zapisi u bazi $3$ ne sadrže nulu, imaju bar dvije znamenke, te počinju i završavaju znamenkom $2$. Naime, ono što zapravo želimo napraviti je "isprogramirati" dokaz propozicije~\ref{prop:upsilonbij}, no taj dokaz ima nekoliko slučajeva ovisno o tome nalazimo li se prije prvog separatora, nakon zadnjeg, ili između njih. Jednostavnije je kad riječ ima separatore na lijevom i na desnom kraju: tada svaki $x_i$ možemo odrediti brojeći jedinice između susjednih separatora.
+\begin{primjer}
+Recimo, vrijedi $4=(12)_2=\kr{\t{\textbullet/}}\sqsubseteq_\beta\kr{\t{\textbullet/\textbullet\textbullet\textbullet}}=(12111)_2=39$.
+\end{primjer}
+
+Za sljedeću lemu, trebat će nam \emph{uokvireni} brojevi: oni čiji zapisi u pomaknutoj bazi~$2$ imaju bar dvije znamenke, te počinju i završavaju znamenkom $2$. Naime, ono što zapravo želimo napraviti je "isprogramirati" dokaz propozicije~\ref{prop:betabij}, no taj dokaz ima nekoliko slučajeva ovisno o tome nalazimo li se prije prvog separatora, nakon zadnjeg, ili između njih. Jednostavnije je kad riječ ima separatore na lijevom i na desnom kraju: tada svaki $x_i$ možemo odrediti brojeći jedinice između susjednih separatora.
 
 \begin{lema}\label{lm:pos2streak1prn}
 Postoje primitivno rekurzivne funkcije $\f{pos2}$ i $\f{streak1}$, takve da za svaki uokvireni broj $x$, za svaki $i\in\N$, vrijedi:
 \begin{labeling}{$\f{streak1}(x,i)$}
-    \item[$\f{pos2}(x,i)$] je pozicija $i$-te znamenke $2$ (ili\, $\f{Lh3}(x)$ ako takva ne postoji), te
+    \item[$\f{pos2}(x,i)$] je pozicija $i$-te dvojke (ili\, $\f{bitcount}(x)$ ako takva ne postoji), te
     \item[$\f{streak1}(x,i)$] je duljina $i$-tog niza uzastopnih jedinica (ili\, $0$ ako takav ne postoji),
 \end{labeling}
-počevši od $i=0$ slijeva, u zapisu broja $x$ u bazi $3$.
+počevši od $i=0$ slijeva, u zapisu broja $x$ u pomaknutoj bazi $2$.
 \end{lema}
 \begin{proof}
+Za početak, definirajmo pomoćnu primitivno rekurzivnu (lema~\ref{lm:brojrek}) funkciju koja broji dvojke (separatore) u zapisu broja u pomaknutoj bazi $2$.
+\begin{equation}
+    \f{count2}(x):=\bigl(\#i<\f{bitcount}(x)\bigr)\bigl(\f{digit}(x,i,2)=2\bigr)
+\end{equation}
+
 Tvrdimo da funkcije zadane točkovno s
 \begin{align}
-    \f{pos2}(x,i)&:=\f{Lh3}\bigl((\mu z<x)(z\conc32\,\preceq_\upsilon x\,\land\,\f{cd}(z,2,3)=i)\bigr),\\
+    \f{pos2}(x,i)&:=\f{bitcount}\bigl((\mu z<x)(z\conc22\,\sqsubseteq_\beta x\,\land\,\f{count2}(z)=i)\bigr),\\
     \f{streak1}(x,i)&:=\f{pos2}\bigl(x,\f{Sc}(i)\bigr)\ominus\f{Sc}\bigl(\f{pos2}(x,i)\bigr),
 \end{align}
 zadovoljavaju tražene specifikacije (očito su primitivno rekurzivne).
 
-Za $i<\f{cd}(x,2,3)$, uvjet pod operatorom minimizacije jednoznačno određuje $z$. Doista, kad bi postojala dva broja $z$ i $z'$ s tim svojstvom, morali bi biti kodovi različitih riječi $v$ i $v'$, takvih da su $v\t/$ i $v'\!\t/$ prefiksi od $w$, čiji kod je $x$. Prefiksi iste riječi iste duljine su jednaki, pa duljine od $v\t/$ i $v'\!\t/$ moraju biti različite: bez smanjenja općenitosti pretpostavimo $\dulj{v\t/}<\dulj{v'\!\t/}=\dulj{v'}+1$, dakle $v\t/$ je zapravo prefiks od $v'$, pa mora imati manje ili jednako znamenaka $2$ u bazi $3$. Dakle
+Za $i<\f{count2}(x)$, uvjet pod operatorom minimizacije jednoznačno određuje $z$. Doista, kad bi postojala dva broja $z$ i $z'$ s tim svojstvom, morali bi biti kodovi različitih riječi $v$ i $v'$, takvih da su $v\t/$ i $v'\!\t/$ prefiksi od $w$, čiji kod je $x$. Prefiksi iste riječi iste duljine su jednaki ($\f{prefix}$ je funkcija), pa duljine od $v\t/$ i $v'\!\t/$ moraju biti različite: bez smanjenja općenitosti pretpostavimo $\dulj{v\t/}<\dulj{v'\!\t/}=\dulj{v'}+1$, dakle $v\t/$ je zapravo prefiks od $v'$, pa mora imati manje ili jednako dvojki. Dakle
 \begin{multline}
-    i=\f{cd}(z',2,3)=\f{cd}(\kr{v'},2,3)\ge\f{cd}(\kr{v\t/},2,3)=\f{cd}(\kr v\conc3\kr{\t/},2,3)=\\
-    =\f{cd}(\kr v\conc32,2,3)=\f{cd}(\kr v,2,3)+1=\f{cd}(z,2,3)+1=i+1\text,
+    i=\f{count2}(z')=\f{count2}(\kr{v'})\ge\f{count2}(\kr{v\t/})=\f{count2}(\kr v\conc2\kr{\t/})=\\
+    =\f{count2}(\kr v\conc22)=\f{count2}(\kr v)+1=\f{count2}(z)+1=i+1\text,
 \end{multline}
-kontradikcija. No ako je $z$ jedinstven, to znači da je dovoljno naći \emph{neki} takav i taj će biti minimalan, a kod "prefiksa" od $x$ do isključivo $i$-te dvojke zadovoljava to svojstvo. Njegova duljina je onda upravo ta pozicija (brojeći od $0$), kao što i treba biti.
+kontradikcija. No ako je $z$ jedinstven, to znači da je dovoljno naći \emph{neki} takav i taj će biti minimalan, a kod "prefiksa" od $x$ do isključivo pozicije $i$-te dvojke zadovoljava to svojstvo. Njegova duljina je onda upravo ta pozicija (brojeći od $0$), kao što i treba biti.
 
-Za $i\ge\f{cd}(x,2,3)$, takav $z$ ne postoji (jer $z\conc32$ ima više dvojki nego $x$, pa ne može biti $z\preceq_\upsilon x$), te minimizacija $(\mu z<x)$ dade $x$, odnosno vrijedi $\f{pos2}(x,i)=\f{Lh3}(x)$, opet, kao što i treba biti po specifikaciji.
+Za $i\ge\f{count2}(x)$, takav $z$ ne postoji (jer $z\conc22$ ima više dvojki nego $x$, pa ne može biti $z\conc22\sqsubseteq_\beta x$), te minimizacija $(\mu z<x)$ dade $x$, odnosno $\f{pos2}(x,i)=\f{bitcount}(x)$, opet, kao što i treba biti po specifikaciji.
 
-Sada je za funkciju $\f{streak1}$ dovoljno oduzeti odgovarajuće pozicije: poziciju prvog znaka nakon $i$-te dvojke, od pozicije sljedeće dvojke. Za $i<\f{cd}(x,2,3)-1$, to funkcionira točno kako treba: kako uokvireni brojevi ne sadrže znamenku $0$, između susjednih dvojki nalaze se samo jedinice.
+Sada je za funkciju $\f{streak1}$ dovoljno oduzeti odgovarajuće pozicije: poziciju prvog znaka nakon $i$-te dvojke, od pozicije sljedeće dvojke. Za $i<\f{count2}(x)-1$, to funkcionira točno kako treba: kako pomaknuta baza $2$ ima samo znamenke $1$ i $2$, između susjednih dvojki nalaze se samo jedinice.
 
-Za $i=\f{cd}(x,2,3)-1$, $i$-ta dvojka je upravo zadnja, pa je $\f{pos2}(x,i)=\f{Lh3}(x)-1$ (možemo pisati obične minuse jer uokvireni brojevi imaju bar dvije dvojke --- na početku i na kraju). Također po specifikaciji $\f{pos2}$ vrijedi $\f{pos2}(x,i+1)=\f{Lh3}(x)$, pa je $\f{streak1}(x,i)=\f{Lh3}(x)\ominus\f{Sc}\bigl(\f{Lh3}(x)-1\bigr)=0$.
+Za $i=\f{count2}(x)-1$, $i$-ta dvojka je upravo zadnja, pa je $\f{pos2}(x,i)=\f{bitcount}(x)-1$ (možemo pisati obične minuse jer uokvireni brojevi imaju bar dvije dvojke --- na početku i na kraju). Također po specifikaciji $\f{pos2}$ vrijedi $\f{pos2}(x,i+1)=\f{bitcount}(x)$, pa je $\f{streak1}(x,i)=\f{bitcount}(x)\ominus\f{Sc}\bigl(\f{bitcount}(x)-1\bigr)=0$.
 
-Za $i\ge\f{cd}(x,2,3)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{Lh3}(x)$, pa je opet $\f{streak1}(x,i)=\f{Lh3}(x)\ominus\f{Sc}\bigl(\f{Lh3}(x)\bigr)=0$.
+Za $i\ge\f{count2}(x)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{bitcount}(x)$, pa je opet $\f{streak1}(x,i)=\f{bitcount}(x)\ominus\f{Sc}\bigl(\f{bitcount}(x)\bigr)=0$.
 \end{proof}
 
-Sada je za ekstrakciju pojedinog $x_i$ samo potrebno uokviriti $\f u^k(\vec x)$ dvojkama, i pozvati funkciju $\f{streak1}$ s odgovarajućim argumentom.
+Sada je za ekstrakciju pojedinog $x_i$ samo potrebno uokviriti $\f{bin}^k(\vec x)$ dvojkama, i pozvati funkciju $\f{streak1}$ s odgovarajućim argumentom.
 
 \begin{propozicija}\label{pp:argnprn}
-Za svaki $n\in\N_+$ postoji primitivno rekurzivna funkcija $\f{arg}_n$, takva da za sve $\vec x=(x_1,x_2,\dotsc,x_k)\in\N^*$, za sve $i\in\N_+$ vrijedi $\f{arg}_i\bigl(\f u(\vec x)\bigr)=\begin{cases}
+Za svaki $n\in\N_+$ postoji primitivno rekurzivna funkcija $\f{arg}_n$, takva da za sve $\vec x=(x_1,\dotsc,x_k)\in\N^*$, za sve $i\in\N_+$ vrijedi $\f{arg}_i\bigl(\f{bin}(\vec x)\bigr)=\begin{cases}
 x_i,&i\le k\\
 0,&\text{inače}
 \end{cases}$.
@@ -514,61 +511,41 @@ x_i,&i\le k\\
 \begin{proof}
 Za svaki $n\in\N_+$ vrijedi $n-1\in\N$, pa definiramo
 \begin{equation}
-    \f{arg}_n(x):=\f{streak1}(2\conc3x\conc32,n-1)\text.
+    \f{arg}_n(x):=\f{streak1}(2\conc2x\conc22,n-1)\text.
 \end{equation}
-Neka je $\vec x\in\N^k$ proizvoljan ($k\in\N_+$). Tada u $\upsilon(\vec x)$ ima točno $k-1$ separatora, pa je $\f{cd}\bigl(\f u(\vec x),2,3\bigr)=k-1$, odnosno za $y:=2\conc3\f u(\vec x)\conc32$ vrijedi $\f{cd}(y,2,3)=k-1+2=k+1$. Sada za svaki $i\in[1..k]$ vrijedi $\f{arg}_i\bigl(\f u(\vec x)\bigr)=\f{streak1}(y,i-1)$, što je upravo $x_i$ (recimo, za $i=2<k$ imat ćemo $\f{streak}(\kr{\t{/\textbullet}^{x_1}\!\t{/\textbullet}^{x_2}\!\t/\dotsm\t{/\textbullet}^{x_k}\!\t/},0)=\f{pos2}(y,2)-\f{Sc}\bigl(\f{pos2}(y,1)\bigr)=(1+x_1+1+x_2)-\f{Sc}(1+x_1)=x_2$).
-
-Za $i>k$ imat ćemo $i-1\ge k=\f{cd}(y,2,3)-1$, pa će po lemi~\ref{lm:pos2streak1prn} $\f{streak1}(y,i-1)$ biti $0$, kao što i treba.
+Neka je $\vec x\in\N^k$ proizvoljan ($k\in\N_+$). Tada u $\beta(\vec x)$ ima točno $k-1$ separatora, pa je $\f{count2}\bigl(\f{bin}(\vec x)\bigr)=k-1$, odnosno za $y:=2\conc2\f{bin}(\vec x)\conc22$ vrijedi $\f{count2}(y)=k-1+2=k+1$. Sada za svaki $i\in[1..k]$ vrijedi $\f{arg}_i\bigl(\f{bin}(\vec x)\bigr)=\f{streak1}(y,i-1)$, što je upravo $x_i$ (recimo, za $i=2<k$ imat ćemo $\f{streak}(\kr{\t{/\textbullet}^{x_1}\!\t{/\textbullet}^{x_2}\!\t/\dotsm\t{/\textbullet}^{x_k}\!\t/},1)=\f{pos2}(y,2)-\f{Sc}\bigl(\f{pos2}(y,1)\bigr)=(1+x_1+1+x_2)-\f{Sc}(1+x_1)=x_2$).
+Za $i>k$ imat ćemo $i-1\ge k=\f{count2}(y)-1$, pa će po lemi~\ref{lm:pos2streak1prn} biti $\f{streak1}(y,i-1)=0$, kao što i treba.
 \end{proof}
 
-\subsection{Parcijalno rekurzivne funkcije su Turing-izračunljive}
+%\subsection{Parcijalno rekurzivne funkcije su Turing-izračunljive}
 
-Napokon je sve spremno za dokaz obrata teorema~\ref{tm:utip}.
+Napokon je sve spremno za dokaz obrata teorema~\ref{tm:btip}.
 
-\begin{teorem}\label{tm:piut}
-Za svaku parcijalno rekurzivnu funkciju $\f f$, $\upsilon\f f$ je Turing-izračunljiva.
+\begin{teorem}\label{tm:pibt}
+Za svaku parcijalno rekurzivnu funkciju $\f f$, $\beta\f f$ je Turing-izračunljiva.
 \end{teorem}
 \begin{proof}
-Označimo s $k\in\N_+$ mjesnost od $\f f$. Cilj nam je dokazati da je $\N\upsilon\f f$ parcijalno rekurzivna. Tu funkciju možemo dobiti (iz dijagrama) kao $\f u^1\!\circ\f f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, na slici od $\f u^k$. Ta slika je primitivno rekurzivan skup, jer samo treba provjeriti da njegov element nema nijedne nule, i da ima točno $k-1$ dvojku.
-\begin{equation}\label{eq:imuk}
-    x\in\im{\f u^k}\Longleftrightarrow\f{cd}(x,0,3)=0\land\f{cd}(x,2,3)=k-1
+Označimo s $k\in\N_+$ mjesnost od $\f f$. Cilj nam je dokazati da je $\N\beta\f f$ parcijalno rekurzivna. Tu funkciju možemo dobiti (iz dijagrama) kao $\f{bin}^1\!\circ\f f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, restringiranu na sliku od $\f{bin}^k$. Ta slika je primitivno rekurzivan skup, jer samo treba provjeriti da njegov element ima točno $k-1$ dvojku ($k-1\in\N$ je konstanta).
+Dakle,
+\begin{equation}
+\label{eq:defNbetaf}
+    \N\beta\f f(x)\simeq\f{bin}^1\bigl(\f f\bigl(\f{arg}_1(x),\dotsc,\f{arg}_k(x)\bigr)\bigr)\text{, ako je }\f{count2}(x)=k-1
 \end{equation}
-
-Što ako taj uvjet nije ispunjen? Može ne biti ispunjen na dva načina. Prvo, ako je $\f{cd}(x,0,3)>0$, to zapravo znači da $x$ nije u slici od $\f u^k=\N\Sigma_\upsilon^*\circ\upsilon^k$ jer uopće nije u slici od $\N\Sigma_\upsilon^*$. Tada $\N\upsilon\f f(x)$, kao i svako kodiranje jezične funkcije, po~\eqref{eq:kodfidef} poprima u $x$ vrijednost baze ulazne abecede, koja u ovom slučaju iznosi $3$.
-
-Ako je $\f{cd}(x,0,3)=0$, to zapravo znači da $x$ jest kod neke riječi $w\in\Sigma_\upsilon^*$, i kako je $\upsilon$ bijekcija (propozicija \ref{prop:upsilonbij}), sigurno postoji neki $\vec y\in\N^+$ takav da je $w=\upsilon(\vec y)$. Ako u tom slučaju uvjet~\eqref{eq:imuk} ipak nije ispunjen, to zapravo znači da duljina od $\vec y$ nije $k$. Tada $\upsilon \f f(x)$ mora vratiti $\t/$ po~\eqref{eq:upsilonf}, pa $\N\upsilon\f f$ daje $\kr{\t/}=2$.
-
-Dakle, vrijedi
-\begin{align}
-\SwapAboveDisplaySkip
-\label{eq:defNupsf}
-    \N\upsilon\f f(x)&\simeq\begin{cases}
-    \f u^1\bigl(f(\vec a)\bigr),&x\in\im{\f u^k}\\
-    3,&\f{cd}(x,0,3)>0\\
-    2,&\text{inače}
-    \end{cases}\text,\\
-    \text{uz pokratu }\vec a&:=\bigl(\f{arg}_1(x),\f{arg}_2(x),\dotsc,\f{arg}_k(x)\bigr)\text,
-\end{align}
-iz čega slijedi, po teoremu~\ref{tm:gprek}, da je $\N\upsilon\f f$ parcijalno rekurzivna. Sada je po teoremu~\ref{tm:pir}, $\N\upsilon\f f$ RAM-izračunljiva, te je po korolaru~\ref{kor:krit} funkcija $\upsilon\f f$ Turing-iz\-rač\-un\-lji\-va, što smo i trebali.
+iz čega slijedi, po korolaru~\ref{kor:restrprek}, da je $\N\beta\f f$ parcijalno rekurzivna. Sada je po teoremu~\ref{tm:pir}, $\N\beta\f f$ RAM-izračunljiva, te je po teoremu~\ref{tm:krit} funkcija $\beta\f f$ Turing-iz\-rač\-un\-lji\-va.
 \end{proof}
 
-Primijetimo da srednji uvjet u~\eqref{eq:defNupsf} zapravo nije bio nužan (mogli smo i takve $x$ poslati u $2$, na primjer), jer za primjenu teorema~\ref{tm:krit} dovoljno da imamo RAM-program koji računa $\N\upsilon\f f$ na kodovima riječi. Ali ovako je jednakost jasnija i točnija, a budući da ionako moramo imati grananje, nije bitno kompliciranija.
+Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj parametara. Definiramo pomoćne (primitivno rekurzivne) funkcije
+\begin{align}
+\SwapAboveDisplaySkip
+    \f{argc}(a)&:=\f{Sc}\bigl(\f{count2}(a)\bigr)\text,\\
+    \f{arg}(a,i)&:=\f{streak1}(2\conc2a\conc22,i)\text.
+\end{align}
 
-Za kraj pogledajmo nekoliko vrijednosti koje $\N\upsilon\f f(x)$ može poprimiti, i što one znače.
-\begin{itemize}
-    \item[$0$] znači da je sve u redu, i $\f f(\vec a)=0$ ($\mathit{false}$). Tada je $\N\upsilon\f f(x)=\kr{\upsilon(0)}=\kr{\varepsilon}=0$.
-    \item[$1$] znači da je sve u redu, i $\f f(\vec a)=1$ ($\mathit{true}$). Tada je $\N\upsilon\f f(x)=\kr{\upsilon(1)}=\kr{\text\textbullet}=1$.
-    \item[$2$] znači da je $\vec a$ krive duljine, pa $\f f^k(\vec a)$ nema smisla (možemo $2$ shvatiti kao \emph{error code} za grešku "\emph{wrong argument count}")
-    \item[$3$] znači da $\vec a$ ne postoji, jer se znamenka $0$ nalazi u nečem što bi trebao biti kod riječi (greška "\emph{zero byte in source}")
-    \item[$4$] znači da je sve u redu, i $\f f(\vec a)=2$. Tada je $\N\upsilon\f f(x)=\kr{\upsilon(2)}=\kr{\t{\textbullet\textbullet}}=(11)_3=4$.
-\end{itemize}
-Sljedeća legalna vrijednost za $\N\upsilon\f f(x)$ je tek $(111)_3=13$, i ona odgovara $\f f(\vec a)=3$.
-
-Sada je jasno da dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj parametara: recimo, $\f{add}^{\cdots}$, koja zbraja sve svoje argumente (koliko god da ih ima), je primitivno rekurzivna, jer je funkcija zadana s
+\begin{primjer}
+Recimo, $\f{add}^{\cdots}$, koja zbraja sve svoje argumente (koliko god da ih ima), je primitivno rekurzivna, jer je funkcija zadana s
 \begin{equation}
-    \N\upsilon\f{add}^{\cdots}(x)=\begin{cases}\quad\,\displaystyle\sum_{\mathclap{i\le\f{cd}(x,2,3)}}\f{streak1}(2\conc3x\conc32,i),&\f{cd}(x,0,3)=0\\
-    \quad\,3,&\text{inače}
-    \end{cases}
+    \N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i<\f{argc}(a)}}\f{arg}(a,i)
 \end{equation}
-primitivno rekurzivna po  teoremu~\ref{tm:grek}, lemama~\ref{lm:sumrek},~\ref{lm:LhDigitcdprn} i~\ref{lm:pos2streak1prn}, te propoziciji~\ref{pp:concprn}.
+primitivno rekurzivna po lemi~\ref{lm:sumrek} i prethodnim rezultatima.
+\end{primjer}
 To nam neće bitno trebati u nastavku, ali zgodno je znati da imamo i tu mogućnost.

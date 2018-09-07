@@ -8,10 +8,10 @@ Dokazali smo brojne teoreme koji pokazuju ekvivalentnost različitih modela iz\-
 Neka je $k\in\N_+$, te\, $\f f\colon\N^k\rightharpoonup\N$ brojevna funkcija mjesnosti $k$. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
     \item[\t{(r)}] $\f f$ je RAM-izračunljiva (\,$f\in\mathcal Comp_k$);
-    \item[\t{(m)}] $\f f$ je makro-izračunljiva (postoji makro-stroj koji računa $\f f$);
+    \item[\t{(m)}] $\f f$ je makro-izračunljiva (postoji makro-algoritam koji računa $\f f$);
     \item[\t{(p)}] $\f f$ je parcijalno rekurzivna (\,$\f f$ je dobivena iz inicijalnih pomoću konačno mnogo primjena kompozicije, primitivne rekurzije i minimizacije);
     \item[\t{(i)}] $\f f$ ima indeks (postoji $e\in\N$ takav da je $\f f=\kf e^k$);
-    \item[\t{(t)}] $\upsilon\f f$ je Turing-izračunljiva (postoji Turingov stroj koji računa $\upsilon\f f$).
+    \item[\t{(t)}] $\beta\f f$ je Turing-izračunljiva (postoji Turingov stroj koji računa $\beta\f f$).
 \end{itemize}
 \end{teorem}
 \begin{proof}
@@ -22,9 +22,9 @@ Sve bitno u ovom teoremu smo već dokazali. Ponovimo samo glavne ideje.
     \item[\t{(m$\Rightarrow$r)}] Svaki makro-program $Q\in\mathcal{MP}rog$ ekvivalentan je svojem spljoštenju $Q^\flat\in\mathcal Prog$ --- teorem~\ref{tm:rem}.
     \item[\t{(p$\Rightarrow$r)}] Postorder obilaskom njene simboličke definicije, kompajliramo funkciju $\f f$ u RAM-program --- teorem~\ref{tm:pir}.
     \item[\t{(r$\Rightarrow$i)}] Ako RAM-program $P\in\mathcal Prog$ računa $\f f$, tada je njegov kod $e:=\kprog P\in\f{Prog}$ jedan indeks za $ \f f$ --- propozicija~\ref{prop:computeind}.
-    \item[\t{(i$\Rightarrow$p)}] Funkcija $\f f^k$ s indeksom $e$ dobivena je kompozicijom $\f{comp}_k$, konstante $\f C_e^k$ i projekcija identitete --- korolar \ref{kor:iip}.
-    \item[\t{(t$\Rightarrow$p)}] Funkciju $\f f$ možemo dobiti kompozicijom iz parcijalno rekurzivnih funkcija $\f{Lh3}$, $\N\upsilon\f f$ i $\f u^k$ --- teorem~\ref{tm:utip}.
-    \item[\t{(p$\Rightarrow$t)}] Funkciju $\N\upsilon\f f$ možemo dobiti (do na neke specijalne slučajeve) kompozicijom iz $\f u^1$, $\f f$ i $(\f{arg}_1,\dotsc,\f{arg}_k)$ --- teorem~\ref{tm:piut}.
+    \item[\t{(i$\Rightarrow$p)}] Funkcija $\f f^k$ s indeksom $e$ dobivena je kompozicijom $\f{comp}_k$, konstante $\f C_e^k$ i koordinatnih projekcija --- korolar \ref{kor:iip}.
+    \item[\t{(t$\Rightarrow$p)}] Funkciju $\f f$ možemo dobiti kompozicijom iz parcijalno rekurzivnih funkcija $\f{bitcount}$, $\N\beta\f f$ i $\f{bin}^k$ --- teorem~\ref{tm:btip}.
+    \item[\t{(p$\Rightarrow$t)}] Funkciju $\N\beta\f f$ možemo dobiti restrikcijom na $\im{\f{bin}^k}$ kompozicije funkcija $\f{bin}^1$, $\f f$ i $\f{arg}_1$,~\ldots, $\f{arg}_k$ --- teorem~\ref{tm:pibt}.
 \end{labeling}
 Dijagramatski, usmjeren graf
 \begin{tikzcd}
@@ -45,30 +45,28 @@ Dijagramatski, usmjeren graf
 \end{tikzcd} je jako povezan.
 \end{proof}
 
-Također, za dokaz ekvivalencije parcijalne rekurzivnosti i Turing-izračunljivosti koristili smo ekvivalenciju brojevnog i jezičnog modela za jezične funkcije.
+Za jednomjesne funkcije imamo korolar~\ref{kor:peuf}, koji je zgodniji zbog jednočlane abecede i bijektivnosti kodiranja. Za dokaz ekvivalencije parcijalne rekurzivnosti i Turing-izračunljivosti koristili smo ekvivalenciju brojevnog i jezičnog modela za jezične funkcije.
 
 \begin{teorem}[Teorem ekvivalencije za jezične funkcije]
 Neka je $\Sigma\not=\emptyset$ abeceda, te $\varphi\colon\Sigma^*\rightharpoonup\Sigma^*$ jezična funkcija nad njom. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
     \item[\t{(T)}] $\varphi$ je Turing-izračunljiva;
     \item[\t{(P)}] $\N\varphi$ je parcijalno rekurzivna;
-    \item[\t{(R)}] $\N\varphi$ je RAM-izračunljiva;
-    \item[\t{(K)}] $(\exists\,\f f\in\mathcal Comp_1)(f\approx\N\varphi)$.
+    \item[\t{(R)}] $\N\varphi$ je RAM-izračunljiva.
 \end{itemize}
 \end{teorem}
 \begin{proof}
-Samo napomenimo, svaka stavka osim prve zapravo predstavlja $(\card\Sigma)!$ tvrdnji --- po jednu za svako kodiranje od $\Sigma$ --- ali sve su one ekvivalentne po korolaru~\ref{kor:ikojiNSigma}.
+Napomenimo, druga i treća stavka zapravo predstavljaju po $(\card\Sigma)!$ tvrdnji --- po jednu za svako kodiranje od $\Sigma$ --- ali sve su one ekvivalentne po korolaru~\ref{kor:ikojiNSigma}.
 
 Opet, sve bitno je već dokazano; slijedi rekapitulacija glavnih ideja.
 \begin{labeling}{\t{(A$\Rightarrow$B)}}
 \item[\t{(T$\Rightarrow$P)}] Kodirajući sve dijelove Turing-izračunavanja s rječju zadanog koda, dobijemo parcijalnu rekurzivnost funkcije $\N\varphi$ --- teorem~\ref{tm:tikp}.
 \item[\t{(P$\Rightarrow$R)}] Jednostavno kompajliramo funkciju $\N\varphi$ u RAM-program --- teorem~\ref{tm:pir}.
-\item[\t{(R$\Rightarrow$K)}] Trivijalno: $f:=\N\varphi\approx\N\varphi$ --- korolar~\ref{kor:krit}.
-\item[\t{(K$\Rightarrow$T)}] Transpiliranjem RAM-programa koji računa $\f f$, u pet faza dobijemo Turingov stroj koji računa $\varphi$ --- teorem~\ref{tm:krit}.\qedhere
+\item[\t{(R$\Rightarrow$T)}] Transpiliranjem RAM-programa koji računa $\N\varphi$, u pet faza dobijemo Turingov stroj koji računa $\varphi$ --- teorem~\ref{tm:krit}.\qedhere
 \end{labeling}
 \end{proof}
 
-Za jezike, karakteristična funkcija mora biti totalna, dakle za izračunljive jezike mora biti rekurzivna.
+Karakteristična funkcija je totalna, dakle za izračunljive jezike mora biti rekurzivna.
 
 \begin{teorem}[Teorem ekvivalencije za jezike]
 Neka je $\Sigma\not=\emptyset$ abeceda, te $L\subseteq\Sigma^*$ jezik nad njom. Tada su sljedeće tvrdnje ekvivalentne:
@@ -80,8 +78,8 @@ Neka je $\Sigma\not=\emptyset$ abeceda, te $L\subseteq\Sigma^*$ jezik nad njom. 
 \begin{proof}
 Kao i u prethodnom teoremu, stavka \t{(\textsc r)} je zapravo $(\card\Sigma)!$ tvrdnji. One su ekvivalentne po tranzitivnosti, jer je svaka od njih ekvivalentna sa stavkom \t{(\textsc o)}.
 \begin{labeling}{\t{(\textsc a$\Rightarrow$\textsc b)}}
-\item[\t{(\textsc r$\Rightarrow$\textsc o)}] Malom modifikacijom kraja konstrukcije transpiliranog Turingovog stro\-ja (iz RAM-programa koji računa $\f f\approx\chi_{\kr L}$) dobijemo odlučivač --- teorem~\ref{tm:krio}.
-\item[\t{(\textsc o$\Rightarrow$\textsc r)}] Malom modifikacijom kodiranja (stanja, funkcije prijelaza i) Turing-iz\-ra\-ču\-na\-va\-nja odlučivača dobijemo rekurzivnost od $\kr L$ --- teorem~\ref{tm:oikr}.\qedhere
+\item[\t{(\textsc r$\Rightarrow$\textsc o)}] Malom modifikacijom kraja konstrukcije transpiliranog Turingovog stro\-ja koji računa $\N^{-1}\chi_{\kr L}$ dobijemo odlučivač --- teorem~\ref{tm:krio}.
+\item[\t{(\textsc o$\Rightarrow$\textsc r)}] Malom modifikacijom kodiranja stanja, funkcije prijelaza i Turing-iz\-ra\-ču\-na\-va\-nja odlučivača dobijemo rekurzivnost od $\kr L$ --- teorem~\ref{tm:oikr}.\qedhere
 \end{labeling}
 \end{proof}
 
@@ -100,12 +98,13 @@ Već smo rekli da domene izračunljivih brojevnih funkcija ne moraju biti izrač
 \section{\texorpdfstring{Church--\!Turingova teza}{Church-Turingova teza}}
 Nakon toliko dokazanih implikacija oblika "ako je funkcija izračunljiva u nekom modelu, onda je izračunljiva i u drugom modelu", počinjemo uočavati određene obrasce u definicijama i dokazima.
 
-\subsection{Shematski prikaz izračunavanja}
+%\subsection{Shematski prikaz izračunavanja}
+
 Algoritam $\mathcal A$ je uglavnom opisan pomoću stroja (diskretnog dinamičkog sustava) s prebrojivim skupom mogućih konfiguracija $C$, tako da se svaka konfiguracija $c\in C$ može opisati s konačno (ali ne unaprijed ograničeno) mnogo bitova.
 
 Ako s $A$ označimo skup mogućih ulaznih podataka, a s $B$ skup mogućih izlaznih podataka algoritma $\mathcal A$, imamo preslikavanje $start\colon A\to C$, koje svakom ulazu $x\in A$ pridružuje početnu konfiguraciju s ulazom $x$. Imamo još zadan podskup $E\subseteq C$ završnih konfiguracija, i preslikavanje $result\colon E\to B$ (često zadano na čitavom skupu $C$) koje svakoj završnoj konfiguraciji pridružuje rezultat izračunavanja.
 
-Također imamo binarnu relaciju $\leadsto$ na skupu $C$, koja za determinističke algoritme (kakve jedino promatramo) ima funkcijsko svojstvo --- pa je možemo promatrati i kao funkciju $nextconf\colon C\to C$, koja svakoj konfiguraciji stroja pridružuje sljedeću konfiguraciju po trenutnom koraku algoritma $\mathcal A$. Završne konfiguracije pritom ostaju nepromijenjene: restrikcija $nextconf$ na skup $E$ mora biti identiteta.
+Također imamo dvomjesnu relaciju $\leadsto$ na skupu $C$, koja za determinističke algoritme (kakve jedino promatramo) ima funkcijsko svojstvo --- pa je možemo promatrati i kao funkciju $nextconf\colon C\to C$, koja svakoj konfiguraciji stroja pridružuje sljedeću konfiguraciju po trenutnom koraku algoritma $\mathcal A$. Završne konfiguracije pritom ostaju nepromijenjene: restrikcija $nextconf$ na skup $E$ mora biti identiteta.
 
 Iteriranjem funkcije $nextconf$ na vrijednosti funkcije $start$ dobivamo izračunavanje. Precizno, za $x\in A$ definiramo
 \begin{align}
@@ -151,12 +150,12 @@ Ako postoji $n_0$ takav da je $c_{n_0}\in E$, izračunavanje $(c_n)_n$ stane, i 
 \end{tikzpicture}    
 \end{equation}
 
-\subsection{Simulacije: intuicija u pozadini dokaza ekvivalentnosti}
+% \subsection{Simulacije: intuicija u pozadini dokaza ekvivalentnosti}
 
 Ako sad između istih skupova $A$ i $B$ stavimo još neki drugi skup konfiguracija $C'$, sa svojom funkcijom $nextconf'$ i podskupom završnih konfiguracija $E'$, možemo zamisliti funkciju $start$ kao zadatak $f'$ za taj novi stroj, sa $A':=A$ i $B':=C$. No kako taj stroj zna računati samo funkcije iz $A$ u $B$, moramo prethodno kodirati $C$ nekom funkcijom $Code_1\colon C\to B$. To je zapravo najzanimljiviji dio, jer o njemu ovisi koliko će laki biti kasniji koraci. Dakle $f'=Code_1\circ start$, i kako su te dvije funkcije obično prilično jednostavne, za očekivati je da će $f'$ biti izračunljiva u novom modelu.
 
 \begin{napomena}\label{nap:ASM}
-Zanimljiv i relativno nov uvid je da se "univerzalni" skup $C$ može naći u obliku interpretacija za strukture prvog reda. Tada možemo i formalno, koristeći \emph{lokalnost}, definirati što znači "prilično jednostavna" funkcija: to je ona koja ovisi o konačno mnogo "elemenata" (vrijednosti zatvorenih terma) u interpretaciji. Taj uvid vodi na formalizaciju \emph{strojeva s apstraktnim stanjima} (ASM), koji u nekom smislu predstavljaju "univerzalni supstrat" za opis algoritama. Lijep uvod u ASM teoriju, pisan specifično za računarce, može se naći u~\cite{huggins}.
+Zanimljiv i relativno nov uvid Jurija Gureviča s kraja prošlog stoljeća je da se "univerzalni" skup $C$ može naći u obliku interpretacija za strukture prvog reda. Tada možemo i formalno, koristeći \emph{lokalnost}, definirati što znači "prilično jednostavna" funkcija: to je ona koja ovisi o konačno mnogo "elemenata" (vrijednosti zatvorenih terma) u interpretaciji. Taj uvid vodi na formalizaciju \emph{strojeva s apstraktnim stanjima} (ASM), koji u nekom smislu predstavljaju "univerzalni supstrat" za opis algoritama. Lijep uvod u ASM teoriju, pisan specifično za računarce, može se naći u~\cite{huggins}.
 \end{napomena}
 
 Analogni postupak možemo napraviti za $result$, samo s druge strane; i za $nextconf$, kodiranjem s obje strane. Svaka od tako dobivenih funkcija sama za sebe je dovoljno jednostavna (u smislu prethodne napomene) da je iz\-ra\-čun\-lji\-va u novom modelu.
@@ -174,7 +173,7 @@ Odgovarajućim kodiranjima možemo dobiti i simulaciju za promijenjene skupove $
 
 Zato nije čudno da sve formalizacije algoritama koje se mogu svesti na paradigmu shematski prikazanu u~\eqref{dia:alg}, mogu simulirati jedna drugu. Možemo ići toliko daleko da kažemo da je \textbf{prikazivost u obliku takve sheme ono esencijalno što algoritme čini algoritmima}.
 
-Iako je to intuitivno jasno, iz toga nipošto ne slijedi da je svaki model jednostavno svesti na tu shemu. Recimo, možete se zabaviti pokušavajući konstruirati stroj --- sustav $(C,start,nextconf,E,result)$ --- koji računa parcijalno rekurzivne funkcije zadane simboličkim definicijama (ili još kompliciranije, točkovnim definicijama). Koliko god taj zadatak bio prekriven gustim slojem tehničkih detalja, vjerojatno ćete se složiti da su to \emph{samo} tehnički detalji --- izuzetno biste se iznenadili da nekim slučajem ispadne da je takav stroj nemoguće konstruirati, zar ne? Upravo ta intuicija je ono što opravdava Church--\!Turingovu tezu.
+Iako je to intuitivno jasno, iz toga nipošto ne slijedi da je svaki model jednostavno svesti na tu shemu. Recimo, možete se zabaviti pokušavajući konstruirati stroj --- sustav $(C,start,nextconf,E,result)$ --- koji računa parcijalno rekurzivne funkcije zadane simboličkim definicijama (ili još kompliciranije, točkovnim definicijama). Koliko god taj zadatak bio prekriven debelim slojem tehničkih detalja, vjerojatno ćete se složiti da su to \emph{samo} tehnički detalji --- izuzetno biste se iznenadili da nekim slučajem ispadne da je takav stroj nemoguće konstruirati, zar ne? Upravo ta intuicija je ono što opravdava Church--\!Turingovu tezu.
 
 \subsection{Fiksiranje pojma algoritma}
 
@@ -190,16 +189,16 @@ Osim s obzirom na apstraktnost, možemo gledati i kompromise s obzirom na druge 
     \end{tabular}
 \end{equation}
 
-Naravno, tablica~\eqref{eq:vrste-alg} je vrlo pojednostavljena --- em postoji puno više dimenzija po kojima se može uspoređivati (strukturalnost, primjenjivost na stvarne probleme, entropija, količina pretpostavljenog znanja,~\ldots), em prikazane dimenzije nisu binarne. Pored jezičnog i brojevnog modela postoje razni drugi, recimo geometrijski (Wangove domine) ili algebarski (diofantski skupovi), pa čak i topološki (homotopska teorija tipova); dok je konkretno--apstraktno "podjela" zapravo spektar duž kojeg se mogu smjestiti razni koncepti. Recimo, makro-stroj je mrvicu apstraktniji od RAM-stroja, dok je logika prvog reda malo konkretnija od $\lambda$-računa. Čak ni sustavi koje smo obradili nisu ekstremi na tom spektru: postoje i sustavi poput G\"odel--Herbrandovih jednadžbi, koji su još apstraktniji od parcijalne rekurzivnosti, kao i Minskijevi brojači (\emph{counter machines}) koji su još konkretniji od RAM-strojeva jer zahtijevaju fiksan broj registara. Već smo spomenuli ASM u napomeni~\ref{nap:ASM} --- taj model se proteže duž cijelog spektra konkretno--apstraktno, jer je njegova osnovna odlika da hvata algoritme na njihovoj \textbf{prirodnoj razini apstrakcije}, koja god ona bila.
+Naravno, tablica~\eqref{eq:vrste-alg} je vrlo pojednostavljena --- em postoji puno više dimenzija po kojima možemo uspoređivati algoritamske formalizme (strukturalnost, primjenjivost na stvarne probleme, entropija, količina pretpostavljenog znanja,~\ldots), em prikazane dimenzije nisu binarne. Pored jezičnog i brojevnog modela postoje razni drugi, recimo geometrijski (Wangove domine) ili algebarski (diofantski skupovi), pa čak i topološki (homotopska teorija tipova); dok je konkretno--apstraktno "podjela" zapravo spektar duž kojeg se mogu smjestiti razni koncepti. Recimo, makro-stroj je mrvicu apstraktniji od RAM-stroja, dok je logika prvog reda malo konkretnija od $\lambda$-računa. Čak ni sustavi koje smo obradili nisu ekstremi na tom spektru: postoje i sustavi poput G\"odel--Herbrandovih jednadžbi, koji su još apstraktniji od parcijalne rekurzivnosti, kao i Minskijevi brojači (\emph{counter machines}) koji su još konkretniji od RAM-strojeva. Već smo spomenuli ASM u napomeni~\ref{nap:ASM} --- taj model se proteže duž cijelog spektra konkretno--apstraktno, jer je njegova osnovna odlika da hvata algoritme na njihovoj \textbf{prirodnoj razini apstrakcije}, koja god ona bila.
 
 Ono što je sada bitno je da između ćelija takve tablice možemo slobodno prolaziti kako nam je drago, dok imamo odgovarajuće teoreme ekvivalencije. Za pojedini redak (vrstu ulaznih odnosno izlaznih podataka) to se može sasvim formalizirati, u smislu da su izračunljive funkcije doslovno iste bez obzira na to koji stupac odaberemo. Za različite retke, moramo se dogovoriti oko prirodnog kodiranja, no to je najčešće prilično jednostavno i dosta robusno s obzirom na tehničke detalje (recimo, zapis broja u bazi je vrlo prirodna veza brojevnog i jezičnog modela, i pritom za samu izračunljivost čak nije bitno --- iako za složenost jest --- odaberemo li unarni zapis ili zapis u bazi $b\ge2$).
 
 %\textbf{Church--\!Turingova teza}
 \begin{ctteza}
-Svaka dovoljno općenita formalizacija pojma algoritma na istoj vrsti podataka ra\-ču\-na iste funkcije, a na različitim vrstama podataka računa funkcije koje su vezane prirodnim kodiranjima između tih vrsta podataka. To su upravo \emph{izračunljive} funkcije, odnosno one za koje u intuitivnom smislu postoje algoritmi.
+Svaka dovoljno općenita formalizacija pojma algoritma na istoj vrsti podataka ra\-ču\-na iste funkcije, a na različitim vrstama podataka računa funkcije koje su vezane prirodnim kodiranjima između tih vrsta podataka. To su upravo \emph{izračunljive} funkcije, one za koje u intuitivnom smislu postoje algoritmi.
 \end{ctteza}
 
-Teoremi ekvivalencije mogu se sada izreći kao: sve ćelije u tablici~\eqref{eq:vrste-alg} su dovoljno općenite formalizacije pojma algoritma. (Nismo definirali $\lambda$-račun, ali i za njega vrijedi teorem ekvivalencije. Zainteresirani čitatelj može naći detalje u~\cite{lovnicki}.)
+Teoremi ekvivalencije mogu se sada izreći kao: sve ćelije u tablici~\eqref{eq:vrste-alg} jesu dovoljno općenite formalizacije pojma algoritma. (Nismo definirali $\lambda$-račun, ali i za njega vrijedi teorem ekvivalencije. Zainteresirani čitatelj može naći detalje u~\cite{lovnicki}.)
 
 Povijesno, Alonzo Church je autor teze, i prvi koji je primijetio da je teza potrebna kako bi se dokazali rezultati o nepostojanju algoritma. Ipak, njegova formalizacija ($\lambda$-račun) je bila preapstraktna da bi zadovoljila vodeće eksperte za izračunljivost toga doba. To je između ostalog potaklo Turinga na detaljnu analizu intuitivnog pojma algoritma, te kad je njegova formalizacija dokazana ekvivalentnom ostalima do tad poznatima, vrlo brzo je postala prihvaćena kao "mjera" (\emph{Turing completeness}) pomoću koje se procjenjuju algoritamski sustavi (npr.\ programski jezici) sve do danas.
 
@@ -213,10 +212,10 @@ Church--\!Turingova teza nije uobličena kao teorem, pa čak niti kao tvrdnja ko
 
 \begin{definicija}\label{def:izr}
 Za jezičnu funkciju $\varphi$ kažemo da je \emph{izračunljiva} ako postoji Turingov stroj koji je računa.
-Za brojevnu funkciju $f$ kažemo da je \emph{izračunljiva} ako je njena unarna reprezentacija $\upsilon f$ izračunljiva.
+Za brojevnu funkciju $f$ kažemo da je \emph{izračunljiva} ako je njena binarna reprezentacija $\beta f$ izračunljiva.
 %Umjesto "$f$ je izračunljiva" govorimo još "postoji algoritam za $f$".
 \end{definicija}
 
-U tom svjetlu, teoremi ekvivalencije bili bi \emph{karakterizacije} upravo definiranog pojma izračunljivosti. Ipak, u uvodnom kursu je vjerojatno bolje vidjeti interakciju raznih formalizacija, prije nego što se jedna od njih odabere kao definicija. Iako je modernom fizičaru sasvim prirodna definicija "metar je udaljenost koju svjetlost u vakuumu prijeđe za $1/299\,792\,458\,s$", to nije dobra definicija u osnovnoškolskoj nastavi fizike, jer pretpostavlja puno znanja i iskustva o prirodi svjetlosti, inercijalnim sustavima, i teoriji relativnosti. Bez tog znanja definicija se također može prihvatiti, ali djeluje forsirano. Autorovo mišljenje je da bi jednako tako djelovala i definicija~\ref{def:izr} prije dokaza teorema ekvivalencije. Smijete se usprotiviti tom uvjerenju --- ono nije matematičko, već psihološko.
+U tom svjetlu, teoremi ekvivalencije bili bi \emph{karakterizacije} upravo definiranog pojma izračunljivosti. Ipak, u uvodnom kursu je vjerojatno bolje vidjeti interakciju raznih formalizacija, prije nego što se jedna od njih odabere kao definicija. Iako je modernom fizičaru sasvim prirodna definicija "metar je udaljenost koju svjetlost u vakuumu prijeđe za $\frac{1}{299\,792\,458}\,s$", to nije dobra definicija u osnovnoškolskoj nastavi fizike, jer pretpostavlja puno znanja i iskustva o prirodi svjetlosti, inercijalnim sustavima, i teoriji relativnosti. Bez tog znanja definicija se također može prihvatiti, ali djeluje forsirano. Autorovo mišljenje je da bi jednako tako djelovala i definicija~\ref{def:izr} prije dokaza teorema ekvivalencije. Smijete se usprotiviti tom uvjerenju --- ono nije matematičko, već psihološko.
 
 \input{church.tex}
