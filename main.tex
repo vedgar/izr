@@ -8,7 +8,7 @@
   numbers=endperiod
 ]{scrbook}
 %%%%
-%\includeonly{uvod}
+\includeonly{uvod,ram,rek,univ,turing,neizr}
 %%%%
 \raggedbottom
 \pdfmapline{+dummy-space <dummy-space.pfb}
@@ -102,8 +102,8 @@ initial text=$ $}
     \t\textbullet\\
     \t\textbullet
     \end{array}$}
+\newcommand{\mund}[1]{\raisebox{3pt}{\smash{\scriptsize $#1$}}}
 \newcommand{\TComp}{\mathcal{TC}omp_\Sigma}
-
 
 \newenvironment{prog}{\left[\begin{array}{r@{\;}l}}{\end{array}\right]}
 
@@ -124,6 +124,7 @@ initial text=$ $}
 
 \begin{document}
 %\tracingall
+\frontmatter
 \titlehead{\centering{\Huge{\color{light-gray}\textup{\MakeUppercase{c o m p u t o n o m i c o n}}}}\vspace{1cm}
 
 \begin{equation*}\label{dia:naslovnica}
@@ -170,6 +171,7 @@ initial text=$ $}
 \tableofcontents
 
 %\part{Modeli izračunljivosti}
+\mainmatter
 \include{uvod}
 \include{ram}
 %\addtocontents{toc}{\protect\newpage}

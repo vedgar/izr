@@ -179,8 +179,8 @@ Za svaki $k\in\N_+$, skup $\mathcal Comp_k$ je prebrojiv. Skup $\mathcal Comp$ s
 \end{teorem}
 \begin{proof}
 Neka je $k$ fiksna mjesnost. Preslikavanje
-sa skupa $\mathcal Prog$ na skup $\mathcal Comp_k$
-koje svakom RAM-programu $P$ pridružuje funkciju koju algoritam $P^k$ računa je dobro definirano prema korolaru~\ref{kor:ram1fun}. Iz toga je $\card(\mathcal Comp_k)\le\card(\mathcal Prog)$, što je $\aleph_0$ po korolaru~\ref{kor:alef0prog}.
+sa skupa $\mathcal Prog$ na skup $\mathcal Comp_k$,
+koje svakom RAM-programu $P$ pridružuje funkciju koju algoritam $P^k$ računa, je dobro definirano prema korolaru~\ref{kor:ram1fun}. Iz toga je $\card(\mathcal Comp_k)\le\card(\mathcal Prog)$, što je $\aleph_0$ po korolaru~\ref{kor:alef0prog}.
 
 Za drugu nejednakost, primijetimo da su za sve $n\in\N$ i $k\in\N_+$, konstantne funkcije $\f{C}_n^k$, zadane sa
 $\f{C}_n^k(\vec x):=n$, RAM-izračunljive: doista, računaju ih RAM-algoritmi
@@ -213,7 +213,7 @@ Iz toga slijedi $\mathcal Func_k\not\subseteq\mathcal Comp_k$, pa postoji funkci
 
 \section{Primjeri RAM-programa}
 
-Jednu familiju primjera, RAM-programe za konstantne funkcije, vidjeli smo već u dokazu teorema~\ref{tm:alef0izr}. Specijalno, za $n=0$, \emph{prazan program} $[\,]$ računa \emph{nulfunkciju} $\f{C}_0^k$ za svaki $k\in\N_+$. Dakle, prazan program nažalost ne računa praznu funkciju --- što bi bilo lako zapamtiti --- ali računa \emph{praznu relaciju} $\emptyset^k$, odnosno njenu karakterističnu funkciju. Također, za $n=1$, program $[\,0.\,\incr{0}\,]$ računa "univerzalnu" relaciju $\N^k$.
+Jednu familiju primjera, RAM-programe za konstantne funkcije, vidjeli smo već u dokazu teorema~\ref{tm:alef0izr}. Specijalno, za $n=0$, \emph{prazan program} $[\,]$ računa \emph{nulfunkciju} $\f{C}_0^k$ za svaki $k\in\N_+$. Dakle, prazan program nažalost ne računa praznu funkciju --- što bi bilo lako zapamtiti --- ali računa \emph{praznu relaciju} $\emptyset^k$, odnosno njenu karakterističnu funkciju. Također, za $n=1$, program $[\,0.\,\incr{0}\,]$ računa univerzalnu relaciju $\N^k$.
 
 Napišimo sada i RAM-program koji računa praznu funkciju $\varnothing^k$. Iz definicije zaključujemo da je to program čije izračunavanje s $\vec x$ ne stane ni za koji $\vec x$ (bez obzira na mjesnost). Dakle, moramo spriječiti $\textsc{pc}$ da dođe do $n$, odnosno treba nam instrukcija s odredištem, koja će vratiti $\textsc{pc}$ na staru vrijednost tako da se ne poveća za $1$ (\emph{petlja}), i to ona koja se izvrši uvijek (\emph{beskonačna} petlja). Najjednostavniji takav program je $[\,0.\,\goto\;0\,]$.
 
@@ -501,7 +501,7 @@ Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$
 Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$, gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat\,*}$, koji ima istu semantiku što se registara tiče.
 \end{napomena}
 
-\section{Primjeri makroa i makro-programa}
+\section{Primjeri makroa}
 
 Jedan važan primjer smo već vidjeli: prisjetimo se, za svaki $j\in\N$,
 \begin{equation}
@@ -525,7 +525,7 @@ Nije teško vidjeti, sličnom tehnikom kao za \textsc{zero}, da za sve \emph{raz
 \end{equation}
 ima semantiku $r_i'=0\land r_j'=r_i$: riječima, prebacuje sadržaj $\reg{i}$ u $\reg{j}$ i pritom resetira $\reg{i}$. Ovdje je bitan uvjet $i\not=j$; pokušajte odrediti što se događa kad taj uvjet nije ispunjen. Općenito ćemo imati uvjete na "parametre" makroa pod kojima on ima traženu semantiku. Naravno, onda smo dužni pri svakom korištenju makroa u programu provjeriti da konkretni parametri zadovoljavaju te uvjete.
 
-Evo primjera makroa s malo kompliciranijim uvjetom: neka su $i,j,n\in\N$ takvi da je $\left|i-j\right|\ge n$. Definiramo makro
+Evo primjera makroa s malo kompliciranijim uvjetom: neka su $i,j,n\in\N$ takvi da je $\dulj{i-j}\ge n$. Definiramo makro
 \begin{equation}
     (\textsc{mmove $n$ from $\reg{i}..$ to $\reg{j}..$}):=\begin{prog}
     t.&\remove{i+t}{j+t}
@@ -616,7 +616,7 @@ Semantika funkcijskog makroa, uz oznake iz definicije~\ref{def:funmakro}, te pok
 \end{enumerate}
 \end{propozicija}
 \begin{proof}
-Prvo primijetimo da su svi uvjeti na parametre korištenih makroa zadovoljeni: za prvu i zadnju instrukciju to je $\left|b-0\right|=\left|0-b\right|=b\ge b$, za prijenos argumenata je $b+j_t\ge b>k$, a za prijenos povratne vrijednosti je $b+j_0\ge b\ge 1>0$.
+Prvo primijetimo da su svi uvjeti na parametre korištenih makroa zadovoljeni: za prvu i zadnju instrukciju to je $\dulj{b-0}=\dulj{0-b}=b\ge b$, za prijenos argumenata je $b+j_t\ge b>k$, a za prijenos povratne vrijednosti je $b+j_0\ge b\ge 1>0$.
 
 Za tvrdnju~\ref{case:in}, pogledajmo redom efekte pojedinih makro-instrukcija iz~\eqref{mprog:funmakro}.
 
