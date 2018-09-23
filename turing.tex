@@ -6,7 +6,7 @@ Uveli smo dva modela izračunljivosti brojevnih funkcija --- RAM-izračunljivost
 
 % \subsection{Elementarne operacije}
 
-Prvi je izračunljivost funkcija koje nisu brojevne. Rekli smo u uvodnom poglavlju, i opravdali to mnogo puta kasnije --- skup $\N$ je idealan za matematički tretman izračunljivosti, ali nije baš vjeran onom što se događa u praksi. Glavni problem leži u konačnosti odnosno beskonačnosti skupova relevantnih za izračunavanje.
+Prvi je izračunljivost funkcija koje nisu brojevne. Rekli smo u uvodnom poglavlju, i opravdali to mnogo puta kasnije --- skup $\N$ je idealan za matematički tretman izračunljivosti, ali nije baš vjeran onom što se događa u praksi. Glavna razlika leži u konačnosti odnosno beskonačnosti skupova relevantnih za izračunavanje.
 
 Recimo, u RAM-modelu, skup mogućih stanja pojedinog registra je beskonačan. Često je problematično shvaćanje beskonačnosti kao "jako puno, pa još malo više". Zapravo, bliže definiciji beskonačnosti bilo bi "jako puno, pa onda još beskonačno više" --- ma koliko velik konačni skup uzeli od beskonačnog skupa, ostatak je jednako velik kao da nismo uzeli ništa.
 
@@ -542,7 +542,7 @@ Funkcija $\f{stop}^1$, definirana sa
 \begin{equation}
     \f{stop}(\kr w):\simeq\text{"broj koraka nakon kojeg $\mathcal T_0$-izračunavanje s $w$ stane",}
 \end{equation}
-parcijalno je rekurzivna (naravno, $\dom{\f{stop}}=\{\kr w\mid w\in\dom{\varphi_0}\}$).
+    parcijalno je rekurzivna (naravno, $\dom{\f{stop}}=\dom{\N\varphi_0}=\{\kr w\mid w\in\dom{\varphi_0}\}$).
 \end{lema}
 \begin{proof}
 Tvrdimo da je
@@ -577,7 +577,7 @@ Ako je pak $w\in\dom{\varphi_0}$, tada $\mathcal T_0$-izračunavanje s $w$ stane
 
 \section{Pretvorba RAM-stroja u Turingov stroj}\label{sec:RAM>Turing}
 
-Pokušajmo sada dokazati obrat teorema~\ref{tm:tikp}. Kako za parcijalno rekurzivne funkcije imamo kompajler u RAM-strojeve, možemo ga iskoristiti za kompajliranje u Turingove strojeve. To je također česta pojava u računarstvu: dolaskom nove arhitekture, često ne moramo iznova kompajlirati izvorni kod. Ako već imamo kod na sličnoj razini (kao što je recimo već kompajlirani RAM-program), možemo ga direktno prevesti ("transpilirati") u kompajlirani kod za drugu arhitekturu. To ćemo učiniti ovdje.
+Pokušajmo sada dokazati obrat teorema~\ref{tm:tikp}. Kako za parcijalno rekurzivne funkcije imamo kompajler u RAM-strojeve, možemo ga iskoristiti i za kompajliranje u Turingove strojeve. To je također poznata pojava u računarstvu: dolaskom nove arhitekture, često ne moramo iznova kompajlirati izvorni kod. Ako već imamo kod na sličnoj razini (kao što je recimo već kompajlirani RAM-program), možemo ga direktno prevesti ("transpilirati") u kompajlirani kod za drugu arhitekturu. To ćemo učiniti ovdje.
 
 Kroz čitavu ovu točku, imat ćemo fiksiranu abecedu $\Sigma_0$, njeno kodiranje $\N\Sigma_0$, kodiranje $\N\Sigma_0^*$ u pomaknutoj bazi $b'=\card\Sigma_0$, jezičnu funkciju $\varphi_0$ nad $\Sigma_0$ takvu da je $\N\varphi_0\in\mathcal Comp_1$, te fiksni RAM-algoritam $P_0^1$ koji računa $\N\varphi_0$. 
 
@@ -751,9 +751,9 @@ Vrijeme je da opišemo kako ćemo točno reprezentirati konfiguraciju RAM-stroja
 Kako to najbolje učiniti? Kao što smo rekli na početku ovog poglavlja, jezični model je "transponirani" brojevni model: u jezičnom modelu broj ćelija nije ograničen, ali broj mogućih sadržaja svake ćelije jest, dok je u brojevnom modelu obrnuto. To znači da možemo stanje relevantnih (prvih $m$) registara prikazati kao riječ nad "abecedom $m$-bitnih procesorskih riječi"
 \begin{equation}
 \renewcommand{\arraystretch}{0.1}
-    B^m:=\prod_{i<m}\{\t\textopenbullet,\t\textbullet\}=\bigl\{\left[\begin{array}{@{}l@{}}\beta_0\\
-    \MTFlushSpaceAbove
-    \vdotswithin{\beta}\\
+    B^m:=\prod_{i<m}\{\t\textopenbullet,\t\textbullet\}=\bigl\{\left[\begin{array}{@{}l@{}}\beta_0\\[-2mm]
+    %\MTFlushSpaceAbove
+        \vdotswithin{\beta}\\[1mm]
     \beta_{m-1}\end{array}\right]\bigm|(\forall i<m)(\beta_i\in\{\t\textopenbullet,\t\textbullet\})\bigr\}\text,
 \end{equation}
 tako da se dio trake desno od separatora sastoji od $m$ "redaka" (\emph{tragova}), u svakom od kojih piše $\t\textbullet^t\t\textopenbullet\dotsm$, gdje je $t$ sadržaj odgovarajućeg registra. U tom kontekstu, $B^m$ je "prostor stupaca" sa svim ($2^m$ njih) kombinacijama $\t\textbullet$ i $\t\textopenbullet$ visine $m$. Recimo,
@@ -872,17 +872,17 @@ iz čega vidimo dvije stvari. Prvo, $\bl$ je očito ovaj prvi element u $B^m$, k
     \bl\,:=\begin{array}{c}
     \t\textopenbullet\\
     \t\textopenbullet\\
-    \t\textopenbullet\\
-    \MTFlushSpaceAbove
-    \vdotswithin{\t\textopenbullet}\\
+        \t\textopenbullet\\[-1.5mm]
+    %\MTFlushSpaceAbove
+        \vdotswithin{\t\textopenbullet}\\[1mm]
     \t\textopenbullet
     \end{array}\text{,\qquad}
     r_1:=\begin{array}{c}
     \t\textopenbullet\\
     \t\textbullet\\
-    \t\textopenbullet\\
-    \MTFlushSpaceAbove
-    \vdotswithin{\t\textopenbullet}\\
+        \t\textopenbullet\\[-1.5mm]
+    %\MTFlushSpaceAbove
+        \vdotswithin{\t\textopenbullet}\\[1mm]
     \t\textopenbullet
     \end{array}\text.
 \end{equation}

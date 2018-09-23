@@ -2,9 +2,9 @@
 
 Prvi model izračunavanja koji ćemo promotriti --- \emph{RAM-stroj} --- dobiven je kao pojednostavljenje (gotovo karikatura) modernih računalnih procesora. S jedne strane, radi se o "krajnje RISC procesoru", sa samo tri tipa instrukcija (a i jedan od ta tri tipa je trivijalno eliminabilan; ipak, zadržat ćemo ga zbog jednostavnosti izlaganja).
 
-S druge pak strane, ne pretpostavljamo nikakva ograničenja na broj dostupnih registara (pretpostavljamo da ih ima dovoljno za spremanje ulaznih i izlaznih podataka, te za odvijanje programa --- svaki konkretni algoritam koristit će konačno mnogo \emph{relevantnih} registara, ali ne postavljamo gornju granicu s obzirom na sve algoritme), niti na veličinu pojedinog registra (u svakom trenutku izvršavanja algoritma, u svakom relevantnom registru može se nalaziti proizvoljni prirodni broj). Lako se vidi da su oba uvjeta nužna već za reprezentaciju ulaza: postoje algoritmi proizvoljno velike mjesnosti, te ih je moguće pozvati s proizvoljno velikim ulaznim podacima.
+S druge pak strane, ne pretpostavljamo nikakva ograničenja na broj dostupnih registara (pretpostavljamo da ih ima dovoljno za spremanje ulaznih i izlaznih podataka, te za odvijanje programa --- svaki konkretni algoritam koristit će konačno mnogo \emph{relevantnih} registara, ali ne postavljamo gornju granicu s obzirom na sve algoritme), niti na veličinu pojedinog registra (u svakom trenutku izvršavanja algoritma, u svakom relevantnom registru može se nalaziti proizvoljni prirodni broj). Obje značajke nužne su već za reprezentaciju ulaza: postoje algoritmi proizvoljno velike mjesnosti, te ih je moguće pozvati s proizvoljno velikim ulaznim podacima.
 
-Još jedno bitno pojednostavljenje sastoji se u tome da ćemo pretpostavljati da je program \emph{fiksan}: ne može se mijenjati (tzv.\ \emph{harvardska} arhitektura). Iako kod koji sam sebe mijenja za vrijeme izvršavanja nije baš popularan na modernim računalnim arhitekturama (prvenstveno iz sigurnosnih razloga), osnovna ideja modernog računala sastoji se u tome da imamo jedan procesor koji je sposoban izvršavati razne programe (\emph{von Neumannova} arhitektura). Da bismo počeli koristiti drugi operativni sustav, dovoljno ga je instalirati i resetirati računalo; ne moramo kupovati novi procesor.
+Još jedno bitno pojednostavljenje sastoji se u tome da ćemo pretpostavljati da je program \emph{fiksan}: ne može se mijenjati (tzv.\ \emph{harvardska} arhitektura). Iako k\^od koji sam sebe mijenja za vrijeme izvršavanja nije baš popularan na modernim računalnim arhitekturama (prvenstveno iz sigurnosnih razloga), osnovna ideja modernog računala je da "dovoljno nisko" imamo jedan procesor koji je sposoban izvršavati razne programe (\emph{von Neumannova} arhitektura). Da bismo počeli koristiti drugi operacijski sustav, dovoljno je instalirati ga i ponovo pokrenuti računalo; ne moramo kupovati novi procesor.
 
 Razlog zašto radimo s ograničenijim modelom je što von Neumannova arhitektura \emph{pretpostavlja} univerzalnost, koju mi tek trebamo dokazati. To ćemo svakako učiniti, ali tek u poglavlju~\ref{ch:univ}. Krenimo s osnovnim definicijama.
 
@@ -254,7 +254,7 @@ Prethodni dokaz (ili programerska intuicija) daje nam i više: ako "naslažemo" 
     \end{prog}^3\text.
 \end{equation}
 
-Ovdje vidimo jednu dobru stranu naizgled čudne konvencije da izračunavanje za\-vr\-ša\-va kad programski brojač postane jednak duljini programa: tada prilikom ovakve konkatenacije nije potrebno mijenjati odredišta već napisanih instrukcija. Odredište $3$ instrukcije rednog broja $0$ jednako je označavalo kraj programa za $\f{I}_1^1$, kao i kraj \emph{tog dijela} programa za $\f{add}^3$. Primijetite sličnost sa standardnom konvencijom o \t{end}-iteratoru u C\t{++} STL biblioteci.
+Ovdje vidimo jednu dobru stranu naizgled čudne konvencije da izračunavanje za\-vr\-ša\-va kad programski brojač postane jednak duljini programa: prilikom ovakve konkatenacije ne trebamo mijenjati odredišta već napisanih instrukcija. Odredište $3$ instrukcije rednog broja $0$ jednako je označavalo kraj programa za $\f{I}_1^1$, kao i kraj \emph{tog dijela} programa za $\f{add}^3$. Primijetite sličnost sa standardnom konvencijom o \texttt{end}-iteratoru u biblioteci STL jezika C\texttt{++}.
 
 Vidimo da su mnoge jednostavne funkcije: prazna, konstante, identiteta, zbrajanje,~\ldots\ RAM-izračunljive. Ipak, pisati RAM-programe može biti dosta zamorno (recimo za $\f{add}^8$ --- mnogi dijelovi se ponavljaju uz neznatne izmjene u odredištima ili adresama registara) ili teško (recimo za množenje, ili potenciranje --- povremeno bismo htjeli iskoristiti registar kao brojač za neku petlju, ali istodobno i sačuvati njegovu vrijednost). Prvi problem ćemo riješiti makroima, a drugi funkcijskim programiranjem.
 
@@ -266,7 +266,7 @@ Oznaka sugerira dualnu upotrebu RAM-programa $P$: ako ga koristimo za računanje
 Primjerice, za svaki $j\in\N$, RAM-program $P_j:=\begin{prog}
 0.&\decr j2\\
 1.&\goto\;0
-\end{prog}$ ima semantiku $r_j'=0$ (njegovo izvršavanje postavlja $\reg{j}$ na nulu --- kažemo da \emph{resetira} $\reg j$). To znači da imamo makro $P_j^*$ koju kasnije možemo koristiti u \emph{makro-programima} kad god želimo resetirati neki registar, ne mijenjajući ostale registre. Taj makro označavat ćemo sa $\textsc{zero}\;\reg{j}$.
+\end{prog}$ ima semantiku $r_j'=0$ (njegovo izvršavanje postavlja $\reg{j}$ na nulu --- kažemo da \emph{resetira} $\reg j$). To znači da imamo makro $P_j^*$ koji kasnije možemo koristiti u \emph{makro-programima} kad god želimo resetirati neki registar, ne mijenjajući ostale registre. Taj makro označavat ćemo sa $\textsc{zero}\;\reg{j}$.
 
 Definirat ćemo brojne makroe, što će kulminirati \emph{funkcijskim makroom} --- koji pruža mogućnost da naš programski jezik, kojim pišemo makro-programe, izvršava prave funkcijske pozive, sa zasebnim okvirom (\emph{scope}) lokalnih varijabli, prijenosom argumenata po vrijednosti, i zapisivanjem povratne vrijednosti u po volji odabrani registar, čuvajući sadržaje registara koji su nam bitni. No do tada je još dug put. Za početak, navedimo osnovne definicije i tvrdnje koje vrijede za makro-paradigmu. Gotovo sve one su sasvim analogne onima u RAM-paradigmi, pa ih nećemo detaljno motivirati odnosno obrazlagati.
 
@@ -388,7 +388,7 @@ Također se mogu (uz malo više tehnikalija) dokazati rezultati o deterministič
 
 Dakle, cilj nam je opisati postupak za pretvorbu makro-strojeva u RAM-strojeve koji za iste ulaze prolaze kroz "iste" konfiguracije. One ne mogu biti doslovno iste jer makro-stroj ima dva programska brojača a RAM-stroj samo jedan, ali to je zapravo jedini detalj koji je različit. Sadržaj registara makro-stroja i RAM-stroja bit će isti kako se krećemo kroz izračunavanje, i izvršavat ćemo iste instrukcije (istog tipa nad istim registrima) istim redom, samo će one biti u različitim programima, s različitim rednim brojevima, te će njihova odredišta trebati biti drugačija kako bi se odnosila na odgovarajuće instrukcije u drugom programu.
 
-Ideju konstrukcije je lako opisati intuitivno: "spljoštimo" gornju razinu (na kojoj su makroi $P^*$) i donju razinu (na kojoj su pojedinačne instrukcije programa $P$) u jednu razinu. U modernom računarstvu ta se tehnika zove \emph{inlining}: umjesto makro-instrukcije $P^*$ na isto "mjesto" (relativnu poziciju u programu u odnosu na ostale instrukcije) stavimo sve instrukcije od $P$ redom. Naravno, time su neki redni brojevi instrukcija prestali biti sinkronizirani s odredištima: prvo, svi redni brojevi instrukcija u $P$ (osim ako je makro $P^*$ bio baš na početku makro-programa), a drugo, svi redni brojevi nakon onog koji je imao makro $P^*$ (osim ako $P$ ima točno jednu instrukciju). Sve njih treba popraviti, a jednako tako i odredišta koja se odnose na njih. Sada je još samo preostalo precizirati taj postupak.
+Ideju konstrukcije je lako opisati intuitivno: "spljoštimo" gornju razinu (na kojoj su makroi $P^*$) i donju razinu (na kojoj su pojedinačne instrukcije programa $P$) u jednu razinu. U modernom računarstvu ta se tehnika zove \emph{inlining}: umjesto makro-instrukcije $P^*$\!, na isto "mjesto" (relativnu poziciju u programu u odnosu na ostale instrukcije) stavimo sve instrukcije od $P$ redom. Naravno, time su neki redni brojevi instrukcija prestali biti sinkronizirani s odredištima: prvo, svi redni brojevi instrukcija u $P$ (osim ako je makro $P^*$ bio baš na početku makro-programa), a drugo, svi redni brojevi nakon onog koji je imao makro $P^*$ (osim ako $P$ ima točno jednu instrukciju). Sve njih treba popraviti, a jednako tako i odredišta koja se odnose na njih. Sada je još samo preostalo precizirati taj postupak.
 
 \begin{definicija}\label{def:flat}
 Neka je $Q$ makro-program. \emph{Spljoštenje} od $Q$ definiramo kao RAM-program $Q^\flat$, dobiven iz $Q$ sljedećim postupkom:
@@ -414,7 +414,7 @@ Surjektivnost slijedi iz činjenice da je $\mathcal Ins\subset\mathcal{MI}ns$, d
 \end{proof}
 
 \begin{primjer}\label{pr:flat}
-Spljoštimo program $Q$ iz primjera~\ref{pr:makro}. Prvi makro u $Q$ nalazi se odmah na početku ($i=0$), pa ne moramo renumerirati instrukcije koje implementiraju $\textsc{zero}\;\reg1$ --- samo ove ispod njih: trebamo im povećati odredišta i redne brojeve za $2-1=1$. Nakon prvog prolaza kroz petlju dakle dobijemo makro-program iz~\eqref{eq:prflatQ'Q''} lijevo.
+Spljoštimo program $Q$ iz primjera~\ref{pr:makro}. Prvi makro u $Q$ nalazi se odmah na početku ($i=0$)	 pa ne moramo renumerirati instrukcije koje implementiraju $\textsc{zero}\;\reg1$ --- samo ove ispod njih: trebamo im povećati odredišta i redne brojeve za $2-1=1$. Nakon prvog prolaza kroz petlju tako dobijemo makro-program $Q'$ iz~\eqref{eq:prflatQ'Q''} lijevo.
 
 Sljedeći makro je onaj koji odgovara praznom RAM-programu, na rednom broju $i=2$. Za njega očito ne treba provoditi korak~\ref{korak:dodaj}, samo ga uklonimo i smanjimo redne brojeve i odredišta veće od $2$ za $1$. Specijalno, to znači da u instrukciji $(3.\;\decr12)$, odredište ostaje $2$, dok se redni broj smanjuje za $1$ i postaje također $2$. Dobivamo
 \begin{equation}\label{eq:prflatQ'Q''}
@@ -424,7 +424,7 @@ Sljedeći makro je onaj koji odgovara praznom RAM-programu, na rednom broju $i=2
     2.&[\;]^*\\
     3.&\decr22\\
     4.&P_{\f{add}^3}^*
-    \end{prog}\qquad
+    \end{prog}\text,\qquad
     Q'':=\begin{prog}
     0.&\decr12\\
     1.&\goto\;0\\
@@ -498,7 +498,7 @@ Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$
 \end{proof}
 
 \begin{napomena}
-Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$, gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat\,*}$, koji ima istu semantiku što se registara tiče.
+Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$ gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat\,*}$\!, koji ima istu semantiku što se efekata na registrima tiče.
 \end{napomena}
 
 \section{Primjeri makroa}
