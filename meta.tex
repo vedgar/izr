@@ -733,9 +733,9 @@ Za svaki $k\in\N_+$, preslikavanje $\knk{\cdots}\colon\mathcal P(\mathcal Comp_k
 \end{lema}
 Štoviše, iz dokaza će slijediti da je $\knk{\cdots}$ strogo rastuće: $\mathcal F\subset\mathcal G$ povlači $\knk{\mathcal F}\subset\knk{\mathcal G}$.
 \begin{proof}
-Neka su $\mathcal F,\mathcal G\subseteq\mathcal Comp_k$ različiti. Tada postoji funkcija $\f F$ takva da (bez smanjenja općenitosti) je $\f F\in\mathcal F$, ali $\f F\not\in\mathcal G$. Tada $\f F\in\mathcal F\subseteq\mathcal Comp_k$ znači da je $\f F$ RAM-izračunljiva, pa postoji RAM-program $P$ koji je računa. Tada je $e:=\kprog P$ indeks funkcije $\f F$, odnosno $\kf e^k\in\mathcal F$, pa je $e\in\knk{\mathcal F}$.
+Neka su $\mathcal F,\mathcal G\subseteq\mathcal Comp_k$ različiti. Tada postoji funkcija $\f F$ takva da (bez smanjenja općenitosti) je $\f F\in\mathcal G$, ali $\f F\not\in\mathcal F$. Tada $\f F\in\mathcal G\subseteq\mathcal Comp_k$ znači da je $\f F$ RAM-izračunljiva, pa postoji RAM-program $P$ koji je računa. Tada je $e:=\kprog P$ indeks funkcije $\f F$, odnosno $\kf e^k\in\mathcal G$, pa je $e\in\knk{\mathcal G}$.
 
-No kad bi bilo i $e\in\knk{\mathcal G}$, to bi značilo $\kf e^k\in\mathcal G$, što je nemoguće jer $\f F\not\in\mathcal G$. Drugim riječima, $e\in\knk{\mathcal F}\setminus\knk{\mathcal G}$, odnosno $\knk{\mathcal F}\not=\knk{\mathcal G}$.
+No kad bi bilo i $e\in\knk{\mathcal F}$, to bi značilo $\kf e^k\in\mathcal F$, što je nemoguće jer $\f F\not\in\mathcal F$. Drugim riječima, $e\in\knk{\mathcal G}\setminus\knk{\mathcal F}$, odnosno $\knk{\mathcal F}\not=\knk{\mathcal G}$.
 \end{proof}
 
 Na neki način, do na nezgodnu činjenicu da je $\mathcal P(\mathcal Comp_k)$ neprebrojiv, čini se kao da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\knk{\mathcal F}}$ ima to svojstvo. Ili, jezikom problema: neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\knk{\{\f F\in\mathcal Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceovog teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
@@ -788,7 +788,9 @@ Neka je $k\in\N_+$. Za skup $S\subseteq\N$ kažemo da je \emph{$k$-invarijantan}
 Svojstvo $k$-invarijantnosti pruža brojevnu karakterizaciju skupova indeksa, bez pozivanja na skupove funkcija.
 
 \begin{lema}\label{lm:kinv=sind}
-Neka je $k\in\N_+$, te $S\subseteq N$. Tada je $S$ $k$-invarijantan ako i samo ako je $S=\knk{\mathcal F}$ za neki $\mathcal F\subseteq\mathcal Comp_k$.
+Neka je $k\in\N_+$, te $S\subseteq\N$.
+
+Tada je $S$ $k$-invarijantan ako i samo ako je $S=\knk{\mathcal F}$ za neki $\mathcal F\subseteq\mathcal Comp_k$.
 \end{lema}
 \begin{proof}
 Za smjer ($\Leftarrow$), neka je $f\approx_k e\in S=\knk{\mathcal F}$. Tada je po definiciji $\kf f^k=\kf e^k\in\mathcal F$, pa je i $f\in\knk{\mathcal F}=S$. Za smjer ($\Rightarrow$), pretpostavimo da je $S$ $k$-invarijantan, i tražimo $\mathcal F$. Očit kandidat je $\mathcal F:=\{\kf e^k\mid e\in S\}$. Dakle, trebamo dokazati da je $\knk{\mathcal F}=S$.
