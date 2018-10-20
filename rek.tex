@@ -74,7 +74,7 @@ Ta dilema je dobro poznata u modernom računarstvu, i različiti programski jezi
     Prelude| in f(5)
     0
 \end{verbatim}
-Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i prisutan je u gotovo svim imperativnim jezicima, pa i mnogim funkcijskima (kao što je ML). Prednost je lakša implementacija, i lakše razmišljanje o kodu (što povlači lakši \emph{debugging}).
+Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i prisutan je u gotovo svim imperativnim jezicima, pa i mnogim funkcijskima (kao što je ML). Prednost je lakša implementacija, i lakše razmišljanje o kodu (a time i lakši \emph{debugging}).
 \begin{verbatim}
     >>> def i12(x, y): return x
     >>> def z(x): return 0
@@ -139,7 +139,7 @@ Skup RAM-izračunljivih funkcija, $\mathcal Comp$, zatvoren je na kompoziciju.
 Pomoću funkcijskog makroa i uz marljivu evaluaciju, algoritam je očit: prvo izračunamo sve $\f G_i$ u istim argumentima $\vec x$, spremimo njihove povratne vrijednosti u $l$ pomoćnih registara nakon ulaznih, te 
 na kraju izračunamo $\f H$ s tako dobivenim argumentima.
 
-Precizno, neka su $k,l\in\N_+$ proizvoljni, te neka su $\f G_1^k$, $\f G_2^k$,~\ldots,$\f G_l^k$ i $\f H^l$ proizvoljne RAM-izračunljive funkcije. To znači da postoje RAM-algoritmi $P_{\f G_1}^k$, $P_{\f G_2}^k$,~\ldots, $P_{\f G_l}^k$ i $P_{\f H}^l$, koji ih redom računaju. Tvrdimo da makro-program
+Precizno, neka su $k,l\in\N_+$ proizvoljni, te neka su $\f G_1^k$, $\f G_2^k$,~\ldots,~$\f G_l^k$ i $\f H^l$ proizvoljne RAM-izračunljive funkcije. To znači da postoje RAM-algoritmi $P_{\f G_1}^k$, $P_{\f G_2}^k$,~\ldots, $P_{\f G_l}^k$ i $P_{\f H}^l$, koji ih redom računaju. Tvrdimo da makro-program
 \begin{equation}
 \label{eq:compmacro}
     Q_{\f F}:=\begin{prog}
@@ -165,7 +165,7 @@ l.    &P_{\f H}\dots  &\f F(\vec x)&x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&
 \end{equation}
 
 S druge strane, ako $\vec x\not\in\dom{\f F}$, prema~\eqref{eq:domkomp} to se može dogoditi na dva načina. Ako $\vec x\not\in\bigcap_{i=1}^l\dom{\f G_i}$, postoji neki $i$ takav da $\vec x\not\in\dom{\f G_i}$, pa označimo s $i_0$ najmanji takav. Tada će izvršavanje programa $Q_{\f F}$ doći do instrukcije s rednim brojem $i_0-1$, ali izvršavanje te instrukcije neće nikada stati prema propoziciji~\ref{prop:semfmacro}, pa ni $Q_{\f F}$-izračunavanje s $\vec x$ neće stati. Ako pak $l$-torka dobivenih povratnih vrijednosti nije u $\dom{\f H}$, izvršavanje $Q_{\f F}$ će zapeti u beskonačnoj petlji na posljednjoj instrukciji, pa opet $Q_{\f F}$-izračunavanje s $\vec x$ neće stati.
-Sada prema teoremu~\ref{tm:rem}, RAM-algoritam $Q_{\f F}^{\flat\,k}$ također računa $\f F$, pa je $\f F\in\mathcal Comp$.
+Sada prema teoremu~\ref{tm:rem} RAM-algoritam $Q_{\f F}^{\flat\,k}$ također računa $\f F$, pa je $\f F\in\mathcal Comp$.
 \end{proof}
 
 \section{Primitivna rekurzija}
@@ -461,7 +461,7 @@ Domena funkcije $\mu R^{k+1}$ je $k$-mjesna relacija koju označavamo s $\exists
 
 U tom prikazu lako možemo vizualizirati i funkciju $\mu R$: za svaku točku $(x,y)$ iz projekcije, $\mu zR(x,y,z)$ je visina do koje vidimo prazan prostor, odnosno visina na kojoj vidimo prvu točku u relaciji iznad $(x,y)$. 
 
-Naravno, samo za $\vec x\in\exists_*R$ izraz $\mu yR(\vec x,y)$ uopće ima smisla --- inače je nedefiniran. Za obrat --- da je za \emph{svaki} $\vec x\in\exists_*R$, izraz $\mu yR(\vec x,y)$ dobro definiran --- zaslužna je dobra uređenost od $\N$: ako postoji neki $y\in\N$ takav da vrijedi $R(\vec x,y)$, tada po principu dobre uređenosti postoji i najmanji takav.
+Naravno, samo za $\vec x\in\exists_*R$ izraz $\mu yR(\vec x,y)$ uopće ima smisla --- inače je nedefiniran. Za obrat --- da je za \emph{svaki} $\vec x\in\exists_*R$, izraz $\mu yR(\vec x,y)$ dobro definiran --- zaslužna je dobra uređenost od $\N$: ako postoji neki $y\in\N$ takav da vrijedi $R(\vec x,y)$, tada postoji i najmanji takav.
 
 \begin{primjer}\label{pr:varnothingprek}
 Sada je lako dobiti praznu funkciju minimizacijom prazne relacije: konkretno, za svaki $k\in\N_+$, $\varnothing^k=\mu\,\emptyset^{k+1}$. Naime, projekcija prazne relacije je opet prazna, a jedina funkcija s praznom domenom je prazna funkcija.
@@ -823,7 +823,7 @@ Neka je $k\in\N_+$, neka je $\f G^k$ (primitivno) rekurzivna funkcija, te neka j
 \end{propozicija}
 Naglasimo, totalnost funkcije $\f F$ je esencijalna. Izbacivanjem već jedne točke iz $\dom{\f G}$ dobit ćemo funkciju koja nije primitivno rekurzivna, po kontrapoziciji propozicije~\ref{prop:prntot}.
 \begin{proof}
-Po pretpostavci, skup $\{\vec x\in\N^k\mid\f F(\vec x)\not=\f G(\vec x)\}$ je konačan: označimo mu sve elemente (recimo poredane leksikografski) s $\vec c_1,\vec c_2,\dotsc,\vec c_l$. Ako je taj skup prazan, tada je $\f F=\f G$ pa nemamo što dokazivati. Inače je
+    Po pretpostavci, skup $\{\vec x\in\N^k\mid\f F(\vec x)\not=\f G(\vec x)\}$ je konačan: označimo mu sve elemente (recimo, poredane leksikografski) s $\vec c_1,\vec c_2,\dotsc,\vec c_l$. Ako je taj skup prazan, tada je $\f F=\f G$ pa je (primitivno) rekurzivna po pretpostavci. Inače je
 \begin{equation}
     \f F(\vec x)=\begin{cases}
     \f F(\vec c_1),&\vec x=\vec c_1\\

@@ -595,7 +595,7 @@ početna konfiguracija RAM-stroja s ulazom $\vec x$ (prenesenim preko koda, jer 
 \begin{proof}
 Samo treba napisati definiciju:
 \begin{equation}
-    \f{start}(x):=\;\prod_{\mathclap{i<\f{lh}(x)}}p_{i+1}^{x[i]}=\;\prod_{\mathclap{i<\f{lh}(x)}}\f{pow}\bigl(\f{prime}\bigl(\f{Sc}(i)\bigr),\f{part}(x,i)\bigr)\text.
+    \f{start}(x):=\;\prod_{i=0}^{\mathclap{\f{lh}(x)-1}}p_{i+1}^{x[i]}=\;\prod_{\mathclap{i<\f{lh}(x)}}\f{pow}\bigl(\f{prime}\bigl(\f{Sc}(i)\bigr),\f{part}(x,i)\bigr)\text.
 \end{equation}
 Primitivna rekurzivnost slijedi iz propozicija~\ref{pp:primeprn} i~\ref{prop:lhpartprn}, napomene~\ref{nap:sumprodH} i primjera~\ref{pr:addmulpow}. Prim-brojevi su pomaknuti jer adrese ulaznih registara počinju od $1$.
 \end{proof}
@@ -619,9 +619,9 @@ Za samo izvršavanje instrukcija na registrima, koristit ćemo množenje odnosno
 \end{align}
 (jasno, \eqref{eq:knkkpj} vrijedi samo ako je $r_j>0$).
 
-Sada možemo kodirati dokaz leme~\ref{lema:ramdet}. Drugim riječima, za preslikavanje $nextconf$ koje svaku konfiguraciju RAM-stroja preslikava u "sljedeću" konfiguraciju (u koju ova prelazi), konstruirat ćemo $\N nextconf$ kao izračunljivu funkciju. Ona ima dva izlaza, pa ćemo je reprezentirati kroz dvije primitivno rekurzivne funkcije.
+Sada možemo kodirati dokaz leme~\ref{lema:ramdet}: za preslikavanje $nextconf$ koje konfiguraciju RAM-stroja preslikava u "sljedeću" konfiguraciju (u koju ova prelazi), konstruirat ćemo $\N nextconf$ kao izračunljivu funkciju. Ona ima dva izlaza, pa ćemo je reprezentirati kroz dvije primitivno rekurzivne funkcije.
 
-Jedan tehnički detalj: funkcijska relacija $\leadsto$ ovisi o programu $P$, no ako zanemarimo završne konfiguracije (i pravilo da one prelaze u same sebe), zapravo ovisi samo o trenutnoj instrukciji $I_{c(\textsc{pc})}$ tog programa. Zato će naše primitivno rekurzivne funkcije primati tu instrukciju, odnosno njen kod, i u parcijalnoj specifikaciji nećemo precizirati što rade ako je ulazna konfiguracija završna --- time ćemo se baviti kasnije.
+Funkcijska relacija $\leadsto$ ovisi o programu, no ako zanemarimo pravilo da završne konfiguracije prelaze u same sebe, zapravo ovisi samo o trenutnoj instrukciji $I_{c(\textsc{pc})}$ tog programa. Zato će naše primitivno rekurzivne funkcije primati tu instrukciju, i nećemo specificirati djelovanje na završnim konfiguracijama --- time ćemo se baviti kasnije.
 
 \begin{lema}\label{lm:NextRegCountprn}
 Za proizvoljnu RAM-konfiguraciju $c$, označimo kod stanja njenih registara s $c(\reg{*}):=\knk{c(\reg0),c(\reg1),\dotsc}$.

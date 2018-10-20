@@ -38,7 +38,7 @@ Vidimo da korolar~\ref{kor:pent} vrijedi bez obzira na abecedu i kodiranje. Važ
 \begin{definicija}
 \emph{Unarna abeceda} je $\Sigma_{\t\textbullet}:=\{\t\textbullet\}$. Kad nema opasnosti od zabune, umjesto $\Sigma_{\t\textbullet}$ pišemo samo \t\textbullet. Kodiranje unarne abecede je jedino moguće: $\N\Sigma_{\t\textbullet}(\t\textbullet):=1$.
 
-Za jednomjesnu brojevnu funkciju $F^1$, jezičnu funkciju $\N^{-1}F$ zovemo \emph{unarnom reprezentacijom} od $F$, i označavamo je $\t\textbullet F$.
+Za jednomjesnu brojevnu funkciju $F^1$, jezičnu funkciju $\N^{-1}F$ nad $\t\textbullet$ zovemo \emph{unarnom reprezentacijom} od $F$, i označavamo je $\t\textbullet F$.
 \end{definicija}
 
 Svaka riječ $u$ nad unarnom abecedom ($u\in\t\textbullet^*$) je oblika $u=\t\textbullet^n$, gdje je $n=\dulj u=\kr u$. Sada definicija preslikavanja $\N^{-1}$ kaže da je $(\t\textbullet F)(\t\textbullet^n)=\t\textbullet^{F(n)}$ ako je $n\in\dom F$, a $\t\textbullet^n\not\in\dom{\t\textbullet F}$ inače. Po napomeni~\ref{nap:parcdef}, pišemo
@@ -96,7 +96,7 @@ I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$, imat ćemo funkciju
 \begin{equation}\label{eq:stop'def}
     \f{stop}'(x):=\mu n\bigl(\f{State}(x,n)\in\{1,2\}\bigr)\text,
 \end{equation}
-za koju lako vidimo da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}), pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak `:=') po definiciji odlučivača: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$, za neki $n$ jer $\mathcal T$-izračunavanje s $w$ mora stati.
+za koju lako vidimo da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}), pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak `:=') po definiciji odlučivača: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$ za neki $n$, jer $\mathcal T$-izračunavanje s $w$ mora stati.
 Naravno, tada je $\f{stop}'(x)=\f{stop}'(\kr w)$ upravo broj koraka nakon kojeg to iz\-ra\-ču\-na\-va\-nje stane.
 
 Tvrdimo da je
@@ -486,7 +486,7 @@ Za $i<\f{count2}(x)$, uvjet pod operatorom minimizacije jednoznačno određuje $
     i=\f{count2}(z')=\f{count2}(\kr{v'})\ge\f{count2}(\kr{v\t/})=\f{count2}(\kr v\conc2\kr{\t/})=\\
     =\f{count2}(\kr v\conc22)=\f{count2}(\kr v)+1=\f{count2}(z)+1=i+1\text,
 \end{multline}
-kontradikcija. No ako je $z$ jedinstven, to znači da je dovoljno naći \emph{neki} takav i taj će biti minimalan, a kod "prefiksa" od $x$ do isključivo pozicije $i$-te dvojke zadovoljava to svojstvo. Njegova duljina je onda upravo ta pozicija (brojeći od $0$), kao što i treba biti.
+kontradikcija. No ako je $z$ jedinstven, to znači da je dovoljno naći \emph{neki} takav i taj će biti minimalan, a "prefiks" od $x$ do isključivo pozicije $i$-te dvojke zadovoljava to svojstvo. Njegova duljina je onda upravo ta pozicija (brojeći od $0$), kao što i treba biti.
 
 Za $i\ge\f{count2}(x)$, takav $z$ ne postoji (jer $z\conc22$ ima više dvojki nego $x$, pa ne može biti $z\conc22\sqsubseteq_\beta x$), te minimizacija $(\mu z<x)$ dade $x$, odnosno $\f{pos2}(x,i)=\f{blh}(x)$, opet, kao što i treba biti po specifikaciji.
 
