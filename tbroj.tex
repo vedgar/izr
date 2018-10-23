@@ -88,9 +88,9 @@ Neka je $L$ jezik. Ako postoji Turingov odlučivač koji prepoznaje $L$, tada je
 \begin{proof}
 Pretpostavimo da je $\mathcal T$ odlučivač za $L$, i provedimo s tim strojem postupak iz točke~\ref{sec:tikp}. Ovdje navodimo samo detalje koje je potrebno promijeniti.
 
-Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_\mathit{true}):=1$, a $\N Q(q_\mathit{false}):=2$. (Možemo dokazati analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\not=q_\mathit{true}$ i $q_0\not=q_\mathit{false}$ --- a po definiciji odlučivača mora biti $q_\mathit{true}\not=q_\mathit{false}$.)
+Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_\mathit{true}):=1$, a $\N Q(q_\mathit{false}):=2$. (Lako je dokazati analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\not=q_\mathit{true}$ i $q_0\not=q_\mathit{false}$ --- a po definiciji odlučivača mora biti $q_\mathit{true}\not=q_\mathit{false}$.)
 
-Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\not\in\{q_\mathit{true},q_\mathit{false}\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica~\eqref{eq:directiontable} imati dva retka jedinica, a ne samo jedan.
+    Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\not\in\{q_\mathit{true},q_\mathit{false}\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica (vidjeti primjer~\ref{pr:polatable}) imati dva retka jedinica, a ne samo jedan.
 
 I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$, imat ćemo funkciju zadanu sa
 \begin{equation}\label{eq:stop'def}
@@ -148,7 +148,7 @@ Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad \begin{tikzpict
 (q9) edge[dashed] node[below] {\t\$:\bl} (qf)
 ;
 \end{tikzpicture}\;.
-\vspace{-12mm}
+%\vspace{-12mm}
 
 \subsection{Turing-izračunljivost višemjesnih funkcija}
 

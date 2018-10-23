@@ -636,7 +636,7 @@ Za svaki $e\in\N$ i za svaki $k\in\N_+$ vrijedi $\f S_k(0,e)=e$.
 \begin{proof}
 Direktnim uvrštavanjem u definiciju. Prvo, ako je $e\in\f{Prog}\kompl$, tada je po~\eqref{eq:Skprn} $\f S_k(y,e)=e$ za sve $y\in\N$, pa tako i za $y=0$. Još treba dokazati tvrdnju za $e\in\f{Prog}$.
 
-Drugo, rastavom na slučajeve vidimo da je $\f{Shift}(0,i)=i$. Recimo, za $i\in\f{InsDEC}$, imamo $\f{Ins}(i)$ i $i[0]=1$, što znači da postoje $j,l<i$ takvi da je $i=\f{codeDEC(j,l)}=\kr{1,j,l}$ (u~\eqref{eq:Insprn} vrijedi drugi disjunkt, jer u ostalima je $i[0]\not=1$). No to znači da je $j=i[1]=\f{regn}(i)$ i $l=i[2]=\f{dest}(i)$, pa je $\f{Shift}(0,i)=\f{codeDEC}(j,l+0)=i$. Ostali slučajevi su slični, zapravo još jednostavniji.
+Drugo, rastavom na slučajeve vidimo da je $\f{Shift}(0,i)=i$. Recimo, za $i\in\f{InsDEC}$, postoje $j,l<i$ takvi da je $i=\f{codeDEC(j,l)}=\kr{1,j,l}$. No to znači da je $j=i[1]=\f{regn}(i)$ i $l=i[2]=\f{dest}(i)$, pa je $\f{Shift}(0,i)=\f{codeDEC}(j,l+0)=i$. Ostali slučajevi su slični, zapravo još jednostavniji.
 
 Treće, sada je $\f H(0,e,t)=\f{Shift}(0,e[t])=e[t]=\f{part}(e,t)$, pa je desni operand operacije $*$ u~\eqref{eq:Skprn} jednak $\overline{\f H}\bigl(0,e,\f{lh}(e)\bigr)=\overline{\f{part}}\bigl(e,\f{lh}(e)\bigr)=e$ jer iz $\f{Prog}(e)$ slijedi $\f{Seq}(e)$. Lijevi operand iste operacije je $\overline{\f G}(0)=1$ jer je svaka povijest u nuli jednaka $\kr{}=1$.
 
@@ -667,7 +667,7 @@ Označimo $m:=k-l\in\N_+$. Za $(\subseteq)$, neka je $e\approx_kf$. Tada je $\kf
 \end{equation}
 Dakle vrijedi i $\kf e^l=\kf f^l$, pa je $e\approx_lf$.
 
-Za $(\not=)$, moramo naći dva RAM-programa koji su ekvivalentni za sve moguće $l$-torke ulaznih podataka, ali kad počnemo stavljati ulaze i u registre $\reg{l+1}..\reg k$, više nisu. Za to nam mogu poslužiti $1$ kao dobro poznati indeks nulfunkcije, i $i_k$ kao indeks $k$-te koordinatne projekcije --- pogledajte tekst nakon~\eqref{eq:paramcompose} za preciznu definiciju.
+Za $(\not=)$, moramo naći dva RAM-programa koji su ekvivalentni za sve moguće $l$-torke ulaznih podataka, ali kad počnemo stavljati ulaze i u registre $\reg{l+1}..\,\reg k$, više nisu. Za to nam mogu poslužiti $1$ kao dobro poznati indeks nulfunkcije, i $i_k$ kao indeks $k$-te koordinatne projekcije --- pogledajte tekst nakon~\eqref{eq:paramcompose} za preciznu definiciju.
 
 Tada svakako vrijedi $1\approx_l i_k$, jer za svaki $\vec x\in\N^l$ vrijedi
 \begin{equation}
