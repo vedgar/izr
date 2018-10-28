@@ -82,7 +82,7 @@ Neka su $k,l\in\N_+$, te $R^k$ i $P^l$ relacije. Kažemo da je $R$ \emph{svediva
 
 Zadnja jednakost se može točkovno zapisati kao $R(\vec x)\Leftrightarrow P\bigl(\f G_1(\vec x),\dotsc,\f G_l(\vec x)\bigr)$. Primijetimo da je to zapravo obična kompozicija $\chi_R=\chi_P\circ G$, samo uzevši u obzir da je kodomena od $G$ jednaka $\N^l$, pa je prikazujemo kroz $l$ koordinatnih funkcija --- što je već standardno kad se o kompoziciji radi.
 
-Također primijetimo da nismo ništa dokomponirali na $\chi_P$ slijeva: nije dozvoljen \emph{post-processing} povratne vrijednosti od $\chi_P$, samo \emph{pre-processing} njenih ulaznih argumenata. Kako se radi o karakterističnim funkcijama čije su povratne vrijednosti iz $bool=\{0,1\}$, jedini netrivijalni \emph{post-processing} bi moglo biti negiranje (komplementiranje), ali kako smo upravo vidjeli da komplementiranje općenito nije tako jednostavna operacija na problemima (npr.\ na domenama izračunljivih funkcija, odnosno problemima zaustavljanja), s razlogom ga nećemo htjeti ovdje.
+Također primijetimo da nismo ništa dokomponirali na $\chi_P$ slijeva: nije dozvoljen \emph{post-processing} povratne vrijednosti od $\chi_P$, samo \emph{pre-processing} njenih ulaznih podataka. Kako se radi o karakterističnim funkcijama čije su povratne vrijednosti iz $bool=\{0,1\}$, jedini netrivijalni \emph{post-processing} bi moglo biti negiranje (komplementiranje), ali kako smo upravo vidjeli da komplementiranje općenito nije tako jednostavna operacija na problemima (npr.\ na domenama izračunljivih funkcija, odnosno problemima zaustavljanja), s razlogom ga nećemo htjeti ovdje.
 
 \begin{propozicija}\label{pp:preceqrt}
 Relacija $\preceq$ (na skupu $\bigcup_{k\in\N_+}\!\mathcal P(\N^k)$ svih brojevnih relacija) je refleksivna i tranzitivna.
@@ -90,7 +90,7 @@ Relacija $\preceq$ (na skupu $\bigcup_{k\in\N_+}\!\mathcal P(\N^k)$ svih brojevn
 \begin{proof}
 Refleksivnost je jednostavna: stavimo $\f G_1:=\f I_1^l$, $\f G_2:=\f I_2^l$,~\ldots, $\f G_l:=\f I_l^l$ (koordinatne funkcije identitete $id_{\N^l}$). Očito je $\chi_P\circ(\f I_1^l,\dotsc,\f I_l^l)=\chi_P$, pa je $P\preceq P$.
 
-Tranzitivnost je kompliciranija, ali samo notacijski, zbog toga što funkcije s više izlaza promatramo kroz koordinatne funkcije. Neka su $k,l,m\in\N_+$, te neka su $R^k$, $Q^m$ i $P^l$ relacije takve da je $R\preceq Q\preceq P$. Prvo svođenje znači da postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_m^k$ takve da je $\chi_R=\chi_Q\circ(\f G_1,\dotsc,\f G_m)$, dok drugo znači da postoje rekurzivne funkcije $\f H_1$,~\ldots, $\f H_l$ takve da je $\chi_Q=\chi_P\circ(\f H_1,\dotsc,\f H_l)$. Sada je (možemo pisati jednakosti jer su sve funkcije ili karakteristične ili rekurzivne, dakle totalne, a kompozicija totalnih je totalna po propoziciji~\ref{prop:comptot})
+Tranzitivnost je kompliciranija, ali samo notacijski, zbog toga što funkcije s više izlaza promatramo kroz koordinatne funkcije. Neka su $k,l,m\in\N_+$, te neka su $R^k$, $Q^m$ i $P^l$ relacije takve da je $R\preceq Q\preceq P$. Prvo svođenje znači da postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_m^k$ takve da je $\chi_R=\chi_Q\circ(\f G_1,\dotsc,\f G_m)$, dok drugo znači da postoje rekurzivne funkcije $\f H_1^m$,~\ldots, $\f H_l^m$ takve da je $\chi_Q=\chi_P\circ(\f H_1,\dotsc,\f H_l)$. Sada je (možemo pisati jednakosti jer su sve funkcije ili karakteristične ili rekurzivne, dakle totalne, a kompozicija totalnih je totalna po propoziciji~\ref{prop:comptot})
 \begin{multline}\label{eq:tranzpreceq}
     \chi_R(\vec x)=\chi_Q\bigl(\f G_1(\vec x),\dotsc,\f G_m(\vec x)\bigr)=\bigl(\chi_P\circ(\f H_1,\dotsc,\f H_l)\bigr)\bigl(\f G_1(\vec x),\dotsc,\f G_m(\vec x)\bigr)=\\
     =\chi_P\bigl(
@@ -105,13 +105,13 @@ Tranzitivnost je kompliciranija, ali samo notacijski, zbog toga što funkcije s 
 dakle ako za svaki $i\in[1..l]$ definiramo $\f F_i:=\f H_i\circ(\f G_1,\dotsc,\f G_m)$, tada je svaka $\f F_i$ rekurzivna po lemi~\ref{lm:comprek}. Sada~\eqref{eq:tranzpreceq} možemo zapisati kao $\chi_R=\chi_P\circ(\f F_1,\dotsc,\f F_l)$, odakle slijedi $R\preceq P$.
 \end{proof}
 
-$R\preceq P$ znači da ako imamo algoritam za rješavanje problema $P$, pomoću njega možemo riješiti i problem $R$. Intuitivno, $R$ je "bar toliko odlučiv" koliko i $P$.
+Relacija $R\preceq P$ znači da ako imamo algoritam za rješavanje problema $P$, pomoću njega možemo riješiti i problem $R$. Intuitivno, $R$ je "barem toliko odlučiv" koliko i $P$.
 
 \begin{propozicija}\label{pp:rek<rek}
 Relacija svediva na rekurzivnu relaciju je i sama rekurzivna.
 \end{propozicija}
 \begin{proof}
-Neka su $k,l\in\N_+$, te $R^k$ relacija i $P^l$ rekurzivna relacija, takve da je $R\preceq P$. To znači $\chi_{\f R}=\chi_{\f P}\circ(\f G_1,\dotsc,\f G_l)$, a rekurzivnost od $\f P$ znači da je $\chi_{\f P}$ rekurzivna, pa je po lemi~\ref{lm:comprek} i $\chi_R$ rekurzivna, odnosno $R$ je rekurzivna.
+Neka su $k,l\in\N_+$, te $R^k$ relacija i $\f P^l$ rekurzivna relacija, takve da je $R\preceq\f P$. To znači $\chi_R=\chi_{\f P}\circ(\f G_1,\dotsc,\f G_l)$, a rekurzivnost od $\f P$ znači da je $\chi_{\f P}$ rekurzivna, pa je po lemi~\ref{lm:comprek} i $\chi_R$ rekurzivna, odnosno $R$ je rekurzivna.
 \end{proof}
 
 \begin{korolar}\label{kor:nrek<nrek}
@@ -441,7 +441,7 @@ $\{\t\_,\t a,\t b,\t c,\dotsc,\t z,\t A,\t B,\t C,\dotsc,\t Z,\t 0,\t 1,\t 2,\do
 
 Ta \emph{leksička} struktura prirodno se nalazi "ispod" sintaksne strukture programskog jezika, u smislu da se leksički analizator izvršava prije sintaksnog, i predaje mu samo tipove \emph{tokena} koji su pronađeni u izvornom kodu. Recimo, iako su \t{abc} i \t{xy} dvije različite varijable, u sintaksno ispravnom programu možemo zamijeniti jednu drugom i sigurno nećemo uvesti sintaksnu grešku --- iako ćemo možda, zapravo vjerojatno, uvesti neke semantičke greške poput nedeklariranih varijabli.
 
-Vrlo je slična stvar i u logici prvog reda: $x_2$ i $x_{58}$ su različite individualne varijable, ali ako sintaksa kaže da na nekom mjestu (recimo neposredno iza kvantifikatora) mora doći varijabla, tada može doći bilo koja varijabla, i formula će biti sintaksno ispravna. Ili, na početku atomarne formule mora stajati relacijski simbol, ali možemo staviti bilo koji relacijski simbol $R_i$ --- doduše, mora biti odgovarajuće mjesnosti, ali to samo znači da se mjesnost može zaključiti iz ostatka atomarne formule, pa je ne treba pisati. Recimo, \t{(R(x)\textrightarrow R(x,x))} je formula u kojoj postoje dva relacijska simbola: $R_0^1$ i $R_0^2$.
+Vrlo je slična stvar i u logici prvog reda: $x_2$ i $x_{58}$ su različite individualne varijable, ali ako sintaksa kaže da na nekom mjestu (recimo neposredno iza kvantifikatora) mora doći varijabla, tada može doći bilo koja varijabla, i formula će ostati sintaksno ispravna. Ili, na početku atomarne formule mora stajati relacijski simbol, ali možemo staviti bilo koji relacijski simbol $R_i$ --- doduše, mora biti odgovarajuće mjesnosti, ali to samo znači da se mjesnost može zaključiti iz ostatka atomarne formule, pa je ne treba pisati. Recimo, \t{(R(x)\textrightarrow R(x,x))} je formula u kojoj postoje dva relacijska simbola: $R_0^1$ i $R_0^2$.
 
 Mogli bismo dakle doslovno tako raditi, osim što je dekadski zapis supskripta nespretan. Već smo mnogo puta jezično prikazivali prirodne brojeve u unarnom zapisu, zašto ne i ovdje? Štoviše, tradicionalna matematika već poznaje taj zapis u obliku (recimo za varijable) $x$, $x'$, $x''$, $x'''$,~\ldots\ --- što nije ništa drugo nego prebrojiv skup individualnih varijabli koji smo već promatrali, samo nad jednostavnijom abecedom $\{x,'\!\}$. Isti pristup upotrijebit ćemo za konstantske ($c$, $c'$, $c''$,~\ldots), funkcijske ($f$, $f'$,~\ldots) i relacijske ($R$, $R'$,~\ldots) simbole.
 
@@ -733,7 +733,7 @@ S druge strane, ako $u\not\in DR$, prva dretva po definiciji neće stati, no ho�
 
 No to bi značilo da smo upravo napisali (vrlo neformalni) algoritam za računanje funkcije $\chi_{DR}$, što je po Church--\!Turingovoj tezi u kontradikciji s teoremom~\ref{tm:DRnrek}.
 
-Jedina pretpostavka koja može biti kriva je da PA ne dokazuje sve formule oblika $\neg\varphi_u', u\in DR\kompl$ --- drugim riječima, postoji formula iz $\mathcal G\ddot o$ koja nije dokaziva u PA.
+Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in DR\kompl$ --- drugim riječima, postoji formula iz $\mathcal G\ddot o$ koja nije dokaziva u PA.
 \end{proof}
 
 \subsection{Problemi u skici dokaza G\"odelovog teorema}

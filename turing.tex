@@ -36,7 +36,7 @@ Britanski matematičar Alan Mathison Turing prvi je uspješno formalizirao taj k
 
 %\subsection{Turingov stroj}
 
-Odakle onda u priči Turingovi \emph{strojevi}? Isprva su bili zamišljeni samo kao stilska figura, odnosno način izražavanja. Naime, Turing je bio svjestan fenomena da je izuzetno lako pomisliti kako opisujemo postupak koji ne zahtijeva nikakvo eksterno znanje, a da to zapravo nije istina. Razumijevanje napisanog ili izgovorenog jezika, prepoznavanje objekata na slikama, pa čak i osnove socijalnog ponašanja, vještine su koje smo toliko duboko internalizirali da nam se čine elementarnima --- a zapravo pretpostavljaju ogromne količine znanja o svijetu koji nas okružuje. Jedan trivijalni primjer: rečenice hrvatskog jezika "Ana i Marija su sestre."\ i "Ana i Marija su majke."\ imaju potpuno istu sintaksnu strukturu, ali fundamentalno različitu semantiku, za čiju je konstrukciju potrebno netrivijalno znanje o ljudskoj biologiji --- a ipak nam svaka od te dvije semantike dođe sasvim prirodno čitajući odgovarajuću rečenicu, i uopće ne razmišljamo kako bi moglo biti drugačije, sve dok ih ne vidimo jednu pored druge.
+Odakle onda u priči Turingovi \emph{strojevi}? Turing je bio svjestan fenomena da je izuzetno lako pomisliti kako opisujemo postupak koji ne zahtijeva nikakvo eksterno znanje, a da to zapravo nije istina. Razumijevanje napisanog ili izgovorenog jezika, prepoznavanje objekata na slikama, pa čak i osnove socijalnog ponašanja, vještine su koje smo toliko duboko internalizirali da nam se čine elementarnima --- a zapravo pretpostavljaju ogromne količine znanja o svijetu koji nas okružuje. Jednostavni primjer: rečenice hrvatskog jezika "Ana i Marija su sestre."\ i "Ana i Marija su majke."\ imaju potpuno istu sintaksnu strukturu, ali fundamentalno različitu semantiku, za čiju je konstrukciju potrebno netrivijalno znanje o ljudskoj biologiji --- a ipak nam svaka od te dvije semantike dođe sasvim prirodno čitajući odgovarajuću rečenicu, i uopće ne razmišljamo kako bi moglo biti drugačije, sve dok ih ne vidimo jednu pored druge.
 
 Da bi svoje čitatelje uvjerio kako njegove elementarne operacije doista ne zahtijevaju nikakvo implicitno pretpostavljeno znanje, Turing je paralelno opisao i zamišljeni, idealizirani, \emph{stroj} koji može provoditi te operacije. Taj stroj, odnosno njegovu matematičku formalizaciju (do na neke kasnije ispeglane detalje radi lakšeg razumijevanja) danas nazivamo Turingovim strojem. Ipak, treba razumjeti da "ove operacije su toliko elementarne da bi ih mogao provoditi i mehanički stroj" nije poziv na konstrukciju stvarnog stroja, već apel na intuiciju da smo lišili osnovni opis algoritma svega suvišnog.
 
@@ -192,7 +192,7 @@ Sve su to problemi o kojima smo već govorili, ponajviše u uvodu. No sada znamo
 
 Prvo recimo nešto o kodiranju abecede $\Sigma$. Kako je to konačan skup, iskoristit ćemo \t{enum}-tehniku, kao što smo već napravili kod kodiranja tipova instrukcija RAM-stroja. Ipak, ovdje ćemo početi brojiti od $1$ (ne želimo $0$ u slici od $\N\Sigma$), iz tehničkog razloga koji će uskoro biti jasan.
 
-Još jedan mali filozofski problem je u tome što su elementi od $\Sigma$ "apstraktni znakovi" bez ikakve imanentne semantike i međusobnog odnosa, tako da ne možemo fiksirati jedan poredak kao što smo to učinili za tipove RAM-instrukcija. Ipak, za svaku konkretnu abecedu moći ćemo fiksirati kodiranje (\emph{encoding}), a za apstraktne abecede moći ćemo univerzalno kvantificirati tvrdnje u obliku "Za svako kodiranje od $\Sigma$~\ldots", podrazumijevajući da je očito ("Zermelov teorem za konačne skupove") da kodiranje \emph{postoji}. U praksi, ti znakovi će obično biti dio Unicode standarda, te ćemo ih moći urediti, ako baš nemamo pametniji kriterij, po rednim brojevima u Unicodeu.
+Još jedan mali filozofski problem je u tome što su elementi od $\Sigma$ "apstraktni znakovi" bez ikakve imanentne semantike i međusobnog odnosa, tako da ne možemo fiksirati jedan poredak kao što smo to učinili za tipove RAM-instrukcija. Ipak, za svaku konkretnu abecedu moći ćemo fiksirati kodiranje (\emph{encoding}), a za apstraktne abecede moći ćemo univerzalno kvantificirati tvrdnje u obliku "Za svako kodiranje od $\Sigma$~\ldots", podrazumijevajući da je očito ("Zermelov teorem za konačne skupove") da kodiranje \emph{postoji}. U praksi, ti znakovi će obično biti dio standarda Unikod, te ćemo ih moći urediti, ako baš nemamo pametniji kriterij, po rednim brojevima u Unikodu.
 
 \begin{definicija}
 Neka je $\Sigma$ abeceda. Označimo $b':=\card\Sigma$. %(taj broj zovemo \emph{baza} abecede $\Sigma$, iz razloga koji će uskoro postati jasan). 
@@ -342,9 +342,9 @@ Kroz čitavu ovu točku, imat ćemo fiksiranu abecedu $\Sigma_0$, njeno kodiranj
 
 %\subsection{Kodiranje stanja, radne abecede i trake}
 
-Prvo kodirajmo skup $Q_0$. Kako se radi o konačnom skupu, možemo jednostavno staviti $a:=\card Q_0$ i fiksirati bijekciju $\N Q_0\colon Q_0\leftrightarrow[0..a\rangle$. Što se konstruktora tiče, trebamo samo fiksirati $\N Q_0(q_0)$ --- prirodnim se čini definirati $\N Q_0(q_0):=0$ --- a što se komponenata tiče, sve što trebamo je usporedba s $\N Q_0(q_z)$, što ćemo dobiti ako i to bude fiksan broj --- recimo, $\N Q_0(q_z):=1$.
+Prvo kodirajmo skup $Q_0$. Kako se radi o konačnom skupu, možemo jednostavno staviti $a:=\card Q_0$ i fiksirati bijekciju $\N Q_0\colon Q_0\leftrightarrow[0..a\rangle$. Za konstruktor trebamo samo fiksirati kod početnog stanja --- prirodnim se čini definirati $\N Q_0(q_0):=0$ --- a što se komponenata tiče, sve što trebamo je usporedba s $q_z$, što ćemo dobiti ako i njegov kod bude fiksan broj --- recimo, $\N Q_0(q_z):=1$.
 
-Hm, hoće li onda $\N Q_0$ biti dobro definirana? Što ako je $q_0=q_z$? U definiciji Turingovog stroja ništa ne sprečava da se to dogodi. Ipak, lako se vidi da $q_0\not=q_z$ smijemo pretpostaviti bez smanjenja općenitosti.
+Hm, hoće li onda $\N Q_0$ biti dobro definirana --- što ako je $q_0=q_z$? U definiciji Turingovog stroja ništa ne sprečava da se to dogodi. Ipak, lako se vidi da $q_0\not=q_z$ smijemo pretpostaviti bez smanjenja općenitosti.
 
 \begin{lema}\label{lm:bsomp-q0neqz}
 Za svaki Turingov stroj $\mathcal T$ koji računa neku jezičnu funkciju $\varphi$, postoji ekvivalentan (računa istu funkciju $\varphi$) Turingov stroj $\mathcal T'$, kojem se početno i završno stanje razlikuju.
@@ -611,8 +611,8 @@ Standardni način da se to napravi je otići na kraj riječi, pa pomicati slova 
 
 Tada, ako u stanju $n_\alpha$ čitamo znak $\alpha'$, brišemo ga s trake (zamjenjujemo ga s $\alpha$), i pamtimo u stanju (odlazimo u stanje $\alpha'$)~\eqref{d:12}. To činimo sve dok ne pročitamo prvu \bl\ na traci: ako je to u stanju $n_\alpha$, pišemo $\alpha$ na traku i prelazimo u novo stanje $q_1$~\eqref{d:13}. Ako pak pročitamo $\bl$ već u stanju $q_0$, to znači da je ulazna riječ bila prazna ($w=\varepsilon$), pa samo treba zamijeniti tu prazninu s \t\$ i odmah otići u stanje $q_1$~\eqref{d:14}. U tom stanju samo treba dopisati \t\# na kraj trake, i pomaknuti se ulijevo~\eqref{d:15}.
 \end{proof}
-
 \noindent\begin{gather}
+    \SwapAboveDisplaySkip
 \label{d:11}
     \delta(q_0,\alpha):=(n_\alpha,\t\$,1)\text{, za sve }\alpha\in\Sigma_0\\
 \label{d:12}
@@ -659,7 +659,7 @@ Za riječ \t{aab} imali bismo sljedeću šetnju kroz konfiguracije:
 U slučaju općenite abecede $\Sigma$, umjesto vertikale koja prolazi kroz $n_{\t a}$ i $n_{\t b}$, između $q_0$ i $q_1$ bismo imali potpun usmjeren graf s $(\card\Sigma)^2$ bridova, nad skupom vrhova $\{n_\alpha\mid\alpha\in\Sigma\}$.
 \end{primjer}
 
-Sljedeći korak je konstruirati početnu konfiguraciju od $\mathcal S_0$, desno od separatora \t\# na poziciji $\dulj{w}$. Znamo da to mora biti element od $(B^m)^*$, pa pokušajmo s unarnim kodiranjem: uzmimo jedan konkretan element $r_1\in B^m$, i cilj nam je desno od \t\# napisati $r_1^{\langle w\rangle}$. Što je točno $r_1$ (i čitav $B^m$),a reći ćemo u idućoj točki.%, ali zasad ga samo tretiramo kao zasebni znak (baš kao \bl).
+Sljedeći korak je konstruirati početnu konfiguraciju od $\mathcal S_0$, desno od separatora \t\# na poziciji $\dulj{w}$. Znamo da to mora biti element od $(B^m)^*$, pa pokušajmo s unarnim kodiranjem: uzmimo jedan konkretan element $r_1\in B^m$, i cilj nam je desno od \t\# napisati $r_1^{\langle w\rangle}$. Što je točno $r_1$ (i čitav $B^m$), reći ćemo u idućoj točki.%, ali zasad ga samo tretiramo kao zasebni znak (baš kao \bl).
 
 \begin{lema}\label{lm:faza2}
 Postoji fragment Turingovog stroja koji prevodi konfiguraciju $\T{\$}{q_2}{\t{$w$}}{\#}=(q_2,\dulj w,\t\$w\t\#\bl\ldots)$ u konfiguraciju $\t\$\bl^{\dulj w}\t\#\underset{\mathclap{p_0}}{r_1}^{\!\kr w}=(p_0,\dulj w+2,\t\$\bl^{\dulj w}\t\#r_1{}^{\!\kr w}\bl\ldots)$.
@@ -1253,6 +1253,7 @@ Primijetimo da zbog $\kr v=y=\kr{\varphi_0(w)}$, i propozicije~\ref{pp:bijkr}, z
 Postoji fragment Turingovog stroja koji prevodi konfiguraciju $(q_5,\dulj w+1,\t\$\bl^{\dulj w}\t\#uv\t\$\bl\ldots)$, gdje je $v\in\Sigma_0^*$, te $u\in(B^m)^*$, u konfiguraciju $(q_z,\dulj v,v\bl\ldots)$.
 \end{lema}
 \noindent\begin{gather}
+    \SwapAboveDisplaySkip
 \label{d:81}\delta(q_5,\t\#):=\delta(q_8,\gamma):=(q_8,\bl,1)\text{, za sve }\gamma\in B^m\\
 \label{d:83}\delta(q_8,\alpha):=\delta(m_\alpha,\bl):=(m_\alpha,\bl,-1)\text{, za sve }\alpha\in\Sigma_0\\
 \label{d:85}\delta(m_\alpha,\alpha'):=(l_\alpha,\alpha',1)\text{, za sve }\alpha,\alpha'\in\Sigma_0\\
@@ -1305,7 +1306,7 @@ Za $\Sigma_0:=\{\t a,\t b\}$, peti fragment možemo prikazati dijagramom
 ;
 \end{tikzpicture}\text.
 \end{equation}
-Za općenitu abecedu $\Sigma_0$, umjesto dva "viseća trokuta" ispod $q_8$ imat ćemo ih $b'$, po jedan $\triangle q_8 m_\alpha l_\alpha$ za svaki znak $\alpha\in\Sigma_0$.
+Za općenitu abecedu $\Sigma_0$, umjesto dva "viseća trokuta" ispod $q_8$, imat ćemo ih $b'$: po jedan $\triangle q_8 m_\alpha l_\alpha$ za svaki znak $\alpha\in\Sigma_0$.
 \end{primjer}
 
 %Primijetite da smo stigli do završnog stanja $q_z$. Time smo napokon završili konstrukciju Turingovog stroja $\mathcal T_0$, i sve je spremno za dokaz "obrata" teorema~\ref{tm:tikp}.
@@ -1318,7 +1319,7 @@ Neka je $\Sigma_0$ abeceda, $\N\Sigma_0$ njeno kodiranje, i $\varphi_0$ funkcija
 \begin{proof}
 Po pretpostavci postoji RAM-program $P_0$ koji računa $\N\varphi_0$. Označimo $n:=n_{P_0}$ i $m:=m_{P_0^1}$. Tvrdimo da tada funkciju $\varphi_0$ računa Turingov stroj
 \begin{align}
-    \mathcal T_0&:=(Q,\Sigma_0,\Gamma,\bl,\delta,q_0,q_z)\text,
+    &\qquad\mathcal T_0:=(Q,\Sigma_0,\Gamma,\bl,\delta,q_0,q_z)\text,
 \shortintertext{s komponentama}
     Q&:=\bdcup_{i\le9}\{q_i\}\dcup\bdcup_{i\le n}\{p_i,s_i,t_i\}\dcup\bdcup_{\mathclap{\alpha\in\Sigma_0}}\,\{n_\alpha,m_\alpha,l_\alpha\}\dcup\{q_x,q_z\}\text,\\
     \Gamma&:=    \Sigma_0\dcup\{\t\$,\t\#\}\dcup B^m\text{, gdje je }B^m:=\prod_{i<m}\{\t\textopenbullet,\t\textbullet\}\text,\\

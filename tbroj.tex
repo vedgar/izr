@@ -109,6 +109,7 @@ Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da
 
 U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučivač, pa $\mathcal T$-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\not\in\{1,2\}$ za $n<n_0$, i očito $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_{\mathit{true}}$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
 \end{proof}
+\newpage
 
 \begin{teorem}\label{tm:krio}
 Neka je $L$ jezik (nad nekom abecedom $\Sigma$). Ako je relacija $\kr L$ rekurzivna, tada postoji Turingov odlučivač za $L$.
@@ -193,7 +194,7 @@ nad binarnom abecedom $\Sigma_\beta$, kažemo da je \emph{binarna reprezentacija
 
 Vjerojatno ste nekad napisali Turingov stroj za $\beta\f{add}^2$, koristeći $\beta\f{add}^2(u\t/v)=uv$, ako su $u,v\in\t\textbullet^*$. Ipak, već tada ste zasigurno vidjeli koliko je teško napisati $\beta\f{mul}^2$, a pogotovo $\beta\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\beta\f{part}$?!) da i ne spominjemo.
 
-Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Ipak, prvo ćemo prvo dokazati obrat: brojevne funkcije, čije su binarne reprezentacije Turing-izračunljive, su parcijalno rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a mnoge dijelove dokaza moći ćemo upotrijebiti i u dokazu obrata.
+Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\beta\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Ipak, prvo ćemo prvo dokazati obrat: brojevne funkcije, čije su binarne reprezentacije Turing-izračunljive, su parcijalno rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a mnoge dijelove dokaza moći ćemo upotrijebiti i u dokazu obrata.
 
 %\subsection{Prateća funkcija binarne reprezentacije}
 
@@ -241,7 +242,7 @@ U traženju tih funkcija može pomoći dijagram.
 63
 \end{tikzcd}
 \end{equation}
-Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}^3$ na $(3,1,2)$). Brojevi desno dolje su razumljiviji u pomaknutoj bazi $2$: $275=(11121211)_2$, $63=(111111)_2$. Gornji pravokutnik predstavlja definiciju~\eqref{eq:betaf}, dok donji predstavlja~\eqref{eq:kodfidef} za specijalni slučaj binarne abecede, i jezične funkcije $\beta f$ nad njom.
+Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}^3$ na $(3,1,2)$). Brojevi desno dolje su razumljiviji u pomaknutoj bazi $2$: $275=(11121211)_2$, te $63=(111111)_2$. Gornji pravokutnik predstavlja definiciju~\eqref{eq:betaf}, dok donji predstavlja~\eqref{eq:kodfidef} za specijalni slučaj binarne abecede, i jezične funkcije $\beta f$ nad njom.
 
 \begin{lema}\label{lm:pravkomut}
 Dijagram prikazan lijevo u~\eqref{dia:Nbeta} (samo pune strelice) komutira.
