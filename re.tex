@@ -150,7 +150,7 @@ Postoje primitivno rekurzivne funkcije $\f{pair}^2$, $\f{fst}^1$ i $\f{snd}^1$, 
 \end{lema}
 Točkovno, za sve $x,y\in\N$ vrijedi $\f{fst}\bigl(\f{pair}(x,y)\bigr)=x\land\f{snd}\bigl(\f{pair}(x,y)\bigr)=y$.
 \begin{proof}[Prva implementacija]
-$\f{pair}:=\f{Code}^2$, $\f{fst}(p):=p[0]$, $\f{snd}(p):=p[1]$. Tada je $\f{pair}$ primitivno rekurzivna po propoziciji~\ref{prop:Codekprn}, a $\f{fst}$ i $\f{snd}$ jer su dobivene parametrizacijom primitivno rekurzivne funkcije $\f{part}$: $\f{fst}=param(0,\f{part})$, $\f{snd}=param(1,\f{part})$. Također za sve $x,y\in\N$ vrijedi
+$\f{pair}:=\f{Code}^2$, $\f{fst}(p):=p[0]$, $\f{snd}(p):=p[1]$. Tada je $\f{pair}$ primitivno rekurzivna po propoziciji~\ref{prop:Codekprn}, a $\f{fst}$ i $\f{snd}$ jer su dobivene specijalizacijom primitivno rekurzivne funkcije $\f{part}$: $\f{fst}=spec(0,\f{part})$, $\f{snd}=spec(1,\f{part})$. Također za sve $x,y\in\N$ vrijedi
 \begin{equation}
     (\f{fst}\circ\f{pair})(x,y)=\f{fst}\bigl(\f{pair}(x,y)\bigr)=\f{part}\bigl(\f{Code}^2(x,y),0\bigr)=\kr{x,y}[0]=x=\f I_1^2(x,y)\text,
 \end{equation}

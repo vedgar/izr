@@ -2,30 +2,31 @@
 
 U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathcal Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathcal Comp$ --- već smo doista konstruirali funkciju $compose$ koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije, te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_{kl}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to doista dokazati. Ipak, nećemo programirati direktno dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je dosta komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
 
-\section{Parametrizacija}
+\section{Specijalizacija}
 
-Kao što smo već nagovijestili, počet ćemo s \emph{parametrizacijom}, načinom da u od\-re\-đe\-nom algoritmu fiksiramo određeni (zadnji) ulazni podatak na neki konkretni broj. Dosad smo vidjeli mnoge primjere parametrizacije:
+Kao što smo već nagovijestili, počet ćemo sa \emph{specijalizacijom}, načinom da u od\-re\-đe\-nom algoritmu fiksiramo određeni (zadnji) ulazni podatak na neki konkretni broj. Dosad smo vidjeli mnoge primjere specijalizacije:
 
 \begin{itemize}
-    \item Funkcija $\f{blh}$ iz leme~\ref{lm:blh} dobivena je parametrizacijom iz funkcije $\f{lh}$, fiksirajući njen zadnji (drugi) argument na $2$. Skraćeno kažemo da je $\f{blh}$ parametrizacija od $\f{lh}$ brojem $2$, i pišemo $\f{blh}=param(2,\f{lh})$.
-    \item Operacija $\conc{}$ je parametrizacija funkcije $\f{concat}$ (propozicija~\ref{pp:concprn}) brojem $12$.
-    \item Općenito u primitivnoj rekurziji~\eqref{eq:defprb}, baza je zapravo parametrizacija definirane funkcije nulom: $G=param(0,G\pr H)$.
-    \item Za svaki konkretni $e\in\N$ i $k\in\N_+$, funkcija $\kf e^k$ je parametrizacija funkcije $\f{comp}_k$ brojem $e$.
-    \item Baza $\f G_3$ za funkciju $\f{Tape}$ (lema~\ref{lm:StateHeadTapeprn} --- parametrizacija $\f{Tape}$ nulom) je dobivena parametrizacijom funkcije $\f{Recode}$, fiksirajući njena dva zadnja argumenta na $b'$ i $b$ redom. Vidimo da možemo parametrizirati i s obzirom na više argumenata, što je samo višestruka primjena parametrizacije jednog argumenta.
-\begin{multline}\label{eq:multpar}
-    \f G_3=param(0,\f{Tape})=\\
-    =param(b',b,\f{Recode})=param\bigl(b',param(b,\f{Recode})\bigr)
-\end{multline}
+    \item Funkcija $\f{blh}$ iz leme~\ref{lm:blh} dobivena je specijalizacijom funkcije $\f{lh}$, fiksirajući njen zadnji (drugi) argument na $2$. Skraćeno kažemo da je $\f{blh}$ $2$-specijalizacija $\f{lh}$, i pišemo $\f{blh}=spec(2,\f{lh})$.
+    \item Operacija $\conc{}$ je $12$-specijalizacija funkcije $\f{concat}$ (propozicija~\ref{pp:concprn}).
+    \item Općenito u primitivnoj rekurziji~\eqref{eq:defprb}, baza je zapravo $0$-specijalizacija definirane funkcije: $G=spec(0,G\pr H)$.
+    \item Za svaki konkretni $e\in\N$ i $k\in\N_+$, funkcija $\kf e^k$ je $e$-specijalizacija funkcije $\f{comp}_k$.
+    \item Baza $\f G_3$ za funkciju $\f{Tape}$ (lema~\ref{lm:StateHeadTapeprn} --- $0$-specijalizacija $\f{Tape}$) je dobivena specijalizacijom funkcije $\f{Recode}$, fiksirajući njena dva zadnja argumenta na $b'$ i $b$ redom. Vidimo da možemo specijalizirati i s obzirom na više argumenata, što je samo višestruka primjena specijalizacije jednog argumenta.
+\begin{equation}\label{eq:multpar}
+    \f G_3=spec(0,\f{Tape})=spec(b',b,\f{Recode})=spec\bigl(b',spec(b,\f{Recode})\bigr)
+\end{equation}
 \end{itemize}
 
-Ideja parametrizacije je time na neki način suprotna ideji dinamizacije, koja iz familije $f^k_i(\vec x),i\in\N$ konstruira $f^{k+1}(\vec x,i)$ --- ovdje iz $f^{k+1}(\vec x,i)$ i konkretnog broja $i_0$ dobijemo funkciju $f^k_{i_0}$, koja preslikava $\vec x$ u $f(\vec x,i_0)$. Iako dinamizacija općenito nije izračunljivo preslikavanje na funkcijama, parametrizacija jest, i to nam je cilj ovdje dokazati.
+Ideja specijalizacije je time na neki način suprotna ideji dinamizacije, koja iz familije $f^k_i(\vec x),i\in\N$ konstruira $f^{k+1}(\vec x,i)$ --- ovdje iz $f^{k+1}(\vec x,i)$ i konkretnog broja $i_0$ dobijemo funkciju $f^k_{i_0}$, koja preslikava $\vec x$ u $f(\vec x,i_0)$. Iako dinamizacija općenito nije izračunljivo preslikavanje na funkcijama, specijalizacija jest, i to nam je cilj ovdje dokazati.
 
-U literaturi se za parametrizaciju još koriste nazivi \emph{specijalizacija} i \emph{parcijalna evaluacija}, ovaj posljednji posebno kod algoritamske optimizacije --- jer je ideja da ako imamo fiksnu vrijednost nekog argumenta, određeni dio izraza možemo izračunati unaprijed, i tako pojednostaviti izraz. Sličnu ideju imamo u konkretnoj matematici, kroz pojam \emph{zatvorenog oblika}: npr.\ iako je teško izračunati općenite vrijednosti funkcije $f(n,k):=\sum_{j=1}^n j^k$, za $k=2$ dobivamo jednostavnu formulu $f(n,2)=\frac{n(n+1)(2n+1)}{6}$. U logičkom kontekstu, tome odgovara \emph{supstitucija}, gdje iz formule s $k+1$ slobodnih varijabli dobijemo formulu s $k$ slobodnih varijabli, uvrštavajući za neku varijablu neki zatvoreni term (koji u standardnom modelu od PA odgovara upravo nekom fiksnom prirodnom broju). Vidimo da se slična ideja pojavljuje pod raznim imenima na mnogim mjestima, što upućuje na njenu korisnost.
+U literaturi se za specijalizaciju još koristi naziv \emph{parcijalna evaluacija}, posebno kod algoritamske optimizacije --- jer je ideja da ako imamo fiksnu vrijednost nekog argumenta, određeni dio izraza možemo izračunati unaprijed, i tako pojednostaviti izraz. Sličnu ideju imamo u konkretnoj matematici, kroz pojam \emph{zatvorenog oblika}: npr.\ iako je teško izračunati općenite vrijednosti funkcije $f(n,k):=\sum_{j=1}^n j^k$, za $k=2$ dobivamo jednostavnu formulu $f(n,2)=\frac{n(n+1)(2n+1)}{6}$. U logičkom kontekstu, tome odgovara \emph{supstitucija}, gdje iz formule s $k+1$ slobodnih varijabli dobijemo formulu s $k$ slobodnih varijabli, uvrštavajući za neku varijablu neki zatvoreni term (koji u standardnom modelu od PA odgovara upravo nekom fiksnom prirodnom broju). Vidimo da se slična ideja pojavljuje pod raznim imenima na mnogim mjestima, što upućuje na njenu korisnost.
 
-Ono što je sasvim nesporno, i lako dokazati (i već smo to dokazali u svim specijalnim slučajevima navedenima na početku ove točke), je da parametrizacija čuva izračunljivost. Zbog teorema ekvivalencije, svejedno je u kom obliku konkretiziramo tu izračunljivost, a dokaz je najlakši za parcijalnu rekurzivnost.
+Ono što je sasvim nesporno, i lako dokazati (i već smo to dokazali u svim specijalnim slučajevima navedenima na početku ove točke), je da specijalizacija čuva izračunljivost. Zbog teorema ekvivalencije, svejedno je u kom obliku konkretiziramo tu izračunljivost, a dokaz je najlakši za parcijalnu rekurzivnost.
 
 \begin{propozicija}
-Neka su $k\in\N_+$, $y\in\N$, te $\f f$ parcijalno rekurzivna funkcija. Tada je i funkcija $\f g^k$, zadana s
+    Neka su $k\in\N_+$, $y\in\N$, te $\f f^{k+1}$ parcijalno rekurzivna funkcija.
+
+    Tada je i funkcija $\f g^k=spec(y,\f f)$, zadana s
 %\begin{equation}
     $\f g(\vec x)\simeq\f f(\vec x,y)$,
 %\end{equation}
@@ -39,9 +40,17 @@ Definiciju od $\f g$ možemo zapisati u simboličkom obliku
 što vrijedi jer imamo $\dom{\f g}=\{\vec x\in\N^k\mid(\vec x,y)\in\dom{\f f}\}$, što je upravo domena desne strane jer su sve koordinatne projekcije, kao i konstanta $\f C_y^k$, totalne. Sada tvrdnja slijedi iz zatvorenosti skupa svih parcijalno rekurzivnih funkcija na kompoziciju.
 \end{proof}
 
-Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne direktno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Primijetimo samo da nije veliki problem izračunati (neke) indekse od $\f I_i^k$ za $i\in[1..k]$, i od $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, mogli bismo kao specijalni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo napraviti parametrizaciju u obliku izračunljive funkcije $\f S$ (slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere), a onda $\f{compose}$ pomoću te funkcije.
+\begin{korolar}\label{kor:paramprn}
+    Ako je $k\in\N_+$, $\f f^{k+1}$ (primitivno) rekurzivna, te $y\in\N$, tada je i $\f g^k=spec(y,\f f)$ (primitivno) rekurzivna.
+\end{korolar}
+\begin{proof}
+Isti kao gore --- zapravo jednostavniji, jer ne moramo određivati domenu.
+\end{proof}
 
-Na neki način, $\f S=\N param$, gdje funkcije kodiramo njihovim indeksima na način koji je detaljno objašnjen u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$, te vraća \emph{neki} indeks za $param(y,\f f)$.
+Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne direktno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Primijetimo samo da nije veliki problem izračunati (neke) indekse od $\f I_i^k$ za $i\in[1..k]$, i od $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, mogli bismo kao specijalni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
+, a onda $\f{compose}$ pomoću te funkcije.
+
+Na neki način, $\f S=\N spec$, gdje funkcije kodiramo njihovim indeksima na način koji je detaljno objašnjen u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$, te vraća \emph{neki} indeks za $spec(y,\f f)$.
 
 Bilo bi super kad bismo mogli dobiti $\f S$ kao jednu funkciju, neovisnu o mjesnosti $k$ funkcije $\f f$ --- no lako se vidi da to, barem ovako kako smo zamislili indekse, nije moguće. Ta funkcija bi trebala primati $y$ i kod RAM-programa $e$, i vraćati kod novog RAM-programa $e'$ takvog da bude $\kf e(\vec x,y)\simeq\kf{e'}(\vec x)$ za sve $\vec x\in\N^k$. No to znači da \emph{registar} u kojem će pisati ulazni podatak $y$ u odgovarajućem RAM-stroju ($\reg{k+1}$) ovisi o $k$, a $k$ ne možemo zaključiti iz samog RAM-programa odnosno njegovog koda $e$.
 
@@ -52,7 +61,7 @@ Zapravo, mogli bismo dokazati i "uniformnu" verziju, kad bismo fiksirali argumen
 \subsection{Teorem o parametru}
 
 \begin{propozicija}[Teorem o parametru]\label{pp:tmpar}
-Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^2$ takva da za sve $y,e\in\N$ vrijedi $\kf{\f S_k(y,e)}^k=param(y,\kf e^{k+1})$.
+Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^2$ takva da za sve $y,e\in\N$ vrijedi $\kf{\f S_k(y,e)}^k=spec(y,\kf e^{k+1})$.
 \end{propozicija}
 Posljednja funkcijska jednakost može se zapisati i kao
 \begin{equation}\label{eq:Sfunceq}
@@ -62,7 +71,7 @@ Posljednja funkcijska jednakost može se zapisati i kao
 \begin{proof}
 Kao što smo već rekli, trebamo "hardkodirati" $y$ u registar $\reg{k+1}$, i nakon toga pustiti RAM-program $P$ da računa s ulaznim podacima $\vec x$ (u registrima $\reg1$ do $\reg k$, kao ulazni podaci za $\kf{\f S_k(y,e)}^k$) i $y$ (u registru $\reg{k+1}$). Program $P$ je onaj program čiji je $e$ kod --- no što ako takvog nema?
 
-Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, tada ($e\not\in\f{Prog}$) je $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je lako vidjeti da je tada i $param(y,f)=\varnothing$ --- naime, pomoću formule za domenu kompozicije, funkcija~\eqref{eq:paramcompose} ima praznu domenu. Tada nam za povratnu vrijednost od $\f S$ treba neki indeks od $\varnothing^k$, te je najjednostavnije upotrijebiti upravo $e$ --- kako je $e\not\in\f{Prog}$, za svaku mjesnost $k$ će biti $\kf e^k=\varnothing^k$, opet prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}.
+Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, tada ($e\not\in\f{Prog}$) je $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je lako vidjeti da je tada i $spec(y,f)=\varnothing$ --- naime, pomoću formule za domenu kompozicije, funkcija~\eqref{eq:paramcompose} ima praznu domenu. Tada nam za povratnu vrijednost od $\f S$ treba neki indeks od $\varnothing^k$, te je najjednostavnije upotrijebiti upravo $e$ --- kako je $e\not\in\f{Prog}$, za svaku mjesnost $k$ će biti $\kf e^k=\varnothing^k$, opet prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}.
 
 Sada promotrimo slučaj kad takav $P$ postoji --- zbog injektivnosti kodiranja programa taj $P$ je jedinstven. Zapravo trebamo spljoštiti makro-program
 \begin{equation}\label{eq:makroprogS}
@@ -115,7 +124,7 @@ pa je izlazni podatak doista $\kf e^{k+1}(\vec x,y)\simeq\f{comp}_{k+1}(\vec x,y
 
 \subsection{Teorem o parametrima}
 
-Jednom kad imamo teorem o parametru, njegovom iteracijom (ponovljenom primjenom) lako dobijemo parametrizaciju više zadnjih argumenata izračunljive funkcije odjednom. Primjer, koji može poslužiti i kao ideja dokaza, smo vidjeli u~\eqref{eq:multpar}.
+Jednom kad imamo teorem o parametru, njegovom iteracijom (ponovljenom primjenom) lako dobijemo specijalizaciju više zadnjih argumenata izračunljive funkcije odjednom. Primjer, koji može poslužiti i kao ideja dokaza, smo vidjeli u~\eqref{eq:multpar}.
 
 \begin{korolar}\label{kor:pars}
 Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_{kl}^{l+1}$ takva da za sve $\vec x\in\N^k$, za sve $\vec y\in\N^l$, i za sve $e\in\N$, vrijedi
@@ -142,7 +151,7 @@ Dakle, $\f S_{k(l+1)}$ je definirana kompozicijom iz $\f S_{kl}$ (koja je primit
 \end{proof}
 
 \begin{primjer}
-Drugi supskript funkcije $\f S$ govori koliko zadnjih argumenata želimo parametrizirati (i moramo navesti njihove vrijednosti u pozivu prije indeksa $e$), a prvi supskript govori koliko još argumenata naša funkcija $\kf e$ prima (odnosno koliko će ih "preživjeti" parametrizaciju). Recimo, u slučaju funkcije mjesnosti $7$ i indeksa $e_1$, kojoj želimo parametrizirati zadnja tri argumenta redom na brojeve $2$, $8$ i $5$, imali bismo
+Drugi supskript funkcije $\f S$ govori koliko zadnjih argumenata želimo fiksirati (i moramo navesti njihove vrijednosti u pozivu prije indeksa $e$), a prvi supskript govori koliko još argumenata naša funkcija $\kf e$ prima (odnosno koliko će ih "preživjeti" specijalizaciju). Recimo, u slučaju funkcije mjesnosti $7$ i indeksa $e_1$, kojoj želimo fiksirati zadnja tri argumenta redom na brojeve $2$, $8$ i $5$, imali bismo
 $
     e_2:=\f S_{43}(2,8,5,e_1)=\f S_4\bigl(2,\f S_5\bigl(8,\f S_6(5,e_1)\bigr)\bigr)
 $, i za sve $x,y,z,t\in\N$ bi vrijedilo
@@ -164,7 +173,7 @@ Ugrubo, \emph{kompajlirati} kompoziciju dvije funkcije koje već imamo kompajlir
     \end{equation}
 \end{propozicija}
 \begin{proof}
-Zapravo ćemo programirati čitav postupak računanja kompozicije u proizvoljnom $\vec x\in\N^k$, ali ga nećemo pokrenuti --- nego ćemo iz njegovog indeksa parametrizacijom dobiti indeks same kompozicije.
+Zapravo ćemo programirati čitav postupak računanja kompozicije u proizvoljnom $\vec x\in\N^k$, ali ga nećemo pokrenuti --- nego ćemo iz njegovog indeksa specijalizacijom dobiti indeks same kompozicije.
 
 Dakle, definirajmo funkciju $\f F_{kl}$ točkovno s
 \begin{equation}\label{eq:defkompcomp}
@@ -177,12 +186,12 @@ Dakle, definirajmo funkciju $\f F_{kl}$ točkovno s
 \end{equation}
 Funkcija $\f F_{kl}$ je definirana kompozicijom iz parcijalno rekurzivnih funkcija $\f{comp}_k$ i $\f{comp}_l$, te koordinatnih projekcija --- pa je parcijalno rekurzivna. Po korolaru~\ref{kor:pii}, $\f F_{kl}$ ima indeks; označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind}). 
 
-Sada definiramo $\f{compose}_{kl}$ kao funkciju koja prima $\f g_1$,~\ldots, $\f g_l$ i $\f h$, te parametrizira zadnjih $l+1$ argumenata od $\f F_{kl}$ s tim vrijednostima:
+Sada definiramo $\f{compose}_{kl}$ kao funkciju koja prima $\f g_1$,~\ldots, $\f g_l$ i $\f h$, te fiksira zadnjih $l+1$ argumenata od $\f F_{kl}$ na te vrijednosti:
 \begin{equation}
     \f{compose}_{kl}^{l+1}(\vec g,h):=\f S_{k(l+1)}(\vec g,h,e)\text.
 \end{equation}
 
-Dakle, $\f{compose}_{kl}=param(e,\f S_{k(l+1)})$, pa je primitivno rekurzivna po~\eqref{eq:paramcompose} (samo s drugačijim slovima). Sada za sve $\vec x\in\N^k$, za sve $\vec g\in\N^l$ i za sve $h\in\N$ vrijedi
+Dakle, $\f{compose}_{kl}=spec(e,\f S_{k(l+1)})$, pa je primitivno rekurzivna po korolaru~\ref{kor:paramprn}. Sada za sve $\vec x\in\N^k$, za sve $\vec g\in\N^l$ i za sve $h\in\N$ vrijedi
 \begin{multline}
     \kf{\f{compose}_{kl}(\vec g,h)}(\vec x)\simeq\f{comp}_k\bigl(\vec x,\f{compose}_{kl}(\vec g,h)\bigr)\simeq\f{comp}_k\bigl(\vec x,\f S_{k(l+1)}(\vec g,h,e)\bigr)\simeq{}\\
     {}\simeq\f{comp}_{k+l+1}(\vec x,\vec g,h,e)\simeq
@@ -225,12 +234,12 @@ kao niti izračunati njegov kod,
 \begin{equation*}
     a:=\kr{\kr{1,1,3},\kr{0,0},\kr{2,0},\kr{1,2,6},\kr{0,0},\kr{2,3}}=2^{22\,501}\cdot3^7\cdot5^{25}\cdot7^{8\,437\,501}\cdot11^7\cdot13^{649}\text,
 \end{equation*}
-broj koji jest oveći (ima $7\,138\,041$ znamenku), ali ipak sasvim točno određen. Sad samo treba napisati $\f{plus}(e,f):=\f{compose}_{k2}(e,f,a)$, odnosno $\f{plus}=param(a,\f{compose}_{k2})$ je primitivno rekurzivna.
+broj koji jest oveći (ima $7\,138\,041$ znamenku), ali ipak sasvim točno određen. Sad samo treba napisati $\f{plus}(e,f):=\f{compose}_{k2}(e,f,a)$, odnosno $\f{plus}=spec(a,\f{compose}_{k2})$ je primitivno rekurzivna.
 \end{proof}
 
 % \subsection{Što s ostalim elementarnim operacijama?}
 
-Kad smo uspjeli isprogramirati pisanje programa za kompoziciju, zašto ne bismo istu stvar pokušali i za primitivnu rekurziju, ili minimizaciju? Na prvi pogled, sve što nam treba je točkovni zapis izračunavanja pomoću funkcija $\f{comp}$ (odgovarajuće mjesnosti), koji onda predstavlja primitivno rekurzivnu funkciju, čiji indeks uzmemo i parametriziramo ga s obzirom na indekse polaznih funkcija. Što može poći krivo? Pogledajmo.
+Kad smo uspjeli isprogramirati pisanje programa za kompoziciju, zašto ne bismo istu stvar pokušali i za primitivnu rekurziju, ili minimizaciju? Na prvi pogled, sve što nam treba je točkovni zapis izračunavanja pomoću funkcija $\f{comp}$ (odgovarajuće mjesnosti), koji onda predstavlja primitivno rekurzivnu funkciju, čiji indeks uzmemo i specijaliziramo ga s obzirom na indekse polaznih funkcija. Što može poći krivo? Pogledajmo.
 
 Pokušajmo što vjernije slijediti postupak koji nas je doveo do funkcije $\f{compose}_{kl}$, za primitivnu rekurziju. Zanemarimo degenerirani slučaj --- lako možete vidjeti da se u njemu pojavljuje sasvim isti problem.
 
@@ -248,11 +257,11 @@ Za $\f{compose}$ smo uzeli parcijalnu jednakost~\eqref{eq:defkomp}, i zapisali j
 \end{equation}
 i sad bismo mogli upotrijebiti teorem~\ref{tm:gprek}, da nije jednog malog problema: jednadžba~\eqref{eq:defprk} ima traženu funkciju i s lijeve i s desne strane. Ovaj $f$ koji se nalazi u grani "inače", to je upravo onaj $primRecurse_k(g,h)$ kojeg želimo odrediti. Dakle, nemamo ga još, pa ga ne možemo koristiti u definiciji od $F_k$.
 
-Ili možemo? Sjetimo se napomene~\ref{nap:blokovi} --- ovaj $f$ je upravo "implicitna varijabla" kakve smo rekli da trebamo prenijeti kao argumente. Dakle, na lijevoj strani~\eqref{eq:primRecursegr} zapravo imamo $F_k(\vec x,y,g,h,f)$ --- i po teoremu~\ref{tm:gprek} to je parcijalno rekurzivna funkcija, te ima indeks~\ldots\ i tako dalje. No sad bismo iz $F_k^{k+4}$ trebali parametrizirati $f$, a to ne znamo kako učiniti jer još uvijek ne znamo koju vrijednost staviti za $f$.
+Ili možemo? Sjetimo se napomene~\ref{nap:blokovi} --- ovaj $f$ je upravo "implicitna varijabla" kakve smo rekli da trebamo prenijeti kao argumente. Dakle, na lijevoj strani~\eqref{eq:primRecursegr} zapravo imamo $F_k(\vec x,y,g,h,f)$ --- i po teoremu~\ref{tm:gprek} to je parcijalno rekurzivna funkcija, te ima indeks~\ldots\ i tako dalje. No sad bismo u $F_k^{k+4}$ trebali fiksirati $f$, a to ne znamo kako učiniti jer još uvijek ne znamo koju vrijednost staviti za $f$.
 
-Kad bismo samo znali odrediti $f$, dalje bi bilo lako: $g$ i $h$ bismo parametrizirali na isti način kao kod komponiranja. Primijetimo svakako da $f$ ne možemo odrediti jednoznačno, jer naprosto nije jedinstven: $\f G\pr\f H$, kao i bilo koja izračunljiva funkcija, ima beskonačno mnogo indeksa --- a svi oni mogu poslužiti kao $f$. No ono što nam može biti bitno, je da \emph{funkcija} $\kf f^{k+1}=\kf g^k\pr\kf h^{k+2}$ bude jednoznačno određena.
+Kad bismo samo znali odrediti $f$, dalje bi bilo lako: $g$ i $h$ bismo specijalizirali na isti način kao kod komponiranja. Primijetimo svakako da $f$ ne možemo odrediti jednoznačno, jer naprosto nije jedinstven: $\f G\pr\f H$, kao i bilo koja izračunljiva funkcija, ima beskonačno mnogo indeksa --- a svi oni mogu poslužiti kao $f$. No ono što nam može biti bitno, je da \emph{funkcija} $\kf f^{k+1}=\kf g^k\pr\kf h^{k+2}$ bude jednoznačno određena.
 
-Zanemarujući $g$ i $h$ (jer njih znamo parametrizirati) i "utapajući" $y$ među $\vec x$, te zovući tako dobivenu funkciju $G_k$, vidimo da je općenit oblik naše jednadžbe koju želimo riješiti $\kf f(\vec x)\simeq G_k(\vec x,f)$. Takve \emph{opće rekurzije} tema su iduće točke.
+Zanemarujući $g$ i $h$ (jer njih znamo specijalizirati) i "utapajući" $y$ među $\vec x$, te zovući tako dobivenu funkciju $G_k$, vidimo da je općenit oblik naše jednadžbe koju želimo riješiti $\kf f(\vec x)\simeq G_k(\vec x,f)$. Takve \emph{opće rekurzije} tema su iduće točke.
 
 \section{Opće rekurzije}
 
@@ -384,11 +393,11 @@ Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da b
 
 Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, služe istoj svrsi --- računanju faktorijele zadanog broja. Ako nemamo \texttt{factorial}, možemo li umjesto nje upotrijebiti \texttt{G} kao drugi argument od \texttt{G} (efektivno, dijagonalizirati \texttt G)?
 
-Doslovno, to neće ići --- tipovi ne pašu. Drugi argument funkcije \texttt{G} trebao bi biti pokazivač na jednomjesnu funkciju, dok je sama \texttt{G}, naravno, dvomjesna. C kompajler će nam samo dati \emph{warning}, jer svi pokazivači su ionako samo "ukrašeni prirodni brojevi", baš kao i indeksi u svijetu parcijalno rekurzivnih funkcija --- ali u strože tipiziranom jeziku, dobili bismo kompajlersku grešku.
+Doslovno, to neće ići --- tipovi ne pašu. Drugi argument funkcije \texttt{G} trebao bi biti pokazivač na jednomjesnu funkciju, dok je sama \texttt{G}, naravno, dvomjesna. C-kompajler će nam samo dati \emph{warning}, jer svi pokazivači su ionako samo "ukrašeni prirodni brojevi", baš kao i indeksi u svijetu parcijalno rekurzivnih funkcija --- ali u strože tipiziranom jeziku, dobili bismo kompajlersku grešku.
 
-Zapravo, C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li C kompajler nešto što mi ne znamo?
+C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li \texttt{gcc} nešto što mi ne znamo?
 
-Ovdje treba nešto znati o tome kako se C kompajlira. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
+Ovdje treba znati neke tehničke pojedinosti o kompajliranju jezika C. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
 
 Možemo li to iskoristiti da bismo eksplicitno napisali taj poziv u kodu, i izbjegli \emph{warning}? Da, jer C nam dopušta da ne specificiramo tipove parametara funkcije.
 
@@ -473,7 +482,7 @@ Ackermann je promatrao niz aritmetičkih operacija: sljedbenik, zbrajanje, množ
 \begin{equation}\label{eq:A2SSdef}
     \f A_{n+1}(x,y+1)=\f A_n\bigl(x,\f A_{n+1}(x,y)\bigr)\text{, za sve }x,y,n\in\N\text,
 \end{equation}
-što zapravo znači $\f A_{n+1}=\f G_{n+1}\pr\f A_n\circ(\f I_1^3,\f I_3^3)$; razlikuju se samo početni uvjeti zadani s $\f G_n=param(0,\f A_n)$. Prvih nekoliko je doista različito: $\f G_0(x)=\f{Sc}(0)=1$, $\f G_1(x)=x+0=x$, $\f G_2(x)=x\cdot 0=0$, $\f G_3(x)=x^0=1$ --- ali svi kasniji se obično fiksiraju na $1$.
+što zapravo znači $\f A_{n+1}=\f G_{n+1}\pr\f A_n\circ(\f I_1^3,\f I_3^3)$; razlikuju se samo početni uvjeti zadani s $\f G_n=spec(0,\f A_n)$. Prvih nekoliko je doista različito: $\f G_0(x)=\f{Sc}(0)=1$, $\f G_1(x)=x+0=x$, $\f G_2(x)=x\cdot 0=0$, $\f G_3(x)=x^0=1$ --- ali svi kasniji se obično fiksiraju na $1$.
 
 Dakle, za sve $n>1$ vrijedi $\f A_{n+1}:=\f C_1^1\pr\f A_n\circ(\f I_1^3,\f I_3^3)$.
 
@@ -601,13 +610,13 @@ Teorem rekurzije može se shvatiti na još jedan način, koji je povijesno bio p
     %\kf{S_k(y,e)}^k&=\kf e^{k+1}\circ(\f I_1^k,\dotsc,\f I_k^k,\f C_y^k)\\
     \f S_k'(y,e):=\f{compose}_{k(k+1)}\bigl(i_1,\dotsc,i_k,\overline{C_6}(y),e\bigr)\text,
 \end{equation}
-gdje je $i_n:=\kprog{[0.\;\remove{n}{0}]^\flat}=\kr{\f{codeDEC}(n,3),\f{codeINC}(0),\f{codeGOTO}(0)}$ indeks funkcije $\f I_n^k$, te je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)$ indeks funkcije $\f C_y^k$ --- ali s obzirom na to da je lakše dokazati teorem o parametru, išli smo u suprotnom smjeru.
+gdje je $i_n:=\kr{\f{codeDEC}(n,3),\f{codeINC}(0),\f{codeGOTO}(0)}$ indeks funkcije $\f I_n^k$, te je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)$ indeks funkcije $\f C_y^k$ --- ali s obzirom na to da je lakše dokazati teorem o parametru, išli smo u suprotnom smjeru.
 
 \subsection{Relacije \texorpdfstring{$\approx_k$}{k-ekvivalentnosti}}
 
-Tako je i ovdje: jednakost $\kf e(\vec x)\simeq\f G(\vec x,e)$ iz teorema rekurzije možemo shvatiti kao $\kf e=param(e,\f G)$, odnosno na neki način $e\approx\f S_k(e,g)$, gdje je $g$ neki indeks za $\f G$. Lako se vidi da ta "približna jednakost" ne može doista biti jednakost ni u kojem zanimljivom slučaju, jer za $g\in\f{Prog}$ uvijek vrijedi $\f S_k(e,g)>e$ (zgodna je vježba dokazati to). Što je onda relacija $\approx$?
+Tako je i ovdje: jednakost $\kf e(\vec x)\simeq\f G(\vec x,e)$ iz teorema rekurzije možemo shvatiti kao $\kf e=spec(e,\f G)$, odnosno na neki način $e\approx\f S_k(e,g)$, gdje je $g$ neki indeks za $\f G$. Lako se vidi da ta "približna jednakost" ne može doista biti jednakost ni u kojem zanimljivom slučaju, jer za $g\in\f{Prog}$ uvijek vrijedi $\f S_k(e,g)>e$ (zgodna je vježba dokazati to). Što je onda relacija $\approx$?
 
-Ukratko, vrijeme je da malo preciznije formaliziramo ideju ekvivalentnih RAM-programa iz definicije~\ref{def:ekvprog}: ono što bismo htjeli reći nije da su $e$ i $\f S_k(e,g)=:\f F(e)$ isti brojevi, već da su $\kf e^k$ i $\kf{\f F(e)}^k$ iste funkcije. Nažalost, kao i u slučaju parametrizacije, imat ćemo različite relacije $\approx_k,k\in\N_+$ --- nećemo ih moći upotrebljivo objediniti u jednu relaciju, jer u RAM-programu nigdje ne piše intendirana mjesnost.
+Ukratko, vrijeme je da malo preciznije formaliziramo ideju ekvivalentnih RAM-programa iz definicije~\ref{def:ekvprog}: ono što bismo htjeli reći nije da su $e$ i $\f S_k(e,g)=:\f F(e)$ isti brojevi, već da su $\kf e^k$ i $\kf{\f F(e)}^k$ iste funkcije. Nažalost, kao i u slučaju specijalizacije, imat ćemo različite relacije $\approx_k,k\in\N_+$ --- nećemo ih moći upotrebljivo objediniti u jednu relaciju, jer u RAM-programu nigdje ne piše intendirana mjesnost.
 
 \begin{definicija}
 Neka je $k\in\N_+$, te $e,f\in\N$. Kažemo da su $e$ i $f$ \emph{$k$-ekvivalentni}, i pišemo $e\approx_kf$, ako vrijedi $\kf e^k=\kf f^k$.
@@ -738,7 +747,7 @@ Neka su $\mathcal F,\mathcal G\subseteq\mathcal Comp_k$ različiti. Tada postoji
 No kad bi bilo i $e\in\knk{\mathcal F}$, to bi značilo $\kf e^k\in\mathcal F$, što je nemoguće jer $\f F\not\in\mathcal F$. Drugim riječima, $e\in\knk{\mathcal G}\setminus\knk{\mathcal F}$, odnosno $\knk{\mathcal F}\not=\knk{\mathcal G}$.
 \end{proof}
 
-Na neki način, do na nezgodnu činjenicu da je $\mathcal P(\mathcal Comp_k)$ neprebrojiv, čini se kao da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\knk{\mathcal F}}$ ima to svojstvo. Ili, jezikom problema: neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\knk{\{\f F\in\mathcal Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceovog teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
+Na neki način, do na nezgodnu činjenicu da je $\mathcal P(\mathcal Comp_k)$ neprebrojiv, čini se kao da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\knk{\mathcal F}}$ ima to svojstvo. Ili, neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\knk{\{\f F\in\mathcal Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceovog teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
 
 % \subsection{Invarijantnost}
 
@@ -793,7 +802,7 @@ Neka je $k\in\N_+$, te $S\subseteq\N$.
 Tada je $S$ $k$-invarijantan ako i samo ako je $S=\knk{\mathcal F}$ za neki $\mathcal F\subseteq\mathcal Comp_k$.
 \end{lema}
 \begin{proof}
-Za smjer ($\Leftarrow$), neka je $f\approx_k e\in S=\knk{\mathcal F}$. Tada je po definiciji $\kf f^k=\kf e^k\in\mathcal F$, pa je i $f\in\knk{\mathcal F}=S$. Za smjer ($\Rightarrow$), pretpostavimo da je $S$ $k$-invarijantan, i tražimo $\mathcal F$. Očit kandidat je $\mathcal F:=\{\kf e^k\mid e\in S\}$. Dakle, trebamo dokazati da je $\knk{\mathcal F}=S$.
+Za smjer ($\Leftarrow$), neka je $f\approx_k e\in S=\knk{\mathcal F}$. Tada je po definiciji $\kf f^k=\kf e^k\in\mathcal F$, pa je i $f\in\knk{\mathcal F}=S$. Za smjer ($\Rightarrow$), pretpostavimo da je $S$ $k$-invarijantan, i tražimo $\mathcal F$. Očiti kandidat je $\mathcal F:=\{\kf e^k\mid e\in S\}$. Dakle, trebamo dokazati da je $\knk{\mathcal F}=S$.
 
 Za inkluziju ($\supseteq$), po definiciji $\mathcal F$ iz $e\in S$ slijedi $\kf e^k\in\mathcal F$, dakle $e\in\knk{\mathcal F}$.
 
@@ -804,7 +813,7 @@ Još je jedna stvar tu na prvi pogled čudna: zašto svojstvo~\eqref{eq:unittest
 
 \subsection{Dokaz Riceovog teorema}
 
-Ideja dokaza je vrlo slična onom što smo napravili za $Emp$ --- samo, dok nam je tamo Russellov paradoks bio "serviran"\!, ovdje ćemo morati namjestiti scenu za njega. Ipak, neće biti teško.
+Ideja dokaza je vrlo slična onom što smo napravili za $Emp$ --- samo, dok nam je tamo Russellov paradoks bio "serviran"\!, ovdje ćemo morati namjestiti scenu za njega.
 
 \begin{teorem}[Riceov teorem]\label{tm:Rice}
 Neka je $k\in\N_+$, i $S\subseteq\N$ rekurzivan $k$-invarijantan skup. Tada je $S=\emptyset$ ili $S=\N$.
