@@ -770,7 +770,7 @@ Kao što smo već napomenuli, još ne znamo dokazati da je to izračunljivo ako 
 Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ (primitivno) rekurzivne funkcije, te $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne (primitivno) rekurzivne relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\{\f R_1\colon\f G_1,\f R_2\colon\f G_2,\dotsc,\f R_l\colon\f G_l,\f G_0\}$ također (primitivno) rekurzivna.
 \end{teorem}
 
-Primijetimo samo da ovdje ne smijemo ispustiti $\f G_0$, jer $\varnothing^k$ nije totalna!
+Primijetimo: ovdje ne smijemo ispustiti $\f G_0$, jer $\varnothing^k$ nije (primitivno) rekurzivna!
 
 \begin{proof}
 Prvo, primijetimo da je $\f R_0:=\bigl(\bigcup\nolimits_{i=1}^{\,l}\f R_i\bigr)\!\kompl$ (primitivno) rekurzivna, prema propozicijama~\ref{prop:skupl} i~\ref{prop:kompl}. Dalje je stvar jednostavne aritmetike, jer tvrdimo da je
@@ -864,7 +864,7 @@ Neka je\, $\f g$ konačna brojevna funkcija (takva da je\, $\dom{\f g}$ konačan
 
 Vidjeli smo da, kao što kompozicija odgovara slijednom izvršavanju naredaba u imperativnom modelu, primitivna rekurzija odgovara ograničenim petljama. Kad malo bolje pogledamo, postoji neka vrsta analogije između ta dva pojma.
 
-Kompoziciju koristimo u slučaju \emph{statičke} granice, najčešće direktno vezane uz mjesnost $l$, gdje nam je svih $l$ argumenata zadano eksplicitnim, često različitim, funkcijama. Dakle, prvo specificiramo $l\in\N_+$ i $l$-mjesnu funkciju $\f H$, zatim specificiramo $l$ funkcija $\f G_1,\dotsc,\f G_l$, i tek onda uvrštavamo ulazne podatke. U tom smislu, $l$ nije ulazni podatak, već parametar konstrukcije: za različite $l$ (i time različite $H$), dobit ćemo različite kompozicije, koje se onda mogu računati s (čak istim, ako je $k$ konstantan) ulaznim podacima $\vec x$.
+Kompoziciju koristimo u slučaju \emph{statičke} granice, najčešće direktno vezane uz mjesnost $l$, gdje nam je svih $l$ argumenata zadano eksplicitnim, često različitim, funkcijama. Dakle, prvo specificiramo $l\in\N_+$ i $l$-mjesnu funkciju $\f H$, zatim specificiramo $l$ funkcija $\f G_1$,~\ldots,~$\f G_l$, i tek onda uvrštavamo ulazne podatke. U tom smislu, $l$ nije ulazni podatak, već parametar konstrukcije: za različite $l$ (i time različite $H$), dobit ćemo različite kompozicije, koje se onda mogu računati s (čak istim, ako je $k$ konstantan) ulaznim podacima $\vec x$.
 
 S druge strane, primitivnu rekurziju koristimo u slučaju \emph{dinamičke} granice, naj\-češ\-će vezane uz broj koraka izračunavanja, gdje su nam $y$ različitih "argumenata" (npr.\ konfiguracija) dobiveni iteracijom jedne te iste funkcije $\f H$ počevši od početne konfiguracije dobivene funkcijom $\f G$. Dakle, prvo specificiramo $k$ i $k$-mjesnu funkciju $\f G$, zatim specificiramo \emph{jednu} $(k+2)$-mjesnu funkciju, u koju pored početnih ulaznih podataka $\vec x$ uvrštavamo još i $y$, redni broj koraka (prolaza kroz petlju) koji računamo.
 
@@ -983,7 +983,7 @@ također (primitivno) rekurzivna. Skraćeno pišemo $\f F(\vec x):=\bigl(\#y<\f 
 
 \subsection{Ograničena kvantifikacija i minimizacija}
 
-Još jedan čest obrazac (\emph{pattern}) u uvodnim algoritmima je provjera zadovoljava li neki element zadanog konačnog skupa neko zadano svojstvo --- ili dualno, zadovoljavaju li ga svi elementi tog skupa. U nekim modernim programskim jezicima to se ostvaruje kroz funkcije \texttt{any} i \texttt{all}. Na primjer, da bismo ustanovili je li broj $n$ složen, moramo vidjeti postoji li $d\in\bigl[2..\lfloor\sqrt{n}\rfloor\bigr]$ takav da $d\mathrel|n$. Vidimo da je prirodna matematička formalizacija tog obrasca \emph{ograničena kvantifikacija}, gdje univerzalno ili egzistencijalno kvantificiramo varijable u nekom uvjetu do neke granice.
+Još jedan čest obrazac (\emph{pattern}) u uvodnim algoritmima je provjera zadovoljava li neki element zadanog konačnog skupa neko zadano svojstvo --- ili dualno, zadovoljavaju li ga svi elementi tog skupa. U nekim modernim programskim jezicima to se ostvaruje kroz funkcije \texttt{any} i \texttt{all}. Na primjer, ustanoviti je li broj $n$ složen možemo tako da ispitamo postoji li $d\in[2..n\rangle$ (ili $d\in\bigl[2..\lfloor\!\sqrt{n}\rfloor\bigr]$) takav da $d\mathrel|n$. Vidimo da je prirodna matematička formalizacija tog obrasca \emph{ograničena kvantifikacija}, gdje univerzalno ili egzistencijalno kvantificiramo varijable u nekom uvjetu do neke granice.
 
 Razlog zašto se takav obrazac promatra posebno je mogućnost prijevremenog izlaska iz petlje (\emph{shortcircuit evaluation}, u ovom slučaju najčešće realizirana kroz naredbu \texttt{break}), jer ako provjeravamo postoji li element s nekim svojstvom, znamo da postoji onog trena kada ga nađemo --- ne moramo provjeravati ostale elemente. Tako možemo ubrzati pretraživanje po konačnim skupovima, a i dobiti odgovor u slučaju prebrojivih skupova \emph{ako} je taj odgovor pozitivan. O ovom drugom fenomenu reći ćemo više kasnije, kad budemo govorili o \emph{rekurzivno prebrojivim} relacijama --- a prvi fenomen nas ne zanima, jer smo rekli da se nećemo baviti performansama algoritama.
 
@@ -1026,7 +1026,7 @@ kažemo da je dobivena \emph{ograničenom minimizacijom} iz relacije $R$, do gra
 \end{definicija}
 
 \begin{napomena}\label{nap:min=H}
-U definiciji smo napisali znak $:=$ umjesto $:\simeq$, jer desna strana uvijek ima smisla: $y<H(\vec x)$ je sigurno laž za neki $y$ (prvi takav je upravo $H(\vec x)$, koji postoji jer je $H$ totalna), pa je kondicional tada istinit. Drugim riječima, $F(\vec x)$ će biti najmanji broj $y$ ispod $H(\vec x)$ koji zadovoljava $R(\vec x,y)$ ako takav postoji, a inače će biti $F(\vec x)=H(\vec x)$.
+U definiciji smo napisali znak $:=$ umjesto $:\simeq$, jer desna strana uvijek ima smisla: $y<H(\vec x)$ je sigurno laž za neki $y$ (prvi takav je upravo $H(\vec x)$, koji postoji jer je $H$ totalna), pa je kondicional tada istinit. Drugim riječima, $F(\vec x)$ će biti najmanji broj $y<H(\vec x)$ koji zadovoljava $R(\vec x,y)$ ako takav postoji, a inače će biti $F(\vec x)=H(\vec x)$.
 
 Dakle, ograničenom minimizacijom do totalne granice dobivamo totalnu funkciju. Štoviše, ako su $\f H$ i $\f R$ rekurzivne, $\f F$ će biti parcijalno rekurzivna --- jer je dobivena neograničenom minimizacijom relacije zadane s $\f P(\vec x,y):\Longleftrightarrow y<\f H(\vec x)\to\f R(\vec x,y)$, koja je rekurzivna zbog primjera~\ref{pr:m-v} i propozicije~\ref{prop:vezn}. Ukratko, ograničenom minimizacijom rekurzivne relacije do rekurzivne granice
 dobivamo rekurzivnu funkciju.
@@ -1066,9 +1066,10 @@ Tvrdimo da je za svaki $\vec x\in\N^k$, vrijednost $\f F(\vec x)$ jednaka
 Prvo, ako ne postoji $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, tada na lijevoj strani stoji $\f H(\vec x)$ po napomeni~\ref{nap:min=H}. S druge strane, za sve $y<\f H(\vec x)$, svaki $i\le y$ je također manji od $\f H(\vec x)$, pa ni za koji od njih ne vrijedi $\f R(\vec x,i)$. Dakle $(\nexists i\le y)\f R(\vec x,i)$ je uvijek istina, te je desna strana jednaka $\bigl(\#y<\f H(\vec x)\bigr)\top$, što je također jednako $\f H(\vec x)$.
     
 Ako pak postoji neki $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, najmanji takav označimo sa $y_0$. Tada je vrijednost lijeve strane upravo $y_0$. Kako je $y_0$ najmanji broj takav da vrijedi $\f R(\vec x,y_0)$, $(\nexists i\le y)\f R(\vec x,i)$ je još uvijek istina za sve $y<y_0$. Također, za sve $y\ge y_0$, ta relacija \emph{nije} istinita, jer uvijek možemo uzeti $i:=y_0$ kao kontraprimjer. Dakle svi oni $y$ za koje vrijedi $(\nexists i\le y)\f R(\vec x,i)$ su upravo svi oni manji od $y_0$, te na desnoj strani piše njihov broj, koji je također $y_0$.
-    
-Sada još samo treba primijetiti da je funkcija na desnoj strani izraza~\eqref{eq:muHprn} primitivno rekurzivna, kao posljedica (redom) napomene~\ref{nap:kvantSc}, propozicije~\ref{prop:kompl} i leme~\ref{lm:brojrek}. U iskazu ove propozicije nismo trebali stavljati riječ "primitivno" u zagrade, jer tvrdnja čitana bez riječi "primitivno" slijedi iz napomene~\ref{nap:min=H}.
+ 
+Sada samo treba primijetiti da je funkcija na desnoj strani izraza~\eqref{eq:muHprn} primitivno rekurzivna, kao posljedica (redom) napomene~\ref{nap:kvantSc}, propozicije~\ref{prop:kompl} i leme~\ref{lm:brojrek}.
 \end{proof}
+U iskazu ove propozicije nismo trebali stavljati riječ "primitivno" u zagrade, jer tvrdnja čitana bez riječi "primitivno" slijedi iz napomene~\ref{nap:min=H}.
 
 \begin{napomena}\label{nap:muSc}
 Ista napomena o uključenoj gornjoj granici, poput~\ref{nap:kvantSc}, vrijedi i ovdje:
