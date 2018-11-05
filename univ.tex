@@ -168,7 +168,7 @@ Kako uopće znamo da je ta funkcija \emph{totalna}, odnosno da možemo pomoću n
 \end{equation}
 Upravo napisani izraz zapravo kaže da je $\f{nextprime}$ \emph{rekurzivna} funkcija (parcijalno je rekurzivna jer je dobivena minimizacijom konjunkcije dvije rekurzivne relacije, a totalna je zbog beskonačnosti skupa $\mathbb P$), pa je i $\f{prime}$ rekurzivna po korolaru~\ref{kor:F1rek}.
 
-Za primitivnu rekurzivnost, moramo nekako ograničiti minimizaciju, odnosno moramo "isprogramirati" dokaz da je $\mathbb P$ beskonačan. Uzmimo Euklidov dokaz: ako imamo $p_0,p_1,\dotsc,p_n\in\mathbb P$, novi prim-broj možemo dobiti tako da potražimo prim-djelitelj broja $m:=p_0\cdot p_1\dotsm p_n+1>0$. Aha! Znamo da je djelitelje pozitivnog broja dovoljno tražiti do samog tog broja, dakle samo trebamo primitivno rekurzivno izračunati $m$ iz $n$ i $p_n$. Tu bismo mogli upotrijebiti primorijel iz primjera~\ref{pr:primorijel} --- konkretno, $m=\f{Sc}\bigl(\overline{\f Z}\bigl(\f{Sc}(n)\bigr)\bigr)$ --- ali nažalost još ne znamo da je funkcija $\overline{\f Z}$ primitivno rekurzivna, jer nismo dokazali da povijest čuva primitivnu rekurzivnost. I to s razlogom: pokazat će se da za tu lemu treba rezultat koji upravo dokazujemo.
+Za primitivnu rekurzivnost, moramo nekako ograničiti minimizaciju, odnosno moramo "isprogramirati" dokaz da je $\mathbb P$ beskonačan. Uzmimo Euklidov dokaz: ako imamo $p_0,p_1,\dotsc,p_n\in\mathbb P$, novi prim-broj možemo dobiti tako da potražimo prim-djelitelj broja $m:=p_0\cdot p_1\dotsm p_n+1>1$. Aha! Znamo da je djelitelje pozitivnog broja dovoljno tražiti do samog tog broja, dakle samo trebamo primitivno rekurzivno izračunati $m$ iz $n$ i $p_n$. Tu bismo mogli upotrijebiti primorijel iz primjera~\ref{pr:primorijel} --- konkretno, $m=\f{Sc}\bigl(\overline{\f Z}\bigl(\f{Sc}(n)\bigr)\bigr)$ --- ali nažalost još ne znamo da je funkcija $\overline{\f Z}$ primitivno rekurzivna, jer nismo dokazali da povijest čuva primitivnu rekurzivnost. I to s razlogom: pokazat će se da za tu lemu treba rezultat koji upravo dokazujemo.
 
 Kako se izvući? Spas leži u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Naime, ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. Sada je lako: umjesto primorijela, možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a očito je $p_n!\ge p_0\cdot p_1\dotsm p_n$ (jer je $p_n!$ umnožak svih brojeva na desnoj strani, i eventualno još nekih, koji su veći ili jednaki $1$).
 \begin{equation}
@@ -234,7 +234,7 @@ Za jedan smjer (zapisati $\overline{\f G}$ primitivno rekurzivno pomoću $\f G$)
 \end{equation}
 Ako $i$-ti faktor u~\eqref{eq:povijestrek} označimo s $\f H(\vec x,i)$, tada je $\f{pow}\circ(\f{prime}\circ\f I_{k+1}^{k+1},\f{Sc}\circ\f G)$ sim\-bo\-li\-čka definicija od $\f H^{k+1}$ kompozicijom iz funkcija za koje je već dokazano da su primitivno rekurzivne, te funkcije $\f G$ koja je (primitivno) rekurzivna --- pa je $\f H$ (primitivno) rekurzivna. Sada je $\overline{\f G}$ (primitivno) rekurzivna po lemi~\ref{lm:prodrek}.
 
-Za drugi smjer, zamislimo da nam je zadana $\overline{\f G}$, i želimo iz nje dobiti $\f G$. Pažljivim gledanjem~\eqref{eq:povijest} vidimo da $\overline{\f G}(\vec x,y)$ kodira prvih $y$ vrijednosti oblika $\f G(\vec x,i)$, među kojima \emph{nije} $\f G(\vec x,y)$. (To je čest početnički \emph{bug} u C-programiranju: polje deklarirano s \texttt{int a[7];} \emph{ne} sadrži element \texttt{a[7]}.) Ako želimo dobiti taj broj, moramo zapravo izračunati $\overline{\f G}$ u nekom broju \emph{većem} od $y$ kao zadnjem argumentu. Dovoljno je uzeti $\overline{\f G}(\vec x,y+1)$: tvrdimo
+Za drugi smjer, pretpostavimo da nam je zadana $\overline{\f G}$, i želimo iz nje dobiti $\f G$. Pažljivim gledanjem~\eqref{eq:povijest} vidimo da $\overline{\f G}(\vec x,y)$ kodira prvih $y$ vrijednosti oblika $\f G(\vec x,i)$, među kojima \emph{nije} $\f G(\vec x,y)$. (To je čest početnički \emph{bug} u C-programiranju: polje deklarirano s \texttt{int a[7];} \emph{ne} sadrži element \texttt{a[7]}.) Ako želimo dobiti taj broj, moramo zapravo izračunati $\overline{\f G}$ u nekom broju \emph{većem} od $y$ kao zadnjem argumentu. Dovoljno je uzeti $\overline{\f G}(\vec x,y+1)$: tvrdimo
 \begin{equation}\label{eq:unpovijest}
     \f G(\vec x,y)=\overline{\f G}\bigl(\vec x,\f{Sc}(y)\bigr)[y]\text,
 \end{equation}
@@ -450,7 +450,7 @@ Tada je $\f R$ primitivno rekurzivna kao disjunkcija tri primitivno rekurzivne r
 
 \section{Kodiranje RAM-modela izračunljivosti}
 
-Napokon imamo dovoljno alata da možemo proći kroz poglavlje~\ref{sec:RAMizr}, i sve bitno u njemu kodirati prirodnim brojevima. Tako ćemo dobiti mogućnost simulacije rada RAM-stroja primitivno rekurzivnim funkcijama, a time i parcijalnu rekurzivnost RAM-izračunljivih funkcija. Krenimo redom: prvo su na redu RAM-instrukcije.
+Napokon imamo dovoljno alata da možemo proći kroz točku~\ref{sec:RAMizr}, i sve bitno u njoj kodirati prirodnim brojevima. Tako ćemo dobiti mogućnost simulacije rada RAM-stroja primitivno rekurzivnim funkcijama, a time i parcijalnu rekurzivnost RAM-izračunljivih funkcija. Krenimo redom: prvo su na redu RAM-instrukcije.
 
 %\subsection{Kodiranje instrukcija i programa}
 
@@ -480,13 +480,13 @@ Komponente $j$ odnosno $l$, te tip, definiramo kroz dvije funkcije i tri relacij
 Vidimo
 \begin{align}
 \SwapAboveDisplaySkip
-    \label{eq:InsINC2}\f{InsINC}(i)&\Longleftrightarrow(\exists j<i)\bigl(i=\f{codeINC}(j)\bigr)\text,\\
-    \label{eq:InsDEC2}\f{InsDEC}(i)&\Longleftrightarrow(\exists j<i)(\exists l<i)\bigl(i=\f{codeDEC}(j,l)\bigr)\text,\\
-    \label{eq:InsGOTO2}\f{InsGOTO}(i)&\Longleftrightarrow(\exists l<i)\bigl(i=\f{codeGOTO}(l)\bigr)\text.
+    \label{eq:InsINC3}\f{InsINC}(i)&\Longleftrightarrow i=\f{codeINC}(i[1])\text,\\
+    \label{eq:InsDEC3}\f{InsDEC}(i)&\Longleftrightarrow i=\f{codeDEC}(i[1],i[2])\text,\\
+    \label{eq:InsGOTO3}\f{InsGOTO}(i)&\Longleftrightarrow i=\f{codeGOTO}(i[1])\text.
 \end{align}
-    Dokažimo samo ekvivalenciju~\eqref{eq:InsINC2}, ostale su sasvim analogne. Za smjer $(\Rightarrow)$, ako je $i$ kod instrukcije tipa $\inc$, recimo $i=\kins{\incr j}$, tada po definiciji~\ref{def:kodIns} vrijedi $i=\f{codeINC}(j)=\langle0,j\rangle$. Štoviše, svaki element niza je manji od koda tog niza~\eqref{eq:elem<kod}, pa je $j=i[1]<i$ --- odnosno mogli smo ograničiti kvantifikaciju.  
+    Dokažimo samo ekvivalenciju~\eqref{eq:InsINC3}, ostale su sasvim analogne. Za smjer $(\Rightarrow)$, ako je $i$ kod instrukcije tipa $\inc$, recimo $i=\kins{\incr j}$, tada po definiciji~\ref{def:kodIns} vrijedi $i=\f{codeINC}(j)=\langle0,j\rangle$, pa je $j=\langle0,j\rangle[1]=i[1]$.% Štoviše, svaki element niza je manji od koda tog niza~\eqref{eq:elem<kod}, pa je $j=i[1]<i$ --- odnosno mogli smo ograničiti kvantifikaciju.  
 
-    Za smjer $(\Leftarrow)$, očito je $i=\f{codeINC}(j)=\kins{\incr j}$ kod instrukcije tipa $\inc$.
+    Za smjer $(\Leftarrow)$, očito je $i=\f{codeINC}(i[1])=\kins{\incr{i[1]}}$ kod instrukcije tipa $\inc$.
 
     Sada primitivna rekurzivnost skupa $\f{Ins}=\f{InsINC}\cup\f{InsDEC}\cup\f{InsGOTO}$ slijedi direktno iz propozicije~\ref{prop:skupl}.
 \end{proof}
@@ -495,7 +495,8 @@ Vidimo
     Definiramo $\f{regn}(t)$ kao adresu registra na koji djeluje instrukcija koda $t$, ako takva postoji i djeluje na neki registar, a $0$ inače. Analogno definiramo $\f{dest}(t)$ za odredište. Funkcije $\f{regn}^1$ i\, $\f{dest}^1$ su primitivno rekurzivne.
 \end{lema}
 \begin{proof}
-Koristeći prethodnu lemu i teorem o grananju (primitivno rekurzivnu verziju), odmah pišemo točkovne definicije:
+    Iz dokaza leme~\ref{lm:InsTYPEprn} odmah se vidi da ako je $t$ kod instrukcije tipa $\inc$, adresa njenog registra je $t[1]$. Ako je tipa $\dec$, adresa registra je i dalje $t[1]$, a odredište je $t[2]$. Ako je tipa $\goto$, odredište je $t[1]$.
+    Koristeći tu činjenicu i teorem o grananju (primitivno rekurzivnu verziju), odmah pišemo točkovne definicije:
 \begin{align}
     \f{regn}(t)&=\begin{cases}
     t[1],&\f{InsINC}(t)\lor\f{InsDEC}(t)\\
@@ -580,8 +581,7 @@ Iz teorije skupova znamo da nizova prirodnih brojeva s konačnim nosačem ima pr
 \end{equation}
 Zbog konačnosti nosača samo konačno mnogo eksponenata je pozitivno (svi ostali su $0$), pa samo konačno mnogo prim-brojeva sudjeluje u produktu.
 
-Važan razlog zašto je to idealno kodiranje stanja registara je to što 
-ne ovisi o konkretnom RAM-stroju odnosno programu. Mogli bismo npr.\ proći kroz program i naći mu širinu $m_P$, pa kodirati stanje kao konačan niz registara do $\reg{m_P}$, ali to bi ovisilo o programu, i dodavanje potpuno irelevantnih instrukcija koje se možda uopće ne mogu izvršiti (\emph{unreachable code}) bi promijenilo kod stanja registara za isto izračunavanje (isti niz konfiguracija), te kodiranje ne bi bilo funkcija.
+Važno je da takvo kodiranje stanja registara ne ovisi o konkretnom RAM-stroju odnosno programu. Mogli bismo npr.\ proći kroz program i naći mu širinu $m_P$, pa kodirati stanje kao konačan niz registara do $\reg{m_P}$ --- ali to bi ovisilo o programu: dodavanje potpuno irelevantnih instrukcija koje se možda uopće ne mogu izvršiti (\emph{unreachable code}) bi moglo promijeniti kod stanja registara za isto izračunavanje (isti niz konfiguracija), te kodiranje ne bi bilo funkcija.
 
 Treba nam jedan bitan konstruktor, a to je %\emph{proširenje nulom} zadanog konačnog niza. Kako već imamo kodiranje konačnih nizova, možemo ga definirati na kodovima.
 početna konfiguracija RAM-stroja s ulazom $\vec x$ (prenesenim preko koda, jer želimo imati jednu funkciju za sve mjesnosti).
