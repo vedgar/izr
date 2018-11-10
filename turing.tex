@@ -203,7 +203,7 @@ Neka je $\Sigma$ abeceda. Označimo $b':=\card\Sigma$. %(taj broj zovemo \emph{b
 
 Sada bismo mogli, kao za kodiranje RAM-programa, jednostavno kodirati riječi kao kodove konačnih nizova kodova njihovih znakova --- ali to je nezgrapno (i ne bi bilo bijekcija). Naime, kodovi RAM-instrukcija mogli su biti proizvoljno veliki, dok za fiksnu abecedu, kodovi znakova mogu biti najviše $b'$. To sugerira da nam je dovoljno jednostavnije kodiranje.
 
-Najprirodnije kodiranje ograničenih nizova, toliko prirodno da možda nismo ni svjesni kako ga koristimo (za $b'=10$) svaki put kad čitamo i pišemo višeznamenkaste brojeve, je \textbf{zapis u bazi} $b'$. Ipak, s njime postoje dva problema. Prvi problem su početne nule ($(001121)_3=(1121)_3$), što smo riješili tako što smo počeli brojiti kodove znakova od $1$, ali smo na račun toga dobili uključenu gornju granicu. Kako opravdati znamenku $b'$ u bazi $b'$? Drugi problem su jednočlane abecede: znamo da se obični pozicijski brojevni sustavi definiraju samo za baze od $2$ nadalje. Da, postoji i unarni zapis, ali on nije pozicijski --- ili jest?
+Najprirodnije kodiranje ograničenih nizova, toliko prirodno da možda nismo ni svjesni kako ga koristimo (za $b'=10$) svaki put kad čitamo i pišemo višeznamenkaste brojeve, je \textbf{zapis u bazi} $b'$. Ipak, s njime postoje dva problema. Prvi problem su početne nule ($(001121)_3=(1121)_3$), što smo riješili tako što smo počeli kodirati znakove od $1$, ali smo na račun toga dobili uključenu gornju granicu. Kako opravdati znamenku $b'$ u bazi $b'$? Drugi problem su jednočlane abecede: znamo da se obični pozicijski brojevni sustavi definiraju samo za baze od $2$ nadalje. Da, postoji i unarni zapis, ali on nije pozicijski --- ili jest?
 
 Zapravo, unarni zapis sasvim odgovara uobičajenom brojevnom zapisu u bazi $b'$ za $b'=1$: recimo, $(1111)_1=1\cdot1^3+1\cdot1^2+1\cdot1^1+1\cdot1^0=4$, i jedini problem je uključena gornja granica --- u bazi $1$ imamo znamenku $1$. Ali nemamo znamenku $0$, i ne smijemo je imati ako želimo jedinstven zapis --- no to upravo rješava prvi problem.
 
@@ -362,11 +362,11 @@ Tada za svaku $w\in\Sigma^*$ imamo $\mathcal T'$-izračunavanje s $w$: $(0,0,w\b
 te je izlazni podatak opet $w$, odnosno $\mathcal T'$ računa identitetu.
 \end{proof}
 
-Slično možemo kodirati i $\Gamma_0$ --- ali kako već imamo kodiranje skupa $\Sigma_0\subset\Gamma_0$, želimo da znakovi ulazne abecede imaju iste kodove. Dakle, označimo $b:=\card\Gamma_0$, i proširimo bijekciju $\N\Sigma_0\colon\Sigma_0\leftrightarrow[1..b']$ na bijekciju $\N\Gamma_0\colon\Gamma_0\leftrightarrow[0..b\rangle$, tako da $\bl$ preslikamo u $0$, a ostale elemente iz $\Gamma_0\setminus\Sigma_0$ bijektivno u skup $\langle b'\!..b\rangle$.
+Slično možemo kodirati i $\Gamma_0$ --- ali kako već imamo kodiranje skupa $\Sigma_0\subset\Gamma_0$, želimo da znakovi ulazne abecede imaju iste kodove. Dakle, označimo $b:=\card\Gamma_0$, i proširimo bijekciju $\N\Sigma_0\colon\Sigma_0\leftrightarrow[1..b']$ na bijekciju $\N\Gamma_0\colon\Gamma_0\leftrightarrow[0..b\rangle$, tako da $\bl$ preslikamo u $0$, a ostale elemente iz $\Gamma_0\!\setminus\Sigma_0$ bijektivno u skup $\langle b'\!..b\rangle$.
 
 Primijetite da smo sada upotrijebili nulu, i to kao $\N\Gamma_0(\bl)$. To pruža opravdanje za frazu "traka je s konačnim nosačem" (praznine su kodirane nulama, pa ne-nula ima konačno mnogo), a bit će esencijalno i za kodiranje trake.
 
-Naime, sada imamo sličan problem kao sa stanjem registara RAM-stroja: da bismo kodirali proizvoljnu traku, moramo nekako skupiti kodove beskonačno mnogo ćelija, ali tako da svi osim konačno mnogo njih budu $0$. Alternativno, želimo "kodiranje" konačnih nizova, ali tako da dodavanje nule na kraj ne promijeni kod.
+Naime, sada imamo sličan problem kao sa stanjem registara RAM-stroja: da bismo kodirali proizvoljnu traku, moramo nekako skupiti kodove beskonačno mnogo ćelija, ali takve da su svi osim konačno mnogo njih jednaki $0$. Alternativno, želimo "kodiranje" konačnih nizova, ali tako da dodavanje nule na kraj ne promijeni kod.
 
 U slučaju RAM-registara to smo riješili rastavom na prim-faktore, odnosno malom modifikacijom kodiranja $\N^*$ --- umjesto od $1$, eksponenti su išli od $0$. Možemo li ovdje naći neku malu modifikaciju kodiranja $\Sigma^*$ (zapis u bazi) da dobijemo analogni rezultat?
 
@@ -532,8 +532,8 @@ Ako ta konfiguracija nije završna, tad je $q\in[0..a\rangle\setminus\{1\}$, pa 
 \begin{multline}
     \f{Position}(\kr w,k+1)=\f H_2\bigl(\kr w,k,\f{State}(\kr w,k),\f{Position}(\kr w, k),\f{Tape}(\kr w,k)\bigr)=\\
     =\f H_2(\kr w,k,q,p,t)=
-    \f{pd}\bigl(p+\f{direction}\bigl(q,\f{Digit}(t,p,b)\bigr)\bigr)=\\
-    =\f{pd}(p+d+1)=\max\,\{p+d+1-1,0\}=\max\,\{\f{Position}(\kr w,k)+d,0\}\text.
+    \f{pd}\bigl(p+\f{direction}(q,g)\bigr)=\f{pd}(p+d+1)=\\
+    =\max\,\{p+d+1-1,0\}=\max\,\{\f{Position}(\kr w,k)+d,0\}\text.
 \end{multline}
 Slično se dobiju i odgovarajuće vrijednosti za $\f{State}(\kr w,k+1)$ i $\f{Tape}(\kr w,k+1)$.
 \end{proof}
@@ -1174,9 +1174,9 @@ Time smo riješili pitanje domene, i potrebno je još samo natrag dekodirati $y$
 
 \subsection{Dekodiranje izlazne vrijednosti}
 
-Ovaj će postupak biti sličan onome u drugoj fazi, samo u obrnutom smjeru. Imamo broj $y$ zapisan unarno (pomaknuta baza $1$) u tragu $0$, i trebamo ga zapisati u pomaknutoj bazi $b'$ --- skidajući po jedan \textbullet\ iz traga $0$ i inkrementirajući riječ iz $\Sigma_0^*$ svaki put. Ipak, nekoliko tehničkih detalja čine ovaj postupak kompliciranijim.
+Ovaj će postupak biti sličan onome u drugoj fazi, samo u obrnutom smjeru. Imamo broj $y$ zapisan unarno (pomaknuta baza $1$) u tragu $0$, i trebamo ga zapisati u pomaknutoj bazi $b'$ --- skidajući po jedan \t\textbullet\ iz traga $0$ i inkrementirajući riječ iz $\Sigma_0^*$ svaki put. Ipak, nekoliko tehničkih detalja čine ovaj postupak kompliciranijim.
 
-Prvo, umjesto pisanja konstantnog znaka $r_1\in B^m$, morat ćemo čitati bilo koji znak koji u tragu $0$ ima \textbullet. Srećom, tehniku za to smo napravili (definicija~\ref{def:trag}).
+Prvo, umjesto pisanja konstantnog znaka $r_1\in B^m$, morat ćemo čitati bilo koji znak koji u tragu $0$ ima \t\textbullet. Srećom, tehniku za to smo napravili (definicija~\ref{def:trag}).
 
 Drugo i važnije, kod dekrementiranja smo znali da riječ neće postati dulja, te smo prazninama skraćivali broj koliko je već potrebno, dok ga nismo dekrementirali sasvim do nule. Kod inkrementiranja nemamo tu garanciju, i općenito se može dogoditi da puno puta moramo dodati po jednu znamenku slijeva (recimo, za $b'=5$, kad inkrementiramo $555$ u $1111$).
 

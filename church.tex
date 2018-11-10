@@ -16,7 +16,7 @@ Kako bismo to dokazali? Uzmimo za početak nešto lakše. U uvodu smo već spome
 \begin{equation}\label{eq:Russelldef}
     \f{Russell}(n):\simeq\f{comp}_1(n,n)+1\text.
 \end{equation}
-\emph{Russellov skup} je domena Russellove funkcije: $DR^1:=\dom{\f{Russell}}$.
+\emph{Russellov skup} je domena Russellove funkcije: $K^1:=\dom{\f{Russell}}$.
 \end{definicija}
 
 \begin{korolar}\label{kor:Russellprek}
@@ -29,37 +29,36 @@ Točkovna definicija~\eqref{eq:Russelldef} se lako zapiše u simboličkom obliku
 Paradoks iz uvoda sada se može iskazati ovako: imamo algoritam za $\f{Russell}$, ali nijedan algoritam koji računa vrijednosti od $\f{Russell}$ nije totalan. Drugim riječima, Russellova funkcija je izračunljiva, ali ne postoji njeno izračunljivo totalno proširenje.
 
 \begin{lema}\label{lm:Russellnrek}
-Ne postoji rekurzivna funkcija $\f r$ takva da je $\f r|_{DR}=\f{Russell}$.
+Ne postoji rekurzivna funkcija $\f r$ takva da je $\f r|_{K}=\f{Russell}$.
 \end{lema}
 \begin{proof}
 Pretpostavimo da takva funkcija postoji. Tada je ona parcijalno rekurzivna, pa po teoremu ekvivalencije ima indeks, označimo ga s $e$ (vidjeti napomenu~\ref{nap:>1ind}); i totalna je, pa postoji $q:=\f r(e)\in\N$. Sada je sljedbenik od $q$ jednak
 \begin{equation}
     1+q=1+\f r(e)=1+\kf e(e)=1+\f{comp}(e,e)\text,
 \end{equation}
-iz čega slijedi da je $e\in DR$ i $\f{Russell}(e)=1+q$. No $\f r(e)=q\not=1+q$, pa $\f r$ ne može biti proširenje od $\f{Russell}$, kontradikcija.
+iz čega slijedi da je $e\in K$ i $\f{Russell}(e)=1+q$. No $\f r(e)=q\not=1+q$, pa $\f r$ ne može biti proširenje od $\f{Russell}$, kontradikcija.
 \end{proof}
 
 \begin{teorem}\label{tm:DRnrek}
-Russellov skup $DR$ nije rekurzivan.
+Russellov skup $K$ nije rekurzivan.
 \end{teorem}
 \begin{proof}
-Pretpostavimo suprotno, i označimo s $\rus:=\{DR\colon\f{Russell},\f Z\}$ proširenje Russellove funkcije nulom.
+Pretpostavimo suprotno, i označimo s $\rus:=\{K\colon\f{Russell},\f Z\}$ proširenje Russellove funkcije nulom.
 Točkovno, imamo
 \begin{equation}
     \rus(n):\simeq
 \begin{cases}
-\f{Russell}(n),&n\in DR\\
+\f{Russell}(n),&n\in K\\
 0,&\text{inače}
 \end{cases}\text.
 \end{equation}
-Po korolaru~\ref{kor:Russellprek} $\f{Russell}$ je parcijalno rekurzivna, po pretpostavci suprotnog je $DR$ rekurzivna relacija, a $\f Z$ je inicijalna pa je trivijalno parcijalno rekurzivna. Prema teoremu~\ref{tm:gprek}, iz toga bi slijedilo da je $\rus$ parcijalno rekurzivna funkcija. 
+Po korolaru~\ref{kor:Russellprek} $\f{Russell}$ je parcijalno rekurzivna, po pretpostavci suprotnog je $K$ rekurzivna relacija, a $\f Z$ je inicijalna pa je trivijalno parcijalno rekurzivna. Prema teoremu~\ref{tm:gprek}, iz toga bi slijedilo da je $\rus$ parcijalno rekurzivna funkcija. 
 
-S druge strane, po definiciji~\ref{def:gr} je $R_0:=DR\kompl$, pa je
-\begin{multline}
-    \dom{\rus}=(\dom{\f Z}\cap R_0)\cup(\dom{\f{Russell}}\cap DR)=\\
-    =(\N\cap DR\kompl)\cup(DR\cap DR)=DR\kompl\cup DR=\N\text,
-\end{multline}
-dakle $\rus$ je totalna funkcija. To, zajedno s parcijalnom rekurzivnošću, značilo bi da je $\rus$ rekurzivna funkcija, što je u kontradikciji s lemom~\ref{lm:Russellnrek} (očito je $\rus|_{DR}=\f{Russell}$).
+S druge strane, po definiciji~\ref{def:gr} je $R_0:=K\kompl$, pa je
+\begin{equation}
+    \dom{\rus}=(\dom{\f Z}\cap R_0)\cup(\dom{\f{Russell}}\cap K)=(\N\cap K\kompl)\cup(K\cap K)=K\kompl\cup K=\N\text,
+\end{equation}
+dakle $\rus$ je totalna funkcija. To, zajedno s parcijalnom rekurzivnošću, značilo bi da je $\rus$ rekurzivna funkcija, što je u kontradikciji s lemom~\ref{lm:Russellnrek} (očito je $\rus|_{K}=\f{Russell}$).
 \end{proof}
 
 Time smo napokon dokazali da postoji izračunljiva funkcija s neizračunljivom domenom, i vidimo u čemu je problem s našom intuicijom: iako proširenje nulom doživljavamo kao trivijalnu operaciju na brojevnoj funkciji, za izračunljivost $\tilde{\f f}$ je potrebno ustanoviti kad ulazni podatak $x$ \emph{nije} u domeni $\dom{\f f}$ (da bismo ga preslikali u $0$) --- a to zapravo zahtijeva da ustanovimo da \emph{nijedna} konfiguracija stroja koji računa $\f f$ na $x$ nije završna. 
@@ -129,13 +128,13 @@ Korolar~\ref{kor:nrek<nrek}, kao što smo već nagovijestili, pruža način da p
 Problemi $Halt_1$ i $HALT$ nisu odlučivi.
 \end{propozicija}
 \begin{proof}
-Tvrdimo da vrijedi $DR(n)\Leftrightarrow Halt_1(n,n)$. Doista,
+Tvrdimo da vrijedi $K(n)\Leftrightarrow Halt_1(n,n)$. Doista,
 \begin{multline}
-    DR=\dom{\f{Russell}}=\dom{\f{Sc}\,\circ\,\f{comp_1}\circ(\f I_1^1,\f I_1^1)}=\dom{\f{comp}_1\circ(\f I_1^1,\f I_1^1)}=\\
+    K=\dom{\f{Russell}}=\dom{\f{Sc}\,\circ\,\f{comp_1}\circ(\f I_1^1,\f I_1^1)}=\dom{\f{comp}_1\circ(\f I_1^1,\f I_1^1)}=\\
     =\left\{n\;\middle\vert\;\bigl(\f I_1^1(n),\f I_1^1(n)\bigr)\in\dom{\f{comp}_1}\right\}
     =\{n\mid(n,n)\in Halt_1\}\text,
 \end{multline}
-gdje smo koristili definiciju~\eqref{eq:domkomp}, i njenu laganu posljedicu da je $\dom{F\circ G}=\dom G$ ako je $F$ totalna. Iz toga slijedi $DR\preceq Halt_1$, pa je $Halt_1$ neodlučiv po korolaru~\ref{kor:nrek<nrek} i teoremu~\ref{tm:DRnrek}.
+gdje smo koristili definiciju~\eqref{eq:domkomp}, i njenu laganu posljedicu da je $\dom{F\circ G}=\dom G$ ako je $F$ totalna. Iz toga slijedi $K\preceq Halt_1$, pa je $Halt_1$ neodlučiv po korolaru~\ref{kor:nrek<nrek} i teoremu~\ref{tm:DRnrek}.
 
 Slično, po definiciji iz korolara~\ref{kor:funHaltTk}, vrijedi $Halt_1(x,e)\Leftrightarrow HALT(\kr x,e)$, a funkcija $\f{Code}^1$ je (primitivno) rekurzivna, te je $Halt_1\!\preceq HALT$, iz čega je i $HALT$ neodlučiv.
 \end{proof}
@@ -148,10 +147,10 @@ Dakle, ono što zasad znamo, po Church--\!Turingovoj tezi, je da ne postoji algo
 Postoji RAM-program $P_0$, takav da nijedan algoritam ne može točno odrediti, za svaki $u\in\N$, stane li $P_0$-izračunavanje s $u$.
 \end{korolar}
 \begin{proof}
-%Jednostavno kompajliramo (teorem~\ref{tm:pir}) simboličku definiciju funkcije $\f{Russell}$ koju smo dobili u dokazu korolara~\ref{kor:Russellprek}. Tako dobijemo RAM-program $P_0$, za koji po definiciji~\ref{def:compute} vrijedi: za svaki $t\in\N$, $P_0$-izračunavanje s $t$ stane ako i samo ako je $t\in DR$.
-Po korolaru~\ref{kor:Russellprek}, Russellova funkcija je parcijalno rekurzivna. Po teoremu~\ref{tm:pir}, ona je i RAM-izračunljiva. Označimo s $P_0$ jedan RAM-program koji je računa. Po definiciji~\ref{def:compute}, za svaki $u\in\N$, $P_0$-izračunavanje s $u$ stane ako i samo ako je $u\in DR$.
+%Jednostavno kompajliramo (teorem~\ref{tm:pir}) simboličku definiciju funkcije $\f{Russell}$ koju smo dobili u dokazu korolara~\ref{kor:Russellprek}. Tako dobijemo RAM-program $P_0$, za koji po definiciji~\ref{def:compute} vrijedi: za svaki $t\in\N$, $P_0$-izračunavanje s $t$ stane ako i samo ako je $t\in K$.
+Po korolaru~\ref{kor:Russellprek}, Russellova funkcija je parcijalno rekurzivna. Po teoremu~\ref{tm:pir}, ona je i RAM-izračunljiva. Označimo s $P_0$ jedan RAM-program koji je računa. Po definiciji~\ref{def:compute}, za svaki $u\in\N$, $P_0$-izračunavanje s $u$ stane ako i samo ako je $u\in K$.
 
-Kad bi postojao algoritam za odlučivanje problema zaustavljanja $P_0$-izračunavanja s proizvoljnim $u$, po Church--\!Turingovoj tezi $DR$ bi bio odlučiv problem, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
+Kad bi postojao algoritam za odlučivanje problema zaustavljanja $P_0$-izračunavanja s proizvoljnim $u$, po Church--\!Turingovoj tezi $K$ bi bio odlučiv problem, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
 \begin{lema}\label{lm:THaltnodl}
@@ -162,9 +161,9 @@ Po korolaru~\ref{kor:peuf}, jezična funkcija $\rho:=\t\textbullet\f{Russell}$ j
 \begin{equation}\label{eq:rhoRussell}
     \rho(\t\textbullet^t)\simeq\t\textbullet^{\f{Russell}(t)}\text.
 \end{equation}
-To znači da za $\mathcal T_0$ možemo uzeti Turingov stroj koji računa $\rho$. Očito $\mathcal T_0$ jest nad unarnom abecedom, i stane točno za riječi oblika $\t\textbullet^t$ za $t\in DR$.
+To znači da za $\mathcal T_0$ možemo uzeti Turingov stroj koji računa $\rho$. Očito $\mathcal T_0$ jest nad unarnom abecedom, i stane točno za riječi oblika $\t\textbullet^t$ za $t\in K$.
 
-Sad, kada bi postojao algoritam koji bi za svaku riječ nad $\Sigma_{\t\textbullet}$ odlučivao hoće li $\mathcal T_0$-izračunavanje s njome stati, pomoću njega bismo mogli odlučiti $DR$, sljedećim algoritmom: za ulaz $u\in\N$, konstruiramo riječ $\t\textbullet^u$, i vratimo stane li $\mathcal T_0$-izračunavanje s njom. Po definiciji~\ref{def:Tcomputefi}, to će biti ako i samo ako je $\t\textbullet^u\in\dom\rho$, što će prema definiciji unarne reprezentacije biti ako i samo ako je $u\in DR$. Po Church--\!Turingovoj tezi, to bi značilo da je $DR$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
+Sad, kada bi postojao algoritam koji bi za svaku riječ nad $\Sigma_{\t\textbullet}$ odlučivao hoće li $\mathcal T_0$-izračunavanje s njome stati, pomoću njega bismo mogli odlučiti $K$, sljedećim algoritmom: za ulaz $u\in\N$, konstruiramo riječ $\t\textbullet^u$, i vratimo stane li $\mathcal T_0$-izračunavanje s njom. Po definiciji~\ref{def:Tcomputefi}, to će biti ako i samo ako je $\t\textbullet^u\in\dom\rho$, što će prema definiciji unarne reprezentacije biti ako i samo ako je $u\in K$. Po Church--\!Turingovoj tezi, to bi značilo da je $K$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
 \begin{propozicija}[Neodlučivost problema zaustavljanja za Turingove strojeve]
@@ -173,7 +172,7 @@ Za svaku abecedu $\Sigma$ postoji Turingov stroj nad njom, čiji je problem zaus
 \begin{proof}
 Ako je $\t\textbullet\;\raisebox{1.1pt}{$\in$}\;\Sigma$, možemo direktno primijeniti lemu~\ref{lm:THaltnodl}, na Turingov stroj $\mathcal T_0$ s abecedom $\Sigma$. Kad bi postojao algoritam koji za svaku riječ $w\in\Sigma^*$ točno određuje stane li $\mathcal T_0$-izračunavanje s $w$, to bi specijalno moralo vrijediti za sve $w\in\t\textbullet^*\subseteq\Sigma^*$, što je u kontradikciji s lemom~\ref{lm:THaltnodl}.
 
-Ako pak $\t\textbullet\;\raisebox{1.1pt}{$\not\in$}\;\Sigma$, uzmimo neki konkretni znak $\alpha\in\Sigma$ (po definiciji abecede je $\Sigma\not=\emptyset$, pa $\alpha$ postoji), i \emph{zamijenimo} ga s \t\textbullet: gledamo Turingov stroj $\mathcal T_0'$ koji je kao $\mathcal T_0$ iz prethodnog odlomka, osim što umjesto \t\textbullet\ ima $\alpha$ --- kako u $\Sigma$, tako i u $\Gamma$ i u svim prijelazima od $\delta$. S obzirom na to da znakovi radne abecede nemaju nikakvu imanentnu semantiku (osim praznine, ali za to pogledajte sljedeći odlomak), $\mathcal T_0'$-izračunavanje s $\alpha^u$ stane ako i samo ako $\mathcal T_0$-izračunavanje s $\t\textbullet^u$ stane --- pa kad bi neki algoritam za svaku $w\in\Sigma^*$ točno određivao stane li $\mathcal T_0'$-izračunavanje s $w$, tada bi to specijalno vrijedilo i za sve riječi oblika $\alpha^u,u\in\N$, pa bismo opet imali kontradikciju s neodlučivošću od $DR$ kao u prethodnom odlomku.
+Ako pak $\t\textbullet\;\raisebox{1.1pt}{$\not\in$}\;\Sigma$, uzmimo neki konkretni znak $\alpha\in\Sigma$ (po definiciji abecede je $\Sigma\not=\emptyset$, pa $\alpha$ postoji), i \emph{zamijenimo} ga s \t\textbullet: gledamo Turingov stroj $\mathcal T_0'$ koji je kao $\mathcal T_0$ iz prethodnog odlomka, osim što umjesto \t\textbullet\ ima $\alpha$ --- kako u $\Sigma$, tako i u $\Gamma$ i u svim prijelazima od $\delta$. S obzirom na to da znakovi radne abecede nemaju nikakvu imanentnu semantiku (osim praznine, ali za to pogledajte sljedeći odlomak), $\mathcal T_0'$-izračunavanje s $\alpha^u$ stane ako i samo ako $\mathcal T_0$-izračunavanje s $\t\textbullet^u$ stane --- pa kad bi neki algoritam za svaku $w\in\Sigma^*$ točno određivao stane li $\mathcal T_0'$-izračunavanje s $w$, tada bi to specijalno vrijedilo i za sve riječi oblika $\alpha^u,u\in\N$, pa bismo opet imali kontradikciju s neodlučivošću od $K$ kao u prethodnom odlomku.
 
 Jedan detalj još moramo uzeti u obzir: što ako je praznina stroja $\mathcal T_0$ upravo \t\textbullet? Tada ona po definiciji nije u $\Sigma$, ali je ne možemo jednostavno zamijeniti s $\alpha$ jer $\alpha$ jest u $\Sigma$. U tom slučaju odaberemo neki novi znak $\beta\not\in\Gamma$, proglasimo ga prazninom, i \t\textbullet\ zamijenimo s $\beta$ u $\Gamma$ i $\delta$. Nakon toga primijenimo postupak iz prethodnog odlomka.
 \end{proof}
@@ -421,16 +420,16 @@ Za ulaz $u\in\N$ (koji dalje promatramo kao $(u)\in\N^1$):
 \end{quote}
 Taj algoritam odlučuje Russellov skup, jer za svaki $u\in\N$ vrijedi:% sljedeći lanac ekvivalencija:
 \begin{equation}\label{eq:lanaceqv}
-    u\in DR\Longleftrightarrow\text{$P_0$-izračunavanje s $u$ stane}\Longleftrightarrow(\Gamma_u\models\zeta)\Longleftrightarrow{}\!\models\varphi_u\text.
+    u\in K\Longleftrightarrow\text{$P_0$-izračunavanje s $u$ stane}\Longleftrightarrow(\Gamma_u\models\zeta)\Longleftrightarrow{}\!\models\varphi_u\text.
 \end{equation}
-Prva ekvivalencija je definicija~\ref{def:compute}, jer je $DR=\dom{\f{Russell}}$, a $P_0$ računa $\f{Russell}$. Druga ekvivalencija je u jednom smjeru propozicija~\ref{pp:stop>models}, a u drugom smjeru propozicija~\ref{pp:models>stop}. Treća ekvivalencija je dobivena primjenom propozicije~\ref{pp:valj<>zaklj}.
+Prva ekvivalencija je definicija~\ref{def:compute}, jer je $K=\dom{\f{Russell}}$, a $P_0$ računa $\f{Russell}$. Druga ekvivalencija je u jednom smjeru propozicija~\ref{pp:stop>models}, a u drugom smjeru propozicija~\ref{pp:models>stop}. Treća ekvivalencija je dobivena primjenom propozicije~\ref{pp:valj<>zaklj}.
 
-Dakle, pod pretpostavkom da $\mathcal A$ ispravno odlučuje koje su formule prvog reda valjane a koje nisu, upravo opisani neformalni algoritam ispravno odlučuje koji su brojevi elementi Russellovog skupa a koji nisu. Po Church--\!Turingovoj tezi, to bi značilo da je relacija $DR$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
+Dakle, pod pretpostavkom da $\mathcal A$ ispravno odlučuje koje su formule prvog reda valjane a koje nisu, upravo opisani neformalni algoritam ispravno odlučuje koji su brojevi elementi Russellovog skupa a koji nisu. Po Church--\!Turingovoj tezi, to bi značilo da je relacija $K$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
 Time je dokazan Churchov teorem, ali na neformalnoj razini --- "dokazali" smo da ne postoji neformalni algoritam, tako što smo se pozvali na Church--\!Turingovu tezu. Možemo li bez toga?
 
-Rekli smo da probleme obično shvaćamo kao jezike: odlučivost problema je tu rekurzivnost (karakteristične funkcije kodiranja) jezika čiji elementi su riječi koje predstavljaju instance problema na koje je odgovor potvrdan. U ovom slučaju, promotrili bismo jezik $Valid$ nad nekom abecedom koja je dovoljno bogata da može izraziti svaku formulu logike prvog reda, i u njemu bi se nalazile samo valjane formule. Ako uspijemo dokazati da $Valid$ nije rekurzivan, "odgurat" ćemo primjenu Church--\!Turingove teze na sam kraj dokaza, i pseudokod u dokazu teorema~\ref{tm:Church} moći ćemo zamijeniti pravom rekurzivnom funkcijom koja svodi $Valid$ (preciznije $\kr{Valid}$) na $DR$.
+Rekli smo da probleme obično shvaćamo kao jezike: odlučivost problema je tu rekurzivnost (karakteristične funkcije kodiranja) jezika čiji elementi su riječi koje predstavljaju instance problema na koje je odgovor potvrdan. U ovom slučaju, promotrili bismo jezik $Valid$ nad nekom abecedom koja je dovoljno bogata da može izraziti svaku formulu logike prvog reda, i u njemu bi se nalazile samo valjane formule. Ako uspijemo dokazati da $Valid$ nije rekurzivan, "odgurat" ćemo primjenu Church--\!Turingove teze na sam kraj dokaza, i pseudokod u dokazu teorema~\ref{tm:Church} moći ćemo zamijeniti pravom rekurzivnom funkcijom koja svodi $Valid$ (preciznije $\kr{Valid}$) na $K$.
 
 Hoćemo li time dobiti išta vrednije nego u prethodnoj točki? Da, jer imamo garanciju da smo bar svođenje napisali egzaktno --- a ako prihvatimo definiciju~\ref{def:izr}, argument postaje sasvim matematički bez pozivanja na intuiciju pojma algoritma.
 
@@ -631,7 +630,7 @@ Jezik $Valid$ nije odlučiv.
 \begin{proof}
 Lanac ekvivalencija~\eqref{eq:lanaceqv} sada možemo proširiti još trima karikama:
 \begin{multline}
-    u\in DR
+    u\in K
     \Longleftrightarrow
     \text{$P_0$-izračunavanje s $u$ stane}
     \Longleftrightarrow
@@ -649,7 +648,7 @@ Lanac ekvivalencija~\eqref{eq:lanaceqv} sada možemo proširiti još trima karik
 \end{multline}
 Predpredzadnja ekvivalencija je definicija skupa $Valid$ (u donjem redu je $\varphi_u$ zapisana u osnovnom jeziku). Predzadnja ekvivalencija je u jednom smjeru definicija~\eqref{eq:kodLdef}, a u drugom injektivnost kodiranja (propozicija~\ref{pp:bijkr}): ako je $\kr{\varphi_u}=\kr{\varphi'}$ za neku $\varphi'\in Valid$, tada je $\varphi_u=\varphi'\in Valid$. Zadnja ekvivalencija je definicija funkcije $\f{Fi}$.
 
-Sada se čitav lanac može sažeti u $\chi_{DR}=\chi_{\kr{Valid}}\circ\f{Fi}$, te je $\f{Fi}$ (čak primitivno) rekurzivna, odnosno vrijedi $DR\preceq\kr{Valid}$. 
+Sada se čitav lanac može sažeti u $\chi_{K}=\chi_{\kr{Valid}}\circ\f{Fi}$, te je $\f{Fi}$ (čak primitivno) rekurzivna, odnosno vrijedi $K\preceq\kr{Valid}$. 
 Kada bi $Valid$ bio odlučiv, po teoremu~\ref{tm:oikr} bi jednomjesna relacija $\kr{Valid}$ bila rekurzivna. Prema propoziciji~\ref{pp:rek<rek}, tada bi i Russellov skup bio rekurzivan, što je kontradikcija s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
@@ -662,7 +661,7 @@ U prethodnoj točki uveli smo, za svaki prirodni broj $u$, formulu $\varphi_u$, 
 \begin{definicija}
 \emph{G\"odelov skup} je skup formula
 %\begin{equation}
-    $\mathcal G\ddot o:=\{\lnot\varphi_u\mid u\in DR\kompl\}$.
+    $\mathcal G\ddot o:=\{\lnot\varphi_u\mid u\in K\kompl\}$.
 %\end{equation}
 \end{definicija}
 Kako je negacija rečenice ponovo rečenica, G\"odelov skup je skup rečenica.
@@ -671,7 +670,7 @@ Kako je negacija rečenice ponovo rečenica, G\"odelov skup je skup rečenica.
 Vrijedi $\mathfrak N\models\mathcal G\ddot o$.
 \end{propozicija}
 \begin{proof}
-Po kontrapoziciji propozicije~\ref{pp:models>stop}, za svaki $u\in DR\kompl$ formula $\varphi_u$ nije valjana, a iz dokaza te propozicije slijedi da ne vrijedi upravo na strukturi $\mathfrak N$ (jer tamo vrijedi $\pi_u$ i sve $\iota_i$, ali ne vrijedi $\zeta$). Iz logike znamo da $\mathfrak N\not\models\varphi_u$ povlači $\mathfrak N\models\lnot\varphi_u$, jer je $\varphi_u$ rečenica. Drugim riječima, za svaki $u\in DR\kompl$ vrijedi $\mathfrak N\models\lnot\varphi_u$, što smo trebali dokazati.
+Po kontrapoziciji propozicije~\ref{pp:models>stop}, za svaki $u\in K\kompl$ formula $\varphi_u$ nije valjana, a iz dokaza te propozicije slijedi da ne vrijedi upravo na strukturi $\mathfrak N$ (jer tamo vrijedi $\pi_u$ i sve $\iota_i$, ali ne vrijedi $\zeta$). Iz logike znamo da $\mathfrak N\not\models\varphi_u$ povlači $\mathfrak N\models\lnot\varphi_u$, jer je $\varphi_u$ rečenica. Drugim riječima, za svaki $u\in K\kompl$ vrijedi $\mathfrak N\models\lnot\varphi_u$, što smo trebali dokazati.
 \end{proof}
 
 \begin{teorem}
@@ -724,13 +723,13 @@ Pogledajmo sada sljedeći \emph{paralelni} algoritam:
     U drugoj dretvi, generiramo sve elemente od $Proof_{\text{PA}}$ redom po kodovima. Za svaki $p\in Proof_{\text{PA}}$, nađemo zadnju pojavu znaka \t\# u $p$, i usporedimo dio $p$ od te pojave (isključivo) do kraja s formulom $\neg\varphi_u'$ dobivenom na početku. Ako su jednake, prekidamo program i vraćamo $\mathit{false}$ ($0$).
 \end{quote}
 
-Očito, ako je $u\in DR$, prva dretva će stati, pa će i cijeli algoritam stati i vratiti $1$ --- pod pretpostavkom da druga dretva ne zaustavi algoritam prije. No PA je konzistentna teorija, pa ne dokazuje ono što nije istina. Kako $\neg\varphi_u$ nije istinita u $\mathfrak N$, tako niti $\neg\varphi_u'$ nije istinita u $\N$, dakle ne može se dogoditi da neki $p\in Proof_{\text{PA}}$ završi njome.
+Očito, ako je $u\in K$, prva dretva će stati, pa će i cijeli algoritam stati i vratiti $1$ --- pod pretpostavkom da druga dretva ne zaustavi algoritam prije. No PA je konzistentna teorija, pa ne dokazuje ono što nije istina. Kako $\neg\varphi_u$ nije istinita u $\mathfrak N$, tako niti $\neg\varphi_u'$ nije istinita u $\N$, dakle ne može se dogoditi da neki $p\in Proof_{\text{PA}}$ završi njome.
 
-S druge strane, ako $u\not\in DR$, prva dretva po definiciji neće stati, no hoće li druga? Ako bi PA bila i \emph{potpuna} teorija, odnosno dokazivala sve što je istina u strukturi $\N$, tada bi s vremenom na red došao i dokaz za $\neg\varphi_u'$. To bi značilo da za sve $u\not\in DR$, naš algoritam također stane i vraća $0$.
+S druge strane, ako $u\not\in K$, prva dretva po definiciji neće stati, no hoće li druga? Ako bi PA bila i \emph{potpuna} teorija, odnosno dokazivala sve što je istina u strukturi $\N$, tada bi s vremenom na red došao i dokaz za $\neg\varphi_u'$. To bi značilo da za sve $u\not\in K$, naš algoritam također stane i vraća $0$.
 
-No to bi značilo da smo upravo napisali (vrlo neformalni) algoritam za računanje funkcije $\chi_{DR}$, što je po Church--\!Turingovoj tezi u kontradikciji s teoremom~\ref{tm:DRnrek}.
+No to bi značilo da smo upravo napisali (vrlo neformalni) algoritam za računanje funkcije $\chi_{K}$, što je po Church--\!Turingovoj tezi u kontradikciji s teoremom~\ref{tm:DRnrek}.
 
-Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in DR\kompl$ --- drugim riječima, postoji formula iz $\mathcal G\ddot o$ koja nije dokaziva u PA.
+Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathcal G\ddot o$ koja nije dokaziva u PA.
 \end{proof}
 
 \subsection{Problemi u skici dokaza G\"odelovog teorema}

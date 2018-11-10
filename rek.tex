@@ -61,11 +61,11 @@ Kompozicija je intuitivno vrlo jednostavna operacija (baš kao i slijedno izvrš
 
 Konkretno, htjeli bismo reći: "kompozicija $\f H\circ\f G$ dviju izračunljivih funkcija, $\f G^k$ i $\f H^l$, je izračunljiva funkcija". Ali da bi ta kompozicija imala smisla, kodomena od $\f G^k$ bi morala biti $\N^l$. U skladu s napomenom~\ref{nap:brip}, to zapravo znači da imamo $l$ izračunljivih koordinatnih funkcija, $\f G_1^k,\dotsc,\f G_l^k$, i svaka od njih daje po jedan ulazni podatak za funkciju $\f H^l$. Drugim riječima, komponiranje više nije nužno binarna operacija: zato kompoziciju označavamo $\f H\circ(\f G_1,\dotsc,\f G_l)$.
 
-Drugi tehnički detalj je suptilniji, i tiče se domene tako definirane kompozicije. Da bismo uočili problem, promotrimo kompoziciju $\f F^1:=\f I_1^2\circ(\f Z^1,\varnothing^1)$. Ta funkcija je svakako izračunljiva, ali \emph{što} je ona? Konkretno, koliko je $\f F(5)$? S jedne strane, čini se da je $\f F(5)=\f I_1(\f Z(5),\varnothing(5))=\f Z(5)=0$. Općenito bi se to dogodilo za svaki ulaz, pa bismo zaključili $\f F =\f Z$. S druge strane, ako to doista pokušamo mehanički \emph{izračunati} na intuitivno očit način, vidjet ćemo problem: da bismo izračunali $\f F(5)$, moramo izračunati $\f Z(5)=:y_1$, zatim "izračunati" $\varnothing(5)=:y_2$, i na kraju izračunati $\f I_1(y_1,y_2)=y_1$. U tom smislu, algoritam za računanje $\f F$ ne stane s ulazom $5$ (niti s bilo kojim drugim ulazom), jer njegov drugi korak ne stane. Dakle po tome bi bilo $\f F=\varnothing$. Što je od toga?
+Drugi tehnički detalj je suptilniji, i tiče se domene tako definirane kompozicije. Da bismo uočili problem, promotrimo kompoziciju $\f F^1:=\f I_1^2\circ(\f Z^1,\varnothing^1)$. Ta funkcija je svakako izračunljiva, ali \emph{što} je ona? Konkretno, koliko je $\f F(5)$? S jedne strane, čini se da je $\f F(5)=\f I_1(\f Z(5),\varnothing(5))=\f Z(5)=0$. Općenito bi se to dogodilo za svaki ulaz, pa bismo zaključili $\f F =\f Z$. S druge strane, ako to doista pokušamo mehanički \emph{izračunati} na intuitivno očit način, vidjet ćemo problem: da bismo izračunali $\f F(5)$, moramo izračunati $\f Z(5)=:y_1$, zatim "izračunati" $\varnothing(5)=:y_2$, i na kraju izračunati $\f I_1(y_1,y_2)=y_1$. U tom smislu, algoritam za računanje $\f F$ ne stane s ulazom $5$ (niti s ikojim drugim ulazom), jer njegov drugi korak ne stane. Dakle po tome bi bilo $\f F=\varnothing$. Što je od toga?
 
-\subsection{Lijena i marljiva evaluacija}
+%\subsection{Lijena i marljiva evaluacija}
 
-Ta dilema je dobro poznata u modernom računarstvu, i različiti programski jezici je rješavaju na različite načine. Oba pristupa imaju svoje prednosti i mane. Prvi pristup zove se \emph{lijena} evaluacija (\emph{lazy evaluation}) i prisutan je kod nekih modernih čisto funkcijskih jezika kao što je Haskell. Prednost je bogatija semantika (više izraza je definirano), te činjenica da beskonačne strukture nisu nužno problem ako nam treba samo njihov konačni početak. Pogledajmo kako to izgleda u Haskellu:
+Ta dilema je dobro poznata u modernom računarstvu, i oba pristupa nalazimo u današnjim programskim jezicima. Prvi pristup zove se \emph{lijena} evaluacija (\emph{lazy evaluation}) i koriste ga neki čisto funkcijski jezici poput Haskella. Prednost je bogatija semantika (više izraza ima smisla), te činjenica da beskonačne strukture nisu nužno problem ako nam treba samo njihov konačni početak. Pogledajmo kako to izgleda u Haskellu:
 \begin{verbatim}
     Prelude> let i12(x, y) = x
     Prelude|     z(x) = 0
@@ -127,10 +127,10 @@ $\f C_2^3=\f{Sc}\circ\f{Sc}\circ\f Z\circ\f I_1^3$. Doista,
 (\f{Sc}\circ\f{Sc}\circ\f Z\circ\f I_1^3)(x,y,z)=(\f{Sc}\circ\f{Sc}\circ\f Z)\bigl(\f I_1^3(x,y,z)\bigr)=(\f{Sc}\circ\f{Sc}\circ\f Z)(x)=\\
 =(\f{Sc}\circ\f{Sc})\bigl(\f Z(x)\bigr)=(\f{Sc}\circ\f{Sc})(0)=\f{Sc}\bigl(\f{Sc}(0)\bigr)=\f{Sc}(1)=2=\f C_2^3(x,y,z).
 \end{multline}
-Naravno, i ostale konstante $\f C_n^k$ se mogu prikazati na sličan način.
+    Sve konstante $\f C_n^k$ se mogu slično tako prikazati (propozicija~\ref{prop:konst}).
 \end{primjer}
 
-% \subsection{RAM-izračunljivost kompozicije}
+\subsection{RAM-izračunljivost kompozicije}
 
 \begin{lema}\label{lm:compram}
 Skup RAM-izračunljivih funkcija, $\mathcal Comp$, zatvoren je na kompoziciju.
@@ -233,7 +233,7 @@ Vidimo da se mnoge funkcije mogu napisati koristeći samo inicijalne funkcije, k
 Skup $\mathcal Comp$ je zatvoren na primitivnu rekurziju.
 \end{lema}
 \begin{proof}
-Neka je $k\in\N_+$, te neka su $\f G^k,\f H^{k+2}\in\mathcal Comp$ totalne funkcije. One su RAM-izračunljive, pa postoje RAM-algoritmi $P_{\f G}^k$ i $P_{\f H}^{k+2}$ koji ih redom računaju. Želimo naći program koji računa funkciju $\f F^{k+1}:=\f G\pr\f H$. Dakle, u registrima $\reg1$ do $\reg{k}$ se nalazi $\vec x$, dok se u $\reg{k+1}$ nalazi $y$, broj ponavljanja petlje odnosno broj izračunavanja funkcije $\f H$. Prvo, prije petlje moramo izračunati funkciju $\f G$ na prvih $k$ ulaznih registara. Rezultat između prolazaka kroz petlju držat ćemo u $\reg0$, tako da završetkom petlje već bude spreman kao izlazni podatak. Petlju pišemo na standardni način koji smo već vidjeli u makroima $\textsc{zero}$, $\textsc{remove}$, $\textsc{clone}$, i programu $P_{\f{add}^3}$. Kontrolnu varijablu držimo u pomoćnom registru $\reg{k+2}$ --- primijetimo da za to ne možemo koristiti $\reg{k+1}$ jer idu u suprotnim smjerovima: sa svakim izvršavanjem petlje $\reg{k+1}$ se dekrementira, dok se kontrolna varijabla mora inkrementirati (jer broji koliko puta smo izvršili petlju).
+Neka je $k\in\N_+$, te neka su $\f G^k,\f H^{k+2}\in\mathcal Comp$ totalne funkcije. One su RAM-izračunljive, pa postoje RAM-algoritmi $P_{\f G}^k$ i $P_{\f H}^{k+2}$ koji ih redom računaju. Želimo naći program koji računa funkciju $\f F^{k+1}:=\f G\pr\f H$. Dakle, u registrima $\reg1$ do $\reg{k}$ se nalazi $\vec x$, dok se u $\reg{k+1}$ nalazi $y$, broj ponavljanja petlje odnosno broj izračunavanja funkcije $\f H$. Prvo, prije petlje moramo izračunati funkciju $\f G$ na prvih $k$ ulaznih registara. Rezultat između prolazaka kroz petlju držat ćemo u $\reg0$, tako da završetkom petlje već bude spreman kao izlazni podatak. Petlju pišemo na standardni način koji smo već vidjeli u makroima $\textsc{zero}$, $\textsc{remove}$, $\textsc{clone}$, i programu $P_{\f{add}^3}$. Kontrolnu varijablu držimo u pomoćnom registru $\reg{k+2}$ --- primijetimo da za to ne možemo koristiti $\reg{k+1}$ jer idu u suprotnim smjerovima: svakim izvršavanjem petlje $\reg{k+1}$ se dekrementira, dok se kontrolna varijabla mora inkrementirati (jer broji koliko puta smo izvršili petlju).
 
     Primijetimo još da kontrolnu varijablu ne treba inicijalizirati: kako $\reg{k+2}$ nije ulazni registar, na početku izračunavanja njegov sadržaj već jest $0$. Također, inkrementiranjem kontrolne varijable \emph{nakon} izvođenja petlje (funkcijski makro s $P_{\f H}$) postižemo brojenje od nule; inkrementiranjem prije računanja $\f H$ postigli bismo brojenje od $1$ do uključivo $y$. Programski jezici koji broje od nule obično zahtijevaju inkrement nakon: recimo, standard jezika C propisuje da se u~\eqref{prog:Cprloop} inkrement \texttt{++i} obavi nakon tijela petlje.
 
@@ -297,14 +297,14 @@ Ako je $c+r=0$, tada mora biti $c=r=0$, drugim riječima, $f$ mora biti inicijal
 
 Pretpostavimo da za sve $t<c+r$, za svaku funkciju $g\in\mathcal S$ dobivenu s $c'$ primjena kompozicije i $r'$ primjena primitivne rekurzije tako da je $c'+r'=t$, vrijedi da je $g$ primitivno rekurzivna.
 
-Neka je sad $f\in\mathcal S$ dobivena s $c$ primjena kompozicije i $r$ primjena primitivne rekurzije ($c+r>0$), iz inicijalnih funkcija. Tada $f\in\mathcal S$ znači da je ili $f=H\circ(G_1,\dotsc,G_l)$ za neke $G_1,\dotsc,G_l,H\in\mathcal S$, ili pak $f=G\pr H$, za neke totalne $G,H\in\mathcal S$ (odgovarajućih mjesnosti). U svakom od tih slučajeva pojedine funkcije pomoću kojih je dobivena $f$, dobivene su iz inicijalnih funkcija sa strogo manje ukupno primjena kompozicije i primitivne rekurzije: recimo, ako je $f=G\pr H$, tada je $r>0$, te je $G$ dobivena iz inicijalnih pomoću najviše $c$ primjena kompozicije i najviše $r-1$ primjena primitivne rekurzije (i isto tako za $H$). Po pretpostavci indukcije, $G$ i $H$ su primitivno rekurzivne. Kako je skup primitivno rekurzivnih funkcija zatvoren na primitivnu rekurziju, zaključujemo da je $f=G\pr H$ primitivno rekurzivna. Sasvim analogno bi se dokazalo da je $f$ oblika $H\circ(G_1,\dotsc,G_l)$ primitivno rekurzivna.
+    Neka je sad $f\in\mathcal S$ dobivena s $c$ primjena kompozicije i $r$ primjena primitivne rekurzije ($c+r>0$), iz inicijalnih funkcija. Tada $f\in\mathcal S$ znači da je ili $f=H\circ(G_1,\dotsc,G_l)$ za neke $G_1,\dotsc,G_l,H\in\mathcal S$, ili pak $f=G\pr H$, za neke totalne $G,H\in\mathcal S$ (odgovarajućih mjesnosti). U svakom od tih slučajeva pojedine funkcije pomoću kojih je dobivena $f$, dobivene su iz inicijalnih funkcija sa strogo manje ukupno primjena kompozicije i primitivne rekurzije: recimo, ako je $f=G\pr H$, tada je $r>0$, te je $G$ (i isto tako $H$) dobivena iz inicijalnih pomoću najviše $c$ primjena kompozicije i najviše $r-1$ primjena primitivne rekurzije. Po pretpostavci indukcije, $G$ i $H$ su primitivno rekurzivne. Kako je skup primitivno rekurzivnih funkcija zatvoren na primitivnu rekurziju, zaključujemo da je $f=G\pr H$ primitivno rekurzivna. Sasvim analogno bi se dokazalo da je $f$ oblika $H\circ(G_1,\dotsc,G_l)$ primitivno rekurzivna.
 \end{proof}
 
 \begin{napomena}\label{nap:symbdef}
 Naravno, umjesto "\emph{ab ovo}" od inicijalnih funkcija, možemo krenuti od nekih funkcija za koje smo već utvrdili da su primitivno rekurzivne. Zapis koji pokazuje kako se neka funkcija $f$ može dobiti kompozicijom i primitivnom rekurzijom iz već utvrđeno primitivno rekurzivnih funkcija zovemo \emph{simbolička definicija} od $f$. Recimo, u primjeru~\ref{pr:C23} navedena je simbolička definicija od $\f C_2^3$, a u primjeru~\ref{pr:addmulpow}, simboličke definicije od $\f{add}^2$ i $\f{mul}^2$.
 \end{napomena}
 
-Simboličke definicije su koncizne i izražajne, ali nisu baš čitljive. Umjesto njih, često se pišu \emph{točkovne} definicije, gdje funkciju definiramo "po točkama" tako da kažemo što je $f(\vec x)$, umjesto da kažemo što je $f$. Većina modernih programskih jezika upravo tako definira funkcije. Recimo, lijevi stupac od~\eqref{eq:addb} i~\eqref{eq:addk} sadrži točkovnu definiciju zbrajanja dva broja, iz koje se vidi da je ono primitivno rekurzivno. U desnom stupcu je također točkovna definicija, ali je manje čitljiva jer smo je namjestili na oblik za~\eqref{eq:defprb} i~\eqref{eq:defprk}.
+Simboličke definicije su koncizne i izražajne, ali nisu baš čitljive. Umjesto njih, često se pišu \emph{točkovne} definicije, gdje funkciju definiramo "po točkama" tako da kažemo što je $f(\vec x)$, umjesto da kažemo što je $f$. Većina modernih programskih jezika upravo tako definira funkcije. Recimo, lijevi stupac od~\eqref{eq:addb} i~\eqref{eq:addk} sadrži točkovnu definiciju zbrajanja dva broja, iz koje se vidi da je ono primitivno rekurzivno. U desnom stupcu je također točkovna definicija, ali manje čitljiva jer je namještena na oblik za~\eqref{eq:defprb} i~\eqref{eq:defprk}.
 
 Točkovne definicije znaju biti neprecizne, i na nekim mjestima morat ćemo pribjeći simboličkoj definiciji da bi se znalo što zapravo pokušavamo definirati. No u ogromnom broju slučajeva, posebno za kompliciranije funkcije (i relacije), pisat ćemo točkovne definicije. Važno je imati na umu da se svaka takva točkovna definicija može \emph{pretvoriti} u simboličku --- pokušajte ako ne vjerujete!
 
@@ -430,7 +430,7 @@ Za $x,y\in\N$, označimo $x\ominus y:=\max\,\{x-y,0\}$. Lako se vidi da je
 Pored računskih operacija (dijeljenje s ostatkom definirat ćemo kasnije, kad uvedemo još neke tehnike), brojeve možemo i \emph{uspoređivati}, raznim dvomjesnim relacijama  kao što su $<$, $\ge$ ili $\not=$. Rekli smo da izračunljivost relacija promatramo kroz izračunljivost njihovih karakterističnih funkcija.
 
 \begin{primjer}\label{pr:N+prn}
-Za početak pogledajmo jednomjesnu relaciju $\N_+$ --- drugim riječima, svojstvo pozitivnosti. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum} funkcija. Jednostavno je tu definiciju zapisati kao degeneriranu primitivnu rekurziju $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna. Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
+Za početak pogledajmo jednomjesnu relaciju $\N_+$ --- drugim riječima, svojstvo pozitivnosti. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum}. Jednostavno ju je dobiti degeneriranom primitivnom rekurzijom $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna. Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
 \end{primjer}
 
 Sada kada imamo pozitivnost i ograničeno oduzimanje, možemo odmah vidjeti primitivnu rekurzivnost strogog uređaja. Ostale uređajne relacije dokazat ćemo primitivno rekurzivnima kasnije, kad ustanovimo kako se radi s logičkim veznicima.
@@ -938,7 +938,7 @@ Upravo dokazane leme omogućuju nam da zadamo broj pribrojnika ili faktora kao a
     \f F_3^{k-1}(\vec x)&:=\sum_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)\\
     \text{i\quad}\f F_4^{k-1}(\vec x)&:=\prod_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)\text,
 \end{align}
-gdje je $\f H^{k-1}$ neka izračunljiva funkcija, jednostavnim komponiranjem funkcije $\f F_1$ odnosno $\f F_2$ s prikladno odabranim koordinatnim projekcijama i s funkcijom $\f H$.
+gdje je $\f H^{k-1}$ neka izračunljiva funkcija, jednostavnim komponiranjem funkcije $\f F_1$ odnosno $\f F_2$ s koordinatnim projekcijama i s funkcijom $\f H$.
 
 Recimo, za $k=3$ vrijedi $\f F_4^2(x,y)=\prod_{i<\f H(x,y)}\f G(x,y,i)=\f F_2^3\bigl(x,y,\f H(x,y)\bigr)$.
 \end{napomena}

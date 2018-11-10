@@ -16,6 +16,8 @@
 \raggedbottom
 %\pdfmapline{+dummy-space <dummy-space.pfb}
 \pdfinterwordspaceon
+\input{glyphtounicode}
+\pdfgentounicode=1
 %\usepackage{mmap}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -111,7 +113,7 @@ initial text=$ $}
 \newenvironment{prog}{\left[\begin{array}{r@{\;}l}}{\end{array}\right]}
 
 \DeclareMathOperator{\card}{card}
-\DeclareTextFontCommand{\t}{\ttfamily\upshape\color{dark-red}}
+\DeclareTextFontCommand{\t}{\ttfamily\upshape\color{brown}}
 %\DeclareTextFontCommand{\f}{\mathsf\color{dark-blue}}
 \newcommand{\f}[1]{\textcolor{dark-blue}{\mathsf{#1}}}
 
@@ -124,6 +126,7 @@ initial text=$ $}
 \definecolor{light-gray}{gray}{0.9}
 \definecolor{dark-blue}{HTML}{000055}
 \definecolor{dark-red}{HTML}{550000}
+\definecolor{brown}{HTML}{6F5A21}
 
 \begin{document}
 %\tracingall

@@ -1,5 +1,8 @@
 \section{Turing-izračunljivost brojevnih funkcija}
 
+% Ivanov prijedlog: koristiti zareze umjesto / za separator.
+% Nisam siguran kako to sklopiti s nulama u nizu ali možda nije strašno.
+
 Sve dosad napravljeno može se iskazati u jednom vrlo općenitom obliku.
 
 \begin{propozicija}\label{pp:trackbij}
@@ -80,7 +83,7 @@ Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Tur
     \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{false}}$}\}\text,
 \end{align} i kažemo da \emph{prepoznaje} $L(\mathcal T)$.
 
-Nije preteško vidjeti da su te dvije karakterizacije povezane --- pogotovo jer već imamo napravljen najveći dio posla.
+Nije preteško vidjeti da su te dvije karakterizacije, brojevna i jezična, povezane --- pogotovo jer već imamo napravljen najveći dio posla.
 
 \begin{teorem}\label{tm:oikr}
 Neka je $L$ jezik. Ako postoji Turingov odlučivač koji prepoznaje $L$, tada je jednomjesna relacija $\kr L$ rekurzivna.
@@ -128,7 +131,7 @@ Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju od $bool$ u $\Sigma^
 
 %Kako izvršavanje RAM-programa o kojem govorimo stane za svaki $\kr w$, po korolaru~\ref{kor:faza3} i napomeni~\ref{nap:snstane} slijedi da će Turingov stroj koji konstruiramo stati za svaki $w$ --- samo trebamo malo promijeniti način na koji stane, da ne komunicira izlaz putem trake nego putem završnog stanja.
 
-Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (zadnje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti. Samo trebamo zamijeniti prijelaze~\eqref{d:88} i~\eqref{d:89} s
+Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (zadnje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze~\eqref{d:88} i~\eqref{d:89} s
 \begin{gather}
 \label{eq:d88j}
     \delta(q_9,\alpha):=(q_\mathit{true},\alpha,1)\text{, za sve }\alpha\in\Sigma\text,\\

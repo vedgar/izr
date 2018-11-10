@@ -1,6 +1,6 @@
 \chapter{Metaprogramiranje}
 
-U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathcal Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathcal Comp$ --- već smo doista konstruirali funkciju $compose$ koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije, te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_{kl}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to doista dokazati. Ipak, nećemo programirati direktno dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je dosta komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
+U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathcal Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathcal Comp$ --- već smo doista konstruirali funkciju $compose:\mathcal Prog^{l+1}\times\N_+^2\to\mathcal Prog$ koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije, i njihove mjesnosti $k$ i $l$, te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_{kl}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to doista dokazati. Ipak, nećemo programirati direktno dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je dosta komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
 
 \section{Specijalizacija}
 
@@ -349,7 +349,7 @@ Naravno, netrivijalan je samo u formalnom smislu: intuitivno, lako je objasniti 
 
 Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odnosno pozvana s argumentima $\vec x$, mora se ponašati kao funkcija $\f G$ pozvana s $\vec x$ i još indeksom $e$.
 
-Recimo, u slučaju funkcije \texttt{factorial}, C kompajler se brine da poziv funkcije \texttt{factorial} u samom kodu doista pozove samu tu funkciju (sa za jedan manjim argumentom), ali da kojim slučajem kompajler ne podržava rekurziju, mogli bismo (pokazivač na) funkciju \texttt{factorial} prenijeti u samu sebe kao dodatni parametar.
+Recimo, u slučaju funkcije \texttt{factorial}, kompajler se brine da poziv te funkcije u njenom kodu doista pozove nju samu (sa za jedan manjim argumentom), ali da kojim slučajem kompajler ne podržava rekurziju, mogli bismo (pokazivač na) funkciju \texttt{factorial} prenijeti u samu sebe kao dodatni parametar.
 
 Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} funkciju \texttt{factorial} koju ćemo poslati kao argument, ali zasad pričamo samo o specifikaciji.
 
@@ -389,13 +389,13 @@ odnosno u terminima univerzalne funkcije, $\f{comp}_k\bigl(\vec x,\f D_k(h)\bigr
 
 % \subsection{Dokaz teorema rekurzije}
 
-Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da bismo doista dobili funkciju koja je rješenje opće rekurzije. U programu s \texttt{G}, svejedno smo trebali nekako drugačije dobiti \texttt{factorial} koju smo poslali kao njen drugi argument. To se čini prilično beskorisnim (jer jednom kad imamo \texttt{factorial}, možemo je jednostavno pozvati bez petljanja s dijagonalom), ali zapravo je vrlo blizu rješenju.
+Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da bismo doista dobili funkciju koja je rješenje opće rekurzije. U programu s funkcijom \texttt{G}, svejedno smo trebali nekako drugačije dobiti \texttt{factorial} koju bismo poslali kao njen drugi argument. To se čini prilično beskorisnim (jer jednom kad imamo \texttt{factorial}, možemo je jednostavno pozvati bez petljanja s dijagonalom), ali zapravo je vrlo blizu rješenju.
 
 Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, služe istoj svrsi --- računanju faktorijele zadanog broja. Ako nemamo \texttt{factorial}, možemo li umjesto nje upotrijebiti \texttt{G} kao drugi argument od \texttt{G} (efektivno, dijagonalizirati \texttt G)?
 
 Doslovno, to neće ići --- tipovi ne pašu. Drugi argument funkcije \texttt{G} trebao bi biti pokazivač na jednomjesnu funkciju, dok je sama \texttt{G}, naravno, dvomjesna. C-kompajler će nam samo dati \emph{warning}, jer svi pokazivači su ionako samo "ukrašeni prirodni brojevi", baš kao i indeksi u svijetu parcijalno rekurzivnih funkcija --- ali u strože tipiziranom jeziku, dobili bismo kompajlersku grešku.
 
-C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li \texttt{gcc} nešto što mi ne znamo?
+C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (sigurno radi na \texttt{gcc} 4.6.3 --- pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li \texttt{gcc} nešto što mi ne znamo?
 
 Ovdje treba znati neke tehničke pojedinosti o kompajliranju jezika C. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
 
@@ -505,7 +505,7 @@ Slično je i ovdje: svaka primjena primitivne rekurzije može povećati $z$ samo
 $\f A^3$ je totalna funkcija.
 \end{korolar}
 \begin{proof}
-Neka je $(x,y,z)\in\N^3$ proizvoljan. Kako je $\f A_z$ primitivno rekurzivna po propoziciji~\ref{pp:Anprn}, ona je totalna, pa je $\dom{\f A_z}=\N^2$. Specijalno je $(x,y)\in\dom{\f A_z}$, pa izraz $\f A_z(x,y)$ ima smisla --- označimo njegovu vrijednost s $t$. No tada je i $\f A(x,y,z)=t$, dakle izraz $\f A(x,y,z)$ također ima smisla, pa je $(x,y,z)\in\dom{\f A}$.
+Neka je $(x,y,z)\in\N^3$ proizvoljna. Kako je $\f A_z$ primitivno rekurzivna po propoziciji~\ref{pp:Anprn}, ona je totalna, pa je $\dom{\f A_z}=\N^2$. Specijalno je $(x,y)\in\dom{\f A_z}$, pa izraz $\f A_z(x,y)$ ima smisla --- označimo njegovu vrijednost s $t$. No tada je i $\f A(x,y,z)=t$, dakle izraz $\f A(x,y,z)$ također ima smisla, pa je $(x,y,z)\in\dom{\f A}$.
 \end{proof}
 
 Svakako, budući da je svaka $\f A_n$ izračunljiva, i funkcija $\f A$ bi trebala biti izračunljiva u intuitivnom smislu: ako nam netko dade $(x,y,z)$ i traži od nas da izračunamo $\f A(x,y,z)$, zapravo traži da izračunamo $\f A_z(x,y)$, a to sigurno (za konkretan $z$) znamo učiniti. Po Church--\!Turingovoj tezi $\f A$ bi trebala biti parcijalno rekurzivna, dakle rekurzivna, ali možemo li to dokazati bez primjene Church--\!Turingove teze? Svakako, i u tome će nam pomoći teorem rekurzije.

@@ -802,15 +802,15 @@ Funkcija $\f{univ}$ je univerzalna, jer može simulirati bilo koji RAM-stroj, od
 
 Htjeli bismo napisati što jednostavniju "simboličku definiciju" univerzalne funkcije. Definicija~\eqref{eq:univdef} ima nezgodno svojstvo da dvaput koristi $x$ i $e$, odnosno napisana je kao kompozicija dvije funkcije, svaka od kojih ovisi o ulaznim podacima. To je očito prekomplicirano: vanjska funkcija ne mora primati $x$ i $e$, ako joj unutarnja funkcija jednostavno pošalje završnu konfiguraciju, ili nešto iz čega se završna konfiguracija može odrediti. Razlog zašto ih trenutno prima je što joj unutarnja funkcija pošalje samo broj koraka, koji je očito sam po sebi nedovoljan za određivanje završne konfiguracije. No koristeći kodiranje $\N^*\!$, poslana vrijednost može biti proizvoljno komplicirana.
 
-Drugo, očito od osnovnih operatora ($\circ$, $\pr$ i $\mu$) moramo koristiti minimizaciju jer $\f{univ}$ nije totalna --- ali htjeli bismo je koristiti što "kasnije", tako da što veći dio stabla koje predstavlja njenu simboličku definiciju bude primitivno rekurzivan. Napomenimo samo, iako to nećemo dokazati jer je jako teško, da se ne može postići da minimizacija bude u korijenu (drugim riječima, ne postoji primitivno rekurzivna relacija $\f{R}^3$ takva da je $\f{univ}=\mu\,\f{R}$) --- dakle moramo još nakon minimizacije primijeniti još neki operator. To ne može biti $\pr$ jer bismo time opet dobili totalnu funkciju, dakle mora biti kompozicija. Najjednostavnija "normalna forma" koja zadovoljava te uvjete je $\f{univ}^2=\f U^1\circ\mu\f{\dot T}^3$ za primitivno rekurzivne $\f U$ i $\f{\dot T}$ ($\f U$ je funkcija, $\f{\dot T}$ je relacija).
+Drugo, očito od osnovnih operatora ($\circ$, $\pr$ i $\mu$) moramo koristiti minimizaciju jer $\f{univ}$ nije totalna --- ali htjeli bismo je koristiti što "kasnije", tako da što veći dio stabla koje predstavlja njenu simboličku definiciju bude primitivno rekurzivan. Nije teško pokazati, tehnikama svođenja iz poglavlja~\ref{ch:ne}, da se ne može postići da minimizacija bude u korijenu (ne postoji rekurzivna relacija $\f{R}^3$ takva da je $\f{univ}=\mu\,\f{R}$) --- dakle moramo nakon $\mu$ primijeniti još neki operator. To ne može biti $\pr$ jer bismo time opet dobili totalnu funkciju, dakle mora biti kompozicija. Najjednostavnija "normalna forma" koja zadovoljava te uvjete je $\f{univ}^2=\f U^1\circ\mu\f{\hat T}^3$ za primitivno rekurzivne $\f U$ i $\f{\hat T}$ ($\f U$ je funkcija, $\f{\hat T}$ je relacija).
 
-%Još jedan tehnički detalj je da želimo primiti argumente zasebno, a ne kao kod konačnog niza. To znači da ćemo umjesto $x$ imati $\vec x$, duljine $k$, te ćemo umjesto jedne relacije $\f{\dot T}^3$ imati po jednu relaciju $\f T_k^{k+2}$ za svaki $k\in\N_+$, a umjesto $\f{univ}^2$ imat ćemo familiju parcijalnih funkcija $\f{comp}_k^{k+1}$, $k\in\N_+$, koje će zadovoljavati
+%Još jedan tehnički detalj je da želimo primiti argumente zasebno, a ne kao kod konačnog niza. To znači da ćemo umjesto $x$ imati $\vec x$, duljine $k$, te ćemo umjesto jedne relacije $\f{\hat T}^3$ imati po jednu relaciju $\f T_k^{k+2}$ za svaki $k\in\N_+$, a umjesto $\f{univ}^2$ imat ćemo familiju parcijalnih funkcija $\f{comp}_k^{k+1}$, $k\in\N_+$, koje će zadovoljavati
 %\begin{equation}\label{eq:comp=univ}
     %\f{comp}_k(\vec x^k,e)\simeq\f{univ}(\langle\vec x\rangle,e)\text.
 %\end{equation}
 %Drugim riječima, za svaki $k\in\N_+$, $\f{comp}_k$ je dobivena kompozicijom iz parcijalno rekurzivnih funkcija $\f{univ}$ i $\f{Code}^k$, pa je parcijalno rekurzivna. Još je preostalo naći $\f U$ i $\f T_k$ takve da je $\f{comp}_k=\f U\circ\mu\,\f T_k$.
 
-Najjednostavniji način da funkciji $\f U$ pošaljemo dovoljno podataka o izračunavanju je da joj pošaljemo \emph{čitavo} izračunavanje. Možemo li ga kodirati prirodnim brojem? Ako ne stane, teško: može se ponavljati ciklički, ali se može i ponašati vrlo komplicirano. Ali izračunavanja koja ne stanu ionako nas ne zanimaju, jer ne želimo da $\f U\circ\mu\f{\dot T}$ bude definirano u tom slučaju.
+Najjednostavniji način da funkciji $\f U$ pošaljemo dovoljno podataka o izračunavanju je da joj pošaljemo \emph{čitavo} izračunavanje. Možemo li ga kodirati prirodnim brojem? Ako ne stane, teško: može se ponavljati ciklički, ali se može i ponašati vrlo komplicirano. Ali izračunavanja koja ne stanu ionako nas ne zanimaju, jer ne želimo da $\f U\circ\mu\f{\hat T}$ bude definirano u tom slučaju.
 
 Dakle, promotrimo izračunavanje koje stane. Vidjeli smo da ono mora biti oblika $(c_0,c_1,\dotsc,c_{n_0},c_{n_0},c_{n_0},\dotsc)$, gdje je $c_{n_0}$ završna, a nijedna $c_i$ za $i<n_0$ nije završna. Za potrebe kodiranja, dovoljno je gledati samo konačan niz $(c_0,c_1,\dotsc,c_{n_0})$ duljine $n_0+1$, jer se iz njega beskonačnim ponavljanjem zadnjeg elementa može dobiti i čitavo izračunavanje. Za kodirati pojedinu $c_i$, trebali bismo poslati i $\f{Reg}(x,e,i)$ i $\f{Count}(x,e,i)$, no s obzirom na to da nam je u završnoj konfiguraciji po definiciji poznata ova druga vrijednost ($c_{n_0}(\textsc{pc})=\f{lh}(e)$) i zapravo nam treba sadržaj registra $\reg0$, slat ćemo samo vrijednosti funkcije $\f{Reg}$. Drugim riječima, treba nam povijest $\overline{\f{Reg}}(x,e,n_0+1)$, što je izračunljivo jednom kad imamo $n_0:=\f{step}(x,e)$.
 
@@ -821,13 +821,13 @@ Neka je $P^k$ RAM-algoritam, te $\vec x\in\N^k$ takav da $P$-izračunavanje s $\
 Propozicija~\ref{prop:ramdet}, restringirana samo na izračunavanja koja stanu (jer jedino takva znamo kodirati), može se iskazati kao: tromjesna relacija \begin{equation}\label{eq:Trace}
     Trace\bigl(\vec x,P,(c_n)_n\bigr):\Longleftrightarrow\text{"$(c_n)_n$ je $P$-izračunavanje s $\vec x$, koje stane",}
 \end{equation}
-ima funkcijsko svojstvo. Tada će i $\f{\dot T}^3:=\N Trace$ imati funkcijsko svojstvo. Cilj nam je dokazati da je $Trace$ izračunljiva, odnosno da je $\f{\dot T}$ primitivno rekurzivna.
+ima funkcijsko svojstvo. Tada će i $\f{\hat T}^3:=\N Trace$ imati funkcijsko svojstvo. Cilj nam je dokazati da je $Trace$ izračunljiva, odnosno da je $\f{\hat T}$ primitivno rekurzivna.
 
-U skladu s napomenom u primjeru~\ref{pr:concat}, $Trace$ ćemo shvatiti kao ($k+2$)-mjesnu relaciju, tako da svaki $x_i$ shvatimo kao zasebni argument. To vodi na promatranje familije brojevnih relacija $\f T_k^{k+2},k\in\N_+$. A jednom kad dobijemo primitivnu rekurzivnost od $\f{\dot T}$, dobit ćemo i primitivnu rekurzivnost svih $\f T_k$, jer vrijedi
+U skladu s napomenom u primjeru~\ref{pr:concat}, $Trace$ ćemo shvatiti kao ($k+2$)-mjesnu relaciju, tako da svaki $x_i$ shvatimo kao zasebni argument. To vodi na promatranje familije brojevnih relacija $\f T_k^{k+2},k\in\N_+$. A jednom kad dobijemo primitivnu rekurzivnost od $\f{\hat T}$, dobit ćemo i primitivnu rekurzivnost svih $\f T_k$, jer vrijedi
 \begin{equation}\label{eq:TkviadotT}
-\f T_k(\vec x,e,y)\Longleftrightarrow\f{\dot T}(\langle\vec x\rangle,e,y)\text,
+\f T_k(\vec x,e,y)\Longleftrightarrow\f{\hat T}(\langle\vec x\rangle,e,y)\text,
 \end{equation}
-dakle $\f T_k$ je dobivena iz $\f{\dot T}$ kompozicijom s $\f{Code}^k$ i koordinatnim projekcijama.
+dakle $\f T_k$ je dobivena iz $\f{\hat T}$ kompozicijom s $\f{Code}^k$ i koordinatnim projekcijama.
 
 \begin{primjer}
 U primjeru~\ref{pr:makro} je naveden primjer makro-programa $Q$ i $Q$-izračunavanja s $(2,4)$, koje stane. Kako $Q^\flat$-izračunavanje s $(2,4)$ prolazi kroz ista stanja registara, možemo iz~\eqref{ml:Qstane} izračunati kod tog izračunavanja (iz definicije~\ref{def:makrolead} trebamo zanemariti prijelaze tipa~\ref{stav:carry}, jer oni ne odgovaraju nikakvim prijelazima RAM-stroja, kao i one tipa~\ref{stav:zav}, jer smo već stigli do završne konfiguracije):
@@ -837,7 +837,7 @@ U primjeru~\ref{pr:makro} je naveden primjer makro-programa $Q$ i $Q$-izračunav
 \end{multline}
 Recimo, $c_0[6]=\f{part}(c_0,6)=\f{pd}\bigl(\f{ex}(c_0,6)\bigr)=\f{pd}(126)=125=5^3=\knk{0,0,3,0,\dotsc}$, jer nakon $6$ koraka $Q^\flat$-izračunavanja s $(2,4)$ u $\reg2$ bude broj $3$, a u svim ostalim registrima broj $0$.
 
-Drugi način za iskazati to isto je $\f{Reg}(\langle2,4\rangle,\kprog{Q^\flat},6)=\knk{0,0,3,0,\dotsc}$. Ako iz\-ra\-ču\-na\-mo $\langle2,4\rangle=2^3\cdot3^5=1944$ i upotrijebimo $e_0:=\kprog{Q^\flat}$ iz primjera~\ref{pr:Qflatkod}, možemo napisati i $\f{Reg}(1944,e_0,6)=5^3$. Vidimo da je $c_0$ povijest funkcije $\f{Reg}$, konkretno $\f{\dot T}(1944,e_0,c_0)$ znači $c_0=\overline{\f{Reg}}(1944,e_0,19)$, gdje je $\f{pd}(19)=18=\f{step}(1944,e_0)$.
+Drugi način za iskazati to isto je $\f{Reg}(\langle2,4\rangle,\kprog{Q^\flat},6)=\knk{0,0,3,0,\dotsc}$. Ako iz\-ra\-ču\-na\-mo $\langle2,4\rangle=2^3\cdot3^5=1944$ i upotrijebimo $e_0:=\kprog{Q^\flat}$ iz primjera~\ref{pr:Qflatkod}, možemo napisati i $\f{Reg}(1944,e_0,6)=5^3$. Vidimo da je $c_0$ povijest funkcije $\f{Reg}$, konkretno $\f{\hat T}(1944,e_0,c_0)$ znači $c_0=\overline{\f{Reg}}(1944,e_0,19)$, gdje je $\f{pd}(19)=18=\f{step}(1944,e_0)$.
 \end{primjer}
 
 %\subsection{Grafovi totalnih funkcija}
@@ -915,7 +915,7 @@ Ako $\lnot HALT(x,e)$, tada ne postoji $n$ takav da vrijedi $\f{Final}(x,e,n)$, 
 Ako je $s<m$, tada je $t=s$, pa je opet $t\not=m$. Ako je $s>m$, tada (po definiciji funkcije $\f{step})$ za svaki $n<s$ --- pa specijalno za svaki $n\le m$ --- vrijedi $\lnot\f{Final}(x,e,n)$, te je opet $t=m+1\not=m$.
 \end{proof}
 
-Sada se napokon možemo pozabaviti relacijama $\f{\dot T}$ i $\f T_k,k\in\N_+$. Prisjetimo se, one su dobivene kodiranjem argumenata relacije $Trace$, prva kodirajući ulazne podatke $\vec x$ kao element od $\N^*\!$, a druga gledajući ih zasebno. 
+Sada se napokon možemo pozabaviti relacijama $\f{\hat T}$ i $\f T_k,k\in\N_+$. Prisjetimo se, one su dobivene kodiranjem argumenata relacije $Trace$, prva kodirajući ulazne podatke $\vec x$ kao element od $\N^*\!$, a druga gledajući ih zasebno. 
 
 \begin{propozicija}\label{prop:Tkprn}
 Za svaki $k\in\N_+$, relacija $\f T_k$, zadana s
@@ -925,18 +925,18 @@ Za svaki $k\in\N_+$, relacija $\f T_k$, zadana s
 primitivno je rekurzivna.
 \end{propozicija}
 \begin{proof}
-Kao što smo već rekli, prvo ćemo dokazati primitivnu rekurzivnost relacije $\f{\dot T}$, zadane s
+Kao što smo već rekli, prvo ćemo dokazati primitivnu rekurzivnost relacije $\f{\hat T}$, zadane s
 \begin{equation}\label{eq:dotTdef}
-    \f{\dot T}(x,e,y):\Longleftrightarrow(\exists\vec x\in\N^+)\bigl(x=\langle\vec x\rangle\land\f T_{\f{lh}(x)}(\vec x,e,y)\bigr)\text.
+    \f{\hat T}(x,e,y):\Longleftrightarrow(\exists\vec x\in\N^+)\bigl(x=\langle\vec x\rangle\land\f T_{\f{lh}(x)}(\vec x,e,y)\bigr)\text.
 \end{equation}
 
 Tvrdimo da je njena točkovna definicija
 \begin{align}
-    \dot{\f T}(x,e,y)\Longleftrightarrow\f{Step}&(x,e,n)\land y=\overline{\f{Reg}}\bigl(x,e,\f{Sc}(n)\bigr)\text,\\
+    \hat{\f T}(x,e,y)\Longleftrightarrow\f{Step}&(x,e,n)\land y=\overline{\f{Reg}}\bigl(x,e,\f{Sc}(n)\bigr)\text,\\
     &\text{uz pokratu }n:=\f{pd}\big(\f{lh}(y)\bigr)\text.
-    %\f T_k(\vec x^k,e,y)&:\Longleftrightarrow\dot{\f T}(\langle\vec x\rangle,e,y)\text{, za svaki $k\in\N_+$.}
+    %\f T_k(\vec x^k,e,y)&:\Longleftrightarrow\hat{\f T}(\langle\vec x\rangle,e,y)\text{, za svaki $k\in\N_+$.}
 \end{align}
-U jednom smjeru, pretpostavimo da vrijedi $\f{\dot T}(x,e,y)$. Tada prema~\eqref{eq:dotTdef} i~\eqref{eq:Tkdef} postoje $\vec x\in\N^+$ (njegovu duljinu označimo s $k$) i $P\in\mathcal Prog$ takvi da je $x$ kod od $\vec x$, $e$ je kod od $P$, a $y$ je kod $P$-izračunavanja s $\vec x$. Po definiciji~\ref{def:kodizr}, to znači da $P$-izračunavanje s $\vec x$ stane (inače kod ne bi bio definiran) --- odnosno vrijedi $HALT(x,e)$, pa postoji $n_0:=\f{step}(x,e)$ --- i $y$ je upravo povijest stanja registara prvih $n_0+1$ konfiguracija u tom izračunavanju, od $c_0$ do uključivo $c_{n_0}$.
+U jednom smjeru, pretpostavimo da vrijedi $\f{\hat T}(x,e,y)$. Tada prema~\eqref{eq:dotTdef} i~\eqref{eq:Tkdef} postoje $\vec x\in\N^+$ (njegovu duljinu označimo s $k$) i $P\in\mathcal Prog$ takvi da je $x$ kod od $\vec x$, $e$ je kod od $P$, a $y$ je kod $P$-izračunavanja s $\vec x$. Po definiciji~\ref{def:kodizr}, to znači da $P$-izračunavanje s $\vec x$ stane (inače kod ne bi bio definiran) --- odnosno vrijedi $HALT(x,e)$, pa postoji $n_0:=\f{step}(x,e)$ --- i $y$ je upravo povijest stanja registara prvih $n_0+1$ konfiguracija u tom izračunavanju, od $c_0$ do uključivo $c_{n_0}$.
 
 Iz $n_0=\f{step}(x,e)$ slijedi $\f{Step}(x,e,n_0)$, povijest stanja registara opisana je funkcijom $\overline{\f Reg}$, a upravo smo vidjeli da je $\f{lh}(y)=\f{Sc}(n_0)$. Dakle, $n_0=\f{pd}\bigl(\f{lh}(y)\bigr)$, što se upravo tvrdi u točkovnoj definiciji.
 
@@ -964,7 +964,7 @@ Korolar~\ref{kor:funHaltTk} prema napomeni~\ref{nap:graf=funsv} kaže da je za s
 \end{equation}
 doslovno, "sadržaj izlaznog registra zadnje konfiguracije kodirane s $y$", te ćemo dobiti
 \begin{equation}
-    \f{comp}_k(\vec x,y):\simeq \f U\bigl(\mu y\,\f T_k(\vec x,e,y)\bigr)\text.
+    \f{comp}_k(\vec x,e):\simeq \f U\bigl(\mu y\,\f T_k(\vec x,e,y)\bigr)\text.
 \end{equation}
 
 \begin{propozicija}\label{prop:compspec}
@@ -986,7 +986,7 @@ Sada je $\f{comp}_k=\f U\circ\mu\f T_k$ parcijalno rekurzivna jer je dobivena ko
     =\\
     =\f U\bigl(\mu y\bigl(y=\overline{\f{Reg}}(x,e,\f{Sc}(n))\bigr)\bigr)=
     \f U\bigl(\mu y\bigl(y=\overline{\f{Reg}}(x,e,\f{Sc}(n))\land\f{Step}(x,e,n)\bigr)\bigr)=\\
-    =\f U\bigl(\mu y\f{\dot T}(x,e,y)\bigr)=
+    =\f U\bigl(\mu y\f{\hat T}(x,e,y)\bigr)=
     \f U\bigl(\mu y\f T_k(\vec x,e,y)\bigr)=
     \f{comp}_k(\vec x,e)\text,
 \end{multline}
@@ -1001,7 +1001,7 @@ Za svaki $k\in\N_+$, za sve $(\vec x,e)\in\N^{k+1}$ vrijedi:
 \end{enumerate}
 \end{korolar}
 \begin{proof}
-Ovo je zapravo lema~\ref{lm:univspec}, iskazana na malo drugačiji način koristeći upravo dokazanu parcijalnu jednakost~\eqref{eq:comp=univ} --- i pojednostavljena jer znamo da vrijedi $\langle\vec x^k\rangle\in\f{Seq}'$ za $k\in\N_+$, pa to ne treba pisati u uvjete.
+Ovo je zapravo lema~\ref{lm:univspec}, iskazana na malo drugačiji način koristeći upravo dokazanu parcijalnu jednakost~\eqref{eq:comp=univ} --- i malo pojednostavljena jer znamo da vrijedi $\langle\vec x^k\rangle\in\f{Seq}'$ za $k\in\N_+$, pa to ne treba pisati u uvjete.
 \end{proof}
 
 \subsection{Indeksi izračunljivih funkcija}
@@ -1009,7 +1009,7 @@ Ovo je zapravo lema~\ref{lm:univspec}, iskazana na malo drugačiji način korist
 Sve bitno što smo dosad napravili u ovoj točki može se iskazati u jednom teoremu.
 
 \begin{teorem}[Kleenejev teorem o normalnoj formi]\label{tm:Kleene}
-Postoji primitivno rekurzivna funkcija $\f U$, takva da za svaki $k\in\N_+$ postoji primitivno rekurzivna relacija $\f T_k$, takva da za svaku parcijalno rekurzivnu funkciju $\f f$ postoji broj $e$, takav da za svaki $\vec x\in\N^k$ vrijede sljedeće dvije tvrdnje:
+Postoji primitivno rekurzivna funkcija $\f U$, takva da za svaki $k\in\N_+$ postoji primitivno rekurzivna relacija $\f T_k$, takva da za svaku parcijalno rekurzivnu funkciju $\f f$ mjesnosti $k$ postoji prirodni broj $e$, takav da za svaki $\vec x\in\N^k$ vrijede sljedeće dvije tvrdnje:
 \begin{gather}
     \label{eq:kleenedom}\vec x\in\dom{\f f}\Longleftrightarrow\exists y\,\f T_k(\vec x,e,y)\text,\\
     \label{eq:kleeneval}\f f(\vec x)\simeq\f U\bigl(\mu y\,\f T_k(\vec x,e,y)\bigr)\text.
@@ -1045,7 +1045,7 @@ Za svaku $\f f\in\mathcal Comp$ postoje $k\in\N_+$ i $e\in\N$ takvi da je funkci
 \end{korolar}
 
 \begin{proof}
-Naravno, za $k$ stavimo mjesnost funkcije $\f f$, a za $e$ kod RAM-programa koji računa $\f f$ (koji postoji jer je $\f f$ RAM-izračunljiva). Tada po Kleenejevom teoremu o normalnoj formi, funkcije o kojima tvrdnja govori imaju istu domenu i podudaraju se na toj domeni, dakle to su jednake funkcije.
+Naravno, za $k$ stavimo mjesnost funkcije $\f f$, a za $e$ kod nekog RAM-programa koji računa $\f f$ (koji postoji jer je $\f f$ RAM-izračunljiva). Tada po Kleenejevom teoremu o normalnoj formi, funkcije o kojima tvrdnja govori imaju istu domenu i podudaraju se na toj domeni, dakle to su jednake funkcije.
 \end{proof}
 
 \begin{definicija}\label{def:indeks}
