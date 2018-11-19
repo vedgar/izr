@@ -98,7 +98,7 @@ Naravno, $k$ može biti i $1$; jedan važan slučaj je $\f G:=\f Z$. Recimo,
 Dakle, funkcija $\overline{\f Z}$ je u uskoj vezi s funkcijom tzv.\ \emph{primorijel}, koja je definirana slično kao faktorijel, osim što množi samo prim-brojeve. 
 \end{primjer}
 
-Sada bismo htjeli dokazati rezultat analogan onom u lemi~\ref{lm:sumrek}, samo za povijest umjesto sume. Kao što smo već rekli, to će zahtijevati ponešto teorije brojeva.
+Sada bismo htjeli dokazati rezultat analogan onom u lemi~\ref{lm:sumprodrek}, samo za operator povijesti. Kao što smo već rekli, to će zahtijevati ponešto teorije brojeva.
 
 \subsection{Potrebni rezultati iz teorije brojeva}\label{sec:teobroj}
 
@@ -226,13 +226,13 @@ Neka je $k\in\N_+$, i $\f{G}^k$ totalna funkcija.
 Tada je ${\f G}$ (primitivno) rekurzivna ako i samo ako je $\overline{\f G}$ (primitivno) rekurzivna.
 \end{lema}
 
-Za razliku od, recimo, leme~\ref{lm:sumrek}, ovdje se tvrde dva smjera. (Zapravo, i u lemi~\ref{lm:sumrek} vrijedi obrat, dok recimo u lemi~\ref{lm:prodrek} ne vrijedi. Zgodna je vježba pokušati to dokazati.)
+Za razliku od leme~\ref{lm:sumprodrek}, ovdje se tvrde dva smjera. (Zapravo, i u lemi~\ref{lm:sumprodrek} vrijedi obrat za $\f F_1$, dok za $\f F_2$ ne vrijedi. Zgodna je vježba pokušati to dokazati.)
 \begin{proof}
 Za jedan smjer (zapisati $\overline{\f G}$ primitivno rekurzivno pomoću $\f G$), treba uvrstiti~\eqref{eq:Codek} u~\eqref{eq:povijest}:
 \begin{equation}\label{eq:povijestrek}
     \overline{\f G}(\vec x,y)=\prod_{i<y}\f{pow}\bigl(\f{prime}(i),\f{Sc}\bigl(\f{G}(\vec x,i)\bigr)\bigr)\text.
 \end{equation}
-Ako $i$-ti faktor u~\eqref{eq:povijestrek} označimo s $\f H(\vec x,i)$, tada je $\f{pow}\circ(\f{prime}\circ\f I_{k+1}^{k+1},\f{Sc}\circ\f G)$ sim\-bo\-li\-čka definicija od $\f H^{k+1}$ kompozicijom iz funkcija za koje je već dokazano da su primitivno rekurzivne, te funkcije $\f G$ koja je (primitivno) rekurzivna --- pa je $\f H$ (primitivno) rekurzivna. Sada je $\overline{\f G}$ (primitivno) rekurzivna po lemi~\ref{lm:prodrek}.
+Ako $i$-ti faktor u~\eqref{eq:povijestrek} označimo s $\f H(\vec x,i)$, tada je $\f{pow}\circ(\f{prime}\circ\f I_{k+1}^{k+1},\f{Sc}\circ\f G)$ sim\-bo\-li\-čka definicija od $\f H^{k+1}$ kompozicijom iz funkcija za koje je već dokazano da su primitivno rekurzivne, te funkcije $\f G$ koja je (primitivno) rekurzivna --- pa je $\f H$ (primitivno) rekurzivna. Sada je $\overline{\f G}$ (primitivno) rekurzivna po lemi~\ref{lm:sumprodrek}.
 
 Za drugi smjer, pretpostavimo da nam je zadana $\overline{\f G}$, i želimo iz nje dobiti $\f G$. Pažljivim gledanjem~\eqref{eq:povijest} vidimo da $\overline{\f G}(\vec x,y)$ kodira prvih $y$ vrijednosti oblika $\f G(\vec x,i)$, među kojima \emph{nije} $\f G(\vec x,y)$. (To je čest početnički \emph{bug} u C-programiranju: polje deklarirano s \texttt{int a[7];} \emph{ne} sadrži element \texttt{a[7]}.) Ako želimo dobiti taj broj, moramo zapravo izračunati $\overline{\f G}$ u nekom broju \emph{većem} od $y$ kao zadnjem argumentu. Dovoljno je uzeti $\overline{\f G}(\vec x,y+1)$: tvrdimo
 \begin{equation}\label{eq:unpovijest}
@@ -381,7 +381,7 @@ Ideja je slična kao u dokazu propozicije~\ref{prop:simultrek}, samo umjesto kod
 \begin{equation}
     \overline{\f F}(\vec x,0)=\langle\rangle=1\text.
 \end{equation}
-Za korak, moramo izraziti $\overline{\f F}(\vec x,y+1)$ pomoću $\vec x$, $y$ i $z:=\overline{\f F}(\vec x,y)$ --- primijetimo da nam ovdje "kontrolna varijabla" zapravo i ne treba, jer $y$ uvijek možemo dobiti kao $\f{lh}(z)$. Kao što smo, primjerice, operator $\sum$ mogli dobiti iteriranjem operacije $+$~\eqref{eq:sumH} na početnoj vrijednosti $0$~\eqref{eq:sumG}, tako operator $\overline{\cdots}$ možemo dobiti iteriranjem operacije $*$ na početnoj vrijednosti $\langle\rangle$. Dakle, vrijedi
+Za korak, moramo izraziti $\overline{\f F}(\vec x,y+1)$ pomoću $\vec x$, $y$ i $z:=\overline{\f F}(\vec x,y)$ --- primijetimo da nam ovdje "kontrolna varijabla" zapravo i ne treba, jer $y$ uvijek možemo dobiti kao $\f{lh}(z)$. Kao što smo, primjerice, operator $\sum$ mogli dobiti iteriranjem operacije $+$~\eqref{eq:sumH1} na početnoj vrijednosti $0$~\eqref{eq:sumG1}, tako operator $\overline{\cdots}$ možemo dobiti iteriranjem operacije $*$ na početnoj vrijednosti $\langle\rangle$. Dakle, vrijedi
 \begin{align}
     \overline{\f F}(\vec x,y+1)&=\overline{\f F}(\vec x,y)*\langle\f F(\vec x,y)\rangle=\overline{\f F}(\vec x,y)*\bigl\langle\f G\bigl(\vec x,\overline{\f F}(\vec x,y)\bigr)\bigr\rangle\text,
 \shortintertext{odnosno}

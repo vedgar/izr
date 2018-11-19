@@ -277,65 +277,62 @@ $\begin{array}{rrrrrrr}
 \end{array}$, dakle $153=(2222121)_2=\kr{\t{bbbbaba}}$. Kako je $\dulj{\t{bbbbaba}}=7$ neparan broj, zaključujemo $\t{bbbbaba}\not\in\dom{\varphi_h}$, pa $153\not\in\dom{\N\varphi_h}$.
 \end{primjer}
 
+Za dekodiranje trebamo, analogno kao za kodiranje $\N^*$ (propozicija~\ref{prop:lhpartprn}), duljinu zapisa u određenoj bazi, te određenu znamenku. %Ipak, prvo to napravimo za obične zapise u bazi, jer je jednostavnije a trebat će nam. Nakon toga ćemo vidjeti što treba promijeniti za zapis u pomaknutoj bazi.
+
+\begin{lema}\label{lm:ldcpprn}
+% Možda: umjesto specifikacije napraviti definiciju s točkicom (b=0->b=1)
+Postoje primitivno rekurzivne funkcije $\f{slh}^2$\!, $\f{sdigit}^3$\!, $\f{sconcat}^3$ i $\f{sprefix}^3$, takve da za sve $b\in\N_+$, za sve $i,n,m\in\N$ vrijedi:
+\begin{labeling}{$\f{sconcat}(m,n,b)$}
+    \item[$\f{slh}(n,b)$] je duljina zapisa broja $n$ u pomaknutoj bazi $b$. \item[$\f{sdigit}(n,i,b)$] za $i<\f{slh}(n,b)$, je vrijednost $i$-te znamenke zapisa broja $n$ u pomaknutoj bazi $b$, gdje brojimo od nule slijeva.
+    \item[$\f{sconcat}(m,n,b)$] je broj čiji zapis u pomaknutoj bazi $b$ se dobije konkatenacijom istih takvih zapisa za $m$ i $n$ redom. Pišemo ga i kao $m\conc bn$.
+    \item[$\f{sprefix}(n,i,b)$] za $i\le\f{slh}(n,b)$, je broj čiji je zapis u pomaknutoj bazi $b$ prefiks (početak) duljine $i$ istog takvog zapisa broja $n$.
+\end{labeling}
+\end{lema}
+%Za fiksni $b$, $\f{sconcat}(m,n,b)$ još pišemo $m\conc b n$, a $\f{Prefix}(m,n,b)$ pišemo $m\preceq_b n$.
+\noindent\begin{align}
+\label{eq:deflh}
+    \f{slh}(n,b)&:=(\mu t\le n)\big(
+    \textstyle\sum_{i\le t}b^i>n
+    \big)\\
+\label{eq:defconcat}
+    \f{sconcat}(m,n,b)&:=m\conc bn:=m\cdot b^{\,\f{slh}(n,b)}+n\\
+\label{eq:defprefix}
+    \f{sprefix}(n,i,b)&:=(\mu m\le n)(\exists t\le n)\bigl(n=m\conc bt\land\f{slh}(m,b)=i\bigr)\\
+\label{eq:defdigit}
+    \f{sdigit}(n,i,b)&:=\f{mod}'\bigl(\f{sprefix}\bigl(n,\f{Sc}(i),b\bigr),b\bigr)
+\end{align}
+\begin{proof}
+Za $\f{slh}$, treba uočiti da zapisa duljine $i$ ima točno $b^i$. Dakle, samo trebamo zbrajati takve brojeve dok ne prijeđemo $n$. Također, očito je $\f{slh}(n,b)\le n$.~\eqref{eq:deflh}
+
+Sada jednostavno možemo dobiti konkatenaciju: $m$ pomaknemo udesno da $n$ taman stane u dobiveni prostor, i samo ga pribrojimo.~\eqref{eq:defconcat}
+
+Pomoću konkatenacije možemo dobiti $\f{sprefix}$: prefiks je ono što se može konkatenirati s nečim tako da se dobije početni zapis $n$. Očito su dijelovi manji ili jednaki $n$.~\eqref{eq:defprefix}
+
+Sada nije teško napisati ni $\f{sdigit}$: to je posljednja znamenka prefiksa čija je duljina za jedan veća od pozicije znamenke.~\eqref{eq:defdigit}
+%Sve te funkcije su primitivno rekurzivne, koristeći dosadašnje rezultate.
+\end{proof}
+
 \begin{propozicija}\label{pp:bijkr}
 Neka je $\Sigma$ abeceda, i $\N\Sigma$ njeno kodiranje. Tada je $\N\Sigma^*$ bijekcija između $\Sigma^*$ i $\N$.
 \end{propozicija}
 \begin{proof}
-Označimo $b':=\card\Sigma$. Ako je $w\not=w'$ za $w,w'\in\Sigma^*$, tada su $w$ i $w'$ ili različitih duljina (pa je $\f{lh}(\kr w,b')\not=\f{lh}(\kr{w'},b')$), ili su jednake duljine ali se na nekom mjestu razlikuju (pa je za neki $i$, $\f{digit}(\kr w,i,b')\not=\f{digit}(\kr{w'},i,b')$).
+Označimo $b':=\card\Sigma$. Ako je $w\not=w'$ za $w,w'\in\Sigma^*$, tada su $w$ i $w'$ ili različitih duljina (pa je $\f{slh}(\kr w,b')\not=\f{slh}(\kr{w'},b')$), ili su jednake duljine ali se na nekom mjestu razlikuju (pa je za neki $i$, $\f{sdigit}(\kr w,i,b')\not=\f{sdigit}(\kr{w'},i,b')$).
 
 U svakom slučaju mora biti $\kr w\not=\kr{w'}$, dakle $\N\Sigma^*$ je injekcija.
 
 Za surjektivnost, neka je $x\in\N$ proizvoljan. Prema lemi~\ref{lm:pomakbaza}, postoje znamenke $\vec z\in[1..b']^*$ takve da je $x=(\vec z)_{b'}$. Ako sad za svaku $z_i$ označimo $\alpha_i:=\N\Sigma^{-1}(z_i)\in\Sigma$, riječ sastavljena od tih znakova ima upravo kod $x$.
 \end{proof}
 
-Za dekodiranje trebamo, analogno kao za kodiranje $\N^*$ (propozicija~\ref{prop:lhpartprn}), duljinu zapisa u određenoj bazi, te određenu znamenku. %Ipak, prvo to napravimo za obične zapise u bazi, jer je jednostavnije a trebat će nam. Nakon toga ćemo vidjeti što treba promijeniti za zapis u pomaknutoj bazi.
-
-\begin{lema}\label{lm:ldcpprn}
-% umjesto specifikacije napraviti definiciju s točkicom (b=0->b=1)
-Postoje primitivno rekurzivne funkcije $\f{lh}^2$\!, $\f{digit}^3$\!, $\f{concat}^3$ i $\f{prefix}^3$, takve da za sve $b\in\N_+$, za sve $i,n,m\in\N$ vrijedi:
-\begin{labeling}{$\f{concat}(m,n,b)$}
-    \item[$\f{lh}(n,b)$] je duljina zapisa broja $n$ u pomaknutoj bazi $b$. \item[$\f{digit}(n,i,b)$] za $i<\f{lh}(n,b)$, je vrijednost $i$-te znamenke zapisa broja $n$ u pomaknutoj bazi $b$, gdje brojimo od nule slijeva.
-    \item[$\f{concat}(m,n,b)$] je broj čiji zapis u pomaknutoj bazi $b$ se dobije konkatenacijom istih takvih zapisa za $m$ i $n$ redom. Pišemo ga i kao $m\conc bn$.
-    \item[$\f{prefix}(n,i,b)$] za $i\le\f{lh}(n,b)$, je broj čiji je zapis u pomaknutoj bazi $b$ prefiks (početak) duljine $i$ istog takvog zapisa broja $n$.
-\end{labeling}
-\end{lema}
-%Za fiksni $b$, $\f{concat}(m,n,b)$ još pišemo $m\conc b n$, a $\f{Prefix}(m,n,b)$ pišemo $m\preceq_b n$.
-\begin{proof}
-Za $\f{lh}$, treba uočiti da zapisa duljine $i$ ima točno $b^i$. Dakle, samo trebamo zbrajati takve brojeve dok ne prijeđemo $n$. Također, očito je $\f{lh}(n,b)\le n$.~\eqref{eq:deflh}
-
-Sada jednostavno možemo dobiti konkatenaciju: $m$ pomaknemo udesno da $n$ taman stane u dobiveni prostor, i samo ga pribrojimo.~\eqref{eq:defconcat}
-
-Pomoću konkatenacije možemo dobiti $\f{prefix}$: prefiks je ono što se može konkatenirati s nečim tako da se dobije početni zapis $n$. Očito su dijelovi manji ili jednaki $n$.~\eqref{eq:defprefix}
-
-Sada nije teško napisati ni $\f{digit}$: to je posljednja znamenka prefiksa čija je duljina za jedan veća od pozicije znamenke.~\eqref{eq:defdigit}
-%Sve te funkcije su primitivno rekurzivne, koristeći dosadašnje rezultate.
-\end{proof}
-
-\noindent\begin{align}
-\label{eq:deflh}
-    \f{lh}(n,b)&:=(\mu t\le n)\big(
-    \textstyle\sum_{i\le t}b^i>n
-    \big)\\
-\label{eq:defconcat}
-    \f{concat}(m,n,b)&:=m\conc bn:=m\cdot b^{\,\f{lh}(n,b)}+n\\
-\label{eq:defprefix}
-    \f{prefix}(n,i,b)&:=(\mu m\le n)(\exists t\le n)\bigl(n=m\conc bt\land\f{lh}(m,b)=i\bigr)\\
-\label{eq:defdigit}
-    \f{digit}(n,i,b)&:=\f{mod}'\bigl(\f{prefix}\bigl(n,\f{Sc}(i),b\bigr),b\bigr)
-\end{align}
-
 \subsection{Parcijalna rekurzivnost jezičnih funkcija}\label{sec:tikp}
 
-Sada možemo formalno dokazati da Turing-izračunljivost jezične funkcije povlači parcijalnu rekurzivnost njene prateće funkcije.
+%Sada možemo formalno dokazati da Turing-izračunljivost jezične funkcije povlači parcijalnu rekurzivnost njene prateće funkcije.
 
 \begin{definicija}\label{def:kodfi}
-Neka je $\Sigma$ abeceda, $\N\Sigma$ njeno kodiranje, te $\varphi\colon\Sigma^*\rightharpoonup\Sigma^*$ jezična funkcija nad njom. \emph{Prateća funkcija} od $\varphi$ je jednomjesna  funkcija $\N\varphi$, zadana s
+Neka je $\Sigma$ abeceda, $\N\Sigma$ njeno kodiranje, te $\varphi\colon\Sigma^*\rightharpoonup\Sigma^*$ jezična funkcija nad njom. \emph{Prateća funkcija} od $\varphi$ je jednomjesna  funkcija $\N\varphi$ s domenom $\N\Sigma^*[\dom\varphi]$, zadana s
 \begin{equation}\label{eq:kodfidef}
-    \N\varphi(\kr{w}):\simeq
-    \kr{\varphi(w)}\text.
+    \N\varphi(\kr{w}):\simeq\kr{\varphi(w)}\text.
 \end{equation}
-Kako je svaki prirodni broj kod jedinstvene riječi iz $\Sigma^*$, definicija je dobra. Naravno,
-$\dom{\N\varphi}=\N\Sigma^*[\dom\varphi]$.
+Kako je svaki prirodni broj kod jedinstvene riječi iz $\Sigma^*$, definicija je dobra.
 \end{definicija}
 
 Kroz čitavu ovu točku, imat ćemo fiksiranu abecedu $\Sigma_0$, njeno kodiranje $\N\Sigma_0$ uz oznaku $b':=\card\Sigma_0$, Turing-izračunljivu jezičnu funkciju $\varphi_0$ nad $\Sigma_0$, te fiksni Turingov stroj $\mathcal T_0=(Q_0,\Sigma_0,\Gamma_0,\bl,\delta_0,q_0,q_z)$ koji računa $\varphi_0$. Cilj će nam biti, kodirajući komponente i izračunavanje stroja $\mathcal T_0$, dokazati da je $\N\varphi_0$ parcijalno rekurzivna funkcija. To je slično pristupu u poglavlju~\ref{ch:univ}, samo je jednostavnije jer ne moramo pisati interpreter za proizvoljni RAM-program zadan kodom, već samo "ručno" prevesti jedan konkretni Turingov stroj $\mathcal T_0$ u funkcijski jezik.
@@ -396,17 +393,17 @@ Postoji primitivno rekurzivna funkcija $\f{Recode}^3$ takva da za svaku riječ $
 \end{lema}
 \begin{proof}
 Kao što smo već rekli, $\f{Recode}(n,b_1,b_2)$ samo treba ekstrahirati znamenke od $n$ u bazi $b_1$, i slagati ih obrnutim redom u bazi $b_2$. Kako je $w\in\Sigma_0^*$, u zapisu nema znamenke $0$, pa 
-možemo koristiti funkcije $\f{lh}$ i $\f{digit}$ bez obzira na to je li baza $b_1$ pomaknuta.
+možemo koristiti funkcije $\f{slh}$ i $\f{sdigit}$ bez obzira na to je li baza $b_1$ pomaknuta.
 \begin{equation}
-    \f{Recode}(n,b_1,b_2):=\quad\sum_{\mathclap{i\,<\,\f{lh}(n,b_1\!)}}\f{digit}(n,i,b_1)\cdot{b_2}^i
+    \f{Recode}(n,b_1,b_2):=\quad\sum_{\mathclap{i\,<\,\f{slh}(n,b_1\!)}}\f{sdigit}(n,i,b_1)\cdot{b_2}^i
 \end{equation}
-Neka je $w=\alpha_0\alpha_1\dotsm\alpha_{l-1}\in\Sigma^*$ proizvoljna ($l:=\dulj{w}$). Tada, ako označimo $n:=\kr w$, vrijedi $\f{lh}(n,b')=l$ i $d_i:=\f{digit}(n,i,b')=\N\Sigma_0(\alpha_i)=\N\Gamma_0(\alpha_i)$ za sve $i<l$. Iz toga
+Neka je $w=\alpha_0\alpha_1\dotsm\alpha_{l-1}\in\Sigma^*$ proizvoljna ($l:=\dulj{w}$). Tada, ako označimo $n:=\kr w$, vrijedi $\f{slh}(n,b')=l$ i $d_i:=\f{sdigit}(n,i,b')=\N\Sigma_0(\alpha_i)=\N\Gamma_0(\alpha_i)$ za sve $i<l$. Iz toga
 \begin{equation}
     \f{Recode}(n,b',b)=\sum_{i<l}d_i\cdot b^i=\sum_{i=0}^{l-1}\N\Gamma_0(\alpha_i)\cdot b^i=\knk{w\bl\ldots}\text,
 \end{equation}
 i analogno~\eqref{eq:recodeout}. Ključno je bilo da se $\N\Sigma_0$ i $\N\Gamma_0$ podudaraju na svim $\alpha\in\Sigma_0$.
 
-Za dokaz primitivne rekurzivnosti, samo treba primijeniti leme~\ref{lm:sumrek} i~\ref{lm:ldcpprn}, te primjere~\ref{pr:addmulpow} i~\ref{pr:sub}.
+    Za dokaz primitivne rekurzivnosti, samo treba primijeniti napomenu~\ref{nap:sumprodH}, lemu~\ref{lm:ldcpprn}, te primjer~\ref{pr:addmulpow}.
 \end{proof}
 
 \begin{primjer}
@@ -513,7 +510,7 @@ Kao i kod RAM-izračunavanja, upotrijebit ćemo simultanu primitivnu rekurziju. 
 \end{equation}
 Dakle, $\f G_1=\f G_2=\f Z$ (inicijalna funkcija), a $\f G_3$ je primitivno rekurzivna po lemi~\ref{lm:recodeprn} i propoziciji~\ref{prop:konst}.
 
-Za korak, trebamo funkcije $\f H_1$, $\f H_2$ i $\f H_3$, od kojih svaka prima po pet argumenata: k\^od riječi s kojom se računa $x=\kr w$, broj dosad napravljenih koraka izračunavanja $n$, k\^od prethodnog stanja $q=\N Q_0(q_n)$, prethodnu poziciju $p=p_n$, i k\^od prethodne trake $t=\knk{t_n}$. Redom trebaju vratiti $\N Q_0(q_{n+1})$, $p_{n+1}$ i $\knk{t_{n+1}}$. Pri tome će nam pomoći funkcije (redom) $\f{newstate}$, $\f{direction}$ i $\f{newsymbol}$, ali na čemu ih pozvati? Prvi argument je kod trenutnog stanja $q$, a drugi je kod trenutno čitanog znaka $g$, koji možemo dobiti kao vrijednost znamenke od $t$ mjesne vrijednosti $b^p$. (Tu ne možemo koristiti $\f{digit}$ jer se na traci mogu nalaziti i praznine, te se mjesne vrijednosti broje zdesna u zapisu --- ali standardni postupak za ekstrakciju znamenke funkcionira.)
+Za korak, trebamo funkcije $\f H_1$, $\f H_2$ i $\f H_3$, od kojih svaka prima po pet argumenata: k\^od riječi s kojom se računa $x=\kr w$, broj dosad napravljenih koraka izračunavanja $n$, k\^od prethodnog stanja $q=\N Q_0(q_n)$, prethodnu poziciju $p=p_n$, i k\^od prethodne trake $t=\knk{t_n}$. Redom trebaju vratiti $\N Q_0(q_{n+1})$, $p_{n+1}$ i $\knk{t_{n+1}}$. Pri tome će nam pomoći funkcije (redom) $\f{newstate}$, $\f{direction}$ i $\f{newsymbol}$, ali na čemu ih pozvati? Prvi argument je kod trenutnog stanja $q$, a drugi je kod trenutno čitanog znaka $g$, koji možemo dobiti kao vrijednost znamenke od $t$ mjesne vrijednosti $b^p$. (Tu ne možemo koristiti $\f{sdigit}$ jer se na traci mogu nalaziti i praznine, te se mjesne vrijednosti broje zdesna u zapisu --- ali standardni postupak za ekstrakciju znamenke funkcionira.)
 
 Sada $\f H_1$ jednostavno treba vratiti $\f{newstate}(q,g)$. $\f H_2$ treba vratiti $p$ pomaknut za $\f{direction}(q,g)$, ali za jedan manje jer smo pomake za $d$ kodirali s $d+1$. $\f H_3$ je najkompliciranija: treba $p$-tu znamenku u zapisu $t$ u bazi $b$ zamijeniti sa znamenkom vrijednosti $\f{newsymbol}(q,g)$. To radimo tako da od $t$ oduzmemo trenutnu mjesnu vrijednost te znamenke $g\cdot b^p$, i dodamo mjesnu vrijednost nove. Dakle, primitivno rekurzivne funkcije zadane s
 \begin{align}
@@ -896,7 +893,7 @@ iz čega vidimo dvije stvari. Prvo, $\bl$ je očito ovaj prvi element u $B^m$, k
 \end{equation}
 
 \begin{primjer}\label{pr:+a}
-Nad abecedom $\Sigma:=\{\t a,b\}$ (kodiranom s $\t a\mapsto1$, $\t b\mapsto2$) pogledajmo jezičnu funkciju zadanu s $\varphi_{\t a}(w):=w\t a$ (dopisivanje \t a zdesna). Baza je $b'=2$, te je $\N\varphi_{\t a}(\kr w)=\kr{w\t a}=\kr w\conc2\kr{\t a}=\kr w\conc21=\kr w\cdot2^{\f{lh}(1,2)}+1=2\kr w+1$, odnosno $\N\varphi_{\t a}(x)=2x+1$. Očito je $\N\varphi_{\t a}\in\mathcal Comp_1$: računa je jednostavan RAM-program
+Nad abecedom $\Sigma:=\{\t a,b\}$ (kodiranom s $\t a\mapsto1$, $\t b\mapsto2$) pogledajmo jezičnu funkciju zadanu s $\varphi_{\t a}(w):=w\t a$ (dopisivanje \t a zdesna). Baza je $b'=2$, te je $\N\varphi_{\t a}(\kr w)=\kr{w\t a}=\kr w\conc2\kr{\t a}=\kr w\conc21=\kr w\cdot2^{\f{slh}(1,2)}+1=2\kr w+1$, odnosno $\N\varphi_{\t a}(x)=2x+1$. Očito je $\N\varphi_{\t a}\in\mathcal Comp_1$: računa je jednostavan RAM-program
 \begin{equation}\label{eq:+aprog}
     P_{\t a}:=\begin{prog}
     0.&\decr14\\

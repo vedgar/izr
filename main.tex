@@ -11,7 +11,6 @@
 %%%%
 % TODO za iduću godinu:
 % * eksplicitna formula za domenu kompozicije kad je H totalna (l=1?)
-% * dokazati da parametrizacija čuva primitivnu rekurzivnost
 % * po instrukciji vs po programu prijelaz eksplicirati
 \raggedbottom
 %\pdfmapline{+dummy-space <dummy-space.pfb}
@@ -123,7 +122,7 @@ initial text=$ $}
 \DeclarePairedDelimiter{\kf}{\t{\color{dark-blue}\char`\{}}{\t{\color{dark-blue}\char`\}}}
 \DeclarePairedDelimiter{\kr}{\langle}{\rangle}
 \DeclarePairedDelimiter{\dulj}{|}{|}
-\definecolor{light-gray}{gray}{0.9}
+\definecolor{light-gray}{gray}{0.7}
 \definecolor{dark-blue}{HTML}{000055}
 \definecolor{dark-red}{HTML}{550000}
 \definecolor{brown}{HTML}{6F5A21}
@@ -170,30 +169,27 @@ initial text=$ $}
 \title{\vspace{-2cm}\normalfont Izračunljivost}
 \subtitle{\normalfont\Huge{za\; računarce}}
 \author{\textit{V\!edran Č\hspace{-0.5mm}ačić}}
-\date{2019}
+\date{\today}
 
 \maketitle
 
 \tableofcontents
+{\renewcommand\thesection{\alph{section}}
+\include{uvod}}
 
-%\part{Modeli izračunljivosti}
 \mainmatter
-\include{uvod}
 \include{ram}
-%\addtocontents{toc}{\protect\newpage}
+\addtocontents{toc}{\protect\newpage}
 \include{rek}
 \include{univ}
-%\addtocontents{toc}{\protect\newpage}
 \addtocontents{toc}{\protect\newpage}
 \include{turing}%\include{tbroj}
 \include{neizr}%\include{church}
-%\addtocontents{toc}{\protect\newpage}
 \include{meta}
 \include{re}
 
-%\part{Posljedice univerzalnosti}
-%\chapter{Teorem o parametru}
-\appendix
+\backmatter
+\pagenumbering{Roman}
 \printbibliography
 
 \end{document}

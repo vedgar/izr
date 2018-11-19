@@ -283,7 +283,7 @@ Kako bismo iz $(3,1,2)$ izračunali $(11121211)_2=275$, ili iz $6$ izračunali $
 Funkcija $\f{bin}^1$\! je primitivno rekurzivna.
 \end{lema}
 \begin{proof}
-Možemo direktno napisati točkovnu definiciju $\f{bin}(x)=\sum_{i<x}2^i$, pa će primitivna rekurzivnost slijediti iz propozicije~\ref{lm:sumrek} --- ali svaki računarac zna da to ima i zatvorenu formu:
+Možemo direktno napisati točkovnu definiciju $\f{bin}(x)=\sum_{i<x}2^i$, pa će primitivna rekurzivnost slijediti iz leme~\ref{lm:sumprodrek} --- ali svaki računarac zna da to ima i zatvoreni oblik:
 $\f{bin}(x)=2^x-1=\f{pd}\bigl(\f{pow}(2,x)\bigr)$ (jer je uvijek $2^x\ge 1$).
 \end{proof}
 
@@ -317,26 +317,26 @@ Uz oznake $u=\alpha_1\alpha_2\dotsm\alpha_{\dulj{u}}$ i $v=\beta_1\beta_2\dotsm\
 \end{multline}
 Za $u=\varepsilon$ ili $v=\varepsilon$ tvrdnja također vrijedi jer je $\varepsilon$ neutralni element za konkatenaciju, a lako se vidi da je $\kr\varepsilon=0$ neutralni element za $\conc b$:
 \begin{align}
-    0\conc bx&=\f{concat}(0,x,b)=0\cdot b^{\f{lh}(x,b)}+x=0+x=x\text,\\
-    x\conc b0&=\f{concat}(x,0,b)=x\cdot b^{\f{lh}(0,b)}+0=x\cdot b^0=x\text,
+    0\conc bx&=\f{sconcat}(0,x,b)=0\cdot b^{\f{slh}(x,b)}+x=0+x=x\text,\\
+    x\conc b0&=\f{sconcat}(x,0,b)=x\cdot b^{\f{slh}(0,b)}+0=x\cdot b^0=x\text,
 \end{align}
-jer je $\f{lh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ zbog $\sum_{i\le0}b^i=b^0=1>0$.
+jer je $\f{slh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ zbog $\sum_{i\le0}b^i=b^0=1>0$.
 \end{proof}
 
 \begin{korolar}\label{kor:lhkonk=lh+lh}
-Za sve $x,y\in\N$, za sve $b\in\N_+$, vrijedi $\f{lh}(x\conc b y,b)=\f{lh}(x,b)+\f{lh}(y,b)$.
+Za sve $x,y\in\N$, za sve $b\in\N_+$, vrijedi $\f{slh}(x\conc b y,b)=\f{slh}(x,b)+\f{slh}(y,b)$.
 \end{korolar}
 \begin{proof}
 Neka su $x,y,b$ proizvoljni ($b$ pozitivan). Abeceda $\Sigma_b:=[1..b]$ očito ima $b$ elemenata --- kodirajmo je identitetom.
-Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in\Sigma_b^*$ takve da je $x=\kr u$ i $y=\kr v$. Po definiciji $\f{lh}$, vrijedi $\f{lh}(\kr w,b)=\dulj w$ za sve $w\in\Sigma_b^*$, pa specijalno za $w=x$, $w=y$ i $w=xy$. Sada imamo
+Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in\Sigma_b^*$ takve da je $x=\kr u$ i $y=\kr v$. Po definiciji $\f{slh}$, vrijedi $\f{slh}(\kr w,b)=\dulj w$ za sve $w\in\Sigma_b^*$, pa specijalno za $w=x$, $w=y$ i $w=xy$. Sada imamo
 \begin{multline}
-    \f{lh}(x,b)+\f{lh}(y,b)=
-    \f{lh}(\kr u,b)+\f{lh}(\kr v,b)=
+    \f{slh}(x,b)+\f{slh}(y,b)=
+    \f{slh}(\kr u,b)+\f{slh}(\kr v,b)=
     \dulj u+\dulj v=
     \dulj{uv}=
-    \f{lh}(\kr{uv},b)={}\\
-    \text{[propozicija \ref{pp:krkonkkr}]}{}=\f{lh}(\kr u\conc b\kr v,b)=
-    \f{lh}(x\conc b y,b)\text{\qedhere\;.}
+    \f{slh}(\kr{uv},b)={}\\
+    \text{[propozicija \ref{pp:krkonkkr}]}{}=\f{slh}(\kr u\conc b\kr v,b)=
+    \f{slh}(x\conc b y,b)\text{\qedhere\;.}
 \end{multline}
 \end{proof}
 
@@ -346,10 +346,10 @@ Za svaki $b\in\N_+$, $\conc b$ je primitivno rekurzivna asocijativna operacija.
 \begin{proof}
 Primitivna rekurzivnost slijedi direktno iz leme~\ref{lm:ldcpprn}. Za asocijativnost,
 \begin{multline}
-    \left(x\conc b y\right)\conc b z=\left(x\cdot b^{\f{lh}(y,b)}+y\right)\cdot b^{\f{lh}(z,b)}+z=\\[1mm]
-    =\left(x\cdot b^{\f{lh}(y,b)}\cdot b^{\f{lh}(z,b)}+y\cdot b^{\f{lh}(z,b)}\right)+z=
-    x\cdot b^{\f{lh}(y,b)\,+\,\f{lh}(z,b)}+\left(y\cdot b^{\f{lh}(z,b)}+z\right)=\\[-1mm]
-    \text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{lh}\bigl(y\conc b z\,,\,b\bigr)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
+    \left(x\conc b y\right)\conc b z=\left(x\cdot b^{\f{slh}(y,b)}+y\right)\cdot b^{\f{slh}(z,b)}+z=\\[1mm]
+    =\left(x\cdot b^{\f{slh}(y,b)}\cdot b^{\f{slh}(z,b)}+y\cdot b^{\f{slh}(z,b)}\right)+z=
+    x\cdot b^{\f{slh}(y,b)\,+\,\f{slh}(z,b)}+\left(y\cdot b^{\f{slh}(z,b)}+z\right)=\\[-1mm]
+    \text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{slh}\bigl(y\conc b z\,,\,b\bigr)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
 \end{multline}
 \end{proof}
 Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Primijetimo samo da je za asocijativnost ključno da se radi o pomaknutoj bazi: recimo, u običnoj bazi 10 je $(1\conc{10}'0)\conc{10}'2=10\conc{10}'2=102\not=1\conc{10}'(0\conc{10}'2)=1\conc{10}'2=12$, pa ne vrijedi asocijativnost.
@@ -387,12 +387,12 @@ To je jednakost~\eqref{eq:pravkomut} u koju je uvrštena (s obje strane) definic
 Sjetimo se, naš cilj je izraziti $f$ pomoću $\N\beta f$. S korolarom~\ref{kor:binf=Nbetafbin} smo već jako blizu, treba nam samo još (izračunljiv) lijevi inverz za $\f{bin}^1$. Kako možemo iz $63=(111111)_2=\f{bin}(6)$ natrag dobiti $6$? Samo treba prebrojiti jedinice, odnosno znamenke.
 
 \begin{lema}\label{lm:blh}
-Definiramo funkciju $\f{blh}$ s $\f{blh}(n):=\f{lh}(n,2)$. 
+Definiramo funkciju $\f{blh}$ s $\f{blh}(n):=\f{slh}(n,2)$. 
 
 Funkcija $\f{blh}$ je primitivno rekurzivna, i vrijedi $\f{blh}\circ\f{bin}^1\!=\f I_1^1$.
 \end{lema}
 \begin{proof}
-Primitivna rekurzivnost slijedi iz simboličke definicije $\f{blh}=\f{lh}\circ(\f I_1^1,C_2^1)$, leme~\ref{lm:ldcpprn} i propozicije~\ref{prop:konst}.
+Primitivna rekurzivnost slijedi iz simboličke definicije $\f{blh}=\f{slh}\circ(\f I_1^1,C_2^1)$, leme~\ref{lm:ldcpprn} i propozicije~\ref{prop:konst}.
 Za kompoziciju, uzmimo proizvoljni $n\in\N$, i računamo $\f{blh}\bigl(\f{bin}(n)\bigr)=\f{blh}(2^n-1)$. Relacija koju minimiziramo (po $t\le 2^n-1$) je
 \begin{equation}
     \textstyle\sum_{i\le t}2^i>2^n-1
@@ -455,7 +455,7 @@ Dvomjesna brojevna relacija $\sqsubseteq_\beta$, zadana s
 \end{korolar}
 \begin{proof}
 Činjenica da se radi o parcijalnom uređaju slijedi iz propozicija~\ref{pp:prefiksrpu} i~\ref{pp:bijkr}, a
-primitivna rekurzivnost iz leme~\ref{lm:ldcpprn}: $x\sqsubseteq_\beta y\Longleftrightarrow x=\f{prefix}\bigl(y,\f{blh}(x),2\bigr)$.
+primitivna rekurzivnost iz leme~\ref{lm:ldcpprn}: $x\sqsubseteq_\beta y\Longleftrightarrow x=\f{sprefix}\bigl(y,\f{blh}(x),2\bigr)$.
 \end{proof}
 
 \begin{primjer}
@@ -475,7 +475,7 @@ počevši od $i=0$ slijeva, u zapisu broja $x$ u pomaknutoj bazi $2$.
 \begin{proof}
 Za početak, definirajmo pomoćnu primitivno rekurzivnu (lema~\ref{lm:brojrek}) funkciju koja broji dvojke (separatore) u zapisu broja u pomaknutoj bazi $2$.
 \begin{equation}
-    \f{count2}(x):=\bigl(\#i<\f{blh}(x)\bigr)\bigl(\f{digit}(x,i,2)=2\bigr)
+    \f{count2}(x):=\bigl(\#i<\f{blh}(x)\bigr)\bigl(\f{sdigit}(x	i,2)=2\bigr)
 \end{equation}
 
 Tvrdimo da funkcije zadane točkovno s
@@ -485,7 +485,7 @@ Tvrdimo da funkcije zadane točkovno s
 \end{align}
 zadovoljavaju tražene specifikacije (očito su primitivno rekurzivne).
 
-Za $i<\f{count2}(x)$, uvjet pod operatorom minimizacije jednoznačno određuje $z$. Doista, kad bi postojala dva broja $z$ i $z'$ s tim svojstvom, morali bi biti kodovi različitih riječi $v$ i $v'$, takvih da su $v\t/$ i $v'\!\t/$ prefiksi od $w$, čiji kod je $x$. Prefiksi iste riječi iste duljine su jednaki ($\f{prefix}$ je funkcija), pa duljine od $v\t/$ i $v'\!\t/$ moraju biti različite: bez smanjenja općenitosti pretpostavimo $\dulj{v\t/}<\dulj{v'\!\t/}=\dulj{v'}+1$, dakle $v\t/$ je zapravo prefiks od $v'$, pa mora imati manje ili jednako dvojki. Dakle
+Za $i<\f{count2}(x)$, uvjet pod operatorom minimizacije jednoznačno određuje $z$. Doista, kad bi postojala dva broja $z$ i $z'$ s tim svojstvom, morali bi biti kodovi različitih riječi $v$ i $v'$, takvih da su $v\t/$ i $v'\!\t/$ prefiksi od $w$, čiji kod je $x$. Prefiksi iste riječi iste duljine su jednaki ($\f{sprefix}$ je funkcija), pa duljine od $v\t/$ i $v'\!\t/$ moraju biti različite: bez smanjenja općenitosti pretpostavimo $\dulj{v\t/}<\dulj{v'\!\t/}=\dulj{v'}+1$, dakle $v\t/$ je zapravo prefiks od $v'$, pa mora imati manje ili jednako dvojki. Dakle
 \begin{multline}
     i=\f{count2}(z')=\f{count2}(\kr{v'})\ge\f{count2}(\kr{v\t/})=\f{count2}(\kr v\conc2\kr{\t/})=\\
     =\f{count2}(\kr v\conc22)=\f{count2}(\kr v)+1=\f{count2}(z)+1=i+1\text,

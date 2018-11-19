@@ -94,9 +94,9 @@ Neka su $k,l\in\N_+$, te neka su $G_1^k$, $G_2^k$,~\ldots, $G_l^k$ i $H^l$ funkc
 \begin{align}
 \SwapAboveDisplaySkip
 \label{eq:domkomp}
-    \dom{F}&:=\left\{\vec x\in\bigcap\nolimits_{i=1}^l\dom{G_i}\;\middle|\;\bigl(G_1(\vec x),G_2(\vec x),\dotsc,G_l(\vec x)\bigr)\in\dom{H}\right\},\\
+    \dom{F}&:=\left\{\vec x\in\bigcap\nolimits_{i=1}^l\dom{G_i}\;\middle|\;\bigl(G_1(\vec x),G_2(\vec x),\dotsc,G_l(\vec x)\bigr)\in\dom{H}\right\}\text,\\
 \label{eq:defkomp}
-    F(\vec x)&:=H\bigl(G_1(\vec x),G_2(\vec x),\dotsc,G_l(\vec x)\bigr)\text{, za sve $\vec x\in\dom F$},
+    F(\vec x)&:=H\bigl(G_1(\vec x),G_2(\vec x),\dotsc,G_l(\vec x)\bigr)\text{, za sve $\vec x\in\dom F$,}
 \end{align}
 kažemo da je dobivena \emph{kompozicijom} iz funkcija $G_1$, $G_2$,~\ldots, $G_l$ i $H$. Skraćeno pišemo $F:=H\circ(G_1,G_2,\dotsc,G_l)$. Operator $\circ$ smatramo lijevo asociranim.
 
@@ -204,9 +204,9 @@ Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na primitivnu rekurzi
 Iz Dedekindovog teorema rekurzije~\cite{skr:VukTS} slijedi da je jednadžbama~\eqref{eq:defprb} i~\eqref{eq:defprk} zadana jedinstvena totalna funkcija. Također, primitivna rekurzija je \emph{definirana} samo za totalne funkcije, pa ne moramo pričati o domenama od $G$, $H$ i $G\pr H$.
 \end{napomena}
 
-Primijetimo jedan tehnički problem: budući da ne promatramo brojevne funkcije s nula ulaznih podataka, funkcija $G$ koja zadaje početni uvjet mora biti bar jednomjesna, a onda funkcija $F$ dobivena primitivnom rekurzijom mora biti bar dvomjesna. Naravno, htjeli bismo i jednomjesne funkcije definirati primitivnom rekurzijom: kanonski primjer je vjerojatno faktorijel,
+Primijetimo jedan tehnički problem: budući da ne promatramo brojevne funkcije s nula ulaznih podataka, funkcija $G$ koja zadaje početni uvjet mora biti barem jednomjesna, a onda funkcija $F$ dobivena primitivnom rekurzijom mora biti bar dvomjesna. Naravno, htjeli bismo i jednomjesne funkcije definirati primitivnom rekurzijom: kanonski primjer je vjerojatno faktorijel,
 \begin{align}
-\SwapAboveDisplaySkip
+%\SwapAboveDisplaySkip
 \label{eq:faktb}
     0!&:=1\text,\\
 \label{eq:faktk}
@@ -304,7 +304,7 @@ Pretpostavimo da za sve $t<c+r$, za svaku funkciju $g\in\mathcal S$ dobivenu s $
 Naravno, umjesto "\emph{ab ovo}" od inicijalnih funkcija, možemo krenuti od nekih funkcija za koje smo već utvrdili da su primitivno rekurzivne. Zapis koji pokazuje kako se neka funkcija $f$ može dobiti kompozicijom i primitivnom rekurzijom iz već utvrđeno primitivno rekurzivnih funkcija zovemo \emph{simbolička definicija} od $f$. Recimo, u primjeru~\ref{pr:C23} navedena je simbolička definicija od $\f C_2^3$, a u primjeru~\ref{pr:addmulpow}, simboličke definicije od $\f{add}^2$ i $\f{mul}^2$.
 \end{napomena}
 
-Simboličke definicije su koncizne i izražajne, ali nisu baš čitljive. Umjesto njih, često se pišu \emph{točkovne} definicije, gdje funkciju definiramo "po točkama" tako da kažemo što je $f(\vec x)$, umjesto da kažemo što je $f$. Većina modernih programskih jezika upravo tako definira funkcije. Recimo, lijevi stupac od~\eqref{eq:addb} i~\eqref{eq:addk} sadrži točkovnu definiciju zbrajanja dva broja, iz koje se vidi da je ono primitivno rekurzivno. U desnom stupcu je također točkovna definicija, ali manje čitljiva jer je namještena na oblik za~\eqref{eq:defprb} i~\eqref{eq:defprk}.
+Simboličke definicije su koncizne i izražajne, ali nisu baš čitljive. Umjesto njih, često se pišu \emph{točkovne} definicije, gdje funkciju definiramo "po točkama" tako da kažemo što je $f(\vec x)$, umjesto da kažemo što je $f$. Većina modernih programskih jezika upravo tako definira funkcije. Lijevi stupac~\eqref{eq:addb}--\eqref{eq:addk} sadrži točkovnu definiciju zbrajanja dva broja, iz koje se vidi da je ono primitivno rekurzivno. U desnom stupcu je također točkovna definicija, ali manje čitljiva jer je namještena na oblik~\eqref{eq:defprb}--\eqref{eq:defprk}.
 
 Točkovne definicije znaju biti neprecizne, i na nekim mjestima morat ćemo pribjeći simboličkoj definiciji da bi se znalo što zapravo pokušavamo definirati. No u ogromnom broju slučajeva, posebno za kompliciranije funkcije (i relacije), pisat ćemo točkovne definicije. Važno je imati na umu da se svaka takva točkovna definicija može \emph{pretvoriti} u simboličku --- pokušajte ako ne vjerujete!
 
@@ -359,7 +359,7 @@ Korak: tvrdimo da je $\f C_{m+1}^k=\f{Sc}\circ\f C_m^k$ simbolička definicija o
 To znači da je $\f C_{m+1}^k$ dobivena iz inicijalne i (po pretpostavci indukcije) primitivno rekurzivne funkcije kompozicijom, pa je primitivno rekurzivna. Po principu matematičke indukcije, tvrdnja vrijedi za svaki $n\in\N$.
 \end{proof}
 
-Sada napokon možemo riješiti i problem jednomjesnih funkcija definiranih "degeneriranim" rekurzijama poput one u~\eqref{eq:faktb} i~\eqref{eq:faktk}. Takve funkcije neće biti direktno dobivene primitivnom rekurzijom (već kompozicijom), ali će svejedno biti primitivno rekurzivne.
+Sada napokon možemo riješiti i problem jednomjesnih funkcija definiranih "degeneriranim" rekurzijama poput one u~\eqref{eq:faktb} i~\eqref{eq:faktk}. Takve funkcije neće biti direktno dobivene primitivnom rekurzijom (već kompozicijom), ali će biti primitivno rekurzivne.
 
 \begin{propozicija}\label{prop:F1prn}
 Neka je $a\in\N$, te $\f H^2$ primitivno rekurzivna funkcija. Tada je funkcija $\f F^1$, zadana s
@@ -498,6 +498,14 @@ Svaka primitivno rekurzivna funkcija je rekurzivna.
 Direktno po svojstvu najmanjeg skupa: sve inicijalne funkcije su totalne po napomeni~\ref{nap:inittot}, a parcijalno su rekurzivne po definiciji, dakle rekurzivne su. Sada samo treba primijeniti leme~\ref{lm:comprek} i~\ref{lm:prrek}.
 \end{proof}
 
+\begin{korolar}\label{kor:F1rek}
+Neka je $a\in\N$, te $\f H^2$ rekurzivna funkcija. Tada je funkcija $a\pr\f H$ također rekurzivna.
+\end{korolar}
+\begin{proof}
+Iz dokaza propozicije~\ref{prop:F1prn}
+vidimo $a\pr\f H^2=\bigl(\f C_a^1\pr\f H^2\circ(\f I_2^3,\f I_3^3)\bigr)\circ(\f Z,\f I_1^1)$. Sada tvrdnja slijedi iz propozicije~\ref{prop:konst}, korolara~\ref{kor:prnrek}, te lema~\ref{lm:comprek} i~\ref{lm:prrek}.
+\end{proof}
+
 Slično kao propoziciju~\ref{prop:symbdef}, mogli bismo dokazati da je funkcija parcijalno rekurzivna ako i samo ako je dobivena iz inicijalnih pomoću konačno mnogo primjena kompozicije, primitivne rekurzije (samo na totalne dobivene funkcije) i minimizacije (na relacije čije su karakteristične funkcije već dobivene). To bi bila neka generalizacija simboličke definicije za parcijalno rekurzivne funkcije. Ipak, najčešće ćemo pisati točkovne definicije parcijalno rekurzivnih funkcija --- a i Kleenejev teorem o normalnoj formi, koji ćemo dokazati kasnije, reći će da nam tolika općenitost nije potrebna: dovoljno je promatrati funkcije oblika $\f U\circ\mu\f T$, gdje su $\f U$ i $\f T$ primitivno rekurzivne.
 
 %Zapravo, imamo još puno za reći o primitivno rekurzivnim funkcijama; razlog zašto već sad uvodimo minimizaciju je što će se nekoliko rezultata vezanih uz definiciju po slučajevima moći jednako dokazati za primitivno rekurzivne i za rekurzivne funkcije --- a za rekurzivne funkcije će nam ti rezultati trebati kasnije, tako da ih nećemo morati ponovo dokazivati. Naime, dokazi će transformirati neke \emph{ulazne} funkcije u \emph{izlazne}, komponirajući ih s primitivno rekurzivnim funkcijama. Tada je jasno, s obzirom na to da je skup rekurzivnih funkcija zatvoren na kompoziciju (i primitivnu rekurziju) --- kao presjek dva takva skupa --- da ako ulazne funkcije budu primitivno rekurzivne, i izlazne će biti primitivno rekurzivne, a ako ulazne budu rekurzivne, i izlazne će biti rekurzivne.
@@ -619,7 +627,7 @@ Ako pak samo znamo da je $\chi_{\f R}$ rekurzivna, tada zaključujemo ovako: $f_
 Ubuduće ćemo samo napisati simboličku definiciju tražene funkcije iz zadanih funkcija, koristeći neke pomoćne primitivno rekurzivne funkcije, te kompoziciju i eventualno primitivnu rekurziju. Podrazumijevat ćemo da na kraju dokaza uvijek imamo argumentaciju poput ove u prethodnom odlomku, tako da ako su zadane funkcije primitivno rekurzivne, tada je i tražena funkcija primitivno rekurzivna, te ako su zadane funkcije rekurzivne, tada je i tražena funkcija rekurzivna. Efektivno, imamo generalizaciju napomene~\ref{nap:symbdef}, gdje polazimo od rekurzivnih funkcija umjesto od primitivno rekurzivnih.
 
 \begin{korolar}\label{kor:mj-vj}
-Brojevne relacije uređaja $\le$ i $\ge$ su primitivno rekurzivne.
+Brojevne relacije nestrogog uređaja $\le$ i $\ge$ su primitivno rekurzivne.
 \end{korolar}
 \begin{proof}
 Direktno iz primjera~\ref{pr:m-v}, propozicije~\ref{prop:kompl}, te očitih ekvivalencija
@@ -652,7 +660,8 @@ Neka je $k\in\N_+$, te $\f R^k$ i $\f P^k$ (primitivno) rekurzivne relacije iste
 \end{align}
 \end{propozicija}
 \begin{proof}
-Prvo pokažimo da skupovne i logičke definicije ekvivalentne za gornje relacije. Za $\f Q_1$ i $\f Q_2$ to je upravo definicija presjeka i unije. Za $\f Q_3$, \begin{equation}
+Prvo pokažimo da skupovne i logičke definicije ekvivalentne za upravo definirane relacije. Za $\f Q_1$ i $\f Q_2$ to je upravo definicija presjeka i unije. Za $\f Q_3$ imamo
+    \begin{equation}
     \vec x\in(\f R\setminus\f P)\kompl\Leftrightarrow\lnot(\vec x\in\f R\land\vec x\not\in\f P)\Leftrightarrow\vec x\not\in\f R\lor\vec x\in\f P\Leftrightarrow\vec x\in \f R\to\vec x\in\f P\text.
 \end{equation}
 Za $\f Q_4$, logička definicija kaže da je $\chi_{\f R}(\vec x)=\chi_{\f P}(\vec x)$. Njena negacija kaže da su ta dva broja različiti, a kako su oba iz skupa $\{0,1\}$, mora jedan od njih biti $0$ a drugi $1$. To upravo znači da se $\vec x$ nalazi u točno jednom od skupova $\f R$ i $\f P$, dakle $\vec x\in\f R\mathbin\triangle\f P$.
@@ -741,7 +750,7 @@ Za uniju, možemo opet iskoristiti De Morganovo pravilo i propoziciju~\ref{prop:
 Napokon možemo dokazati teorem o grananju za totalne funkcije, samo prethodno moramo precizno definirati pojmove.
 
 \begin{definicija}\label{def:gr}
-Neka su $k,l\in\N_+$, neka su $G_0^k$, $G_1^k$, $G_2^k$,~\ldots, $G_l^k$ funkcije, te neka su $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u parovima disjunktne relacije, sve iste mjesnosti. Za funkciju $F^k$ definiranu s
+Neka su $k,l\in\N_+$, neka su $G_0^k$, $G_1^k$, $G_2^k$,~\ldots, $G_l^k$ funkcije, te neka su $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u parovima disjunktne relacije iste mjesnosti. Za funkciju $F^k$ definiranu s
 \begin{align}
 \SwapAboveDisplaySkip
     \dom{F}&:=\bigcup_{i=0}^l\,(\dom{G_i}\cap R_i)\text{, \quad gdje je }
@@ -773,13 +782,13 @@ Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_
 Primijetimo: ovdje ne smijemo ispustiti $\f G_0$, jer $\varnothing^k$ nije (primitivno) rekurzivna!
 
 \begin{proof}
-Prvo, primijetimo da je $\f R_0:=\bigl(\bigcup\nolimits_{i=1}^{\,l}\f R_i\bigr)\!\kompl$ (primitivno) rekurzivna, prema propozicijama~\ref{prop:skupl} i~\ref{prop:kompl}. Dalje je stvar jednostavne aritmetike, jer tvrdimo da je
+Prvo primijetimo da je $\f R_0:=\bigl(\bigcup\nolimits_{i=1}^{\,l}\f R_i\bigr)\!\kompl$ (primitivno) rekurzivna, prema propozicijama~\ref{prop:skupl} i~\ref{prop:kompl}. Dalje je stvar jednostavne aritmetike, jer tvrdimo da je
 \begin{equation}\label{eq:grek}
     \f F=\chi_{\f R_0}\cdot \f G_0+\chi_{\f R_1}\cdot \f G_1+\chi_{\f R_2}\cdot \f G_2+\dotsb+\chi_{\f R_l}\cdot\f G_l\text,
 \end{equation}
 dakle dobivena kompozicijom iz (primitivno) rekurzivnih $\chi_{\f R_i}$, $\f G_i$, te $\f{mul}^2$ i $\f{add}^{l+1}$.
 
-Doista, neka je $\vec x\in\N^k$ proizvoljan, i promotrimo gornju funkcijsku jednakost u $\vec x$. Ako je $\vec x$ u nekoj $\f R_i$, tada je $\chi_{\f R_i}(\vec x)=1$, pa je $i$-ti pribrojnik u~\eqref{eq:grek} (brojeći od nule) jednak $G_i(\vec x)$. Štoviše, jer su uvjeti u parovima disjunktni, $\vec x\not\in\f R_j$ za sve $j\in[1..l]\setminus\{i\}$, dok iz definicije $\f R_0$ slijedi također $\vec x\not\in\f R_0$, dakle svi ostali pribrojnici imaju faktor $0$, pa iznose $0$ i ne utječu na zbroj. Dakle ako je $\vec x\in\f R_i$, tada je $\f F(\vec x)=\f G_i(\vec x)$.
+    Doista, neka je $\vec x\in\N^k$ proizvoljan, i promotrimo funkcijsku jednakost~\ref{eq:grek} u $\vec x$. Ako je $\vec x$ u nekoj $\f R_i$, tada je $\chi_{\f R_i}(\vec x)=1$, pa je $i$-ti pribrojnik u~\eqref{eq:grek} (brojeći od nule) jednak $G_i(\vec x)$. Štoviše, jer su uvjeti u parovima disjunktni, $\vec x\not\in\f R_j$ za sve $j\in[1..l]\setminus\{i\}$, dok iz definicije $\f R_0$ slijedi također $\vec x\not\in\f R_0$, dakle svi ostali pribrojnici imaju faktor $0$, pa iznose $0$ i ne utječu na zbroj. Dakle ako je $\vec x\in\f R_i$, tada je $\f F(\vec x)=\f G_i(\vec x)$.
 
 S druge strane, ako $\vec x$ nije ni u jednoj $\f R_i$, tada po De Morganovom pravilu nije ni u njihovoj uniji, dakle $\vec x\in\f R_0$, pa je početni pribrojnik u~\eqref{eq:grek} jednak $\f G_0(\vec x)$, a svi ostali pribrojnici, kao i u prethodnom odlomku, jednaki su $0$. Dakle tada je $\f F(\vec x)=\f G_0(\vec x)$, kao što i treba biti.
 \end{proof}
@@ -829,13 +838,13 @@ Naglasimo, totalnost funkcije $\f F$ je esencijalna. Izbacivanjem već jedne to�
 \begin{equation}
     \f F(\vec x)=\begin{cases}
     \f F(\vec c_1),&\vec x=\vec c_1\\
-    \f F(\vec c_2),&\vec x=\vec c_2\\
+    %\f F(\vec c_2),&\vec x=\vec c_2\\
     &\vdots\\
     \f F(\vec c_l),&\vec x=\vec c_l\\
     \f G(\vec x),&\text{inače}
     \end{cases}=\begin{cases}
     \f C^k_{\f F(\vec c_1)}(\vec x),&\vec x\in\{\vec c_1\}\\
-    \f C^k_{\f F(\vec c_2)}(\vec x),&\vec x\in\{\vec c_2\}\\
+    %\f C^k_{\f F(\vec c_2)}(\vec x),&\vec x\in\{\vec c_2\}\\
     &\vdots\\
     \f C^k_{\f F(\vec c_l)}(\vec x),&\vec x\in\{\vec c_l\}\\
     \f G(\vec x),&\text{inače}
@@ -844,20 +853,13 @@ Naglasimo, totalnost funkcije $\f F$ je esencijalna. Izbacivanjem već jedne to�
 dakle $\f F$ je dobivena grananjem iz funkcija $\f C^k_{\f F(\vec c_i)}$ (koje su primitivno rekurzivne po propoziciji~\ref{prop:konst}, jer je $\f F(\vec c_i)\in\N$ zbog totalnosti od $\f F$), funkcije $\f G$ koja je (primitivno) rekurzivna po pretpostavci propozicije, te relacija $\{\vec c_i\}$ koje su primitivno rekurzivne po propoziciji~\ref{lm:r1prn}. Po teoremu~\ref{tm:grek}, $\f F$ je također (primitivno) rekurzivna.
 \end{proof}
 
-Sada napokon možemo formalizirati intuiciju \emph{lookup}-tablice, koja kaže da su funkcije zadane na konačnom skupu vrlo jednostavno izračunljive.
-
-\begin{korolar}\label{kor:konprom0}
-Neka je $k\in\N_+$, te $\f F^k$ totalna funkcija koja poprima vrijednost $0$ svuda osim u konačno mnogo točaka. (Kažemo da je $\f F$ \emph{s konačnim nosačem}.) Tada je $\f F$ primitivno rekurzivna.
-\end{korolar}
-\begin{proof}
-Direktno iz propozicije~\ref{prop:konprom} i činjenice da je nulfunkcija primitivno rekurzivna (propozicija~\ref{prop:konst}). Naime, $\f F^k$ i $\f C_0^k$ se razlikuju samo na nosaču od $\f F$, što je po pretpostavci konačan skup.
-\end{proof}
+Sada napokon možemo formalizirati intuiciju \emph{lookup}-tablice, koja kaže da su funkcije zadane na konačnom skupu izračunljive. %Za totalnu brojevnu funkciju kažemo da je \emph{s konačnim nosačem} ako poprima vrijednost $0$ svuda osim u konačno mnogo točaka.
 
 \begin{korolar}\label{kor:kon0}
-Neka je\, $\f g$ konačna brojevna funkcija (takva da je\, $\dom{\f g}$ konačan skup). Tada postoji primitivno rekurzivna funkcija\, $\f F$ takva da je\, $\f F|_{\dom{\f g}}=\f g$.
+Neka je $k\in\N_+$, te $\f g^k$ konačna funkcija ($\dom{\f g}$ je konačan skup). Tada postoji primitivno rekurzivna funkcija\, $\f F$ takva da je\, $\f F|_{\dom{\f g}}=\f g$.
 \end{korolar}
 \begin{proof}
-    Iz prethodnog korolara: za $\f F$ uzmemo $\tilde{\f g}$, proširenje funkcije $\f g$ nulom.
+    Za $\f F$ uzmemo $\tilde{\f g}$, proširenje funkcije $\f g$ nulom. Tada se $\f F^k$ i $\f C_0^k$ razlikuju samo na konačnom skupu $\dom{\f g}$, pa tvrdnja slijedi iz propozicija~\ref{prop:konprom} i~\ref{prop:konst}. 
 \end{proof}
 
 \subsection{Ograničene sume, produkti i brojenje}\label{sec:sumprodcount}
@@ -879,65 +881,41 @@ Jedan jednostavan primjer smo već vidjeli: s jedne (statičke) strane, za svaki
 odnosno $\f I_{k+1}^{k+1}=\f C_0^k\pr\f{Sc}\circ\f I_{k+2}^{k+2}$, ali $\f I_{k+2}^{k+2}$ nije ni po čemu jednostavnija od $\f I_{k+1}^{k+1}$.
 \end{primjer}
 
-Za početak dokažimo "rekurzivnu verziju" propozicije~\ref{prop:F1prn}.
-
-\begin{korolar}\label{kor:F1rek}
-Neka je $a\in\N$, te $\f H^2$ rekurzivna funkcija. Tada je funkcija $a\pr\f H$ također rekurzivna.
-\end{korolar}
-\begin{proof}
-Iz dokaza propozicije~\ref{prop:F1prn}
-vidimo $a\pr\f H^2=\bigl(\f C_a^1\pr\f H^2\circ(\f I_2^3,\f I_3^3)\bigr)\circ(\f Z,\f I_1^1)$. Sada tvrdnja slijedi iz propozicije~\ref{prop:konst}, korolara~\ref{kor:prnrek}, te lema~\ref{lm:comprek} i~\ref{lm:prrek}.
-\end{proof}
+%Za početak dokažimo "rekurzivnu verziju" propozicije~\ref{prop:F1prn}.
 
 %\subsection{Ograničene sume i produkti}
 
-Evo malo kompliciranijeg primjera: u lemi~\ref{lm:addmulk}, dokazali smo da je za svaki $k$, funkcija $\f{add}^k$ primitivno rekurzivna: ako joj damo $k$ brojeva, ili izračunljivih funkcija, ona će ih zbrojiti (funkcije će zbrojiti na presjeku njihovih domena). Sada ćemo napraviti dinamičku varijantu: operator $\sum$ koji za unaprijed zadanu \emph{totalnu} funkciju $\f G$ prima broj koji kaže koliko prvih njenih vrijednosti treba zbrojiti, te eventualno ostale argumente od $\f G$ ako je ona mjesnosti veće od $1$.
+Evo malo kompliciranijeg primjera: u lemi~\ref{lm:addmulk}, dokazali smo da je za svaki $k$, funkcija $\f{add}^k$ primitivno rekurzivna; ako joj damo $k$ brojeva, ili izračunljivih funkcija, ona će ih zbrojiti (funkcije će zbrojiti na presjeku njihovih domena). Sada ćemo napraviti dinamičku varijantu: operator $\sum$ koji za unaprijed zadanu \emph{totalnu} funkciju $\f G$ prima broj koji kaže koliko prvih njenih vrijednosti treba zbrojiti, te eventualno ostale argumente od $\f G$ ako je ona mjesnosti veće od $1$. Isto ćemo napraviti za množenje.
 
-\begin{lema}\label{lm:sumrek}
-Neka je $k\in\N_+$, te $\f G^k$\! (primitivno) rekurzivna funkcija. Tada je i funkcija $\f F_1^k$, zadana s
+\begin{lema}\label{lm:sumprodrek}
+    Neka je $k\in\N_+$, te $\f G^k$\! (primitivno) rekurzivna funkcija. Tada su (primitivno) rekurzivne i funkcije $\f F_1^k$ i $\f F_2^k$, zadane s
 \begin{equation}
-    \f F_1(\vec x,y):=\sum_{i<y}\f G(\vec x,i)\text,
+    \f F_1(\vec x,y):=\sum_{i<y}\f G(\vec x,i)\text,\qquad
+    \f F_2(\vec x,y):=\prod_{i<y}\f G(\vec x,i)\text.
 \end{equation}
-također (primitivno) rekurzivna.
 \end{lema}
 \begin{proof}
-    Kao što smo rekli, prirodno je funkciju $\f F_1$ zadati primitivnom rekurzijom. Jednom kad imamo tu ideju, nije teško napisati potrebne jednadžbe.
+    Kao što smo rekli, prirodno ih je zadati primitivnom rekurzijom.
     \begin{align}
-        \label{eq:sumG}\f F_1(\vec x,0)&:=0
+        \label{eq:sumG1}\f F_1(\vec x,0)&:=0&\f F_2(\vec x,0)&:=1
         %& \f G^{k-1}(\vec x)&:=0
         \\
-        \label{eq:sumH}
-        \f F_1(\vec x,y+1)&:=\f F_1(\vec x,y)+\f G(\vec x,y)
+        \label{eq:sumH1}
+        \f F_1(\vec x,y+1)&:=\f F_1(\vec x,y)+\f G(\vec x,y)&
+        \f F_2(\vec x,y+1)&:=\f F_2(\vec x,y)\cdot\f G(\vec x,y)
         %& \f H^{k+1}(\vec x,y,z)&:=z+\f G(\vec x,y)
     \end{align}
-Treba primijetiti da su svi gornji pozivi funkcija mjesnosti $k$, dakle $\vec x$ je duljine $k-1$, odnosno $x$-eva uopće nema ako je $k=1$. To ne smeta u napisanim jednadžbama jer nijednu funkciju ne pozivamo samo na $\vec x$, ali treba uzeti u obzir da je gornjim jednadžbama napisana obična primitivna rekurzija (definicija~\ref{def:pr}) za $k>1$, a degenerirana primitivna rekurzija (propozicija~\ref{prop:F1prn}, ili korolar~\ref{kor:F1rek}) za $k=1$.
+Treba primijetiti da su svi ti pozivi funkcija mjesnosti $k$, dakle $\vec x$ je duljine $k-1$, odnosno $x$-eva uopće nema ako je $k=1$. To ne smeta u napisanim jednadžbama jer nijednu funkciju ne pozivamo samo na $\vec x$, ali treba uzeti u obzir da je tim jednadžbama napisana obična primitivna rekurzija (definicija~\ref{def:pr}) za $k>1$, a degenerirana primitivna rekurzija (propozicija~\ref{prop:F1prn}, ili korolar~\ref{kor:F1rek}) za $k=1$.
 \end{proof}
-
-Sasvim analogno, možemo računati i ograničene produkte. 
-
-\begin{lema}\label{lm:prodrek}
-Neka je $k\in\N_+$, te $\f G^k$\! (primitivno) rekurzivna funkcija. Tada je i funkcija $\f F_2^k$, zadana s
-\begin{equation}
-    \f F_2(\vec x,y):=\prod_{i<y}\f G(\vec x,i)\text,
-\end{equation}
-također (primitivno) rekurzivna.
-\end{lema}
-\begin{proof}
-    Svaki programer zna da se varijable koje računaju produkte inicijaliziraju na $1$ (dok se one za sume inicijaliziraju na $0$). To, i korištenje funkcije $\f{mul}^2$ umjesto $\f{add}^2$ u tijelu petlje, jedine su razlike u odnosu na dokaz leme~\ref{lm:sumrek}.
-    \begin{align}
-        \f F_2(\vec x,0)&:=1\\
-        \f F_2(\vec x,y+1)&:=\f F_2(\vec x,y)\cdot\f G(\vec x,y)
-    \end{align}
-Vrijedi ista napomena o degeneriranoj primitivnoj rekurziji za $k=1$.
-\end{proof}
+%Sasvim analogno, možemo računati i ograničene produkte. 
 
 \begin{napomena}\label{nap:sumprodH}
-Upravo dokazane leme omogućuju nam da zadamo broj pribrojnika ili faktora kao argument funkcije. Naravno, tada možemo i \emph{izračunati} broj pribrojnika odnosno faktora kao neku izračunljivu funkciju ostalih argumenata. Precizno, za $k>1$, možemo računati i funkcije
-\begin{align}
-\SwapAboveDisplaySkip
-    \f F_3^{k-1}(\vec x)&:=\sum_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)\\
-    \text{i\quad}\f F_4^{k-1}(\vec x)&:=\prod_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)\text,
-\end{align}
+Upravo dokazana lema omogućuju nam da zadamo broj pribrojnika ili faktora kao argument funkcije. Naravno, tada možemo i \emph{izračunati} broj pribrojnika odnosno faktora kao neku izračunljivu funkciju ostalih argumenata. Precizno, za $k>1$, možemo računati i funkcije
+\begin{equation}
+%\SwapAboveDisplaySkip
+    \f F_3^{k-1}(\vec x):=\sum_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)
+    \text{\quad i\quad}\f F_4^{k-1}(\vec x):=\prod_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)\text,
+\end{equation}
 gdje je $\f H^{k-1}$ neka izračunljiva funkcija, jednostavnim komponiranjem funkcije $\f F_1$ odnosno $\f F_2$ s koordinatnim projekcijama i s funkcijom $\f H$.
 
 Recimo, za $k=3$ vrijedi $\f F_4^2(x,y)=\prod_{i<\f H(x,y)}\f G(x,y,i)=\f F_2^3\bigl(x,y,\f H(x,y)\bigr)$.
@@ -1073,5 +1051,5 @@ U iskazu ove propozicije nismo trebali stavljati riječ "primitivno" u zagrade, 
 
 \begin{napomena}\label{nap:muSc}
 Ista napomena o uključenoj gornjoj granici, poput~\ref{nap:kvantSc}, vrijedi i ovdje:
-$\mu y\le\f H(\vec x)$ jednostavno shvaćamo kao $\mu y<\f{Sc}\bigl(\f H(\vec x)\bigr)$, a kompozicijom s inicijalnom funkcijom $\f{Sc}$ sigurno nismo pokvarili izračunljivost funkcije $\f H$.
+$\mu y\le\f H(\vec x)$ jednostavno shvaćamo kao $\mu y<\f{Sc}\bigl(\f H(\vec x)\bigr)$, a kompozicijom s inicijalnom funkcijom $\f{Sc}$ sigurno nismo pokvarili izračunljivost granice $\f H$.
 \end{napomena}
