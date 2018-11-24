@@ -7,24 +7,24 @@ Dokazali smo brojne teoreme koji pokazuju ekvivalentnost različitih modela iz\-
 \begin{teorem}[Teorem ekvivalencije za brojevne funkcije]
 Neka je $k\in\N_+$, te\, $\f f\colon\N^k\rightharpoonup\N$ brojevna funkcija mjesnosti $k$. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
-    \item[\t{(r)}] $\f f$ je RAM-izračunljiva (\,$f\in\mathcal Comp_k$);
-    \item[\t{(m)}] $\f f$ je makro-izračunljiva (postoji makro-algoritam koji računa $\f f$);
-    \item[\t{(p)}] $\f f$ je parcijalno rekurzivna (\,$\f f$ je dobivena iz inicijalnih pomoću konačno mnogo primjena kompozicije, primitivne rekurzije i minimizacije);
-    \item[\t{(i)}] $\f f$ ima indeks (postoji $e\in\N$ takav da je $\f f=\kf e^k$);
-    \item[\t{(t)}] $\beta\f f$ je Turing-izračunljiva (postoji Turingov stroj koji računa $\beta\f f$).
+    \item[\texttt{\textup{(r)}}] $\f f$ je RAM-izračunljiva (\,$f\in\mathcal Comp_k$);
+    \item[\texttt{\textup{(m)}}] $\f f$ je makro-izračunljiva (postoji makro-algoritam koji računa $\f f$);
+    \item[\texttt{\textup{(p)}}] $\f f$ je parcijalno rekurzivna (\,$\f f$ je dobivena iz inicijalnih pomoću konačno mnogo primjena kompozicije, primitivne rekurzije i minimizacije);
+    \item[\texttt{\textup{(i)}}] $\f f$ ima indeks (postoji $e\in\N$ takav da je $\f f=\kf e^k$);
+    \item[\texttt{\textup{(t)}}] $\beta\f f$ je Turing-izračunljiva (postoji Turingov stroj koji računa $\beta\f f$).
 \end{itemize}
 \end{teorem}
 \begin{proof}
 Sve bitno u ovom teoremu smo već dokazali. Ponovimo samo glavne ideje.
 
-\begin{labeling}{\t{(a$\Rightarrow$b)}}
-    \item[\t{(r$\Rightarrow$m)}] Ovo je trivijalno: $\mathcal Prog\subset\mathcal{MP}rog$ (svaki RAM-program je ujedno i makro-program) --- napomena~\ref{nap:rem}.
-    \item[\t{(m$\Rightarrow$r)}] Svaki makro-program $Q\in\mathcal{MP}rog$ ekvivalentan je svojem spljoštenju $Q^\flat\in\mathcal Prog$ --- teorem~\ref{tm:rem}.
-    \item[\t{(p$\Rightarrow$r)}] \emph{Postorder}-obilaskom njene simboličke definicije, kompajliramo funkciju $\f f$ u RAM-program --- teorem~\ref{tm:pir}.
-    \item[\t{(r$\Rightarrow$i)}] Ako RAM-program $P\in\mathcal Prog$ računa $\f f$, tada je njegov kod $e:=\kprog P\in\f{Prog}$ jedan indeks za $ \f f$ --- propozicija~\ref{prop:computeind}.
-    \item[\t{(i$\Rightarrow$p)}] Funkcija $\f f^k$ s indeksom $e$ dobivena je kompozicijom $\f{comp}_k$, konstante $\f C_e^k$ i koordinatnih projekcija --- korolar \ref{kor:iip}.
-    \item[\t{(t$\Rightarrow$p)}] Funkciju $\f f$ možemo dobiti kompozicijom iz parcijalno rekurzivnih funkcija $\f{blh}$, $\N\beta\f f$ i $\f{bin}^k$ --- teorem~\ref{tm:btip}.
-    \item[\t{(p$\Rightarrow$t)}] Funkciju $\N\beta\f f$ možemo dobiti restrikcijom na $\im{\f{bin}^k}$ kompozicije funkcija $\f{bin}^1$, $\f f$ i $\f{arg}_1$,~\ldots, $\f{arg}_k$ --- teorem~\ref{tm:pibt}.
+\begin{labeling}{\texttt{(a$\Rightarrow$b)}}
+    \item[\texttt{(r$\Rightarrow$m)}] Ovo je trivijalno: $\mathcal Prog\subset\mathcal{MP}rog$ (svaki RAM-program je ujedno i makro-program) --- napomena~\ref{nap:rem}.
+    \item[\texttt{(m$\Rightarrow$r)}] Svaki makro-program $Q\in\mathcal{MP}rog$ ekvivalentan je svojem spljoštenju $Q^\flat\in\mathcal Prog$ --- teorem~\ref{tm:rem}.
+    \item[\texttt{(p$\Rightarrow$r)}] \emph{Postorder}-obilaskom njene simboličke definicije, kompajliramo funkciju $\f f$ u RAM-program --- teorem~\ref{tm:pir}.
+    \item[\texttt{(r$\Rightarrow$i)}] Ako RAM-program $P\in\mathcal Prog$ računa $\f f$, tada je njegov kod $e:=\kprog P\in\f{Prog}$ jedan indeks za $ \f f$ --- propozicija~\ref{prop:computeind}.
+    \item[\texttt{(i$\Rightarrow$p)}] Funkcija $\f f^k$ s indeksom $e$ dobivena je kompozicijom $\f{comp}_k$, konstante $\f C_e^k$ i koordinatnih projekcija --- korolar \ref{kor:iip}.
+    \item[\texttt{(t$\Rightarrow$p)}] Funkciju $\f f$ možemo dobiti kompozicijom iz parcijalno rekurzivnih funkcija $\f{blh}$, $\N\beta\f f$ i $\f{bin}^k$ --- teorem~\ref{tm:btip}.
+    \item[\texttt{(p$\Rightarrow$t)}] Funkciju $\N\beta\f f$ možemo dobiti restrikcijom na $\im{\f{bin}^k}$ kompozicije funkcija $\f{bin}^1$, $\f f$ i $\f{arg}_1$,~\ldots, $\f{arg}_k$ --- teorem~\ref{tm:pibt}.
 \end{labeling}
 Dijagramatski, usmjeren graf
 \begin{tikzcd}
@@ -50,19 +50,19 @@ Za jednomjesne funkcije imamo korolar~\ref{kor:peuf}, koji je zgodniji zbog jedn
 \begin{teorem}[Teorem ekvivalencije za jezične funkcije]
 Neka je $\Sigma\not=\emptyset$ abeceda, te $\varphi\colon\Sigma^*\rightharpoonup\Sigma^*$ jezična funkcija nad njom. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
-    \item[\t{(T)}] $\varphi$ je Turing-izračunljiva;
-    \item[\t{(P)}] $\N\varphi$ je parcijalno rekurzivna;
-    \item[\t{(R)}] $\N\varphi$ je RAM-izračunljiva.
+    \item[\texttt{\textup{(T)}}] $\varphi$ je Turing-izračunljiva;
+    \item[\texttt{\textup{(P)}}] $\N\varphi$ je parcijalno rekurzivna;
+    \item[\texttt{\textup{(R)}}] $\N\varphi$ je RAM-izračunljiva.
 \end{itemize}
 \end{teorem}
 \begin{proof}
 Napomenimo, druga i treća stavka zapravo predstavljaju po $(\card\Sigma)!$ tvrdnji --- po jednu za svako kodiranje od $\Sigma$ --- ali sve su one ekvivalentne po korolaru~\ref{kor:ikojiNSigma}.
 
 Opet, sve bitno je već dokazano; slijedi rekapitulacija glavnih ideja.
-\begin{labeling}{\t{(A$\Rightarrow$B)}}
-\item[\t{(T$\Rightarrow$P)}] Kodirajući sve dijelove Turing-izračunavanja s rječju zadanog koda, dobijemo parcijalnu rekurzivnost funkcije $\N\varphi$ --- teorem~\ref{tm:tikp}.
-\item[\t{(P$\Rightarrow$R)}] Jednostavno kompajliramo funkciju $\N\varphi$ u RAM-program --- teorem~\ref{tm:pir}.
-\item[\t{(R$\Rightarrow$T)}] Transpiliranjem RAM-programa koji računa $\N\varphi$, u pet faza dobijemo Turingov stroj koji računa $\varphi$ --- teorem~\ref{tm:krit}.\qedhere
+\begin{labeling}{\texttt{(A$\Rightarrow$B)}}
+\item[\texttt{(T$\Rightarrow$P)}] Kodirajući sve dijelove Turing-izračunavanja s rječju zadanog koda, dobijemo parcijalnu rekurzivnost funkcije $\N\varphi$ --- teorem~\ref{tm:tikp}.
+\item[\texttt{(P$\Rightarrow$R)}] Jednostavno kompajliramo funkciju $\N\varphi$ u RAM-program --- teorem~\ref{tm:pir}.
+\item[\texttt{(R$\Rightarrow$T)}] Transpiliranjem RAM-programa koji računa $\N\varphi$, u pet faza dobijemo Turingov stroj koji računa $\varphi$ --- teorem~\ref{tm:krit}.\qedhere
 \end{labeling}
 \end{proof}
 
@@ -71,15 +71,15 @@ Karakteristična funkcija je totalna, dakle za izračunljive jezike mora biti re
 \begin{teorem}[Teorem ekvivalencije za jezike]
 Neka je $\Sigma\not=\emptyset$ abeceda, te $L\subseteq\Sigma^*$ jezik nad njom. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
-    \item[\t{(\textsc r)}] relacija $\kr L:=\{\kr w\mid w\in L\}$ je rekurzivna;
-    \item[\t{(\textsc o)}] postoji Turingov odlučivač $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_\mathit{true},q_\mathit{false})$ koji prepoznaje $L$.
+    \item[\texttt{\textup{(\textsc r)}}] relacija $\kr L:=\{\kr w\mid w\in L\}$ je rekurzivna;
+    \item[\texttt{\textup{(\textsc o)}}] postoji Turingov odlučivač $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_\mathit{true},q_\mathit{false})$ koji prepoznaje $L$.
 \end{itemize}
 \end{teorem}
 \begin{proof}
-Kao i u prethodnom teoremu, stavka \t{(\textsc r)} je zapravo $(\card\Sigma)!$ tvrdnji. One su ekvivalentne po tranzitivnosti, jer je svaka od njih ekvivalentna sa stavkom \t{(\textsc o)}.
-\begin{labeling}{\t{(\textsc a$\Rightarrow$\textsc b)}}
-\item[\t{(\textsc r$\Rightarrow$\textsc o)}] Malom modifikacijom kraja konstrukcije transpiliranog Turingovog stro\-ja koji računa $\N^{-1}\chi_{\kr L}$ dobijemo odlučivač --- teorem~\ref{tm:krio}.
-\item[\t{(\textsc o$\Rightarrow$\textsc r)}] Malom modifikacijom kodiranja stanja, funkcije prijelaza i Turing-iz\-ra\-ču\-na\-va\-nja odlučivača dobijemo rekurzivnost od $\kr L$ --- teorem~\ref{tm:oikr}.\qedhere
+Kao i u prethodnom teoremu, stavka \texttt{(\textsc r)} je zapravo $(\card\Sigma)!$ tvrdnji. One su ekvivalentne po tranzitivnosti, jer je svaka od njih ekvivalentna sa stavkom \texttt{(\textsc o)}.
+\begin{labeling}{\texttt{(\textsc a$\Rightarrow$\textsc b)}}
+\item[\texttt{(\textsc r$\Rightarrow$\textsc o)}] Malom modifikacijom kraja konstrukcije transpiliranog Turingovog stro\-ja koji računa $\N^{-1}\chi_{\kr L}$ dobijemo odlučivač --- teorem~\ref{tm:krio}.
+\item[\texttt{(\textsc o$\Rightarrow$\textsc r)}] Malom modifikacijom kodiranja stanja, funkcije prijelaza i Turing-iz\-ra\-ču\-na\-va\-nja odlučivača dobijemo rekurzivnost od $\kr L$ --- teorem~\ref{tm:oikr}.\qedhere
 \end{labeling}
 \end{proof}
 

@@ -234,11 +234,11 @@ varijantom Peanove aritmetike, ali zapravo možemo i lakše: budući da je sve �
 
 Napomenimo samo da ne promatramo logiku prvog reda s jednakošću --- nećemo uopće imati potrebu promatrati jednakost, a kamoli kao relacijski simbol s nekim posebnim svojstvima. Usporedba s nulom za instrukciju \dec\ bit će sintaksna.
 
-Vrijeme je da počnemo pričati formalnije: krenimo od RAM-programa $P$, i mjesnosti $k$ (drugim riječima, od RAM-algoritma $P^k$). Označimo s $n:=n_P$ duljinu programa $P$, i s $m:=m_{P^k}$ širinu algoritma $P^k$. Signatura $\sigma$ nad kojom ćemo graditi formule za naš problem odlučivanja imat će:
+Vrijeme je da počnemo pričati formalnije: krenimo od RAM-programa $P$, i mjesnosti $k$ (drugim riječima, od RAM-algoritma $P^k$). Označimo s $n:=n_P$ duljinu programa $P$, i s $m:=m_{P^k}$ širinu algoritma $P^k$. Signatura $\sigma$, nad kojom ćemo graditi formule za naš problem zaključivanja, imat će:
 \begin{itemize}
     \item jedan konstantski simbol $\mathsf 0$;
     \item jedan jednomjesni funkcijski simbol $\mathsf s$;
-    \item $n+1$ $m$-mjesnih relacijskih simbola $R_0$,~$R_1$,~\ldots,~$R_n$.
+    \item $n+1$ $m$-mjesnih relacijskih simbola $R_0^m$,~$R_1^m$,~\ldots,~$R_n^m$.
 \end{itemize}
 
 Za svaki $u\in\N$, zatvoreni term $\mathsf s(\mathsf s(\dotsb(\mathsf s(\mathsf0))\dotsb))$ u kojem ima $u$ pojava funkcijskog simbola $\mathsf s$, skraćeno označavamo s $\overline u$ --- dakle $\overline 0=\mathsf 0$, $\overline 1=\mathsf s(\mathsf0)$, $\overline 2=\mathsf s\bigl(\mathsf s(\mathsf0)\bigr)$ itd. Za proizvoljni $\vec u=(u_1,u_2,\dotsc,u_k)\in\N^k$, definiramo formulu

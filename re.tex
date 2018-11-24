@@ -191,7 +191,7 @@ Pretpostavimo da su $a,b,c,d\in\N$ takvi da vrijedi $\f{pair}(a,b)=\f{pair}(c,d)
 \end{equation}
 i analogno $b=d$, pa je $(a,b)=(c,d)$, odnosno $\f{pair}$ je injekcija.
 
-Za primitivnu rekurzivnost slike, koristimo istu tehniku kao u dokazu korolara~\ref{kor:Seqprn}: $p\in\im{\f{pair}}\Longleftrightarrow\bigl(\exists(x,y)\in\N^2\bigr)\bigl(p=\f{pair}(x,y)\bigr)$, i jedini kandidat za $x$ odnosno $y$ je $\f{fst}(p)$ odnosno $\f{snd}(p)$. Dakle, vrijedi
+Za primitivnu rekurzivnost slike, koristimo istu tehniku kao u dokazu korolara~\ref{kor:Seqprn}: $p\in\im{\f{pair}}\Longleftrightarrow\bigl(\exists\,(x,y)\in\N^2\bigr)\bigl(p=\f{pair}(x,y)\bigr)$, i jedini kandidat za $x$ odnosno $y$ je $\f{fst}(p)$ odnosno $\f{snd}(p)$. Dakle, vrijedi
     $p\in\im{\f{pair}}\Longleftrightarrow p=\f{pair}\bigl(\f{fst}(p),\f{snd}(p)\bigr)$,
 što je primitivno rekurzivno jer su $\f{pair}$, $\f{fst}$, $\f{snd}$ i $\chi_=$ takve.
 \end{proof}
@@ -241,7 +241,7 @@ Za ($\subseteq$), iz $\vec x\in\exists_*\exists_*P$ slijedi da postoji $y\in\N$ 
 \end{proof}
 
 \begin{napomena}
-Ista tvrdnja bi se mogla dokazati za dva univerzalna kvantifikatora uzastopce. Zaključujemo da nizanje kvantifikatora iste vrste ne otežava bitno problem (u smislu postojanja algoritma, ne u smislu performansi). Ipak, ispreplitanje kvantifikatora ($\forall\,\exists\,\forall\dotsm$) općenito otežava probleme koje promatramo. Recimo, totalnost: $\kf e^2$ je totalna ako i samo ako vrijedi $\forall x_1\forall x_2\,\exists n\,\f{Final}(\kr{x_1,x_2},e,n)$, i može se pokazati da je to bitno teže od bilo kakvog problema koji sadrži samo egzistencijalne ili samo univerzalne kvantifikatore, i nakon toga rekurzivnu relaciju. Ideja da problemi postaju sve teži kako dodajemo sve više kvantifikatora, uvijek suprotne vrste od one koju smo upravo dodali, formalizirana je u pojmu \emph{aritmetičke hijerarhije}. Definiciju i neke osnovne teoreme možete naći u~\cite{skr:Vuk}, a puno više detalja u~\cite{shoenfield}.
+Ista tvrdnja bi se mogla dokazati za dva univerzalna kvantifikatora uzastopce. Zaključujemo da nizanje kvantifikatora iste vrste ne otežava bitno problem (u smislu postojanja algoritma, ne u smislu performansi). Ipak, ispreplitanje kvantifikatora ($\forall\,\exists\,\forall\dotsm$) općenito otežava probleme koje promatramo. Uzmimo totalnost: $\kf e^2$ je totalna ako i samo ako vrijedi $\forall x_1\forall x_2\,\exists n\,\f{Final}(\kr{x_1,x_2},e,n)$, i može se pokazati da je to bitno teže od bilo kakvog problema koji sadrži samo egzistencijalne ili samo univerzalne kvantifikatore, i nakon toga rekurzivnu relaciju. Ideja da problemi postaju sve teži kako dodajemo sve više kvantifikatora, uvijek suprotne vrste od one koju smo upravo dodali, formalizirana je u pojmu \emph{aritmetičke hijerarhije}. Definiciju i neke osnovne teoreme možete naći u~\cite{skr:Vuk}, a puno više detalja u~\cite{shoenfield}.
 \end{napomena}
 
 Jednostavna posljedica upravo dokazanog rezultata i projekcijske karakterizacije je da projekcija ne može otežati već poluodlučiv problem.
