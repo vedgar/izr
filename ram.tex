@@ -99,10 +99,10 @@ Za skupove brojeva koristimo standardne oznake $\mathbb P\subset
 Brojevne izračunljive funkcije i relacije označavamo posebnim fontom: dok nam $g$ označava proizvoljnu funkciju, $\f{g}$ nam označava funkciju za koju imamo neku vrstu algoritma. U tom smislu, $g(x)$ označava uobičajenu funkcijsku vrijednost (drugu komponentu uređenog para u $g$ čija je prva komponenta $x$), dok $\f{g}(x)$ označava izlazni podatak algoritma za $\f{g}$ pokrenutog s ulaznim podatkom $x$. Ipak, to se odnosi samo na funkcijski zapis: inače ćemo koristiti uobičajene matematičke oznake gdje god možemo. Recimo, pisat ćemo $x+y+z$ za zbroj tri broja, $a^b$ za potenciranje, $m\mid n$ za djeljivost, ili pak $p\in\mathbb P$ za prim-brojeve. No treba imati na umu da su to izračunljive funkcije i relacije (što ćemo dokazati), te da u pozadini stoje algoritmi za $\f{add}^3$, $\f{pow}^2$, $\f{Divides}^2$, odnosno $\f{isPrime}^1$.
 
 \begin{napomena}\label{nap:parcdef}
-Algoritamsku jednakost (izračunljivu dvomjesnu brojevnu relaciju, koja se u modernim programskim jezicima često označava `\t{==}') oz\-na\-ča\-va\-mo uobičajenim simbolom `$=$', koji i inače koristimo za jednakost matematičkih objekata (funkcija, relacija, skupova,~\ldots). Kod definicija skupova, i funkcija s prethodno specificiranom domenom (što uključuje totalne funkcije), koristimo simbol `$:=$'. Relacije definiramo formulama koristeći `$:\Longleftrightarrow$'. Često imamo potrebu vrijednosti funkcije specificirati izrazom, uz prešutnu pretpostavku "prirodne domene" (sve ulazne vrijednosti za koje izraz ima smisla). Tada pišemo $f(\vec x):\simeq izraz$. Ovisno o obliku izraza, definirat ćemo precizno značenje fraze "ima smisla".
+Algoritamsku jednakost (izračunljivu dvomjesnu brojevnu relaciju, koja se u modernim programskim jezicima često označava `\t{==}') oz\-na\-ča\-va\-mo uobičajenim simbolom `$\eq$', koji i inače koristimo za jednakost matematičkih objekata (funkcija, relacija, skupova,~\ldots). Kod definicija skupova, i funkcija s prethodno specificiranom domenom (što uključuje totalne funkcije), koristimo simbol `$:=$'. Relacije definiramo formulama koristeći `$:\Longleftrightarrow$'. Često imamo potrebu vrijednosti funkcije specificirati izrazom, uz prešutnu pretpostavku "prirodne domene" (sve ulazne vrijednosti za koje izraz ima smisla). Tada pišemo $f(\vec x):\simeq izraz$. Ovisno o obliku izraza, definirat ćemo precizno značenje fraze "ima smisla".
 \end{napomena}
 
-Ponekad ćemo imati potrebu korištenja znaka $\simeq$ između dva izraza, što će značiti da su oni jednaki za one vrijednosti varijabli za koje imaju smisla, te da oba izraza imaju smisla za iste vrijednosti varijabli. Drugačije rečeno, $izraz1\simeq izraz2$ znači da su definicije $f(\vec x):\simeq izraz1$ i $f(\vec x):\simeq izraz2$ ekvivalentne (definiraju istu funkciju), gdje su u $\vec x$ sve varijable koje se pojavljuju bilo u $izraz1$, bilo u $izraz2$. Razlog za izbjegavanje korištenja znaka = i u takvom slučaju leži u tome što relacija $\simeq$, kao i svojstvo "imati smisla", nisu izračunljive. Još jedan razlog za korištenje neuobičajenog znaka je što mnoga "instinktivna pojednostavljenja" više nisu validna: na primjer, ako je $f^3$ totalna a $g^3$ nije, $f(\vec x)+0\cdot g(\vec x)\not\simeq f(\vec x)$ --- jer izraz zdesna ima smisla za sve $\vec x\in\N^3$, dok izraz slijeva ima smisla samo za $\vec x\in\dom{g}$.
+Ponekad ćemo imati potrebu korištenja znaka $\simeq$ između dva izraza, što će značiti da su oni jednaki za one vrijednosti varijabli za koje imaju smisla, te da oba izraza imaju smisla za iste vrijednosti varijabli. Drugačije rečeno, $izraz1\simeq izraz2$ znači da su definicije $f(\vec x):\simeq izraz1$ i $f(\vec x):\simeq izraz2$ ekvivalentne (definiraju istu funkciju), gdje su u $\vec x$ sve varijable koje se pojavljuju bilo u $izraz1$, bilo u $izraz2$. Razlog za izbjegavanje korištenja znaka $\eq$ i u takvom slučaju leži u tome što relacija $\simeq$, kao i svojstvo "imati smisla", nisu izračunljive. Još jedan razlog za korištenje neuobičajenog znaka je što mnoga "instinktivna pojednostavljenja" više nisu validna: na primjer, ako je $f^3$ totalna a $g^3$ nije, $f(\vec x)+0\cdot g(\vec x)\not\simeq f(\vec x)$ --- jer izraz zdesna ima smisla za sve $\vec x\in\N^3$, dok izraz slijeva ima smisla samo za $\vec x\in\dom{g}$.
 
 \section{RAM-stroj i RAM-program}\label{sec:RAMizr}
 
@@ -650,31 +650,29 @@ Razlog zašto moderna računala ne implementiraju stog na taj način je što je 
 
 Upravo konstruirani makroi su u redu ako nam je prihvatljivo da se registar resetira u postupku prijenosa, ali što ako ga želimo sačuvati? Na prvi pogled, to je neizvedivo. Jedina usporedba koju imamo je ona s nulom u instrukciji tipa $\dec$, dakle jedini način da unutar RAM-programa saznamo sadržaj registra je da ga dekrementiramo do nule. Na drugi pogled, dekrementiranjem možemo inkrementirati $1$ registar (kao u \textsc{remove}), $0$ registara (kao u \textsc{zero}), ili $2$ registra: ako su $i,j,k\in\N$ svi različiti, makro
 \begin{equation}
-    (\textsc{clone}\;\reg{i}\;\textsc{to}\;\reg{j}\;\textsc{and}\;\reg{k}):=\begin{prog}
+    (\textsc{move}\;\reg{i}\;\textsc{to}\;\reg{j}\;\textsc{using}\;\reg{k}):=\begin{prog}
     0.&\textsc{zero}\;\reg{j}\\
     1.&\textsc{zero}\;\reg{k}\\
     2.&\decr{i}{6}\\
     3.&\incr{j}\\
     4.&\incr{k}\\
-    5.&\goto\;2
-    \end{prog}^{\flat\;*}
-\end{equation}
-ima semantiku $r_i'=0\land r_j'=r_k'=r_i$. Sada je lako kombinirati \textsc{clone} i \textsc{remove} da se dobije traženi efekt, ali primijetimo da za to moramo "žrtvovati" jedan registar sa strane. Konkretno, ako su $i,j,k\in\N$ međusobno različiti, makro
-\begin{equation}
-    (\textsc{move $\reg{i}$ to $\reg{j}$ using $\reg{k}$}):=\begin{prog}
-    0.&\textsc{clone}\;\reg{i}\;\textsc{to}\;\reg{j}\;\textsc{and}\;\reg{k}\\
-    1.&\remove{k}{i}
+    5.&\goto\;2\\
+    6.&\remove{k}{i}
     \end{prog}^{\flat\;*}
 \end{equation}
 ima semantiku $r_j'=r_i\land r_k'=0$ (primijetimo da nismo napisali $r_i'$, što u skladu s našom konvencijom znači da je $r_i'=r_i$). To se dokaže po koracima, praćenjem stanja relevantnih registara kroz instrukcije:
 \begin{equation}
     \begin{array}{r@{\;}l|ccc}
 \SwapAboveDisplaySkip
-        & & r_i & r_j & r_k\\\hline 0.&\textsc{clone}\;\reg{i}\;\textsc{to}\;\reg{j}\;\textsc{and}\;\reg{k}&  0&r_i&r_i\\
-         1.&\textsc{remove $\reg{k}$ to $\reg{i}$}& r_i & r_i & 0
+        & & r_i & r_j & r_k\\\hline
+        0.&\textsc{zero}\;\reg{j} & r_i & 0 & r_k\\
+        1.&\textsc{zero}\;\reg{k} & r_i & 0 & 0  \\
+        2.\text{--}5.& \text{(petlja)} &    0   & r_i & r_i \\
+        6.&\textsc{remove $\reg{k}$ to $\reg{i}$}& r_i & r_i & 0
     \end{array}
 \end{equation}
-Također primijetimo da su zbog različitosti $i$, $j$ i $k$, svi uvjeti na parametre korištenih makroa zadovoljeni.
+Primijetimo da smo za tu operaciju morali "žrtvovati" jedan registar sa strane.
+Zbog $i\not=k$, uvjet na parametre makroa \textsc{remove} je zadovoljen.
 
 \begin{napomena}
 Terminološki detalj: ako ste navikli na rad s modernim sustavima datoteka, vjerojatno smatrate čudnim naziv \textsc{move} za ono što biste vjerojatno intuitivno zvali \textsc{copy} (dok se ono što biste intuitivno zvali \textsc{move} ovdje zove \textsc{remove}, a ono što biste zvali \textsc{remove} ovdje se zove \textsc{zero}). Niste jedini: pogledajte recimo~\cite{url:movecopy}. Pravi razlozi su vjerojatno zauvijek izgubljeni u dubinama povijesti, ali je činjenica da moderne računalne arhitekture uglavnom terminološki prate arhitekturu \texttt{x86}, koja standardno instrukciju za kopiranje podataka između registara (ili drugih lokacija) zove \textsc{mov}. Tu terminologiju i mi slijedimo ovdje.

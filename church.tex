@@ -180,7 +180,7 @@ Jedan detalj još moramo uzeti u obzir: što ako je praznina stroja $\mathcal T_
 \section{Neodlučivost u logici prvog reda}
 
 %Jedan od najvažnijih rezultata o neodlučivosti je svakako Churchov teorem o neodlučivosti logike prvog reda. 
-U uvodnom kursu matematičke logike obično se za logiku sudova dokažu teoremi adekvatnosti i potpunosti (koji povezuju sintaksni pojam dokazivosti sa semantičkim pojmom valjanosti), te se navedu neki sustavi (npr.\ glavni test) koji u potpunosti određuju je li neka formula valjana ili nije. Drugim riječima, postoji algoritam za utvrđivanje valjanosti. Postoji li \emph{polinomni} algoritam za to, je zanimljivije pitanje i vodi na slavni milijun dolara vrijedan problem $P\stackrel?=NP$, ali bar znamo da je valjanost odlučiva. Štoviše, nije prevelik problem (i dobra je vježba), koristeći kodiranje opisano u primjeru~\ref{pr:lskod}, formalno dokazati da je skup $\f{PValid}\subset\f{PF}$, svih kodova valjanih formula logike sudova, primitivno rekurzivan. Praktički jedino na što treba misliti je da je ne možemo kodirati (totalne) interpretacije jer ih ima neprebrojivo mnogo, ali parcijalne interpretacije (s konačnom domenom) možemo.
+U uvodnom kursu matematičke logike obično se za logiku sudova dokažu teoremi adekvatnosti i potpunosti (koji povezuju sintaksni pojam dokazivosti sa semantičkim pojmom valjanosti), te se navedu neki sustavi (npr.\ glavni test) koji u potpunosti određuju je li neka formula valjana ili nije. Drugim riječima, postoji algoritam za utvrđivanje valjanosti. Postoji li \emph{polinomni} algoritam za to, je zanimljivije pitanje i vodi na slavni milijun dolara vrijedan problem $P\stackrel?=NP$, ali barem znamo da je valjanost odlučiva. Štoviše, nije prevelik problem (i dobra je vježba), koristeći kodiranje opisano u primjeru~\ref{pr:lskod}, formalno dokazati da je skup $\f{PValid}\subset\f{PF}$, svih kodova valjanih formula logike sudova, primitivno rekurzivan. Praktički jedino na što treba misliti je da je ne možemo kodirati (totalne) interpretacije jer ih ima neprebrojivo mnogo, ali parcijalne interpretacije (s konačnom domenom) možemo.
 
 U logici prvog reda, također vrijede teoremi adekvatnosti i potpunosti (dakle, postoji dokaz za formulu $\phi$ koji koristi samo aksiome i pravila zaključivanja logike prvog reda, ako i samo ako je $\phi$ istinita u svim $\sigma$-strukturama prvog reda, gdje je $\sigma$ signatura koja sadrži sve nelogičke simbole u $\phi$), i također imamo glavni test, i znamo da je korektan (odgovor koji dade je uvijek točan), ali nije totalan --- mogu postojati beskonačne grane, u kojima algoritam ne daje odgovor. I to nije nedostatak specifičnog algoritma: jedan od prvih i najvažnijih rezultata o neodlučivosti je Churchov teorem da \textbf{problem valjanosti za logiku prvog reda nije odlučiv}. Skraćeno kažemo "logika prvog reda nije odlučiva", i doista, valjanost tu nije esencijalna. Ekvivalentno možemo promatrati probleme ispunjivosti, oborivosti, proturječnosti, ili čak zaključivanja (logičke posljedice iz konačnog skupa formula). Mi ćemo promatrati problem koji prirodno ima oblik problema zaključivanja, pa je prirodno usredotočiti se na njegovu vezu s problemom valjanosti.
 
@@ -311,7 +311,7 @@ Vrijedi $\mathfrak N\models\pi_{\vec u}$.
 Gledajući~\eqref{eq:defpiu}, samo treba vidjeti da postoji $t\in\N$ takav da je $c_t(\textsc{pc})=0$ i $c_t(\reg j)=\begin{cases}
 u_j,&j\in[1..k]\\
 0,&\text{inače}
-\end{cases}$, drugim riječima $c_t$ je početna konfiguracija s ulazom $\vec u$, a ona se sigurno postiže za $t=0$ (možda i za neke druge $t$, ali jedan nam je dovoljan).
+\end{cases}$; drugim riječima, $c_t$ je početna konfiguracija s ulazom $\vec u$, a ona se sigurno postiže za $t=0$ (možda i za neke druge $t$, ali jedan nam je dovoljan).
 \end{proof}
 
 \begin{lema}\label{lm:Niotai}
@@ -454,7 +454,7 @@ U abecedu ćemo dodati i separator \t\#, koji ćemo koristiti u radu s konačnim
 \emph{Logička abeceda} je zadana prvim retkom tablice
 \begin{equation}
     \begin{array}{r|cccccccccccc}
-         \Sigma_{\log}& \t x & \t c & \t f & \t R & \t, & \t' & \t( & \t) & \lnot & \t\textrightarrow & \forall & \t\# \\\hline
+        \Sigma_{\log}& \t x & \t c & \t f & \t R & \t, & \t' & \t( & \t) & \t{$\lnot$} & \t\textrightarrow & \t{$\forall$} & \t\# \\\hline
          \N\Sigma_{\log}& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12
     \end{array}\text.
 \end{equation}
@@ -493,16 +493,18 @@ Nad logičkom abecedom promotrimo sljedeće jezike:
 \begin{propozicija}\label{pp:F1odl}
 Jezik $F1$ je odlučiv.
 \end{propozicija}
-\begin{proof}[Skica dokaza] Puni dokaz ovoga odveo bi nas predaleko u teoriju formalnih jezika. Tamo se promatraju razne klase jezika (koje čine tzv.\ \emph{Chomskyjevu hijerarhiju}), te \emph{gramatike} i \emph{automati} za njih. Turingovi odlučivači, koje smo spomenuli u točki~\ref{sec:Todl}, vrsta su takvih automata, no postoje i bitno jednostavniji automati, koji prihvaćaju jednostavnije jezike.
+\begin{proof}[Skica dokaza] Puni dokaz ovoga odveo bi nas predaleko u teoriju formalnih jezika. Tamo se promatraju razne klase jezika (koje čine tzv.\ \emph{Chomskyjevu hijerarhiju}), te \emph{gramatike} i \emph{automati} za njih. Turingovi odlučitelji, koje smo spomenuli u točki~\ref{sec:Todl}, vrsta su takvih automata, no postoje i bitno jednostavniji automati, koji prihvaćaju jednostavnije jezike.
 
-Specijalno, u sintaksnoj analizi vrlo je bitna klasa \emph{beskontekstnih} jezika, koje generiraju beskontekstne gramatike, a prepoznaju ih potisni automati. Potisni automat je specijalni slučaj (nedeterminističnog višetračnog) Turingovog stroja, a beskontekstna gramatika se može zapisati u \emph{Chomskyjevoj normalnoj formi}, osiguravajući da njegovo izračunavanje uvijek stane --- pa se može smatrati Turingovim odlučivačem.
+Specijalno, u sintaksnoj analizi vrlo je bitna klasa \emph{beskontekstnih} jezika, koje generiraju beskontekstne gramatike, a prepoznaju ih potisni automati. Potisni automat je specijalni slučaj (nedeterminističnog višetračnog) Turingovog stroja, a beskontekstna gramatika se može zapisati u \emph{Chomskyjevoj normalnoj formi}, osiguravajući da njegovo izračunavanje uvijek stane --- pa se može smatrati Turingovim odlučiteljem.
 
 Jedna beskontekstna gramatika za jezik $F1$ zadana je pravilima
 \begin{align}
-    Form&\to Rel\t(Terms\t)\mid\lnot Form\mid\t(Form\t\textrightarrow Form\t)\mid\forall\,Var\,Form\\
+    Form&\to Rel\t(Terms\t)\mid\t{$\lnot$} Form\mid\t(Form\t\textrightarrow Form\t)\mid\t{$\forall$}\,Var\,Form\\
     Terms&\to Term\mid Terms\t,Term\\
     Term&\to Var\mid Const\mid Func\t(Terms\t)
-\shortintertext{uz tipove tokena}
+\end{align}
+uz tipove tokena
+    \begin{align}
     Var&\to\t x\mid Var\t'\\
     Const&\to\t c\mid Const\t'\\
     Func&\to\t f\mid Func\t'\\
@@ -528,18 +530,18 @@ Sada je $\f{Var}(i):=\kr{\t{x{}'{}'}\dotsm\t'}=1\conc{}\f{Repeat}(6,i)$, i analo
 Introdukciju logičkih veznika mogli bismo obavljati na sličan način, samo ih treba izraziti u osnovnom jeziku. Recimo, primitivno rekurzivna funkcija
 \begin{equation}\label{eq:Conjunction}
     \f{Conjunction}(x,y):=
-    \kr{\lnot\t(}\conc{}
+    \kr{\t{$\lnot$(\,}}\conc{}
     x\conc{}
-    \kr{\t\textrightarrow\,\lnot}\conc{}
+    \kr{\t{\textrightarrow$\,\lnot$}}\conc{}
     y\conc{}
-    \kr{\t)}=
+    \kr{\,\t)}=
     115\conc{}
     x\conc{}
     129\conc{}
     y\conc{}
     8
 \end{equation}
-ima svojstvo da je $\f{Conjunction}(\kr{\varphi},\kr{\psi})=\kr{\varphi\land\psi}$ (preciznije $\kr{\lnot\t(\varphi\,\t\textrightarrow\,\lnot\psi\t)}$ u osnovnom jeziku) za sve formule $\varphi$ i $\psi$, te se može shvatiti kao introdukcija konjunkcije na kodovima. Za eliminaciju, možemo iskoristiti \emph{brute force} pristup:
+ima svojstvo da je $\f{Conjunction}(\kr{\varphi},\kr{\psi})=\kr{\varphi\land\psi}$ (preciznije $\kr{\t{$\lnot$(}\varphi\,\t{\textrightarrow\,$\lnot$}\psi\t)}$ u osnovnom jeziku) za sve formule $\varphi$ i $\psi$, te se može shvatiti kao introdukcija konjunkcije na kodovima. Za eliminaciju, možemo iskoristiti \emph{brute force} pristup:
 \begin{align}
     \f{IsConjunction}(x,y,z)&:\Longleftrightarrow y\in\kr{F1}\land z\in\kr{F1}\land x=\f{Conjunction}(y,z)\text,
 \\\label{eq:lconj}
@@ -689,10 +691,10 @@ odlučiv. To sigurno nećemo napraviti u potpunosti, ali sve osnovne ideje već 
     {}\lor(\exists j<i)(\exists k<i)\f{ModPon}\bigl(\f{arg}'(p,i),\f{arg}'(p,j),\f{arg}'(p,k)\bigr)\lor{}\\
     {}\lor(\exists j<i)\f{Gen}\bigl(\f{arg}'(p,i),\f{arg}'(p,j)\bigr)\bigr)\Bigr)
 \end{multline}
-Sheme (A1), (A2) i (A3) lako je karakterizirati konkatenacijom. Napisat ćemo je za (A1), ostale su samo dulje ali ne bitno kompliciranije.
+Sheme (A1), (A2) i (A3) lako je karakterizirati konkatenacijom. Napisat ćemo je za (A1) --- ostale su samo dulje ali ne bitno kompliciranije.
 \begin{multline}
-    \f{IsA1}(f):\Longleftrightarrow(\exists a<f)(\exists b<f)\bigl(a\in\kr{F1}\land b\in\kr{F1}\land{}\\
-    {}\land f=\langle\t(\rangle\conc{}a\conc{}\langle\t{\textrightarrow(}\rangle\conc{}b\conc{}\langle\t\textrightarrow\rangle\conc{}a\conc{}\langle\t{))}\rangle\bigr)
+    \f{IsA1}(f):\Longleftrightarrow(\exists a<f)\,(\exists b<f)\,\bigl(a\in\kr{F1}\land b\in\kr{F1}\land{}\\
+    {}\land f=\langle\t(\,\rangle\conc{}a\conc{}\langle\t{\,\textrightarrow(\,}\rangle\conc{}b\conc{}\langle\,\t\textrightarrow\,\rangle\conc{}a\conc{}\langle\t{\,))}\rangle\bigr)
 \end{multline}
 
 Koristili smo relativno očitu činjenicu da za podriječ $v$ od $w$ vrijedi $\kr v\le\kr w$ (za pravu podriječ stroga nejednakost), što nam omogućuje da ograničimo egzistencijalne kvantifikacije.

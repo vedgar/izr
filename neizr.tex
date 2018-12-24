@@ -72,14 +72,14 @@ Karakteristična funkcija je totalna, dakle za izračunljive jezike mora biti re
 Neka je $\Sigma\not=\emptyset$ abeceda, te $L\subseteq\Sigma^*$ jezik nad njom. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
     \item[\texttt{\textup{(\textsc r)}}] relacija $\kr L:=\{\kr w\mid w\in L\}$ je rekurzivna;
-    \item[\texttt{\textup{(\textsc o)}}] postoji Turingov odlučivač $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_\mathit{true},q_\mathit{false})$ koji prepoznaje $L$.
+    \item[\texttt{\textup{(\textsc o)}}] postoji Turingov odlučitelj $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_\mathit{true},q_\mathit{false})$ koji prepoznaje $L$.
 \end{itemize}
 \end{teorem}
 \begin{proof}
 Kao i u prethodnom teoremu, stavka \texttt{(\textsc r)} je zapravo $(\card\Sigma)!$ tvrdnji. One su ekvivalentne po tranzitivnosti, jer je svaka od njih ekvivalentna sa stavkom \texttt{(\textsc o)}.
 \begin{labeling}{\texttt{(\textsc a$\Rightarrow$\textsc b)}}
-\item[\texttt{(\textsc r$\Rightarrow$\textsc o)}] Malom modifikacijom kraja konstrukcije transpiliranog Turingovog stro\-ja koji računa $\N^{-1}\chi_{\kr L}$ dobijemo odlučivač --- teorem~\ref{tm:krio}.
-\item[\texttt{(\textsc o$\Rightarrow$\textsc r)}] Malom modifikacijom kodiranja stanja, funkcije prijelaza i Turing-iz\-ra\-ču\-na\-va\-nja odlučivača dobijemo rekurzivnost od $\kr L$ --- teorem~\ref{tm:oikr}.\qedhere
+\item[\texttt{(\textsc r$\Rightarrow$\textsc o)}] Malom modifikacijom kraja konstrukcije transpiliranog Turingovog stro\-ja koji računa $\N^{-1}\chi_{\kr L}$ dobijemo odlučitelj --- teorem~\ref{tm:krio}.
+\item[\texttt{(\textsc o$\Rightarrow$\textsc r)}] Malom modifikacijom kodiranja stanja, funkcije prijelaza i Turing-iz\-ra\-ču\-na\-va\-nja odlučitelja dobijemo rekurzivnost od $\kr L$ --- teorem~\ref{tm:oikr}.\qedhere
 \end{labeling}
 \end{proof}
 
@@ -102,7 +102,7 @@ Nakon toliko dokazanih implikacija oblika "ako je funkcija izračunljiva u nekom
 
 Algoritam $\mathcal A$ je uglavnom opisan pomoću stroja (diskretnog dinamičkog sustava) s prebrojivim skupom mogućih konfiguracija $C$, tako da se svaka konfiguracija $c\in C$ može opisati s konačno (ali ne unaprijed ograničeno) mnogo bitova.
 
-Ako s $A$ označimo skup mogućih ulaznih podataka, a s $B$ skup mogućih izlaznih podataka algoritma $\mathcal A$, imamo preslikavanje $start\colon A\to C$, koje svakom ulazu $x\in A$ pridružuje početnu konfiguraciju s ulazom $x$. Imamo još zadan podskup $E\subseteq C$ završnih konfiguracija, i preslikavanje $result\colon E\to B$ (često zadano na čitavom skupu $C$) koje svakoj završnoj konfiguraciji pridružuje rezultat izračunavanja.
+Ako s $A$ označimo skup mogućih ulaznih podataka, a s $B$ skup mogućih izlaznih podataka algoritma $\mathcal A$, imamo injekciju $start\colon A\to C$, koja svakom ulazu $x\in A$ pridružuje početnu konfiguraciju s ulazom $x$. Imamo još zadan podskup $E\subseteq C$ završnih konfiguracija, i surjekciju $result\colon E\to B$ (često zadanu na čitavom skupu $C$) koja svakoj završnoj konfiguraciji pridružuje rezultat izračunavanja.
 
 Također imamo dvomjesnu relaciju $\leadsto$ na skupu $C$, koja za determinističke algoritme (kakve jedino promatramo) ima funkcijsko svojstvo --- pa je možemo promatrati i kao funkciju $nextconf\colon C\to C$, koja svakoj konfiguraciji stroja pridružuje sljedeću konfiguraciju po trenutnom koraku algoritma $\mathcal A$. Završne konfiguracije pritom ostaju nepromijenjene: restrikcija $nextconf$ na skup $E$ mora biti identiteta.
 

@@ -279,7 +279,7 @@ Sada kad smo napokon vidjeli da parcijalnost za izračunljive funkcije odgovara 
 Graf svake parcijalno rekurzivne funkcije je rekurzivno prebrojiv.
 \end{teorem}
 
-Ideja je slična kao kod projekcijske karakterizacije; jedina razlika između domene i grafa je što kod grafa moramo voditi računa i o funkcijskim vrijednostima. Zato nam više nije dosta relacija $\exists_*\f{Final}$ koja kaže "postoji neki broj koraka", već "postoji neko izračunavanje koje stane" (iz kojeg možemo izvući funkcijsku vrijednost). Srećom, upravo to nam daje Kleenejev teorem o normalnoj formi.
+Ideja je slična kao kod projekcijske karakterizacije; jedina razlika između domene i grafa je što kod grafa moramo voditi računa i o funkcijskim vrijednostima. Zato nam više nije dovoljna relacija $\exists_*\f{Final}$ koja kaže "postoji neki broj koraka", već "postoji neko izračunavanje koje stane" (iz kojeg možemo izvući funkcijsku vrijednost). Srećom, upravo to nam daje Kleenejev teorem o normalnoj formi.
 
 \begin{proof}
 Neka je $k\in\N_+$, i $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi} $\f F$ ima indeks, označimo ga (napomena~\ref{nap:>1ind}) s $e$. Tada po teoremu~\ref{tm:Kleene} imamo: \begin{equation}\label{eq:Grafproj}
@@ -287,7 +287,7 @@ Neka je $k\in\N_+$, i $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi}
     \f T_k(\vec x,e,z)\land
     \f U(z)=y\bigr)\text.
 \end{equation}
-Doista, ako je $(\vec x,y)\in\graf{\f F}$, tada je $\graf{\f F}\not=\emptyset$, odnosno $\f F\not=\varnothing$, iz čega slijedi $\f{Prog}(e)$ (kontrapozicijom propozicije~\ref{prop:computeind}\eqref{it:nprogind}), pa postoji (jedinstven) RAM-program $P$ takav da je $e=\kprog P$. Po definiciji, $P^k$ računa $\kf e^k=\f F$.
+    Doista, ako je $(\vec x,y)\in\graf{\f F}$, tada je $\graf{\f F}\not=\emptyset$, odnosno $\f F\not=\varnothing$, iz čega slijedi $\f{Prog}(e)$ (kontrapozicijom propozicije~\ref{prop:computeind}\eqref{it:nprogind}), pa postoji (jedinstven) RAM-program $P$ takav da je $e=\kprog P$. Po korolaru~\ref{kor:computeind}, $P^k$ računa $\kf e^k=\f F$.
 
 Također, iz $(\vec x,y)\in\graf{\f F}$ zaključujemo $\vec x\in\dom{\f F}$, pa po definiciji~\ref{def:compute}, $P$-izračunavanje s $\vec x$ stane. Označimo sa $z$ kod tog izračunavanja. Tada po propoziciji~\ref{prop:Tkprn} vrijedi $\f T_k(\vec x,e,z)$, te je $y=\f U(z)$ jer je to izlazni podatak tog izračunavanja.
 
@@ -355,6 +355,14 @@ $y=\f{fst}\bigl(\mu t\hat{\f P}(\vec x,t)\bigr)$. Tada $\vec x\in\exists_*\hat{\
 pa ako najmanji takav označimo s $v$, vrijedi 
 $\hat{\f P}(\vec x,v)$ i $y=\f{fst}(v)$. No ovo prvo po definiciji znači da vrijedi $\f P\bigl(\vec x,\f{fst}(v),\f{snd}(v)\bigr)$, što je zbog drugog ekvivalentno s $\f P\bigl(\vec x,y,\f{snd}(v)\bigr)$. To pak znači da postoji $z\in\N$ (konkretno, $z:=\f{snd}(v)$) takav da je $(\vec x,y,z)\in\f P$, odnosno $(\vec x,y)\in\exists_*\f P=R$.
 \end{proof}
+
+% Primijetimo sličnost upravo napisanog dokaza s dokazom Kleenejevog teorema
+% o normalnoj formi: ako definiramo (primitivno rekurzivnu) relaciju M^4 s
+% M(x,e,y,n) :<=> Final(x,e,n) && result(Reg(x,e,n))=y
+% sa specifikacijom "e je kod RAM-programa P, x je kod nepraznog konačnog niza
+% xs, te P-izračunavanje s xs stane u najviše n koraka i dade rezultat y",
+% tada je univ = fst o mu hat M, što je istog oblika kao nađeni selektor.
+% Precizno, graf univ je upravo projekcija M.
 
 %\subsection{Dokaz teorema o grafu}
 
@@ -556,7 +564,7 @@ Drugo, možemo prevesti samu definiciju. Kako su rekurzivno prebrojive relacije 
 
 Treće, sama ta definicija znači da postoji RAM-stroj čije izračunavanje s $\vec x$ stane ako i samo ako je $\vec x$ element relacije za koju tvrdimo da je rekurzivno prebrojiva. Analogna definicija u jezičnom modelu --- postoji Turingov stroj $\mathcal T$ takav da $\mathcal T$-izračunavanje s $w$ stane ako i samo ako je $w\in L$ (kažemo da $\mathcal T$ \emph{prepoznaje} $L$) --- obično se u teoriji formalnih jezika uzima kao definicija rekurzivno prebrojivih jezika.
 
-I četvrto, analogon jezika u brojevnom svijetu su zapravo \emph{jednomjesne} relacije, pa ih možemo shvatiti kao slike, odnosno enumeracije nekih izračunljivih funkcija. Formalizacija toga u jezičnom modelu vodi na pojam \emph{Turingovih nabrajača (enumeratora)}, koji imaju dvije trake: radnu i izlaznu, te umjesto završnog stanja imaju \emph{izlazno} stanje $q_p$. Enumerator nema ulaza (obje trake su na početku prazne) i očito radi beskonačno dugo (nema završnog stanja), te kažemo da \emph{nabraja} jezik svih riječi koje se nalaze na izlaznoj traci u trenucima u kojima se enumerator nađe u stanju $q_p$.
+I četvrto, analogon jezika u brojevnom svijetu su zapravo \emph{jednomjesne} relacije, pa ih možemo shvatiti kao slike, odnosno enumeracije nekih izračunljivih funkcija. Formalizacija toga u jezičnom modelu vodi na pojam \emph{Turingovih enumeratora}, koji imaju dvije trake: radnu i izlaznu, te umjesto završnog stanja imaju \emph{izlazno} stanje $q_p$. Enumerator nema ulaza (obje trake su na početku prazne) i očito radi beskonačno dugo (nema završnog stanja), te kažemo da \emph{nabraja} jezik svih riječi koje se nalaze na izlaznoj traci u trenucima u kojima se enumerator nađe u stanju $q_p$.
 
 Nakon svega što ste naučili, ne biste trebali biti začuđeni time da sva ta četiri pristupa karakteriziraju istu klasu jezika.
 

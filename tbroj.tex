@@ -44,7 +44,7 @@ Vidimo da korolar~\ref{kor:pent} vrijedi bez obzira na abecedu i kodiranje. Važ
 Za jednomjesnu brojevnu funkciju $F^1$, jezičnu funkciju $\N^{-1}F$ nad $\t\textbullet$ zovemo \emph{unarnom reprezentacijom} od $F$, i označavamo je $\t\textbullet F$.
 \end{definicija}
 
-Svaka riječ $u$ nad unarnom abecedom ($u\in\t\textbullet^*$) je oblika $u=\t\textbullet^n$, gdje je $n=\dulj u=\kr u$. Sada definicija preslikavanja $\N^{-1}$ kaže da je $(\t\textbullet F)(\t\textbullet^n)=\t\textbullet^{F(n)}$ ako je $n\in\dom F$, a $\t\textbullet^n\not\in\dom{\t\textbullet F}$ inače. Po napomeni~\ref{nap:parcdef}, pišemo
+Svaka riječ $u$ nad unarnom abecedom ($u\in\t\textbullet^*$) je oblika $u=\t\textbullet^n$, gdje je $n=\dulj u=\kr u$. Sada definicija preslikavanja $\N^{-1}$ kaže da je $\t\textbullet F(\t\textbullet^n)=\t\textbullet^{F(n)}$ ako je $n\in\dom F$, a $\t\textbullet^n\not\in\dom{\t\textbullet F}$ inače. Po napomeni~\ref{nap:parcdef}, pišemo
 $\t\textbullet F(\t\textbullet^n)\simeq\t\textbullet^{F(n)}$.
 
 \begin{primjer}
@@ -77,7 +77,7 @@ Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\empt
 
 U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. Očito, to treba biti Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_{\mathit{true}}$ i $q_{\mathit{false}}$, te njima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
-Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što je propisano da konfiguracija sa stanjem $q_{\mathit{false}}$ (kao i ona s $q_{\mathit{true}}$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja). Za takve strojeve kažemo da su \emph{odlučivači}. Svaki odlučivač $\mathcal T$ tako dijeli $\Sigma^*$ na dva dijela,
+Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što je propisano da konfiguracija sa stanjem $q_{\mathit{false}}$ (kao i ona s $q_{\mathit{true}}$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja). Za takve strojeve kažemo da su \emph{odlučitelji} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ tako dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
     L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{true}}$}\}
     \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{false}}$}\}\text,
@@ -86,12 +86,12 @@ Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Tur
 Nije preteško vidjeti da su te dvije karakterizacije, brojevna i jezična, povezane --- pogotovo jer već imamo napravljen najveći dio posla.
 
 \begin{teorem}\label{tm:oikr}
-Neka je $L$ jezik. Ako postoji Turingov odlučivač koji prepoznaje $L$, tada je jednomjesna relacija $\kr L$ rekurzivna.
+Neka je $L$ jezik. Ako postoji Turingov odlučitelj koji prepoznaje $L$, tada je jednomjesna relacija $\kr L$ rekurzivna.
 \end{teorem}
 \begin{proof}
-Pretpostavimo da je $\mathcal T$ odlučivač za $L$, i provedimo s tim strojem postupak iz točke~\ref{sec:tikp}. Ovdje navodimo samo detalje koje je potrebno promijeniti.
+Pretpostavimo da je $\mathcal T$ odlučitelj za $L$, i provedimo s tim strojem postupak iz točke~\ref{sec:tikp}. Ovdje navodimo samo detalje koje je potrebno promijeniti.
 
-Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_\mathit{true}):=1$, a $\N Q(q_\mathit{false}):=2$. (Lako je dokazati analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\not=q_\mathit{true}$ i $q_0\not=q_\mathit{false}$ --- a po definiciji odlučivača mora biti $q_\mathit{true}\not=q_\mathit{false}$.)
+Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_\mathit{true}):=1$, a $\N Q(q_\mathit{false}):=2$. (Lako je dokazati analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\not=q_\mathit{true}$ i $q_0\not=q_\mathit{false}$ --- a po definiciji odlučitelja mora biti $q_\mathit{true}\not=q_\mathit{false}$.)
 
     Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\not\in\{q_\mathit{true},q_\mathit{false}\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica (vidjeti primjer~\ref{pr:polatable}) imati dva retka jedinica, a ne samo jedan.
 
@@ -99,7 +99,7 @@ I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$, imat ćemo funkciju
 \begin{equation}\label{eq:stop'def}
     \f{stop}'(x):=\mu n\bigl(\f{State}(x,n)\in\{1,2\}\bigr)\text,
 \end{equation}
-za koju lako vidimo da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}), pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak `:=') po definiciji odlučivača: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$ za neki $n$, jer $\mathcal T$-izračunavanje s $w$ mora stati.
+za koju lako vidimo da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}), pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak `:=') po definiciji odlučitelja: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$ za neki $n$, jer $\mathcal T$-izračunavanje s $w$ mora stati.
 Naravno, tada je $\f{stop}'(x)=\f{stop}'(\kr w)$ upravo broj koraka nakon kojeg to iz\-ra\-ču\-na\-va\-nje stane.
 
 Tvrdimo da je
@@ -110,12 +110,12 @@ iz čega odmah slijedi rekurzivnost od $\kr L$ po lemi~\ref{lm:comprek} i korola
 
 Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$-izračunavanje s $w$ mora stati u stanju $q_\mathit{true}$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju), pa vrijedi $\f{State}(x,n)\not\in\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
 
-U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučivač, pa $\mathcal T$-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\not\in\{1,2\}$ za $n<n_0$, i očito $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_{\mathit{true}}$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
+U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučitelj, pa $\mathcal T$-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\not\in\{1,2\}$ za $n<n_0$, i očito $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_{\mathit{true}}$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
 \end{proof}
 \newpage
 
 \begin{teorem}\label{tm:krio}
-Neka je $L$ jezik (nad nekom abecedom $\Sigma$). Ako je relacija $\kr L$ rekurzivna, tada postoji Turingov odlučivač za $L$.
+Neka je $L$ jezik (nad nekom abecedom $\Sigma$). Ako je relacija $\kr L$ rekurzivna, tada postoji Turingov odlučitelj za $L$.
 \end{teorem}
 \begin{proof}
 Pretpostavka zapravo znači da je $\chi_{\kr L}$ rekurzivna funkcija. Dakle $\chi_{\kr L}$ je parcijalno rekurzivna, pa po teoremu~\ref{tm:pir} postoji RAM-program koji je računa; i totalna je, pa taj RAM-program stane za svaki ulaz. Na taj RAM-program htjeli bismo primijeniti postupak iz točke~\ref{sec:RAM>Turing}. Da bismo to mogli, moramo $\chi_{\kr L}$ prikazati kao $\N\varphi$ za neku jezičnu funkciju $\varphi$ nad $\Sigma$. Možemo li to?
@@ -138,7 +138,7 @@ Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-progra
 \label{eq:d89j}
     \delta(q_9,\t\$):=(q_\mathit{false},\bl,-1)\text.
 \end{gather}
-Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučivači zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan, te će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_\mathit{true}$. Za $w\not\in L$, rezultat će biti $\varepsilon$, te će stroj doći do graničnika, obrisati ga i ući u stanje $q_\mathit{false}$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučivač.
+Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan, te će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_\mathit{true}$. Za $w\not\in L$, rezultat će biti $\varepsilon$, te će stroj doći do graničnika, obrisati ga i ući u stanje $q_\mathit{false}$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
 \end{proof}
 \vspace{-4mm}
 
@@ -475,7 +475,7 @@ počevši od $i=0$ slijeva, u zapisu broja $x$ u pomaknutoj bazi $2$.
 \begin{proof}
 Za početak, definirajmo pomoćnu primitivno rekurzivnu (lema~\ref{lm:brojrek}) funkciju koja broji dvojke (separatore) u zapisu broja u pomaknutoj bazi $2$.
 \begin{equation}
-    \f{count2}(x):=\bigl(\#i<\f{blh}(x)\bigr)\bigl(\f{sdigit}(x	i,2)=2\bigr)
+    \f{count2}(x):=\bigl(\#i<\f{blh}(x)\bigr)\bigl(\f{sdigit}(x,i,2)=2\bigr)
 \end{equation}
 
 Tvrdimo da funkcije zadane točkovno s

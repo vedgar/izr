@@ -2,7 +2,7 @@
 
 \section{Zašto nam treba još jedan model?}
 
-Uveli smo dva modela izračunljivosti brojevnih funkcija --- RAM-izračunljivost i parcijalna rekurzivnost --- i dokazali da su ekvivalentni, usprkos bitno različitim pristupima (imperativnom odnosno funkcijskom) definiciji algoritma. To pruža dobar argument u korist Church--\!Turingove teze, da su izračunljive funkcije iste u svim modelima, odnosno u modernijem obliku, da su sve programske paradigme jednako snažne. Ipak, pritom su zanemarena dva aspekta izračunljivosti.
+Uveli smo dva modela izračunljivosti brojevnih funkcija --- RAM-izračunljivost i parcijalna rekurzivnost --- i dokazali da su ekvivalentni, usprkos bitno različitim pristupima (imperativnom odnosno funkcijskom) definiciji algoritma. To pruža dobar argument u korist Church--\!Turingove teze, da su izračunljive funkcije iste u svim modelima --- odnosno u modernijem obliku, da su sve programske paradigme jednako snažne. Ipak, pritom su zanemarena dva aspekta izračunljivosti.
 
 % \subsection{Elementarne operacije}
 
@@ -190,7 +190,7 @@ Sve su to problemi o kojima smo već govorili, ponajviše u uvodu. No sada znamo
 
 \subsection{Kodiranje znakova i riječi}\label{sec:kSigma}
 
-Prvo recimo nešto o kodiranju abecede $\Sigma$. Kako je to konačan skup, iskoristit ćemo \t{enum}-tehniku, kao što smo već napravili kod kodiranja tipova instrukcija RAM-stroja. Ipak, ovdje ćemo početi brojiti od $1$ (ne želimo $0$ u slici od $\N\Sigma$), iz tehničkog razloga koji će uskoro biti jasan.
+Prvo recimo nešto o kodiranju abecede $\Sigma$. Kako je to konačan skup, iskoristit ćemo \texttt{enum}-tehniku, kao što smo već napravili kod kodiranja tipova instrukcija RAM-stroja. Ipak, ovdje ćemo početi brojiti od $1$ (ne želimo $0$ u slici od $\N\Sigma$), iz tehničkog razloga koji će uskoro biti jasan.
 
 Još jedan mali filozofski problem je u tome što su elementi od $\Sigma$ "apstraktni znakovi" bez ikakve imanentne semantike i međusobnog odnosa, tako da ne možemo fiksirati jedan poredak kao što smo to učinili za tipove RAM-instrukcija. Ipak, za svaku konkretnu abecedu moći ćemo fiksirati kodiranje (\emph{encoding}), a za apstraktne abecede moći ćemo univerzalno kvantificirati tvrdnje u obliku "Za svako kodiranje od $\Sigma$~\ldots", podrazumijevajući da je očito ("Zermelov teorem za konačne skupove") da kodiranje \emph{postoji}. U praksi, ti znakovi će obično biti dio standarda Unikod, te ćemo ih moći urediti, ako baš nemamo pametniji kriterij, po rednim brojevima u Unikodu.
 
@@ -488,7 +488,7 @@ tada su funkcije $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ redom zadane 
 
 %\subsection{Kodiranje Turing-izračunavanja}
 
-Upravo dokazana lema je donekle analogna lemi~\ref{lm:NextRegCountprn}. Vrijeme je za analogon leme~\ref{lm:RegCountprn}. Za razliku od tih lema, koje su definirale \emph{uniformne} funkcije koje su primale RAM-program kao argument, ove će se odnositi na fiksni Turingov stroj $\mathcal T_0$ --- jer je tako lakše, a ne treba nam puna općenitost jer sve što će nam kasnije trebati su \emph{neki} indeksi izračunljivih funkcija, a njih smo dobili s RAM-strojevima.
+Upravo dokazana lema je donekle analogna lemi~\ref{lm:NextRegCountprn}. Vrijeme je za analogon leme~\ref{lm:RegCountprn}. Za razliku od tih lema, koje su definirale \emph{uniformne} funkcije koje su primale RAM-program kao argument, ove će se odnositi na fiksni Turingov stroj $\mathcal T_0$ --- jer je tako lakše, a ne treba nam puna općenitost; sve što će nam kasnije trebati su \emph{neki} indeksi izračunljivih funkcija, a njih smo dobili s RAM-strojevima.
 
 \begin{lema}\label{lm:StateHeadTapeprn}
 %Postoje primitivno rekurzivne dvomjesne funkcije $\f{State}$, $\f{Position}$ i $\f{Tape}$, takve da za svaku riječ $w\in\Sigma_0^*$, za svaki $n\in\N$, njihove vrijednosti u $(\kr w,n)$ kodiraju stanje, poziciju i traku konfiguracije Turingovog stroja $\mathcal T_0$ nakon $n$ koraka izračunavanja s $w$.
