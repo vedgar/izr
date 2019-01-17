@@ -79,6 +79,7 @@ U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\
 
 Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što je propisano da konfiguracija sa stanjem $q_{\mathit{false}}$ (kao i ona s $q_{\mathit{true}}$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja). Za takve strojeve kažemo da su \emph{odlučitelji} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ tako dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
+    \SwapAboveDisplaySkip
     L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{true}}$}\}
     \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{false}}$}\}\text,
 \end{align} i kažemo da \emph{prepoznaje} $L(\mathcal T)$.
