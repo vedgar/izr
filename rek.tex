@@ -86,7 +86,7 @@ Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i pri
     KeyboardInterrupt
 \end{verbatim}
 
-Važno je napomenuti da, kao i inače kad je riječ o implementaciji algoritama (princip opće izračunljivosti), svaki od tih pristupa može \emph{simulirati} onaj drugi. S obzirom na to da nas performanse ne zanimaju, odabrat ćemo \textbf{marljivu} evaluaciju jer je jednostavnija za implementaciju (u našem slučaju, jednostavnija za dokaz ekvivalentnosti s RAM-izračunljivošću, odnosno za konstrukciju kompajlera u RAM-programe), a poslije ćemo opisati kako simulirati lijenu evaluaciju kad nam bude trebala. Jedno od mjesta gdje će nam svakako trebati je implementacija grananja gdje nisu sve grane totalne, poput onog što radi operator \texttt{?:}\ u programskom jeziku C; recimo, \texttt{1?z(5):prazna(5)} ima vrijednost $0$. U našoj terminologiji, to će biti funkcija definirana po slučajevima iz parcijalno rekurzivnih funkcija. U početku ćemo se baviti samo totalnim (primitivno rekurzivnim i rekurzivnim) funkcijama, pa nam to neće trebati --- no dobro je odmah pravilno formalizirati domenu kompozicije, da ne bismo morali poslije mijenjati definiciju.
+Važno je napomenuti da, kao i inače kad je riječ o implementaciji algoritama (princip opće izračunljivosti), bilo koji od tih pristupa može \emph{simulirati} onaj drugi. S obzirom na to da nas performanse ne zanimaju, odabrat ćemo \textbf{marljivu} evaluaciju jer je jednostavnija za implementaciju (u našem slučaju, jednostavnija za dokaz ekvivalentnosti s RAM-izračunljivošću, odnosno za konstrukciju kompajlera u RAM-programe), a poslije ćemo opisati kako simulirati lijenu evaluaciju kad nam bude trebala. Jedno od mjesta gdje će nam svakako trebati je implementacija grananja gdje nisu sve grane totalne, poput onog što radi operator \texttt{?:}\ u programskom jeziku C; recimo, \texttt{1?z(5):prazna(5)} ima vrijednost $0$. U našoj terminologiji, to će biti funkcija definirana po slučajevima iz parcijalno rekurzivnih funkcija. U početku ćemo se baviti samo totalnim (primitivno rekurzivnim i rekurzivnim) funkcijama, pa nam to neće trebati --- no dobro je odmah pravilno formalizirati domenu kompozicije, da ne bismo morali poslije mijenjati definiciju.
 
 Dakle, želimo da je $\f H\circ(\f G_1,\dotsc,\f G_l)$ definirana u $\vec x$ ako je \emph{svaka} $\f G_i$ definirana u $\vec x$, te ako označimo $g_i:=\f G_i(\vec x)$, još je $\f H$ definirana u $\vec g^{\,l}$. Matematički rečeno, u domeni kompozicije su sve one $k$-torke iz presjeka domena pojedinih $\f G_i$, takve da je $l$-torka njihovih vrijednosti element domene od $\f H$.
 \begin{definicija}
@@ -98,7 +98,7 @@ Neka su $k,l\in\N_+$, te neka su $G_1^k$, $G_2^k$,~\ldots, $G_l^k$ i $H^l$ funkc
 \label{eq:defkomp}
     F(\vec x)&:=H\bigl(G_1(\vec x),G_2(\vec x),\dotsc,G_l(\vec x)\bigr)\text{, za sve $\vec x\in\dom F$,}
 \end{align}
-kažemo da je dobivena \emph{kompozicijom} iz funkcija $G_1$, $G_2$,~\ldots, $G_l$ i $H$. Skraćeno pišemo $F:=H\circ(G_1,G_2,\dotsc,G_l)$. Operator $\circ$ smatramo lijevo asociranim.
+kažemo da je dobivena \emph{kompozicijom} iz funkcija $G_1$, $G_2$,~\ldots, $G_l$ i $H$. Skraćeno pišemo $F:=H\circ(G_1,G_2,\dotsc,G_l)$. %Operator $\circ$ smatramo lijevo asociranim.
 
 Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na kompoziciju} ako za sve mjesnosti $k,l\in\N_+$, za sve $k$-mjesne $G_1,G_2,\dotsc,G_l\in\mathcal F$, te za sve $l$-mjesne $H\in\mathcal F$, vrijedi $H\circ(G_1,G_2,\dotsc,G_l)\in\mathcal F$.
 \end{definicija}
@@ -233,7 +233,7 @@ Vidimo da se mnoge funkcije mogu napisati koristeći samo inicijalne funkcije, k
 Skup $\mathcal Comp$ je zatvoren na primitivnu rekurziju.
 \end{lema}
 \begin{proof}
-Neka je $k\in\N_+$, te neka su $\f G^k,\f H^{k+2}\in\mathcal Comp$ totalne funkcije. One su RAM-izračunljive, pa postoje RAM-algoritmi $P_{\f G}^k$ i $P_{\f H}^{k+2}$ koji ih redom računaju. Želimo naći program koji računa funkciju $\f F^{k+1}:=\f G\pr\f H$. Dakle, u registrima $\reg1$ do $\reg{k}$ se nalazi $\vec x$, dok se u $\reg{k+1}$ nalazi $y$, broj ponavljanja petlje odnosno broj izračunavanja funkcije $\f H$. Prvo, prije petlje moramo izračunati funkciju $\f G$ na prvih $k$ ulaznih registara. Rezultat između prolazaka kroz petlju držat ćemo u $\reg0$, tako da završetkom petlje već bude spreman kao izlazni podatak. Petlju pišemo na standardni način koji smo već vidjeli u makroima $\textsc{zero}$, $\textsc{remove}$, $\textsc{clone}$, i programu $P_{\f{add}^3}$. Kontrolnu varijablu držimo u pomoćnom registru $\reg{k+2}$ --- primijetimo da za to ne možemo koristiti $\reg{k+1}$ jer idu u suprotnim smjerovima: svakim izvršavanjem petlje $\reg{k+1}$ se dekrementira, dok se kontrolna varijabla mora inkrementirati (jer broji koliko puta smo izvršili petlju).
+Neka je $k\in\N_+$, te neka su $\f G^k,\f H^{k+2}\in\mathcal Comp$ totalne funkcije. One su RAM-izračunljive, pa postoje RAM-algoritmi $P_{\f G}^k$ i $P_{\f H}^{k+2}$ koji ih redom računaju. Želimo naći program koji računa funkciju $\f F^{k+1}:=\f G\pr\f H$. Dakle, u registrima $\reg1$ do $\reg{k}$ se nalazi $\vec x$, dok se u $\reg{k+1}$ nalazi $y$, broj ponavljanja petlje odnosno broj izračunavanja funkcije $\f H$. Prvo, prije petlje moramo izračunati funkciju $\f G$ na prvih $k$ ulaznih registara. Rezultat između prolazaka kroz petlju držat ćemo u $\reg0$, tako da završetkom petlje već bude spreman kao izlazni podatak. Petlju pišemo na standardni način koji smo već vidjeli u makroima $\textsc{zero}$, $\textsc{remove}$, $\textsc{move}$, i programu $P_{\f{add}^3}$. Kontrolnu varijablu držimo u pomoćnom registru $\reg{k+2}$ --- primijetimo da za to ne možemo koristiti $\reg{k+1}$ jer idu u suprotnim smjerovima: svakim izvršavanjem petlje $\reg{k+1}$ se dekrementira, dok se kontrolna varijabla mora inkrementirati (jer broji koliko puta smo izvršili petlju).
 
     Primijetimo još da kontrolnu varijablu ne treba inicijalizirati: kako $\reg{k+2}$ nije ulazni registar, na početku izračunavanja njegov sadržaj već jest $0$. Također, inkrementiranjem kontrolne varijable \emph{nakon} izvođenja petlje (funkcijski makro s $P_{\f H}$) postižemo brojenje od nule; inkrementiranjem prije računanja $\f H$ postigli bismo brojenje od $1$ do uključivo $y$. Programski jezici koji broje od nule obično zahtijevaju inkrement nakon: recimo, standard jezika C propisuje da se u~\eqref{prog:Cprloop} inkrement \texttt{++i} obavi nakon tijela petlje.
 
@@ -362,7 +362,8 @@ To znači da je $\f C_{m+1}^k$ dobivena iz inicijalne i (po pretpostavci indukci
 Sada napokon možemo riješiti i problem jednomjesnih funkcija definiranih "degeneriranim" rekurzijama poput one u~\eqref{eq:faktb} i~\eqref{eq:faktk}. Takve funkcije neće biti direktno dobivene primitivnom rekurzijom (već kompozicijom), ali će biti primitivno rekurzivne.
 
 \begin{propozicija}\label{prop:F1prn}
-Neka je $a\in\N$, te $\f H^2$ primitivno rekurzivna funkcija. Tada je funkcija $\f F^1$, zadana s
+Neka je $a\in\N$, te $\f H^2$ primitivno rekurzivna funkcija.
+    \newline Tada je funkcija $\f F^1$, zadana s
 \begin{align}
 \SwapAboveDisplaySkip
 \label{eq:F1b}
@@ -430,10 +431,10 @@ Za $x,y\in\N$, označimo $x\ominus y:=\max\,\{x-y,0\}$. Lako se vidi da je
 Pored računskih operacija (dijeljenje s ostatkom definirat ćemo kasnije, kad uvedemo još neke tehnike), brojeve možemo i \emph{uspoređivati}, raznim dvomjesnim relacijama  kao što su $<$, $\ge$ ili $\eq$. Rekli smo da izračunljivost relacija promatramo kroz izračunljivost njihovih karakterističnih funkcija.
 
 \begin{primjer}\label{pr:N+prn}
-Za početak pogledajmo jednomjesnu relaciju $\N_+$ --- drugim riječima, svojstvo pozitivnosti. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum}. Jednostavno ju je dobiti degeneriranom primitivnom rekurzijom $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna. Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
+Za početak pogledajmo jednomjesnu relaciju $\N_+$ --- drugim riječima, pozitivnost. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum}. Jednostavno ju je dobiti degeneriranom primitivnom rekurzijom $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna. Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
 \end{primjer}
 
-Sada kada imamo pozitivnost i ograničeno oduzimanje, možemo odmah vidjeti primitivnu rekurzivnost strogog uređaja. Ostale uređajne relacije dokazat ćemo primitivno rekurzivnima kasnije, kad ustanovimo kako se radi s logičkim veznicima.
+Kada imamo pozitivnost i ograničeno oduzimanje, možemo odmah vidjeti primitivnu rekurzivnost strogog uređaja. Ostale uređajne relacije dokazat ćemo primitivno rekurzivnima kasnije, kad ustanovimo kako se radi s logičkim veznicima.
 
 \begin{primjer}\label{pr:m-v}
 Lako se vidi da je $x>y$ ako i samo ako je $x\ominus y$ pozitivan, iz čega je $\chi_>=\chi_{\N_+}\!\circ\f{sub}$, pri\-mi\-tiv\-no rekurzivna funkcija. Naravno, $x<y$ ako i samo ako je $y>x$, dakle $\chi_<=\chi_>\circ(\f I_2^2,\f I_1^2)$ je također primitivno rekurzivna.
@@ -552,7 +553,7 @@ $\chi_{\f R}(\vec x,y)=0$. Ta će vrijednost upravo biti izračunata kad god mak
 \end{multline}
 koje nikada ne stane jer nijedna konfiguracija u njemu nije završna.
 
-Ako je pak $\vec x\in\exists_*R$, tada je $\f F(\vec x)\in\N$ definirano, označimo tu vrijednost sa $y_0$. Tada za svaki $y<y_0$ i dalje vrijedi $\chi_{\f R}(\vec x,y)=0$, pa će $Q_{\f F}$-izračunavanje s $\vec x$ izgledati isto sve do trenutka kad se sadržaj registra $\reg0$ približi odozdo $y_0$, kada će izgledati ovako:
+Ako je pak $\vec x\in\exists_*R$, tada je $\f F(\vec x)\in\N$ definirano --- označimo tu vrijednost sa $y_0$. Tada za svaki $y<y_0$ i dalje vrijedi $\chi_{\f R}(\vec x,y)=0$, pa će $Q_{\f F}$-izračunavanje s $\vec x$ izgledati isto sve do trenutka kad se sadržaj registra $\reg0$ približi odozdo $y_0$, kada će izgledati ovako:
 \begin{multline}
     \dotsb\leadsto(y_0-1,\vec x,0,?,\dotsc,1,0)\leadsto
     (y_0,\vec x,0,?,\dotsc,2,0)\leadsto^*

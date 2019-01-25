@@ -19,7 +19,7 @@ Pokušajmo još malo preciznije odrediti što mislimo pod izračunljivošću fun
 Slično možemo činiti za funkcije iz $\mathcal K$ u $\N$ (samo ih komponiramo s ${\N\mathcal K}^{-1}$ zdesna), za funkcije iz $\N$ u $\mathcal K$ (samo ih komponiramo s ${\N\mathcal K}$ slijeva --- primijetite da su karakteristične funkcije specijalni slučaj pratećih funkcija, za $\N bool(\mathit{false}):=0,\N bool(\mathit{true}):=1$), te čak za razne "višemjesne" funkcije iz skupova poput $\mathcal K^2\times \mathcal L\times\N$ (gdje je $\mathcal L$ neki drugi skup čije kodiranje $\N\mathcal L$ već imamo): ulaze dekodiramo (ulaze koji već jesu prirodni brojevi ostavimo nepromijenjene), primijenimo funkciju, te kodiramo rezultat ako je definiran. Puna implementacija tog principa odvela bi nas u \emph{objektno programiranje}, gdje je $\mathcal K$ \emph{klasa}, čije razne \emph{metode} kodiramo na opisani način. Često među tim metodama postoji jedna istaknuta surjekcija na $\mathcal K$ (ili više njih čije slike čine particiju od $\mathcal K$) koju onda zovemo \emph{konstruktor}, te koordinatne funkcije njenog inverza (\emph{getters}, ili jednostavno \emph{komponente}) pomoću kojih možemo napraviti sve ostale metode.
 
 \begin{napomena}
-U još jednoj stvari budimo precizni: \textbf{neprebrojive skupove ne možemo kodirati}! Doista, ako postoji kodiranje kao injekcija iz $\mathcal K$ u $\N$, tada mora biti $\card\mathcal K\le\card\N=\aleph_0$. Ovo je izuzetno važno, jer pruža opravdanje za intuiciju da samo konačni i prebrojivi skupovi imaju \emph{totalnu reprezentaciju}: sve njihove elemente možemo reprezentirati u (po volji velikom) računalu. 
+U još jednoj stvari budimo precizni: \textbf{neprebrojive skupove ne možemo kodirati}! Doista, ako postoji kodiranje kao injekcija s $\mathcal K$ u $\N$, tada mora biti $\card\mathcal K\le\card\N=\aleph_0$. Ovo je izuzetno važno, jer pruža opravdanje za intuiciju da samo konačni i prebrojivi skupovi imaju \emph{totalnu reprezentaciju}: sve njihove elemente možemo reprezentirati u (po volji velikom) računalu. 
 
 Neegzaktnosti tipa \texttt{float}, i raznih drugih tipova koji bi trebali reprezentirati realne brojeve, nisu samo tehnički nedostaci pojedinog standarda (kao što je IEEE\;754): one su fundamentalna posljedica činjenice da $\mathbb R$ kao neprebrojiv skup nema totalnu reprezentaciju. Kako god pokušali~\cite{url:calc}, ne možemo u računalu reprezentirati proizvoljan realan broj, i to nema veze s ograničenom veličinom naših računala.
 \end{napomena}
@@ -113,7 +113,7 @@ Prije dokaza samo primijetimo da je nula problematična u operaciji $\sslash$, a
 \begin{proof}
 Cjelobrojno dijeljenje zapravo je ponovljeno oduzimanje, onoliko puta koliko se može. Dakle, za zadane $x$ i $y$, tražimo najveći $t$ takav da je $t\cdot y\le x$. Relacija $t\cdot y\le x$ je svakako primitivno rekurzivna, ali nemamo operator maksimizacije. S razlogom ga općenito nemamo: ako malo razmislimo, vidjet ćemo da ne postoji općeniti algoritam kojim bismo odredili najveći broj s nekim svojstvom, čak ni ako znamo da taj broj postoji, jer nikad ne znamo jesmo li tražili dovoljno dugo --- u svakom trenutku iznad najvećeg broja koji smo ispitali postoji još beskonačno mnogo kandidata, svaki od kojih može biti traženi broj.
 
-Ipak, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y$ postane veće od $x$, ostat će veće od $x$ za sve veće $t$. Kod takvih relacija, "prva laž" i "zadnja istina" su susjedne, te jednostavno možemo naći najmanji $t$ za koji vrijedi $t\cdot y>x$, i uzeti njegov prethodnik.
+Srećom, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y$ postane veće od $x$, ostat će veće od $x$ za sve veće $t$. Kod takvih relacija, "prva laž" i "zadnja istina" su susjedne, te jednostavno možemo naći najmanji $t$ za koji je $t\cdot y>x$, i uzeti njegov prethodnik.
 
 Ipak, to je neograničena minimizacija, a mi bismo htjeli primitivno rekurzivnu funkciju --- možemo li je nekako ograničiti? Svakako: $y\bump\ge 1$ znači $t\cdot y\bump\ge t$ za svaki $t$, te specijalno $(x+1)\cdot y\bump\ge x+1>x$. Dakle, dovoljno je tražiti $t$ do $x+1$ --- odnosno do $x$ uključivo, jer znamo da će ograničena minimizacija tada dati $x+1$ ako ne pronađe nijedan broj s traženim svojstvom u zadanom rasponu. Sve u svemu, tvrdimo da vrijedi
 \begin{equation}\label{eq:sslash}
@@ -399,7 +399,7 @@ Vjerojatno najpoznatija funkcija definirana rekurzijom s poviješću je Fibonacc
     \f{Fib}(n)&:=n\text{, za  $n<2$;}\\
     \f{Fib}(n)&:=\f{Fib}(n-1)+\f{Fib}(n-2)\text{, inače.}
 \end{align}
-Dokažimo da je $\f{Fib}^1$ primitivno rekurzivna. Po propoziciji~\ref{prop:rekpov}, dovoljno je naći primitivno rekurzivnu funkciju $\f G$ koja prima povijest $p:=\overline{\f{Fib}}(n)$ (kod prvih $n$ vrijednosti Fibonaccijevog niza), te vraća sljedeću vrijednost $\f{Fib}(n)$. Kao što smo rekli, $n$ uvijek možemo dobiti kao $\f{lh}(p)$. Pomoću njega možemo i napisati pomoćnu funkciju za indeksiranje "s kraja" (koja je i inače prilično korisna: moderni programski jezici često dozvoljavaju indeksiranje s kraja pomoću negativnih indeksa, ali mi nemamo negativne brojeve pa ćemo upotrijebiti drugu funkciju):
+Dokažimo da je $\f{Fib}^1$ primitivno rekurzivna. Po propoziciji~\ref{prop:rekpov}, dovoljno je naći primitivno rekurzivnu funkciju $\f G$ koja prima povijest $p:=\overline{\f{Fib}}(n)$ (kod prvih $n$ vrijednosti Fibonaccijevog niza), te vraća sljedeću vrijednost $\f{Fib}(n)$. Kao što smo rekli, $n$ uvijek možemo dobiti kao $\f{lh}(p)$. Pomoću njega možemo i napisati pomoćnu funkciju za indeksiranje "s kraja" (koja je i inače prilično korisna; moderni programski jezici često dozvoljavaju indeksiranje s kraja pomoću negativnih indeksa, ali mi nemamo negativne brojeve pa ćemo upotrijebiti drugu funkciju):
 \begin{align}\label{eq:rpartdef}
     \f{rpart}(c,i)&:=\begin{cases}
     c[\f{lh}(c)\ominus\f{Sc}(i)],&i<\f{lh}(c)\\
@@ -737,7 +737,7 @@ Ipak, za proizvoljne $(x,e,n)\in\N^3$, može se dogoditi da vrijedi $\f{Final}'(
 \begin{primjer}\label{pr:Final'}
 Recimo, za $x=100$ i $e=10^{217}$, prvo bismo odredili
 $\f{start}(100)$. Broj $100$ ima dva prim-djelitelja ($2$ i $5$), pa je $\f{lh}(100)=2$. Iz toga $\f{start}(100)=3^{100[0]}\cdot5^{100[1]}=\knk{0,1,0,0,\dotsc}=3=\f{Reg}(100,10^{217},0)$. Dakle, $\reg1$ kreće od $1$, a svi ostali registri od nule.  $\f{Count}(100,10^{217},0)=0$ jer \textsc{pc} uvijek kreće od nule.
-% \eq stigao do ovdje
+% \eq stigao do ovdje % dovde stiglo jednakost
 
 Sada odredimo "trenutnu instrukciju": $e[0]=216=2^3\cdot3^3=\langle2,2\rangle=\kins{\goto\;2}\in\f{InsGOTO}$, te je $\f{Count}(100,10^{217},1)=\f{dest}(216)=2=\f{lh}(e)$. Dakle, $\f{Final}'(100,10^{217},1)$ vrijedi --- no nema smisla reći da to reprezentira zaustavljanje nekog iz\-ra\-ču\-na\-va\-nja, jer ne postoje $P\in\mathcal Prog$ i $\vec x\in\N^+$ takvi da bi to bilo $P$-izračunavanje s $\vec x$.
 \end{primjer}
@@ -759,7 +759,7 @@ Za specifikaciju, smjer slijeva nadesno, raspetljavanjem definicije od $\f{Final
     \item $\f{Seq}(x)$, dakle $x=\langle\vec x\rangle$ za neki $\vec x\in\N^*$, jer je $\f{Seq}=\im{\langle\,\cdots\rangle}$;
     \item $x\not=1=\langle\rangle$, dakle $\vec x$ je neprazan, jer je $\langle\,\cdots\rangle$ injekcija;
     \item $\f{Prog}(e)$, dakle $e=\kprog{P}$ za neki RAM-program $P$, jer je $\f{Prog}=\im{\kprog{\cdots}}$;
-    \item $\f{Count}(x,e,n)=\f{lh}(e)$, što prema lemi~\ref{lm:RegCountprn} (koju možemo primijeniti zbog prethodne tri stavke) znači da je $n$-ta konfiguracija u $P$-izračunavanju s $\vec x$ završna --- iz čega slijedi da ono stane, te je prvi indeks završne konfiguracije u izračunavanju manji ili jednak $n$.
+    \item $\f{Count}(x,e,n)\eq\f{lh}(e)$, što prema lemi~\ref{lm:RegCountprn} (koju možemo primijeniti zbog prethodne tri stavke) znači da je $n$-ta konfiguracija u $P$-izračunavanju s $\vec x$ završna --- iz čega slijedi da ono stane, te je prvi indeks završne konfiguracije u izračunavanju manji ili jednak $n$.
 \end{itemize}
 Analogno, zaključivanjem u suprotnom smjeru, dobijemo i drugi smjer tvrdnje.
 \end{proof}
@@ -786,7 +786,7 @@ Funkcija $\f{univ}^2$ je parcijalno rekurzivna, i za sve $x,e\in\N$ vrijedi:
 \end{enumerate}
 \end{lema}
 \begin{proof}
-Parcijalna rekurzivnost slijedi direktno iz~\eqref{eq:univdef}, iz primitivne rekurzivnosti funkcije $\f{result}=\f{ex}\circ(\f I_1^1,\f Z)$ i $\f{Reg}$, te parcijalne rekurzivnosti funkcije $\f{step}$.
+Parcijalna rekurzivnost slijedi direktno iz~\eqref{eq:univdef}, iz primitivne rekurzivnosti funkcija $\f{result}=\f{ex}\circ(\f I_1^1,\f Z)$ i $\f{Reg}$, te parcijalne rekurzivnosti funkcije $\f{step}$.
 
 Za tvrdnju~\ref{tv:univ}, pretpostavke znače da postoji konfiguracija u $P$-izračunavanju s $\vec x$ koja je završna. Prema lemi~\ref{lm:Finalspec}, to znači $\exists n\,\f{Final}(x,e,n)$, odnosno $(x,e)\in\exists_*\f{Final}=\dom{\f{step}}$, pa postoji $n_0:=\f{step}(x,e)$, i $\f{Reg}(x,e,n_0)$ je kod stanja registara u završnoj konfiguraciji $c_{n_0}$ tog izračunavanja.
 \begin{equation}
@@ -849,7 +849,7 @@ Funkcija $\f{step}$ jest izračunljiva, ali budući da nam treba \emph{relacija}
 Primijetimo da \textbf{ne možemo} napisati $n=\f{step}(x,e)$ kao točkovnu definiciju relacije $\f{Step}$ --- to bi simbolički glasilo $\chi_{\f{Step}}=\chi_=\circ\bigl(\f I_3^3,\f{step}\circ(\f I_1^3,\f I_2^3)\bigr)$, što jednostavno nije istina jer te dvije funkcije imaju različite domene: lijeva je totalna, a desna je definirana samo na $HALT\times\N$. To je samo jedan od problema koje imamo s parcijalnim funkcijama, koji su osnovni razlog zašto se držimo primitivno rekurzivnih funkcija dok god možemo: vidjet ćemo kasnije da općenito graf (baš kao ni domena) izračunljive funkcije ne mora biti izračunljiv.
 \end{napomena}
 
-Ipak, za totalne funkcije takav rezultat vrijedi, što možemo već sada dokazati. Prvo strogo definirajmo graf, i dokažimo jednu tehničku lemu.
+Ipak, za totalne funkcije takav rezultat vrijedi, i to već sada možemo dokazati. Prvo strogo definirajmo graf, i dokažimo jednu tehničku lemu.
 
 \begin{definicija}
 Neka je $k\in\N_+$ i $f^k$ funkcija. \emph{Graf} funkcije $f$ je relacija $\graf f^{k+1}$ zadana s
@@ -1106,20 +1106,20 @@ Recimo da imamo funkciju $F\colon\mathcal Comp_2\rightharpoonup\mathcal Comp_3$.
 \begin{equation}\label{eq:parcspecind}
     \kf{\N F(e)}^3=F(\kf e^2)\text.
 \end{equation}
-Preciznije, ako $F$ preslikava $\f f^2$ u $\f g^3$, tada $\N F$ mora preslikavati \emph{svaki} indeks za $\f f^2$ u \emph{neki} (ne nužno isti) indeks za $\f g^3$. A ako $\f f\not\in\dom F$, tada \emph{nijedan} indeks za $\f f$ ne smije biti u $\dom{\N F}$. Takvih funkcija općenito ima neprebrojivo mnogo --- jer indeksa za svaku $\f g\in\im F$ ima beskonačno mnogo --- pa ih ima i neizračunljivih. Ali ako \emph{postoji} bar jedna takva funkcija koja je izračunljiva u nekom smislu i zadovoljava~\eqref{eq:parcspecind}, kažemo da je $F$ izračunljiva u istom tom smislu.
+Riječima, ako $F$ preslikava $\f f^2$ u $\f g^3$, tada $\N F$ mora preslikavati \emph{svaki} indeks za $\f f^2$ u \emph{neki} (ne nužno isti) indeks za $\f g^3$ --- a ako $\f f\not\in\dom F$, tada \emph{nijedan} indeks za $\f f$ ne smije biti u $\dom{\N F}$. Takvih funkcija općenito ima neprebrojivo mnogo --- jer indeksa za svaku $\f g\in\im F$ ima beskonačno mnogo --- pa ih ima i neizračunljivih. Ali ako \emph{postoji} bar jedna takva funkcija koja je izračunljiva u nekom smislu i zadovoljava~\eqref{eq:parcspecind}, kažemo da je $F$ izračunljiva u istom tom smislu.
 
 Takve funkcije možemo i komponirati: ako imamo $G\colon\mathcal Comp_3\rightharpoonup\mathcal Comp_1$ sa sličnom specifikacijom, koja preslikava $\f g^3$ u $\f h^1$, tada iako ne znamo koji će nam indeks od $\f g$ funkcija $\N F$ dati, funkcija $\N G$ mora ispravno raditi za \emph{sve} indekse od $\f g$, pa će na kraju $\N G\circ\N F$ dati neki indeks za $\f h$, ako joj damo (bilo koji) indeks za $\f f$.
 \end{primjer}
 
 Naravno, to možemo kombinirati s dosad napravljenim kodiranjima: recimo, funkcija $apply_k\colon\N^k\times\mathcal Comp_k\rightharpoonup\N$, koja prima $\vec x^k$ i $\f f^k$, i vraća $\f f(\vec x)$ ako je $\vec x\in\dom{\f f}$, ima svoju prateću funkciju koja prima $\langle\vec x\rangle$ i bilo koji indeks za $\f f$, i vraća $\f f(\vec x)$ ako postoji.
 \begin{equation}
-    \N apply_k(x,e):\simeq\f{univ}(x,e)\text{, za }\f{lh}(x)=k
+    \N apply_k(x,e):\simeq\f{univ}(x,e)\text{, za }\f{lh}(x)\eq k
 \end{equation}
 
 \begin{napomena}\label{nap:restrprek}
 Nažalost, iz toga još uvijek ne slijedi da je takva funkcija izračunljiva, iako su $\f{univ}$, $\f{lh}$ i $=$ izračunljive --- jer trebamo neki rezultat koji kaže da je restrikcija parcijalno rekurzivne funkcije na (primitivno) rekurzivan skup ponovo parcijalno rekurzivna. To sigurno možemo "na prste" --- recimo, probajte pokazati da je 
     \begin{equation}\label{eq:restrprek}
-        (\f G|_{\f R})(\vec x)\simeq\f G(\vec x)+\mu y\bigl(\f{Sc}(y)=\chi_{\f R}(\vec x)\bigr)
+        (\f G|_{\f R})(\vec x)\simeq\f G(\vec x)+\mu y\bigl(\f{Sc}(y)\eq\chi_{\f R}(\vec x)\bigr)
 \end{equation}
 --- ali zapravo će to trivijalno slijediti iz rezultata u idućoj točki. %Ipak, ideja prikaza restrikcije kao zbroja s funkcijom koja je na nekom lijepom skupu nula, a izvan njega nedefinirana --- bit će nam od koristi kasnije, u poglavlju~\ref{ch:re}.
 \end{napomena}
