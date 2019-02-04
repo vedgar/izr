@@ -597,7 +597,7 @@ Samo treba napisati definiciju:
 Primitivna rekurzivnost slijedi iz propozicija~\ref{pp:primeprn} i~\ref{prop:lhpartprn}, napomene~\ref{nap:sumprodH} i primjera~\ref{pr:addmulpow}. Prim-brojevi su pomaknuti jer adrese ulaznih registara počinju od $1$.
 \end{proof}
 
-Napomenimo da funkcija $\f{start}$ nije injekcija: recimo, $\f{start}(\langle2,1\rangle)=\f{start}(\langle2,1,0,0\rangle)=\knk{0,2,1,0,0,\dotsc}$, odnosno $\f{start}(72)=\f{start}(2520)=45$. Ali preslikavanje $\knk{\cdots}$ jest injekcija (kao što kodiranje i treba biti), po osnovnom teoremu aritmetike. Također po osnovnom teoremu aritmetike, slika mu je $\im{\knk{\cdots}}=\N_+$, što smo dokazali primitivno rekurzivnim još odavno (primjer~\ref{pr:N+prn}).
+Napomenimo da funkcija $\f{start}$ nije injekcija: recimo, $\f{start}(\langle2,1\rangle)=\f{start}(\langle2,1,0,0\rangle)=\knk{0,2,1,0,0,\dotsc}$, odnosno $\f{start}(72)=\f{start}(2520)=45$. Ali preslikavanje $\knk{\cdots}$ jest injekcija (kao što kodiranje i treba biti), po osnovnom teoremu aritmetike. Također po osnovnom teoremu aritmetike, slika mu je $\im{\knk{\cdots}}=\N_+$, što smo dokazali primitivno rekurzivnim još davno (primjer~\ref{pr:N+prn}).
 
 Što se komponenata tiče, $\f{lh}$ nema smisla, a za indeksiranje služi funkcija $\f{ex}$ iz leme~\ref{lm:exprn}. Doista, $\f{ex}(\knk{r_0,r_1,\dotsc,0,0,\dotsc},i)=r_i$, jer je to upravo eksponent od $p_i$ u tom kodu. Koristit ćemo je u očitavanju rezultata (sadržaj registra $\reg0$ u završnoj konfiguraciji).
 \begin{equation}\label{eq:resultdef}
@@ -677,19 +677,19 @@ za svaki RAM-program $P$, za svaki neprazni konačni niz $\vec x$, za svaki prir
 \end{lema}
 Preciznije, ako je $P$-izračunavanje s $\vec x$ niz $(c_n)_{n\in\N}$, tada je $\f{Reg}(\langle\vec x\rangle, \kprog{P},n)=c_n(\reg{*})$, a $\f{Count}(\langle\vec x\rangle,\kprog{P},n)=c_n(\textsc{pc})$.
 \begin{proof}
-To što smo razdvojili reprezentaciju izračunavanja na dvije funkcije ne znači da ih možemo računati odvojenim algoritmima. Lako je vidjeti da, prema lemi~\ref{lema:ramdet}, sljedeća konfiguracija ovisi samo o neposredno prethodnoj (kao Markovljev lanac, samo deterministički), ali o oba njena dijela --- i o registrima i o brojaču. To znači da je prirodni način definiranja tih funkcija \emph{simultana rekurzija}.
+    To što smo razdvojili reprezentaciju izračunavanja na dvije funkcije ne znači da ih možemo računati odvojenim algoritmima. Lako je vidjeti da, prema lemi~\ref{lema:ramdet}, sljedeća konfiguracija ovisi samo o neposredno prethodnoj (izračunavanje je \emph{memoryless} --- kao Markovljev lanac, samo što je determinističko), ali o oba njena dijela --- i o registrima i o brojaču. To znači da je prirodni način definiranja tih funkcija \emph{simultana rekurzija}.
 
-Za nju nam prvo trebaju inicijalizacije, odnosno vrijednosti funkcija u $n=0$. To je lako: nakon $0$ koraka stanje registara je početna konfiguracija s ulazom $\vec x$, čiji se kod može dobiti iz koda $x:=\langle\vec x\rangle$ funkcijom $\f{start}$ iz leme~\ref{lm:startprn}:
+Za nju nam prvo trebaju inicijalizacije, odnosno vrijednosti funkcija u $n=0$. To je lako: nakon $0$ koraka stanje registara je početna konfiguracija s ulazom $\vec x$, čiji se kod može dobiti iz koda $\langle\vec x\rangle$ funkcijom $\f{start}$ iz leme~\ref{lm:startprn}:
 \begin{equation}
-    \f{Reg}(x,e,0)=\knk{0,x_1,x_2,\dotsc,x_k,0,0,\dotsc}=\f{start}(x)\text,
+    \f{Reg}(\langle\vec x\rangle,e,0)=\knk{0,x_1,x_2,\dotsc,x_k,0,0,\dotsc}=\f{start}(\langle\vec x\rangle)\text,
 \end{equation}
-dakle za općenitu točkovnu definiciju inicijalizacijske funkcije za $\f{Reg}$ (gdje je $x\in\N$ proizvoljan) možemo uzeti
+pa za općenitu točkovnu definiciju inicijalizacijske funkcije za $\f{Reg}$ (gdje je $x\in\N$ proizvoljan) uzmimo
 \begin{equation}
     \f{Reg}(x,e,0):=\f G_1(x,e):=\f{start}(x)\text.
 \end{equation}
 Inicijalizacija za $\f{Count}$ je još jednostavnija: $\f G_2:=\f C_0^2$, jer je početna vrijednost programskog brojača uvijek $0$.
 
-Prelazimo na korak računanja. Za njega nam trebaju funkcije $\f H_1^5$ i $\f H_2^5$, koje primaju $x$ i $e$, broj već napravljenih koraka $n$, te stare vrijednosti koda stanja registara $r$ i programskog brojača $p$ --- a vraćaju nove vrijednosti $r'$ i $p'$ redom. Njih dobijemo pomoću $\f{NextReg}$ i $\f{NextCount}$, s tim da sad moramo voditi računa i o završnim konfiguracijama, i preslikati ih u same sebe. $\f{NextReg}$ to već čini, jer ako $t$ nije kod instrukcije,~\eqref{eq:NextRegdef} kaže da je $\f{NextReg}(t,r)=r$ --- no za $\f H_2$ ćemo morati granati.
+Prelazimo na korak računanja. Za njega nam trebaju funkcije $\f H_1^5$ i $\f H_2^5$, koje primaju $x$ i $e$, broj već napravljenih koraka $n$, te stare vrijednosti koda stanja registara $r$ i programskog brojača $p$ --- a vraćaju nove vrijednosti $r'$ i $p'$ redom. Njih dobijemo pomoću $\f{NextReg}$ i $\f{NextCount}$, s tim da sad moramo voditi računa i o završnim konfiguracijama, i ostaviti ih fiksnima. $\f{NextReg}$ to već čini, jer ako $t$ nije kod instrukcije,~\eqref{eq:NextRegdef} kaže da je $\f{NextReg}(t,r)=r$ --- no za $\f H_2$ ćemo morati granati.
 \begin{align}
 %\SwapAboveDisplaySkip
     \f H_1(x,e,n,r,p)&:=\f{NextReg}(e[p],r)\text,\\

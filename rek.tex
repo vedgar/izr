@@ -235,7 +235,7 @@ Skup $\mathcal Comp$ je zatvoren na primitivnu rekurziju.
 \begin{proof}
 Neka je $k\in\N_+$, te neka su $\f G^k,\f H^{k+2}\in\mathcal Comp$ totalne funkcije. One su RAM-izračunljive, pa postoje RAM-algoritmi $P_{\f G}^k$ i $P_{\f H}^{k+2}$ koji ih redom računaju. Želimo naći program koji računa funkciju $\f F^{k+1}:=\f G\pr\f H$. Dakle, u registrima $\reg1$ do $\reg{k}$ se nalazi $\vec x$, dok se u $\reg{k+1}$ nalazi $y$, broj ponavljanja petlje odnosno broj izračunavanja funkcije $\f H$. Prvo, prije petlje moramo izračunati funkciju $\f G$ na prvih $k$ ulaznih registara. Rezultat između prolazaka kroz petlju držat ćemo u $\reg0$, tako da završetkom petlje već bude spreman kao izlazni podatak. Petlju pišemo na standardni način koji smo već vidjeli u makroima $\textsc{zero}$, $\textsc{remove}$, $\textsc{move}$, i programu $P_{\f{add}^3}$. Kontrolnu varijablu držimo u pomoćnom registru $\reg{k+2}$ --- primijetimo da za to ne možemo koristiti $\reg{k+1}$ jer idu u suprotnim smjerovima: svakim izvršavanjem petlje $\reg{k+1}$ se dekrementira, dok se kontrolna varijabla mora inkrementirati (jer broji koliko puta smo izvršili petlju).
 
-    Primijetimo još da kontrolnu varijablu ne treba inicijalizirati: kako $\reg{k+2}$ nije ulazni registar, na početku izračunavanja njegov sadržaj već jest $0$. Također, inkrementiranjem kontrolne varijable \emph{nakon} izvođenja petlje (funkcijski makro s $P_{\f H}$) postižemo brojenje od nule; inkrementiranjem prije računanja $\f H$ postigli bismo brojenje od $1$ do uključivo $y$. Programski jezici koji broje od nule obično zahtijevaju inkrement nakon: recimo, standard jezika C propisuje da se u~\eqref{prog:Cprloop} inkrement \texttt{++i} obavi nakon tijela petlje.
+    Primijetimo još da kontrolnu varijablu ne treba inicijalizirati: kako $\reg{k+2}$ nije ulazni registar, na početku izračunavanja njegov sadržaj već jest $0$. Također, inkrementiranjem kontrolne varijable \emph{nakon} izvođenja petlje (funkcijski makro s $P_{\f H}$) postižemo brojenje od nule; inkrementiranjem prije računanja $\f H$ postigli bismo brojenje od $1$ do uključivo $y$. Programski jezici koji broje od nule obično zahtijevaju inkrement poslije: recimo, standard jezika C propisuje da se u~\eqref{prog:Cprloop} inkrement \texttt{++i} obavi nakon tijela petlje.
 
 Dakle, tvrdimo da makro-program
 \begin{equation}
@@ -717,8 +717,9 @@ Za svaki $k\in\N_+$, funkcije $\f{add}^k$ i\, $\f{mul}^k$, zadane s
 primitivno su rekurzivne.
 \end{lema}
 \begin{proof}
-Matematičkom indukcijom po $k$. Za $k=1$, vidimo da je $\f{add}^1=\f{mul}^1=\f I_1^1$, inicijalna funkcija. Za $k=2$, tvrdnja slijedi iz primjera~\ref{pr:addmulpow}. Pretpostavimo sad da su za neki $l\in\N\setminus\{0,1\}$, funkcije $\f{add}^l$ i $\f{mul}^l$ primitivno rekurzivne. Tada točkovnu definiciju
+Matematičkom indukcijom po $k$. Za $k=1$, vidimo da je $\f{add}^1=\f{mul}^1=\f I_1^1$, inicijalna funkcija. Za $k=2$, tvrdnja slijedi iz primjera~\ref{pr:addmulpow}. Pretpostavimo sad da su za neki $l\in\N\setminus\{0,1\}$, funkcije $\f{add}^l$ i $\f{mul}^l$ primitivno rekurzivne. Tada definiciju
 \begin{align}
+%\SwapAboveDisplaySkip
     x_1+x_2+\dotsb+x_l+x_{l+1}&:=(x_1+x_2+\dotsb+x_l)+x_{l+1}
 \intertext{možemo zapisati kao}
     \f{add}^{l+1}(x_1,x_2,\dotsc,x_l,x_{l+1})&=\f{add}^2\bigl(\f{add}^k(x_1,x_2,\dotsc,x_l),x_{l+1}\bigr)
