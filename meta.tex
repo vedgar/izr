@@ -555,11 +555,11 @@ Sada zapišimo taj sustav u obliku opće rekurzije. Prvo skupimo sve te jednadž
         \;\f{Astart}(x,z),&\text{inače}
     \end{cases}\text,
 \end{equation}
-a zatim to napišimo u obliku $\f{comp}_k(x,y,z,e)=\f G(x,y,z,e)$, gdje je očito $k=3$, $e$ je traženi indeks, a funkcija $\f G^4$ je zadana s
+a zatim to napišimo u obliku opće rekurzije $\f{comp}_k(x,y,z,e)=\f G(x,y,z,e)$, gdje je očito $k=3$, $e$ je traženi indeks, a funkcija $\f G^4$ je zadana s
 \begin{equation}
     \f G(x,y,z,e):\simeq\begin{cases}
-        \;\f{comp}_3\bigl(x,\f{comp}_3\bigl(x,\f{pd}(y),z,e\bigr),\f{pd}(z),e\bigr),&y>0\land z>0\\
-        \;y+1,&z=0\\
+        \;\f{comp}_3\bigl(x,\f{comp}_3\bigl(x,\f{pd}(y),z,e\bigr),\f{pd}(z),e\bigr),&y\in\N_+\land z\in\N_+\\
+        \;\f{Sc}(y),&z=0\\
         \;\f{Astart}(x,z),&\text{inače}
     \end{cases}
 \end{equation}
