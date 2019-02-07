@@ -452,19 +452,14 @@ Neka je $k\in\N_+$, te $\f G^{k+1}$ parcijalno rekurzivna funkcija. Tada postoji
 \begin{proof}
     Definiramo funkciju $\f H^{k+1}$ pomoću $\f H(\vec x,f):\simeq\f G\bigl(\vec x,\f D_k(f)\bigr)$. Ta funkcija je očito parcijalno rekurzivna (dobivena je kompozicijom iz $\f G$, $\f D_k$ i koordinatnih projekcija), pa ima indeks: označimo ga s $h$ (sjetite se napomene~\ref{nap:>1ind}).
 
-Tvrdimo da je $e:=\f D_k(h)$ traženi indeks. Doista, za sve $\vec x\in\N^k$ imamo
-\begin{multline}
+    Tvrdimo da je $d\f H$ rješenje opće rekurzije, odnosno njen indeks $e:=\f D_k(h)$ je traženi broj. Doista, za sve $\vec x\in\N^k$ imamo
+\begin{equation}
     \kf e(\vec x)\simeq
-    \f{comp}_k(\vec x,e)\simeq
-    \f{comp}_k\bigl(\vec x,\f D_k(h)\bigr)\simeq
-    \f{comp}_k\bigl(\vec x,\f S_k(h,h)\bigr)\simeq{}\\
-    {}\simeq
-    \f{comp}_{k+1}(\vec x,h,h)\simeq
-    \kf h(\vec x,h)\simeq
+    d\f H(\vec x)\simeq
     \f H(\vec x,h)\simeq
     \f G\bigl(\vec x,\f D_k(h)\bigr)\simeq
     \f G(\vec x,e)\text,
-\end{multline}
+\end{equation}
 što smo trebali dokazati.
 \end{proof}
 
