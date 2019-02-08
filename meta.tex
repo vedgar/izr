@@ -8,7 +8,7 @@ Kao što smo već nagovijestili, počet ćemo sa \emph{specijalizacijom}, način
 
 \begin{itemize}
     \item Funkcija $\f{blh}$ iz leme~\ref{lm:blh} dobivena je specijalizacijom funkcije $\f{slh}$, fiksirajući njen zadnji (drugi) argument na $2$. Skraćeno kažemo da je $\f{blh}$ $2$-specijalizacija $\f{slh}$, i pišemo $\f{blh}=spec(2,\f{slh})$.
-    \item Operacija $\conc{}$ je $12$-specijalizacija funkcije $\f{concat}$ (propozicija~\ref{pp:concprn}).
+    \item Operacija $\conc{}$ je $12$-specijalizacija funkcije $\f{sconcat}$ (propozicija~\ref{pp:concprn}).
     \item Općenito u primitivnoj rekurziji~\eqref{eq:defprb}, baza je zapravo $0$-specijalizacija definirane funkcije: $G=spec(0,G\pr H)$.
     \item Za svaki konkretni $e\in\N$ i $k\in\N_+$, funkcija $\kf e^k$ je $e$-specijalizacija funkcije $\f{comp}_k$.
     \item Baza $\f G_3$ za funkciju $\f{Tape}$ (lema~\ref{lm:StateHeadTapeprn} --- $0$-specijalizacija $\f{Tape}$) je dobivena specijalizacijom funkcije $\f{Recode}$, fiksirajući njena dva zadnja argumenta na $b'$ i $b$ redom. Vidimo da možemo specijalizirati i s obzirom na više argumenata, što je samo višestruka primjena specijalizacije jednog argumenta.
@@ -425,14 +425,14 @@ Ali ako već želimo tako zaobilaziti statičke tipove, puno je jednostavnije pr
 Refaktorirajmo ovu duplikaciju koda za dijagonaliziranje, u definiciji i pozivu \texttt H:
 
 \begin{verbatim}
-            >>> def D(H):
+            >>> def d(H):
             ...     def dH(x):
             ...         return H(x, H)
             ...     return dH
             >>> def H(n, f):
-            ...     if n: return D(f)(n-1)
+            ...     if n: return d(f)(n-1)
             ...     else: return 1
-            >>> factorial = D(H)
+            >>> factorial = d(H)
             >>> factorial(7)
             5040
 \end{verbatim}
@@ -441,10 +441,10 @@ Dobra strana toga je da više ne moramo ručno proizvoditi funkciju \texttt H iz
             >>> def G(n, f):
             ...     if n: return n * f(n-1)
             ...     else: return 1
-            >>> def H(x, f): return G(x, D(f))
+            >>> def H(x, f): return G(x, d(f))
 \end{verbatim}
 
-I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo promotrimo, vidjet ćemo da nigdje nismo koristili rekurzivne pozive. Sad samo sve to treba napisati matematički.
+I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćemo da nigdje nismo koristili rekurzivne pozive. Sad samo sve to treba napisati matematički.
 
 \begin{teorem}[Teorem rekurzije]\label{tm:rek}
 Neka je $k\in\N_+$, te $\f G^{k+1}$ parcijalno rekurzivna funkcija. Tada postoji $e\in\N$ takav da za sve $\vec x\in\N^k$ vrijedi $\kf e^k(\vec x)\simeq\f G(\vec x,e)$.

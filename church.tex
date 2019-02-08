@@ -414,7 +414,7 @@ Za ulaz $u\in\N$ (koji dalje promatramo kao $(u)\in\N^1$):
     \models^?
     %\end{array}}
     \zeta$.
-    \item\label{step:varphi_u} Pretvorimo ga (koristeći dokaz propozicije~\ref{pp:valj<>zaklj}) u instancu problema valjanosti neke formule $\varphi_u$.
+    \item\label{step:varphi_u} Pretvorimo je (koristeći dokaz propozicije~\ref{pp:valj<>zaklj}) u instancu problema valjanosti neke formule $\varphi_u$.
     \item Provjerimo (koristeći $\mathcal A$) je li tako dobivena formula valjana.
 \end{enumerate}    
 \end{quote}
@@ -513,7 +513,7 @@ uz tipove tokena
 ($Var$, $Const$, $Func$ i $Rel$ su leksičke varijable, dok su $Form$, $Term$ i $Terms$ sintaksne varijable; $Form$ je početna varijabla). Objašnjenje pojmova i dokaze tvrdnji koje smo naveli zainteresirani čitatelj može pronaći u~\cite{sipser}.
 \end{proof}
 
-Iz prethodne propozicije slijedi (po teoremu~\ref{tm:oikr}) da je $\kr{F1}$ rekurzivan skup. Drugim riječima, ako restringiramo $\N\Sigma_{\log}^*$ na formule prvog reda zapisane u osnovnom jeziku, imamo kodiranje formula. Za konstruktore tog skupa moramo prvo napraviti leksičke konstruktore za pojedine tokene, ali to doista nije teško. U daljem tekstu često koristimo konkatenaciju u pomaknutoj bazi $12$, koju zovemo jednostavno \emph{konkatenacijom}, te umjesto $\conc{12}$ pišemo samo $\conc{}$.
+Iz prethodne propozicije slijedi (po teoremu~\ref{tm:oikr}) da je $\kr{F1}$ rekurzivan skup. Drugim riječima, ako restringiramo $\N\Sigma_{\log}^*$ na formule prvog reda zapisane u osnovnom jeziku, imamo kodiranje formula. Za konstruktore tog skupa moramo prvo napraviti leksičke konstruktore za pojedine tokene, ali to doista nije teško. U nastavku često koristimo konkatenaciju u pomaknutoj bazi $12$, koju zovemo jednostavno \emph{konkatenacijom}, te umjesto $\conc{12}$ pišemo samo $\conc{}$.
 
 \begin{lema}\label{lm:lexF1}
 Postoje primitivno rekurzivne funkcije $\f{Var}$, $\f{Const}$, $\f{Func}$ i $\f{Rel}$ koje preslikavaju $i\in\N$ redom u $\kr{x_i}$, $\kr{c_i}$, $\kr{f_i}$ i $\kr{R_i}$.
@@ -714,7 +714,7 @@ Modus ponens i generalizacija su sintaksno vrlo jednostavni.
 
 Odnosno, $\alpha$ je dobivena modus ponensom iz $\beta$ i $\gamma$ ako i samo ako je $\beta=(\gamma\to\alpha)$. Također, $\alpha$ je dobivena generalizacijom iz $\beta$ ako postoji $k$ takav da je $\alpha=\forall x_k\beta$. Pri tome primijetimo da je $k<k+1=\dulj{x_k}<\dulj{\forall x_k}<\dulj{\alpha}\le\kr\alpha=a$ po lemi~\ref{lm:dulj<=kr}, pa možemo ograničiti kvantifikaciju po $k$.
 
-Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, te provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana. Za elegantan pristup koji zaobilazi supstituciju u slučaju PA, pogledati~\cite{smullyan}.
+Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, te provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana. Za elegantan pristup koji zaobilazi supstituciju u slučaju PA, pogledajte~\cite{smullyan}.
 
 Pogledajmo sada sljedeći \emph{paralelni} algoritam:
 \begin{quote}
