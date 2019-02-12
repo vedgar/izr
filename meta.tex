@@ -347,7 +347,7 @@ Naravno, netrivijalan je samo u formalnom smislu: intuitivno, lako je objasniti 
 
 \subsection{Dijagonalna funkcija}
 
-Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odnosno pozvana s argumentima $\vec x$, mora se ponašati kao funkcija $\f G$ pozvana s $\vec x$ i još indeksom $e$.
+Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odnosno pozvana s argumentima $\vec x$, mora se ponašati kao funkcija $\f G$ pozvana s $\vec x$ i još indeksom $e$. Drugim riječima, želimo $\kf e^k=spec(e,G)$.
 
 Recimo, u slučaju funkcije \texttt{factorial}, kompajler se brine da poziv te funkcije u njenom kodu doista pozove nju samu (sa za jedan manjim argumentom), ali da kojim slučajem kompajler ne podržava rekurziju, mogli bismo (pokazivač na) funkciju \texttt{factorial} prenijeti u samu sebe kao dodatni parametar.
 
@@ -368,23 +368,18 @@ Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} 
 Matematički, "pokazivač na funkciju" nije ništa drugo nego njen indeks, što motivira sljedeću definiciju.
 
 \begin{definicija}
-Neka je $k\in\N_+$, te $\f H^{k+1}$ parcijalno rekurzivna funkcija. \emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $d\f H$, definirana s $d\f H(\vec x):\simeq\f H(\vec x,h)$, gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
+    Neka je $k\in\N_+$, te $\f H^{k+1}$ parcijalno rekurzivna funkcija. \emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $d\f H:=spec(h,H)$, gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
 \end{definicija}
 
-Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će ionako biti bitna samo prateća funkcija $\N d$, koja je definirana na indeksima.
+Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će ionako biti bitna samo prateća funkcija $\f D=\N d$, koja je definirana na indeksima.
 
 U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad radimo s pokazivačem na funkciju, funkcijski poziv. Standard jezika C čak zabranjuje ikakvu aritmetiku na funkcijskim pokazivačima, ali neki kompajleri to ipak dozvoljavaju. Slično, ovdje bismo mogli $h$ iskoristiti ne samo kao zadnji argument funkcije $\f{comp}_k$, nego raditi razne čudne stvari poput gledanja počinje li "strojni kod" funkcije $\f H$ instrukcijom \inc\ ($\f{InsINC}(h[0])$), i sličnog --- ali najčešće to ne činimo, a dok god $h$ koristimo samo za pozivanje funkcije $\f H$, svejedno je koji njen indeks smo uzeli.
 
 \begin{lema}
-Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$, koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $d\f H$, i to upravo one koja je definirana pomoću indeksa $h$.
+    Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$, koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $d\f H=spec(h,H)$.
 \end{lema}
 \begin{proof}
-Samo treba raspisati definicije. Želimo da za sve $h\in\N$ i za sve $\vec x\in\N^k$, vrijedi
-\begin{equation}
-    \kf{\f D_k(h)}(\vec x)\simeq d\f H(\vec x)\simeq\f H(\vec x,h)\simeq\kf h(\vec x,h)
-    \text,
-\end{equation}
-odnosno u terminima univerzalne funkcije, $\f{comp}_k\bigl(\vec x,\f D_k(h)\bigr)\simeq\f{comp}_{k+1}(\vec x,h,h)$. Ali već znamo jednu takvu funkciju: svakako, $\f{comp}_{k+1}(\vec x,h,h)\simeq\f{comp}_k\bigl(\vec x,\f S_k(h,h)\bigr)$. Dakle, možemo jednostavno definirati $\f D_k(h):=\f S_k(h,h)$, i ta funkcija je primitivno rekurzivna: $\f D_k=\f S_k\circ(\f I_1^1,\f I_1^1)$.
+    Teorem o parametru kaže da se indeks za $d\f H=spec(h,\kf h^{k+1})$ može dobiti kao $\f S_k(h,h)$. Drugim riječima, možemo definirati $\f D_k:=\f S_k^2\circ(\f I_1^1,\f I_1^1)$, što je primitivno rekurzivna funkcija kao kompozicija primitivno rekurzivnih.
 \end{proof}
 
 % \subsection{Dokaz teorema rekurzije}
@@ -460,7 +455,7 @@ Neka je $k\in\N_+$, te $\f G^{k+1}$ parcijalno rekurzivna funkcija. Tada postoji
     \f G\bigl(\vec x,\f D_k(h)\bigr)\simeq
     \f G(\vec x,e)\text,
 \end{equation}
-što smo trebali dokazati.
+    odnosno $\kf e^k=spec(e,G)$, što smo trebali dokazati.
 \end{proof}
 
 \subsection{Ackermannova funkcija}
@@ -598,20 +593,20 @@ Unutarnji korak: neka je sad $y=s+1$, i $x\in\N$ proizvoljan. Moramo dokazati $\
 Time su oba koraka provedena, pa tvrdnja vrijedi. To znači da $\f A$ ima indeks $a$, pa je parcijalno rekurzivna, odnosno zbog korolara~\ref{kor:A3tot} rekurzivna funkcija.
 \end{proof}
 
-Upravo provedeni dokaz predstavlja određenu "šablonu" pomoću koje možemo za razne rekurzivno zadane funkcije dokazati da su doista rekurzivne u precizno definiranom smislu (imaju indeks, i totalne su). Ključno je da moramo na neki "vanjski" način zaključiti totalnost, jer inače bismo zapravo mogli zaključiti da je promatrana funkcija primitivno rekurzivna.
+% Upravo provedeni dokaz predstavlja određenu "šablonu" pomoću koje možemo za razne rekurzivno zadane funkcije dokazati da su doista rekurzivne u precizno definiranom smislu (imaju indeks, i totalne su). Ključno je da moramo na neki "vanjski" način zaključiti totalnost, jer inače bismo zapravo mogli zaključiti da je promatrana funkcija primitivno rekurzivna.
 
 \section{Ekvivalentnost indeksa}
 
 Teorem rekurzije može se shvatiti na još jedan način, koji je povijesno bio prvi dokazan. Taj fenomen smo već vidjeli na početku ovog poglavlja. Teorem o parametru (propozicija~\ref{pp:tmpar}) se prirodno može dobiti iz primitivne rekurzivnosti komponiranja (propozicija~\ref{pp:composeprn}), jer po~\eqref{eq:paramcompose} možemo staviti
 \begin{equation}\label{eq:paramcomposeind}
     %\kf{S_k(y,e)}^k&=\kf e^{k+1}\circ(\f I_1^k,\dotsc,\f I_k^k,\f C_y^k)\\
-    \f S_k'(y,e):=\f{compose}_{k(k+1)}\bigl(i_1,\dotsc,i_k,\overline{C_6}(y),e\bigr)\text,
+    \f S_k'(y,e):=\f{compose}_{k(k+1)}\bigl(i_1,\dotsc,i_k,\overline{\f C_6}(y),e\bigr)\text,
 \end{equation}
 gdje je $i_n:=\kr{\f{codeDEC}(n,3),\f{codeINC}(0),\f{codeGOTO}(0)}$ indeks funkcije $\f I_n^k$, te je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)$ indeks funkcije $\f C_y^k$ --- ali s obzirom na to da je lakše dokazati teorem o parametru, išli smo u suprotnom smjeru.
 
 % \subsection{Relacije \texorpdfstring{$\approx_k$}{k-ekvivalentnosti}}
 
-Tako je i ovdje: jednakost $\kf e(\vec x)\simeq\f G(\vec x,e)$ iz teorema rekurzije možemo shvatiti kao $\kf e=spec(e,\f G)$, odnosno na neki način $e\approx\f S_k(e,g)$, gdje je $g$ neki indeks za $\f G$. Lako se vidi da ta "približna jednakost" ne može doista biti jednakost ni u kojem zanimljivom slučaju, jer za $g\in\f{Prog}$ uvijek vrijedi $\f S_k(e,g)>e$ (zgodna je vježba dokazati to). Što je onda relacija $\approx$?
+Tako je i ovdje: jednakost $\kf e=spec(e,\f G)$ iz teorema rekurzije možemo shvatiti kao $e\approx\f S_k(e,g)$, gdje je $g$ neki indeks za $\f G$. Lako se vidi da ta "približna jednakost" ne može doista biti jednakost ni u kojem zanimljivom slučaju, jer za $g\in\f{Prog}$ uvijek vrijedi $\f S_k(e,g)>e$ (zgodna je vježba dokazati to). Što je onda relacija $\approx$?
 
 Ukratko, vrijeme je da malo preciznije formaliziramo ideju ekvivalentnih RAM-programa iz definicije~\ref{def:ekvprog}: ono što bismo htjeli reći nije da su $e$ i $\f S_k(e,g)=:\f F(e)$ isti brojevi, već da su $\kf e^k$ i $\kf{\f F(e)}^k$ iste funkcije. Nažalost, kao i u slučaju specijalizacije, imat ćemo različite relacije $\approx_k,k\in\N_+$ --- nećemo ih moći upotrebljivo objediniti u jednu relaciju, jer u RAM-programu nigdje ne piše intendirana mjesnost.
 
@@ -673,7 +668,7 @@ Označimo $m:=k-l\in\N_+$. Za $(\subseteq)$, neka je $e\approx_kf$. Tada je $\kf
 \end{equation}
 Dakle vrijedi i $\kf e^l=\kf f^l$, pa je $e\approx_lf$.
 
-Za $(\not=)$, moramo naći dva RAM-programa koji su ekvivalentni za sve moguće $l$-torke ulaznih podataka, ali kad počnemo stavljati ulaze i u registre $\reg{l+1}..\,\reg k$, više nisu. Za to nam mogu poslužiti $1$ kao dobro poznati indeks nulfunkcije, i $i_k$ kao indeks $k$-te koordinatne projekcije --- pogledajte tekst nakon~\eqref{eq:paramcompose} za preciznu definiciju.
+Za $(\not=)$, moramo naći dva RAM-programa koji su ekvivalentni za sve moguće $l$-torke ulaznih podataka, ali kad počnemo stavljati ulaze i u registre $\reg{l+1}..\,\reg k$, više nisu. Za to nam mogu poslužiti $1$ kao dobro poznati indeks nulfunkcije, i $i_k$ kao indeks $k$-te koordinatne projekcije --- pogledajte tekst nakon~\eqref{eq:paramcomposeind} za preciznu definiciju.
 
 Tada svakako vrijedi $1\approx_l i_k$, jer za svaki $\vec x\in\N^l$ vrijedi
 \begin{equation}
@@ -686,7 +681,7 @@ ali za $\vec y:=(0,0,\dotsc,0,1)\in\N^k$ vrijedi
 iz čega slijedi $1\not\approx_ki_k$.
 \end{proof}
 
-% \subsection{Dokaz teorema o fiksnoj točki}
+\subsection{Teorem o fiksnoj točki}
 
 Kao što rekosmo na početku, indeks $e$ iz teorema rekurzije može se shvatiti kao neka vrsta "fiksne točke" primitivno rekurzivne funkcije $\f F^1$ zadane s $\f F(e):=\f S_k(e,g)$, gdje je $g$ neki (fiksni) indeks funkcije $\f G$ čiji poziv stoji na desnoj strani opće rekurzije. Dakle, da imamo teorem koji nam kaže da svaka primitivno rekurzivna jednomjesna funkcija ima fiksnu točku, mogli bismo pomoću njega dokazati teorem rekurzije. Ipak, kako zasad stvari stoje, teorem rekurzije smo već dokazali, pa pokušajmo pomoću njega dokazati teorem o fiksnoj točki.
 
@@ -833,7 +828,7 @@ Ako pak $e\not\in S$, tada je $F(e)=s\in S$, pa zbog simetričnosti relacije $\a
 U oba slučaja došli smo do kontradikcije, pa pod pretpostavkom da je $S$ rekurzivan, jedino je moguće da je $S=\emptyset$ ili $S=\N$.
 \end{proof}
 
-Riceov teorem smo izrekli u "pozitivnom" obliku --- no on se češće koristi u "negativnom" obliku.
+Riceov teorem smo izrekli u "pozitivnom" obliku --- no on se češće koristi "negativno".
 
 \begin{korolar}
 Neka je $S\subset\N$ neprazan skup koji je $k$-invarijantan za neki $k\in\N_+$. Tada $S$ nije rekurzivan.
@@ -846,7 +841,7 @@ Ovo je samo obrat po kontrapoziciji teorema~\ref{tm:Rice}.
 Neka je $k\in\N_+$, i \,$\emptyset\subset\mathcal F\subset\mathcal Comp_k$. Tada $\mathcal F$ nije odlučiv.
 \end{korolar}
 \begin{proof}
-Označimo $S:=\knk{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\not=\knk{\emptyset}=\emptyset$ i $S\not=\knk{\mathcal Comp_k}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po prethodnom korolaru, $S$ nije rekurzivan, odnosno $\mathcal F$ nije odlučiv.
+Označimo $S:=\knk{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\not=\knk{\emptyset}=\emptyset$ i $S\not=\knk{\mathcal Comp_k}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po prethodnom korolaru $S$ nije rekurzivan.
 \end{proof}
 
 \begin{korolar}
@@ -860,7 +855,7 @@ No po Church--\!Turingovoj tezi, to znači da bi taj algoritam računao $\chi_{\
 
 \subsection{Sintaksna i semantička svojstva RAM-programa}
 
-Vezano uz zadani RAM-program možemo postaviti mnoga zanimljiva pitanja: ima li više od milijun instrukcija, stane li s ulazom $(2,5)$, je li mu registar $\reg{15}$ relevantan, sadrži li instrukciju tipa $\goto$, računa li totalnu funkciju, dekrementira li ikad u toku izračunavanja registar $\reg7$, je li dobiven kompajliranjem simboličke definicije neke primitivno rekurzivne funkcije, zapiše li Turingov stroj dobiven njegovim transpiliranjem ikad prazninu na traku, može li se dobiti spljoštenjem makro-programa koji sadrži barem jedan funkcijski makro, napravi li paran broj koraka prije zaustavljanja s ulazom $27$, i tako dalje.
+Za zadani RAM-program možemo postaviti mnoga pitanja: ima li više od milijun instrukcija, stane li s ulazom $(2,5)$, je li mu registar $\reg{15}$ relevantan, sadrži li instrukciju tipa $\goto$, računa li totalnu funkciju, dekrementira li ikad u toku izračunavanja registar $\reg7$, je li dobiven kompajliranjem simboličke definicije neke primitivno rekurzivne funkcije, zapiše li Turingov stroj dobiven njegovim transpiliranjem ikad prazninu na traku, može li se dobiti spljoštenjem makro-programa koji sadrži barem jedan funkcijski makro, napravi li paran broj koraka prije zaustavljanja s ulazom $27$, i tako dalje.
 
 Mnoga od tih svojstava (ali ne nužno sva) prirodno svrstavamo u dvije grupe: nazovimo ih \emph{sintaksna} i \emph{semantička} svojstva. Sintaksna svojstva su ona vezana uz konkretni "programski jezik" kojim je RAM-program pisan: govore o instrukcijama, registrima, ili o raznim sintaksnim postupcima pretvorbe (npr.\ iz makro-programa, ili u Turingov stroj), te o sintaksnim svojstvima tih drugih nositelja izračunavanja.
 
@@ -889,10 +884,10 @@ Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupo
     \item Zaključimo da kad bi $S$ bio rekurzivan, bio bi takav i $T$, što je kontradikcija s Riceovim teoremom.
 \end{enumerate}
 
-Recimo, za dokaz da $Halt_3^4=\{(x,y,z,e)\mid(x,y,z)\in\dom{\kf e^3}\}$ nije rekurzivna relacija:
-\begin{itemize}
-\item fiksiramo $(x,y,z)$, recimo na $(0,0,0)$ --- dakle $\mathcal F:=\{\f F\in\mathcal Comp_3\mid(0,0,0)\in\dom{\f F}\}$, odnosno $T:=\{e\in\N\mid(0,0,0)\in\dom{\kf e^3}\}$;
-\item nađemo funkcije $\f C_0^3\in\mathcal F$ i $\varnothing^3\not\in\mathcal F$, iz čega dobivamo $1\in T\land0\not\in T$;
-\item dokažemo $3$-invarijantnost: $T\ni e\approx_3f$ povlači $(0,0,0)\in\dom{\kf e^3}=\dom{\kf f^3}$, pa $f\in T$;
-\item zaključimo da vrijedi $e\in T$ ako i samo ako je $(0,0,0,e)\in Halt_3$ --- dakle $\chi_T=\chi_{Halt_3}\circ(\f Z,\f Z,\f Z,\f I_1^1)$, odnosno $T\preceq Halt_3$. (Raspišite detalje!)
-\end{itemize}
+%Recimo, za dokaz da $Halt_3^4=\{(x,y,z,e)\mid(x,y,z)\in\dom{\kf e^3}\}$ nije rekurzivna relacija:
+%\begin{itemize}
+%\item fiksiramo $(x,y,z)$, recimo na $(0,0,0)$ --- dakle $\mathcal F:=\{\f F\in\mathcal Comp_3\mid(0,0,0)\in\dom{\f F}\}$, odnosno $T:=\{e\in\N\mid(0,0,0)\in\dom{\kf e^3}\}$;
+%\item nađemo funkcije $\f C_0^3\in\mathcal F$ i $\varnothing^3\not\in\mathcal F$, iz čega dobivamo $1\in T\land0\not\in T$;
+%\item dokažemo $3$-invarijantnost: $T\ni e\approx_3f$ povlači $(0,0,0)\in\dom{\kf e^3}=\dom{\kf f^3}$, pa $f\in T$;
+%\item zaključimo da vrijedi $e\in T$ ako i samo ako je $(0,0,0,e)\in Halt_3$ --- dakle $\chi_T=\chi_{Halt_3}\circ(\f Z,\f Z,\f Z,\f I_1^1)$, odnosno $T\preceq Halt_3$. (Raspišite detalje!)
+%\end{itemize}

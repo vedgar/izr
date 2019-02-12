@@ -175,7 +175,7 @@ Ona je prikazana samo da se vidi kako nije teško naći bijektivno kodiranje ---
     \f{fst}(p)&:=(\mu\,i\le p)(\exists\,j\le p)\bigl(p=\f{pair}(i,j)\bigr)\text,\\
     \f{snd}(p)&:=(\mu\,j\le p)(\exists\,i\le p)\bigl(p=\f{pair}(i,j)\bigr)\text,
 \end{align}
-što je primitivno rekurzivno jer smo ograničili $i$ i $j$ s $p$, a što smo mogli jer je uvijek $\f{pair}(i,j)\ge\sum_{t\le i+j}t\ge i+j\ge i,j$.
+što je primitivno rekurzivno jer smo $i$ i $j$ ograničili s $p$, a što smo mogli jer je uvijek $\f{pair}(i,j)\ge\sum_{t\le i+j}t\ge i+j\ge i,j$.
 \end{proof}
 
 Ubuduće smatramo da smo fiksirali neku implementaciju, ali nećemo od nje ništa "privatno" koristiti osim sučelja opisanog u lemi. Za početak možemo dokazati ostatak tvrdnji potrebnih da bismo imali kodiranje.
@@ -206,7 +206,7 @@ Neka je $k\in\N_+$, te $P^{k+1}$ relacija. Za $k$-mjesnu relaciju $\hat P$, zada
 kažemo da je dobivena \emph{kontrakcijom} zadnja dva argumenta od $P$.
 \end{definicija}
 
-Prvo, uočimo da su $P$ i $\hat P$, "jednako teške" kad ih promatramo kao probleme. Za relaciju svedivosti $\preceq$ smo u propoziciji~\ref{pp:preceqrt} vidjeli da je refleksivna i tranzitivna. Ipak, ona nije parcijalni uređaj jer nije antisimetrična: relacija i njena kontrakcija su dobar kontraprimjer.
+Prvo, uočimo da su $P$ i $\hat P$ "jednako teške" kad ih promatramo kao probleme. Za relaciju svedivosti $\preceq$ smo u propoziciji~\ref{pp:preceqrt} vidjeli da je refleksivna i tranzitivna. Ipak, ona nije parcijalni uređaj jer nije antisimetrična: relacija i njena kontrakcija su dobar kontraprimjer.
 
 \begin{lema}\label{lm:hatPeqP}
 Za svaku relaciju $P$ mjesnosti barem $2$, vrijedi $P\preceq\hat P\preceq P$.
@@ -468,7 +468,9 @@ Pokušajmo malo formalizirati to objašnjenje. U teoremima~\ref{tm:gprek} i~\ref
 Intuicija je jasna: znamo da možemo čekati na više stvari istovremeno. Ako čekamo na dvije međusobno suprotne stvari, znamo da će se sigurno točno jedna dogoditi.
 
 \begin{teorem}[Post]\label{tm:Post}
-Neka je $\f R$ brojevna relacija. Tada je $\f R$ rekurzivna ako i samo ako su $\f R$ i $\f R\kompl$ obje rekurzivno prebrojive.
+Neka je $\f R$ brojevna relacija.
+    
+    Tada je $\f R$ rekurzivna ako i samo ako su $\f R$ i $\f R\kompl$ obje rekurzivno prebrojive.
 \end{teorem}
 \begin{proof}
 Za smjer ($\Rightarrow$), neka je $\f R$ rekurzivna. Tada je po propoziciji~\ref{prop:kompl} $\f R\kompl$ također rekurzivna. Sada su po propoziciji~\ref{pp:rekire} obje rekurzivne relacije, $\f R$ i $\f R\kompl$, rekurzivno prebrojive.
