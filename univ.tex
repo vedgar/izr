@@ -317,13 +317,14 @@ Važno mjesto gdje se to pojavljuje je simulacija kompliciranih (npr.\ univerzal
 Takva ovisnost zove se \emph{simultana} primitivna rekurzija, jer moramo simultano ra\-ču\-na\-ti svih $l$ vrijednosti --- ali kodiranje $\N^*$ (zapravo samo $\N^l$) omogućuje nam da to implementiramo pomoću obične primitivne rekurzije. Ideja je jednostavna: umjesto $l$ vrijednosti $a_1$, $a_2$,~\ldots, $a_l$, pratimo jednu vrijednost $\langle\vec a\rangle$. Slikovito, pratimo jedan \t{struct} s $l$ članova.
 
 \begin{propozicija}\label{prop:simultrek}
-Neka su $k,l\in\N_+$, te neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$, $\f H_1^{k+l+1}$, $\f H_2^{k+l+1}$,~\ldots, $\f H_l^{k+l+1}$ (primitivno) rekurzivne funkcije.  Tada su i $\f F_1^k$, $\f F_2^k$,~\ldots, $\f F_l^k$, zadane s
+    Neka su $k,l\in\N_+$, te neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$, $\f H_1^{k+l+1}$, $\f H_2^{k+l+1}$,~\ldots, $\f H_l^{k+l+1}$ (primitivno) rekurzivne funkcije.  Tada su funkcije $\f F_1^{k+1}$, $\f F_2^{k+1}$,~\ldots, $\f F_l^{k+1}$, zadane s
 \begin{align}
+    \SwapAboveDisplaySkip
     \label{eq:simultG}\f F_i(\vec x,0)&:=\f G_i(\vec x)\text,\\
     \label{eq:simultH}
     \f F_i(\vec x,y+1)&:=\f H_i\bigl(\vec x,y,\f F_1(\vec x,y),\f F_2(\vec x,y),\dotsc,\f F_l(\vec x,y)\bigr)\text,
 \end{align}
-za sve $i\in[1..l]$, (primitivno) rekurzivne.
+za sve $i\in[1..l]$, također (primitivno) rekurzivne.
 \end{propozicija}
 \begin{proof}
 Kao što smo već rekli, cilj nam je primitivnom rekurzijom prvo dobiti funkciju $\f F:=\f{Code}^l\circ(\f F_1,\f F_2,\dotsc,\f F_l)$, iz koje ćemo onda lako dobiti svaki $\f F_i$ kompozicijom s funkcijom $\f{part}$. Inicijalizacija je jednostavna: iz~\eqref{eq:simultG} imamo
