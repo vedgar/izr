@@ -768,7 +768,7 @@ Analogno, zaključivanjem u suprotnom smjeru, dobijemo i drugi smjer tvrdnje.
 To je u redu ako već imamo (kandidat za) $n$ --- ali možemo li \emph{izračunati} $n$? Naravno, to je upravo minimizacija:  $\f{step}:=\mu\,\f{Final}$ je parcijalno rekurzivna, te je $\f{step}(\langle\vec x\rangle,\kprog P)=\mu n\,\f{Final}(\langle\vec x\rangle,\kprog{P},n)$ upravo broj koraka $P$-izračunavanja s $\vec x$, do dolaska u završnu konfiguraciju. To je definirano samo za izračunavanja koja stanu: $HALT:=\dom{\f{step}}=\exists_*\f{Final}$ je dvomjesna relacija takva da $HALT(\langle \vec x\rangle,\kprog P)$ vrijedi ako i samo ako $P$-izračunavanje s $\vec x$ stane.
 
 \begin{napomena}\label{nap:HaltProg}
-Štoviše, zahvaljujući oprezu sa specifikacijom prije, sad možemo biti precizniji: kad god $e$ nije kod nekog programa, ili $x$ nije kod nepraznog konačnog niza, ne vrijedi  $\f{Final}(x,e,n)$, ni za koji $n$. Dakle, tada $(x,e)\not\in HALT$, te izraz $\f{step}(x,e)$ nema smisla.
+Štoviše, zahvaljujući oprezu sa specifikacijom prije, sad možemo biti precizniji: kad god $e$ nije kod nekog programa, ili $x$ nije kod nepraznog konačnog niza, ne vrijedi $\f{Final}(x,e,n)$ ni za koji $n$. Dakle, tada $(x,e)\not\in HALT$, te izraz $\f{step}(x,e)$ nema smisla.
 \end{napomena}
 
 Primijetimo da $HALT$ nismo napisali u "izračunljivom fontu", jer nemamo algoritam za računanje $\chi_{HALT}$. To što je $HALT$ domena parcijalno rekurzivne funkcije, odnosno projekcija primitivno rekurzivne relacije, nije dovoljno: ako je $(x,e)\in HALT$, to ćemo doznati čim nađemo broj koraka $n$ --- ali ako $(x,e)\not\in HALT$, to nećemo nikada doznati tim pristupom. Pokazat ćemo, štoviše, da \textbf{nijedan pristup ne radi za sve parove} $(x,e)$, iako u nekim slučajevima (poput $e\not\in\f{Prog}$) možemo utvrditi $\lnot HALT(x,e)$. Precizno, pokazat ćemo da skup $HALT$ nije rekurzivan --- što će biti jedan od prvih primjera nepostojanja algoritma za neki problem. No to će morati još malo pričekati.
@@ -946,7 +946,7 @@ U drugom smjeru, pretpostavimo da vrijedi točkovna definicija. Tada iz $(x,e,n)
 
 Također vrijedi $y=\overline{\f{Reg}}\bigl(x,e,\f{Sc}(n)\bigr)$, dakle $\f{lh}(y)=\f{Sc}(n)>0$. To znači da je $y$ povijest stanja registara prvih $n+1$ konfiguracija, što je upravo kod tog izračunavanja.
 
-Primijetimo još samo da nismo mogli zapisati jednostavnije $y=\f{Reg}\bigl(x,e,\f{lh}(y)\bigr)$, jer bi to zadovoljavao i kod praznog niza: $1=\overline G\bigl(\vec x,\f{lh}(1)\bigr)$ bez obzira na specifikaciju funkcije $G$ i vrijednosti argumenata $\vec x$. Na neki način, $0$ je problematična kao $m=\f{lh}(y)$, pa smo umjesto $m$ napisali $\f{Sc}\bigl(\f{pd}(m)\bigr)=m\bump$ u duhu napomene~\ref{nap:crtica}.
+    Primijetimo još samo da nismo mogli zapisati jednostavnije $y=\overline{\f{Reg}}\bigl(x,e,\f{lh}(y)\bigr)$, jer bi to zadovoljavao i kod praznog niza: $1=\overline G\bigl(\vec x,\f{lh}(1)\bigr)$ bez obzira na specifikaciju funkcije $G$ i vrijednosti argumenata $\vec x$. Na neki način, $0$ je problematična kao $m=\f{lh}(y)$, pa smo umjesto $m$ napisali $\f{Sc}\bigl(\f{pd}(m)\bigr)=m\bump$ u duhu napomene~\ref{nap:crtica}.
 
 Sada za proizvoljni $k$, primitivna rekurzivnost $\f T_k$ slijedi iz~\eqref{eq:TkviadotT}.
 \end{proof}

@@ -1,6 +1,6 @@
 \chapter{Metaprogramiranje}
 
-U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathcal Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathcal Comp$ --- već smo doista konstruirali funkciju $compose\colon\mathcal Prog^+\times\mathcal Prog\times\N_+\to\mathcal Prog$, koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije (i mjesnost $k$), te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_{kl}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to doista dokazati. Ipak, nećemo programirati direktno dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je dosta komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
+U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathcal Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathcal Comp$ --- već smo doista konstruirali funkciju $compose\colon\mathcal Prog^+\times\mathcal Prog\times\N_+\to\mathcal Prog$, koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije (i mjesnost $k$), te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_k^{l+1}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to doista dokazati. Ipak, nećemo programirati direktno dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je dosta komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
 
 \section{Specijalizacija}
 
@@ -67,11 +67,11 @@ Posljednja funkcijska jednakost može se zapisati i kao
 \begin{equation}\label{eq:Sfunceq}
     \f{comp}_k\bigl(\vec x,\f S_k(y,e)\bigr)\simeq\f{comp}_{k+1}(\vec x,y,e)\text{, za sve }\vec x\in\N^k
 \end{equation}
-(i to je razlog za "obrnuti" redoslijed pisanja argumenata od $\f S$).
+(i to je razlog za "obrnuti" redoslijed pisanja argumenata od $\f S_k^2$).
 \begin{proof}
 Kao što smo već rekli, trebamo "hardkodirati" $y$ u registar $\reg{k+1}$, i nakon toga pustiti RAM-program $P$ da računa s ulaznim podacima $\vec x$ (u registrima $\reg1$ do $\reg k$, kao ulazni podaci za $\kf{\f S_k(y,e)}^k$) i $y$ (u registru $\reg{k+1}$). Program $P$ je onaj program čiji je $e$ kod --- no što ako takvog nema?
 
-Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, tada ($e\not\in\f{Prog}$) je $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je lako vidjeti da je tada i $spec(y,f)=\varnothing$ --- naime, pomoću formule za domenu kompozicije, funkcija~\eqref{eq:paramcompose} ima praznu domenu. Tada nam za povratnu vrijednost od $\f S$ treba neki indeks od $\varnothing^k$, te je najjednostavnije upotrijebiti upravo $e$ --- kako je $e\not\in\f{Prog}$, za svaku mjesnost $k$ će biti $\kf e^k=\varnothing^k$, opet prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}.
+Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, tada ($e\not\in\f{Prog}$) je $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je lako vidjeti da je tada i $spec(y,f)=\varnothing$ --- naime, pomoću formule za domenu kompozicije, funkcija~\eqref{eq:paramcompose} ima praznu domenu. Tada nam za povratnu vrijednost od $\f S_k^2$ treba neki indeks od $\varnothing^k$, te je najjednostavnije upotrijebiti upravo $e$ --- kako je $e\not\in\f{Prog}$, za svaku mjesnost $k$ će biti $\kf e^k=\varnothing^k$, opet prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}.
 
 Sada promotrimo slučaj kad takav $P$ postoji --- zbog injektivnosti kodiranja programa taj $P$ je jedinstven. Zapravo trebamo spljoštiti makro-program
 \begin{equation}\label{eq:makroprogS}
@@ -127,33 +127,33 @@ pa je izlazni podatak doista $\kf e^{k+1}(\vec x,y)\simeq\f{comp}_{k+1}(\vec x,y
 Jednom kad imamo teorem o parametru, njegovom iteracijom (ponovljenom primjenom) lako dobijemo specijalizaciju više zadnjih argumenata izračunljive funkcije odjednom. Primjer, koji može poslužiti i kao ideja dokaza, smo vidjeli u~\eqref{eq:multpar}.
 
 \begin{korolar}\label{kor:pars}
-Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_{kl}^{l+1}$ takva da za sve $\vec x\in\N^k$, za sve $\vec y\in\N^l$, i za sve $e\in\N$, vrijedi
+Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$ takva da za sve $\vec x\in\N^k$, za sve $\vec y\in\N^l$, i za sve $e\in\N$, vrijedi
 \begin{equation}\label{eq:Sklspec}
-    \f{comp}_k\bigl(\vec x,\f S_{kl}(\vec y,e)\bigr)\simeq\f{comp}_{k+l}(\vec x,\vec y,e)\text.
+    \f{comp}_k\bigl(\vec x,\f S_k(\vec y,e)\bigr)\simeq\f{comp}_{k+l}(\vec x,\vec y,e)\text.
 \end{equation}
 \end{korolar}
 \begin{proof}
-Fiksirajmo $k$, i dokažimo (za taj $k$) tvrdnju indukcijom po $l$. Kako je $l\in\N_+$, baza je $l=1$, i naravno, $\f S_{k1}:=\f S_k$ je primitivno rekurzivna po propoziciji~\ref{pp:tmpar}.
+    Fiksirajmo $k$, i dokažimo (za taj $k$) tvrdnju indukcijom po $l$. Kako je $l\in\N_+$, baza je $l=1$, i naravno, $\f S_k^{1+1}=\f S_k^2$ je primitivno rekurzivna po propoziciji~\ref{pp:tmpar}.
 
-Pretpostavimo sad da za neki $l$ postoji primitivno rekurzivna funkcija $\f S_{kl}$ sa svojstvom~\eqref{eq:Sklspec}. Kako bismo definirali $\f S_{k(l+1)}$? Uzmimo proizvoljnu $(l+1)$-torku $(\vec y,z)\in\N^{l+1}$, i računamo zdesna:
+    Pretpostavimo sad da za neki $l$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$ sa svojstvom~\eqref{eq:Sklspec}. Kako bismo definirali $\f S_k^{l+2}$? Uzmimo proizvoljnu $(l+1)$-torku $(\vec y,z)\in\N^{l+1}$, i računamo zdesna:
 \begin{equation}
     \f{comp}_{k+l+1}(\vec x,\vec y,z,e)\simeq
     \f{comp}_{k+l}\bigl(\vec x,\vec y,\f S_{k+l}(z,e)\bigr)\simeq
-    \f{comp}_k\bigl(\vec x,\f S_{kl}\bigl(
+    \f{comp}_k\bigl(\vec x,\f S_k\bigl(
     \vec y,\f S_{k+l}(z,e)
     \bigr)\bigr)
 \end{equation}
 --- iz čega slijedi da je najprirodnije definirati
 \begin{equation}
-    \f S_{k(l+1)}(\vec y,z,e):=\f S_{kl}\bigl(\vec y,\f S_{k+l}(z,e)\bigr)\text.
+    \f S_k^{l+2}(\vec y,z,e):=\f S_k^{l+1}\bigl(\vec y,\f S_{k+l}^2(z,e)\bigr)\text.
 \end{equation}
-Dakle, $\f S_{k(l+1)}$ je definirana kompozicijom iz $\f S_{kl}$ (koja je primitivno rekurzivna po pretpostavci indukcije), $\f S_{k+l}$ (koja je primitivno rekurzivna po propoziciji~\ref{pp:tmpar}), i koordinatnih projekcija (koje su primitivno rekurzivne jer su inicijalne), pa je i sama primitivno rekurzivna. Time smo proveli korak indukcije, odnosno za sve pozitivne $k$ i $l$ smo definirali funkciju $\f S_{kl}$ i dokazali da je primitivno rekurzivna.
+    Dakle, $\f S_k^{l+2}$ je definirana kompozicijom iz $\f S_k^{l+1}$ (koja je primitivno rekurzivna po pretpostavci indukcije), $\f S_{k+l}^2$ (koja je primitivno rekurzivna po propoziciji~\ref{pp:tmpar}), i koordinatnih projekcija (koje su primitivno rekurzivne jer su inicijalne), pa je i sama primitivno rekurzivna. Time smo proveli korak indukcije, odnosno za sve pozitivne $k$ i $l$ smo definirali funkciju $\f S_k^{l+1}$ i dokazali da je primitivno rekurzivna.
 \end{proof}
 
 \begin{primjer}
-Drugi supskript funkcije $\f S$ govori koliko zadnjih argumenata želimo fiksirati (i moramo navesti njihove vrijednosti u pozivu prije indeksa $e$), a prvi supskript govori koliko još argumenata naša funkcija $\kf e$ prima (odnosno koliko će ih "preživjeti" specijalizaciju). Recimo, u slučaju funkcije mjesnosti $7$ i indeksa $e_1$, kojoj želimo fiksirati zadnja tri argumenta redom na brojeve $2$, $8$ i $5$, imali bismo
+Prethodnik mjesnosti funkcije $\f S$ govori koliko njenih zadnjih argumenata želimo fiksirati (i moramo navesti njihove vrijednosti u pozivu prije njenog indeksa $e$), a supskript govori koliko još argumenata naša funkcija $\kf e$ prima (odnosno koliko će ih "preživjeti" specijalizaciju). Recimo, u slučaju funkcije mjesnosti $7$ i indeksa $e_1$, kojoj želimo fiksirati zadnja tri argumenta redom na brojeve $2$, $8$ i $5$, imali bismo
 $
-    e_2:=\f S_{43}(2,8,5,e_1)=\f S_4\bigl(2,\f S_5\bigl(8,\f S_6(5,e_1)\bigr)\bigr)
+    e_2:=\f S_4^4(2,8,5,e_1)=\f S_4^2\bigl(2,\f S_5^2\bigl(8,\f S_6^2(5,e_1)\bigr)\bigr)
 $, i za sve $x,y,z,t\in\N$ bi vrijedilo
 $\kf{e_2}(x,y,z,t)\simeq\kf{e_1}(x,y,z,t,2,8,5)$.
 \end{primjer}
@@ -162,40 +162,43 @@ $\kf{e_2}(x,y,z,t)\simeq\kf{e_1}(x,y,z,t,2,8,5)$.
 
 Sada možemo i vidjeti da je $\N compose$, barem za fiksne mjesnosti $k$ i $l$, primitivno rekurzivna. Tehnika koju ćemo pritom koristiti može se općenito primijeniti na razne funkcije definirane na funkcijama, koje su kodirane preko njihovih indeksa.
 
-Primijetimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja), niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Sve što nas zanima je da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_{11}$ koja uzima $g$ i $h$, te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} ako ste zaboravili na što se tu misli.
+Primijetimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja) niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Sve što nas zanima je da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_1^2$ koja uzima $g$ i $h$, te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} ako ste zaboravili na što se tu misli.
 
 Ugrubo, \emph{kompajlirati} kompoziciju dvije funkcije koje već imamo kompajlirane, je daleko "pitomije" nego \emph{izvršiti} (evaluirati) tu kompoziciju. Konkretno, izvršavanje ne mora stati, ako te funkcije nisu totalne. Sâmo kompajliranje kompozicije, s druge strane, mora stati --- i to u unaprijed specificiranom broju koraka.
 
 \begin{propozicija}\label{pp:composeprn}
-    Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f{compose}_{kl}^{l+1}$, takva da za sve $g_1,g_2,\dotsc,g_l,h\in\N$ vrijedi
+    Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f{compose}_k^{l+1}$, takva da za sve $g_1,g_2,\dotsc,g_l,h\in\N$ vrijedi
     \begin{equation}
-        \kf{\f{compose}_{kl}(g_1,\dotsc,g_l,h)}^k=\kf h^l\circ(\kf{g_1}^k,\dotsc,\kf{g_l}^k)\text.
+        \kf{\f{compose}_k(g_1,\dotsc,g_l,h)}^k=\kf h^l\circ(\kf{g_1}^k,\dotsc,\kf{g_l}^k)\text.
     \end{equation}
 \end{propozicija}
 \begin{proof}
 Zapravo ćemo programirati čitav postupak računanja kompozicije u proizvoljnom $\vec x\in\N^k$, ali ga nećemo pokrenuti --- nego ćemo iz njegovog indeksa specijalizacijom dobiti indeks same kompozicije.
 
-Dakle, definirajmo funkciju $\f F_{kl}$ točkovno s
+    Dakle, fiksirajmo pozitivne $k$ i $l$, te definirajmo funkciju $\f F^{k+l+1}$ točkovno s
 \begin{equation}\label{eq:defkompcomp}
-    \f F_{kl}(\vec x^k,\vec g^l,h):\simeq
+    \f F(\vec x^k,\vec g^l,h):\simeq
     \f{comp}_l\bigl(
     \f{comp}_k(\vec x,g_1),
     \dotsc,
     \f{comp}_k(\vec x,g_l),
     h\bigr)\text.
 \end{equation}
-Funkcija $\f F_{kl}$ je definirana kompozicijom iz parcijalno rekurzivnih funkcija $\f{comp}_k$ i $\f{comp}_l$, te koordinatnih projekcija --- pa je parcijalno rekurzivna. Po korolaru~\ref{kor:pii}, $\f F_{kl}$ ima indeks; označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind}). 
+Funkcija $\f F$ je definirana kompozicijom iz parcijalno rekurzivnih funkcija $\f{comp}_k$ i $\f{comp}_l$, te koordinatnih projekcija --- pa je parcijalno rekurzivna. Po korolaru~\ref{kor:pii}, $\f F$ ima indeks; označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind}). 
 
-Sada definiramo $\f{compose}_{kl}$ kao funkciju koja prima $\f g_1$,~\ldots, $\f g_l$ i $\f h$, te fiksira zadnjih $l+1$ argumenata od $\f F_{kl}$ na te vrijednosti:
+    Sada definiramo $\f{compose}_k^{l+1}$ kao funkciju koja prima $\f g_1$,~\ldots, $\f g_l$ i $\f h$, te fiksira zadnjih $l+1$ argumenata od $\f F$ na te vrijednosti:
 \begin{equation}
-    \f{compose}_{kl}^{l+1}(\vec g,h):=\f S_{k(l+1)}(\vec g,h,e)\text.
+    \f{compose}_k^{l+1}(\vec g,h):=\f S_k^{l+2}(\vec g,h,e)\text.
 \end{equation}
 
-Dakle, $\f{compose}_{kl}=spec(e,\f S_{k(l+1)})$, pa je primitivno rekurzivna po korolaru~\ref{kor:paramprn}. Sada za sve $\vec x\in\N^k$, za sve $\vec g\in\N^l$ i za sve $h\in\N$ vrijedi
+    Dakle, $\f{compose}_k^{l+1}=spec(e,\f S_k^{l+2})$, pa je primitivno rekurzivna po korolaru~\ref{kor:paramprn}. Sada za sve $\vec x\in\N^k$, za sve $\vec g\in\N^l$ i za sve $h\in\N$ vrijedi
 \begin{multline}
-    \kf{\f{compose}_{kl}(\vec g,h)}(\vec x)\simeq\f{comp}_k\bigl(\vec x,\f{compose}_{kl}(\vec g,h)\bigr)\simeq\f{comp}_k\bigl(\vec x,\f S_{k(l+1)}(\vec g,h,e)\bigr)\simeq{}\\
-    {}\simeq\f{comp}_{k+l+1}(\vec x,\vec g,h,e)\simeq
-    \kf e^{k+l+1}(\vec x,\vec g,h)\simeq\f F_{kl}(\vec x,\vec g,h)\simeq{}\\
+    \kf{\f{compose}_k^{l+1}(\vec g,h)}(\vec x)\simeq
+    \f{comp}_k\bigl(\vec x,\f{compose}_k(\vec g,h)\bigr)\simeq
+    \f{comp}_k\bigl(\vec x,\f S_k^{l+2}(\vec g,h,e)\bigr)
+    \simeq{}\\{}\simeq
+    \f{comp}_{k+l+1}(\vec x,\vec g,h,e)\simeq
+    \kf e^{k+l+1}(\vec x,\vec g,h)\simeq\f F(\vec x,\vec g,h)\simeq{}\\
     {}\simeq\f{comp}_l\bigl(
     \f{comp}_k(\vec x,g_1),
     \dotsc,
@@ -213,7 +216,7 @@ Dakle, $\f{compose}_{kl}=spec(e,\f S_{k(l+1)})$, pa je primitivno rekurzivna po 
 što smo trebali dokazati.
 \end{proof}
 
-Često se tehnika koju smo upravo koristili ne mora ponovo provoditi, već se rezultat može jednostavno dobiti primjenom funkcije $\f{compose}_{kl}$ (za neke $k$ i $l$).
+Često se tehnika koju smo upravo koristili ne mora ponovo provoditi, već se rezultat može jednostavno dobiti primjenom funkcije $\f{compose}_k^{l+1}$ (za neke $k$ i $l$).
 
 \begin{primjer}
 Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f{plus}_k$ takva da je za sve $e,f\in\N$, $\f{plus}_k(e,f)$ indeks zbroja funkcija $\kf e^k+\kf f^k$.
@@ -234,14 +237,14 @@ kao niti izračunati njegov kod,
 \begin{equation*}
     a:=\kr{\kr{1,1,3},\kr{0,0},\kr{2,0},\kr{1,2,6},\kr{0,0},\kr{2,3}}=2^{22\,501}\cdot3^7\cdot5^{25}\cdot7^{8\,437\,501}\cdot11^7\cdot13^{649}\text,
 \end{equation*}
-broj koji jest oveći (ima $7\,138\,041$ znamenku), ali ipak sasvim točno određen. Sad samo treba napisati $\f{plus}(e,f):=\f{compose}_{k2}(e,f,a)$, odnosno $\f{plus}=spec(a,\f{compose}_{k2})$ je primitivno rekurzivna.
+broj koji jest oveći (ima $7\,138\,041$ znamenku), ali ipak sasvim točno određen. Sad samo treba napisati $\f{plus}_k(e,f):=\f{compose}_k(e,f,a)$, odnosno $\f{plus}_k^2=spec(a,\f{compose}_k^3)$ je primitivno rekurzivna.
 \end{proof}
 
 % \subsection{Što s ostalim elementarnim operacijama?}
 
 Kad smo uspjeli isprogramirati pisanje programa za kompoziciju, zašto ne bismo istu stvar pokušali i za primitivnu rekurziju, ili minimizaciju? Na prvi pogled, sve što nam treba je točkovni zapis izračunavanja pomoću funkcija $\f{comp}$ (odgovarajuće mjesnosti), koji onda predstavlja parcijalno rekurzivnu funkciju, čiji indeks uzmemo i specijaliziramo ga s obzirom na indekse polaznih funkcija. Što može poći krivo? %Pogledajmo.
 
-Pokušajmo što vjernije slijediti postupak koji nas je doveo do funkcije $\f{compose}_{kl}$, za primitivnu rekurziju. Zanemarimo degenerirani slučaj --- lako možete vidjeti da se u njemu pojavljuje sasvim isti problem.
+Pokušajmo što vjernije slijediti postupak koji nas je doveo do funkcije $\f{compose}_k^{l+1}$, za primitivnu rekurziju. Zanemarimo degenerirani slučaj --- lako možete vidjeti da se u njemu pojavljuje sasvim isti problem.
 
 Dakle, umjesto zadanih mjesnosti $k$ i $l$, ovdje imamo samo zadanu mjesnost $k$. Umjesto $l+1$ polaznih funkcija, ovdje imamo $2$ polazne funkcije, $\f G$ i $\f H$ (još moraju biti totalne, ali to ćemo jednostavno shvatiti kao parcijalnu specifikaciju --- ako ulazni indeksi nisu indeksi totalnih funkcija, ono što bi trebalo biti "indeks od $\f G\pr \f H$" jednostavno može biti bilo što). Želimo primitivno rekurzivnu funkciju $primRecurse_k$, takvu da za sve indekse totalnih funkcija $g,h\in\N$ vrijedi
 \begin{equation}
@@ -334,7 +337,7 @@ Neka je $k\in\N_+$, te $\f G^{k+1}$ parcijalno rekurzivna funkcija. \emph{Opća 
 \begin{equation}\label{eq:genrek}
     \f{comp}_k(\vec x,e)\simeq\f G(\vec x,e)\text{, za sve }\vec x\in\N^k\text.
 \end{equation}
-Ako konkretni broj $e\in\N$ zadovoljava tu jednadžbu, funkciju $\kf e^k$ zovemo \emph{rješenjem} opće rekurzije.
+    Ako konkretni broj $e\in\N$ zadovoljava tu jednadžbu, funkciju $\kf e^k=spec(e,\f G)$ zovemo \emph{rješenjem} opće rekurzije.
 \end{definicija}
 
 Ponekad neformalno govorimo i da je indeks $e$ rješenje, ali bitno je da kažemo da je rješenje \emph{jedinstveno} ako je funkcija jedinstvena, ne indeks. To je bitno jer u uobičajenim situacijama, gdje $\f G$ koristi $e$ samo za pozivanje $\f F$, inače nikad ne bismo imali jedinstvenost: čim postoji neki $e$, svi ostali indeksi za $\kf e^k$ su također "rješenja", a intuitivno znamo (i dokazat ćemo u ovom poglavlju) da ih ima beskonačno mnogo.
@@ -425,7 +428,7 @@ Refaktorirajmo ovu duplikaciju koda za dijagonaliziranje, u definiciji i pozivu 
             ...         return H(x, H)
             ...     return dH
             >>> def H(n, f):
-            ...     if n: return d(f)(n-1)
+            ...     if n: return n * d(f)(n-1)
             ...     else: return 1
             >>> factorial = d(H)
             >>> factorial(7)
@@ -599,8 +602,7 @@ Time su oba koraka provedena, pa tvrdnja vrijedi. To znači da $\f A$ ima indeks
 
 Teorem rekurzije može se shvatiti na još jedan način, koji je povijesno bio prvi dokazan. Taj fenomen smo već vidjeli na početku ovog poglavlja. Teorem o parametru (propozicija~\ref{pp:tmpar}) se prirodno može dobiti iz primitivne rekurzivnosti komponiranja (propozicija~\ref{pp:composeprn}), jer po~\eqref{eq:paramcompose} možemo staviti
 \begin{equation}\label{eq:paramcomposeind}
-    %\kf{S_k(y,e)}^k&=\kf e^{k+1}\circ(\f I_1^k,\dotsc,\f I_k^k,\f C_y^k)\\
-    \f S_k'(y,e):=\f{compose}_{k(k+1)}\bigl(i_1,\dotsc,i_k,\overline{\f C_6}(y),e\bigr)\text,
+    \f S_k'(y,e):=\f{compose}_k\bigl(i_1,\dotsc,i_k,\overline{\f C_6}(y),e\bigr)\text,
 \end{equation}
 gdje je $i_n:=\kr{\f{codeDEC}(n,3),\f{codeINC}(0),\f{codeGOTO}(0)}$ indeks funkcije $\f I_n^k$, te je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)$ indeks funkcije $\f C_y^k$ --- ali s obzirom na to da je lakše dokazati teorem o parametru, išli smo u suprotnom smjeru.
 
@@ -615,7 +617,7 @@ Neka je $k\in\N_+$, te $e,f\in\N$. Kažemo da su $e$ i $f$ \emph{$k$-ekvivalentn
 \end{definicija}
 \begin{primjer}\label{pr:alef0ind}
 Za svaki $k\in\N_+$, za sve $e,f\in\f{Prog}\kompl$ vrijedi $e\approx_kf$ (jer svi brojevi izvan $\f{Prog}$ su indeksi prazne funkcije).
-Također, za svaki $e\in\f{Prog}$, za sve $j,k\in\N_+$, vrijedi $e*\kr{\f{codeINC}(j)}\approx_ke$ (dodavanje instrukcije $\incr j$ na kraj programa neće promijeniti uvjet zaustavljanja, niti će promijeniti izlaznu vrijednost jer je $j>0$).
+Također, za svaki $e\in\f{Prog}$, za sve $j,k\in\N_+$, vrijedi $e*\kr{\f{codeINC}(j)}\approx_ke$ (dodavanje instrukcije $\incr j$ na kraj programa neće promijeniti uvjet zaustavljanja, a ni izlaznu vrijednost jer je $j>0$).
 \end{primjer}
 
 \begin{propozicija}
@@ -651,9 +653,9 @@ Za sve $k,l\in\N_+$, za sve $\vec x\in\N^k$ i za sve $e\in\N$, vrijedi
 \end{equation}
 \end{korolar}
 \begin{proof}
-Prvo, indukcijom po $l$, prateći dokaz korolara~\ref{kor:pars} i koristeći prethodnu lemu u svakom koraku, lako dokažemo $\f S_{kl}(0,0,\dotsc,0,e)=e$. Iz toga onda slijedi
+    Prvo, indukcijom po $l$, prateći dokaz korolara~\ref{kor:pars} i koristeći prethodnu lemu u svakom koraku, lako dokažemo $\f S_k^{l+1}(0,0,\dotsc,0,e)=e$. Iz toga onda slijedi
 \begin{equation}
-    \kf e^{k+l}(\vec x,0,0,\dotsc,0)\simeq\kf{\f S_{kl}(0,0,\dotsc,0,e)}(\vec x)\simeq\kf e^k(\vec x)\text,
+    \kf e^{k+l}(\vec x,0,0,\dotsc,0)\simeq\kf{\f S_k^{l+1}(0,0,\dotsc,0,e)}(\vec x)\simeq\kf e^k(\vec x)\text,
 \end{equation}
 što smo i trebali dokazati. Primijetimo da je na neformalnoj razini ovo očito: za bilo koji RAM-program $P$, $P$-izračunavanje s $\vec x$ je \emph{isto} (isti niz istih konfiguracija) kao i $P$-izračunavanje s $(\vec x,0,0,\dotsc,0)$, za bilo koji broj dodanih nula na kraj ulaza --- jer je izračunavanje determinističko, a početna konfiguracija $c_0=(0,\vec x,0,0,\dotsc,0)$ je ista. Samo smo eksplicitno rekli da će još $l$ registara nakon $\reg k$ biti postavljeno na nule, no oni bi ionako bili postavljeni na nule u računanju s $\vec x^k$, jer tamo nisu ulazni.
 \end{proof}

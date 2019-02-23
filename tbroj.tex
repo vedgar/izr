@@ -143,8 +143,9 @@ Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlu
 \end{proof}
 \vspace{-4mm}
 
-Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad \begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
-\node[state,above right of=q8] (q9) {$q_9$};
+Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
+\begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
+\node[state] (q9) {$q_9$};
 \node[state,accepting,right of=q9] (qt) {$q_\mathit{true}$};
 \node[state,accepting,below right=0.5 and 1.6 of q9] (qf) {$q_\mathit{false}$};
 \draw
@@ -321,7 +322,7 @@ Za $u=\varepsilon$ ili $v=\varepsilon$ tvrdnja također vrijedi jer je $\varepsi
     0\conc bx&=\f{sconcat}(0,x,b)=0\cdot b^{\f{slh}(x,b)}+x=0+x=x\text,\\
     x\conc b0&=\f{sconcat}(x,0,b)=x\cdot b^{\f{slh}(0,b)}+0=x\cdot b^0=x\text,
 \end{align}
-jer je $\f{slh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ zbog $\sum_{i\le0}b^i=b^0=1>0$.
+a $\f{slh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ jer je već $\sum_{i\le0}b^i=b^0=1>0$.
 \end{proof}
 
 \begin{korolar}\label{kor:lhkonk=lh+lh}
@@ -536,7 +537,7 @@ Dakle,
 \label{eq:defNbetaf}
     \N\beta\f f(x)\simeq\f{bin}^1\bigl(\f f\bigl(\f{arg}_1(x),\dotsc,\f{arg}_k(x)\bigr)\bigr)\text{, ako je }\f{count2}(x)=k-1
 \end{equation}
-iz čega slijedi, po korolaru~\ref{kor:restrprek}, da je $\N\beta\f f$ parcijalno rekurzivna. Sada je po teoremu~\ref{tm:pir}, $\N\beta\f f$ RAM-izračunljiva, te je po teoremu~\ref{tm:krit} funkcija $\beta\f f$ Turing-iz\-rač\-un\-lji\-va.
+--- iz čega slijedi, po korolaru~\ref{kor:restrprek}, da je $\N\beta\f f$ parcijalno rekurzivna. Sada je po teoremu~\ref{tm:pir}, $\N\beta\f f$ RAM-izračunljiva, te je po teoremu~\ref{tm:krit} $\beta\f f$ Turing-iz\-rač\-un\-lji\-va.
 \end{proof}
 
 %Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj parametara. Definiramo pomoćne (primitivno rekurzivne) funkcije

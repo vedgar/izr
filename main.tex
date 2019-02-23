@@ -7,7 +7,7 @@
   headings=twolinechapter,
   numbers=endperiod
 ]{scrbook}
-%\includeonly{turing}
+%\includeonly{meta}
 %%%%
 % TODO za iduću godinu:
 % * eksplicitna formula za domenu kompozicije kad je H totalna (l=1?)
@@ -20,7 +20,7 @@
 \raggedbottom
 %\pdfmapline{+dummy-space <dummy-space.pfb}
 \pdfinterwordspaceon
-\input{glyphtounicode}
+\input glyphtounicode
 \pdfgentounicode=1
 %\usepackage{mmap}
 \usepackage[utf8]{inputenc}
@@ -68,8 +68,13 @@
 %\usepackage[defaultlines=3,all]{nowidow}
 \usepackage{textcomp}
 %\usepackage{ae}
+\usepackage{etoolbox}
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning, arrows, cd}
+\usetikzlibrary{external} 
+\tikzexternalize[prefix=tikzcache/]
+\AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
+\AtEndEnvironment{tikzcd}{\tikzexternalenable}
 \tikzset{->,>=stealth',
 node distance=3cm,
 %every state/.style={thick, fill=gray!10},
@@ -129,7 +134,7 @@ initial text=$ $}
 \DeclarePairedDelimiter{\kf}{\t{\color{dark-blue}\char`\{}}{\t{\color{dark-blue}\char`\}}}
 \DeclarePairedDelimiter{\kr}{\langle}{\rangle}
 \DeclarePairedDelimiter{\dulj}{|}{|}
-\definecolor{light-gray}{gray}{0.5}
+\definecolor{light-gray}{gray}{0.4}
 \definecolor{dark-blue}{HTML}{000055}
 \definecolor{dark-red}{HTML}{550000}
 \definecolor{brown}{HTML}{6F5A21}
