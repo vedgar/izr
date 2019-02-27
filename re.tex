@@ -8,7 +8,7 @@ Pokušajmo ustanoviti što bi bio pandan parcijalnim funkcijama za relacije. Tra
 
 Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan, i možemo zamišljati da je $\mathit{true}$, iako ćemo vidjeti u jednom trenutku da će biti korisno pretpostaviti da je zapravo $0$. Ono što jest bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Upravo napisanu ideju možemo formalizirati koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi}, te dijagram~\eqref{dia:alg}.
 
-\begin{definicija}
+\begin{definicija}[{name=[rekurzivna prebrojivost]}]
 Neka je $k\in\N_+$. Za brojevnu relaciju $R^k$ kažemo da je \emph{rekurzivno prebrojiva} ako postoji $\f F\in\mathcal Comp_k$ takva da je $R=\dom{\f F}$.
 \end{definicija}
 
@@ -18,7 +18,7 @@ Neka je $k\in\N_+$. Za brojevnu relaciju $R^k$ kažemo da je \emph{rekurzivno pr
 
 Za početak pokažimo da intuicija "poluodlučivosti" doista smješta rekurzivno prebrojive relacije "između" odlučivih (rekurzivnih) i općenitih relacija, odnosno poklapa se s intuicijom "težine problema" koju smo hvatali relacijom $\preceq$. Od velike važnosti bit će formula~\eqref{eq:domkomp} za domenu kompozicije.
 
-\begin{propozicija}\label{pp:rekire}
+\begin{propozicija}[{name=[rekurzivna prebrojivost rekurzivnih relacija]}]\label{pp:rekire}
 Svaka rekurzivna relacija je rekurzivno prebrojiva.
 \end{propozicija}
 Ideja je jednostavna: ako imamo rekurzivnu karakterističnu funkciju, samo trebamo "zaboraviti" vrijednosti $0$ (ukloniti tu prasliku iz domene), i ostaviti samo vrijednosti $1$. Drugim riječima, trebamo restringirati $\chi_{\f R}$ na $\f R$.
@@ -28,7 +28,7 @@ Neka je $k\in\N$, i $\f R^k$ rekurzivna relacija. Tada je prema korolaru~\ref{ko
 
 No kad već pričamo o restrikciji, funkcija koju restringiramo je nebitna: s bilo kojom rekurzivnom funkcijom dobit ćemo istu domenu. Ponekad je zgodno fiksirati njene vrijednosti na $0$ --- usporedite s napomenom~\ref{nap:re0}.
 
-\begin{korolar}\label{kor:redom0im}
+\begin{korolar}[{name=[za rekurzivno prebrojive domene vrijednosti funkcije nisu bitne]}]\label{kor:redom0im}
 Relacija je rekurzivno prebrojiva ako i samo ako je domena neke parcijalno rekurzivne funkcije koja ne poprima pozitivne vrijednosti.
 \end{korolar}
 
@@ -38,7 +38,7 @@ Relacija je rekurzivno prebrojiva ako i samo ako je domena neke parcijalno rekur
 Smjer ($\Leftarrow$) je trivijalan. Za smjer ($\Rightarrow$), neka je $R=\dom{\f F}$ rekurzivno prebrojiva. Prema formuli za domenu kompozicije, $\dom{\f Z\circ\f F}=\{\vec x\in\dom{\f F}=R\mid\f F(\vec x)\in\dom{\f Z}=\N\}=R$, a funkcija $\f Z\circ\f F$ je očito parcijalno rekurzivna i ne poprima pozitivne vrijednosti.
 \end{proof}
 
-\begin{lema}\label{lm:re<re}
+\begin{lema}[{name=[svedivost čuva rekurzivnu prebrojivost]}]\label{lm:re<re}
 Neka su $k,l\in\N_+$, te $R^k$ i $P^l$ relacije takve da je $R\preceq P$. Ako je $P$ rekurzivno prebrojiva, tada je i $R$ takva.
 \end{lema}
 \begin{proof}
@@ -59,7 +59,7 @@ Dakle, skup rekurzivnih relacija je pravi podskup skupa rekurzivno prebrojivih r
 
 Kako se u formuli~\eqref{eq:domkomp} nalazi presjek $l$ domen\^a, kompozicijom s nekom totalnom "\!vanjskom" $l$-mjesnom funkcijom lako dobijemo zatvorenost na presjeke. Svejedno je koju funkciju upotrijebimo kao vanjsku (može biti i inicijalna $\f I_1^l$), ali simetrije radi uzmimo $\f{add}^l$.
 
-\begin{propozicija}\label{pp:prlre}
+\begin{propozicija}[{name=[rekurzivna prebrojivost presjeka rekurzivno prebrojivih relacija]}]\label{pp:prlre}
 Neka su $k,l\in\N_+$, te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije. Tada je $\bigcap_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
@@ -75,7 +75,7 @@ Primijetimo da zahtjev da su sve relacije iste mjesnosti zapravo nije bitan: ako
 
 Sličnim trikom možemo pokazati da restringiranjem na rekurzivno prebrojiv skup čuvamo izračunljivost --- samo tada moramo paziti i na vrijednosti funkcije na čiju domenu restringiramo. Ideju smo vidjeli u napomeni~\ref{nap:restrprek}.
 
-\begin{korolar}\label{kor:restre}
+\begin{korolar}[{name=[teorem o restrikciji]}]\label{kor:restre}
 Neka je $k\in\N_+$, $\f F^k$ parcijalno rekurzivna funkcija i $R^k$ rekurzivno prebrojiva relacija. Tada je i restrikcija $\f F|_R$ također parcijalno rekurzivna.
 \end{korolar}
 \begin{proof}
@@ -92,7 +92,7 @@ Dokazali smo zatvorenost skupa svih rekurzivno prebrojivih relacija (iste mjesno
 
 U još jednom kontekstu smo vidjeli poluodlučivost: projekcija izračunljive relacije $\exists_*\f R$ ne mora biti izračunljiva, ali ako je $\vec x\in\exists_*\f R$, tada to možemo ustanoviti jednostavnim isprobavanjem, redom za sve $y\in\N$, vrijedi li $\f R(\vec x,y)$. Te dvije formalizacije (zapravo \emph{tri} formalizacije, jer je svejedno formaliziramo li izračunljivost projicirane relacije kao primitivnu rekurzivnost ili kao rekurzivnost) su ekvivalentne.
 
-\begin{teorem}\label{tm:rpeproj}
+\begin{teorem}[{name=[projekcijska karakterizacija rekurzivno prebrojivih relacija]}]\label{tm:rpeproj}
 Neka je $R$ brojevna relacija. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{enumerate}
     \item[\texttt{\textup{(1)}}] $R$ je rekurzivno prebrojiva;
@@ -114,7 +114,7 @@ je primitivno rekurzivna jer joj je karakteristična funkcija dobivena kompozici
 
 Jednom kad imamo karakterizaciju preko projekcije, lako je dokazati zatvorenost na konačne unije, jer se projekcija i unija (disjunkcija) obje mogu zapisati pomoću egzistencijalne kvantifikacije, a dva egzistencijalna kvantifikatora komutiraju.
 
-\begin{propozicija}\label{pp:unlre}
+\begin{propozicija}[{name=[rekurzivna prebrojivost unije rekurzivno prebrojivih relacija]}]\label{pp:unlre}
 Neka su $k,l\in\N_+$, te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je i\, $\bigcup_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
@@ -145,7 +145,7 @@ $\f{Final}(\kr{\vec x},\kprog P,2)$,~\ldots\ u niz tako da svaki dođe na red (s
 
 Na prvi pogled, treba nam izračunljiva bijekcija između $\N^2$ i $\N$, s izračunljivim inverzom (tzv.\ \emph{pairing function}), ali pokazat će se da je injekcija dovoljna. Drugim riječima, samo nam treba neko kodiranje $\N^2$. Napravili smo dva: $\f{Code}^2$ i $\f{bin}^2$. Zaista je svejedno koje od njih (ili neko treće) koristimo, pa možemo to uobličiti kao sučelje (\emph{interface}) za neki apstraktni tip podataka (\texttt{std::pair<unsigned,unsigned>}).
 
-\begin{lema}\label{lm:pairfstsndprn}
+\begin{lema}[{name=[primitivna rekurzivnost kodiranja i dekodiranja parova brojeva]}]\label{lm:pairfstsndprn}
 Postoje primitivno rekurzivne funkcije $\f{pair}^2$, $\f{fst}^1$ i $\f{snd}^1$, takve da je $\f{fst}\circ\f{pair}=\f I_1^2$ i $\f{snd}\circ\f{pair}=\f I_2^2$.
 \end{lema}
 Točkovno, za sve $x,y\in\N$ vrijedi $\f{fst}\bigl(\f{pair}(x,y)\bigr)=x\land\f{snd}\bigl(\f{pair}(x,y)\bigr)=y$.
@@ -180,7 +180,7 @@ Ona je prikazana samo da se vidi kako nije teško naći bijektivno kodiranje ---
 
 Ubuduće smatramo da smo fiksirali neku implementaciju, ali nećemo od nje ništa "privatno" koristiti osim sučelja opisanog u lemi. Za početak možemo dokazati ostatak tvrdnji potrebnih da bismo imali kodiranje.
 
-\begin{propozicija}
+\begin{propozicija}[{name=[injektivnost i primitivna rekurzivnost slike funkcije sparivanja]}]
 Funkcija $\f{pair}$ je injekcija, i slika joj je primitivno rekurzivna.
 \end{propozicija}
 \begin{proof}
@@ -198,7 +198,7 @@ Za primitivnu rekurzivnost slike, koristimo istu tehniku kao u dokazu korolara~\
 
 Sad kada imamo specifikaciju sparivanja, pogledajmo detaljnije što smo napravili s relacijom $\f{Final}$ na kraju prethodne točke. Zapravo smo dva njena zadnja argumenta ($e$ i $n$) "spojili" u jedan, po kojem smo onda enumerirali testove završetka. Tamo smo za $e$ imali samo dvije mogućnosti, $\kprog P$ i $\kprog Q$, ali lako je zamisliti da ih možemo imati i više --- pa čak i sve prirodne brojeve na njihovom mjestu.
 
-\begin{definicija}
+\begin{definicija}[{name=[kontrakcija brojevne relacije]}]
 Neka je $k\in\N_+$, te $P^{k+1}$ relacija. Za $k$-mjesnu relaciju $\hat P$, zadanu s
 \begin{equation}
     \hat P(\vec x,y):\Longleftrightarrow P\bigl(\vec x,\f{fst}(y),\f{snd}(y)\bigr)\text,
@@ -208,7 +208,7 @@ kažemo da je dobivena \emph{kontrakcijom} zadnja dva argumenta od $P$.
 
 Prvo, uočimo da su $P$ i $\hat P$ "jednako teške" kad ih promatramo kao probleme. Za relaciju svedivosti $\preceq$ smo u propoziciji~\ref{pp:preceqrt} vidjeli da je refleksivna i tranzitivna. Ipak, ona nije parcijalni uređaj jer nije antisimetrična: relacija i njena kontrakcija su dobar kontraprimjer.
 
-\begin{lema}\label{lm:hatPeqP}
+\begin{lema}[{name=[međusobna svedivost relacije i njene kontrakcije]}]\label{lm:hatPeqP}
 Za svaku relaciju $P$ mjesnosti barem $2$, vrijedi $P\preceq\hat P\preceq P$.
 \end{lema}
 \begin{proof}
@@ -223,7 +223,7 @@ A to pak vrijedi jer je po definiciji $\hat P$,
 budući da je po lemi~\ref{lm:pairfstsndprn} $\f{fst}\bigl(\f{pair}(y,z)\bigr)=y$ i analogno $\f{snd}\bigl(\f{pair}(y,z)\bigr)=z$.
 \end{proof}
 
-\begin{napomena}
+\begin{napomena}[{name=[kontrahiranje čuva i primitivnu rekurzivnost]}]
 Štoviše, jer su "vezne funkcije" primitivno rekurzivne, vrijedi da je $P$ primitivno rekurzivna ako i samo ako je $\hat P$ primitivno rekurzivna. Ali to nam neće bitno trebati.
 \end{napomena}
 
@@ -231,7 +231,7 @@ budući da je po lemi~\ref{lm:pairfstsndprn} $\f{fst}\bigl(\f{pair}(y,z)\bigr)=y
 
 Sada možemo i formalno dokazati da je više projekcija jednako izračunljivo kao i jedna --- jer dvije projekcije su kao jedna projekcija kontrahirane relacije. Intuitivno, recimo za tromjesne rekurzivne relacije, ispitujemo postoje li $y$ i $z$ takvi da vrijedi $\f R(x,y,z)$, tako da parove $(y,z)$ poredamo prema funkciji $\f{pair}$ (npr.\ po sporednim dijagonalama), kako bismo bili sigurni da će svaki doći na red.
 
-\begin{propozicija}\label{pp:projproj}
+\begin{propozicija}[{name=[projekcija projekcije kao projekcija kontrakcije]}]\label{pp:projproj}
 Za svaku relaciju mjesnosti barem $3$, vrijedi $\exists_*\exists_*P=\exists_*\hat P$.
 \end{propozicija}
 \begin{proof}
@@ -240,7 +240,7 @@ Za ($\supseteq$), pretpostavimo $\vec x\in\exists_*\hat P$. Po definiciji projek
 Za ($\subseteq$), iz $\vec x\in\exists_*\exists_*P$ slijedi da postoji $y\in\N$ takav da je $(\vec x,y)\in\exists_*P$, što pak znači da postoji i $z\in\N$ takav da je $(\vec x,y,z)\in P$. Sada po~\eqref{eq:hatPpair} slijedi $\hat P(\vec x,t)$ za $t:=\f{pair}(y,z)$, odnosno $\vec x\in\exists_*\hat P$.
 \end{proof}
 
-\begin{napomena}
+\begin{napomena}[{name=[aritmetička hijerarhija]}]
 Ista tvrdnja bi se mogla dokazati za dva univerzalna kvantifikatora uzastopce. Zaključujemo da nizanje kvantifikatora iste vrste ne otežava bitno problem (u smislu postojanja algoritma, ne u smislu performansi). Ipak, ispreplitanje kvantifikatora ($\forall\,\exists\,\forall\dotsm$) općenito otežava probleme koje promatramo. Uzmimo totalnost: $\kf e^2$ je totalna ako i samo ako vrijedi $\forall x_1\forall x_2\,\exists n\,\f{Final}(\kr{x_1,x_2},e,n)$, i može se pokazati da je to bitno teže od bilo kakvog problema koji sadrži samo egzistencijalne ili samo univerzalne kvantifikatore, i nakon toga rekurzivnu relaciju. Ideja da problemi postaju sve teži kako dodajemo sve više kvantifikatora, uvijek suprotne vrste od one koju smo upravo dodali, formalizirana je u pojmu \emph{aritmetičke hijerarhije}. Definiciju i neke osnovne teoreme možete naći u~\cite{skr:Vuk}, a puno više detalja u~\cite{shoenfield}.
 \end{napomena}
 

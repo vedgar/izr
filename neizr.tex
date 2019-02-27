@@ -85,7 +85,7 @@ Kao i u prethodnom teoremu, stavka \texttt{(\textsc r)} je zapravo $(\card\Sigma
 
 Još uvijek ostaje otvoreno pitanje što je s jezicima koje prepoznaju općeniti Turingovi strojevi, koji mogu i zapeti u beskonačnoj petlji (štoviše, kažemo da je ulazna riječ u jeziku Turingovog stroja ako i samo ako se to ne dogodi). Prema definiciji~\ref{def:Tcomputefi}, ti jezici su zapravo \emph{domene izračunljivih jezičnih funkcija}. Njihov status razriješit ćemo u točki~\ref{sec:relang}.
 
-\begin{napomena}\label{nap:re0}
+\begin{napomena}[{name=[kod problema zaustavljanja završno stanje trake nije bitno]}]\label{nap:re0}
 Formalno, morali bismo još osigurati da im traka na kraju bude oblika $v\bl\ldots$ za $v\in\Sigma^*$, ali nije teško vidjeti, tehnikama koje se obrade u proučavanju formalnih jezika, da za svaki Turingov stroj (koji ne računa nužno neku funkciju) postoji Turingov stroj koji stane za točno iste ulaze, ali s praznom trakom ($v=\varepsilon$).
 
 Skica dokaza: uvedemo novi znak \t/ u radnu abecedu i proglasimo ga prazninom (znak $\bl$ time postaje običan znak radne abecede), te za svaki prijelaz koji čita bivšu prazninu $\delta(p,\bl)=(q,\gamma,d)$ dodamo prijelaz $\delta(p,\t/)=(q,\gamma,d)$ (pisanja praznina ostavimo na $\bl$). Semantički, i $\bl$ i \t/ su sada praznine, ali stroj ne može napisati \t/ na traku --- odnosno, jedine pojave znaka \t/ na traci su tamo gdje stroj još nije bio. Kako su pomaci mogući samo na susjedne ćelije, nosač takve trake je nužno povezan.
@@ -154,7 +154,7 @@ Ako postoji $n_0$ takav da je $c_{n_0}\in E$, izračunavanje $(c_n)_n$ stane, i 
 
 Ako sad između istih skupova $A$ i $B$ stavimo još neki drugi skup konfiguracija $C'$, sa svojom funkcijom $nextconf'$ i podskupom završnih konfiguracija $E'$, možemo zamisliti funkciju $start$ kao zadatak $f'$ za taj novi stroj, sa $A':=A$ i $B':=C$. No kako taj stroj zna računati samo funkcije iz $A$ u $B$, moramo prethodno kodirati $C$ nekom funkcijom $Code_1\colon C\to B$. To je zapravo najzanimljiviji dio, jer o njemu ovisi koliko će laki biti kasniji koraci. Dakle $f'=Code_1\circ start$, i kako su te dvije funkcije obično prilično jednostavne, za očekivati je da će $f'$ biti izračunljiva u novom modelu.
 
-\begin{napomena}\label{nap:ASM}
+\begin{napomena}[{name=[strojevi s apstraktnim stanjima]}]\label{nap:ASM}
 Zanimljiv i relativno novi uvid Jurija Gureviča s kraja prošlog stoljeća je da se "univerzalni" skup $C$ može naći u obliku interpretacija za strukture prvog reda. Tada možemo i formalno, koristeći \emph{lokalnost}, definirati što znači "prilično jednostavna" funkcija: to je ona koja ovisi o konačno mnogo "elemenata" (vrijednosti zatvorenih terma) u interpretaciji. Taj uvid vodi na formalizaciju \emph{strojeva s apstraktnim stanjima} (ASM), koji u nekom smislu predstavljaju "univerzalnu podlogu" za opis algoritama. Lijep uvod u ASM-teoriju, pisan specifično za računarce, može se naći u~\cite{huggins}.
 \end{napomena}
 

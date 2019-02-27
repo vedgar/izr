@@ -7,7 +7,7 @@
   headings=twolinechapter,
   numbers=endperiod
 ]{scrbook}
-%\includeonly{meta}
+\includeonly{re}
 %%%%
 % TODO za iduću godinu:
 % * eksplicitna formula za domenu kompozicije kad je H totalna (l=1?)
@@ -62,6 +62,7 @@
 \declaretheorem[sibling=definicija,style=definition,qed=$\vartriangleleft$]{primjer}
 \declaretheorem[sibling=definicija,style=definition,qed=$\vartriangleleft$]{napomena}
 \declaretheorem[numbered=no,name={Church--\!Turingova teza}]{ctteza}
+\renewcommand{\listtheoremname}{Popis definicija, teorema, primjera,~\ldots}
 
 %\usepackage{dsfont}
 \usepackage{mathbbol}
@@ -202,6 +203,7 @@ initial text=$ $}
 
 \backmatter
 \pagenumbering{Roman}
+\listoftheorems
 \printbibliography
 
 \end{document}
