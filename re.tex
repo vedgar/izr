@@ -246,14 +246,14 @@ Ista tvrdnja bi se mogla dokazati za dva univerzalna kvantifikatora uzastopce. Z
 
 Jednostavna posljedica upravo dokazanog rezultata i projekcijske karakterizacije je da projekcija ne može otežati već poluodlučiv problem.
 
-\begin{propozicija}\label{pp:projre}
+\begin{propozicija}[{name=[projekcija čuva rekurzivnu prebrojivost]}]\label{pp:projre}
 Projekcija rekurzivno prebrojive relacije (ako je ova mjesnosti barem~$2$) je ponovo rekurzivno prebrojiva.
 \end{propozicija}
 \begin{proof}
 Neka je $k\ge2$ i $R^k$ rekurzivno prebrojiva relacija. Po teoremu~\ref{tm:rpeproj}, postoji rekurzivna relacija $\f P$ takva da je $R=\exists_*\f P$. No tada je projekcija $\exists_*R=\exists_*\exists_*\f P=\exists_*\hat{\f P}$ po propoziciji~\ref{pp:projproj}, što je rekurzivno prebrojivo opet po teoremu~\ref{tm:rpeproj}. Naime, iz leme~\ref{lm:hatPeqP} imamo $\hat{\f P}\preceq\f P$, pa je $\hat{\f P}$ također rekurzivna po propoziciji~\ref{pp:rek<rek}.
 \end{proof}
 
-\begin{korolar}\label{kor:projre}
+\begin{korolar}[{name=[višestruka projekcija čuva rekurzivnu prebrojivost]}]\label{kor:projre}
 Neka su $k,l\in\N_+$, te $R^{k+l}$ rekurzivno prebrojiva relacija. Tada je i relacija $Q^k$, zadana s $Q(\vec x):\Longleftrightarrow(\exists\vec y\in\N^l)R(\vec x,\vec y)$, također rekurzivno prebrojiva.
 \end{korolar}
 \begin{proof}
@@ -275,7 +275,7 @@ Davno smo bili dokazali teorem o grafu za totalne funkcije (teorem~\ref{tm:graft
 
 Sada kad smo napokon vidjeli da parcijalnost za izračunljive funkcije odgovara rekurzivnoj prebrojivosti za relacije, prirodno je pitati se vrijedi li i taj oblik teorema o grafu: parcijalna rekurzivnost $\f f$ kao rekurzivna prebrojivost $\graf{\f f}$. Smjer slijeva nadesno slijedi iz projekcijske karakterizacije (teorem~\ref{tm:rpeproj}), i već ga sada možemo dokazati.
 
-\begin{teorem}\label{tm:grafprre}
+\begin{teorem}[{name=[rekurzivna prebrojivost grafova parcijalno rekurzivnih funkcija]}]\label{tm:grafprre}
 Graf svake parcijalno rekurzivne funkcije je rekurzivno prebrojiv.
 \end{teorem}
 
@@ -312,7 +312,7 @@ Ipak, funkcija $\f g$, koju dobijemo ako za svaki $x$ uzmemo prvi $y$ na koji na
 
 Jedini problem je što nama nije zadana funkcija $f$, nego relacija $R$. Možemo li $\f g$ karakterizirati pomoću $R$? Da: prvo svojstvo kaže $\dom{\f g}\supseteq\dom f=\dom{\mu R}=\exists_*R$, a drugo kaže (za $x\in\exists_*R$) $f(x)=\mu yR(x,y)\le\f g(x)$, što jednostavno možemo osigurati tako da tražimo $R\bigl(x,\f g(x)\bigr)$. Reći da to vrijedi za sve $x$ zapravo znači zahtijevati inkluziju $\graf{\f g}\subseteq R$, a tada po~\eqref{eq:projgraf} slijedi (lako se vidi da je projekcija monotona) $\dom{\f g}=\exists_*\graf{\f g}\subseteq\exists_*R$, što s prvim svojstvom daje $\dom{\f g}=\exists_*R$. Formalizirajmo to svojsvo.
 
-\begin{definicija}
+\begin{definicija}[{name=[selektor]}]
 Neka je $k\in\N_+$, te $R^{k+1}$ relacija.
 
 Za funkciju $g^k$ kažemo da je \emph{selektor} za $R$ ako vrijedi $\dom g=\exists_*R$ i $\graf g\subseteq R$.
@@ -372,7 +372,7 @@ Formalno, tražimo najmanji $t$ takav da je $\bigl(\f{fst}(t),\f{snd}(t)\bigr)=(
 
 Mi želimo dokazati obrat teorema~\ref{tm:grafprre}, dakle rekurzivno prebrojiva relacija s kojom radimo nije bilo kakva --- ona je graf funkcije, pa ima funkcijsko svojstvo. A funkcijsko svojstvo je upravo ono koje nam treba da se riješimo "latentnog nedeterminizma" u lemi~\ref{lm:tmsel}, jer ono znači da svaki prerez ima najviše jedan element --- pa "najmanji", "bilo koji" i "jedini" element prereza znače jedno te isto, i nisu definirani ako i samo ako je prerez prazan.
 
-\begin{lema}\label{lm:selgraf}
+\begin{lema}[{name=[jedinstvenost selektora grafa funkcije]}]\label{lm:selgraf}
 Za svaku brojevnu funkciju $F$, jedini selektor grafa\, $\graf F$ je upravo $F$.
 \end{lema}
 \begin{proof}
@@ -404,7 +404,7 @@ Jedna jednostavna posljedica teorema o grafu je generalizacija propozicije~\ref{
 
 Prvo dokažimo nekoliko jednostavnih ali korisnih lema, koje govore o skupovnim operacijama koje čuvaju parcijalnu rekurzivnost. Za unije i presjeke smo to već vidjeli (propozicije~\ref{pp:unlre} i~\ref{pp:prlre}), vrijeme je da se pozabavimo razlikama. Napomenimo samo da općenito skupovna razlika dvije rekurzivno prebrojive relacije nije rekurzivno prebrojiva, jer \emph{komplement} kao specijalni slučaj razlike ($(R^k)\kompl=\N^k\setminus R$) ne čuva rekurzivnu prebrojivost. Detaljnije ćemo vidjeti što se tu zbiva kad dokažemo Postov teorem.
 
-\begin{lema}\label{lm:re-rek}
+\begin{lema}[{name=[rekurzivna prebrojivost razlike s rekurzivnom relacijom]}]\label{lm:re-rek}
 Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija, i $\f R$ rekurzivna relacija. Tada je $P\setminus\f R$ također rekurzivno prebrojiva.
 \end{lema}
 \begin{proof}
@@ -413,7 +413,7 @@ Znamo iz teorije skupova (uz $\N^k$ kao univerzalni skup) da je $P\setminus\f R=
 
 Za \emph{simetričnu} razliku, više nije dovoljno zahtijevati da $\f R$ bude rekurzivna, pa čak ni primitivno rekurzivna --- isti kontraprimjer, zapisan u obliku $(R^k)\kompl=R\mathbin\triangle\N^k$, funkcionira. Ali ako je $\f R$ \emph{konačna}, dokaz prolazi.
 
-\begin{lema}\label{lm:retrkon}
+\begin{lema}[{name=[rekurzivna prebrojivost simetrične razlike s konačnom relacijom]}]\label{lm:retrkon}
 Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija, i $\f R^k$ konačna relacija. Tada je $P\mathbin\triangle\f R$ također rekurzivno prebrojiva.
 \end{lema}
 \begin{proof}
@@ -421,7 +421,7 @@ Po definiciji je $P\mathbin\triangle\f R:=(P\setminus\f R)\cup(\f R\setminus P)$
 $\f R$ je rekurzivna po korolarima~\ref{kor:konprn} i~\ref{kor:prnrek}, dakle prva razlika je rekurzivno prebrojiva po lemi~\ref{lm:re-rek}. Iz teorije skupova znamo da je podskup konačnog skupa konačan, pa je druga razlika $\f R\setminus P\subseteq\f R$ konačna, te je primitivno rekurzivna po korolaru~\ref{kor:konprn}, rekurzivna po korolaru~\ref{kor:prnrek}, i rekurzivno prebrojiva po propoziciji~\ref{pp:rekire}. Sada tvrdnja slijedi iz propozicije~\ref{pp:unlre} (unija dvije rekurzivno prebrojive relacije iste mjesnosti je ponovo rekurzivno prebrojiva).
 \end{proof}
 
-\begin{propozicija}
+\begin{propozicija}[{name=[teorem o editiranju za parcijalne funkcije]}]
 Neka je $k\in\N_+$, te $\f F^k$ parcijalno rekurzivna, i $\f G^k$ funkcija iste mjesnosti takva da je skup $\graf{\f F}\mathbin\triangle\graf{\f G}$ konačan. Tada je i $\f G$ parcijalno rekurzivna.
 \end{propozicija}
 \begin{proof}
@@ -493,7 +493,7 @@ Pomoću Postovog teorema možemo dokazati da razni skupovi nisu rekurzivno prebr
 Ipak, za samu egzistenciju skupova koji nisu rekurzivno prebrojivi ne treba nam Postov teorem --- to možemo i kardinalnim argumentom.
 Zato najčešće Postov teorem koristimo kad \emph{znamo} da je jedan od ta dva skupa rekurzivno prebrojiv, pa onda zaključujemo da drugi nije.
 
-\begin{korolar}
+\begin{korolar}[{name=[kriterij za negaciju rekurzivne prebrojivosti]}]
 Neka je $R$ rekurzivno prebrojiva relacija koja nije rekurzivna.
 
     Tada $R\kompl$ nije rekurzivno prebrojiva.
@@ -502,7 +502,7 @@ Neka je $R$ rekurzivno prebrojiva relacija koja nije rekurzivna.
 Ovo je samo obrat po kontrapoziciji Postovog teorema.
 \end{proof}
 
-\begin{primjer}
+\begin{primjer}[{name=[komplement Russellovog skupa nije rekurzivno prebrojiv]}]
 Relacija $K\kompl$ nije rekurzivno prebrojiva.
 \end{primjer}
 
@@ -550,7 +550,7 @@ Za ($\supseteq$), neka je $z\in\im{\f G}$ proizvoljan. To znači da postoji $(x_
 Ako pak $\lnot\f P(x_0,y_0)$, tada je trivijalno $z=\f G(x_0,y_0)=r\in R$.
 \end{proof}
 
-\begin{napomena}
+\begin{napomena}[{name=[enumeracija kao jednomjesna funkcija --- niz]}]
 Enumeracija $\f G$ koju smo konstruirali je dvomjesna: ako baš želimo \emph{niz}, možemo ga definirati kontrakcijom: $\f F(n):=\f G\bigl(\f{fst}(n),\f{snd}(n)\bigr)$. Tehnikama kao u dokazu leme~\ref{lm:hatPeqP} (samo za funkcije umjesto relacija), lako se vidi $\im{\f F}=\im{\f G}$ --- inkluzija ($\subseteq$) slijedi direktno iz definicije od $\f F$, a ($\supseteq$) iz $\f G(x,y)=\f F\bigl(\f{pair}(x,y)\bigr)$.
 
 Simbolički, $\f F=\f G\circ(\f{fst},\f{snd})$, a $\f G=\f F\circ\f{pair}$. Općenito za svaku kompoziciju vrijedi $\im{H\circ(G_1,\dotsc,G_l)}\subseteq\im H$ --- raspišite detalje!
@@ -570,7 +570,7 @@ I četvrto, analogon jezik\^a u brojevnom modelu su zapravo \emph{jednomjesne} r
 
 Nakon svega što ste naučili, ne biste trebali biti začuđeni time da sva ta četiri pristupa karakteriziraju istu klasu jezika.
 
-\begin{teorem}
+\begin{teorem}[{name=[teorem ekvivalencije za poluodlučive jezike]}]
 Neka je $\Sigma$ abeceda, i $L\subseteq\Sigma^*$ jezik nad njom.
 
 Tada su sljedeće tvrdnje ekvivalentne:
