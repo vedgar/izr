@@ -245,7 +245,7 @@ Za svaki $u\in\N$, zatvoreni term $\mathsf s(\mathsf s(\dotsb(\mathsf s(\mathsf0
 \begin{equation}\label{eq:defpiu}
     \pi_{\vec u}:=R_0(\mathsf0,\overline{u_1},\overline{u_2},\dotsc,\overline{u_k},\mathsf0,\mathsf0,\dotsc,\mathsf0)\text,
 \end{equation}
-gdje nakon $\overline u_k$ ima još $m-k-1$ simbola $\mathsf0$ (po definiciji je $m=m_{P^k}=\max\,\{m_P,k+1\}\ge k+1$, pa je $m-k-1=m-(k+1)\in\N$).
+gdje nakon $\overline{u_k}$ ima još $m-k-1$ simbola $\mathsf0$ (po definiciji je $m=m_{P^k}=\max\,\{m_P,k+1\}\ge k+1$, pa je $m-k-1=m-(k+1)\in\N$).
 
 Za svaki $i\in[0..n\rangle$, definiramo formulu $\iota_i$ ovisno o tipu instrukcije s rednim brojem $i$ u programu $P$:
 
@@ -570,7 +570,7 @@ Pogledajmo malo detaljnije kako u osnovnom jeziku izgleda formula $\varphi_u$ iz
 
 Preciznije, neka je $P_0=\begin{prog}t.\;I_t\end{prog}_{t<n}$. Za svaki $t<n$ imamo u $\Gamma_u$ jednu formulu $\iota_t$, tako da se njihova univerzalna zatvorenja, obrnutim redom, prebacuju s desne strane~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je u tom trenutku na desnoj stani označimo s $\psi$), i nju možemo prebaciti lijevo bez univerzalnog zatvorenja jer je ona rečenica. Ključno je da formula $\psi$, koliko god ogromna bila, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će jednostavno biti neka jako velika konstanta.
 
-Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\iota_0\to\bigl(\iota_1\to(\iota_2\to\dotsb(\iota_{n-1}\to\zeta)\dotsb)\bigr)\bigr)$\text.
+    Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsb(\overline{\iota_{n-1}}\to\zeta)\dotsb)\bigr)\bigr)$\text.
 Uz očite reprezentacije ($\mathsf0$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, te $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), lako je svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Jedino što je još potrebno su kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili jednostavno proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. U praksi je lakše koristiti ovaj drugi pristup.
 
 \begin{primjer}[{name=[zaustavljanje RAM-izračunavanja kao valjanost jedne formule]}]
@@ -613,7 +613,7 @@ odnosno u osnovnom jeziku
 Funkcija $\f{Fi}$, koja svakom prirodnom broju $u$ pridružuje kod formule $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\,\eqref{step:varphi_u}, primitivno je rekurzivna.
 \end{lema}
 \begin{proof}
-Za početak, označimo s $psi:=\kr{\psi}$ kod formule $\psi$ koja nastane prebacivanjem svih $\iota_i$ na desnu stranu relacije $\models$. Taj broj ne ovisi o $u$.
+    Za početak, označimo s $psi:=\kr{\psi}$ kod formule $\psi$ koja nastane prebacivanjem svih $\overline{\iota_i}$ na desnu stranu relacije $\models$. Taj broj ne ovisi o $u$.
 
 Drugo, označimo s $\f{Pi}$ funkciju koja preslikava $u\mapsto\kr{\pi_u}$. Ta funkcija je primitivno rekurzivna, jer je funkcija $\f{Numeral}$, koja preslikava $u\mapsto\kr{\,\overline u\,}$, primitivno rekurzivna.
 \begin{align}

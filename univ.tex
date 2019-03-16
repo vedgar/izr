@@ -25,7 +25,7 @@ Neegzaktnosti tipa \texttt{float}, i raznih drugih tipova koji bi trebali reprez
 \end{napomena}
 
 \subsection{Kodiranje konačnih nizova}
-Sada se možemo pozabaviti samom implementacijom kodiranja $\N^*$. Kako bismo najlakše kodirali $\vec x=(x_1,x_2,\dotsc,x_k)$ kao jedan prirodni broj, iz kojeg se kasnije mogu izvući pojedini brojevi $x_i$? U teoriji skupova, za dokaz da je $\N^2$ prebrojiv, promatra se injekcija $p(x,y):=2^x\cdot3^y$, te se iskoristi osnovni teorem aritmetike (rastav na prim-faktore) da bi se iz $p(x,y)$ natrag dobili $x$ i $y$. To se očito lako može proširiti na proizvoljnu mjesnost (jer prim-brojeva ima beskonačno mnogo --- samo ih uzmemo dovoljno redom po veličini, potenciramo odgovarajućim eksponentima, i pomnožimo), ali to nije kodiranje skupa $\N^*$. Naime, takvo preslikavanje nije injekcija, jer se recimo $(1,2,0,0)$ i $(1,2)$ preslikaju u isti broj $2^1\cdot3^2\cdot5^0\cdot7^0=2^1\cdot3^2=18$.
+Sada se možemo pozabaviti samom implementacijom kodiranja $\N^*$. Kako bismo najlakše kodirali $\vec x=(x_1,x_2,\dotsc,x_k)$ kao jedan prirodni broj, iz kojeg se kasnije mogu izvući pojedini brojevi $x_i$? U teoriji skupova, za dokaz da je $\N^2$ prebrojiv, promatramo injekciju $p(x,y):=2^x\cdot3^y$, te iskoristimo osnovni teorem aritmetike (rastav na prim-faktore) da bismo iz $p(x,y)$ natrag dobili $x$ i $y$. To se očito lako može proširiti na proizvoljnu mjesnost (jer prim-brojeva ima beskonačno mnogo --- samo ih uzmemo dovoljno redom po veličini, potenciramo odgovarajućim eksponentima, i pomnožimo), ali to nije kodiranje skupa $\N^*$. Naime, takvo preslikavanje nije injekcija, jer se recimo $(1,2,0,0)$ i $(1,2)$ preslikaju u isti broj $2^1\cdot3^2\cdot5^0\cdot7^0=2^1\cdot3^2=18$.
 
 Ipak, mala modifikacija dat će nam kodiranje. Zapravo, jedini problem su nule u konačnom nizu --- opisano preslikavanje \emph{jest} kodiranje skupa ${\N_+\!}^*$ konačnih nizova \emph{pozitivnih} prirodnih brojeva. Sada je još samo preostalo komponirati ga s izračunljivom bijekcijom $\f{Sc}$ između $\N$ i $\N_+$, i dobili smo traženo kodiranje.
 
@@ -160,21 +160,21 @@ U "stvarnom životu", provjera je li $x\in\mathbb P$ odvija se drugačije: nulu,
     Niz $(p_i)_{i\in\N}$ (strogo rastući niz sa slikom $\mathbb P$, tzv.\ \emph{enumeracija} skupa $\mathbb P$) je primitivno rekurzivan.
 \end{propozicija}
 \begin{proof}
-Zapravo trebamo algoritam za funkciju $\f{prime}^1$, koja svakom broju $n$ pridružuje $p_n$, $n$-ti prim-broj po veličini. Očito, treba nam primitivna rekurzija --- i to degenerirana jer definiramo funkciju mjesnosti $1$. Za inicijalizaciju stavimo samo vrijednost $p_0=2$, a u koraku trebamo funkciju $\f{nextprime}^2$ koja prima $n$ i $p_n$, i mora vratiti $p_{n+1}$. Je li ta funkcija izračunljiva?
+    Zapravo trebamo algoritam za funkciju $\f{prime}^1$, koja svakom broju $n$ pridružuje $p_n$, $n$-ti prim-broj po veličini. Očito, treba nam primitivna rekurzija --- i to degenerirana jer definiramo funkciju mjesnosti $1$. Za inicijalizaciju stavimo samo vrijednost $p_0=2$, a u koraku trebamo funkciju $\f{nextprime}$ koja prima ($n$ i) $p_n$, i mora vratiti $p_{n+1}$. Je li ta funkcija izračunljiva?
 
 Kako uopće znamo da je ta funkcija \emph{totalna}, odnosno da možemo pomoću nje graditi primitivnu rekurziju? Prim-brojeva ima beskonačno mnogo: za svaki $p_n$ postoji $q\in\mathbb P$ takav da je $q>p_n$. Štoviše, $p_{n+1}$ je prvi takav $q$, pa ga možemo naći minimizacijom:
 \begin{equation}\label{eq:primerek}
-    \f{nextprime}(n,p):=\mu q(q\in\mathbb P\land q>p)\text.
+    \f{nextprime}(p):=\mu q(q\in\mathbb P\land q>p)\text.
 \end{equation}
-Upravo napisani izraz zapravo kaže da je $\f{nextprime}$ \emph{rekurzivna} funkcija (parcijalno je rekurzivna jer je dobivena minimizacijom konjunkcije dvije rekurzivne relacije, a totalna je zbog beskonačnosti skupa $\mathbb P$), pa je i $\f{prime}$ rekurzivna po korolaru~\ref{kor:F1rek}.
+Upravo napisani izraz zapravo kaže da je $\f{nextprime}^1$ \emph{rekurzivna} funkcija (parcijalno je rekurzivna jer je dobivena minimizacijom konjunkcije dvije rekurzivne relacije, a totalna je zbog beskonačnosti skupa $\mathbb P$), pa je i $\f{prime}$ rekurzivna po korolaru~\ref{kor:F1rek}.
 
 Za primitivnu rekurzivnost, moramo nekako ograničiti minimizaciju, odnosno moramo "isprogramirati" dokaz da je $\mathbb P$ beskonačan. Uzmimo Euklidov dokaz: ako imamo $p_0,p_1,\dotsc,p_n\in\mathbb P$, novi prim-broj možemo dobiti tako da potražimo prim-djelitelj broja $m:=p_0\cdot p_1\dotsm p_n+1>1$. Aha! Znamo da je djelitelje pozitivnog broja dovoljno tražiti do samog tog broja, dakle samo trebamo primitivno rekurzivno izračunati $m$ iz $n$ i $p_n$. Tu bismo mogli upotrijebiti primorijel iz primjera~\ref{pr:primorijel} --- konkretno, $m=\f{Sc}\bigl(\overline{\f Z}\bigl(\f{Sc}(n)\bigr)\bigr)$ --- ali nažalost još ne znamo da je funkcija $\overline{\f Z}$ primitivno rekurzivna, jer nismo dokazali da povijest čuva primitivnu rekurzivnost. I to s razlogom: pokazat će se da za tu lemu treba rezultat koji upravo dokazujemo.
 
 Kako se izvući? Spas leži u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Naime, ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. Sada je lako: umjesto primorijela, možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a očito je $p_n!\ge p_0\cdot p_1\dotsm p_n$ (jer je $p_n!$ umnožak svih brojeva na desnoj strani, i eventualno još nekih, koji su veći ili jednaki $1$).
 \begin{equation}
-    \f{nextprime}(n,p)=(\mu q\le p!+1)(q\in\mathbb P\land q>p)%\text,
+    \f{nextprime}(p)=(\mu q\le p!+1)(q\in\mathbb P\land q>p)%\text,
 \end{equation}
-    Dakle $\f{nextprime}$ je dobivena ograničenom minimizacijom primitivno rekurzivne relacije do primitivno rekurzivne (uključive, napomena~\ref{nap:muSc}) granice, te je primitivno rekurzivna. Sada je i $\f{prime}=2\pr\f{nextprime}$ primitivno rekurzivna po propoziciji~\ref{prop:F1prn}.
+    Dakle $\f{nextprime}^1$ je dobivena ograničenom minimizacijom primitivno rekurzivne relacije do primitivno rekurzivne (uključive, napomena~\ref{nap:muSc}) granice, te je primitivno rekurzivna. Sada je i $\f{prime}=2\pr\f{nextprime}\circ\f I_2^2$ primitivno rekurzivna po propoziciji~\ref{prop:F1prn}.
 \end{proof}
 
 \subsection{Rastav na prim-faktore}
@@ -765,7 +765,7 @@ Za specifikaciju, smjer slijeva nadesno, raspetljavanjem definicije od $\f{Final
 Analogno, zaključivanjem u suprotnom smjeru, dobijemo i drugi smjer tvrdnje.
 \end{proof}
 
-To je u redu ako već imamo (kandidat za) $n$ --- ali možemo li \emph{izračunati} $n$? Naravno, to je upravo minimizacija:  $\f{step}:=\mu\,\f{Final}$ je parcijalno rekurzivna, te je $\f{step}(\langle\vec x\rangle,\kprog P)=\mu n\,\f{Final}(\langle\vec x\rangle,\kprog{P},n)$ upravo broj koraka $P$-izračunavanja s $\vec x$, do dolaska u završnu konfiguraciju. To je definirano samo za izračunavanja koja stanu: $HALT:=\dom{\f{step}}=\exists_*\f{Final}$ je dvomjesna relacija takva da $HALT(\langle \vec x\rangle,\kprog P)$ vrijedi ako i samo ako $P$-izračunavanje s $\vec x$ stane.
+To je u redu ako već imamo (kandidat za) $n$ --- ali možemo li \emph{izračunati} $n$? Naravno, to je upravo minimizacija:  $\f{step}:=\mu\,\f{Final}$ je parcijalno rekurzivna, te je $\f{step}(\langle\vec x\rangle,\kprog P)\simeq\mu n\,\f{Final}(\langle\vec x\rangle,\kprog{P},n)$ upravo broj koraka $P$-izračunavanja s $\vec x$, do dolaska u završnu konfiguraciju. To je definirano samo za izračunavanja koja stanu: $HALT:=\dom{\f{step}}=\exists_*\f{Final}$ je dvomjesna relacija takva da $HALT(\langle \vec x\rangle,\kprog P)$ vrijedi ako i samo ako $P$-izračunavanje s $\vec x$ stane.
 
 \begin{napomena}[{name=[totalna specifikacija zaustavljanja izračunavanja]}]\label{nap:HaltProg}
 Štoviše, zahvaljujući oprezu sa specifikacijom prije, sad možemo biti precizniji: kad god $e$ nije kod nekog programa, ili $x$ nije kod nepraznog konačnog niza, ne vrijedi $\f{Final}(x,e,n)$ ni za koji $n$. Dakle, tada $(x,e)\not\in HALT$, te izraz $\f{step}(x,e)$ nema smisla.
