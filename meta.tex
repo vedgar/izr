@@ -746,11 +746,15 @@ Na neki način, do na nezgodnu činjenicu da je $\mathcal P(\mathcal Comp_k)$ ne
 
 % \subsection{Invarijantnost}
 
-Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo recimo skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
+Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo %recimo skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
+%
+%Dobro, uzmimo onda neki manji skup,
+recimo jednočlan skup $\{1\}$. On je svakako rekurzivan (lema~\ref{lm:r1prn}), ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili $1$ unutra, morali smo staviti i čitavu klasu $\knk{\{\f Z\}}=[1]_{\approx_1}$.
 
-Dobro, uzmimo onda neki manji skup, recimo jednočlan skup $\{1\}$. On je svakako rekurzivan (lema~\ref{lm:r1prn}), ali opet nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili $1$ unutra, morali smo staviti i čitavu klasu $\knk{\{\f Z\}}=[1]_{\approx_1}$.
+Dakle, skupovi indeksa nisu bilo kakvi skupovi prirodnih brojeva. Oni moraju imati specijalno svojstvo \emph{invarijantnosti} na relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma. 
 
-Dakle, skupovi indeksa nisu bilo kakvi skupovi prirodnih brojeva. Oni moraju imati specijalno svojstvo \emph{invarijantnosti} na relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma. Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\colon\f{Seq}\to\f{Seq}$ koja sortira konačne nizove, zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. Recimo, \emph{selection sort} bi izgledao ovako nekako:
+\begin{primjer}[{name=[Sortiranje kao jedna funkcija s raznim implementacijama]}]
+    Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\colon\f{Seq}\to\f{Seq}$ koja sortira konačne nizove, zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
 \begin{align}
     \f{tail}(s)&:\simeq\mu t(\kr{s[0]}*t=s)\\
     \f{min}(s)&:\simeq\mu n\bigl(\exists i<\f{lh}(s)\bigr)(s[i]=n)\\
@@ -784,6 +788,7 @@ Možete se zabaviti pišući razne druge algoritme za sortiranje u jeziku parcij
 \end{equation}
 tada je jasno da i $ss$ i $qs$, i svi drugi indeksi iz $\knk{\{\f{sort}\}}$, moraju zadovoljavati tu jednadžbu. Iako taj \emph{unit test} ni izdaleka nije dovoljan za specifikaciju funkcije $\f{sort}$, svejedno ga možemo gledati kao neko svojstvo koje izračunljive funkcije mogu a i ne moraju imati: $\wp(\f F):\Longleftrightarrow\f F(810\,152\,280)=272\,386\,847\,250
 $. Važno je naglasiti da to svojstvo ne ovisi o implementaciji funkcije $\f F$, već samo ovisi o funkciji samoj.
+\end{primjer}
 
 \begin{definicija}[{name=[$k$-invarijantnost]}]
 Neka je $k\in\N_+$. Za skup $S\subseteq\N$ kažemo da je \emph{$k$-invarijantan} ako i samo ako za sve $e,f\in\N$, iz $e\in S$ i $e\approx_k f$ slijedi $f\in S$.
@@ -887,10 +892,6 @@ Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupo
     \item Zaključimo da kad bi $S$ bio rekurzivan, bio bi takav i $T$, što je kontradikcija s Riceovim teoremom.
 \end{enumerate}
 
-%Recimo, za dokaz da $Halt_3^4=\{(x,y,z,e)\mid(x,y,z)\in\dom{\kf e^3}\}$ nije rekurzivna relacija:
-%\begin{itemize}
-%\item fiksiramo $(x,y,z)$, recimo na $(0,0,0)$ --- dakle $\mathcal F:=\{\f F\in\mathcal Comp_3\mid(0,0,0)\in\dom{\f F}\}$, odnosno $T:=\{e\in\N\mid(0,0,0)\in\dom{\kf e^3}\}$;
-%\item nađemo funkcije $\f C_0^3\in\mathcal F$ i $\varnothing^3\not\in\mathcal F$, iz čega dobivamo $1\in T\land0\not\in T$;
-%\item dokažemo $3$-invarijantnost: $T\ni e\approx_3f$ povlači $(0,0,0)\in\dom{\kf e^3}=\dom{\kf f^3}$, pa $f\in T$;
-%\item zaključimo da vrijedi $e\in T$ ako i samo ako je $(0,0,0,e)\in Halt_3$ --- dakle $\chi_T=\chi_{Halt_3}\circ(\f Z,\f Z,\f Z,\f I_1^1)$, odnosno $T\preceq Halt_3$. (Raspišite detalje!)
-%\end{itemize}
+\begin{primjer}[{name=[neodlučivost $k$-mjesnog brojevnog problema zaustavljanja]}]
+    Za svaki $k\in\N_+$, skup $Halt_k$ nije rekurzivan. Naime, ako definiramo $T(e):\Longleftrightarrow Halt_k(\vec 0,e)$, očito je $T=\knk{\{\f f\in\mathcal Comp_k\mid\vec 0\in\dom{\f f}\}}$ $k$-invarijantan po lemi~\ref{lm:kinv=sind}, te vrijedi $0\not\in T$ i $1\in T$. Dakle $T$ nije rekurzivan, pa zbog $Halt_k\preceq T$ niti $Halt_k$ nije rekurzivan.
+\end{primjer}
