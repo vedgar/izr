@@ -167,7 +167,7 @@ No to zapravo znači da sustav $C'$ može simulirati svaki korak $\mathcal A$-iz
     \item dobivanje funkcije $f$ iz tako dobivene funkcije $c_0\mapsto c_{n_0}$, $start$ i $result$ (slijed).
 \end{itemize}
 
-Sada jasnije vidimo i zašto je skup $\N$ "poseban": dok $A$, $B$ i $C$ mogu biti svakakvi prebrojivi skupovi, domena izračunavanja (kao niza konfiguracija) mora biti $\N$. Drugim riječima, za bilo kakvo meta-programiranje (koje je nužno za univerzalnu funkciju) model u kojem radimo, pored reprezentacije ulaznih i izlaznih podataka, mora moći reprezentirati i prirodne brojeve. Onda je svakako najjednostavnije da ulazni i izlazni podaci također budu prirodni brojevi.
+Sada jasnije vidimo i zašto je skup $\N$ "poseban": dok $A$, $B$ i $C$ mogu biti svakakvi prebrojivi skupovi, domena izračunavanja (kao niza konfiguracija) mora biti $\N$. Drugim riječima, za bilo kakvo metaprogramiranje (koje je nužno za univerzalnu funkciju) model u kojem radimo, pored reprezentacije ulaznih i izlaznih podataka, mora moći reprezentirati i prirodne brojeve. Onda je svakako najjednostavnije da ulazni i izlazni podaci također budu prirodni brojevi.
 
 Odgovarajućim kodiranjima možemo dobiti i simulaciju za promijenjene skupove $A'$ i $B'$ --- baš kao što smo to već činili kad je jedan od tih skupova, ili oba, bio $C$ (za funkcije $start$, $result$ i $nextconf$).
 
@@ -182,7 +182,7 @@ Zapravo, postoji širok (i višedimenzijski!) "prostor kompromisa" (\emph{tradeo
 Osim s obzirom na apstraktnost, možemo gledati i kompromise s obzirom na druge dimenzije: smanjivanje broja različitih koncepata u sustavu (\emph{Occamova britva}) vodi na sustave u kojima je gotovo sve prikazano prirodnim brojevima (jer, kao što smo rekli, prirodne brojeve moramo imati za reprezentaciju samog izračunavanja). Intuitivna bliskost onom što doista činimo kad provodimo algoritam vodi na sustave koji emuliraju naše stanje uma, i mentalne operacije (pamćenja simbola i jednostavnih odluka na nižoj razini, ili uočavanja obrazaca i vizualizacije njihove supstitucije na višoj razini apstrakcije) --- kao što su jezični modeli izračunavanja.
 \begin{equation}\label{eq:vrste-alg}
     \begin{tabular}{c@{\quad}|@{\quad}cc}
-     algoritam & konkretan & apstraktan \\\hline
+        algoritam & konkretni (imperativni) & apstraktni (funkcijski)\\\hline
      jezični (praktični) & Turingov stroj & $\lambda$-račun\\
      brojevni (teorijski) & RAM-stroj & parcijalna rekurzivnost
     \end{tabular}

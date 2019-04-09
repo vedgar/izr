@@ -431,7 +431,7 @@ Za $x,y\in\N$, označimo $x\ominus y:=\max\,\{x-y,0\}$. Lako se vidi da je
 Pored računskih operacija (dijeljenje s ostatkom definirat ćemo kasnije, kad uvedemo još neke tehnike), brojeve možemo i \emph{uspoređivati}, raznim dvomjesnim relacijama  kao što su $<$, $\ge$ ili $\eq$. Rekli smo da izračunljivost relacija promatramo kroz izračunljivost njihovih karakterističnih funkcija.
 
 \begin{primjer}[{name=[primitivna rekurzivnost pozitivnosti]}]\label{pr:N+prn}
-Za početak pogledajmo jednomjesnu relaciju $\N_+$ --- drugim riječima, pozitivnost. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum}. Jednostavno ju je dobiti degeneriranom primitivnom rekurzijom $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna. Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
+Za početak pogledajmo pozitivnost --- formalno, jednomjesnu relaciju $\N_+$. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum}. Jednostavno ju je dobiti degeneriranom primitivnom rekurzijom $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna. Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
 \end{primjer}
 
 Kada imamo pozitivnost i ograničeno oduzimanje, možemo odmah vidjeti primitivnu rekurzivnost strogog uređaja. Ostale uređajne relacije dokazat ćemo primitivno rekurzivnima kasnije, kad ustanovimo kako se radi s logičkim veznicima.
@@ -455,7 +455,7 @@ Neka je $k\in\N_+$ i $R^{k+1}$ relacija. Za funkciju $F^k$ definiranu s
     F(\vec x)&:=\min\,\{y\in\N\mid R(\vec x,y)\}\text{, za sve $\vec x\in\exists_* R$,}
 \end{align}
 kažemo da je dobivena \emph{minimizacijom} relacije $R$. Pišemo $F^k:=\mu R^{k+1}$, ili točkovno
-$F(\vec x):\simeq\mu yR(\vec x,y)$. Smatramo da $\mu$ ima viši prioritet od $\circ$.
+$F(\vec x):\simeq\mu yR(\vec x,y)$.
 
 Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na minimizaciju} ako za svaki $k\in\N_+$, za svaku relaciju $R^{k+1}$, $\chi_R\in\mathcal F$ povlači $\mu R\in\mathcal F$. 
 \end{definicija}

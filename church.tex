@@ -71,7 +71,7 @@ Naravno, to nije \emph{dokaz} da ne postoji možda neka druga metoda kojom bismo
 
 Problem kojim smo se bavili --- za zadani $n$, je li $n$ u domeni od $\kf n^1$ --- čini se vrlo umjetnim: nije da bismo ikad bili doista zainteresirani za općeniti odgovor na to pitanje. Ipak, jednom kad imamo neki neodlučiv problem, možemo se dočepati i ostalih.
 
-Metoda je ista ona pomoću koje iz već poznatih odlučivih problema (izračunljivih funkcija) dobivamo nove: \emph{svođenje} (redukcija). Ako možemo neku funkciju $f$ svesti na neku drugu $g$ --- napisati $f$ pomoću kompozicije, i eventualno primitivne rekurzije, funkcije $g$ s nekim izračunljivim funcijama, tada znamo da ako je $g$ izračunljiva, tada je i $f$ takva. To smo koristili mnogo puta u funkcijskom programiranju. Doduše, tamo nam je bila bitna primitivna rekurzivnost, pa smo govorili samo o totalnim funkcijama, i primitivna rekurzija je igrala bitnu ulogu. Kad govorimo o (ne)odlučivim problemima, primitivna rekurzivnost postaje luksuz koji si ne možemo uvijek priuštiti, pa ćemo zapravo promatrati samo kompoziciju. Kako se radi o problemima, dakle karakterističnim funkcijama relacija koje su totalne, zbog marljive evaluacije proizlazi da sve funkcije u kompoziciji moraju također biti totalne.
+Metoda je ista ona pomoću koje iz već poznatih odlučivih problema (izračunljivih funkcija) dobivamo nove: \emph{svođenje} (redukcija). Ako možemo neku funkciju $f$ svesti na neku drugu $g$ --- napisati $f$ pomoću kompozicije, i eventualno primitivne rekurzije, funkcije $g$ s nekim izračunljivim funcijama, tada znamo da ako je $g$ izračunljiva, tada je i $f$ takva. To smo koristili mnogo puta u funkcijskom programiranju --- recimo, pogledajte primjer~\ref{pr:m-v}. Doduše, tamo nam je bila bitna primitivna rekurzivnost, pa smo govorili samo o totalnim funkcijama, i primitivna rekurzija je igrala bitnu ulogu. Kad govorimo o (ne)odlučivim problemima, primitivna rekurzivnost postaje luksuz koji si ne možemo uvijek priuštiti, pa ćemo zapravo promatrati samo kompoziciju. Kako se radi o problemima, dakle karakterističnim funkcijama relacija koje su totalne, zbog marljive evaluacije proizlazi da sve funkcije u kompoziciji moraju također biti totalne.
 
 Napomenimo samo da u literaturi postoje razne vrste svođenja problema, pa i općenitih funkcija. Mi ćemo odabrati najjednostavniju koja je dovoljno dobra za naše potrebe.
 
@@ -248,6 +248,7 @@ Za svaki $u\in\N$, zatvoreni term $\mathsf s(\mathsf s(\dotsb(\mathsf s(\mathsf0
 gdje nakon $\overline{u_k}$ ima još $m-k-1$ simbola $\mathsf0$ (po definiciji je $m=m_{P^k}=\max\,\{m_P,k+1\}\ge k+1$, pa je $m-k-1=m-(k+1)\in\N$).
 
 Za svaki $i\in[0..n\rangle$, definiramo formulu $\iota_i$ ovisno o tipu instrukcije s rednim brojem $i$ u programu $P$:
+\smallskip
 
 $\rhd$ Ako je to $i.\;\incr j$, definiramo
     \begin{equation}\label{eq:formINC}
@@ -330,7 +331,7 @@ S druge strane, po definiciji~\ref{def:compute}, $c_t\leadsto c_{t+1}$, pa po le
 \end{equation}
 odnosno u $\mathfrak N$ uz valuaciju $v$ vrijedi i konsekvens formule~\eqref{eq:formINC}, što smo trebali.
 
-Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, metodom sličnom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf0,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $v(\mathsf0)=\phi(\mathsf0)=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u
+Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, sličnom metodom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf0,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $v(\mathsf0)=\phi(\mathsf0)=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u
 \begin{equation}
     c_{t+1}=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,l\bigr)\text,
 \end{equation}

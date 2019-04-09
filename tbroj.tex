@@ -6,7 +6,7 @@
 Sve dosad napravljeno može se iskazati u jednom vrlo općenitom obliku.
 
 \begin{propozicija}[{name=[izomorfizam skupova $\TComp$ i $\mathcal Comp_1$]}]\label{pp:trackbij}
-Neka je $\Sigma$ proizvoljna abeceda, i $\N\Sigma$ proizvoljno njeno kodiranje. Tada je $\varphi\mapsto\N\varphi$ bijekcija između skupa $\TComp$ svih Turing-izračunljivih jezičnih funkcija nad $\Sigma$, i skupa $\mathcal Comp_1$ jednomjesnih RAM-izračunljivih funkcija.
+Neka je $\Sigma$ proizvoljna abeceda, i $\N\Sigma$ proizvoljno njeno kodiranje. Tada je $\varphi\mapsto\N\varphi$ bijekcija između skupa $\TComp$ svih Turing-izračunljivih jezičnih funkcija nad $\Sigma$, i skupa $\mathcal Comp_1$ svih jednomjesnih RAM-izračunljivih funkcija.
 \end{propozicija}
 
 \begin{proof}
@@ -30,7 +30,7 @@ Precizno, imamo vezu
 te vrijedi $\N\,\N^{-1}\f F=F$ i $\N^{-1}\N\varphi=\varphi$.
 
 \begin{korolar}[{name=[jednomjesne brojevne funkcije u različitim modelima]}]\label{kor:pent}
-Neka je $\Sigma$ abeceda s kodiranjem $\N\Sigma$, i $F^1$ brojevna funkcija. Tada je $F$ parcijalno rekurzivna ako i samo ako je $\N^{-1}F$ Turing-izračunljiva.
+Neka je $\Sigma$ abeceda s kodiranjem $\N\Sigma$, i\, $F^1$ brojevna funkcija.\newline Tada je $F$ parcijalno rekurzivna ako i samo ako je $\N^{-1}F$ Turing-izračunljiva.
 \end{korolar}
 \begin{proof}
 Ako je $F=\N\,\N^{-1}F$ parcijalno rekurzivna, tada je po teoremu~\ref{tm:pir} RAM-izračunljiva, te je po teoremu~\ref{tm:krit} $\N^{-1}F$ Turing-izračunljiva. S druge strane, ako je $\N^{-1}F$ Turing-izračunljiva, onda je po teoremu~\ref{tm:tikp} $\N\,\N^{-1}F=F$ parcijalno rekurzivna.
@@ -57,7 +57,7 @@ $\t\textbullet\f{factorial}\bigl(
 \end{primjer}
 
 \begin{korolar}[{name=[unarno reprezentirane brojevne funkcije u različitim modelima]}]\label{kor:peuf}
-Neka je $F^1$\! brojevna funkcija. Tada je $F$ parcijalno rekurzivna ako i samo ako je $\t\textbullet F$ Turing-izračunljiva.
+Neka je $F^1$\! brojevna funkcija.\newline Tada je $F$ parcijalno rekurzivna ako i samo ako je $\t\textbullet F$ Turing-izračunljiva.
 \end{korolar}
 \begin{proof}
 Već rekosmo, ovo je specijalni slučaj korolara~\ref{kor:pent}, za unarnu abecedu.
@@ -87,7 +87,7 @@ Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Tur
 Nije preteško vidjeti da su te dvije karakterizacije, brojevna i jezična, povezane --- pogotovo jer već imamo napravljen najveći dio posla.
 
 \begin{teorem}[{name=[rekurzivnost Turing-odlučivog jezika]}]\label{tm:oikr}
-Neka je $L$ jezik. Ako postoji Turingov odlučitelj koji prepoznaje $L$, tada je jednomjesna relacija $\kr L$ rekurzivna.
+    Neka je $L$ jezik (nad nekom abecedom $\Sigma$). Ako postoji Turingov odlučitelj koji prepoznaje $L$, tada je jednomjesna relacija $\kr L$ rekurzivna.
 \end{teorem}
 \begin{proof}
 Pretpostavimo da je $\mathcal T$ odlučitelj za $L$, i provedimo s tim strojem postupak iz točke~\ref{sec:tikp}. Ovdje navodimo samo detalje koje je potrebno promijeniti.
@@ -116,7 +116,7 @@ U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propo
 \newpage
 
 \begin{teorem}[{name=[Turing-odlučivost rekurzivnog jezika]}]\label{tm:krio}
-Neka je $L$ jezik (nad nekom abecedom $\Sigma$). Ako je relacija $\kr L$ rekurzivna, tada postoji Turingov odlučitelj za $L$.
+Neka je $L$ jezik (nad nekom abecedom $\Sigma$).\newline Ako je relacija $\kr L$ rekurzivna, tada postoji Turingov odlučitelj za $L$.
 \end{teorem}
 \begin{proof}
 Pretpostavka zapravo znači da je $\chi_{\kr L}$ rekurzivna funkcija. Dakle $\chi_{\kr L}$ je parcijalno rekurzivna, pa po teoremu~\ref{tm:pir} postoji RAM-program koji je računa; i totalna je, pa taj RAM-program stane za svaki ulaz. Na taj RAM-program htjeli bismo primijeniti postupak iz točke~\ref{sec:RAM>Turing}. Da bismo to mogli, moramo $\chi_{\kr L}$ prikazati kao $\N\varphi$ za neku jezičnu funkciju $\varphi$ nad $\Sigma$. Možemo li to?
