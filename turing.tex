@@ -521,7 +521,7 @@ Sada $\f H_1$ jednostavno treba vratiti $\f{newstate}(q,g)$. $\f H_2$ treba vrat
 \end{align}
 zadovoljavaju parcijalnu specifikaciju koju smo napisali. Sada su $\f{State}$, $\f{Position}$ i $\f{Tape}$ definirane simultanom primitivnom rekurzijom iz $\f G_1$, $\f G_2$, $\f G_3$, $\f H_1$, $\f H_2$ i $\f H_3$, te su primitivno rekurzivne. Tvrdnju leme sada dokazujemo matematičkom indukcijom po $n$, sasvim analogno kao u RAM-modelu.
 
-Za $n=0$, početno stanje je $q_0$, pa je $\f{State}(x,0)=\f G_1(x)=\f Z(x)=0=\N Q_0(q_0)$ doista njegov kod. Početna pozicija je $0=\f Z(x)=\f G_2(x)=\f{Position}(x,0)$. Početna traka je $w\bl\ldots$, čiji kod je $\knk{w\bl\ldots}$, što je prema~\eqref{eq:recodein} jednako $\f{Recode}(\kr w,b',b)=G_3(\kr w)=\f{Tape}(\kr w,0)$.
+Za $n=0$, početno stanje je $q_0$, pa je $\f{State}(x,0)=\f G_1(x)=\f Z(x)=0=\N Q_0(q_0)$ doista njegov kod. Početna pozicija je $0=\f Z(x)=\f G_2(x)=\f{Position}(x,0)$. Početna traka je $w\bl\ldots$, čiji kod $\knk{w\bl\ldots}$ je prema~\eqref{eq:recodein} jednak $\f{Recode}(\kr w,b',b)=G_3(\kr w)=\f{Tape}(\kr w,0)$.
 
 Sada pretpostavimo da je nakon $k$ koraka, $q:=\f{State}(\kr w,k)$ kod stanja, $p:=\f{Position}(\kr w,k)$ pozicija, a $t:=\f{Tape}(\kr w,k)$ kod trake stroja. Ako je ta konfiguracija završna, tada je $q=\N Q_0(q_z)=1$, pa prema definicijama iz leme~\ref{lm:newssdprn} vrijedi $\f{newstate}(q,g)=\f{direction}(q,g)=1$ i $\f{newsymbol}(q,g)=g$. Tada $\f H_1$ daje $q$, $\f H_2$ daje $\f{pd}(p+1)=\f{pd}\bigl(\f{Sc}(p)\bigr)=p$, a $\f H_3$ daje $t\ominus g\cdot b^p+g\cdot b^p=t$ (jer je $g=t\sslash b^p\bmod b\le t\sslash b^p\le\frac{t}{b^p}$, pa je $g\cdot b^p\le t$, odnosno $\ominus$ je zapravo $-$). Dakle $\f{State}(\kr w,k+1)=\f{State}(\kr w,k)$, i analogno za $\f{Position}$ i $\f{Tape}$, odnosno završna konfiguracija ostaje ista, kao što i treba.
 
@@ -1382,7 +1382,7 @@ Naravno, dodati \t a na kraj riječi Turingov stroj može puno jednostavnije ---
 Ukratko, dokazali smo da je za \emph{jezične} funkcije izračunljivost u jezičnom modelu jednako snažna kao izračunljivost njihovih pratećih funkcija u brojevnom modelu. Primijetimo da smo time napokon opravdali neovisnost o korištenom \emph{encodingu}, i riješili "filozofski problem" s početka točke~\ref{sec:kSigma}.
 
 \begin{korolar}[{name=[neovisnost izračunljivosti jezične funkcije o kodiranju abecede]}]\label{kor:ikojiNSigma}
-Neka je $\Sigma$ abeceda, te $\varphi$ jezična funkcija nad njom. Tada parcijalna rekurzivnost funkcije $\N\varphi$ ne ovisi o izboru kodiranja $\N\Sigma$.
+Neka je $\Sigma$ abeceda, te $\varphi$ jezična funkcija nad njom.\newline Tada parcijalna rekurzivnost funkcije $\N\varphi$ ne ovisi o izboru kodiranja $\N\Sigma$.
 \end{korolar}
 \begin{proof}
 Neka su $\N\Sigma$ i $\N'\Sigma$ dva kodiranja $\Sigma$. Ako je $\N\varphi_0$ parcijalno rekurzivna, tada je po teoremu~\ref{tm:pir} RAM-izračunljiva. Tada je po teoremu~\ref{tm:krit} (primijenjenom na kodiranje $\N\Sigma$) $\varphi$ Turing-izračunljiva, a onda je po teoremu~\ref{tm:tikp} (primijenjenom na kodiranje $\N'\Sigma$) $\N'\varphi$ parcijalno rekurzivna. Potpuno isto (zamjenom ta dva kodiranja) se dokaže drugi smjer, dakle $\N\varphi$ je parcijalno rekurzivna ako i samo ako je $\N'\varphi$ parcijalno rekurzivna.
