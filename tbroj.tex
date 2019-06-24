@@ -199,7 +199,7 @@ nad binarnom abecedom $\Sigma_\beta$, kažemo da je \emph{binarna reprezentacija
 
 Vjerojatno ste nekad napisali Turingov stroj za $\beta\f{add}^2$, koristeći $\beta\f{add}^2(u\t/v)=uv$, ako su $u,v\in\t\textbullet^*$. Ipak, već tada ste zasigurno vidjeli koliko je teško napisati $\beta\f{mul}^2$, a pogotovo $\beta\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\beta\f{part}$?!) da i ne spominjemo.
 
-Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\beta\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Ipak, prvo ćemo prvo dokazati obrat: brojevne funkcije, čije su binarne reprezentacije Turing-izračunljive, su parcijalno rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a mnoge dijelove dokaza moći ćemo upotrijebiti i u dokazu obrata.
+Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\beta\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Ipak, prvo ćemo dokazati obrat: brojevne funkcije, čije su binarne reprezentacije Turing-izračunljive, parcijalno su rekurzivne. To nije toliko impresivan rezultat --- ali lakši je za dokazati, a mnoge dijelove dokaza moći ćemo upotrijebiti i u dokazu obrata.
 
 %\subsection{Prateća funkcija binarne reprezentacije}
 
@@ -247,7 +247,7 @@ U traženju tih funkcija može pomoći dijagram.
 63
 \end{tikzcd}
 \end{equation}
-Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}^3$ na $(3,1,2)$). Brojevi desno dolje su razumljiviji u pomaknutoj bazi $2$: $275=(11121211)_2$, te $63=(111111)_2$. Gornji pravokutnik predstavlja definiciju~\eqref{eq:betaf}, dok donji predstavlja~\eqref{eq:kodfidef} za specijalni slučaj binarne abecede, i jezične funkcije $\beta f$ nad njom.
+Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}^3$ na $(3,1,2)$). Brojevi desno dolje su razumljiviji u pomaknutoj bazi $2$: $275=(11121211)_2$, a $63=(111111)_2$. Gornji pravokutnik predstavlja definiciju~\eqref{eq:betaf}, dok donji predstavlja~\eqref{eq:kodfidef} za specijalni slučaj binarne abecede, i jezične funkcije $\beta f$ nad njom.
 
 \begin{lema}[{name=[brojevni-jezični-brojevni dijagram komutira]}]\label{lm:pravkomut}
 Dijagram prikazan lijevo u~\eqref{dia:Nbeta} (samo pune strelice) komutira.
@@ -255,7 +255,7 @@ Dijagram prikazan lijevo u~\eqref{dia:Nbeta} (samo pune strelice) komutira.
 \begin{proof}
 Drugim riječima, za svaki od ta dva pravokutnika, pa onda i za veliki pravokutnik sastavljen od ta dva, je svejedno kojim putem dođemo od njegovog gornjeg lijevog do donjeg desnog vrha.
 
-Prvo, dakle, trebamo dokazati (gornji pravokutnik) da je $\beta f\circ\beta^k =\beta^1\circ f$. Domena desne funkcije je $\dom f$ jer je $\beta^1$ totalna, a domena lijeve funkcije je $\{\vec x\in\N^k\mid\beta^k(\vec x)\in\dom{\beta f}\}$, što je opet jednako $\dom f$ po definiciji domene $\dom{\beta f}$. Neka je sad $\vec x\in\dom f$ proizvoljan. Na njemu je lijeva funkcija $\beta f\bigl(\beta^k(\vec x)\bigr)$, što je po definiciji~\eqref{eq:betaf} jednako $\beta^1\bigl(f(\vec x)\bigr)$, što je upravo jednako $(\beta^1\circ f)(\vec x)$. Dakle, $\beta f\circ\beta^k$ i $\beta^1\circ f$ imaju istu domenu i na njoj se podudaraju, pa su to jednake funkcije.
+Prvo, dakle, trebamo dokazati (gornji pravokutnik) da je $\beta f\circ\beta^k =\beta^1\circ f$. Domena desne funkcije je $\dom f$ jer je $\beta^1$ totalna, a domena lijeve funkcije je $\{\vec x\in\N^k\mid\beta^k(\vec x)\in\dom{\beta f}\}$, što je opet jednako $\dom f$ po definiciji domene $\dom{\beta f}$. Neka je sad $\vec x\in\dom f$ proizvoljan. Na njemu je vrijednost lijeve funkcije $\beta f\bigl(\beta^k(\vec x)\bigr)$, što je po definiciji~\eqref{eq:betaf} jednako $\beta^1\bigl(f(\vec x)\bigr)=(\beta^1\circ f)(\vec x)$. Dakle, $\beta f\circ\beta^k$ i $\beta^1\circ f$ imaju istu domenu i na njoj se podudaraju, pa su to jednake funkcije.
 
 Donji pravokutnik je puno jednostavniji jer je $\N\Sigma_\beta^*$ bijekcija: ako označimo $\varphi:=\beta f$,
 \begin{equation}
@@ -416,7 +416,7 @@ pa je očito najmanji takav $t$ upravo $n=\f I_1^1(n)$.\qedhere
 Neka je $k\in\N_+$, i\, $\f f^k$\! funkcija takva da je $\beta\f f$ Turing-izračunljiva. Tada je $\f f$ parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
-Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\beta$, kodiranje $\t\textbullet\mapsto1,\t/\mapsto2$ i funkciju $\beta\f f$, funkcija $\N\beta\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:blh} i korolara~\ref{kor:binf=Nbetafbin} sada imamo
+    Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\beta$, kodiranje $\{\t\textbullet\mapsto1,\t/\mapsto2\}$ i funkciju $\beta\f f$, funkcija $\N\beta\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:blh} i korolara~\ref{kor:binf=Nbetafbin} sada imamo
 \begin{equation}
     \f f=\f I_1^1\circ\f f=\f{blh}\circ\f{bin}^1\!\circ\f f=\f{blh}\circ\N\beta\f f\circ\f{bin}^k\text,
 \end{equation}

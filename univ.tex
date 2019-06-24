@@ -113,7 +113,7 @@ Prije dokaza samo primijetimo da je nula problematična u operaciji $\sslash$, a
 \begin{proof}
 Cjelobrojno dijeljenje zapravo je ponovljeno oduzimanje, onoliko puta koliko se može. Dakle, za zadane $x$ i $y$, tražimo najveći $t$ takav da je $t\cdot y\le x$. Relacija $t\cdot y\le x$ je svakako primitivno rekurzivna, ali nemamo operator maksimizacije. S razlogom ga općenito nemamo: ako malo razmislimo, vidjet ćemo da ne postoji općeniti algoritam kojim bismo odredili najveći broj s nekim svojstvom, čak ni ako znamo da taj broj postoji, jer nikad ne znamo jesmo li tražili dovoljno dugo --- u svakom trenutku iznad najvećeg broja koji smo ispitali postoji još beskonačno mnogo kandidata, svaki od kojih može biti traženi broj.
 
-Srećom, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y$ postane veće od $x$, ostat će veće od $x$ za sve veće $t$. Kod takvih relacija, "prva laž" i "zadnja istina" su susjedne, te jednostavno možemo naći najmanji $t$ za koji je $t\cdot y>x$, i uzeti njegov prethodnik.
+Srećom, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y$ postane veće od $x$, ostat će veće od $x$ za sve veće $t$. Kod takvih relacija, "prva laž" i "zadnja istina" su susjedne, dakle možemo jednostavno naći najmanji $t$ za koji je $t\cdot y>x$, i uzeti njegov prethodnik.
 
 Ipak, to je neograničena minimizacija, a mi bismo htjeli primitivno rekurzivnu funkciju --- možemo li je nekako ograničiti? Svakako: $y\bump\ge 1$ znači $t\cdot y\bump\ge t$ za svaki $t$, te specijalno $(x+1)\cdot y\bump\ge x+1>x$. Dakle, dovoljno je tražiti $t$ do $x+1$ --- odnosno do $x$ uključivo, jer znamo da će ograničena minimizacija tada dati $x+1$ ako ne pronađe nijedan broj s traženim svojstvom u zadanom rasponu. Sve u svemu, tvrdimo da vrijedi
 \begin{equation}\label{eq:sslash}
@@ -276,7 +276,7 @@ Time smo u potpunosti opisali kodiranje skupa $\N^*$, koje ćemo kasnije koristi
 Pomalo neprecizno, ali sasvim jasno, pišemo $concat(\vec x^k,\vec y^{\,l}):=(\vec x,\vec y)$. I ubuduće ćemo smatrati da su takvi konstrukti "spljošteni" na jednu razinu --- duljina od $(\vec x,\vec y)$ nije $2$, već $k+l$. To smo zapravo već koristili svaki put kad smo napisali npr.\ $\f{f}(\vec x,y)$.
 \end{primjer}
 
-Prateća funkcija $\N concat$ definirana je samo na $\f{Seq}\times\f{Seq}$, ali u svrhu primitivne rekurzivnosti, to se shvaća kao parcijalna specifikacija. Također, njeno primitivno rekurzivno proširenje se često piše infiksno kao operacija.
+Prateća funkcija $\N concat$ definirana je samo na $\f{Seq}\times\f{Seq}$, ali u svrhu primitivne rekurzivnosti, to shvaćamo kao parcijalnu specifikaciju. Također, njeno primitivno rekurzivno proširenje često pišemo infiksno kao operaciju $*$.
 
 \begin{lema}[{name=[primitivna rekurzivnost konkatenacije konačnih nizova]}]\label{lm:starprn}
 Postoji primitivno rekurzivna operacija $*$ takva da je za sve $\vec x,\vec y\in\N^*\!$, \begin{equation}
@@ -771,7 +771,7 @@ To je u redu ako već imamo (kandidat za) $n$ --- ali možemo li \emph{izračuna
 Štoviše, zahvaljujući oprezu sa specifikacijom prije, sad možemo biti precizniji: kad god $e$ nije kod nekog programa, ili $x$ nije kod nepraznog konačnog niza, ne vrijedi $\f{Final}(x,e,n)$ ni za koji $n$. Dakle, tada $(x,e)\not\in HALT$, te izraz $\f{step}(x,e)$ nema smisla.
 \end{napomena}
 
-Primijetimo da $HALT$ nismo napisali u "izračunljivom fontu", jer nemamo algoritam za računanje $\chi_{HALT}$. To što je $HALT$ domena parcijalno rekurzivne funkcije, odnosno projekcija primitivno rekurzivne relacije, nije dovoljno: ako je $(x,e)\in HALT$, to ćemo doznati čim nađemo broj koraka $n$ --- ali ako $(x,e)\not\in HALT$, to nećemo nikada doznati tim pristupom. Pokazat ćemo, štoviše, da \textbf{nijedan pristup ne radi za sve parove} $(x,e)$, iako u nekim slučajevima (poput $e\not\in\f{Prog}$) možemo utvrditi $\lnot HALT(x,e)$. Precizno, pokazat ćemo da skup $HALT$ nije rekurzivan --- što će biti jedan od prvih primjera nepostojanja algoritma za neki problem. No to će morati još malo pričekati.
+Primijetite da $HALT$ nismo napisali u "izračunljivom fontu", jer nemamo algoritam za računanje $\chi_{HALT}$. To što je $HALT$ domena parcijalno rekurzivne funkcije, odnosno projekcija primitivno rekurzivne relacije, nije dovoljno: ako je $(x,e)\in HALT$, to ćemo doznati čim nađemo broj koraka $n$ --- ali ako $(x,e)\not\in HALT$, to nećemo nikada doznati tim pristupom. Pokazat ćemo, štoviše, da \textbf{nijedan pristup ne radi za sve parove} $(x,e)$, iako u nekim slučajevima (poput $e\not\in\f{Prog}$) možemo utvrditi $\lnot HALT(x,e)$. Precizno, pokazat ćemo da skup $HALT$ nije rekurzivan --- što će biti jedan od prvih primjera nepostojanja algoritma za neki problem. No to će morati još malo pričekati.
 
 Pozabavimo se sada čitanjem rezultata izračunavanja (izlaznog podatka algoritma, odnosno vrijednosti funkcije koja se računa na ulaznim podacima). Za $HALT(x,e)$, izraz $\f{Reg}\bigl(x,e,\f{step}(x,e)\bigr)$ ima smisla, i tada predstavlja stanje registara u završnoj konfiguraciji izračunavanja. Za $\lnot HALT(x,e)$, što uključuje i $\lnot\f{Prog}(e)$ i $\lnot\f{Seq}'(x)$, taj izraz je nedefiniran. Još treba dokomponirati primitivno rekurzivnu funkciju $\f{result}$ iz~\eqref{eq:resultdef}, i dobiti
 \begin{equation}

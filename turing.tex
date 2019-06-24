@@ -28,7 +28,7 @@ Iako je unarni zapis eksponencijalno lošiji od binarnog (i svih ostalih pozicij
 
 \subsection{Računanje bez računala}
 
-Drugi aspekt koji smo u potpunosti zanemarili u brojevnom modelu je povijesni. Danas, kad smo na svakom koraku okruženi računalima, a većina nas jedno nosi u džepu, lako je zaboraviti da računala ne postoje oduvijek. Zapravo, u upotrebljivom obliku postoje tek nekoliko desetaka godina. S druge strane, algoritmi postoje već milenijima: Euklidov algoritam je nastao prije modernog brojenja godina, a neki babilonski algoritmi potječu sa samih početaka pisane povijesti. Što znači algoritam ako nema računala na kojem se može izvršavati?
+Drugi aspekt koji smo u potpunosti zanemarili u brojevnom modelu je povijesni. Danas, kad smo na svakom koraku okruženi računalima, a većina nas jedno nosi u džepu, lako je zaboraviti da računala ne postoje oduvijek. Zapravo, u upotrebljivom obliku postoje tek nekoliko desetaka godina. S druge strane, algoritmi postoje već milenijima: Euklidov algoritam nastao je prije modernog brojenja godina, a neki babilonski algoritmi potječu sa samih početaka pisane povijesti. Što znači algoritam ako nema računala na kojem se može izvršavati?
 
 Odgovor je jednostavan: algoritme su izvršavali ljudi. Iako ljudski mozak po svojoj prirodi nije savršen supstrat za doslovno slijeđenje instrukcija kroz višeznamenkaste brojeve koraka, moderno obrazovanje svjedoči da se može tome na\-u\-či\-ti. Doista, većina zadataka iz školske matematike može se svesti na provođenje nekog algoritma. Mnoge od tih zadataka računala obavljaju brže i bolje od ljudi, o čemu svjedoči uspjeh aplikacija kao što je \t{photomath}. Iako su ljudi bolji u pronalaženju (logičkih, analogijskih ili asocijativnih) veza među pojmovima, potreba za rješavanjem problema iz stvarnog života koji se mogu precizno klasificirati uvjetovala je pronalazak mnogih algoritama. Motivacija je uvijek bila ista: optimizacija i specijalizacija ljudskog rada. Jedan čovjek može osmisliti algoritam, koji poslije milijuni ljudi mogu provoditi i tako rješavati stvarne probleme, ne razumijevajući nužno zašto algoritam radi. No da bi to uspjelo, koraci algoritma moraju biti takvi da njegovo provođenje ne zahtijeva nikakav angažman pored onog koji je specificiran algoritmom, niti ikakvo vanjsko znanje --- osim poznavanja ulaznih podataka, i nekoliko elementarnih vještina poput čitanja i pisanja fiksnog skupa simbola, te odlučivanja na osnovi pročitanog, za koje smatramo da su svojstvene svim radno sposobnim ljudima.
 
@@ -133,7 +133,7 @@ Recimo ponešto o konvencijama pri crtanju takvih dijagrama. Crtamo konačni usm
 
 Više prijelaza s istim $p$, $q$ i $d$ može biti prikazano jednom strelicom, na kojoj se nalazi više oznaka $\alpha_1\mathord:\beta_1,\dotsc,\alpha_k\mathord:\beta_k$. Ako se znak ne mijenja ($\alpha=\beta$), umjesto $\alpha\mathord:\alpha$ pišemo jednostavno $\alpha$. Ako već imamo oznaku za skup $S\subseteq\Gamma$, možemo je napisati na brid umjesto pojedinih elemenata (kao što smo na dijagramu učinili sa $\Sigma$).
 
-Početno stanje označavamo "strelicom niotkud", kako je na dijagramu označeno stanje $\textsc a$. Završno stanje označavamo dvostrukim krugom, kako je na dijagramu označeno stanje $\textsc e$. I još jedno pravilo koje bitno povećava preglednost dijagrama: ne pišemo stanja ni prijelaze koji više ne mogu voditi do završnog stanja. Običaj je prilikom konstrukcije Turingovog stroja imati jedno stanje $q_x$ (u slučaju $\mathcal T_h$ to je stanje $\textsc f$), takvo da se svaki "nemoguć prijelaz", odnosno nemoguća situacija $(q,\alpha)$, po $\delta$ preslika u $(q_x,\alpha,1)$. Specijalno to vrijedi i za $q=q_x$, za sve $\alpha\in\Gamma$, iz čega slijedi da nakon što Turingov stroj napravi neki od tih nemogućih prijelaza, više nikada neće stati. 
+Početno stanje označavamo "strelicom niotkud", kako je na dijagramu označeno stanje $\textsc a$. Završno stanje označavamo dvostrukim krugom, kako je na dijagramu označeno stanje $\textsc e$. I još jedno pravilo koje bitno povećava preglednost dijagrama: ne pišemo stanja ni prijelaze koji više ne mogu voditi do završnog stanja. Običaj je prilikom konstrukcije Turingovog stroja imati jedno stanje $q_x$ (u slučaju $\mathcal T_h$ to je stanje $\textsc f$), takvo da se svaki "nemoguć prijelaz", odnosno nemoguća situacija $(q,\alpha)$, po $\delta$ preslika u $(q_x,\alpha,1)$. Specijalno to vrijedi i za $q=q_x$, za sve $\alpha\in\Gamma$, iz čega slijedi da nakon što Turingov stroj napravi neki od tih "nemogućih" prijelaza, više nikada neće stati. 
 
 Efektivno, to je "stanje greške", i ne moramo ga, kao ni prijelaze koji prema njemu vode, crtati na dijagramu: podrazumijevamo da riječi za koje se dogodi neka od tih "nemogućih situacija" nisu u domeni funkcije koju Turingov stroj računa. Važno je da ne mora vrijediti obrat: Turingov stroj ne mora nikada ući u stanje $q_x$, a da ipak nikada ne stane. Možemo to usporediti s instrukcijom RAM-stroja $i.\,\goto\;i$ --- ako $\textsc{pc}$ ikad postane $i$, RAM-stroj sigurno ne stane, ali može ne stati i na druge načine.
 
@@ -544,7 +544,7 @@ Funkcija $\f{stop}^1$, definirana sa
 \begin{equation}
     \f{stop}(\kr w):\simeq\text{"broj koraka nakon kojeg $\mathcal T_0$-izračunavanje s $w$ stane",}
 \end{equation}
-    parcijalno je rekurzivna (naravno, $\dom{\f{stop}}=\dom{\N\varphi_0}=\{\kr w\mid w\in\dom{\varphi_0}\}$).
+    parcijalno je rekurzivna (naravno, $\dom{\f{stop}}=\dom{\N\varphi_0}=\{\kr w\mid w\in\dom{\varphi_0}\}=:\kr{\dom{\varphi_0}}$).
 \end{lema}
 \begin{proof}
 Tvrdimo da je
@@ -1302,7 +1302,7 @@ Za $\Sigma_0:=\{\t a,\t b\}$, peti fragment možemo prikazati dijagramom
 ;
 \end{tikzpicture}\text.
 \end{equation}
-Za općenitu abecedu $\Sigma_0$, umjesto dva "viseća trokuta" ispod $q_8$, imat ćemo ih $b'$: po jedan $\triangle q_8 m_\alpha l_\alpha$ za svaki znak $\alpha\in\Sigma_0$.
+Za općenitu abecedu $\Sigma_0$, umjesto dva "viseća trokuta" ispod $q_8$, bit će ih $b'$: po jedan $\triangle q_8 m_\alpha l_\alpha$ za svaki znak $\alpha\in\Sigma_0$.
 \end{primjer}
 
 %Primijetite da smo stigli do završnog stanja $q_z$. Time smo napokon završili konstrukciju Turingovog stroja $\mathcal T_0$, i sve je spremno za dokaz "obrata" teorema~\ref{tm:tikp}.
