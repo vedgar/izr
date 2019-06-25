@@ -61,7 +61,7 @@ Ipak, bitno je  lakše raditi s algoritmima koji računaju totalne funkcije. Par
 
 Kad smo već kod toga, recimo nekoliko riječi i o klasičnim izuzecima poput dijeljenja nulom. Primitivno rekurzivne funkcije po definiciji moraju biti totalne, pa si ne možemo priuštiti jednostavno reći nešto poput "$3\sslash0$ nije definirano" (dokazat ćemo da je $\sslash$ primitivno rekurzivna operacija). U mnogim slučajevima to ćemo rješavati jednostavno tako da kažemo "\emph{postoji} primitivno rekurzivna funkcija $\f{f}$ koja se podudara s traženom funkcijom $g$ na domeni $\dom{g}$", ne govoreći ništa o vrijednostima $\f{f}(\vec x)$ za $\vec x\not\in\dom{g}$. Još općenitije, ponekad ćemo umjesto funkcije $g$ navesti samo neko \emph{svojstvo} koje vrijednosti od $\f{f}$ moraju zadovoljavati na nekom skupu. Kazat ćemo tada da smo \emph{parcijalno specificirali} (totalnu) funkciju $\f{f}$: u smislu, $\f{f}$ je definirana svuda, ali nas zanimaju samo vrijednosti na nekom užem skupu.
 
-Treba napomenuti da je važna odlika ove knjige da će svi algoritmi biti precizno specificirani --- ništa neće ostati na pseudokodu. Dakle, uvijek ćemo moći precizno izračunati vrijednosti primitivno rekurzivne funkcije i izvan skupa na kojem je specificirana --- na primjer, algoritam za $\sslash$ reći će nam da je $3\sslash 0=3$. Ponekad će čak te vrijednosti (\emph{undocumented behavior}) imati neko značenje, u smislu da će takvu funkciju biti lakše uklopiti u kasnije definicije bez puno rastava na slučajeve. No to nećemo često koristiti, i svaki put ćemo naglasiti kad se to dogodi.
+Treba napomenuti da je važna odlika ove knjige da će svi algoritmi biti precizno specificirani --- ništa neće ostati na pseudokodu. Dakle, uvijek ćemo moći precizno izračunati vrijednosti primitivno rekurzivne funkcije i izvan skupa na kojem je specificirana --- na primjer, algoritam za $\sslash$ reći će nam da je $3\sslash 0=3$. Ponekad će čak te vrijednosti ("nedokumentirano ponašanje") imati neko značenje, u smislu da će takvu funkciju biti lakše uklopiti u kasnije definicije bez puno rastava na slučajeve. No to nećemo često koristiti, i svaki put ćemo naglasiti kad se to dogodi.
 
 %\subsection{Relacije}
 
@@ -79,9 +79,9 @@ Dakle, relacijama ćemo pripisivati svojstva izračunljivosti koja imaju njihove
 
 Iz prethodne točke zaključujemo da ćemo promatrati (algoritme za) dvije vrste funkcija: jezične i brojevne. Brojevne funkcije su nam važnije i uglavnom ćemo raditi s njima, ali na nekoliko mjesta dobro će nam doći i formalizacija izračunljivosti jezičnih funkcija.
 
-Svaka brojevna funkcija je oblika $f\colon S\to\N$, gdje je $S\subseteq\N^k$ za neki $k\in\N_+$. Skraćeno pišemo $f\colon\N^k\rightharpoonup\N$, ili još kraće $f^k$, ako nam nije bitan skup $S=\dom{f}$. Broj $k$ zovemo \emph{mjesnost} funkcije $f$. Svaka brojevna funkcija ima jedinstvenu mjesnost --- osim prazne funkcije $\varnothing$, čija domena je prazan skup $\emptyset$. Radi jednostavnosti izlaganja, smatrat ćemo da i prazne funkcije imaju fiksnu mjesnost, odnosno umjesto jedne funkcije $\varnothing$ promatrat ćemo familiju $\varnothing^k,k\in\N_+$, i smatrat ćemo da su, na primjer, $\varnothing^3$ i $\varnothing^8$ različite funkcije. Formalno, to možemo napraviti tako da nam "funkcija" znači uređen par, kojem je prva komponenta uobičajena reprezentacija funkcije (skup uređenih parova s nekim svojstvom), a druga komponenta mjesnost --- ali nećemo imati potrebu biti toliko formalni, tim više što prazne funkcije nisu zanimljive iz perspektive izračunljivosti: algoritmi koji ih računaju su jednostavno beskonačne petlje.
+Svaka brojevna funkcija je oblika $f\colon S\to\N$, gdje je $S\subseteq\N^k$ za neki $k\in\N_+$. Skraćeno pišemo $f\colon\N^k\rightharpoonup\N$, ili još kraće $f^k$, ako nam nije bitan skup $S=\dom{f}$. Broj $k$ zovemo \emph{mjesnost} funkcije $f$. Svaka brojevna funkcija ima jedinstvenu mjesnost --- osim prazne funkcije $\varnothing$, čija domena je prazan skup $\emptyset$. Radi jednostavnosti izlaganja, smatrat ćemo da i prazne funkcije imaju fiksnu mjesnost, odnosno umjesto jedne funkcije $\varnothing$ promatrat ćemo familiju $\varnothing^k,k\in\N_+$, i smatrat ćemo da su, na primjer, $\varnothing^3$ i $\varnothing^8$ različite funkcije. Formalno to možemo napraviti tako da nam "funkcija" znači uređen par, kojem je prva komponenta uobičajena reprezentacija funkcije (skup uređenih parova s nekim svojstvom), a druga komponenta mjesnost --- ali nećemo imati potrebu biti toliko formalni, tim više što prazne funkcije nisu zanimljive iz perspektive izračunljivosti: algoritmi koji ih računaju su jednostavno beskonačne petlje.
 
-(Brojevna) relacija je oblika $R\subseteq\N^k$ za neki $k\in\N_+$. Po analogiji s funkcijama, $k$ zovemo \emph{mjesnost} relacije, i pišemo $R^k$ ako ga želimo naglasiti. Kao i za funkcije, iako su sve prazne relacije skupovno jednake (postoji samo jedan prazan skup), promatrat ćemo familiju $\emptyset^k,k\in\N_+$, i smatrati sve njene elemente različitim relacijama. Na kraju krajeva, njihove karakteristične funkcije \emph{jesu} različite, jer imaju različite domene: recimo, $\dom{\chi_{\emptyset^3}}\!=\N^3$. (Radi se o nulfunkciji $\f C_0^3\colon\N^3\to\N$; potrebno je razlikovati nulfunkciju, koja je totalna, od prazne funkcije koja nije definirana nigdje!)
+(Brojevna) relacija je oblika $R\subseteq\N^k$ za neki $k\in\N_+$. Po analogiji s funkcijama, $k$ zovemo \emph{mjesnost} relacije, i pišemo $R^k$ ako je želimo naglasiti. Kao i za funkcije, iako su sve prazne relacije skupovno jednake (postoji samo jedan prazan skup), promatrat ćemo familiju $\emptyset^k,k\in\N_+$, i smatrati sve njene elemente različitim relacijama. Na kraju krajeva, njihove karakteristične funkcije \emph{jesu} različite, jer imaju različite domene: recimo, $\dom{\chi_{\emptyset^3}}\!=\N^3$. (Radi se o nulfunkciji $\f C_0^3\colon\N^3\to\N$; potrebno je razlikovati nulfunkciju, koja je totalna, od prazne funkcije koja nije definirana nigdje!)
 
 Jezične funkcije ćemo uvijek definirati nad nekom \emph{abecedom} (konačan neprazan skup) $\Sigma$, i to će nam biti funkcije $\varphi\colon\Sigma^*\rightharpoonup\Sigma^*$. Elementi od $\Sigma^*:=\bigcup_{k\in\N}\Sigma^k$ su konačni nizovi \emph{znakova} iz $\Sigma$, koje zovemo \emph{riječi} i pišemo jednostavno konkatenacijom: recimo, $\t{aab}$ umjesto $(\t{a},\t{a},\t{b})$. \emph{Prazna riječ} je niz duljine $0$: označavamo je s $\varepsilon$. Iz oblika jezičnih funkcija vidimo da su one jednomjesne: u svrhu reprezentacije funkcija veće mjesnosti, obično se abecedi dodaje \emph{separator}, znak koji služi razdvajanju argumenata. Recimo, višemjesne funkcije nad $\{\t{a},\t{b}\}$ možemo reprezentirati kao jednomjesne funkcije nad tročlanom abecedom $\{\t{a},\t{b},\t{,}\}$ --- tako da primjerice $\varphi^4(\t{a},\t{abb},\varepsilon,\t{ba})$ računamo kao $\dot\varphi^1(\t{a{},{}a{}b{}b{},{},{}b{}a})$. Kažemo da je $\dot\varphi$ dobivena \emph{kontrakcijom} iz $\varphi$.
 Primijetimo da je ovo generalnije od brojevnih višemjesnih funkcija jer možemo imati \emph{varargs} (mjesnost možemo zaključiti jednostavnim brojenjem separatora u ulaznoj ri\-je\-či), ali i dalje nemamo mogućnost prikazivanja nulmjesnih funkcija: $\dot\varphi(\varepsilon)$ je jednostavno $\varphi^1(\varepsilon)$, ne $\varphi^0()$. Sličan trik možemo primijeniti i kod brojevnih funkcija, nakon što definiramo kodiranje skupa $\N^*$.
@@ -609,9 +609,9 @@ Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$
 Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$ gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat\,*}$\!, koji ima istu semantiku što se efekata na registrima tiče.
 \end{napomena}
 
-\subsection{Primjeri makroa}
+%\subsection{Primjeri makroa}
 
-Jedan važan primjer smo već vidjeli: prisjetimo se, za svaki $j\in\N$,
+Evo primjera korištenja te tehnike. Prisjetimo se, za svaki $j\in\N$,
 \begin{equation}
 (\textsc{zero}\;\reg{j}):=\begin{prog}
 0.&\decr{j}{2}\\
@@ -698,19 +698,21 @@ Za makro-program $Q$, možemo prirodno definirati $m_Q:=m_{Q^\flat}$ --- iako na
 
 \begin{definicija}[{name=[funkcijski makro]}]\label{def:funmakro}
 Neka je $k\in\N_+$, $\f{f}^k\in\mathcal Comp_k$, te $P_{\f{f}}^k$ RAM-algoritam koji računa $\f{f}^k$. Neka su $m,j_0,j_1,\dotsc,j_k\in\N$. Definiramo
-\begin{equation}
-    b:=1+\max\,\{m_{P_{\f{f}}},m,k,j_0,j_1,\dotsc,j_k\}
-\end{equation}
-i pomoću njega \emph{funkcijski makro}
-\begin{multline}\label{mprog:funmakro}
-    \bigl(P_{\f{f}}(\reg{j_1},\reg{j_2},\dotsc,\reg{j_k})\to\reg{j_0}\textsc{ using }\reg{m}..\bigr):=\\:=\begin{prog}
+    %\begin{equation}
+    $b:=1+\max\,\{m_{P_{\f{f}}},m,k,j_0,j_1,\dotsc,j_k\}$
+    %\end{equation}
+te pomoću tog broja definiramo \emph{funkcijski makro}
+    \vspace{-5mm}
+\begin{equation*}%\label{mprog:funmakro}
+    \bigl(P_{\f{f}}(\reg{j_1},%\reg{j_2},
+    \dotsc,\reg{j_k})\to\reg{j_0}\textsc{ using }\reg{m}..\bigr):=\begin{prog}
     0.&\textsc{mmove}\;b\;\textsc{from}\;\reg0..\;\textsc{to}\;\reg{b}..\\
     1.&\textsc{args}\;\reg{b+j_1},\reg{b+j_2},\dotsc,\reg{b+j_k}\\
     2.&P_{\f{f}}^*\\
     3.&\remove{0}{b+j_0}\\
     4.&\textsc{mmove}\;b\;\textsc{from}\;\reg{b}..\;\textsc{to}\;\reg0..
-    \end{prog}^{\flat\;*}\text{.\qedhere}
-\end{multline}
+    \end{prog}^{\flat\;*}\text{\!\!\!\!.\!\!\!\!\qedhere}
+\end{equation*}
 \end{definicija}
 
 \begin{propozicija}[{name=[semantika funkcijskog makroa]}]\label{prop:semfmacro}
@@ -724,7 +726,7 @@ Semantika funkcijskog makroa, uz oznake iz definicije~\ref{def:funmakro}, te pok
 \begin{proof}
 Prvo primijetimo da su svi uvjeti na parametre korištenih makroa zadovoljeni: za prvu i zadnju instrukciju to je $\dulj{b-0}=\dulj{0-b}=b\ge b$, za prijenos argumenata je $b+j_t\ge b>k$, a za prijenos povratne vrijednosti je $b+j_0\ge b\ge 1>0$.
 
-Za tvrdnju~\ref{case:in}, pogledajmo redom efekte pojedinih makro-instrukcija iz~\eqref{mprog:funmakro}.
+Za tvrdnju~\ref{case:in}, pogledajmo redom efekte pojedinih makro-instrukcija iz definicije~\ref{def:funmakro}.
 
 Nakon prve instrukcije \textsc{mmove}, u prvih $b$ registara bit će nule, a u idućih $b$ registara bit će \emph{backup} starih vrijednosti prvih $b$ registara ($r_0,r_1,\dotsc,r_{b-1}$). Konkretno, za svaki $t\in[1..k]$, u $\reg{b+j_t}$ nalazit će se $r_{j_t}$.
 

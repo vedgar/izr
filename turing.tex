@@ -455,7 +455,7 @@ tada su funkcije $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ redom zadane 
 5& 2 & 5 & 5 & 0 & 0 & \multicolumn{1}{|c}{0} & \cdots\\ \cline{2-6}
 6& 0 & 0 & 0 & 0 & 0 & 0 & \cdots\\
 \vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots
-\end{array}\text,%\quad
+\end{array}\text,\;
 \begin{array}{r|ccccccc}
 %\f{newsymbol}
     &0&1&2&3&4&5&\cdots\\\hline
@@ -467,7 +467,7 @@ tada su funkcije $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ redom zadane 
 5& 0 & 1 & 2 & 1 & 2 & \multicolumn{1}{|c}{0} & \cdots\\ \cline{2-6}
 6& 0 & 0 & 0 & 0 & 0 & 0 & \cdots\\
 \vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots
-\end{array}\text,
+\end{array}\text,\;
 %\end{equation}
 %\begin{equation}
 %\label{eq:directiontable}
@@ -482,13 +482,13 @@ tada su funkcije $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ redom zadane 
 5& 2 & 0 & 0 & 2 & 2 & \multicolumn{1}{|c}{0} & \cdots\\ \cline{2-6}
 6& 0 & 0 & 0 & 0 & 0 & 0 & \cdots\\
 \vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots
-\end{array}\text.\qedhere
+\end{array}\text.\!\!\!\qedhere
 \end{equation*}
 \end{primjer}
 
 %\subsection{Kodiranje Turing-izračunavanja}
 
-Upravo dokazana lema je donekle analogna lemi~\ref{lm:NextRegCountprn}. Vrijeme je za analogon leme~\ref{lm:RegCountprn}. Za razliku od tih lema, koje su definirale \emph{uniformne} funkcije koje su primale RAM-program kao argument, ove će se odnositi na fiksni Turingov stroj $\mathcal T_0$ --- jer je tako lakše, a ne treba nam puna općenitost; sve što će nam kasnije trebati su \emph{neki} indeksi izračunljivih funkcija, a njih smo dobili s RAM-strojevima.
+Upravo dokazana lema donekle je analogna lemi~\ref{lm:NextRegCountprn}. Vrijeme je za analogon leme~\ref{lm:RegCountprn}. Za razliku od tih lema, koje su definirale \emph{uniformne} funkcije koje su primale RAM-program kao argument, ove će se odnositi na fiksni Turingov stroj $\mathcal T_0$ --- jer je tako lakše, a ne treba nam puna općenitost; sve što će nam kasnije trebati su \emph{neki} indeksi izračunljivih funkcija, a njih smo dobili s RAM-strojevima.
 
 \begin{lema}[{name=[primitivna rekurzivnost $\mathcal T_0$-izračunavanja]}]\label{lm:StateHeadTapeprn}
 %Postoje primitivno rekurzivne dvomjesne funkcije $\f{State}$, $\f{Position}$ i $\f{Tape}$, takve da za svaku riječ $w\in\Sigma_0^*$, za svaki $n\in\N$, njihove vrijednosti u $(\kr w,n)$ kodiraju stanje, poziciju i traku konfiguracije Turingovog stroja $\mathcal T_0$ nakon $n$ koraka izračunavanja s $w$.
@@ -1332,7 +1332,7 @@ Tada će početnu konfiguraciju $(q_0,0,w\bl\ldots)$ prvi fragment od $\mathcal 
 Ako pak $w\not\in\dom{\varphi_0}$, tada će se prve dvije faze izvršiti jednako, ali iz $x\not\in\dom{\N\varphi_0}$ slijedi da $P_0$-izračunavanje s $x$ nikad neće stati, pa po korolaru~\ref{kor:faza3} niti $\mathcal T_0$-izračunavanje neće doći do $s_n$. Prema napomeni~\ref{nap:snstane}, to znači da ono nikad neće stati (doći do $q_z$), jer jedini put od $q_0$ do $q_z$ vodi kroz stanje $s_n$.
 \end{proof}
 
-Primijetimo iznenađujuću sličnost upravo provedenog dokaza s dokazom propozicije~\ref{prop:semfmacro} (semantika funkcijskog makroa). Kao što smo tamo omogućili makro-stroju da u izoliranoj okolini izvrši neki konkretni RAM-program, tako smo to ovdje omogućili Turingovom stroju. Kao i tamo~\eqref{mprog:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (namještanje početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa), te ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije, i "zatvaranje okvira" (pospremanje nereda koji smo napravili).
+Primijetimo iznenađujuću sličnost upravo provedenog dokaza s dokazom propozicije~\ref{prop:semfmacro} (semantika funkcijskog makroa). Kao što smo tamo omogućili makro-stroju da u izoliranoj okolini izvrši neki konkretni RAM-program, tako smo to ovdje omogućili Turingovom stroju. Kao i u makro-programu iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (namještanje početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa), te ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije, i "zatvaranje okvira" (pospremanje nereda koji smo napravili).
 
 Prikažimo postupak Turing-iz\-ra\-ču\-na\-va\-nja kroz faze (sa $z$ je označen najveći broj u ikojem relevantnom registru od $\mathcal S_0$ u završnoj konfiguraciji $P_0$-izračunavanja s $\kr w$):
 \begin{equation}
