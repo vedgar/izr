@@ -1,7 +1,7 @@
 import itertools, collections, sys, pdb
 INC, DEC, GOTO = range(3)
 
-test = 3
+test = 1
 if test == 1:
     eSigma = 'abcde'
     P = [
@@ -13,7 +13,7 @@ if test == 1:
         (5, INC, 0),
         (6, GOTO, 0),
     ]
-    word = 'abab'
+    word = 'aaa'
 elif test == 2:
     eSigma = 'abcde'
     P = [
@@ -172,7 +172,7 @@ def show(q, pos, tape, steps):
     print(end=str(steps) + ':')
     for i in range(2 + max(tape, default=0)):
         if i == pos: print(end=q.join('(>'))
-        print(end=tape[i].join('[]'))
+        print(end='_' if tape[i] == space else tape[i].join('[]'))
     if tape[max(tape, default=0)] == space:
         del tape[max(tape)]
     print('...')
@@ -193,5 +193,5 @@ def simulate(tape):
         show(q, pos, tape, steps)
         print(repr(exc), file=sys.stderr)
 
-simulate('8')
+simulate(word)
 # 1:81,2:237,3:591,4:1320,5:2568,6:4594,7:7686,8:12180
