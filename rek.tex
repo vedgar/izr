@@ -1,6 +1,6 @@
 \chapter{Rekurzivne funkcije}
 
-Iz uglavnom povijesnih razloga, prvi doticaj s programiranjem za većinu ljudi bude kroz \emph{imperativno} programiranje: algoritmi kao \emph{programi}, nizovi \emph{naredaba} koje mijenjaju stanje neke zajedničke \emph{memorije} nad kojom se izvršavaju. Velik broj \emph{mainstream} programskih jezika spada u tu paradigmu: gotovo svi jezici niske razine, C, C\texttt{++}, Python, Rust,~\ldots\ (Java preko tog imperativnog sloja prostire "objektno-orijentirani veo", ali fundamentalno, provođenje algoritma je i dalje izvršavanje naredaba i mijenjanje memorije). Kontrola toka (izvršavanje određenih naredbi nula ili više puta, što može ovisiti o stanju memorije) se u takvim jezicima obično iskazuje \emph{skokovima} (uvjetnim ili bezuvjetnim, kao što su \dec\ ili \goto\ u RAM-stroju), ili na višoj razini, \emph{petljama} koje mijenjaju \emph{kontrolnu varijablu} i testiraju je da bi ustanovile trebaju li se nastaviti izvršavati, ili zaustaviti.
+Iz uglavnom povijesnih razloga, prvi doticaj s programiranjem za većinu ljudi bude kroz \emph{imperativno} programiranje: algoritmi kao \emph{programi}, nizovi \emph{naredaba} koje mijenjaju stanje neke zajedničke \emph{memorije} nad kojom se izvršavaju. Velik broj \emph{mainstream} programskih jezika spada u tu paradigmu: gotovo svi jezici niske razine, C, C\texttt{++}, Python, Rust,~\ldots\ (Java preko tog imperativnog sloja prostire "objektno-orijentirani veo", ali fundamentalno, provođenje algoritma je i dalje izvršavanje naredaba i mijenjanje memorije). Kontrola toka (izvršavanje određenih naredbi nula ili više puta, što može ovisiti o stanju memorije) se u takvim jezicima obično ostvaruje \emph{skokovima} (uvjetnim ili bezuvjetnim, kao što su \dec\ ili \goto\ u RAM-stroju), ili na višoj razini, \emph{petljama} koje mijenjaju \emph{kontrolnu varijablu} i testiraju je da bi ustanovile trebaju li se nastaviti izvršavati, ili zaustaviti.
 
 Ipak, postoji i drugi pristup: matematičke formule kojima se definiraju funkcije često mogu poslužiti kao vrsta algoritama za njihovo računanje. Važno je primijetiti da se u tom slučaju nikakve vrijednosti ne mijenjaju: $\f f(x,y):=x^2+3y+2$ nije naredba koja mijenja $x$ niti $y$, već matematička definicija, koja kazuje kako izračunati vrijednosti funkcije $\f f$, recimo na prirodnim brojevima, ako ih znamo potencirati, množiti i zbrajati.
 
@@ -66,6 +66,7 @@ Drugi tehnički detalj je suptilniji, i tiče se domene tako definirane kompozic
 %\subsection{Lijena i marljiva evaluacija}
 
 Ta dilema je dobro poznata u modernom računarstvu, i oba pristupa nalazimo u današnjim programskim jezicima. Prvi pristup zove se \emph{lijena} evaluacija (\emph{lazy evaluation}) i koriste ga neki čisto funkcijski jezici poput Haskella. Prednost je bogatija semantika (više izraza ima smisla), te činjenica da beskonačne strukture nisu nužno problem ako nam treba samo njihov konačni početak. Pogledajmo kako to izgleda u Haskellu:
+\begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
     Prelude> let i12(x, y) = x
     Prelude|     z(x) = 0
@@ -74,7 +75,10 @@ Ta dilema je dobro poznata u modernom računarstvu, i oba pristupa nalazimo u da
     Prelude| in f(5)
     0
 \end{verbatim}
+\end{minipage}\end{equation}
+
 Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i prisutan je u gotovo svim imperativnim jezicima, pa i mnogim funkcijskima (kao što je ML). Prednost je lakša implementacija, i lakše razmišljanje o kodu (a time i lakši \emph{debugging}).
+\begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
     >>> def i12(x, y): return x
     >>> def z(x): return 0
@@ -85,6 +89,7 @@ Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i pri
     ^C
     KeyboardInterrupt
 \end{verbatim}
+\end{minipage}\end{equation}
 
 Važno je napomenuti da, kao i inače kad je riječ o implementaciji algoritama (princip opće izračunljivosti), bilo koji od tih pristupa može \emph{simulirati} onaj drugi. S obzirom na to da nas performanse ne zanimaju, odabrat ćemo \textbf{marljivu} evaluaciju jer je jednostavnija za implementaciju (u našem slučaju, jednostavnija za dokaz ekvivalentnosti s RAM-izračunljivošću, odnosno za konstrukciju kompajlera u RAM-programe), a poslije ćemo opisati kako simulirati lijenu evaluaciju kad nam bude trebala. Jedno od mjesta gdje će nam svakako trebati je implementacija grananja gdje nisu sve grane totalne, poput onog što radi operator \texttt{?:}\ u programskom jeziku C; recimo, \texttt{1?z(5):prazna(5)} ima vrijednost $0$. U našoj terminologiji, to će biti funkcija definirana po slučajevima iz parcijalno rekurzivnih funkcija. U početku ćemo se baviti samo totalnim (primitivno rekurzivnim i rekurzivnim) funkcijama, pa nam to neće trebati --- no dobro je odmah pravilno formalizirati domenu kompozicije, da ne bismo morali poslije mijenjati definiciju.
 
@@ -108,7 +113,7 @@ U skladu s napomenom~\ref{nap:parcdef}, izraze~\eqref{eq:domkomp} i~\eqref{eq:de
 \end{equation}
 gdje podrazumijevamo da izraz s ugniježđenim funkcijskim pozivima $f(\vec v^{\,k})$ ima smisla ako (rekurzivno) svaki $v_i$ ima smisla, te je $k$-torka njihovih vrijednosti element od $\dom{f}$.
 
-Dakle, kod komponiranja općenitih parcijalnih funkcija moramo voditi računa o domeni, ali dobro je vidjeti da kompozicija sama po sebi ne može narušiti totalnost.
+Dakle, kod komponiranja općenitih parcijalnih funkcija moramo voditi računa o domeni, ali dobro je znati da kompozicija sama po sebi ne može narušiti totalnost.
 
 \begin{propozicija}[{name=[totalnost kompozicije totalnih funkcija]}]\label{prop:comptot}
 Svaka kompozicija totalnih funkcija je totalna.
@@ -119,6 +124,13 @@ Neka su $k,l\in\N_+$, te neka su $G_1^k,G_2^k,\dotsc,G_l^k,H^l$ totalne funkcije
     \dom{H\circ(G_1,\dots,G_l)}=\left\{\,\vec x\in\N^k\;\middle|\;\bigl(G_1(\vec x),\dotsc,G_l(\vec x)\bigr)\in\N^l\,\right\}=\N^k\text,
 \end{equation}
 pa je $H\circ(G_1,\dotsc,G_l)$ totalna.
+\end{proof}
+
+\begin{korolar}[{name=[kompozicija s totalnom funkcijom slijeva ne mijenja domenu]}]\label{kor:comptot}
+    Ako je $H^1$ totalna funkcija, i $G$ brojevna funkcija, tada je $\dom{H\circ G}=\dom G$.
+\end{korolar}
+\begin{proof}
+    Direktno iz~\eqref{eq:domkomp} (za $l=1$) je $\dom{H\circ G}=\{\vec x\in\dom{G}\mid G(\vec x)\in\dom H=\N\}=\dom G$.
 \end{proof}
 
 \begin{primjer}[{name=[prikaz konstante kao kompozicije inicijalnih funkcija]}]\label{pr:C23}
@@ -204,7 +216,7 @@ Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na primitivnu rekurzi
 Iz Dedekindovog teorema rekurzije~\cite{skr:VukTS} slijedi da je jednadžbama~\eqref{eq:defprb} i~\eqref{eq:defprk} zadana jedinstvena totalna funkcija. Također, primitivna rekurzija je \emph{definirana} samo za totalne funkcije, pa ne moramo pričati o domenama od $G$, $H$ i $G\pr H$.
 \end{napomena}
 
-Primijetimo jedan tehnički problem: budući da ne promatramo brojevne funkcije s nula ulaznih podataka, funkcija $G$ koja zadaje početni uvjet mora biti barem jednomjesna, a onda funkcija $F$ dobivena primitivnom rekurzijom mora biti bar dvomjesna. Naravno, htjeli bismo i jednomjesne funkcije definirati primitivnom rekurzijom: kanonski primjer je vjerojatno faktorijel,
+Primijetimo jedan tehnički problem: budući da ne promatramo brojevne funkcije s nula ulaznih podataka, funkcija $G$ koja zadaje početni uvjet mora biti barem jednomjesna, a onda funkcija $F$ dobivena primitivnom rekurzijom mora biti barem dvomjesna. Naravno, htjeli bismo i jednomjesne funkcije definirati primitivnom rekurzijom: kanonski primjer je vjerojatno faktorijel,
 \begin{align}
 %\SwapAboveDisplaySkip
 \label{eq:faktb}
@@ -425,7 +437,7 @@ Za $x,y\in\N$, označimo $x\ominus y:=\max\,\{x-y,0\}$. Lako se vidi da je
     x\ominus0&=x\text,\\
     x\ominus(y+1)&=\f{pd}(x\ominus y)\text,
 \end{align}
-što znači da je \emph{ograničeno oduzimanje} dobiveno primitivnom rekurzijom iz funkcija $\f I_1^1$ i $\f{pd}\circ\f I_3^3$, pa je primitivno rekurzivna operacija. "Operacija" nam jednostavno znači dvomjesnu totalnu brojevnu funkciju, koja se piše infiksno između operanada. Kao funkciju, ograničeno oduzimanje zovemo $\f{sub}$. Dakle, $\f{sub}^2=\f I_1^1\pr\f{pd}\circ\f I_3^3$. Još jedan način dolaska do te simboličke definicije je da jednostavno uzmemo simboličku definiciju za $\f{add}^2$ (primjer~\ref{pr:addmulpow}), i zamijenimo u njoj $\f{Sc}$ sa $\f{pd}$.
+što znači da je \emph{ograničeno oduzimanje} dobiveno primitivnom rekurzijom iz funkcija $\f I_1^1$ i $\f{pd}\circ\f I_3^3$, pa je ono primitivno rekurzivna operacija. "Operacija" nam jednostavno znači dvomjesnu totalnu brojevnu funkciju, koja se piše infiksno između operanada. Kao funkciju, ograničeno oduzimanje zovemo $\f{sub}$. Dakle, $\f{sub}^2=\f I_1^1\pr\f{pd}\circ\f I_3^3$. Još jedan način dolaska do te simboličke definicije je da jednostavno uzmemo simboličku definiciju za $\f{add}^2$ (primjer~\ref{pr:addmulpow}), i zamijenimo u njoj $\f{Sc}$ sa $\f{pd}$.
 \end{primjer}
 
 Pored računskih operacija (dijeljenje s ostatkom definirat ćemo kasnije, kad uvedemo još neke tehnike), brojeve možemo i \emph{uspoređivati}, raznim dvomjesnim relacijama  kao što su $<$, $\ge$ ili $\eq$. Rekli smo da izračunljivost relacija promatramo kroz izračunljivost njihovih karakterističnih funkcija.
@@ -444,7 +456,7 @@ Lako se vidi da je $x>y$ ako i samo ako je $x\ominus y$ pozitivan, iz čega je $
 
 Primitivno rekurzivne funkcije su korisne i pogodne za rad, ali njihova totalnost je na neki način i nedostatak. Recimo, u funkcijskoj paradigmi još uvijek nismo dobili izračunljivost prazne funkcije $\varnothing^1$, koja je bila gotovo trivijalna u RAM-paradigmi. Da bismo dobili i parcijalne (ne-totalne) funkcije, moramo uvesti novi operator, pored $\circ$ i $\pr$. Taj operator --- \emph{minimizacija} --- djelovat će na \emph{relacijama}, odnosno njihovim karakterističnim funkcijama, i tražit će najmanji prirodni broj koji zadovoljava neko svojstvo. Intuitivno, odgovarat će \emph{neograničenim} petljama --- nešto poput \texttt{while}-petlji u Pythonu, samo s negiranim uvjetom --- koje se ne izvršavaju određen broj puta, nego dok se ne ispuni neki uvjet.
 
-Općenite neograničene petlje su raznolike i između provjeravanja uvjeta mogu na razne načine mijenjati stanje, ali kao i za primitivnu rekurziju, aksiomatski ćemo pretpostaviti samo izračunljivost jednostavnih petlji oblika
+Općenite neograničene petlje su raznolike i između provjeravanja uvjeta mogu na razne načine mijenjati stanje memorije, ali kao i za primitivnu rekurziju, aksiomatski ćemo pretpostaviti samo izračunljivost jednostavnih petlji oblika
 \texttt{for(y=0; !R(y); ++y);}.
 Kasnije ćemo vidjeti da u tom modelu možemo pisati i općenite beskonačne petlje.
 
@@ -519,7 +531,7 @@ Naravno, ideja nije ništa revolucionarno: kao "kontrolnu varijablu" koristimo u
 
 Ili prije? Ovdje imamo mali tehnički problem: htjeli bismo da provjera bude na samom dnu programa, jer tako najbolje odgovara semantici negiranog uvjeta. Terminologijom jezika Pascal, implementiramo \texttt{until}-petlju, ne \texttt{while}-petlju. Iz sličnog razloga kao naši strojevi, Pascal je \texttt{while}-uvjet provjeravao na vrhu, a \texttt{until}-uvjet na dnu petlje. Semantika samog skoka je ista: ako je uvjet istinit, nastavljamo dalje (ulazimo u \texttt{while}-petlju, ili izlazimo iz \texttt{until}-petlje), a ako je lažan, skačemo na drugi kraj petlje (izlazimo iz \texttt{while}-petlje, ili ponovo izvršavamo \texttt{until}-petlju) --- što je baš semantika instrukcije tipa $\dec$.
 
-Ali \texttt{until}-petlje imaju jedan veliki nedostatak: uvijek se izvrše bar jednom (kao \texttt{do...while}-petlja u jeziku C). Kako se u petlji mora nalaziti instrukcija $\incr0$, čini se da nikako ne možemo postići da $\reg0$ na kraju bude $0$, što je svakako problem: recimo za univerzalnu relaciju, $\mu y\,\N^{k+1}(\vec x,y)=0$.
+Ali \texttt{until}-petlje imaju jedan veliki nedostatak: uvijek se izvrše barem jednom (kao \texttt{do...while}-petlja u jeziku C). Kako se u petlji mora nalaziti instrukcija $\incr0$, čini se da nikako ne možemo postići da $\reg0$ na kraju bude $0$, što je svakako problem: recimo za univerzalnu relaciju, $\mu y\,\N^{k+1}(\vec x,y)=0$.
 
 Rješenje problema se nalazi na drugom kraju, odnosno početku programa: program možemo početi izvršavati iz sredine! Odnosno preciznije, na sam početak programa možemo staviti instrukciju ($0.\,\goto\;2$), da preskočimo instrukciju ($1.\,\incr0$) kod prvog prolaza.
 
@@ -585,7 +597,7 @@ Po svojstvu najmanjeg skupa za parcijalno rekurzivne funkcije. Skup $\mathcal Co
 
 Upravo napisani dokaz je zapravo sasvim konstruktivan: ako imamo zadanu parcijalno rekurzivnu funkciju ili relaciju, tada možemo napisati njenu simboličku definiciju u obliku stabla. Listovi tog stabla su inicijalne funkcije, a čvorovi mu predstavljaju funkcije dobivene kompozicijom, primitivnom rekurzijom ili minimizacijom iz čvorova ispod, odnosno relacije čije su karakteristične funkcije dobivene na isti način. U korijenu stabla je funkcija ili relacija koju tražimo.
 
-Sada \emph{postorder} obilaskom tog stabla možemo konstruirati preslikavanje (apstraktni tip podataka \texttt{Mapping}) $compile$ koje svaku od tih funkcija odnosno relacija preslikava u RAM-program koji je računa. Kad obilazimo list $L$, koristimo dokaz propozicije~\ref{prop:initmacro} da bismo pogledali koji makro-program $Q_L$ računa $L$, te definiramo $compile[L]:=Q_L^{\,\flat}$. Ako se nalazimo na unutarnjem čvoru $N$, ovisno o tome kako je dobiven iz svoje djece koristimo dokaz leme~\ref{lm:compram},~\ref{lm:prram} ili~\ref{lm:muram} da utvrdimo koji oblik makro-programa ---~\eqref{eq:compmacro},~\eqref{eq:prmacro} ili~\eqref{eq:mumacro} --- računa $N$, te u taj predložak (\emph{template}) uvrstimo funkcijske makroe koji na odgovarajućem mjestu pozivaju $compile[D_i]$, gdje su $D_i$ djeca čvora $N$. (Zbog \emph{postorder} obilaska, $D_i$ su već kompajlirani.) Na taj način dobijemo makro-program $Q_N$, te definiramo $compile[N]:=Q_N^{\,\flat}$. Na kraju \emph{postorder} obilaska nalazi se korijen $K$, i $compile[K]$ će biti RAM-program koji računa parcijalno rekurzivnu funkciju (ili relaciju) zadanu simboličkom definicijom.
+Sada \emph{postorder}-obilaskom tog stabla možemo konstruirati preslikavanje (apstraktni tip podataka \texttt{Mapping}) $compile$ koje svaku od tih funkcija odnosno relacija preslikava u RAM-program koji je računa. Kad obilazimo list $L$, koristimo dokaz propozicije~\ref{prop:initmacro} da bismo pogledali koji makro-program $Q_L$ računa $L$, te definiramo $compile[L]:=Q_L^{\,\flat}$. Ako se nalazimo na unutarnjem čvoru $N$, ovisno o tome kako je dobiven iz svoje djece koristimo dokaz leme~\ref{lm:compram},~\ref{lm:prram} ili~\ref{lm:muram} da utvrdimo koji oblik makro-programa ---~\eqref{eq:compmacro},~\eqref{eq:prmacro} ili~\eqref{eq:mumacro} --- računa $N$, te u taj predložak (\emph{template}) uvrstimo funkcijske makroe koji na odgovarajućem mjestu pozivaju $compile[D_i]$, gdje su $D_i$ djeca čvora $N$. (Zbog \emph{postorder} obilaska, $D_i$ su već kompajlirani.) Na taj način dobijemo makro-program $Q_N$, te definiramo $compile[N]:=Q_N^{\,\flat}$. Na kraju \emph{postorder} obilaska nalazi se korijen $K$, i $compile[K]$ će biti RAM-program koji računa parcijalno rekurzivnu funkciju (ili relaciju) zadanu simboličkom definicijom.
 
 Za obrat teorema~\ref{tm:pir} morat ćemo se više namučiti. To je tema poglavlja~\ref{ch:univ}.
 
@@ -737,7 +749,7 @@ Neka su $k,l\in\N_+$, te $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ (primitivno)
 Za presjek, koristimo istu tehniku kao u dokazu propozicije~\ref{prop:vezn} za $\f Q_1$, samo umjesto funkcije $\f f_1=\f{mul}^2$ koristimo $\f{mul}^l$. Konkretno, tvrdimo da je \begin{equation}
     \chi_{\bigcap_{i=1}^l\!\f R_i}=\chi_{\f R_1}\cdot\chi_{\f R_2}\dotsm\chi_{\f R_l}=\f{mul}^l\circ(\chi_{\f R_1},\chi_{\f R_2},\dotsc,\chi_{\f R_l})
 \end{equation}
---- doista, ako je $\vec x$ u presjeku, imamo jednakost $1=1\cdot1\dotsm1$, a ako nije, tada po De Morganovom pravilu nije u nekoj $\f{R}_i$, pa na lijevoj strani stoji $0$, a na desnoj je umnožak u kojem je bar jedan faktor jednak $0$, te jednakost vrijedi.
+--- doista, ako je $\vec x$ u presjeku, imamo jednakost $1=1\cdot1\dotsm1$, a ako nije, tada po De Morganovom pravilu nije u nekoj $\f{R}_i$, pa na lijevoj strani stoji $0$, a na desnoj je umnožak u kojem je barem jedan faktor jednak $0$, te jednakost vrijedi.
 
 Za uniju, možemo opet iskoristiti De Morganovo pravilo i propoziciju~\ref{prop:kompl}, ali možemo i upotrijebiti drugačiju tehniku, koja će nam biti korisna kasnije. Naime, u našem skupu nema negativnih brojeva, te je zbroj $0$ jedino ako su svi pribrojnici $0$ --- odnosno, zbroj je pozitivan ako i samo ako je neki pribrojnik pozitivan. To znači da ako u širem smislu shvatimo sve pozitivne prirodne brojeve (a ne samo broj $1$) kao istinite, $l$-struka unija jednostavno odgovara funkciji $\f{add}^l$ --- odnosno preciznije, $\chi_{\N_+}\!\circ\f{add}^l$, jer želimo sve pozitivne brojeve preslikati natrag u $1$. Dakle,
 \begin{equation}

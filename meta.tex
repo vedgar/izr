@@ -24,8 +24,7 @@ U literaturi se za specijalizaciju još koristi naziv \emph{parcijalna evaluacij
 Ono što je sasvim nesporno, i lako dokazati (i već smo to dokazali u svim specijalnim slučajevima navedenima na početku ove točke), je da specijalizacija čuva izračunljivost. Zbog teorema ekvivalencije, svejedno je u kom obliku konkretiziramo tu izračunljivost, a dokaz je najlakši za parcijalnu rekurzivnost.
 
 \begin{propozicija}[{name=[specijalizacija čuva parcijalnu rekurzivnost]}]
-    Neka su $k\in\N_+$, $y\in\N$, te $\f f^{k+1}$ parcijalno rekurzivna funkcija.
-
+    Neka su $k\in\N_+$, $y\in\N$, te $\f f^{k+1}$ parcijalno rekurzivna funkcija.\newline
     Tada je i funkcija $\f g^k=spec(y,\f f)$, zadana s
 %\begin{equation}
     $\f g(\vec x)\simeq\f f(\vec x,y)$,
@@ -108,7 +107,7 @@ Koristeći komponente $\f{dest}$ i $\f{regn}$, te tipove instrukcija (leme~\ref{
 \end{equation}
 Još treba vidjeti da $k$-mjesna funkcija s tim indeksom zadovoljava jednadžbu~\eqref{eq:Sfunceq}, no to je lako rastavljanjem na korake: gornja razina makro programa~\eqref{eq:makroprogS} je sasvim sekvencijalna. Dakle, za svaki $\vec x\in\N^k$ imamo
 \begin{equation}
-    \begin{array}{r@{\;}l|ccccccc}
+    \begin{array}{r@{\;}l|cr@{,\dotsc,\,}lcc}
 %\SwapAboveDisplaySkip
     & & \reg0 & \reg1 & \reg k & \reg{k+1} & \reg{k+2}.. \\
     & & 0 & x_1 & x_k & 0 & 0 \\\hline
@@ -162,12 +161,12 @@ $\kf{e_2}(x,y,z,t)\simeq\kf{e_1}(x,y,z,t,2,8,5)$.
 
 Sada možemo i vidjeti da je $\N compose$, barem za fiksne mjesnosti $k$ i $l$, primitivno rekurzivna. Tehnika koju ćemo pritom koristiti može se općenito primijeniti na razne funkcije definirane na funkcijama, koje su kodirane preko njihovih indeksa.
 
-Primijetimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja) niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Sve što nas zanima je da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_1^2$ koja uzima $g$ i $h$, te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} ako ste zaboravili na što se tu misli.
+Primijetimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja) niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Sve što nas zanima je da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_1^2$ koja prima $g$ i $h$, te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} ako ste zaboravili na što se tu misli.
 
 Ugrubo, \emph{kompajlirati} kompoziciju dvije funkcije koje već imamo kompajlirane, je daleko "pitomije" nego \emph{izvršiti} (evaluirati) tu kompoziciju. Konkretno, izvršavanje ne mora stati, ako te funkcije nisu totalne. Sâmo kompajliranje kompozicije, s druge strane, mora stati --- i to u unaprijed specificiranom broju koraka.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost komponiranja]}]\label{pp:composeprn}
-    Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f{compose}_k^{l+1}$, takva da za sve $g_1,g_2,\dotsc,g_l,h\in\N$ vrijedi
+    Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f{compose}_k^{l+1}$\!, takva da za sve $g_1,g_2,\dotsc,g_l,h\in\N$ vrijedi
     \begin{equation}
         \kf{\f{compose}_k(g_1,\dotsc,g_l,h)}^k=\kf h^l\circ(\kf{g_1}^k,\dotsc,\kf{g_l}^k)\text.
     \end{equation}
@@ -258,23 +257,27 @@ Za $\f{compose}$ smo uzeli parcijalnu jednakost~\eqref{eq:defkomp}, i zapisali j
         \f{comp}_{k+2}\bigl(\vec x,\f{pd}(y),\f{comp}_{k+1}\bigl(\vec x,\f{pd}(y),f\bigr),h\bigr),&\text{inače}
     \end{cases}\text,
 \end{equation}
-i sad bismo mogli upotrijebiti teorem~\ref{tm:gprek}, da nije jednog malog problema: jednadžba~\eqref{eq:defprk} ima traženu funkciju i s lijeve i s desne strane. Ovaj $f$ koji se nalazi u grani "inače", to je upravo onaj $primRecurse_k(g,h)$ kojeg želimo odrediti. Dakle, nemamo ga još, pa ga ne možemo koristiti u definiciji od $F_k$.
+i sad bismo mogli upotrijebiti teorem~\ref{tm:gprek}, da nije jednog malog problema: jednadžba~\eqref{eq:defprk} ima traženu funkciju i s lijeve i s desne strane. Ovaj $f$ koji se nalazi u grani "inače", to je upravo $primRecurse_k(g,h)$ koji želimo odrediti. Dakle, nemamo ga još, pa ga ne možemo koristiti u definiciji od $F_k$.
 
-Ili možemo? Sjetimo se napomene~\ref{nap:blokovi} --- ovaj $f$ je upravo "implicitna varijabla" kakve smo rekli da trebamo prenijeti kao argumente. Dakle, na lijevoj strani~\eqref{eq:primRecursegr} zapravo imamo $F_k(\vec x,y,g,h,f)$ --- i po teoremu~\ref{tm:gprek} to je parcijalno rekurzivna funkcija, te ima indeks~\ldots\ i tako dalje. No sad bismo u $F_k^{k+4}$ trebali fiksirati $f$, a to ne znamo kako učiniti jer još uvijek ne znamo koju vrijednost staviti za $f$.
+Ili možemo? Sjetimo se napomene~\ref{nap:blokovi} --- $f$ je upravo "implicitna varijabla" kakve smo rekli da trebamo prenijeti kao argumente. Dakle, na lijevoj strani~\eqref{eq:primRecursegr} zapravo imamo $F_k(\vec x,y,g,h,f)$ --- i po teoremu~\ref{tm:gprek} to je parcijalno rekurzivna funkcija, te ima indeks~\ldots\ i tako dalje. No sad bismo u $F_k^{k+4}$ trebali fiksirati $f$, a to ne znamo kako učiniti jer još uvijek ne znamo koju vrijednost staviti za $f$.
 
-Kad bismo samo znali odrediti $f$, dalje bi bilo lako: $g$ i $h$ bismo specijalizirali na isti način kao kod komponiranja. Primijetimo svakako da $f$ ne možemo odrediti jednoznačno, jer naprosto nije jedinstven: $\f G\pr\f H$, kao i bilo koja izračunljiva funkcija, ima beskonačno mnogo indeksa --- a svi oni mogu poslužiti kao $f$. No ono što nam može biti bitno, je da \emph{funkcija} $\kf f^{k+1}=\kf g^k\pr\kf h^{k+2}$ bude jednoznačno određena.
+Kad bismo samo znali odrediti $f$, dalje bi bilo lako: $g$ i $h$ bismo specijalizirali na isti način kao kod komponiranja. Primijetimo da sigurno $f$ ne možemo odrediti jednoznačno, jer naprosto nije jedinstven: $\f G\pr\f H$, kao i bilo koja izračunljiva funkcija, ima beskonačno mnogo indeksa --- a svi oni mogu poslužiti kao $f$. No ono što nam može biti bitno je da \emph{funkcija} $\kf f^{k+1}=\kf g^k\pr\kf h^{k+2}$ bude jednoznačno određena.
 
 Zanemarujući $g$ i $h$ (jer njih znamo specijalizirati) i "utapajući" $y$ među $\vec x$, te zovući tako dobivenu funkciju $G_k$, vidimo da je općenit oblik naše jednadžbe koju želimo riješiti $\kf f(\vec x)\simeq G_k(\vec x,f)$. Takve \emph{opće rekurzije} tema su iduće točke.
 
 \section{Opće rekurzije}
 
 Vidjeli smo da se u metaprogramiranju, a ponekad i u običnom programiranju, pojavljuje potreba za funkcijama čija simbolička definicija koristi njih same. Recimo, definicija funkcije $\f{factorial}$ koju bismo mogli napisati u programskom jeziku C (zanemarujući iz didaktičkih razloga da za faktorijel postoje jednostavnije implementacije i u jeziku C i u jeziku primitivno rekurzivnih funkcija --- primjer~\ref{pr:factorialprn}),
+\begin{equation}
+    \begin{minipage}{0.8\textwidth}
 \begin{verbatim}
                 unsigned factorial(unsigned n){
                     if(n) return n*factorial(n-1);
                     else return 1;
                 }
 \end{verbatim}
+\end{minipage}
+\end{equation}
 može se točkovno zapisati kao
 \begin{equation}\label{eq:factorialrek}
     \f{factorial}(n)=\begin{cases}
@@ -287,6 +290,7 @@ ili simbolički, kao $\f{factorial}=\{\N_+\colon\f{mul}^2\circ(\f I_1^1,\f{facto
 Kao \emph{definicija} taj izraz nema smisla, jer je cirkularan --- ali može poslužiti kao funkcijska \emph{jednadžba} koju trebamo riješiti po "nepoznanici" $\f{factorial}$. Osnovna prednost definicija pred jednadžbama sastoji se u tome da (dobra) definicija uvijek jednoznačno određuje definirani objekt, dok jednadžba može nemati rješenja, ili ih može imati više.
 
 Još jedan detalj treba razmotriti: u~\eqref{eq:factorialrek} smo koristili znak jednakosti jer otprije znamo da je faktorijel totalna funkcija --- ali opće rekurzije koje koriste samo totalne funkcije mogu kao rješenja imati parcijalne funkcije koje nisu totalne. Recimo,
+\begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
                 unsigned h(unsigned n){
                     if(n==0) return 0;
@@ -294,6 +298,7 @@ Još jedan detalj treba razmotriti: u~\eqref{eq:factorialrek} smo koristili znak
                     else return h(n-2)+1;
                 }
 \end{verbatim}
+\end{minipage}\end{equation}
 --- ovakva $\f h$ je definirana samo na parnim  brojevima, i svaki preslikava u njegovu polovinu (usporedite s jezičnom funkcijom $\varphi_h$ iz primjera~\ref{pr:pola}). Ovdje smo za $n=1$ koristili kompoziciju sa sljedbenikom da forsiramo parcijalnost (kao kod Russellove funkcije), ali i da nismo napisali taj \texttt{+1} u slučaju $n=1$, C bi svejedno računao istu parcijalnu funkciju. Ipak, odgovarajuća točkovna funkcijska jednadžba
 \begin{equation}\label{eq:halfmany}
     \f h(n)\simeq\begin{cases}
@@ -355,7 +360,8 @@ Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odn
 Recimo, u slučaju funkcije \texttt{factorial}, kompajler se brine da poziv te funkcije u njenom kodu doista pozove nju samu (sa za jedan manjim argumentom), ali da kojim slučajem kompajler ne podržava rekurziju, mogli bismo (pokazivač na) funkciju \texttt{factorial} prenijeti u samu sebe kao dodatni parametar.
 
 Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} funkciju \texttt{factorial} koju ćemo poslati kao argument, ali zasad pričamo samo o specifikaciji.
-
+\begin{equation}
+    \begin{minipage}{0.8\textwidth}
 \begin{verbatim}
             typedef unsigned funkcija(unsigned n);
             unsigned G(unsigned n, funkcija f){
@@ -367,6 +373,8 @@ Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} 
                 return G(5, factorial);
             } /* vrati 120 */
 \end{verbatim}
+    \end{minipage}
+\end{equation}
 
 Matematički, "pokazivač na funkciju" nije ništa drugo nego njen indeks, što motivira sljedeću definiciju.
 
@@ -398,20 +406,21 @@ C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{
 Ovdje treba znati neke tehničke pojedinosti o kompajliranju jezika C. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
 
 Možemo li to iskoristiti da bismo eksplicitno napisali taj poziv u kodu, i izbjegli \emph{warning}? Da, jer C nam dopušta da ne specificiramo tipove parametara funkcije.
-
+\begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
-       typedef unsigned funkcija(); /* prima bilo što, vraća unsigned */
+       typedef unsigned funkcija(/* bilo što */);
        unsigned G(unsigned n, funkcija f){
            if(n) return n * f(n-1, f);
            else return 1;
        }
        int main(void){
            return G(5, G);
-       } /* vrati 120 bez warninga, barem na nekim kompajlerima */
+       } /* vrati 120 bez warninga */
 \end{verbatim}
+\end{minipage}\end{equation}
 
 Ali ako već želimo tako zaobilaziti statičke tipove, puno je jednostavnije prebaciti se na dinamički tipiziran jezik. U Pythonu, stvari rade točno kako smo zamislili.
-
+\begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
             >>> def H(n, f):
             ...     if n: return n * f(n-1, f)
@@ -419,9 +428,10 @@ Ali ako već želimo tako zaobilaziti statičke tipove, puno je jednostavnije pr
             >>> H(7, H)
             5040
 \end{verbatim}
+\end{minipage}\end{equation}
 
 Refaktorirajmo ovu duplikaciju koda za dijagonaliziranje, u definiciji i pozivu \texttt H:
-
+\begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
             >>> def d(H):
             ...     def dH(x):
@@ -434,13 +444,16 @@ Refaktorirajmo ovu duplikaciju koda za dijagonaliziranje, u definiciji i pozivu 
             >>> factorial(7)
             5040
 \end{verbatim}
+\end{minipage}\end{equation}
 Dobra strana toga je da više ne moramo ručno proizvoditi funkciju \texttt H iz funkcije \texttt G. Prethodno smo to napravili tako što smo, tamo gdje je \texttt G pozivala \texttt f, u funkciji \texttt H pozvali $d\texttt f$. Sad to možemo formalizirati, tako da definicija od \texttt H pozove \texttt G s $d\texttt f$ automatski.
+\begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
             >>> def G(n, f):
             ...     if n: return n * f(n-1)
             ...     else: return 1
             >>> def H(x, f): return G(x, d(f))
 \end{verbatim}
+\end{minipage}\end{equation}
 
 I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćemo da nigdje nismo koristili rekurzivne pozive. Sad samo sve to treba napisati matematički.
 

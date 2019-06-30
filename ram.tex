@@ -738,7 +738,7 @@ Nakon toga izvršavanje funkcijskog makroa prijeći će na instrukciju \textsc{r
 
 Naime, zadnja instrukcija \textsc{mmove} će čitav taj blok prepisati \emph{backup}-blokom, te će se svih $b$ prvih registara vratiti na originalne vrijednosti (konkretno, zanimat će nas da se sačuva prvih $m<b$ registara), osim što će u $\reg{j_0}$ pisati vraćena vrijednost iz $\reg{b+j_0}$, dakle $\f f(\vec r)$. \emph{Backup}-blok (registri od $\reg{b}$ do $\reg{2b-1}$) će time biti resetiran. Tablično to možemo prikazati otprilike ovako:
 \begin{equation}\label{eq:funmakrotab}
-    \begin{array}{r@{\;}l|cccc|ccc|}
+    \begin{array}{r@{\;}l|cr@{,\dotsc,\,}lc|ccc|}
 %\SwapAboveDisplaySkip
       &                                                             & r_0          & r_1     & r_k     & r_{j_0}      & r_b & r_{b+j_0}    & r_{2b-1}\\\hline
 0.&\textsc{mmove}\;b\;\textsc{from}\;\reg0..\;\textsc{to}\;\reg{b}..& 0            & 0       & 0       & 0            & r_0 & r_{j_0}      & r_{b-1} \\

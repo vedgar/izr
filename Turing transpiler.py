@@ -1,7 +1,7 @@
 import itertools, collections, sys, pdb
 INC, DEC, GOTO = range(3)
 
-test = 1
+test = 3
 if test == 1:
     eSigma = 'abcde'
     P = [

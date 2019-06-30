@@ -88,7 +88,7 @@ Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Tur
 Nije preteško vidjeti da su te dvije karakterizacije, brojevna i jezična, povezane --- pogotovo jer već imamo napravljen najveći dio posla.
 
 \begin{teorem}[{name=[rekurzivnost Turing-odlučivog jezika]}]\label{tm:oikr}
-    Neka je $L$ jezik (nad nekom abecedom $\Sigma$). Ako postoji Turingov odlučitelj koji prepoznaje $L$, tada je jednomjesna relacija $\kr L$ rekurzivna.
+    Neka je $L$ jezik (nad nekom abecedom $\Sigma$).\newline Ako postoji Turingov odlučitelj koji prepoznaje $L$, tada je relacija $\kr L$ rekurzivna.
 \end{teorem}
 \begin{proof}
 Pretpostavimo da je $\mathcal T$ odlučitelj za $L$, i provedimo s tim strojem postupak iz točke~\ref{sec:tikp}. Ovdje navodimo samo detalje koje je potrebno promijeniti.
@@ -179,7 +179,7 @@ Ponekad se reprezentacija također zove "kodiranje", ali nama su kodiranja funkc
 Funkcija $\beta$ je bijekcija između $\N^+$ i $\Sigma_\beta^*$.
 \end{propozicija}
 \begin{proof}
-Najlakše je konstruirati inverznu funkciju, i pokazati da je to doista inverz. Dakle, uzmimo proizvoljnu riječ $u\in\Sigma_\beta^*$, i pitamo se kojeg niza je ona kod. Kao i uvijek kod konačnih nizova, trebamo odrediti njegovu duljinu $k$, i zatim pojedine članove $x_1$, $x_2$,~\ldots, $x_k$. Duljina je očito sljedbenik broja pojavljivanja separatora \t/ u riječi $u$ (jer u~\eqref{eq:betadef} ima $k-1$ separatora), i to je doista pozitivan broj, dakle niz je neprazan. Prvi član mu možemo odrediti brojeći kružiće do prvog separatora (ili do kraja riječi ako je $k=1$), drugi brojeći ih između prvog i drugog separatora, itd. Posljednji član $x_k$ je broj kružića od zadnjeg separatora do kraja riječi $u$.
+Najlakše je konstruirati inverznu funkciju, i pokazati da je to doista inverz. Dakle, uzmimo proizvoljnu riječ $u\in\Sigma_\beta^*$, i pitamo se kojeg niza je ona kod. Kao i uvijek kod konačnih nizova, trebamo odrediti njegovu duljinu $k$, i zatim pojedine članove $x_1$, $x_2$,~\ldots, $x_k$. Duljina je očito sljedbenik broja pojavljivanja separatora \t/ u riječi $u$ (jer u~\eqref{eq:betadef} ima $k-1$ separatora), i to je doista pozitivan broj, dakle niz je neprazan. Prvi član mu možemo odrediti brojeći kružiće do prvog separatora (ili do kraja riječi ako je $k=1$), drugi brojeći ih između prvog i drugog separatora, i tako dalje. Posljednji član $x_k$ je broj kružića od zadnjeg separatora do kraja riječi $u$.
 
 Tvrdimo da je tako konstruirano preslikavanje desni inverz od $\beta$: odnosno, ako tako dobijemo niz $\vec x$, tada je $\beta(\vec x)=u$. Doista, te dvije riječi imaju isti broj separatora ($k-1$) i isti broj kružića ($\sum\vec x$), te se podudaraju na pozicijama svih separatora (malo pomaknute parcijalne sume od $\vec x$) --- što je dovoljno da zaključimo da su jednake.
 
@@ -414,7 +414,7 @@ pa je očito najmanji takav $t$ upravo $n=\f I_1^1(n)$.\qedhere
 %Na komutirajućem dijagramu koji cijelo vrijeme promatramo, $\f{blh}$ bismo mogli prikazati kao strelicu prema gore, s desne strane pravokutnika, ispupčenu još više nego strelica $\f{bin}^1$. Upravo dokazana lema pokazuje da tako dobiveni "polumjesec" također komutira, pa i "proširena elipsa" također komutira --- čime smo napokon prikazali $f$ pomoću $\N\beta f$.
 
 \begin{teorem}[{name=[parcijalna rekurzivnost Turing-izračunljivih brojevnih funkcija]}]\label{tm:btip}
-Neka je $k\in\N_+$, i\, $\f f^k$\! funkcija takva da je $\beta\f f$ Turing-izračunljiva. Tada je $\f f$ parcijalno rekurzivna.
+Neka je $k\in\N_+$, i\, $\f f^k$\! funkcija takva da je $\beta\f f$ Turing-izračunljiva.\newline Tada je $\f f$ parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
     Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\beta$, kodiranje $\{\t\textbullet\mapsto1,\t/\mapsto2\}$ i funkciju $\beta\f f$, funkcija $\N\beta\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:blh} i korolara~\ref{kor:binf=Nbetafbin} sada imamo

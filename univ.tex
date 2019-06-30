@@ -25,9 +25,9 @@ Neegzaktnosti tipa \texttt{float}, i raznih drugih tipova koji bi trebali reprez
 \end{napomena}
 
 \subsection{Kodiranje konačnih nizova}
-Sada se možemo pozabaviti samom implementacijom kodiranja $\N^*$. Kako bismo najlakše kodirali $\vec x=(x_1,x_2,\dotsc,x_k)$ kao jedan prirodni broj, iz kojeg se kasnije mogu izvući pojedini brojevi $x_i$? U teoriji skupova, za dokaz da je $\N^2$ prebrojiv, promatramo injekciju $p(x,y):=2^x\cdot3^y$, te iskoristimo osnovni teorem aritmetike (rastav na prim-faktore) da bismo iz $p(x,y)$ natrag dobili $x$ i $y$. To se očito lako može proširiti na proizvoljnu mjesnost (jer prim-brojeva ima beskonačno mnogo --- samo ih uzmemo dovoljno redom po veličini, potenciramo odgovarajućim eksponentima, i pomnožimo), ali to nije kodiranje skupa $\N^*$. Naime, takvo preslikavanje nije injekcija, jer se recimo $(1,2,0,0)$ i $(1,2)$ preslikaju u isti broj $2^1\cdot3^2\cdot5^0\cdot7^0=2^1\cdot3^2=18$.
+Sada se možemo pozabaviti samom implementacijom kodiranja $\N^*$. Kako bismo najlakše kodirali $\vec x=(x_1,x_2,\dotsc,x_k)$ kao jedan prirodni broj, iz kojeg se kasnije mogu "izvući" pojedini brojevi $x_i$? U teoriji skupova, za dokaz da je $\N^2$ prebrojiv, promatramo injekciju $p(x,y):=2^x\cdot3^y$, te iskoristimo osnovni teorem aritmetike (rastav na prim-faktore) da bismo iz $p(x,y)$ natrag dobili $x$ i $y$. To se očito lako može proširiti na proizvoljnu mjesnost (jer prim-brojeva ima beskonačno mnogo --- samo ih uzmemo dovoljno redom po veličini, potenciramo odgovarajućim eksponentima, i pomnožimo), ali to nije kodiranje skupa $\N^*$. Naime, takvo preslikavanje nije injekcija, jer se recimo $(1,2,0,0)$ i $(1,2)$ preslikaju u isti broj $2^1\cdot3^2\cdot5^0\cdot7^0=2^1\cdot3^2=18$.
 
-Ipak, mala modifikacija dat će nam kodiranje. Zapravo, jedini problem su nule u konačnom nizu --- opisano preslikavanje \emph{jest} kodiranje skupa ${\N_+\!}^*$ konačnih nizova \emph{pozitivnih} prirodnih brojeva. Sada je još samo preostalo komponirati ga s izračunljivom bijekcijom $\f{Sc}$ između $\N$ i $\N_+$, i dobili smo traženo kodiranje.
+Ipak, mala modifikacija tog postupka dat će nam kodiranje. Zapravo, jedini problem su nule u konačnom nizu --- opisano preslikavanje \emph{jest} kodiranje skupa ${\N_+\!}^*$ konačnih nizova \emph{pozitivnih} prirodnih brojeva. Sada je još samo preostalo komponirati ga s izračunljivom bijekcijom $\f{Sc}$ između $\N$ i $\N_+$, i dobili smo traženo kodiranje.
 
 \begin{definicija}[{name=[kodiranje konačnih nizova prirodnih brojeva]}]
 Za $i\in\N$, sa $p_i$ označimo $i$-ti po redu prim-broj (počevši od $p_0=2$). Definiramo $\langle\rangle:=1$, te za svaki $k\in\N_+$ definiramo funkciju
@@ -561,7 +561,7 @@ Samo treba reći da se radi o konačnom nizu instrukcija, čija odredišta (ako 
 \begin{equation}\label{eq:Progget}
     \f{Prog}(e)\Longleftrightarrow\f{Seq}(e)\wedge\bigl(\forall i<\f{lh}(e)\bigr)\bigl(\f{Ins}(e[i])\land\f{dest}(e[i])\le \f{lh}(e)\bigr)\text.\\
 \end{equation}
-Primijetimo samo da koristimo činjenicu da je $\f{dest}(t)\eq0$ ako instrukcija koda $t$ nema od\-re\-di\-šte, te je $0\le\f{lh}(e)$ uvijek. Marljiva evaluacija od $\land$ (odnosno $\f{mul}^2$) znači da će se $\f{lh}(e)$ uvijek izračunati, čak i kad $e$ nije kod konačnog niza, ali rezultat će sigurno biti $\mathit{false}$ (odnosno $0$), a nećemo zapeti u beskonačnoj petlji jer je $\f{lh}$ totalna. Izračunavanje će biti dulje jer nemamo \emph{shortcircuiting}, ali izračunljivost se neće promijeniti.
+Primijetimo samo da koristimo činjenicu da je $\f{dest}(t)\eq0$ ako instrukcija koda $t$ nema od\-re\-di\-šte, te je $0\le\f{lh}(e)$ uvijek. Marljiva evaluacija od $\land$ (odnosno $\f{mul}^2$) znači da će se $\f{lh}(e)$ uvijek izračunati, čak i kad $e$ nije kod konačnog niza, ali rezultat čitavog izraza će tada sigurno biti $\mathit{false}$ (odnosno $0$), a nećemo zapeti u beskonačnoj petlji jer je $\f{lh}$ totalna. Izračunavanje će biti dulje jer nemamo \emph{shortcircuiting}, ali izračunljivost se neće promijeniti.
 \end{proof}
 
 %Za kodiranje programa ne koristimo nikakve posebne komponente osim onih koje već imamo za konačne nizove: $\f{lh}(e)$ za duljinu programa, te $e[i]$ za dohvaćanje instrukcije rednog broja $i$. Uostalom, već smo ih koristili u~\eqref{eq:Progget}.
@@ -572,11 +572,11 @@ Primijetimo samo da koristimo činjenicu da je $\f{dest}(t)\eq0$ ako instrukcija
 
 \subsection{Kodiranje stanja registara i RAM-konfiguracija}
 
-Konfiguraciju RAM-stroja smo definirali kao jednu funkciju, ali zapravo je jasno da trebamo kodirati dvije odvojene stvari: stanje registara, i vrijednost programskog brojača. Vrijednost programskog brojača već jest prirodan broj, pa ga ne kodiramo (odnosno kodiramo ga identitetom). Sa stanjem registara imamo više posla.
+Konfiguraciju RAM-stroja smo definirali kao jednu funkciju, ali zapravo je jasno da trebamo pratiti dvije odvojene stvari: stanje registara, i vrijednost programskog brojača. Vrijednost programskog brojača već jest prirodan broj, pa ga ne kodiramo (odnosno kodiramo ga identitetom). Sa stanjem registara imamo više posla.
 
 Na prvi pogled, skup svih mogućih stanja registara ne možemo uopće kodirati jer je neprebrojiv: imamo prebrojivo mnogo registara, svaki može sadržavati jednu od prebrojivo mnogo vrijednosti, a $\aleph_0^{\aleph_0}=\mathfrak c>\aleph_0$. Ipak, definicija~\ref{def:RAMconf} kaže da promatramo samo one konfiguracije koje su s konačnim nosačem --- i to je doista dovoljno. Naime, početna konfiguracija (bilo kojeg RAM-stroja s bilo kojim ulazom) je $0$ na svim registrima osim najviše $k$ ulaznih, te se u svakom koraku izračunavanja broj elemenata nosača može povećati najviše za $1$ --- izvršavanjem instrukcije $\incr j$ na nekom registru čija je vrijednost prije bila $r_j=0$.
 
-Iz teorije skupova znamo da nizova prirodnih brojeva s konačnim nosačem ima prebrojivo mnogo, no kako ih kodirati? Jedna elegantna metoda koristi istu ideju kao za konačne nizove, samo bez sljedbenika eksponenata. Dakle, za proizvoljan niz s konačnim nosačem $(r_0,r_1,r_2,\dotsc,0,0,0,\dotsc)$ definiramo kod s
+Iz teorije skupova znamo da nizova prirodnih brojeva s konačnim nosačem ima prebrojivo mnogo, no kako ih kodirati? Jedna elegantna metoda koristi istu ideju kao za konačne nizove, samo bez sljedbenika eksponenata. Dakle, za proizvoljan niz prirodnih brojeva s konačnim nosačem $(r_0,r_1,r_2,\dotsc,0,0,0,\dotsc)$ definiramo kod pomoću
 \begin{equation}\label{eq:defkreg}
     \knk{r_0,r_1,r_2,\dotsc,0,0,0,\dotsc}:=\prod_{i\in\N}p_i^{r_i}\,\text.
 \end{equation}
@@ -584,7 +584,7 @@ Zbog konačnosti nosača samo konačno mnogo eksponenata je pozitivno (svi ostal
 
 Važno je da takvo kodiranje stanja registara ne ovisi o konkretnom RAM-stroju odnosno programu. Mogli bismo npr.\ proći kroz program i naći mu širinu $m_P$, pa kodirati stanje kao konačan niz registara do $\reg{m_P}$ --- ali to bi ovisilo o programu: dodavanje potpuno irelevantnih instrukcija koje se možda uopće ne mogu izvršiti (\emph{unreachable code}) bi moglo promijeniti kod stanja registara za isto izračunavanje (isti niz konfiguracija), te kodiranje ne bi bilo funkcija.
 
-Treba nam jedan bitan konstruktor, a to je %\emph{proširenje nulom} zadanog konačnog niza. Kako već imamo kodiranje konačnih nizova, možemo ga definirati na kodovima.
+Treba nam jedan važan konstruktor, a to je %\emph{proširenje nulom} zadanog konačnog niza. Kako već imamo kodiranje konačnih nizova, možemo ga definirati na kodovima.
 početna konfiguracija RAM-stroja s ulazom $\vec x$ (prenesenim preko koda, jer želimo imati jednu funkciju za sve mjesnosti).
 
 \begin{lema}[{name=[primitivna rekurzivnost generatora početne konfiguracije]}]\label{lm:startprn}
@@ -656,7 +656,7 @@ Dokažimo da $\f{NextReg}$ i $\f{NextCount}$ doista zadovoljavaju željenu parci
 
 Ako je $I$ tipa $\inc$, recimo $I=(\incr j)$, tada vrijedi $Up$ i $pj=\f{prime}(j)=p_j$, pa je $r'=r\cdot p_j$, što prema~\eqref{eq:knkppj} kodira upravo stanje registara nakon izvršavanja $I$.
 
-Ako je $I$ tipa $\goto$, recimo $I=(\goto\;l)$, opet ne vrijedi ni $Up$ ni $Down$, te je $r'=r$, a $p'=\f{dest}(i)=\f{dest}(\kins{\goto\;l})=l$, kao što i treba biti.
+Ako je $I$ tipa $\goto$, recimo $I=(\goto\;l)$, tada ne vrijedi ni $Up$ ni $Down$, te je $r'=r$, a $p'=\f{dest}(i)=\f{dest}(\kins{\goto\;l})=l$, kao što i treba biti.
 
 Ako je pak $I$ tipa $\dec$, recimo $I=(\decr jl)$, tada je opet $pj=p_j$, te $Up$ ne vrijedi, a $Down\Leftrightarrow p_j\mid r=c(\reg{*})\Leftrightarrow c(\reg j)>0$. Ako je to istina, $p'=p+1$ i $r'=r\sslash p_j$, a ako nije, $p'=\f{dest}(\kins{\decr jl})=l$ i $r'=r$, kao što i treba biti po semantici instrukcije tipa $\dec$.
 \end{proof}
