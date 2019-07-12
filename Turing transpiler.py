@@ -124,18 +124,18 @@ for instruction in P:
     itype = instruction[1]
     if itype == INC:
         j, = instruction[2:]
-        mrule(si, '●', j)  # (4.59)
-        mrule(si, '○', j, pi1, '●', -1)  # (4.60)
+        mrule(si, '●', j)  # (4.58)
+        mrule(si, '○', j, pi1, '●', -1)  # (4.59)
     elif itype == DEC:
         j, l = instruction[2:]
         ti = 't' + str(i)
-        mrule(si, '●', j)  # (4.61)
-        mrule(si, '○', j, ti, d=-1)  # (4.62)
-        mrule(ti, '●', j, pi1, '○', -1)  # (4.64)
-        rule(ti, '#', 'p' + str(l))  # (4.63)
+        mrule(si, '●', j)  # (4.60)
+        mrule(si, '○', j, ti, d=-1)  # (4.61)
+        mrule(ti, '●', j, pi1, '○', -1)  # (4.63)
+        rule(ti, '#', 'p' + str(l))  # (4.62)
     elif itype == GOTO:
         l, = instruction[2:]
-        for γ in Bm: rule(si, γ, 'p' + str(l), γ, -1)  # (4.65)
+        for γ in Bm: rule(si, γ, 'p' + str(l), γ, -1)  # (4.64)
     else: assert False
 pn = 'p' + str(n)
 sn = 's' + str(n)
@@ -143,51 +143,74 @@ assert pn in Q
 for γ in Bm: rule(pn, γ, d=-1)  # (4.56)
 rule(pn, '#', sn)  # (4.57)
 
-for γ in Bm - {space}: rule(sn, γ)  # (4.68)
-rule(sn, space, 'q5', '$', -1)  # (4.69)
-mrule('q5', '○', 0, d=-1)  # (4.70)
-for α in Sigma: rule('q5', α, d=-1)  # (4.77)
-mrule('q5', '●', 0, 'q6', '○')  # (4.71)
-rule('q6', '$', 'q7', d=-1)  # (4.73)
-for α in Sigma | Bm: rule('q6', α)  # (4.72)
-rule('q7', ISigma[bc], 'q7', ISigma[1], -1)  # (4.74)
-for t in range(1, bc): rule('q7', ISigma[t], 'q5', ISigma[t + 1], -1)  # (4.75)
-for γ in Bm: rule('q7', γ, 'q5', ISigma[1], -1)  # (4.76)
+for γ in Bm - {space}: rule(sn, γ)  # (4.67)
+rule(sn, space, 'q5', '$', -1)  # (4.68)
+mrule('q5', '○', 0, d=-1)  # (4.69)
+for α in Sigma: rule('q5', α, d=-1)  # (4.76)
+mrule('q5', '●', 0, 'q6', '○')  # (4.70)
+rule('q6', '$', 'q7', d=-1)  # (4.72)
+for α in Sigma | Bm: rule('q6', α)  # (4.71)
+rule('q7', ISigma[bc], 'q7', ISigma[1], -1)  # (4.73)
+for t in range(1, bc): rule('q7', ISigma[t], 'q5', ISigma[t + 1], -1)  # (4.74)
+for γ in Bm: rule('q7', γ, 'q5', ISigma[1], -1)  # (4.75)
 
-rule('q5', '#', 'q8', space)  # (4.79)
-for γ in Bm: rule('q8', γ, a2=space)  # (4.79)
+rule('q5', '#', 'q8', space)  # (4.78)
+for γ in Bm: rule('q8', γ, a2=space)  # (4.78)
 for α in Sigma:
-    rule('q8', α, 'm' + α, space, -1)  # (4.80)
-    rule('m' + α, space, d=-1)  # (4.80)
-    for αc in Sigma: rule('m' + α, αc, 'l' + α)  # (4.81)
-    rule('m' + α, '$', 'q8', α)  # (4.82)
-    rule('l' + α, space, 'q8', α)  # (4.82)
-rule('q8', '$', 'q9', space, -1)  # (4.83)
-rule('q9', space, d=-1)  # (4.83)
-rule('q9', '$', 'qz', space, -1)  # (4.85)
-for α in Sigma: rule('q9', α, 'qz')  # (4.84)
+    rule('q8', α, 'm' + α, space, -1)  # (4.79)
+    rule('m' + α, space, d=-1)  # (4.79)
+    for αc in Sigma: rule('m' + α, αc, 'l' + α)  # (4.80)
+    rule('m' + α, '$', 'q8', α)  # (4.81)
+    rule('l' + α, space, 'q8', α)  # (4.81)
+rule('q8', '$', 'q9', space, -1)  # (4.82)
+rule('q9', space, d=-1)  # (4.82)
+rule('q9', '$', 'qz', space, -1)  # (4.84)
+for α in Sigma: rule('q9', α, 'qz')  # (4.83)
 
-def show(q, pos, tape, steps):
+def show_gen(q, pos, tape, steps):
     while tape and tape[max(tape)] == space: del tape[max(tape)]
-    print(end=str(steps) + ':')
+    yield str(steps) + ':'
     for i in range(2 + max(tape, default=0)):
-        if i == pos: print(end=q.join('(>'))
-        print(end='_' if tape[i] == space else tape[i].join('[]'))
+        if i == pos: yield q.join('(>')
+        yield '_' if tape[i] == space else tape[i].join('[]')
     if tape[max(tape, default=0)] == space:
         del tape[max(tape)]
-    print('...')
+    yield '...'
     
-def simulate(tape):
+def show(q, pos, tape, steps):
+    for key, group in itertools.groupby(show_gen(q, pos, tape, steps)):
+        print(end=key)
+        count = sum(1 for cell in group)
+        if count > 5: print(end='^' + str(count) + ' ')
+        else: print(end=key*(count-1))
+    print()
+    
+def simulate(tape, debug=True):
     q, pos = 'q0', 0
     tape = collections.defaultdict(lambda: space, enumerate(tape))
     show(q, pos, tape, 0)
     visited, steps = set(), 0
+    states = []
     try:
         while q != 'qz':
             q, tape[pos], d = delta[q, tape[pos]]
             pos = max(pos + d, 0)
             steps += 1
-            # if q not in visited: show(q, pos, tape, steps); visited.add(q)
+            if debug and q not in visited:
+                if len(states) > 1:
+                    statnum = 0
+                    for statkey, statgroup in itertools.groupby(states[1:]):
+                        statcount = sum(1 for stat in statgroup)
+                        print(statkey, end='')
+                        if statcount > 1: print('*', statcount, end=' ', sep='')
+                        else: print(end=' ')
+                        statnum += 1
+                        if statnum > 99: print(end='...'); break
+                    print()
+                states.clear()
+                show(q, pos, tape, steps)
+                visited.add(q)
+            states.append(q)
         show(q, pos, tape, steps)
     except KeyError as exc:
         show(q, pos, tape, steps)

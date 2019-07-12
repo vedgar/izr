@@ -5,9 +5,10 @@
   DIV=12,
   BCOR=0pt,
   headings=twolinechapter,
-  numbers=endperiod
+  numbers=endperiod,
+  %draft
 ]{scrbook}
-%\includeonly{meta}
+%\includeonly{rek,re} %dolje isključiti listoftheorems
 %%%%
 % TODO za iduću godinu:
 % * po instrukciji vs po programu prijelaz eksplicirati
@@ -27,16 +28,18 @@
 \MakeOuterQuote{"}
 \usepackage[backend=biber]{biblatex}
 %\addtokomafont{sectionentry}{\bfseries}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amsthm}
 \usepackage{thmtools}
 \usepackage{stmaryrd}
 \usepackage[unicode]{hyperref}
 \usepackage{bookmark}
 \usepackage[euler-digits]{eulervm}
 \usepackage{beton}
+\usepackage[mathscr]{eucal}
+\usepackage{MnSymbol}
 \renewcommand{\bfdefault}{sbc}
 %\usepackage{concmath}
-\usepackage[final]{microtype}
+\usepackage{microtype}
 \usepackage{xcolor}
 \hypersetup{
     colorlinks,
@@ -49,7 +52,7 @@
 \usepackage[artemisia]{textgreek}
 \addbibresource{literatura.bib}
 \usepackage{mathtools}
-\usepackage{scrlayer-scrpage}
+\usepackage[draft=false]{scrlayer-scrpage}
 %\pagestyle{plain.scrheadings}
 
 \declaretheorem[style=definition,qed=$\vartriangleleft$,parent=chapter]{definicija}
@@ -117,8 +120,9 @@ initial text=$ $}
     \t\textbullet
     \end{array}$}
 \newcommand{\mund}[1]{\raisebox{3pt}{\smash{\scriptsize $#1$}}}
-\newcommand{\TComp}{\mathcal{TC}omp_\Sigma}
+\newcommand{\TComp}{\mathscr{TC}omp_\Sigma}
 \newcommand{\eq}{=}
+\newcommand{\dd}{\mathbin{\cdot\cdot}}
 
 \newenvironment{prog}{\left[\begin{array}{r@{\;}l}}{\end{array}\right]}
 
@@ -127,13 +131,13 @@ initial text=$ $}
 %\DeclareTextFontCommand{\f}{\mathsf\color{dark-blue}}
 \newcommand{\f}[1]{\textcolor{dark-blue}{\mathsf{#1}}}
 
-\DeclarePairedDelimiter{\knk}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\knk}{\langlebar}{\ranglebar}
 \DeclarePairedDelimiter{\kins}{\ulcorner}{\urcorner}
 \DeclarePairedDelimiter{\kprog}{\ulcorner}{\lrcorner}
 \DeclarePairedDelimiter{\kf}{\t{\color{dark-blue}\char`\{}}{\t{\color{dark-blue}\char`\}}}
 \DeclarePairedDelimiter{\kr}{\langle}{\rangle}
 \DeclarePairedDelimiter{\dulj}{|}{|}
-\definecolor{light-gray}{gray}{0.4}
+\definecolor{title-gray}{gray}{0.1}
 \definecolor{dark-blue}{HTML}{000055}
 \definecolor{dark-red}{HTML}{550000}
 \definecolor{brown}{HTML}{6F5A21}
@@ -141,7 +145,7 @@ initial text=$ $}
 \begin{document}
 %\tracingall
 \frontmatter
-\titlehead{\centering{\Huge{\color{light-gray}\textup{\MakeUppercase{c o m p u t o n o m i c o n}}}}\vspace{1cm}
+\titlehead{\centering{\Huge{\color{title-gray}\textup{\MakeUppercase{c o m p u t o n o m i c o n}}}}\vspace{1cm}
 
 \begin{equation*}\label{dia:naslovnica}
 \begin{tikzpicture}[scale=0.75,baseline=(c0)]

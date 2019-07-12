@@ -1,6 +1,6 @@
 \chapter{Metaprogramiranje}
 
-U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathcal Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathcal Comp$ --- već smo doista konstruirali funkciju $compose\colon\mathcal Prog^+\times\mathcal Prog\times\N_+\to\mathcal Prog$, koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije (i mjesnost $k$), te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_k^{l+1}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to doista dokazati. Ipak, nećemo programirati direktno dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je dosta komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
+U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathscr Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathscr Comp$ --- već smo doista konstruirali funkciju $compose:\mathscr Prog^+\times\mathscr Prog\times\N_+\to\mathscr Prog$, koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije (i mjesnost $k$), te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_k^{l+1}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to doista dokazati. Ipak, nećemo programirati direktno dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je dosta komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
 
 \section{Specijalizacija}
 
@@ -46,7 +46,7 @@ Definiciju od $\f g$ možemo zapisati u simboličkom obliku
 Isti kao gore --- zapravo jednostavniji, jer ne moramo određivati domenu.
 \end{proof}
 
-Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne direktno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Primijetimo samo da nije veliki problem izračunati (neke) indekse od $\f I_i^k$ za $i\in[1..k]$, i od $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, mogli bismo kao specijalni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
+Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne direktno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Primijetimo samo da nije veliki problem izračunati (neke) indekse od $\f I_i^k$ za $i\in[1\dd k]$, i od $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, mogli bismo kao specijalni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
 , a onda $\f{compose}$ pomoću te funkcije.
 
 Na neki način, $\f S=\N spec$, gdje funkcije kodiramo njihovim indeksima na način koji je detaljno objašnjen u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$, te vraća \emph{neki} indeks za $spec(y,\f f)$.
@@ -70,7 +70,7 @@ Posljednja funkcijska jednakost može se zapisati i kao
 \begin{proof}
 Kao što smo već rekli, trebamo "hardkodirati" $y$ u registar $\reg{k+1}$, i nakon toga pustiti RAM-program $P$ da računa s ulaznim podacima $\vec x$ (u registrima $\reg1$ do $\reg k$, kao ulazni podaci za $\kf{\f S_k(y,e)}^k$) i $y$ (u registru $\reg{k+1}$). Program $P$ je onaj program čiji je $e$ kod --- no što ako takvog nema?
 
-Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, tada ($e\not\in\f{Prog}$) je $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je lako vidjeti da je tada i $spec(y,f)=\varnothing$ --- naime, pomoću formule za domenu kompozicije, funkcija~\eqref{eq:paramcompose} ima praznu domenu. Tada nam za povratnu vrijednost od $\f S_k^2$ treba neki indeks od $\varnothing^k$, te je najjednostavnije upotrijebiti upravo $e$ --- kako je $e\not\in\f{Prog}$, za svaku mjesnost $k$ će biti $\kf e^k=\varnothing^k$, opet prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}.
+Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, tada ($e\notin\f{Prog}$) je $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je lako vidjeti da je tada i $spec(y,f)=\varnothing$ --- naime, pomoću formule za domenu kompozicije, funkcija~\eqref{eq:paramcompose} ima praznu domenu. Tada nam za povratnu vrijednost od $\f S_k^2$ treba neki indeks od $\varnothing^k$, te je najjednostavnije upotrijebiti upravo $e$ --- kako je $e\notin\f{Prog}$, za svaku mjesnost $k$ će biti $\kf e^k=\varnothing^k$, opet prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}.
 
 Sada promotrimo slučaj kad takav $P$ postoji --- zbog injektivnosti kodiranja programa taj $P$ je jedinstven. Zapravo trebamo spljoštiti makro-program
 \begin{equation}\label{eq:makroprogS}
@@ -163,7 +163,7 @@ Sada možemo i vidjeti da je $\N compose$, barem za fiksne mjesnosti $k$ i $l$, 
 
 Primijetimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja) niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Sve što nas zanima je da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_1^2$ koja prima $g$ i $h$, te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} ako ste zaboravili na što se tu misli.
 
-Ugrubo, \emph{kompajlirati} kompoziciju dvije funkcije koje već imamo kompajlirane, je daleko "pitomije" nego \emph{izvršiti} (evaluirati) tu kompoziciju. Konkretno, izvršavanje ne mora stati, ako te funkcije nisu totalne. Sâmo kompajliranje kompozicije, s druge strane, mora stati --- i to u unaprijed specificiranom broju koraka.
+Ugrubo, \emph{kompilirati} kompoziciju dvije funkcije koje već imamo kompilirane, je daleko "pitomije" nego \emph{izvršiti} (evaluirati) tu kompoziciju. Konkretno, izvršavanje ne mora stati, ako te funkcije nisu totalne. Sâmo kompiliranje kompozicije, s druge strane, mora stati --- i to u unaprijed specificiranom broju koraka.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost komponiranja]}]\label{pp:composeprn}
     Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f{compose}_k^{l+1}$\!, takva da za sve $g_1,g_2,\dotsc,g_l,h\in\N$ vrijedi
@@ -265,7 +265,7 @@ Kad bismo samo znali odrediti $f$, dalje bi bilo lako: $g$ i $h$ bismo specijali
 
 Zanemarujući $g$ i $h$ (jer njih znamo specijalizirati) i "utapajući" $y$ među $\vec x$, te zovući tako dobivenu funkciju $G_k$, vidimo da je općenit oblik naše jednadžbe koju želimo riješiti $\kf f(\vec x)\simeq G_k(\vec x,f)$. Takve \emph{opće rekurzije} tema su iduće točke.
 
-\section{Opće rekurzije}
+\section{Opće rekurzije}\label{sec:rec}
 
 Vidjeli smo da se u metaprogramiranju, a ponekad i u običnom programiranju, pojavljuje potreba za funkcijama čija simbolička definicija koristi njih same. Recimo, definicija funkcije $\f{factorial}$ koju bismo mogli napisati u programskom jeziku C (zanemarujući iz didaktičkih razloga da za faktorijel postoje jednostavnije implementacije i u jeziku C i u jeziku primitivno rekurzivnih funkcija --- primjer~\ref{pr:factorialprn}),
 \begin{equation}
@@ -329,9 +329,9 @@ Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači pu
 
 Kao i drugdje gdje se gledaju funkcijske jednadžbe (recimo u teoriji običnih diferencijalnih jednadžbi), rijetko se gledaju za sasvim općenite funkcije. Kod diferencijalnih jednadžbi najčešće se bavimo glatkim funkcijama --- ovdje, kod općih rekurzija, bavimo se izračunljivim funkcijama. Zbog teorema ekvivalencije, svejedno je kako manifestiramo tu izračunljivost --- uglavnom ćemo to činiti kroz parcijalnu rekurzivnost i postojanje indeksa.
 
-Dakle, zadane su nam parcijalno rekurzivne funkcije $\f G_1$, $\f G_2$,~\ldots\ preko svojih indeksa $g_1$, $g_2$,~\ldots\ --- i tražimo indeks $f$ funkcije $\f F$ koja zadovoljava opću rekurziju $\f F=\mathcal M(\vec{\f G},\f F)$. Simboličku definiciju $\mathcal M$ je, kao i obično, lakše napisati točkovno, u obliku jedne parcijalno rekurzivne funkcije $\f G$, koja prima ulazne podatke $\vec x$, indekse $\vec g$ i indeks $f$; te vraća vrijednost koja mora biti parcijalno jednaka $\f F(\vec x)\simeq\kf f(\vec x)\simeq\f{comp}(\vec x,f)$.
+Dakle, zadane su nam parcijalno rekurzivne funkcije $\f G_1$, $\f G_2$,~\ldots\ preko svojih indeksa $g_1$, $g_2$,~\ldots\ --- i tražimo indeks $f$ funkcije $\f F$ koja zadovoljava opću rekurziju $\f F=\mathcal M(\vec{\f G},\f F)$. Simboličku definiciju $\mathcal M$ je, kao i obično, lakše napisati točkovno: u obliku jedne parcijalno rekurzivne funkcije $\f G$ koja prima ulazne podatke $\vec x$, indekse $\vec g$ i indeks $f$; te vraća vrijednost koja mora biti parcijalno jednaka $\f F(\vec x)\simeq\kf f(\vec x)\simeq\f{comp}(\vec x,f)$.
 
-No ako već pišemo točkovnu definiciju, indeksi $\vec g$ nam ne trebaju --- s obzirom na to da su $\f G_i$ poznate funkcije, možemo ih jednostavno uklopiti u definiciju funkcije $\f G$. Jedina funkcija s kojom to ne možemo učiniti (jer nije još poznata) je funkcija $\f F$, tako da njen indeks moramo prenijeti kao dodatni argument funkciji $\f G$. Kad $\f G$ želi pozvati $\f F$, na nekim argumentima $\vec y$ (koji će najčešće biti na neki način "manji" od $\vec x$), koristit će izraz $\f{comp}_k(\vec y,f)$.
+No ako već pišemo točkovnu definiciju, indeksi $\vec g$ nam ne trebaju --- s obzirom na to da su $\f G_i$ poznate funkcije, možemo ih jednostavno uklopiti u definiciju funkcije $\f G$. Jedina funkcija s kojom to ne možemo učiniti (jer još nije poznata) je funkcija $\f F$, tako da njen indeks moramo prenijeti kao dodatni argument funkciji $\f G$. Kad $\f G$ želi pozvati $\f F$, na nekim argumentima $\vec y$ (koji će najčešće biti na neki način "manji" od $\vec x$), koristit će izraz $\f{comp}_k(\vec y,f)$.
 
 (Svakako, moguće su i "simultane opće rekurzije", gdje imamo \emph{više} nepoznatih funkcija koje sve ovise međusobno na opće-rekurzivan način --- no to se može riješiti metodama koje smo već upoznali u dokazu propozicije~\ref{prop:simultrek}.)
 
@@ -353,7 +353,7 @@ U prethodna dva odlomka, čini se, zanemarili smo pitanje egzistencije, odnosno 
 
 Naravno, netrivijalan je samo u formalnom smislu: intuitivno, lako je objasniti kako izvršavati opću rekurzivnu funkciju (za zadanu funkciju $\f G$), i taj neformalni algoritam po Church--\!Turingovoj tezi računa parcijalno rekurzivnu funkciju. Ipak, to intuitivno objašnjenje može lako navesti na krivi trag (sjetite se funkcije $\f h_1$\!), a i tvrdnje o jedinstvenosti i rekurzivnosti lakše je dokazivati (najčešće matematičkom indukcijom) jednom kad imamo indeks, nego kad imamo neformalni postupak. Zato je dobro izbjeći Church--\!Turingovu tezu, i doista konstruirati indeks $e$ s traženim svojstvom.
 
-\subsection{Dijagonalna funkcija}
+\subsection{Teorem rekurzije}
 
 Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odnosno pozvana s argumentima $\vec x$, mora se ponašati kao funkcija $\f G$ pozvana s $\vec x$ i još indeksom $e$. Drugim riječima, želimo $\kf e^k=spec(e,G)$.
 
@@ -379,7 +379,7 @@ Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} 
 Matematički, "pokazivač na funkciju" nije ništa drugo nego njen indeks, što motivira sljedeću definiciju.
 
 \begin{definicija}[{name=[dijagonala parcijalno rekurzivne funkcije]}]
-    Neka je $k\in\N_+$, te $\f H^{k+1}$ parcijalno rekurzivna funkcija. \emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $d\f H:=spec(h,H)$, gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
+    Neka je $k\in\N_+$, te $\f H^{k+1}$ parcijalno rekurzivna funkcija. \emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $d\f H:=spec(h,\f H)$, gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
 \end{definicija}
 
 Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će ionako biti bitna samo prateća funkcija $\f D=\N d$, koja je definirana na indeksima.
@@ -399,11 +399,11 @@ Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da b
 
 Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, služe istoj svrsi --- računanju faktorijele zadanog broja. Ako nemamo \texttt{factorial}, možemo li umjesto nje upotrijebiti \texttt{G} kao drugi argument od \texttt{G} (efektivno, dijagonalizirati \texttt G)?
 
-Doslovno, to neće ići --- tipovi ne pašu. Drugi argument funkcije \texttt{G} trebao bi biti pokazivač na jednomjesnu funkciju, dok je sama \texttt{G}, naravno, dvomjesna. C-kompajler će nam samo dati \emph{warning}, jer svi pokazivači su ionako samo "ukrašeni prirodni brojevi", baš kao i indeksi u svijetu parcijalno rekurzivnih funkcija --- ali u strože tipiziranom jeziku, dobili bismo kompajlersku grešku.
+Doslovno, to neće ići --- tipovi ne pašu. Drugi argument funkcije \texttt{G} trebao bi biti pokazivač na jednomjesnu funkciju, dok je sama \texttt{G}, naravno, dvomjesna. C-kompajler će nam samo dati \emph{warning}, jer svi pokazivači su ionako samo "ukrašeni prirodni brojevi", baš kao i indeksi u svijetu parcijalno rekurzivnih funkcija --- ali u strože tipiziranom jeziku kompajler bi nam odbio prevesti kod, uz poruku o grešci.
 
 C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (sigurno radi na \texttt{gcc} 4.6.3 --- pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li \texttt{gcc} nešto što mi ne znamo?
 
-Ovdje treba znati neke tehničke pojedinosti o kompajliranju jezika C. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
+Ovdje treba znati neke tehničke pojedinosti o kompiliranju jezika C. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
 
 Možemo li to iskoristiti da bismo eksplicitno napisali taj poziv u kodu, i izbjegli \emph{warning}? Da, jer C nam dopušta da ne specificiramo tipove parametara funkcije.
 \begin{equation}\begin{minipage}{0.8\textwidth}
@@ -492,7 +492,7 @@ Ackermann je promatrao niz aritmetičkih operacija: sljedbenik, zbrajanje, množ
 
 Dakle, za sve $n>1$ vrijedi $\f A_{n+1}:=\f C_1^1\pr\f A_n\circ(\f I_1^3,\f I_3^3)$.
 
-\begin{propozicija}[{name=[primitivna rekurzivnost specijalizacija Ackermannove funkcije]}]\label{pp:Anprn}
+\begin{propozicija}[{name=[primitivna rekurzivnost generaliziranih aritmetičkih operacija]}]\label{pp:Anprn}
     Za svaki $n\in\N$, $\f A_n^2$ je primitivno rekurzivna.
 \end{propozicija}
 \begin{proof}
@@ -569,7 +569,7 @@ a zatim to napišimo u obliku opće rekurzije $\f{comp}_k(x,y,z,e)=\f G(x,y,z,e)
         \;\f{Astart}(x,z),&\text{inače}
     \end{cases}
 \end{equation}
-(sad smo morali upotrijebiti znak $\simeq$, jer $\f G$ nije totalna --- npr.\ $(0,1,1,0)\not\in\dom{\f G}$).
+(sad smo morali upotrijebiti znak $\simeq$, jer $\f G$ nije totalna --- npr.\ $(0,1,1,0)\notin\dom{\f G}$).
 
 Po teoremu~\ref{tm:gprek}, $\f G$ je parcijalno rekurzivna. Po teoremu~\ref{tm:rek}, postoji prirodni broj $a$ takav da za sve $x,y,z\in\N$ vrijedi $\kf a(x,y,z)\simeq\f G(x,y,z,a)$. Tvrdimo da je $\kf a^3=\f A^3$, odnosno da je rješenje jedinstveno.
 
@@ -640,9 +640,9 @@ Također, za svaki $e\in\f{Prog}$, za sve $j,k\in\N_+$, vrijedi $e*\kr{\f{codeIN
 \begin{proof}
 Refleksivnost, simetričnost i tranzitivnost su trivijalne: recimo, $e\approx_kf\approx_kg$ znači $\kf e^k=\kf f^k=\kf g^k$, pa je $\kf e^k=\kf g^k$, iz čega $e\approx_kg$. Inače, u refleksivnosti se, kroz samu oznaku $\kf e^k$, krije korolar~\ref{kor:ram1fun} koji kaže da za fiksni $k$, svaki RAM-program računa jedinstvenu $k$-mjesnu funkciju.
     
-Prebrojivost broja klasa ekvivalencije jednostavno slijedi iz činjenice da postoji prebrojivo mnogo izračunljivih funkcija (teorem~\ref{tm:alef0izr}). Konkretno, za svaki $k\in\N_+$ su sve funkcije $\f C_y^k,y\in\N$, različite, pa je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)\not\approx_k\overline{\f C_6}(z)$ za sve $y\not=z$. Iz toga slijedi da različitih klasa ima beskonačno, a ne može ih biti neprebrojivo jer su neprazni disjunktni podskupovi od $\N$ (recimo, $\min\colon\N/_{\!\approx_k\!}\to\N$, koja svakoj klasi ekvivalencije pridružuje njen najmanji element, je injekcija, pa je $\card\bigl(\N/_{\!\approx_k\!}\bigr)\le\card\N=\aleph_0$).
+Prebrojivost broja klasa ekvivalencije jednostavno slijedi iz činjenice da postoji prebrojivo mnogo izračunljivih funkcija (teorem~\ref{tm:alef0izr}). Konkretno, za svaki $k\in\N_+$ su sve funkcije $\f C_y^k,y\in\N$, različite, pa je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)\napprox_k\overline{\f C_6}(z)$ za sve $y\ne z$. Iz toga slijedi da različitih klasa ima beskonačno, a ne može ih biti neprebrojivo jer su neprazni disjunktni podskupovi od $\N$ (recimo, $\min:\N/_{\!\approx_k\!}\to\N$, koja svakoj klasi ekvivalencije pridružuje njen najmanji element, je injekcija, pa je $\card\bigl(\N/_{\!\approx_k\!}\bigr)\le\card\N=\aleph_0$).
     
-Prebrojivost svake klase slijedi iz primjera~\ref{pr:alef0ind}: neka je $e\in\N$ proizvoljan. Ako je $e\in\f{Prog}\kompl$, tada je čitav $\f{Prog}\kompl$ u njegovoj klasi. Na primjer, $n\mapsto 2n+3$ je injekcija s $\N$ u $\f{Seq}\kompl\subseteq\f{Prog}\kompl\subseteq[e]_{\approx_k}\subseteq\N$, pa je $[e]_{\approx_k}$ prebrojiva. Ako je pak $e\in\f{Prog}$, tada je $\f F\colon\N_+\!\to[e]_{\approx_k}$, zadana s $\f F(j):=e*\kr{\f{codeINC}(j)}$, injekcija --- jer $j$ možemo rekonstruirati iz $f:=\f F(j)$ kao $\f{regn}\bigl(\f{rpart}(f,0)\bigr)$.
+Prebrojivost svake klase slijedi iz primjera~\ref{pr:alef0ind}: neka je $e\in\N$ proizvoljan. Ako je $e\in\f{Prog}\kompl$, tada je čitav $\f{Prog}\kompl$ u njegovoj klasi. Na primjer, $n\mapsto 2n+3$ je injekcija s $\N$ u $\f{Seq}\kompl\subseteq\f{Prog}\kompl\subseteq[e]_{\approx_k}\subseteq\N$, pa je $[e]_{\approx_k}$ prebrojiva. Ako je pak $e\in\f{Prog}$, tada je $\f F:\N_+\!\to[e]_{\approx_k}$, zadana s $\f F(j):=e*\kr{\f{codeINC}(j)}$, injekcija --- jer $j$ možemo rekonstruirati iz $f:=\f F(j)$ kao $\f{regn}\bigl(\f{rpart}(f,0)\bigr)$.
 \end{proof}
 
 Možda malo više iznenađujuća činjenica vezana uz familiju relacija $\approx_k,k\in\N_+$ je da je ona \emph{padajuća}: vrijedi $(\approx_1)\supset(\approx_2)\supset(\approx_3)\supset\dotsb$. Da bismo to dokazali, prvo trebamo jedno tehničko svojstvo funkcija $\f S_k$.
@@ -684,7 +684,7 @@ Označimo $m:=k-l\in\N_+$. Za $(\subseteq)$, neka je $e\approx_kf$. Tada je $\kf
 \end{equation}
 Dakle vrijedi i $\kf e^l=\kf f^l$, pa je $e\approx_lf$.
 
-Za $(\not=)$, moramo naći dva RAM-programa koji su ekvivalentni za sve moguće $l$-torke ulaznih podataka, ali kad počnemo stavljati ulaze i u registre $\reg{l+1}..\,\reg k$, više nisu. Za to nam mogu poslužiti $1$ kao dobro poznati indeks nulfunkcije, i $i_k$ kao indeks $k$-te koordinatne projekcije --- pogledajte tekst nakon~\eqref{eq:paramcomposeind} za preciznu definiciju.
+Za $(\ne)$, moramo naći dva RAM-programa koji su ekvivalentni za sve moguće $l$-torke ulaznih podataka, ali kad počnemo stavljati ulaze i u registre $\reg{l+1}$--$\reg k$, više nisu. Za to nam mogu poslužiti $1$ kao dobro poznati indeks nulfunkcije, i $i_k$ kao indeks $k$-te koordinatne projekcije --- pogledajte tekst nakon~\eqref{eq:paramcomposeind} za preciznu definiciju.
 
 Tada svakako vrijedi $1\approx_l i_k$, jer za svaki $\vec x\in\N^l$ vrijedi
 \begin{equation}
@@ -692,9 +692,9 @@ Tada svakako vrijedi $1\approx_l i_k$, jer za svaki $\vec x\in\N^l$ vrijedi
 \end{equation}
 ali za $\vec y:=(0,0,\dotsc,0,1)\in\N^k$ vrijedi
 \begin{equation}
-    \kf{i_k}^k(\vec y)=\f I_k^k(0,0,\dotsc,0,1)=1\not=0=\f C_0^k(\vec y)=\kf1^k(\vec y)\text,
+    \kf{i_k}^k(\vec y)=\f I_k^k(0,0,\dotsc,0,1)=1\ne0=\f C_0^k(\vec y)=\kf1^k(\vec y)\text,
 \end{equation}
-iz čega slijedi $1\not\approx_ki_k$.
+iz čega slijedi $1\napprox_ki_k$.
 \end{proof}
 
 \subsection{Teorem o fiksnoj točki}
@@ -708,7 +708,7 @@ Drugo, $\f F$ ne mora biti primitivno rekurzivna --- vidjet ćemo da je dovoljno
 Treće, $\f F$ mora biti jednomjesna: broj $k$ je mjesnost funkcije $\kf e^k$, koja je jednaka funkciji $\kf{\f F(e)}^k$. Mjesnost od $\f F$ mora biti $1$ jer želimo u nju uvrstiti $e\in\N^1$.
 
 I četvrto, $\f F$ mora biti izračunljiva: nije dovoljno da zahtijevamo samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $Emp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{Emp}(e)$, tada bi $e\in Emp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{Emp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija.
-($\kf0(0)$ nema smisla po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\not\simeq\kf1(0)$, dakle $\kf0^1\not=\kf1^1$.) No $e\not\in Emp$ je također kontradikcija, jer bi to značilo $e\approx_1\chi_{Emp}(e)=0$, dakle $e\in[0]_{\approx_1}=Emp$. Dakle, $\chi_{Emp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
+($\kf0(0)$ nema smisla po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\nsimeq\kf1(0)$, dakle $\kf0^1\ne\kf1^1$.) No $e\notin Emp$ je također kontradikcija, jer bi to značilo $e\approx_1\chi_{Emp}(e)=0$, dakle $e\in[0]_{\approx_1}=Emp$. Dakle, $\chi_{Emp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
 
 Primijetite sličnost upravo provedenog razmišljanja s Russellovim paradoksom. Primijetite također da će iz toga slijediti, jednom kad dokažemo teorem o fiksnoj točki, da skup $Emp$ nije rekurzivan. No zapravo će to biti samo jedna jednostavna posljedica Riceovog teorema, koji ćemo dokazati kasnije.
 
@@ -733,29 +733,29 @@ Vidjeli smo u prethodnoj točki da iz teorema o fiksnoj točki zapravo možemo z
 
 O čemu se tu zapravo radi? Reći da je neki broj $e$ element klase $Emp$, zapravo znači reći da je $e\approx_10$, odnosno $\kf e^1=\kf0^1=\varnothing^1$. Drugim riječima, $Emp$ je upravo skup svih indeksa prazne jednomjesne funkcije. Ako uzmemo neku drugu izračunljivu funkciju, dobit ćemo neku drugu klasu (kojoj pripada njen indeks), i obrnuto, neka druga klasa $[e]_{\approx_k}$ će biti skup svih indeksa funkcije $\kf e^k$.
 
-Neka unija klasa $S:=\bigcup_{e\in A}[e]_{\approx_k}$ tada će odgovarati nekom \emph{skupu} izračunljivih $k$-mjesnih funkcija $\mathcal F:=\{\kf e^k\mid e\in A\}\subseteq\mathcal Comp_k$, te će praznom skupu $S$ odgovarati prazan skup $\mathcal F$, a skupu $S=\N$ odgovarat će $\mathcal F=\mathcal Comp_k$. Kako je to preslikavanje injekcija, ostalim skupovima brojeva ($\emptyset\subset S\subset\N$) odgovarat će ostali skupovi funkcija ($\emptyset\subset\mathcal F\subset\mathcal Comp_k$). Vrijeme je da to formaliziramo.
+Neka unija klasa $S:=\bigcup_{e\in A}[e]_{\approx_k}$ tada će odgovarati nekom \emph{skupu} izračunljivih $k$-mjesnih funkcija $\mathcal F:=\{\kf e^k\mid e\in A\}\subseteq\mathscr Comp_k$, te će praznom skupu $S$ odgovarati prazan skup $\mathcal F$, a skupu $S=\N$ odgovarat će $\mathcal F=\mathscr Comp_k$. Kako je to preslikavanje injekcija, ostalim skupovima brojeva ($\emptyset\subset S\subset\N$) odgovarat će ostali skupovi funkcija ($\emptyset\subset\mathcal F\subset\mathscr Comp_k$). Vrijeme je da to formaliziramo.
 
 \begin{definicija}[{name=[skup indeksa]}]
-Neka je $k\in\N_+$. Za svaki $\mathcal F\subseteq\mathcal Comp_k$ definiramo \emph{skup indeksa} (ili \emph{skup $k$-indeksa}, ako želimo naglasiti $k$) kao
+Neka je $k\in\N_+$. Za svaki $\mathcal F\subseteq\mathscr Comp_k$ definiramo \emph{skup indeksa} (ili \emph{skup $k$-indeksa}, ako želimo naglasiti $k$) kao
 \begin{equation}
     \knk{\mathcal F}:=\{e\in\N\mid\kf e^k\in\mathcal F\,\}\,\text.
 \end{equation}
 (U oznaci nigdje ne spominjemo $k$, jer se može rekonstruirati iz $\mathcal F$ ako je $\mathcal F$ neprazan. Naravno, $\knk{\emptyset}=\emptyset$, bez obzira na $k$.)
 \end{definicija}
 
-Primijetite sličnost s definicijom~\eqref{eq:kodLdef} --- kao što smo tamo kodirali riječi zapisom u bazi, ovdje kodiramo funkcije njihovim indeksima. Kao što smo već rekli, relacija $index\subseteq\N\times\N_+\times\mathcal Comp$, zadana s $index(e,k,\f F)\Longleftrightarrow\kf e^k=\f F$, nema funkcijsko svojstvo po prvoj varijabli, odnosno ne možemo govoriti o jedinstvenom indeksu neke konkretne funkcije --- ali zato možemo govoriti o skupu indeksa nekog skupa funkcija.
+Primijetite sličnost s definicijom~\eqref{eq:kodLdef} --- kao što smo tamo kodirali riječi zapisom u bazi, ovdje kodiramo funkcije njihovim indeksima. Kao što smo već rekli, relacija $index\subseteq\N\times\N_+\times\mathscr Comp$, zadana s $index(e,k,\f F)\Longleftrightarrow\kf e^k=\f F$, nema funkcijsko svojstvo po prvoj varijabli, odnosno ne možemo govoriti o jedinstvenom indeksu neke konkretne funkcije --- ali zato možemo govoriti o skupu indeksa nekog skupa funkcija.
 
 \begin{lema}[{name=[različiti skupovi funkcija imaju različite skupove indeksa]}]\label{lm:kodCompinj}
-Za svaki $k\in\N_+$, preslikavanje $\knk{\cdots}\colon\mathcal P(\mathcal Comp_k)\to\mathcal P(\N)$ je injekcija.
+Za svaki $k\in\N_+$, preslikavanje $\knk{\cdots}:\mathcal P(\mathscr Comp_k)\to\mathcal P(\N)$ je injekcija.
 \end{lema}
 Štoviše, iz dokaza će slijediti da $\knk{\cdots}$ strogo raste: $\mathcal F\subset\mathcal G$ povlači $\knk{\mathcal F}\subset\knk{\mathcal G}$.
 \begin{proof}
-Neka su $\mathcal F,\mathcal G\subseteq\mathcal Comp_k$ različiti. Tada postoji funkcija $\f F$ takva da (bez smanjenja općenitosti) je $\f F\in\mathcal G$, ali $\f F\not\in\mathcal F$. Tada $\f F\in\mathcal G\subseteq\mathcal Comp_k$ znači da je $\f F$ RAM-izračunljiva, pa postoji RAM-program $P$ koji je računa. Tada je $e:=\kprog P$ indeks funkcije $\f F$, odnosno $\kf e^k\in\mathcal G$, pa je $e\in\knk{\mathcal G}$.
+Neka su $\mathcal F,\mathcal G\subseteq\mathscr Comp_k$ različiti. Tada postoji funkcija $\f F$ takva da (bez smanjenja općenitosti) je $\f F\in\mathcal G$, ali $\f F\notin\mathcal F$. Tada $\f F\in\mathcal G\subseteq\mathscr Comp_k$ znači da je $\f F$ RAM-izračunljiva, pa postoji RAM-program $P$ koji je računa. Tada je $e:=\kprog P$ indeks funkcije $\f F$, odnosno $\kf e^k\in\mathcal G$, pa je $e\in\knk{\mathcal G}$.
 
-No kad bi bilo i $e\in\knk{\mathcal F}$, to bi značilo $\kf e^k\in\mathcal F$, što je nemoguće jer $\f F\not\in\mathcal F$. Drugim riječima, $e\in\knk{\mathcal G}\setminus\knk{\mathcal F}$, odnosno $\knk{\mathcal F}\not=\knk{\mathcal G}$.
+No kad bi bilo i $e\in\knk{\mathcal F}$, to bi značilo $\kf e^k\in\mathcal F$, što je nemoguće jer $\f F\notin\mathcal F$. Drugim riječima, $e\in\knk{\mathcal G}\setminus\knk{\mathcal F}$, odnosno $\knk{\mathcal F}\ne\knk{\mathcal G}$.
 \end{proof}
 
-Na neki način, do na nezgodnu činjenicu da je $\mathcal P(\mathcal Comp_k)$ neprebrojiv, čini se kao da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\knk{\mathcal F}}$ ima to svojstvo. Ili, neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\knk{\{\f F\in\mathcal Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceovog teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
+Na neki način, do na nezgodnu činjenicu da je $\mathcal P(\mathscr Comp_k)$ neprebrojiv, čini se kao da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\knk{\mathcal F}}$ ima to svojstvo. Ili, neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\knk{\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceovog teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
 
 % \subsection{Invarijantnost}
 
@@ -767,7 +767,7 @@ recimo jednočlan skup $\{1\}$. On je svakako rekurzivan (lema~\ref{lm:r1prn}), 
 Dakle, skupovi indeksa nisu bilo kakvi skupovi prirodnih brojeva. Oni moraju imati specijalno svojstvo \emph{invarijantnosti} na relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma. 
 
 \begin{primjer}[{name=[Sortiranje kao jedna funkcija s raznim implementacijama]}]
-    Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\colon\f{Seq}\to\f{Seq}$ koja sortira konačne nizove, zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
+    Recimo, mogli bismo zamisliti funkciju $\f{sort}^1:\f{Seq}\to\f{Seq}$ koja sortira konačne nizove, zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
 \begin{align}
     \f{tail}(s)&:\simeq\mu t(\kr{s[0]}*t=s)\\
     \f{min}(s)&:\simeq\mu n\bigl(\exists i<\f{lh}(s)\bigr)(s[i]=n)\\
@@ -793,7 +793,7 @@ Dakle, skupovi indeksa nisu bilo kakvi skupovi prirodnih brojeva. Oni moraju ima
         \f{sort}\bigl(\f{dn}\bigl(\f{tail}(s),s[0]\bigr)\bigr)*\kr{s[0]}*\f{sort}\bigl(\f{up}\bigl(\f{tail}(s),s[0]\bigr)\bigr),&\f{Seq}'(s)
     \end{cases}
 \end{align}
---- što će nakon kompajliranja (i korištenja teorema rekurzije na nekoliko mjesta) rezultirati jako različitim RAM-programima, odnosno indeksima funkcije $\f{sort}$. Ako sa $ss$ označimo indeks za \emph{selection sort}, a s $qs$ označimo indeks za \emph{quicksort}, očito vrijedi $ss\approx_1qs$, jer što se specifikacije tiče, i jedan i drugi računaju istu funkciju: sortiraju konačan niz.
+--- što će nakon kompiliranja (i korištenja teorema rekurzije na nekoliko mjesta) rezultirati jako različitim RAM-programima, odnosno indeksima funkcije $\f{sort}$. Ako sa $ss$ označimo indeks za \emph{selection sort}, a s $qs$ označimo indeks za \emph{quicksort}, očito vrijedi $ss\approx_1qs$, jer što se specifikacije tiče, i jedan i drugi računaju istu funkciju: sortiraju konačan niz.
 
 Možete se zabaviti pišući razne druge algoritme za sortiranje u jeziku parcijalno rekurzivnih funkcija~\ldots\ dobit ćete raznorazne implementacije, odnosno indekse, za jednu te istu matematičku funkciju, i svi su oni u istoj klasi ekvivalencije $\knk{\{\f{sort}\}}$. Ako bismo prije navedeni \emph{unit test} htjeli napisati u obliku jednadžbe po indeksu,
 \begin{equation}\label{eq:unittest}
@@ -812,7 +812,7 @@ Svojstvo $k$-invarijantnosti pruža brojevnu karakterizaciju skupova indeksa, be
 \begin{lema}[{name=[$k$-invarijantnost karakterizira skupove indeksa]}]\label{lm:kinv=sind}
 Neka je $k\in\N_+$, te $S\subseteq\N$.
 
-Tada je $S$ $k$-invarijantan ako i samo ako je $S=\knk{\mathcal F}$ za neki $\mathcal F\subseteq\mathcal Comp_k$.
+Tada je $S$ $k$-invarijantan ako i samo ako je $S=\knk{\mathcal F}$ za neki $\mathcal F\subseteq\mathscr Comp_k$.
 \end{lema}
 \begin{proof}
 Za smjer ($\Leftarrow$), neka je $f\approx_k e\in S=\knk{\mathcal F}$. Tada je po definiciji $\kf f^k=\kf e^k\in\mathcal F$, pa je i $f\in\knk{\mathcal F}=S$. Za smjer ($\Rightarrow$), pretpostavimo da je $S$ $k$-invarijantan, i tražimo $\mathcal F$. Očiti kandidat je $\mathcal F:=\{\kf e^k\mid e\in S\}$. Dakle, trebamo dokazati da je $\knk{\mathcal F}=S$.
@@ -833,7 +833,7 @@ Neka je $k\in\N_+$, i $S\subseteq\N$ rekurzivan $k$-invarijantan skup. Tada je $
 Ideja dokaza je vrlo slična onom što smo napravili za $Emp$ --- samo, dok nam je tamo Russellov paradoks bio "serviran"\!, ovdje ćemo morati namjestiti scenu za njega.
 
 \begin{proof}
-Pretpostavimo da je $S$ rekurzivan, i da $S$ nije ni $\emptyset$ ni $\N$. $S\not=\emptyset$ znači da postoji broj $s\in S$, a $S\not=\N$ znači da postoji $n\in S\kompl=\N\setminus S$. Tada je funkcija $F^1$, zadana s
+Pretpostavimo da je $S$ rekurzivan, i da $S$ nije ni $\emptyset$ ni $\N$. $S\ne\emptyset$ znači da postoji broj $s\in S$, a $S\ne\N$ znači da postoji $n\in S\kompl=\N\setminus S$. Tada je funkcija $F^1$, zadana s
 \begin{equation}
     F(x):=\begin{cases}
         n,&x\in S\\
@@ -844,7 +844,7 @@ rekurzivna. To je jednostavna primjena teorema~\ref{tm:grek} --- simbolički, $F
 
 Jer je $F$ rekurzivna, ima fiksnu točku: postoji broj $e\in\N$ takav da je $e\approx_k F(e)$. No to je nemoguće: ako je $e\in S$, tada je po $k$-invarijantnosti i $F(e)\in S$ --- što je u kontradikciji s činjenicom da je $F(e)=n$ za $e\in S$.
 
-Ako pak $e\not\in S$, tada je $F(e)=s\in S$, a zbog simetričnosti relacije $\approx_k$ imamo i $F(e)\approx_k e$. No to bi značilo da $S$ nije $k$-invarijantan, jer smo našli $s\in S$ takav da je $s\approx_k e$, ali $e$ nije u $S$.
+Ako pak $e\notin S$, tada je $F(e)=s\in S$, a zbog simetričnosti relacije $\approx_k$ imamo i $F(e)\approx_k e$. No to bi značilo da $S$ nije $k$-invarijantan, jer smo našli $s\in S$ takav da je $s\approx_k e$, ali $e$ nije u $S$.
 
 U oba slučaja došli smo do kontradikcije, pa pod pretpostavkom da je $S$ rekurzivan, jedino je moguće da je $S=\emptyset$ ili $S=\N$.
 \end{proof}
@@ -859,24 +859,24 @@ Ovo je samo obrat po kontrapoziciji teorema~\ref{tm:Rice}.
 \end{proof}
 
 \begin{korolar}[{name=[neodlučivost netrivijalnog skupa izračunljivih funkcija]}]\label{kor:Rice!odl}
-Neka je $k\in\N_+$, i \,$\emptyset\subset\mathcal F\subset\mathcal Comp_k$. Tada $\mathcal F$ nije odlučiv.
+Neka je $k\in\N_+$, i \,$\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Tada $\mathcal F$ nije odlučiv.
 \end{korolar}
 \begin{proof}
-Označimo $S:=\knk{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\not=\knk{\emptyset}=\emptyset$ i $S\not=\knk{\mathcal Comp_k}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po prethodnom korolaru $S$ nije rekurzivan.
+Označimo $S:=\knk{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\ne\knk{\emptyset}=\emptyset$ i $S\ne\knk{\mathscr Comp_k}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po prethodnom korolaru $S$ nije rekurzivan.
 \end{proof}
 
 \begin{korolar}[{name=[neodlučivost netrivijalnih semantičkih svojstava]}]
-Neka je $k\in\N_+$, te neka je $\wp$ bilo koje netrivijalno svojstvo $k$-mjesnih izračunljivih funkcija. Tada nijedan algoritam ne može točno odrediti, za proizvoljnu $\f F\in\mathcal Comp_k$, ima li\, $\f F$ svojstvo $\wp$.
+Neka je $k\in\N_+$, te neka je $\wp$ bilo koje netrivijalno svojstvo $k$-mjesnih izračunljivih funkcija. Tada nijedan algoritam ne može točno odrediti, za proizvoljnu $\f F\in\mathscr Comp_k$, ima li\, $\f F$ svojstvo $\wp$.
 \end{korolar}
 \begin{proof}
-Budući da je $\wp$ netrivijalno svojstvo, postoji $k$-mjesna funkcija koja ga ima i neka druga $k$-mjesna funkcija koja ga nema. To znači da za skup $\mathcal F:=\{\f F\in\mathcal Comp_k\mid\wp(\f F)\}$ vrijedi $\emptyset\subset\mathcal F\subset\mathcal Comp_k$. Kad bi takav algoritam postojao, morao bi primati funkciju u nekom obliku (točkovna definicija, simbolička definicija, RAM-program, Turingov stroj,~\ldots) --- a svaki od njih znamo, neformalnim algoritmom, pretvoriti u indeks. Štoviše, imamo i (neformalne) algoritme pretvorbe u suprotnom smjeru, što znači da algoritam kojim bismo htjeli odlučiti $\wp$ mora raditi za \emph{sve} indekse traženih funkcija.
+Budući da je $\wp$ netrivijalno svojstvo, postoji $k$-mjesna funkcija koja ga ima i neka druga $k$-mjesna funkcija koja ga nema. To znači da za skup $\mathcal F:=\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}$ vrijedi $\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Kad bi takav algoritam postojao, morao bi primati funkciju u nekom obliku (točkovna definicija, simbolička definicija, RAM-program, Turingov stroj,~\ldots) --- a svaki od njih znamo, neformalnim algoritmom, pretvoriti u indeks. Štoviše, imamo i (neformalne) algoritme pretvorbe u suprotnom smjeru, što znači da algoritam kojim bismo htjeli odlučiti $\wp$ mora raditi za \emph{sve} indekse traženih funkcija.
 %Ovo vjerojatno treba puno bolje raspisati.
 No po Church--\!Turingovoj tezi, to znači da bi taj algoritam računao $\chi_{\knk{\mathcal F}}$, što je u kontradikciji s korolarom~\ref{kor:Rice!odl}.
 \end{proof}
 
 % \subsection{Sintaksna i semantička svojstva RAM-programa}
 
-Za zadani RAM-program možemo postaviti mnoga pitanja: ima li više od milijun instrukcija, stane li s ulazom $(2,5)$, je li mu registar $\reg{15}$ relevantan, sadrži li instrukciju tipa $\goto$, računa li totalnu funkciju, dekrementira li ikad u toku izračunavanja registar $\reg7$, je li dobiven kompajliranjem simboličke definicije neke primitivno rekurzivne funkcije, zapiše li Turingov stroj dobiven njegovim transpiliranjem ikad prazninu na traku, može li se dobiti spljoštenjem makro-programa koji sadrži barem jedan funkcijski makro, napravi li paran broj koraka prije zaustavljanja s ulazom $27$, i tako dalje.
+Za zadani RAM-program možemo postaviti mnoga pitanja: ima li više od milijun instrukcija, stane li s ulazom $(2,5)$, je li mu registar $\reg{15}$ relevantan, sadrži li instrukciju tipa $\goto$, računa li totalnu funkciju, dekrementira li ikad u toku izračunavanja registar $\reg7$, je li dobiven kompiliranjem simboličke definicije neke primitivno rekurzivne funkcije, zapiše li Turingov stroj dobiven njegovim transpiliranjem ikad prazninu na traku, može li se dobiti spljoštenjem makro-programa koji sadrži barem jedan funkcijski makro, napravi li paran broj koraka prije zaustavljanja s ulazom $27$, i tako dalje.
 
 Mnoga od tih svojstava (ali ne nužno sva) prirodno svrstavamo u dvije grupe: nazovimo ih \emph{sintaksna} i \emph{semantička} svojstva. Sintaksna svojstva su ona vezana uz konkretni "programski jezik" kojim je RAM-program pisan: govore o instrukcijama, registrima, ili o raznim sintaksnim postupcima pretvorbe (npr.\ iz makro-programa, ili u Turingov stroj), te o sintaksnim svojstvima tih drugih nositelja izračunavanja.
 
@@ -906,5 +906,5 @@ Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupo
 \end{enumerate}
 
 \begin{primjer}[{name=[neodlučivost $k$-mjesnog brojevnog problema zaustavljanja]}]
-    Za svaki $k\in\N_+$, skup $Halt_k$ nije rekurzivan. Naime, ako definiramo $T(e):\Longleftrightarrow Halt_k(\vec 0,e)$, očito je $T=\knk{\{\f f\in\mathcal Comp_k\mid\vec 0\in\dom{\f f}\}}$ $k$-invarijantan po lemi~\ref{lm:kinv=sind}, te vrijedi $0\not\in T$ i $1\in T$. Dakle $T$ nije rekurzivan, pa zbog $Halt_k\preceq T$ niti $Halt_k$ nije rekurzivan.
+    Za svaki $k\in\N_+$, skup $Halt_k$ nije rekurzivan. Naime, ako definiramo $T(e):\Longleftrightarrow Halt_k(\vec 0,e)$, očito je $T=\knk{\{\f f\in\mathscr Comp_k\mid\vec 0\in\dom{\f f}\}}$ $k$-invarijantan po lemi~\ref{lm:kinv=sind}, te vrijedi $0\notin T$ i $1\in T$. Dakle $T$ nije rekurzivan, pa zbog $Halt_k\preceq T$ niti $Halt_k$ nije rekurzivan.
 \end{primjer}

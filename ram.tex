@@ -15,7 +15,7 @@ Ipak, skup $\{0,1\}^*$, kao i općeniti $\Sigma^*$, matematički je nespretan; r
 
 Za dokazivanje teorema bolje je uzeti jednostavniji skup, te ćemo u najvećem dijelu knjige promatrati \emph{brojevne} funkcije, za koje su ulazni i izlazni podaci \textbf{prirodni brojevi}. U nekom smislu, skup prirodnih brojeva je najjednostavniji mogući skup na kojem se može raditi teorija izračunljivosti --- svakako je najjednostavniji među beskonačnim skupovima, a izračunljivost na konačnim skupovima je trivijalna: svaki algoritam može se napisati jednostavno kao tablica (\emph{lookup table}).
 
-Odabir skupa $\N$ kao osnovnog isplatit će se kroz jednostavnost mnogih dokaza (jer imamo matematičku indukciju, jasan početak i sljedbenika, dobar uređaj,~\ldots), ali s druge strane, zato će biti kompliciranije \emph{kodirati} razne druge matematičke objekte kao prirodne brojeve. Za usporedbu, skup $\Sigma^*$ je zgodniji za kodiranje, jer već imamo intuitivnu predodžbu raznih objekata kao nizova znakova ($\Sigma=$ ASCII): recimo, nitko nam ne mora objasniti kodiranje da bismo znali koji element od $\mathbb Q$ predstavlja \t{'-22/3'}.
+Odabir skupa $\N$ kao osnovnog isplatit će se kroz jednostavnost mnogih dokaza (jer imamo matematičku indukciju, jasan početak i sljedbenika, dobar uređaj,~\ldots), ali s druge strane, zato će biti kompliciranije \emph{kodirati} razne druge matematičke objekte kao prirodne brojeve. Za usporedbu, skup $\Sigma^*$ je zgodniji za kodiranje, jer već imamo intuitivnu predodžbu raznih objekata kao nizova znakova ($\Sigma=$ ASCII): nitko nam ne mora objasniti kodiranje da bismo znali koji element od $\mathbb Q$ predstavlja "\t{-22/3}".
 
 Ipak, neintuitivnost kodiranja nadomjestit će lakoća pisanja algoritama: dok je, uz odgovarajuće tehnike~\cite{posav}, lako napisati algoritam za npr.\ zbrajanje racionalnih brojeva kodiranih prirodnim brojevima, analogni algoritam za ASCII-kodirane razlomke gotovo nikada ne stigne dalje od grubog pseudokoda. Ponegdje, gdje su naši objekti već \emph{definirani} kao nizovi znakova (najvažniji primjer su formule logike prvog reda), svakako ćemo koristiti njihovu jezičnu reprezentaciju, ali to će biti nakon što objasnimo općenito kodiranje sa $\Sigma^*$ u $\N$ (i obrnuto).
 
@@ -31,25 +31,25 @@ Smatramo li nulu prirodnim brojem? Treba li brojenje početi od $0$ ili od $1$, 
 \begin{napomena}[{name=[samo jedan izlazni podatak]}]\label{nap:brip}
 Pričali smo o izlaznim podacima u množini, no lako je vidjeti da --- s obzirom na to da nas samo zanima postojanje algoritma, ne i njegove performanse --- ništa ne gubimo fiksiranjem broja izlaznih podataka na $1$. Algoritam s $k$ ulaznih i $l$ izlaznih podataka uvijek možemo promatrati kao $l$ algoritama s istih $k$ ulaznih podataka i s po jednim izlaznim podatkom.
 
-Na primjer, u nekim programskim jezicima postoji operacija $\f{divmod}$ iz $\mathbb Z^2$ u $\mathbb Z^2$, koja provodi dijeljenje s ostatkom u $\mathbb Z$, te vraća količnik i ostatak. Nju uvijek možemo, čak i da je nemamo kao osnovnu, emulirati pomoću dvije operacije, $\sslash$ i $\bmod$, koje vraćaju količnik i ostatak istog dijeljenja zasebno. Naravno, razlog zašto neki jezici imaju $\f{divmod}$ kao posebnu funkciju leži u tome da algoritmi za te dvije operacije imaju mnogo zajedničkih koraka, te ako smo odredili količnik, obično je lako iz postupka kojim smo to učinili pročitati i ostatak (sjetite se npr.\ algoritma za dijeljenje višeznamenkastih brojeva). Zato bismo ponovnim provođenjem algoritma ispočetka za ostatak nepotrebno duplicirali korake. No ako nas samo zanima koje su funkcije izračunljive, očito postoji algoritam za $\f{divmod}$ ako i samo ako postoje algoritmi za $\sslash$ i za $\bmod$, te nam je dovoljno baviti se pitanjem jesu li \emph{koordinatne funkcije} $\sslash$ i $\bmod$ izračunljive --- u ovom slučaju, dakako, jesu.
+    Na primjer, u nekim programskim jezicima postoji operacija $\texttt{divmod}$ iz $\mathbb Z^2$ u $\mathbb Z^2$, koja provodi dijeljenje s ostatkom u $\mathbb Z$, te vraća količnik i ostatak. Nju uvijek možemo, čak i da je nemamo kao osnovnu, emulirati pomoću dvije operacije, $\sslash$ i $\bmod$, koje vraćaju količnik i ostatak istog dijeljenja zasebno. Naravno, razlog zašto neki jezici imaju $\texttt{divmod}$ kao posebnu funkciju leži u tome da algoritmi za te dvije operacije imaju mnogo zajedničkih koraka, te ako smo odredili količnik, obično je lako iz postupka kojim smo to učinili pročitati i ostatak (sjetite se npr.\ algoritma za dijeljenje višeznamenkastih brojeva). Zato bismo ponovnim provođenjem algoritma ispočetka za ostatak nepotrebno duplicirali korake. No ako nas samo zanima koje su funkcije izračunljive, očito postoji algoritam za $\texttt{divmod}$ ako i samo ako postoje algoritmi za \emph{koordinatne funkcije} $\sslash$ i $\bmod$, te nam je dovoljno baviti se pitanjem jesu li $\sslash$ i $\bmod$ izračunljive --- u ovom slučaju, dakako, jesu.
 \end{napomena}
 
 Kad promatramo broj \emph{ulaznih} podataka (tzv.\ \emph{mjesnost}) algoritma, situacija je bitno drugačija. Jasno je da algoritam za npr.\ potenciranje prirodnih brojeva prima bazu i eksponent kao dva ulazna podatka, i ne može se jednostavno zapisati pomoću algoritama koji primaju po jedan ulazni podatak. %Doduše, korištenjem tehnike \emph{currying}, svaku izračunljivu funkciju možemo računati pomoću algoritama koji primaju po \emph{dva} ulazna podatka, i neki autori doista ograničavaju mjesnost na $2$, ali to stvara dosta tehničkih problema za minimalni dobitak.
-Zato ćemo promatrati algoritme proizvoljnih mjesnosti $k\in\N_+$, i smatrati da mjesnost čini važan dio identiteta algoritma. Primjerice, "zbroji 2 broja" i "zbroji 5 brojeva" su različiti algoritmi, štoviše ovaj prvi pojavljuje se kao korak (nekoliko puta) u ovom drugom.
+Zato ćemo promatrati algoritme proizvoljnih mjesnosti $k\in\N_+$, i smatrati da mjesnost čini bitni dio identiteta algoritma. Primjerice, "zbroji 2 broja" i "zbroji 5 brojeva" su različiti algoritmi, štoviše ovaj prvi pojavljuje se kao korak (nekoliko puta) u ovom drugom.
 
-Direktna posljedica toga je da u našem modelu ne postoje algoritmi s "varijabilnim brojem" ulaznih podataka, u računarstvu poznati kao \emph{varargs}. Na nekoliko mjesta gdje nam budu potrebni, modelirat ćemo ih pomoću familije algoritama svih mogućih mjesnosti, recimo zbrajanje kao $\f{add}^k,k\in\N_+$. Mjesnost algoritma ili funkcije ćemo obično pisati u superskriptu ako je želimo naglasiti --- neće dolaziti do zabune s eksponentima jer ni algoritme ni funkcije nećemo potencirati; niti s oznakom $f^{-1}$ za inverznu funkciju jer mjesnost ne može biti negativna.
+Direktna posljedica toga je da u našem modelu ne postoje algoritmi s "varijabilnim brojem" ulaznih podataka, što je u računarstvu poznato pod nazivom \emph{varargs}. Na nekoliko mjesta gdje nam budu potrebni, modelirat ćemo ih pomoću familije algoritama svih mogućih mjesnosti --- recimo zbrajanje kao $\f{add}^k,k\in\N_+$. Mjesnost algoritma ili funkcije ćemo obično pisati u superskriptu ako je želimo naglasiti --- neće dolaziti do zabune s eksponentima jer ni algoritme ni funkcije nećemo potencirati, niti s oznakom $f^{-1}$ za inverznu funkciju jer mjesnost ne može biti negativna.
 
-Iako mjesnost smatramo neodvojivim dijelom funkcije odnosno algoritma, u slučaju nespecificirane mjesnosti $k$ nespretno je pisati $x_1,x_2,\dotsc,x_k$ svugdje gdje trebamo napisati argumente odnosno ulazne podatke. Zato ćemo često tih $k$ prirodnih brojeva skraćeno pisati $\vec x$, ili $\vec x^{\,k}$ ako želimo naglasiti koliko ih ima --- no najčešće će se to moći zaključiti iz konteksta: recimo, u $f^7(\vec x,y,z)$, očito je duljina od $\vec x$ jednaka $5$.
+Iako mjesnost smatramo neodvojivim dijelom funkcije odnosno algoritma, u slučaju nespecificirane mjesnosti $k$ nespretno je pisati $x_1,x_2,\dotsc,x_k$ svugdje gdje trebamo napisati argumente odnosno ulazne podatke. Zato ćemo često tih $k$ prirodnih brojeva skraćeno pisati $\vec x$, ili $\vec x^k$ ako želimo naglasiti koliko ih ima --- no najčešće će se to moći zaključiti iz konteksta: recimo, u $f^7(\vec x,y,z)$, očito je duljina od $\vec x$ jednaka $5$.
 
 \begin{napomena}[{name=[svi argumenti moraju biti eksplicitno navedeni]}]\label{nap:blokovi}
 S obzirom na to da promatramo samo determinističke algoritme, naglasimo da nema "implicitnih argumenata": sve vrijednosti o kojima ovisi izlaz funkcije (ako se doista mijenjaju od poziva do poziva) moraju biti prenesene u nju kao argumenti. Često ćemo pisati opće funkcijske pozive kao $f(\vec x,y,z)$ --- gdje su $y$ i $z$ "lokalne varijable" s kojima doista nešto radimo u konkretnom algoritmu, a $\vec x$ predstavlja samo kontekst (\emph{environment}) nekog vanjskog algoritma koji je pozvao $f$ --- koji također moramo prenijeti u $f$ ako želimo da mu ona može pristupiti.
 \end{napomena}
 
-Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivan prirodan broj, odnosno ne promatramo algoritme s $0$ ulaznih podataka. Ovo nije bitna restrikcija (možete se zabaviti pokušavajući otkriti koje sve tehničke detalje u knjizi treba promijeniti da bismo uključili i takve algoritme u razmatranje), ali komplicira izlaganje, a opet, takvi algoritmi nam nisu zanimljivi iz perspektive izračunljivosti: budući da zahtijevamo determinističnost, nul-mjesni algoritmi mogu računati jedino konstante, a one su svakako izračunljive bez obzira na formalizam.
+Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivna, odnosno ne promatramo algoritme s $0$ ulaznih podataka. Ovo nije bitna restrikcija (možete se zabaviti pokušavajući otkriti koje sve tehničke detalje u knjizi treba promijeniti da bismo uključili i takve algoritme u razmatranje), ali komplicira izlaganje, a takvi algoritmi nam nisu zanimljivi iz perspektive izračunljivosti: budući da zahtijevamo determinističnost, nul-mjesni algoritmi mogu računati jedino konstante, a ne treba nam jako napredni formalizam da bismo zaključili da konstante \emph{jesu} izračunljive.
 
 \subsection{Parcijalnost}
 
-Gdje smo u dosadašnjem tekstu pričali o općenitim izračunljivim funkcijama, pazili smo da  upotrijebimo prijedlog "iz": funkcija \emph{iz} $A$ u $B$. Općenito u matematici, takva fraza označava \emph{parcijalne} funkcije, koje ne moraju biti definirane u svim točkama od $A$ (precizno, domena im je podskup od $A$). Recimo, tangens je parcijalna funkcija iz $\mathbb R$ u $\mathbb R$, jer $\frac{\pi}{2}\in\mathbb R\setminus \dom{\text{tg}}$. Takve funkcije označavamo oznakom $f\colon A\rightharpoonup B$, za razliku od \emph{totalnih} funkcija koje označavamo $f\colon A\to B$ i zovemo ih funkcije \emph{sa} $A$ u $B$. 
+Gdje god smo u dosadašnjem tekstu pričali o općenitim izračunljivim funkcijama, pazili smo da  upotrijebimo prijedlog "iz": funkcija \emph{iz} $A$ u $B$. Općenito u matematici, takva fraza označava \emph{parcijalne} funkcije, koje ne moraju biti definirane u svim točkama od $A$ (precizno, domena im je podskup od $A$). Recimo, tangens je parcijalna funkcija iz $\mathbb R$ u $\mathbb R$, jer je $\frac{\pi}{2}\in\mathbb R\setminus \dom{\text{tg}}$. Takve funkcije označavamo oznakom $f:A\rightharpoonup B$, za razliku od \emph{totalnih} funkcija koje označavamo $f:A\to B$ i zovemo ih funkcije \emph{sa} $A$ u $B$. 
 
 Dopuštajući algoritmima da računaju parcijalne funkcije, zapravo im omogućavamo da je za neke ulazne podatke njihov rad sasvim dobro definiran (dakle, ovdje ne mislimo na izuzetke, \emph{exceptions}, kao što je dijeljenje nulom), ali da ipak ne postoji završna konfiguracija iz koje bismo mogli pročitati izlazni podatak. Nakon malo razmišljanja dolazimo do zaključka da je to jedino moguće tako da algoritam za neke ulaze beskonačno radi, odnosno nikada ne stane.
 
@@ -59,9 +59,9 @@ Budući da želimo algoritme moći reprezentirati u računalu, moramo ih moći p
 
 Ipak, bitno je  lakše raditi s algoritmima koji računaju totalne funkcije. Parcijalne funkcije moramo dozvoliti u krajnjoj općenitosti, ali mnoge funkcije koje ćemo koristiti u izgradnji teorije bit će ne samo totalne, nego i \emph{sintaksno} totalne unutar teorije koju gradimo: već iz oblika njihovih definicija bit će jasno da algoritmi koji ih računaju uvijek stanu. Takve funkcije zvat ćemo \emph{primitivno rekurzivnima}.
 
-Kad smo već kod toga, recimo nekoliko riječi i o klasičnim izuzecima poput dijeljenja nulom. Primitivno rekurzivne funkcije po definiciji moraju biti totalne, pa si ne možemo priuštiti jednostavno reći nešto poput "$3\sslash0$ nije definirano" (dokazat ćemo da je $\sslash$ primitivno rekurzivna operacija). U mnogim slučajevima to ćemo rješavati jednostavno tako da kažemo "\emph{postoji} primitivno rekurzivna funkcija $\f{f}$ koja se podudara s traženom funkcijom $g$ na domeni $\dom{g}$", ne govoreći ništa o vrijednostima $\f{f}(\vec x)$ za $\vec x\not\in\dom{g}$. Još općenitije, ponekad ćemo umjesto funkcije $g$ navesti samo neko \emph{svojstvo} koje vrijednosti od $\f{f}$ moraju zadovoljavati na nekom skupu. Kazat ćemo tada da smo \emph{parcijalno specificirali} (totalnu) funkciju $\f{f}$: u smislu, $\f{f}$ je definirana svuda, ali nas zanimaju samo vrijednosti na nekom užem skupu.
+Kad smo već kod toga, recimo nekoliko riječi i o klasičnim izuzecima poput dijeljenja nulom. Primitivno rekurzivne funkcije po definiciji moraju biti totalne, pa si ne možemo priuštiti jednostavno reći nešto poput "$3\sslash0$ nije definirano" (dokazat ćemo da je $\sslash$ primitivno rekurzivna operacija). U mnogim slučajevima to ćemo rješavati jednostavno tako da kažemo "\emph{postoji} primitivno rekurzivna funkcija $\f{f}$ koja se podudara s traženom funkcijom $g$ na domeni $\dom{g}$", ne govoreći ništa o vrijednostima $\f{f}(\vec x)$ za $\vec x\notin\dom{g}$. Još općenitije, ponekad ćemo umjesto funkcije $g$ navesti samo neko \emph{svojstvo} koje vrijednosti od $\f{f}$ moraju zadovoljavati na nekom skupu. Kazat ćemo tada da smo \emph{parcijalno specificirali} (totalnu) funkciju $\f{f}$: u smislu, $\f{f}$ je definirana svuda, ali nas zanimaju samo vrijednosti na nekom užem skupu.
 
-Treba napomenuti da je važna odlika ove knjige da će svi algoritmi biti precizno specificirani --- ništa neće ostati na pseudokodu. Dakle, uvijek ćemo moći precizno izračunati vrijednosti primitivno rekurzivne funkcije i izvan skupa na kojem je specificirana --- na primjer, algoritam za $\sslash$ reći će nam da je $3\sslash 0=3$. Ponekad će čak te vrijednosti ("nedokumentirano ponašanje") imati neko značenje, u smislu da će takvu funkciju biti lakše uklopiti u kasnije definicije bez puno rastava na slučajeve. No to nećemo često koristiti, i svaki put ćemo naglasiti kad se to dogodi.
+Treba napomenuti da je važna odlika ove knjige da će svi algoritmi biti precizno specificirani --- ništa neće ostati na pseudokodu. Dakle, uvijek ćemo moći precizno izračunati vrijednosti primitivno rekurzivne funkcije i izvan skupa na kojem je specificirana --- na primjer, algoritam za $\sslash$ reći će nam da je $3\sslash 0=3$. Ponekad će čak to "nedokumentirano ponašanje" imati neko značenje, u smislu da će takvu funkciju biti lakše uklopiti u kasnije definicije bez puno rastava na slučajeve. No to nećemo često koristiti, i svaki put ćemo naglasiti kad se to dogodi.
 
 %\subsection{Relacije}
 
@@ -69,7 +69,7 @@ Iako sva računanja možemo shvatiti kao računanja funkcija, izlaganje je jedno
 
 Iz algoritamske perspektive, nisu. Ako izračunljivu funkciju $\f{f}$ reprezentiramo po\-mo\-ću algoritma koji za dani $\vec x$ računa njenu vrijednost $\f{f}(\vec x)$, izračunljivu relaciju $\f{R}$ prirodno je predstaviti algoritmom koji za dani $\vec x$ računa \emph{istinitosnu} vrijednost ($bool$: $\mathit{true}$ ili $\mathit{false}$), već prema tome je li $\vec x\in\f{R}$ ili nije. Većina programskih jezika uopće nema mogućnost programiranja relacija kao zasebnog tipa algoritma, već ih reprezentiraju funkcijama čiji povratni tip je $bool$.
 
-Na primjer, reći da je dvomjesna relacija uređaja $<$ na prirodnim brojevima iz\-ra\-čun\-lji\-va zapravo znači reći da postoji algoritam koji za sve ulaze $(x,y)\in\N^2$ u konačno mnogo koraka vraća $\mathit{true}$ ako je $x<y$, a $\mathit{false}$ inače. Ili, skup prim-brojeva (jednomjesna relacija $\mathbb P$) je izračunljiv jer možemo napisati algoritam $\f{isPrime}\colon\N\to bool$, koji za svaki $x$ u konačno mnogo koraka vraća $\mathit{true}$ ako je $x\in\mathbb P$, a $\mathit{false}$ ako $x\not\in\mathbb P$. Iz navedenih primjera vidimo da je o relacijama prirodno katkad pričati pomoću formula s relacijskim simbolima ($\f{R}(\vec x)$, ili $x\mathrel{\f R}y$ za dvomjesne relacije), a katkad pomoću skupova ($\vec x\in\f{R}$).
+Na primjer, reći da je dvomjesna relacija uređaja $<$ na prirodnim brojevima iz\-ra\-čun\-lji\-va zapravo znači reći da postoji algoritam koji za sve ulaze $(x,y)\in\N^2$ u konačno mnogo koraka vraća $\mathit{true}$ ako je $x<y$, a $\mathit{false}$ inače. Ili, skup prim-brojeva (jednomjesna relacija $\mathbb P$) je izračunljiv jer možemo napisati algoritam $\f{isPrime}:\N\to bool$, koji za svaki $x$ u konačno mnogo koraka vraća $\mathit{true}$ ako je $x\in\mathbb P$, a $\mathit{false}$ ako $x\notin\mathbb P$. Iz navedenih primjera vidimo da je o relacijama prirodno katkad pričati pomoću formula s relacijskim simbolima ($\f{R}(\vec x)$, ili $x\mathrel{\f R}y$ za dvomjesne relacije), a katkad pomoću skupova ($\vec x\in\f{R}$).
 
 U skladu s uobičajenom praksom modernih programskih jezika, prešutno koristimo standardno ulaganje skupa $bool$ u $\N$, tako da preslikamo $\mathit{false}\mapsto 0$, te $\mathit{true}\mapsto 1$. Drugim riječima, na izračunljivost relacije $R$ gledamo kao na izračunljivost njene \emph{karakteristične funkcije} $\chi_R$, koja je iste mjesnosti kao i $R$. U suprotnom smjeru, kad želimo interpretirati proizvoljni prirodni broj kao $bool$, koristimo (opet standardnu) interpretaciju po kojoj se $0$ interpretira kao $\mathit{false}$, a svi ostali prirodni brojevi kao $\mathit{true}$: drugim riječima, koristimo kompoziciju s karakterističnom funkcijom $\chi_{\N_+}$ (za koju ćemo dokazati da je izračunljiva).
 
@@ -79,22 +79,22 @@ Dakle, relacijama ćemo pripisivati svojstva izračunljivosti koja imaju njihove
 
 Iz prethodne točke zaključujemo da ćemo promatrati (algoritme za) dvije vrste funkcija: jezične i brojevne. Brojevne funkcije su nam važnije i uglavnom ćemo raditi s njima, ali na nekoliko mjesta dobro će nam doći i formalizacija izračunljivosti jezičnih funkcija.
 
-Svaka brojevna funkcija je oblika $f\colon S\to\N$, gdje je $S\subseteq\N^k$ za neki $k\in\N_+$. Skraćeno pišemo $f\colon\N^k\rightharpoonup\N$, ili još kraće $f^k$, ako nam nije bitan skup $S=\dom{f}$. Broj $k$ zovemo \emph{mjesnost} funkcije $f$. Svaka brojevna funkcija ima jedinstvenu mjesnost --- osim prazne funkcije $\varnothing$, čija domena je prazan skup $\emptyset$. Radi jednostavnosti izlaganja, smatrat ćemo da i prazne funkcije imaju fiksnu mjesnost, odnosno umjesto jedne funkcije $\varnothing$ promatrat ćemo familiju $\varnothing^k,k\in\N_+$, i smatrat ćemo da su, na primjer, $\varnothing^3$ i $\varnothing^8$ različite funkcije. Formalno to možemo napraviti tako da nam "funkcija" znači uređen par, kojem je prva komponenta uobičajena reprezentacija funkcije (skup uređenih parova s nekim svojstvom), a druga komponenta mjesnost --- ali nećemo imati potrebu biti toliko formalni, tim više što prazne funkcije nisu zanimljive iz perspektive izračunljivosti: algoritmi koji ih računaju su jednostavno beskonačne petlje.
+Svaka brojevna funkcija je oblika $f:S\to\N$, gdje je $S\subseteq\N^k$ za neki $k\in\N_+$. Skraćeno pišemo $f:\N^k\rightharpoonup\N$, ili još kraće $f^k$, ako nam nije bitan skup $S=\dom{f}$. Broj $k$ zovemo \emph{mjesnost} funkcije $f$. Svaka brojevna funkcija ima jedinstvenu mjesnost --- osim prazne funkcije $\varnothing$, čija domena je prazan skup $\emptyset$. Radi jednostavnosti izlaganja, smatrat ćemo da i prazne funkcije imaju fiksnu mjesnost, odnosno umjesto jedne funkcije $\varnothing$ promatrat ćemo familiju $\varnothing^k,k\in\N_+$, i smatrat ćemo da su, na primjer, $\varnothing^3$ i $\varnothing^8$ različite funkcije. Formalno to možemo napraviti tako da nam "funkcija" znači uređen par, kojem je prva komponenta uobičajena reprezentacija funkcije (skup uređenih parova s nekim svojstvom), a druga komponenta mjesnost --- ali nećemo imati potrebu biti toliko formalni, tim više što prazne funkcije nisu zanimljive iz perspektive izračunljivosti: algoritmi koji ih računaju su jednostavno beskonačne petlje.
 
-(Brojevna) relacija je oblika $R\subseteq\N^k$ za neki $k\in\N_+$. Po analogiji s funkcijama, $k$ zovemo \emph{mjesnost} relacije, i pišemo $R^k$ ako je želimo naglasiti. Kao i za funkcije, iako su sve prazne relacije skupovno jednake (postoji samo jedan prazan skup), promatrat ćemo familiju $\emptyset^k,k\in\N_+$, i smatrati sve njene elemente različitim relacijama. Na kraju krajeva, njihove karakteristične funkcije \emph{jesu} različite, jer imaju različite domene: recimo, $\dom{\chi_{\emptyset^3}}\!=\N^3$. (Radi se o nulfunkciji $\f C_0^3\colon\N^3\to\N$; potrebno je razlikovati nulfunkciju, koja je totalna, od prazne funkcije koja nije definirana nigdje!)
+(Brojevna) relacija je oblika $R\subseteq\N^k$ za neki $k\in\N_+$. Po analogiji s funkcijama, $k$ zovemo \emph{mjesnost} relacije, i pišemo $R^k$ ako je želimo naglasiti. Kao i za funkcije, iako su sve prazne relacije skupovno jednake (postoji samo jedan prazan skup), promatrat ćemo familiju $\emptyset^k,k\in\N_+$, i smatrati sve njene elemente različitim relacijama. Na kraju krajeva, njihove karakteristične funkcije \emph{jesu} različite, jer imaju različite domene: recimo, $\dom{\chi_{\emptyset^3}}\!=\N^3$. (Radi se o nulfunkciji $\f C_0^3:\N^3\to\N$; potrebno je razlikovati nulfunkciju, koja je totalna, od prazne funkcije koja nije definirana nigdje!)
 
-Jezične funkcije ćemo uvijek definirati nad nekom \emph{abecedom} (konačan neprazan skup) $\Sigma$, i to će nam biti funkcije $\varphi\colon\Sigma^*\rightharpoonup\Sigma^*$. Elementi od $\Sigma^*:=\bigcup_{k\in\N}\Sigma^k$ su konačni nizovi \emph{znakova} iz $\Sigma$, koje zovemo \emph{riječi} i pišemo jednostavno konkatenacijom: recimo, $\t{aab}$ umjesto $(\t{a},\t{a},\t{b})$. \emph{Prazna riječ} je niz duljine $0$: označavamo je s $\varepsilon$. Iz oblika jezičnih funkcija vidimo da su one jednomjesne: u svrhu reprezentacije funkcija veće mjesnosti, obično se abecedi dodaje \emph{separator}, znak koji služi razdvajanju argumenata. Recimo, višemjesne funkcije nad $\{\t{a},\t{b}\}$ možemo reprezentirati kao jednomjesne funkcije nad tročlanom abecedom $\{\t{a},\t{b},\t{,}\}$ --- tako da primjerice $\varphi^4(\t{a},\t{abb},\varepsilon,\t{ba})$ računamo kao $\dot\varphi^1(\t{a{},{}a{}b{}b{},{},{}b{}a})$. Kažemo da je $\dot\varphi$ dobivena \emph{kontrakcijom} iz $\varphi$.
+Jezične funkcije ćemo uvijek definirati nad nekom \emph{abecedom} (konačan neprazan skup) $\Sigma$, i to će nam biti funkcije $\varphi:\Sigma^*\rightharpoonup\Sigma^*$. Elementi od $\Sigma^*:=\bigcup_{k\in\N}\Sigma^k$ su konačni nizovi \emph{znakova} iz $\Sigma$, koje zovemo \emph{riječi} i pišemo jednostavno konkatenacijom: recimo, $\t{aab}$ umjesto $(\t{a},\t{a},\t{b})$. \emph{Prazna riječ} je niz duljine $0$: označavamo je s $\varepsilon$. Iz oblika jezičnih funkcija vidimo da su one jednomjesne: u svrhu reprezentacije funkcija veće mjesnosti, obično se abecedi dodaje \emph{separator}, znak koji služi razdvajanju argumenata. Recimo, višemjesne funkcije nad $\{\t{a},\t{b}\}$ možemo reprezentirati kao jednomjesne funkcije nad tročlanom abecedom $\{\t{a},\t{b},\t{,}\}$ --- tako da primjerice $\varphi^4(\t{a},\t{abb},\varepsilon,\t{ba})$ računamo kao $\dot\varphi^1(\t{a{},{}a{}b{}b{},{},{}b{}a})$. Kažemo da je $\dot\varphi$ dobivena \emph{kontrakcijom} iz $\varphi$.
 Primijetimo da je ovo generalnije od brojevnih višemjesnih funkcija jer možemo imati \emph{varargs} (mjesnost možemo zaključiti jednostavnim brojenjem separatora u ulaznoj ri\-je\-či), ali i dalje nemamo mogućnost prikazivanja nulmjesnih funkcija: $\dot\varphi(\varepsilon)$ je jednostavno $\varphi^1(\varepsilon)$, ne $\varphi^0()$. Sličan trik možemo primijeniti i kod brojevnih funkcija, nakon što definiramo kodiranje skupa $\N^*$.
 
 Analogon pojmu relacije u jezičnom slučaju, dakle podskup od $\Sigma^*$, zove se jednostavno \emph{jezik}. Iako karakteristična funkcija jezika nije ni brojevna ni jezična funkcija (ide sa $\Sigma^*$ u $bool$), svejedno možemo pomoću kodiranja skupa $\Sigma^*$ reprezentirati i izračunljivost jezikâ. O tome ćemo također više reći kasnije.
 
-Domenu, sliku i graf funkcije $f$ označavamo redom s $\dom{f}$, $\im{f}$ i $\graf{f}$. Primijetimo da su sve to relacije: za funkciju mjesnosti $k$, domena je mjesnosti $k$, slika je mjesnosti $1$, a graf je mjesnosti $k+1$. Naravno, iste oznake koristimo i za domene, slike i grafove funkcija koje nisu brojevne. Restrikciju funkcije $f$ na skup $S$ (zapravo na $S\cap\dom f$) označavamo s $f|_S$. Sliku te restrikcije za $S\subseteq\dom{f}$ označavamo s $f[S]:=\{f(x)\mid x\in S\}$. Prasliku skupa $T$ označavamo s $f^{-1}[T]:=\{x\in\dom{f}\mid f(x)\in T\}$. Ako je $f^k$ brojevna funkcija, oznakom $\tilde f$ označavamo njeno proširenje nulom: totalnu funkciju $\tilde{f}\colon\N^k\to\N$, koja svaki $\vec x\in\dom f$ preslika u $f(\vec x)$, a preostale $\vec x\in\N^k\setminus\dom f$ preslika u $0$. \emph{Nosač} brojevne funkcije $f$ je $f^{-1}[\N_+]$, dakle podskup domene na kojem $f$ nije $0$.
+Domenu, sliku i graf funkcije $f$ označavamo redom s $\dom{f}$, $\im{f}$ i $\graf{f}$. Primijetimo da su sve to relacije: za funkciju mjesnosti $k$, domena je mjesnosti $k$, slika je mjesnosti $1$, a graf je mjesnosti $k+1$. Naravno, iste oznake koristimo i za domene, slike i grafove funkcija koje nisu brojevne. Restrikciju funkcije $f$ na skup $S$ (zapravo na $S\cap\dom f$) označavamo s $f|_S$. Sliku te restrikcije za $S\subseteq\dom{f}$ označavamo s $f[S]:=\{f(x)\mid x\in S\}$. Prasliku skupa $T$ označavamo s $f^{-1}[T]:=\{x\in\dom{f}\mid f(x)\in T\}$. Ako je $f^k$ brojevna funkcija, oznakom $\tilde f$ označavamo njeno proširenje nulom: totalnu funkciju $\tilde{f}:\N^k\to\N$, koja svaki $\vec x\in\dom f$ preslika u $f(\vec x)$, a preostale $\vec x\in\N^k\setminus\dom f$ preslika u $0$. \emph{Nosač} brojevne funkcije $f$ je $f^{-1}[\N_+]$, dakle podskup domene na kojem $f$ nije $0$.
 
 Za skupove brojeva koristimo standardne oznake $\mathbb P\subset
 \mathbb N\subset
 \mathbb Z\subset
 \mathbb Q\subset
-\mathbb R$. Često koristimo \emph{diskretne intervale}, koje označavamo oznakama $[a..b]$ ili $[a..b\rangle$, gdje su $a,b\in\mathbb Z$ (zapravo $\N$). Svaki takav interval skup je cijelih brojeva iz odgovarajućeg realnog intervala: na primjer, $[1..5\rangle=[1..4]=\{1,2,3,4\}$.
+\mathbb R$. Često koristimo \emph{diskretne intervale}, koje označavamo oznakama $[a\dd b]$ ili $[a\dd b\rangle$, gdje su $a,b\in\mathbb Z$ (zapravo $\N$). Svaki takav interval skup je cijelih brojeva iz odgovarajućeg realnog intervala: na primjer, $[1\dd 5\rangle=[1\dd 4]=\{1,2,3,4\}$.
 
 Brojevne izračunljive funkcije i relacije označavamo posebnim fontom: dok nam $g$ označava proizvoljnu funkciju, $\f{g}$ nam označava funkciju za koju imamo neku vrstu algoritma. U tom smislu, $g(x)$ označava uobičajenu funkcijsku vrijednost (drugu komponentu uređenog para u $g$ čija je prva komponenta $x$), dok $\f{g}(x)$ označava izlazni podatak algoritma za $\f{g}$ pokrenutog s ulaznim podatkom $x$. Ipak, to se odnosi samo na funkcijski zapis: inače ćemo koristiti uobičajene matematičke oznake gdje god možemo. Recimo, pisat ćemo $x+y+z$ za zbroj tri broja, $a^b$ za potenciranje, $m\mid n$ za djeljivost, ili pak $p\in\mathbb P$ za prim-brojeve. No treba imati na umu da su to izračunljive funkcije i relacije (što ćemo dokazati), te da u pozadini stoje algoritmi za $\f{add}^3$, $\f{pow}^2$, $\f{Divides}^2$, odnosno $\f{isPrime}^1$.
 
@@ -102,7 +102,7 @@ Brojevne izračunljive funkcije i relacije označavamo posebnim fontom: dok nam 
 Algoritamsku jednakost (izračunljivu dvomjesnu brojevnu relaciju, koja se u modernim programskim jezicima često označava `\t{==}') oz\-na\-ča\-va\-mo uobičajenim simbolom `$\eq$', koji i inače koristimo za jednakost matematičkih objekata (funkcija, relacija, skupova,~\ldots). Kod definicija skupova, i funkcija s prethodno specificiranom domenom (što uključuje totalne funkcije), koristimo simbol `$:=$'. Relacije definiramo formulama koristeći `$:\Longleftrightarrow$'. Često imamo potrebu vrijednosti funkcije specificirati izrazom, uz prešutnu pretpostavku "prirodne domene" (sve ulazne vrijednosti za koje izraz ima smisla). Tada pišemo $f(\vec x):\simeq izraz$. Ovisno o obliku izraza, definirat ćemo precizno značenje fraze "imati smisla".
 \end{napomena}
 
-Ponekad ćemo imati potrebu korištenja znaka $\simeq$ između dva izraza, što će značiti da su oni jednaki za one vrijednosti varijabli za koje imaju smisla, te da oba izraza imaju smisla za iste vrijednosti varijabli. Drugačije rečeno, $izraz1\simeq izraz2$ znači da su definicije $f(\vec x):\simeq izraz1$ i $f(\vec x):\simeq izraz2$ ekvivalentne (definiraju istu funkciju), gdje su u $\vec x$ sve varijable koje se pojavljuju bilo u $izraz1$, bilo u $izraz2$. Razlog za izbjegavanje korištenja znaka $\eq$ i u takvom slučaju leži u tome što relacija $\simeq$, kao i svojstvo "imati smisla", nisu izračunljive. Još jedan razlog za korištenje neuobičajenog znaka je što mnoga "instinktivna pojednostavljenja" više nisu validna: na primjer, ako je $f^3$ totalna a $g^3$ nije, $f(\vec x)+0\cdot g(\vec x)\not\simeq f(\vec x)$ --- jer izraz zdesna ima smisla za sve $\vec x\in\N^3$, dok izraz slijeva ima smisla samo za $\vec x\in\dom{g}$.
+Ponekad ćemo imati potrebu korištenja znaka $\simeq$ između dva izraza, što će značiti da su oni jednaki za one vrijednosti varijabli za koje imaju smisla, te da oba izraza imaju smisla za iste vrijednosti varijabli. Drugačije rečeno, $izraz1\simeq izraz2$ znači da su definicije $f(\vec x):\simeq izraz1$ i $f(\vec x):\simeq izraz2$ ekvivalentne (definiraju istu funkciju), gdje su u $\vec x$ sve varijable koje se pojavljuju bilo u $izraz1$, bilo u $izraz2$. Razlog za izbjegavanje korištenja znaka $\eq$ i u takvom slučaju leži u tome što relacija $\simeq$, kao i svojstvo "imati smisla", nisu izračunljive. Još jedan razlog za korištenje neuobičajenog znaka je što mnoga "instinktivna pojednostavljenja" više nisu validna: na primjer, ako je $f^3$ totalna a $g^3$ nije, $f(\vec x)+0\cdot g(\vec x)\nsimeq f(\vec x)$ --- jer izraz zdesna ima smisla za sve $\vec x\in\N^3$, dok izraz slijeva ima smisla samo za $\vec x\in\dom{g}$.
 
 \section{RAM-stroj i RAM-program}\label{sec:RAMizr}
 
@@ -121,7 +121,7 @@ Razlog zašto radimo s ograničenijim modelom je što von Neumannova arhitektura
 \begin{itemize}
     \item \emph{RAM-program}: fiksni konačni niz \emph{instrukcija} $P:=(I_0,I_1,I_2,~\dotsc, I_{n-1})$;
     \item \emph{registre}: za svaki $j\in\N$, registar $\reg{j}$, koji može sadržavati bilo koji prirodni broj;
-    \item \emph{programski brojač} (\textsc{pc}): još jedan "registar", koji u svakom trenutku iz\-ra\-ču\-na\-va\-nja sadrži broj iz intervala $[0..n]$.
+    \item \emph{programski brojač} (\textsc{pc}): još jedan "registar", koji u svakom trenutku iz\-ra\-ču\-na\-va\-nja sadrži broj iz intervala $[0\dd n]$.
     \qedhere
 \end{itemize}
 \end{definicija}
@@ -145,10 +145,10 @@ Sadržaj programskog brojača također se mijenja, tako da se iz\-vr\-ša\-va\-n
 \begin{definicija}[{name=[RAM-instrukcija]}]
 Svaka \emph{RAM-instrukcija} ima:
 \begin{itemize}
-    \item (ako je dio RAM-programa $P$) \emph{redni broj}, element skupa $[0..n_p\rangle$;
+    \item (ako je dio RAM-programa $P$) \emph{redni broj}, element skupa $[0\dd n_P\rangle$;
     \item \emph{tip}, koji može biti jedan od tri tipa: \inc, \dec\ ili \goto;
     \item (ako je tipa \inc\ ili \dec) registar na kojem djeluje: $\reg{j}$ za neki $j\in\N$;
-    \item (ako je tipa \dec\ ili \goto, te je dio RAM-programa $P$) \emph{odredište}: element skupa $[0..n_P]$.
+    \item (ako je tipa \dec\ ili \goto, te je dio RAM-programa $P$) \emph{odredište}: element skupa $[0\dd n_P]$.
     \qedhere
 \end{itemize}
 \end{definicija}
@@ -161,18 +161,18 @@ Dakle, RAM-instrukcija može biti jednog od tri oblika, čiji efekti su:
     \item[$\goto\;l$:] Postavlja \textsc{pc} na $l$.
 \end{labeling}
 
-\begin{lema}[{name=[prebrojivost skupa $\mathcal Ins$]}]\label{lema:alef0ins}
-Skup $\mathcal Ins$ svih RAM-instrukcija je prebrojiv.
+\begin{lema}[{name=[prebrojivost skupa $\mathscr Ins$]}]\label{lema:alef0ins}
+Skup $\mathscr Ins$ svih RAM-instrukcija je prebrojiv.
 \end{lema}
 \begin{proof}
-Skup $\mathcal Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikavanje $f_1\colon\N\to\mathcal Ins_\inc$ zadano s $f_1(j):=(\incr{j})$ je bijekcija. Analogno, koristeći odredište (iako je broj odredišta ograničen za fiksni program $P$, svaka instrukcija $\goto\;l$ se može pojaviti u \emph{nekom} programu), skup $\mathcal Ins_{\goto}$ je prebrojiv, a skup $\mathcal Ins_\dec$ je ek\-vi\-po\-ten\-tan sa $\N\times\N$, te je i on prebrojiv. Sada je $\mathcal Ins$ prebrojiv kao (disjunktna) unija tih triju prebrojivih skupova.
+Skup $\mathscr Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikavanje $f_1:\N\to\mathscr Ins_\inc$ zadano s $f_1(j):=(\incr{j})$ je bijekcija. Analogno, koristeći odredište (iako je broj odredišta ograničen za fiksni program $P$, svaka instrukcija $\goto\;l$ se može pojaviti u \emph{nekom} programu), skup $\mathscr Ins_{\goto}$ je prebrojiv, a skup $\mathscr Ins_\dec$ je ek\-vi\-po\-ten\-tan sa $\N\times\N$, te je i on prebrojiv. Sada je $\mathscr Ins$ prebrojiv kao (disjunktna) unija tih triju prebrojivih skupova.
 \end{proof}
 
-\begin{korolar}[{name=[prebrojivost skupa $\mathcal Prog$]}]\label{kor:alef0prog}
-Skup $\mathcal Prog$ svih RAM-programa je prebrojiv.
+\begin{korolar}[{name=[prebrojivost skupa $\mathscr Prog$]}]\label{kor:alef0prog}
+Skup $\mathscr Prog$ svih RAM-programa je prebrojiv.
 \end{korolar}
 \begin{proof}
-Direktno iz činjenice da je $\mathcal Ins_{\inc}^{\quad*}\subseteq\mathcal Prog\subseteq\mathcal Ins^*$, i leme~\ref{lema:alef0ins}. Iz teorije skupova znamo da je skup $A^*$ prebrojiv ako je $A$ prebrojiv.
+Direktno iz činjenice da je $\mathscr Ins_{\inc}^{\quad*}\subseteq\mathscr Prog\subseteq\mathscr Ins^*$, i leme~\ref{lema:alef0ins}. Iz teorije skupova znamo da je skup $A^*$ prebrojiv ako je $A$ prebrojiv.
 \end{proof}
 
 %\subsection{Konfiguracije i izračunavanja}
@@ -182,15 +182,15 @@ Jednom kad imamo definirane instrukcije, program i stroj, možemo preciznije def
 \begin{definicija}[{name=[RAM-konfiguracije i prijelazi među njima]}]\label{def:RAMconf}
 Neka je $\mathcal S$ RAM-stroj s programom $P$, registrima $\reg j,j\in\N$, te programskim brojačem \textsc{pc}. \emph{Konfiguracija} RAM-stroja $\mathcal S$ je bilo koje preslikavanje
 \begin{equation}
-    c\colon\{\reg{j}\mid j\in\N\}\cup\{\textsc{pc}\}\to\N
+    c:\{\reg{j}\mid j\in\N\}\cup\{\textsc{pc}\}\to\N
 \end{equation} takvo da je skoro svuda $0$ (skup $c^{-1}[\N_+]$ je konačan), te je $c(\textsc{pc})\le n_P$. Skraćeno je pišemo kao $c=\bigl(c(\reg0),c(\reg1),\dotsc,c(\textsc{pc})\bigr)$. Konfiguracija $c$ je \emph{završna} ako je $c(\textsc{pc})=n_P$. \emph{Početna konfiguracija} s ulazom $\vec x=(x_1,x_2,\dotsc,x_k)\in\N^k$ je $(0,x_1,x_2,\dotsc,x_k,0,0,\dotsc,0)$ (za $1\le j\le k$, u $\reg j$ je $x_j$; svugdje drugdje su nule).
 
-Za konfiguracije $c=(r_0,r_1,\dotsc,pc)$ i $d=(r_0',r_1',\dotsc,pc')$ istog RAM-stroja s programom $P=(I_0,\dotsc,I_{n_P-1})$, kažemo da $c$ \emph{prelazi} u $d$ (\emph{po programu} $P$, ili \emph{po instrukciji} $I_{pc}$), i pišemo $c\leadsto d$, ako je $c$ završna i $c=d$, ili vrijedi jedno od sljedećeg:
+    Za konfiguracije $c=(r_0,r_1,\dotsc,pc)$ i $d=(r_0',r_1',\dotsc,pc')$ istog RAM-stroja s programom $P=(I_0,\dotsc,I_{n_P-1})$, kažemo da $c$ \emph{prelazi} u $d$ (\emph{po programu} $P$, ili \emph{po instrukciji} $I_{pc}$), i pišemo $c\leadsto d$, ako je $c$ završna i $c=d$ (pišemo $c\!\lcirclearrowleft$), ili vrijedi jedno od sljedećeg:
 \begin{enumerate}
     \item\label{stav:leadINC}
-    $I_{pc}=\incr{j}$ (za neki $j$), $r_j'=r_j+1$, $pc'=pc+1$, te $r'_i=r_i$ za sve $i\not=j$;
+    $I_{pc}=\incr{j}$ (za neki $j$), $r_j'=r_j+1$, $pc'=pc+1$, te $r'_i=r_i$ za sve $i\ne j$;
     \item\label{stav:leadDEC-}
-    $I_{pc}=\decr{j}{l}$ (za neke $j$ i $l$),  $r_j'=r_j-1$, $pc'=pc+1$, te $r'_i=r_i$ za sve $i\not=j$;
+    $I_{pc}=\decr{j}{l}$ (za neke $j$ i $l$),  $r_j'=r_j-1$, $pc'=pc+1$, te $r'_i=r_i$ za sve $i\ne j$;
     \item\label{stav:leadDEC0}
     $I_{pc}=\decr{j}{l}$ (za neke $j$ i $l$), $r_j=0$, $pc'=l$, te $r'_i=r_i$ za sve $i$;
     \item\label{stav:leadGOTO}
@@ -221,13 +221,13 @@ Neka je $P^k$ RAM-algoritam, te $f^k$ brojevna funkcija iste mjesnosti. Kažemo 
 \emph{računa} funkciju $f$ ako za sve $\vec x\in\N^k$ vrijedi:
 \begin{itemize}
     \item ako  je $\vec x\in \dom{f}$, tada $P$-izračunavanje s $\vec x$ stane u konfiguraciji oblika $(f(\vec x),\dotsc,n_P)$;
-    \item u suprotnom (ako $\vec x\not\in\dom{f}$), $P$-izračunavanje s $\vec x$ ne stane.\qedhere
+    \item u suprotnom (ako $\vec x\notin\dom{f}$), $P$-izračunavanje s $\vec x$ ne stane.\qedhere
 \end{itemize}
 \end{definicija}
 
-Drugim riječima, $P$-izračunavanje s $\vec x$ stane točno onda kada je $\vec x\in\dom{f}$, te u tom slučaju, u završnoj konfiguraciji, vrijednost registra $\reg{0}$ je upravo vrijednost funkcije $f$ u točki $\vec x$.
+Drugim riječima, $P$-izračunavanje s $\vec x$ stane točno onda kada je $\vec x\in\dom{f}$, te u tom slučaju, u završnoj konfiguraciji, sadržaj registra $\reg{0}$ je upravo vrijednost funkcije $f$ u točki $\vec x$.
 
-\subsection{Skup \texorpdfstring{$\mathcal Comp$}{Comp}}
+\subsection{Skup \texorpdfstring{$\mathscr Comp$}{Comp}}
 
 Navodimo tri lagane posljedice determinizma.
 
@@ -243,12 +243,12 @@ Za postojanje, induktivno definiramo
 Po Dedekindovom teoremu rekurzije, time je dobro definiran niz, i taj niz je po definiciji $P$-iz\-ra\-ču\-na\-va\-nje s $\vec x$.
 
 Za jedinstvenost, pretpostavimo da postoje dva $P$-izračunavanja s $\vec x$, $(c_i)_{i\in\N}$ i $(c_i')_{i\in\N}$.
-Kako je $c\not=c'$, postoji neki $i\in\N$ takav da je $c_i\not=c_i'$, a zbog dobre uređenosti od $\N$ postoji najmanji takav: označimo ga s $i_0$.
+Kako je $c\ne c'$, postoji neki $i\in\N$ takav da je $c_i\ne c_i'$, a zbog dobre uređenosti od $\N$ postoji najmanji takav: označimo ga s $i_0$.
 Taj $i_0$ nije $0$, jer je $c_0=c_0'=\text{početna konfiguracija s ulazom $\vec x$}$. Dakle, konfiguracija $c_{i_0-1}=c_{i_0-1}'$ prelazi u dvije različite konfiguracije $c_{i_0}$ i $c_{i_0}'$, što je kontradikcija s lemom~\ref{lema:ramdet}.
 \end{proof}
 
 \begin{propozicija}[{name=[jedinstvenost završne konfiguracije]}]\label{prop:ram1zav}
-U svakom RAM-izračunavanju koje stane postoji jedinstvena za\-vrš\-na konfiguracija.
+U svakom RAM-izračunavanju koje stane postoji jedinstvena završna konfiguracija.
 \end{propozicija}
 \begin{proof}
 Pretpostavimo da je $(c_i)_{i\in\N}$ $P$-izračunavanje s $\vec x$ u kojem postoje dvije završne konfiguracije, i označimo indekse na kojima se one prvi put pojavljuju sa $i_1$ i $i_2$. Bez smanjenja općenitosti (različitost je simetrična) možemo pretpostaviti $i_1<i_2$. No budući da je $c_{i_1}$ završna, ona prelazi (samo) u samu sebe, pa indukcijom imamo
@@ -268,26 +268,26 @@ S&:=\{\vec x\in\N^k\mid\text{$P$-izračunavanje s $\vec x$ stane}\}
 \intertext{i na njemu funkciju}
 f(\vec x)&:=c(\reg{0})\text{, gdje je $c$ završna konfiguracija $P$-izračunavanja s $\vec x$}.
 \end{align}
-Iz definicije slijedi da je $f\colon S\to\N$ ($k$-mjesna) brojevna funkcija, te $P^k$ računa $f$.
+Iz definicije slijedi da je $f:S\to\N$ ($k$-mjesna) brojevna funkcija, te $P^k$ računa $f$.
 
 Za jedinstvenost, primijetimo da je mjesnost funkcije određena mjesnošću algoritma (uz prethodni dogovor da se prazne funkcije različitih mjesnosti razlikuju), njena domena je određena stajanjem izračunavanja (koje je jedinstveno zbog propozicije~\ref{prop:ramdet}), a vrijednost funkcije u svakoj točki domene određena je završnom konfiguracijom (koja je jedinstvena zbog propozicije~\ref{prop:ram1zav}).
 \end{proof}
 
 Važna posljedica prethodnog rezultata je ograničenje broja izračunljivih funkcija.
 
-\begin{definicija}[{name=[{RAM-izračunljiva funkcija, skup $\mathcal Comp$}]}]
-Neka je $k\in\N_+$, te $f^k$ brojevna funkcija. Kažemo da je $f^k$ \emph{RAM-izračunljiva} ako postoji RAM-algoritam $P^k$ koji je računa. Za svaki $k\in\N_+$, oznakom $\mathcal Comp_k$ označavamo skup svih RAM-izračunljivih funkcija mjesnosti $k$.
+\begin{definicija}[{name=[{RAM-izračunljiva funkcija, skup $\mathscr Comp$}]}]\label{def:ram-izr}
+Neka je $k\in\N_+$, te $f^k$ brojevna funkcija. Kažemo da je $f^k$ \emph{RAM-izračunljiva} ako postoji RAM-algoritam $P^k$ koji je računa. Za svaki $k\in\N_+$, oznakom $\mathscr Comp_k$ označavamo skup svih RAM-izračunljivih funkcija mjesnosti $k$.
 \end{definicija}
 
-Oznaka $\mathcal Comp_k$ namjerno ne spominje RAM-model izračunavanja --- pokazat ćemo da se \emph{isti} skup brojevnih funkcija dobije i u drugim modelima koje ćemo razmatrati.
+Oznaka $\mathscr Comp_k$ namjerno ne spominje RAM-model izračunavanja --- pokazat ćemo da se \emph{isti} skup brojevnih funkcija dobije i u drugim modelima koje ćemo razmatrati.
 
-\begin{teorem}[{name=[prebrojivost skupa $\mathcal Comp$]}]\label{tm:alef0izr}
-Za svaki $k\in\N_+$, skup $\mathcal Comp_k$ je prebrojiv. Skup $\mathcal Comp$ svih RAM-izračunljivih brojevnih funkcija (svih mjesnosti) je također prebrojiv.
+\begin{teorem}[{name=[prebrojivost skupa $\mathscr Comp$]}]\label{tm:alef0izr}
+Za svaki $k\in\N_+$, skup $\mathscr Comp_k$ je prebrojiv. Skup $\mathscr Comp$ svih RAM-izračunljivih brojevnih funkcija (svih mjesnosti) je također prebrojiv.
 \end{teorem}
 \begin{proof}
 Neka je $k$ fiksna mjesnost. Preslikavanje
-sa skupa $\mathcal Prog$ na skup $\mathcal Comp_k$,
-    koje svakom RAM-programu $P$ pridružuje funkciju koju algoritam $P^k$ računa, je dobro definirano prema korolaru~\ref{kor:ram1fun}, i surjekcija je po definiciji~\ref{def:compute}. Iz toga je $\card(\mathcal Comp_k)\le\card(\mathcal Prog)$, što je $\aleph_0$ po korolaru~\ref{kor:alef0prog}.
+sa skupa $\mathscr Prog$ na skup $\mathscr Comp_k$,
+    koje svakom RAM-programu $P$ pridružuje funkciju koju algoritam $P^k$ računa, je dobro definirano prema korolaru~\ref{kor:ram1fun}, i surjekcija je po definiciji~\ref{def:ram-izr}. Iz toga je $\card(\mathscr Comp_k)\le\card(\mathscr Prog)$, što je $\aleph_0$ po korolaru~\ref{kor:alef0prog}.
 
 Za drugu nejednakost, primijetimo da su za sve $n\in\N$ i $k\in\N_+$, konstantne funkcije $\f{C}_n^k$, zadane sa
 $\f{C}_n^k(\vec x):=n$, RAM-izračunljive: doista, računaju ih RAM-algoritmi
@@ -302,20 +302,20 @@ $\f{C}_n^k(\vec x):=n$, RAM-izračunljive: doista, računaju ih RAM-algoritmi
     \end{prog}^k
 \end{equation}
 (što se može vidjeti indukcijom po $n$).
-Iz toga slijedi da je $\{\f{C}_n^k\mid n\in\N\}\subseteq\mathcal Comp_k$, a kako je taj skup prebrojiv (sve konstante su različite), slijedi $\aleph_0\le\card(\mathcal Comp_k)$, što zajedno s gornjim daje $\card(\mathcal Comp_k)=\aleph_0$.
+Iz toga slijedi da je $\{\f{C}_n^k\mid n\in\N\}\subseteq\mathscr Comp_k$, a kako je taj skup prebrojiv (sve konstante su različite), slijedi $\aleph_0\le\card(\mathscr Comp_k)$, što zajedno s gornjim daje $\card(\mathscr Comp_k)=\aleph_0$.
 
-Sada je, naravno, $\mathcal Comp=\bigcup_{k\in\N_+}\!\mathcal Comp_k$ prebrojiv kao unija prebrojivo mnogo prebrojivih skupova.
+Sada je, naravno, $\mathscr Comp=\bigcup_{k\in\N_+}\!\mathscr Comp_k$ prebrojiv kao unija prebrojivo mnogo prebrojivih skupova.
 \end{proof}
 
 \begin{korolar}[{name=[postojanje ne-RAM-izračunljivih funkcija]}]\label{kor:exneizrk}
 Za svaki $k\in\N_+$, postoji brojevna funkcija mjesnosti $k$ koja nije RAM-izračunljiva.
 \end{korolar}
 \begin{proof}
-Opet, fiksirajmo mjesnost $k\in\N_+$. Skup svih $k$-mjesnih brojevnih funkcija $\mathcal Func_k$ je neprebrojiv, jer je nadskup skupa svih \emph{totalnih} $k$-mjesnih brojevnih funkcija, čija je kardinalnost
+Opet, fiksirajmo mjesnost $k\in\N_+$. Skup svih $k$-mjesnih brojevnih funkcija $\mathscr Func_k$ je neprebrojiv, jer je nadskup skupa svih \emph{totalnih} $k$-mjesnih brojevnih funkcija, čija je kardinalnost
 \begin{equation}
     \card\bigl(\N^{\N^k}\bigr)=\aleph_0^{\aleph_0^k}=\aleph_0^{\aleph_0}=\mathfrak c>\aleph_0\text.
 \end{equation}
-Iz toga slijedi $\mathcal Func_k\not\subseteq\mathcal Comp_k$, pa postoji funkcija iz $\mathcal Func_k\setminus\,\mathcal Comp_k$, što smo trebali.
+Iz toga slijedi $\mathscr Func_k\nsubseteq\mathscr Comp_k$, pa postoji tražena funkcija iz $\mathscr Func_k\setminus\mathscr Comp_k$.
 \end{proof}
 
 \subsection{Primjeri RAM-programa}
@@ -324,7 +324,7 @@ Jednu familiju primjera, RAM-programe za konstantne funkcije, vidjeli smo već u
 
 Napišimo sada i RAM-program koji računa praznu funkciju $\varnothing^k$. Iz definicije zaključujemo da je to program čije izračunavanje s $\vec x$ ne stane ni za koji $\vec x$ (bez obzira na mjesnost). Dakle, moramo spriječiti $\textsc{pc}$ da dođe do $n$, odnosno treba nam instrukcija s odredištem, koja će vratiti $\textsc{pc}$ na staru vrijednost tako da se ne poveća za $1$ (\emph{petlja}), i to ona koja se izvrši uvijek (\emph{beskonačna} petlja). Najjednostavniji takav program je $[\,0.\,\goto\;0\,]$.
 
-Dosadašnji programi nisu uopće koristili svoje ulaze. Vjerojatno najjednostavniji primjer funkcije koja koristi svoj ulaz je identiteta (mjesnosti $1$ --- označena s $\f{I}_1^1$). Da bismo je izračunali, moramo prebaciti vrijednost iz $\reg{1}$ (ulazni registar za jednomjesne funkcije) u $\reg{0}$ (izlazni registar). Lako se vidi, koristeći naše razumijevanje izvršavanja imperativnih programa, da tu svrhu ispunjava RAM-algoritam
+Dosadašnji programi nisu uopće koristili svoje ulaze. Najjednostavnija funkcija koja koristi svoj argument je identiteta (označena s $\f I_1^1$). Da bismo je izračunali, moramo prebaciti vrijednost iz $\reg{1}$ (ulazni registar za jednomjesne algoritme) u $\reg{0}$ (izlazni registar). Koristeći naše razumijevanje izvršavanja imperativnih programa, lako vidimo da tu svrhu ispunjava RAM-algoritam
 \begin{equation}
     P_{\f I_1}^1:=\begin{prog}
         0.&\decr13\\
@@ -341,7 +341,7 @@ Neki formalni dokaz bi vjerojatno išao tako da se pokaže da svaki prolaz kroz 
     \leadsto(1,0,0,\dotsc,1)\leadsto
     (2,0,0,\dotsc,2)\leadsto
     (2,0,0,\dotsc,0)\leadsto
-    (2,0,0,\dotsc,3)\text.
+    (2,0,0,\dotsc,3)\lcirclearrowleft\text.
 \end{multline}
 
 Ubuduće nećemo biti tako precizni (upravo jer imamo razvijenu intuiciju "programiranja" u imperativnim jezicima), ali ćemo navesti "najvažnije trenutke" u iz\-ra\-ču\-na\-va\-nju kako bi bilo lakše pratiti što se događa.
@@ -363,7 +363,7 @@ Prethodni dokaz (ili programerska intuicija) daje nam i više: ako "naslažemo" 
 
 Ovdje vidimo jednu dobru stranu naizgled čudne konvencije da izračunavanje za\-vr\-ša\-va kad programski brojač postane jednak duljini programa: prilikom ovakve konkatenacije ne trebamo mijenjati odredišta već napisanih instrukcija. Odredište $3$ instrukcije rednog broja $0$ jednako je označavalo kraj programa za $\f{I}_1^1$, kao i kraj \emph{tog dijela} programa za $\f{add}^3$. Primijetite sličnost sa standardnom konvencijom o \texttt{end}-iteratoru u biblioteci STL jezika C\texttt{++}.
 
-Vidimo da su mnoge jednostavne funkcije: prazna, konstante, identiteta, zbrajanje,~\ldots\ RAM-izračunljive. Ipak, pisati RAM-programe može biti dosta zamorno (recimo za $\f{add}^8$ --- mnogi dijelovi se ponavljaju uz neznatne izmjene u odredištima ili adresama registara) ili teško (recimo za množenje, ili potenciranje --- povremeno bismo htjeli iskoristiti registar kao brojač za neku petlju, ali istodobno i sačuvati njegovu vrijednost). Prvi problem ćemo riješiti makroima, a drugi funkcijskim programiranjem.
+Vidimo da su mnoge jednostavne funkcije: prazna, konstante, identiteta, zbrajanje,~\ldots\ RAM-izračunljive. Ipak, pisati RAM-programe može biti dosta zamorno (recimo za $\f{add}^8$ --- mnogi dijelovi se ponavljaju uz neznatne izmjene u odredištima ili adresama registara) ili teško (recimo za množenje, ili potenciranje --- povremeno bismo htjeli iskoristiti registar kao brojač za neku petlju, ali istodobno i sačuvati njegovu vrijednost). Prvi problem riješit ćemo makroima, a drugi funkcijskim programiranjem u poglavlju~\ref{ch:rek}.
 
 \section{Makro-izračunljivost}
 
@@ -389,7 +389,7 @@ Definirat ćemo brojne makroe, što će kulminirati \emph{funkcijskim makroom} -
     \item programski brojač $\textsc{pc}$, isti kao i kod RAM-stroja;
     \item \emph{pomoćni programski brojač} $\textsc{ac}$, čije  moguće vrijednosti $ac$ ovise o makro-instrukciji koja se trenutno izvršava ($I_{pc}$, gdje je $pc$ vrijednost od \textsc{pc}):
     \begin{itemize}
-        \item ako je $I_{pc}=P^*$ za RAM-program $P$, tada je $ac\in[0..n_P]$.
+        \item ako je $I_{pc}=P^*$ za RAM-program $P$, tada je $ac\in[0\dd n_P]$.
         \item inače, $ac=0$.\qedhere
     \end{itemize}
 \end{itemize}
@@ -397,15 +397,15 @@ Definirat ćemo brojne makroe, što će kulminirati \emph{funkcijskim makroom} -
 
 Jednako kao lemu~\ref{lema:alef0ins} i korolar~\ref{kor:alef0prog} (i koristeći korolar~\ref{kor:alef0prog} za broj makroa), možemo dokazati da su skupovi
 \begin{align}
-\mathcal{MI}ns&:=\mathcal Ins\mathbin{\dot\cup}\{P^*\mid P\in\mathcal Prog\}\text{, i}\\
-\mathcal{MP}rog&:=\{Q\in\mathcal{MI}ns^*\mid\text{sva odredišta u $Q$ su manja ili jednaka $n_Q$}\}\text,
+\mathscr{MI}ns&:=\mathscr Ins\mathbin{\dot\cup}\{P^*\mid P\in\mathscr Prog\}\text{, i}\\
+\mathscr{MP}rog&:=\{Q\in\mathscr{MI}ns^*\mid\text{sva odredišta u $Q$ su manja ili jednaka $n_Q$}\}\text,
 \end{align}
 svih makro-instrukcija, i svih makro-programa, prebrojivi. Ti rezultati nisu toliko bitni zbog tehnika koje ćemo uskoro razviti, ali predstavljaju dobru vježbu. Sljedeći korak u tom smjeru je konstatacija da makro-izračunljivih funkcija ima prebrojivo mnogo, i kao posljedica toga, postoje brojevne funkcije koje nisu ni makro-izračunljive. No prvo moramo definirati pojam makro-konfiguracije i makro-izračunavanja.
 
 %\subsection{Konfiguracije i izračunavanja}
 
 \begin{definicija}[{name=[makro-konfiguracija]}]\label{def:macroconf}
-\emph{Konfiguracija makro-stroja} s programom $Q=(I_0,I_1,\dotsc,I_{n_Q-1})$, registrima $\reg{j}$, $j\in\N$, te programskim brojačima $\textsc{pc}$ i $\textsc{ac}$, je bilo koje preslikavanje $c\colon\{\reg{j}\mid j\in\N\}\cup\{\textsc{pc},\textsc{ac}\}\to\N$, takvo da je $c^{-1}[\N_+]$ konačan skup, $c(\textsc{pc})\le n_Q$, te vrijedi $c(\textsc{ac})=0$, osim u slučaju $I_{c(\textsc{pc})}=P^*$, kada je $c(\textsc{ac})\le n_P$. Skraćeno pišemo $c=\bigl(c(\reg0),c(\reg1),\dotsc,c(\textsc{pc}),c(\textsc{ac})\bigr)$.
+\emph{Konfiguracija makro-stroja} s programom $Q=(I_0,I_1,\dotsc,I_{n_Q-1})$, registrima $\reg{j}$, $j\in\N$, te programskim brojačima $\textsc{pc}$ i $\textsc{ac}$, je bilo koje preslikavanje $c:\{\reg{j}\mid j\in\N\}\cup\{\textsc{pc},\textsc{ac}\}\to\N$, takvo da je $c^{-1}[\N_+]$ konačan skup, $c(\textsc{pc})\le n_Q$, te vrijedi $c(\textsc{ac})=0$, osim u slučaju $I_{c(\textsc{pc})}=P^*$, kada je $c(\textsc{ac})\le n_P$. Skraćeno pišemo $c=\bigl(c(\reg0),c(\reg1),\dotsc,c(\textsc{pc}),c(\textsc{ac})\bigr)$.
 
 Početna makro-konfiguracija s ulazom $\vec x$ definira se jednako kao i početna RAM-konfiguracija: svuda osim na ulaznim registrima je $0$, pa tako i na $\textsc{ac}$. Također, završna makro-konfiguracija definira se jednako kao i u RAM-slučaju: uvjetom $c(\textsc{pc})=n_Q$ (tada mora biti $c(\textsc{ac})=0$, jer $I_{c(\textsc{pc})}$ uopće ne postoji).
 \end{definicija}
@@ -413,7 +413,7 @@ Početna makro-konfiguracija s ulazom $\vec x$ definira se jednako kao i početn
 \begin{definicija}[{name=[prijelazi među makro-konfiguracijama]}]\label{def:makrolead}
 Za konfiguracije $c=(r_0,r_1,\dotsc,pc,ac)$ i $d=(r_0',r_1',\dotsc,pc',ac')$ istog makro-stroja s makro-programom $Q=(I_0,I_1,\dotsc,I_{n_Q-1})$, kažemo da $c$ \emph{prelazi} u $d$ (\emph{po programu} $Q$), i pišemo $c\leadsto d$, ako vrijedi jedno od sljedećeg:
 \begin{enumerate}
-    \item\label{stav:zav} $c=d$, i $c$ je završna konfiguracija ($pc=n_Q$);
+    \item\label{stav:zav} $c=d$, i $c$ je završna konfiguracija ($pc=n_Q$) --- još pišemo $c\!\lcirclearrowleft$;
     \item\label{stav:Q} $ac=ac'=0$, $I_{pc}$ je RAM-instrukcija, te RAM-konfiguracija $(r_0,r_1,\dotsc,pc)$ nije završna ($pc<n_Q$) i prelazi u RAM-konfiguraciju $(r_0',r_1',\dotsc,pc')$ po programu $Q$ (odnosno njegovoj instrukciji s rednim brojem $pc$);
     \item\label{stav:P} $pc'=pc$, $I_{pc}$ je makro $P^*$, te RAM-konfiguracija $(r_0,r_1,\dotsc,ac)$ nije završna ($ac<n_P$) i prelazi u RAM-konfiguraciju $(r_0',r_1',\dotsc,ac')$ po programu $P$ (odnosno njegovoj instrukciji s rednim brojem $ac$);
     \item\label{stav:carry} $pc'=pc+1$, $I_{pc}=P^*$, $ac=n_P$ ($(r_0,r_1,\dotsc,ac)$ je završna) i $ac'=0$.\qedhere
@@ -429,7 +429,7 @@ Makro-program bez ijednog makroa jest RAM-program (konačni niz RAM-instrukcija)
 \end{napomena}
 
 \begin{primjer}[{name=[makro-program $Q$]}]\label{pr:makro}
-Uzmimo RAM-program $P_{\f{add}^3}$ iz algoritma~\eqref{eq:add3} (za zbrajanje tri broja), i promotrimo makro-stroj s programom
+Uzmimo RAM-program $P_{\f{add}^3}$ iz algoritma~\eqref{eq:add3}, i promotrimo makro-stroj s programom
 \begin{equation}
     Q:=\begin{prog}
         0.&\textsc{zero}\;\reg1\\
@@ -439,6 +439,16 @@ Uzmimo RAM-program $P_{\f{add}^3}$ iz algoritma~\eqref{eq:add3} (za zbrajanje tr
     \end{prog}\text.
 \end{equation}
 Neki prijelazi između konfiguracija tog stroja su:
+\begin{equation}\label{eq:Q!stane}
+    (0,\dotsc,0,0)\leadsto
+    (0,\dotsc,0,2)\leadsto
+    (0,\dotsc,1,0)\leadsto
+    (0,\dotsc,2,0)\leadsto
+    (0,\dotsc,1,0)\leadsto\dotsb
+\end{equation}
+Primijetimo da nijedna od tih konfiguracija nije završna.
+
+Također, možemo imati
 \begin{multline}\label{ml:Qstane}
     (0,2,4,0,\dotsc,0,0)\leadsto
     (0,1,4,0,\dotsc,0,1)\leadsto
@@ -462,25 +472,14 @@ Neki prijelazi između konfiguracija tog stroja su:
     (3,0,0,0,\dotsc,3,3)\leadsto
     (3,0,0,0,\dotsc,3,6)\\\leadsto
     (3,0,0,0,\dotsc,3,9)\leadsto
-    (3,0,0,0,\dotsc,4,0)\leadsto
-    (3,0,0,0,\dotsc,4,0)\leadsto\dotsb
+    (3,0,0,0,\dotsc,4,0)\lcirclearrowleft\text.
 \end{multline}
 Primijetimo da je konfiguracija $(3,0,0,0,\dotsc,4,0)$ završna.
-
-Također, možemo imati
-\begin{equation}\label{eq:Q!stane}
-    (0,\dotsc,0,0)\leadsto
-    (0,\dotsc,0,2)\leadsto
-    (0,\dotsc,1,0)\leadsto
-    (0,\dotsc,2,0)\leadsto
-    (0,\dotsc,1,0)\leadsto\dotsb
-\end{equation}
-Primijetimo da nijedna od gornjih konfiguracija nije završna.
 \end{primjer}
 
-Sada se, jednako kao za RAM-model, može definirati \emph{makro-algoritam}, \emph{makro-izračunavanje}, izreka da "makro-algoritam \emph{računa} brojevnu funkciju", te pojam  \emph{makro-izračunljive} funkcije. Na primjer, niz~\eqref{ml:Qstane} pokazuje da $Q$-izračunavanje s $(2,4)$ stane s izlaznim podatkom $3$, dok niz~\eqref{eq:Q!stane} pokazuje da $Q$-izračunavanje s $(0)$ ne stane. Općenitije, recimo, makro-algoritam $Q^4$ računa funkciju $\f{f}\colon\N\times\N_+\!\times\N\times\N\to\N$, zadanu s $\f{f}(x,y,z,t):=y+z-1$.
+Sada se, jednako kao za RAM-model, može definirati \emph{makro-algoritam}, \emph{makro-izračunavanje}, izreka da makro-algoritam \emph{računa} neku brojevnu funkciju, te pojam  \emph{makro-izračunljive} funkcije. Na primjer, niz~\eqref{eq:Q!stane} pokazuje da $Q$-izračunavanje s $(0)$ ne stane, dok niz~\eqref{ml:Qstane} pokazuje da $Q$-izračunavanje s $(2,4)$ stane s izlaznim podatkom $3$. Također, makro-algoritam $Q^4$ računa funkciju $\f{f}:\N\times\N_+\!\times\N\times\N\to\N$, zadanu s $\f{f}(x,y,z,t):=y+z-1$.
 
-Također se mogu (uz malo više tehnikalija) dokazati rezultati o determinističnosti, prebrojivosti skupa makro-izračunljivih funkcija, te postojanju brojevnih funkcija koje nisu takve. Iako to predstavlja dobru vježbu, nećemo ići na taj način --- naš cilj je dobiti sve te rezultate s druge strane, tako da dokažemo da se svaki makro-stroj može \emph{simulirati} RAM-strojem, te je skup makro-izračunljivih funkcija \emph{jednak} skupu RAM-izračunljivih funkcija $\mathcal Comp$.
+Kao i u RAM-slučaju, uz malo više tehnikalija mogu se dokazati rezultati o determinističnosti, prebrojivosti skupa makro-izračunljivih funkcija, te postojanju brojevnih funkcija koje nisu takve. Iako to predstavlja dobru vježbu, nećemo ići na taj način --- naš cilj je dobiti sve te rezultate s druge strane, tako da dokažemo da se svaki makro-stroj može \emph{simulirati} RAM-strojem, te je skup makro-izračunljivih funkcija \emph{jednak} skupu $\mathscr Comp$ RAM-izračunljivih funkcija.
 
 %\section{Simulacija}
 
@@ -510,29 +509,31 @@ Dok god postoji barem jedan makro u $Q$:
 \end{quotation}
 \end{definicija}
 
-\begin{propozicija}[{name=[spljoštenje projicira $\mathcal{MP}rog$ na $\mathcal Prog$]}]
-Preslikavanje ${}^\flat$ je totalna surjekcija sa skupa $\mathcal{MP}rog$ na skup $\mathcal Prog$.
+\begin{propozicija}[{name=[spljoštenje projicira $\mathscr{MP}rog$ na $\mathscr Prog$]}]
+Preslikavanje ${}^\flat$ je totalna surjekcija sa skupa $\mathscr{MP}rog$ na skup $\mathscr Prog$.
 \end{propozicija}
 \begin{proof}
 Treba vidjeti da za proizvoljni makro-program $Q$, postupak iz definicije~\ref{def:flat} uvijek stane u konačno mnogo koraka, i pritom proizvede RAM-program.
 
 Kako je u svakom makrou $P^*$, $P$ \emph{RAM}-program, u koraku~\ref{korak:dodaj} ne dodajemo nove makroe. S druge strane, u koraku~\ref{korak:makni} uklanjamo jedan makro, a u koraku~\ref{korak:renumeriraj} ne mijenjamo broj makroa, dakle svaki prolaz kroz petlju smanjuje broj makroa za $1$. Kako svaki makro-program ima konačno mnogo makroa, postupak će sigurno završiti (nakon najviše $n_Q$ prolaza kroz petlju). A kada završi, uvjet petlje neće biti ispunjen, dakle u $Q$ više neće biti makroa: drugim riječima, pretvorili smo  $Q$ u RAM-program.
 
-Surjektivnost slijedi iz činjenice da je $\mathcal Ins\subset\mathcal{MI}ns$, dakle $\mathcal Prog\subset\mathcal{MP}rog$, te je ${}^\flat$ na RAM-programima identiteta: uvjet petlje već na početku nije ispunjen, pa se program uopće ne mijenja. Dakle za svaki RAM-program $P$ vrijedi $P^\flat=P$.
+Surjektivnost slijedi iz činjenice da je $\mathscr Ins\subset\mathscr{MI}ns$, dakle $\mathscr Prog\subset\mathscr{MP}rog$, te je ${}^\flat$ na RAM-programima identiteta: uvjet petlje već na početku nije ispunjen, pa se program uopće ne mijenja. Dakle za svaki RAM-program $P$ vrijedi $P^\flat=P$.
 \end{proof}
 
 \begin{primjer}[{name=[spljoštenje makro-programa $Q$]}]\label{pr:flat}
-Spljoštimo program $Q$ iz primjera~\ref{pr:makro}. Prvi makro u $Q$ nalazi se odmah na početku ($i=0$)	 pa ne moramo renumerirati instrukcije koje implementiraju $\textsc{zero}\;\reg1$ --- samo ove ispod njih: trebamo im povećati odredišta i redne brojeve za $2-1=1$. Nakon prvog prolaza kroz petlju tako dobijemo makro-program $Q'$ iz~\eqref{eq:prflatQ'Q''} lijevo.
-
-Sljedeći makro je onaj koji odgovara praznom RAM-programu, na rednom broju $i=2$. Za njega očito ne treba provoditi korak~\ref{korak:dodaj}, samo ga uklonimo i smanjimo redne brojeve i odredišta veće od $2$ za $1$. Specijalno, to znači da u instrukciji $(3.\;\decr22)$, odredište ostaje $2$, dok se redni broj smanjuje za $1$ i postaje također $2$. Dobivamo
-\begin{equation}\label{eq:prflatQ'Q''}
+Spljoštimo program $Q$ iz primjera~\ref{pr:makro}. Prvi makro u $Q$ nalazi se odmah na početku ($i=0$)	 pa ne moramo renumerirati instrukcije koje implementiraju $\textsc{zero}\;\reg1$ --- samo ove ispod njih: trebamo im povećati odredišta i redne brojeve za $2-1=1$. Nakon prvog prolaza kroz petlju tako dobijemo makro-program 
+\begin{equation}
     Q':=\begin{prog}
     0.&\decr12\\
     1.&\goto\;0\\
     2.&[\;]^*\\
     3.&\decr22\\
     4.&P_{\f{add}^3}^*
-    \end{prog}\text,\qquad
+    \end{prog}\text.
+\end{equation}
+
+Sljedeći makro je onaj koji odgovara praznom RAM-programu, na rednom broju $i=2$. Za njega očito ne treba provoditi korak~\ref{korak:dodaj}, samo ga uklonimo i smanjimo redne brojeve i odredišta veće od $2$ za $1$. Specijalno, to znači da u instrukciji $(3.\;\decr22)$, odredište ostaje $2$, dok se redni broj smanjuje za $1$ i postaje također $2$. Dobivamo
+\begin{equation}
     Q'':=\begin{prog}
     0.&\decr12\\
     1.&\goto\;0\\
@@ -575,7 +576,7 @@ Ostao nam je još jedan makro, koji je ovaj put zadnja instrukcija ($i=3$). To z
 i gotovi smo: $Q'''=Q^\flat$, jer više nema makroa u programu. (Za objašnjenje funkcije $v$ čije vrijednosti su napisane pored $Q^\flat$, pogledajte skicu dokaza teorema~\ref{tm:rem}.)
 \end{primjer}
 
-Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathcal{MP}rog$ i $\mathcal Prog$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je svakako mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Svakako napominjemo da ćemo se na ovaj postupak vratiti u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa, u jednom specijalnom slučaju (dokaz teorema o parametru), za koji ćemo poslije pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
+Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathscr{MP}rog$ i $\mathscr Prog$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je svakako mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Svakako napominjemo da ćemo se na ovaj postupak vratiti u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa, u jednom specijalnom slučaju (dokaz teorema o parametru), za koji ćemo poslije pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
 
 \subsection{Ekvivalencija RAM-programa i makro-programa}
 
@@ -597,7 +598,9 @@ Iz toga onda slijedi da se pri izvršavanju programa i njegovog spljoštenja zap
 Teorem~\ref{tm:rem} ima dvije važne posljedice. Prvu možemo uobličiti kao korolar.
 
 \begin{korolar}[{name=[RAM-izračunljivost je ekvivalentna makro-izračunljivosti]}]\label{kor:rem}
-Neka je $k\in\N_+$ i $\f f^k$ funkcija. Tada je $\f f$ RAM-izračunljiva ako i samo ako je makro-izračunljiva.
+Neka je $k\in\N_+$ i\, $\f f^k$ funkcija.
+
+    Tada je $\f f$ RAM-izračunljiva ako i samo ako je makro-izračunljiva.
 \end{korolar}
 \begin{proof}
 Za jedan smjer, ako je $\f f$ RAM-izračunljiva, postoji RAM-algoritam iste mjesnosti $P^k$ koji je računa.  RAM-program $P$ je i makro-program, a vidjeli smo u napomeni~\ref{nap:rem} da je svejedno izvršava li se na makro-stroju ili RAM-stroju. Drugim riječima, $P$ na makro-stroju također računa funkciju $\f f$, odnosno makro-algoritam $P^k$ računa $\f f$, pa je $\f f$ makro-izračunljiva.
@@ -631,7 +634,7 @@ Nije teško vidjeti, sličnom tehnikom kao za \textsc{zero}, da za sve \emph{raz
     3.&\goto\;1
     \end{prog}^{\flat\;*}
 \end{equation}
-ima semantiku $r_i'=0\land r_j'=r_i$: riječima, prebacuje sadržaj $\reg{i}$ u $\reg{j}$ i pritom resetira $\reg{i}$. Ovdje je bitan uvjet $i\not=j$; pokušajte odrediti što se događa kad taj uvjet nije ispunjen. Općenito ćemo imati uvjete na "parametre" makroa pod kojima on ima traženu semantiku. Naravno, onda smo dužni pri svakom korištenju makroa u programu provjeriti da konkretne vrijednosti parametara zadovoljavaju te uvjete.
+ima semantiku $r_i'=0\land r_j'=r_i$: riječima, prebacuje sadržaj $\reg{i}$ u $\reg{j}$ i pritom resetira $\reg{i}$. Ovdje je bitan uvjet $i\ne j$; pokušajte odrediti što se događa kad taj uvjet nije ispunjen. Općenito ćemo imati uvjete na "parametre" makroa pod kojima on ima traženu semantiku. Naravno, onda smo dužni pri svakom korištenju makroa u programu provjeriti da konkretne vrijednosti parametara zadovoljavaju te uvjete.
 
 Evo primjera makroa s malo kompliciranijim uvjetom: neka su $i,j,n\in\N$ takvi da je $\dulj{i-j}\ge n$. Definiramo makro
 \begin{equation}
@@ -639,7 +642,7 @@ Evo primjera makroa s malo kompliciranijim uvjetom: neka su $i,j,n\in\N$ takvi d
     t.&\remove{i+t}{j+t}
     \end{prog}_{t<n}^{\flat\;*}
 \end{equation}
-sa semantikom $(\forall t<n)(r_{j+t}'=r_{i+t}\land r_{i+t}'=0)$ --- koristimo $(\forall t<n)$ kao pokratu za $(\forall t\in[0..n\rangle)$. Riječima, \textsc{mmove} prebacuje komad memorije duljine $n$ registara počevši od $\reg{i}$, na drugo mjesto koje počinje od $\reg{j}$, ostavljajući nule na originalnim lokacijama. Svrha korištenja te instrukcije bit će emulacija \emph{stoga} pri funkcijskim pozivima.
+sa semantikom $(\forall t<n)(r_{j+t}'=r_{i+t}\land r_{i+t}'=0)$ --- koristimo $(\forall t<n)$ kao pokratu za $(\forall t\in[0\dd n\rangle)$. Riječima, \textsc{mmove} prebacuje komad memorije duljine $n$ registara počevši od $\reg{i}$, na drugo mjesto koje počinje od $\reg{j}$, ostavljajući nule na originalnim lokacijama. Svrha korištenja te instrukcije bit će emulacija \emph{stoga} pri funkcijskim pozivima.
 
 Moderna računala rezerviraju poseban dio svoje memorije za stog poziva (\emph{call stack}) koji se dijeli na okvire (\emph{frames}), u kojima se drže podaci o lokalnim varijablama funkcije koja se trenutno izvršava. Pozivom funkcije, pokazivač stoga se pomiče, otvarajući novi okvir u kojem će se funkcija izvršavati. Povratkom iz funkcije, pokazivač stoga se vraća na staro mjesto, eliminirajući taj okvir tako da od njega ostane jedino povratna vrijednost.
 
@@ -661,7 +664,7 @@ Upravo konstruirani makroi su u redu ako nam je prihvatljivo da se registar rese
     6.&\remove{k}{i}
     \end{prog}^{\flat\;*}
 \end{equation}
-ima semantiku $r_j'=r_i\land r_k'=0$ (primijetimo da nismo napisali $r_i'$, što u skladu s našom konvencijom znači da je $r_i'=r_i$). To se dokaže po koracima, praćenjem stanja relevantnih registara kroz instrukcije:
+ima semantiku $r_j'=r_i\land r_k'=0$ (nismo napisali $r_i'$, što u skladu s našom konvencijom znači da je $r_i'=r_i$). To se dokaže po koracima, praćenjem stanja relevantnih registara kroz instrukcije:
 \begin{equation}
     \begin{array}{r@{\;}l|ccc}
 \SwapAboveDisplaySkip
@@ -673,7 +676,7 @@ ima semantiku $r_j'=r_i\land r_k'=0$ (primijetimo da nismo napisali $r_i'$, što
     \end{array}
 \end{equation}
 Primijetimo da smo za tu operaciju morali "žrtvovati" jedan registar sa strane.
-Zbog $i\not=k$, uvjet na parametre makroa \textsc{remove} je zadovoljen.
+Zbog $i\ne k$, uvjet na parametre makroa \textsc{remove} je zadovoljen.
 
 \begin{napomena}[{name=[{terminologija makroa za kopiranje, premještanje i brisanje}]}]
 Terminološki detalj: ako ste navikli na rad s modernim sustavima datoteka, vjerojatno smatrate čudnim naziv \textsc{move} za ono što biste vjerojatno intuitivno zvali \textsc{copy} (dok se ono što biste intuitivno zvali \textsc{move} ovdje zove \textsc{remove}, a ono što biste zvali \textsc{remove} ovdje se zove \textsc{zero}). Niste jedini: pogledajte recimo~\cite{url:movecopy}. Pravi razlozi su vjerojatno zauvijek izgubljeni u dubinama povijesti, ali je činjenica da moderne računalne arhitekture uglavnom terminološki prate arhitekturu \texttt{x86}, koja standardno instrukciju za kopiranje podataka između registara (ili drugih lokacija) zove \textsc{mov}. Tu terminologiju i mi slijedimo ovdje.
@@ -686,7 +689,7 @@ U tu svrhu, neka je $k\in\N_+$, te $j_1,j_2,\dotsc,j_k>k$ prirodni brojevi (ne m
     (\textsc{args} \;\reg{j_1},\reg{j_2},\dotsc,\reg{j_k}):=\begin{prog} t.&\move{j_{t+1}\!}{t+1}{0}
     \end{prog}^{\flat\;*}_{t<k}\text,
 \end{equation}
-čija je semantika $(\forall t\in[1..k])(r_t'=r_{j_t})\land r_0'=0$. Primijetimo da je svaki uvjet za parametre od \textsc{move} zadovoljen, jer za svaki $t\in[1..k]$ vrijedi $0<1\le t\le k<j_t$, pa su $\reg{0}$, $\reg{t}$ i $\reg{j_t}$ različiti registri. Također primijetimo da u procesu prijenosa argumenata resetiramo izlazni registar, što je u redu jer ionako nakon prijenosa argumenata slijedi prijenos kontrole na pozvanu funkciju, koja će očekivati nulu tamo.
+čija je semantika $(\forall t\in[1\dd k])(r_t'=r_{j_t})\land r_0'=0$. Primijetimo da je svaki uvjet za parametre od \textsc{move} zadovoljen, jer za svaki $t\in[1\dd k]$ vrijedi $0<1\le t\le k<j_t$, pa su $\reg{0}$, $\reg{t}$ i $\reg{j_t}$ različiti registri. Također primijetimo da u procesu prijenosa argumenata resetiramo izlazni registar, što je u redu jer ionako nakon prijenosa argumenata slijedi prijenos kontrole na pozvanu funkciju, koja će očekivati nulu tamo.
 
 \subsection{Funkcijski makro}
 
@@ -697,7 +700,7 @@ Prvo definiramo jedan korisni pojam. Kako svaka RAM-instrukcija djeluje na najvi
 Za makro-program $Q$, možemo prirodno definirati $m_Q:=m_{Q^\flat}$ --- iako nam to zapravo neće trebati. Ali (RAM- i makro-\!) algoritmi $P^k$, pored registara koje koriste u instrukcijama, koriste i registre $\reg{1}$ do $\reg{k}$ za ulazne podatke. Moguće je da bude $m_P\le k$, ako računamo funkciju koja ne ovisi o zadnjih nekoliko argumenata. Ipak, registar $\reg{k}$ jest bitan za postupak računanja te funkcije jer, iako ga ne postavlja nijedna instrukcija, postavlja ga sam rad stroja koji u početnoj konfiguraciji u njega spremi agrument $x_k$. Zato definiramo širinu algoritma kao $m_{P^k}:=\max\,\{m_P,k+1\}$. Primijetimo da je, zbog $k\in\N_+$, uvijek $m_{P^k}\ge 2$.
 
 \begin{definicija}[{name=[funkcijski makro]}]\label{def:funmakro}
-Neka je $k\in\N_+$, $\f{f}^k\in\mathcal Comp_k$, te $P_{\f{f}}^k$ RAM-algoritam koji računa $\f{f}^k$. Neka su $m,j_0,j_1,\dotsc,j_k\in\N$. Definiramo
+Neka je $k\in\N_+$, $\f{f}^k\in\mathscr Comp_k$, te $P_{\f{f}}^k$ RAM-algoritam koji računa $\f{f}^k$. Neka su $m,j_0,j_1,\dotsc,j_k\in\N$. Definiramo
     %\begin{equation}
     $b:=1+\max\,\{m_{P_{\f{f}}},m,k,j_0,j_1,\dotsc,j_k\}$
     %\end{equation}
@@ -718,9 +721,9 @@ te pomoću tog broja definiramo \emph{funkcijski makro}
 \begin{propozicija}[{name=[semantika funkcijskog makroa]}]\label{prop:semfmacro}
 Semantika funkcijskog makroa, uz oznake iz definicije~\ref{def:funmakro}, te pokratu $\vec r:=(r_{j_1},r_{j_2},\dotsc,r_{j_k})$, jest:
 \begin{enumerate}
-    \item\label{case:in} Ako je $\vec r\in\dom{\f{f}}$, tada je $r_{j_0}'\!=\f{f}(\vec r)\land(\forall t\in[b..2b\rangle)(r_t'=0)$.\\
-    (Specijalno, zbog $b>m$, za sve $i\in[0..m\rangle\setminus\{j_0\}$ vrijedi $r_i'=r_i$.)
-    \item\label{case:notin} Ako $\vec r\not\in\dom{\f{f}}$, izvršavanje funkcijskog makroa ne stane.
+    \item\label{case:in} Ako je $\vec r\in\dom{\f{f}}$, tada je $r_{j_0}'\!=\f{f}(\vec r)\land(\forall t\in[b\dd 2b\rangle)(r_t'=0)$.\\
+    (Specijalno, zbog $b>m$, za sve $i\in[0\dd m\rangle\setminus\{j_0\}$ vrijedi $r_i'=r_i$.)
+    \item\label{case:notin} Ako $\vec r\notin\dom{\f{f}}$, izvršavanje funkcijskog makroa ne stane.
 \end{enumerate}
 \end{propozicija}
 \begin{proof}
@@ -728,13 +731,13 @@ Prvo primijetimo da su svi uvjeti na parametre korištenih makroa zadovoljeni: z
 
 Za tvrdnju~\ref{case:in}, pogledajmo redom efekte pojedinih makro-instrukcija iz definicije~\ref{def:funmakro}.
 
-Nakon prve instrukcije \textsc{mmove}, u prvih $b$ registara bit će nule, a u idućih $b$ registara bit će \emph{backup} starih vrijednosti prvih $b$ registara ($r_0,r_1,\dotsc,r_{b-1}$). Konkretno, za svaki $t\in[1..k]$, u $\reg{b+j_t}$ nalazit će se $r_{j_t}$.
+Nakon prve instrukcije \textsc{mmove}, u prvih $b$ registara bit će nule, a u idućih $b$ registara bit će \emph{backup} starih vrijednosti prvih $b$ registara ($r_0,r_1,\dotsc,r_{b-1}$). Konkretno, za svaki $t\in[1\dd k]$, u $\reg{b+j_t}$ nalazit će se $r_{j_t}$.
 
-Dakle, instrukcija \textsc{args} će u ulazne registre $\reg1,\dotsc,\reg{k}$ zapisati upravo vrijednosti $\vec r$. Ostale registre neće mijenjati, pa će u $\reg0$ i dalje biti $0$, kao i u svim registrima $\reg{i}$ za $i\in\langle k..b\rangle$, te će u idućih $b$ registara i dalje biti \emph{backup}.
+Dakle, instrukcija \textsc{args} će u ulazne registre $\reg1,\dotsc,\reg{k}$ zapisati upravo vrijednosti $\vec r$. Ostale registre neće mijenjati, pa će u $\reg0$ i dalje biti $0$, kao i u svim registrima $\reg{i}$ za $i\in\langle k\dd b\rangle$, te će u idućih $b$ registara i dalje biti \emph{backup}.
 
 Sada slijedi izvršavanje makroa $P_{\f{f}}^*$, odnosno RAM-programa $P_{\f{f}}$ na trenutnom stanju registara. Kako je to RAM-program, po napomeni~\ref{nap:rem} slijedi da će imati iste efekte na registre kao da se izvršava na RAM-stroju, a iz $b\ge m_{P_{\f{f}}^k}$ i prethodnog odlomka slijedi da će njegovo izvršavanje biti isto kao da se izvršava na  RAM-stroju u početnoj konfiguraciji. Kako $P_{\f{f}}^k$ računa funkciju $\f{f}$, a u "početnoj" konfiguraciji mu se u ulaznim registrima nalazi $\vec r$, koji je prema pretpostavci element domene $\dom{\f{f}}$, slijedi da će izvršavanje tog makroa  (zapravo $P_{\f{f}}$-izračunavanje s $\vec r$) stati, i u "završnoj" konfiguraciji sadržaj registra $\reg0$ će biti $\f{f}(\vec r)$.
 
-Nakon toga izvršavanje funkcijskog makroa prijeći će na instrukciju \textsc{remove}, koja će tu vrijednost $\f{f}(\vec r)$ zapisati u registar $\reg{b+j_0}$, koji se nalazi u bloku $(\reg{i})_{i\in[b..2b\rangle}$ jer je $j_0<b$. Svi ostali registri iz tog bloka i dalje će držati \emph{backup} početnih vrijednosti prvih $b$ registara. Ne znamo što će biti u prvih $b$ registara (osim što će u $\reg0$ biti $0$) jer to ovisi o konkretnom programu $P_{\f{f}}$, ali zapravo to nije ni bitno.
+Nakon toga izvršavanje funkcijskog makroa prijeći će na instrukciju \textsc{remove}, koja će tu vrijednost $\f{f}(\vec r)$ zapisati u registar $\reg{b+j_0}$, koji se nalazi u bloku $(\reg{i})_{i\in[b\dd 2b\rangle}$ jer je $j_0<b$. Svi ostali registri iz tog bloka i dalje će držati \emph{backup} početnih vrijednosti prvih $b$ registara. Ne znamo što će biti u prvih $b$ registara (osim što će u $\reg0$ biti $0$) jer to ovisi o konkretnom programu $P_{\f{f}}$, ali zapravo to nije ni bitno.
 
 Naime, zadnja instrukcija \textsc{mmove} će čitav taj blok prepisati \emph{backup}-blokom, te će se svih $b$ prvih registara vratiti na originalne vrijednosti (konkretno, zanimat će nas da se sačuva prvih $m<b$ registara), osim što će u $\reg{j_0}$ pisati vraćena vrijednost iz $\reg{b+j_0}$, dakle $\f f(\vec r)$. \emph{Backup}-blok (registri od $\reg{b}$ do $\reg{2b-1}$) će time biti resetiran. Tablično to možemo prikazati otprilike ovako:
 \begin{equation}\label{eq:funmakrotab}

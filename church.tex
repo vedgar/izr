@@ -5,7 +5,7 @@ Intuitivni pojam izračunljivog kao "onog za što postoji algoritam", zajedno s 
 Doduše, obično se problemi za koje se utvrđuje postojanje algoritma iskazuju u obliku \emph{problema odluke}: za dani skup $A$ i njegov podskup $D$, postoji li algoritam koji odlučuje, za proizvoljni $x\in A$, je li $x\in D$? Jednom kada imamo kodiranje $\N A$ skupa $A$, to gledamo kao pitanje izračunljivosti skupa (jednomjesne relacije) $\N A[D]\subseteq\N$, odnosno njene karakteristične funkcije $\chi_{\N A[D]}$. Sve te ideje smo već vidjeli (za $A:=\Sigma^*$) kad smo promatrali odlučive jezike.
 
 \begin{definicija}[{name=[odlučivost problema]}]
-Za brojevni problem $D$ kažemo da je \emph{odlučiv} ako je njegova karakteristična funkcija $\chi_D$ rekurzivna. Za problem $D\subseteq A$ takav da postoji prirodno kodiranje $\N A\colon A\to\N$, kažemo da je \emph{odlučiv} ako je brojevni problem $\N A[D]$ odlučiv.
+Za brojevni problem $D$ kažemo da je \emph{odlučiv} ako je njegova karakteristična funkcija $\chi_D$ rekurzivna. Za problem $D\subseteq A$ takav da postoji prirodno kodiranje $\N A:A\to\N$, kažemo da je \emph{odlučiv} ako je brojevni problem $\N A[D]$ odlučiv.
 \end{definicija}
 
 "Brojevni problemi" nisu ništa drugo nego relacije, ali postavljeni u obliku pitanja, odnosno ispitivanja nekog svojstva. Recimo, $Halt_2=\dom{\f{comp}_2}^3$ možemo promatrati kao problem "za zadane $x,y,e\in\N$, (postoji li i) stane li program koda $e$ s ulazom $(x,y)$?", odnosno "ima li izraz $\kf{e}(x,y)$ smisla?". Već smo nagovijestili da taj problem nije odlučiv.
@@ -36,7 +36,7 @@ Pretpostavimo da takva funkcija postoji. Tada je ona parcijalno rekurzivna, pa p
 \begin{equation}
     1+q=1+\f r(e)=1+\kf e(e)=1+\f{comp}(e,e)\text,
 \end{equation}
-iz čega slijedi da je $e\in K$ i $\f{Russell}(e)=1+q$. No $\f r(e)=q\not=1+q$, pa $\f r$ ne može biti proširenje od $\f{Russell}$, kontradikcija.
+iz čega slijedi da je $e\in K$ i $\f{Russell}(e)=1+q$. No $\f r(e)=q\ne 1+q$, pa $\f r$ ne može biti proširenje od $\f{Russell}$, kontradikcija.
 \end{proof}
 
 \begin{teorem}[{name=[nerekurzivnost Russellovog skupa]}]\label{tm:DRnrek}
@@ -65,7 +65,7 @@ Time smo napokon dokazali da postoji izračunljiva funkcija s neizračunljivom d
 
 To je osnovna nesimetrija u definiciji algoritma: dok je zaustavljanje algoritma moguće karakterizirati neograničenom egzistencijalnom kvantifikacijom (projekcijom), što jest domena izračunljive funkcije (minimizacije), njegovo \emph{nezaustavljanje} nije moguće tako karakterizirati. Ukratko, prirodni brojevi imaju lijepo svojstvo \emph{početne konačnosti}: od svakog prirodnog broja ima konačno mnogo manjih, i ako postoji prirodni broj s nekim svojstvom, prateći sljedbenike od nule stići ćemo do njega u konačno mnogo koraka. S druge strane (doslovno!), prirodnih brojeva ima beskonačno mnogo: od svakog broja ima beskonačno mnogo većih, i ako trebamo ustanoviti da neko svojstvo vrijedi za sve prirodne brojeve, to nikako ne možemo učiniti provjeravajući ih jedan po jedan. Čak i da ih ne provjeravamo po redu, do svakog trenutka smo provjerili samo konačno mnogo njih, te od svih njih postoji najveći, a većih od njega ima jednako mnogo kao i svih prirodnih brojeva.
 
-Naravno, to nije \emph{dokaz} da ne postoji možda neka druga metoda kojom bismo ustanovili da $x\not\in\dom{\f f}$ --- samo pokazuje da stvari nisu tako jednostavne.
+Naravno, to nije \emph{dokaz} da ne postoji možda neka druga metoda kojom bismo ustanovili da $x\notin\dom{\f f}$ --- samo pokazuje da stvari nisu tako jednostavne.
 
 \subsection{Svođenje i problemi zaustavljanja}
 
@@ -101,7 +101,7 @@ Tranzitivnost je kompliciranija, ali samo notacijski, zbog toga što funkcije s 
     \bigl(\f H_l\circ(\f G_1,\dotsc,\f G_m)\bigr)(\vec x)\bigr)=\\
     =\bigl(\chi_P\circ\bigl(\f H_1\circ(\f G_1,\dotsc,\f G_m),\dotsc,\f H_l\circ(\f G_1,\dotsc,\f G_m)\bigr)\bigr)(\vec x)\text,
 \end{multline}
-dakle ako za svaki $i\in[1..l]$ definiramo $\f F_i:=\f H_i\circ(\f G_1,\dotsc,\f G_m)$, tada je svaka $\f F_i$ rekurzivna po lemi~\ref{lm:comprek}. Sada~\eqref{eq:tranzpreceq} možemo zapisati kao $\chi_R=\chi_P\circ(\f F_1,\dotsc,\f F_l)$, odakle slijedi $R\preceq P$.
+dakle ako za svaki $i\in[1\dd l]$ definiramo $\f F_i:=\f H_i\circ(\f G_1,\dotsc,\f G_m)$, tada je svaka $\f F_i$ rekurzivna po lemi~\ref{lm:comprek}. Sada~\eqref{eq:tranzpreceq} možemo zapisati kao $\chi_R=\chi_P\circ(\f F_1,\dotsc,\f F_l)$, odakle slijedi $R\preceq P$.
 \end{proof}
 
 Relacija $R\preceq P$ znači da ako imamo algoritam za rješavanje problema $P$, pomoću njega možemo riješiti i problem $R$. Intuitivno, $R$ je "barem toliko odlučiv" koliko i $P$.
@@ -147,7 +147,7 @@ Dakle, ono što zasad znamo, po Church--\!Turingovoj tezi, je da ne postoji algo
 Postoji RAM-program $P_0$, takav da nijedan algoritam ne može točno odrediti, za svaki $u\in\N$, stane li $P_0$-izračunavanje s $u$.
 \end{korolar}
 \begin{proof}
-%Jednostavno kompajliramo (teorem~\ref{tm:pir}) simboličku definiciju funkcije $\f{Russell}$ koju smo dobili u dokazu korolara~\ref{kor:Russellprek}. Tako dobijemo RAM-program $P_0$, za koji po definiciji~\ref{def:compute} vrijedi: za svaki $t\in\N$, $P_0$-izračunavanje s $t$ stane ako i samo ako je $t\in K$.
+%Jednostavno kompiliramo (teorem~\ref{tm:pir}) simboličku definiciju funkcije $\f{Russell}$ koju smo dobili u dokazu korolara~\ref{kor:Russellprek}. Tako dobijemo RAM-program $P_0$, za koji po definiciji~\ref{def:compute} vrijedi: za svaki $t\in\N$, $P_0$-izračunavanje s $t$ stane ako i samo ako je $t\in K$.
 Po korolaru~\ref{kor:Russellprek}, Russellova funkcija je parcijalno rekurzivna. Po teoremu~\ref{tm:pir}, ona je i RAM-izračunljiva. Označimo s $P_0$ jedan RAM-program koji je računa. Po definiciji~\ref{def:compute}, za svaki $u\in\N$, $P_0$-izračunavanje s $u$ stane ako i samo ako je $u\in K$.
 
 Kad bi postojao algoritam za odlučivanje problema zaustavljanja $P_0$-izračunavanja s proizvoljnim $u$, po Church--\!Turingovoj tezi $K$ bi bio odlučiv problem, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
@@ -172,9 +172,9 @@ Za svaku abecedu $\Sigma$ postoji Turingov stroj nad njom, čiji je problem zaus
 \begin{proof}
 Ako je $\t\textbullet\;\raisebox{1.1pt}{$\in$}\;\Sigma$, možemo direktno primijeniti lemu~\ref{lm:THaltnodl}, na Turingov stroj $\mathcal T_0$ nad abecedom $\Sigma$. Kad bi postojao algoritam koji za svaku riječ $w\in\Sigma^*$ točno određuje stane li $\mathcal T_0$-izračunavanje s $w$, to bi specijalno moralo vrijediti za sve $w\in\t\textbullet^*\subseteq\Sigma^*$, što je u kontradikciji s lemom~\ref{lm:THaltnodl}.
 
-Ako pak $\t\textbullet\;\raisebox{1.1pt}{$\not\in$}\;\Sigma$, uzmimo neki konkretni znak $\alpha\in\Sigma$ (po definiciji abecede je $\Sigma\not=\emptyset$, pa $\alpha$ postoji), i \emph{zamijenimo} ga s \t\textbullet: gledamo Turingov stroj $\mathcal T_0'$ koji je kao $\mathcal T_0$ iz prethodnog odlomka, osim što umjesto \t\textbullet\ ima $\alpha$ --- kako u $\Sigma$, tako i u $\Gamma$ i u svim prijelazima od $\delta$. S obzirom na to da znakovi radne abecede nemaju nikakvu imanentnu semantiku (osim praznine, ali za to pogledajte sljedeći odlomak), $\mathcal T_0'$-izračunavanje s $\alpha^u$ stane ako i samo ako $\mathcal T_0$-izračunavanje s $\t\textbullet^u$ stane --- pa kad bi neki algoritam za svaku $w\in\Sigma^*$ točno određivao stane li $\mathcal T_0'$-izračunavanje s $w$, tada bi to specijalno vrijedilo i za sve riječi oblika $\alpha^u,u\in\N$, pa bismo opet imali kontradikciju s neodlučivošću od $K$ kao u prethodnom odlomku.
+Ako pak $\t\textbullet\notin\Sigma$, uzmimo neki konkretni znak $\alpha\in\Sigma$ (po definiciji abecede je $\Sigma\ne\emptyset$, pa $\alpha$ postoji), i \emph{zamijenimo} ga s \t\textbullet: gledamo Turingov stroj $\mathcal T_0'$ koji je kao $\mathcal T_0$ iz prethodnog odlomka, osim što umjesto \t\textbullet\ ima $\alpha$ --- kako u $\Sigma$, tako i u $\Gamma$ i u svim prijelazima od $\delta$. S obzirom na to da znakovi radne abecede nemaju nikakvu imanentnu semantiku (osim praznine, ali za to pogledajte sljedeći odlomak), $\mathcal T_0'$-izračunavanje s $\alpha^u$ stane ako i samo ako $\mathcal T_0$-izračunavanje s $\t\textbullet^u$ stane --- pa kad bi neki algoritam za svaku $w\in\Sigma^*$ točno određivao stane li $\mathcal T_0'$-izračunavanje s $w$, tada bi to specijalno vrijedilo i za sve riječi oblika $\alpha^u,u\in\N$, pa bismo opet imali kontradikciju s neodlučivošću od $K$ kao u prethodnom odlomku.
 
-Jedan detalj još moramo uzeti u obzir: što ako je praznina stroja $\mathcal T_0$ upravo \t\textbullet? Tada ona po definiciji nije u $\Sigma$, ali je ne možemo jednostavno zamijeniti s $\alpha$ jer $\alpha$ jest u $\Sigma$. U tom slučaju odaberemo neki novi znak $\beta\not\in\Gamma$, proglasimo ga prazninom, i \t\textbullet\ zamijenimo s $\beta$ u $\Gamma$ i $\delta$. Nakon toga primijenimo postupak iz prethodnog odlomka.
+Jedan detalj još moramo uzeti u obzir: što ako je praznina stroja $\mathcal T_0$ upravo \t\textbullet? Tada ona po definiciji nije u $\Sigma$, ali je ne možemo jednostavno zamijeniti s $\alpha$ jer $\alpha$ jest u $\Sigma$. U tom slučaju odaberemo neki novi znak $\beta\notin\Gamma$, proglasimo ga prazninom, i \t\textbullet\ zamijenimo s $\beta$ u $\Gamma$ i $\delta$. Nakon toga primijenimo postupak iz prethodnog odlomka.
 \end{proof}
 
 \section{Neodlučivost u logici prvog reda}
@@ -217,7 +217,7 @@ Za dovršetak odnosno formalizaciju dokaza još bi trebalo vidjeti da je funkcij
 
 Osnovna ideja dokaza Churchovog teorema je svesti problem zaustavljanja za RAM-strojeve na problem zaključivanja. Iz toga će onda Churchov teorem odmah slijediti po propoziciji~\ref{pp:Haltnodl} i korolaru~\ref{kor:nrek<nrek}.
 
-Dakle, neka su $k\in\N_+$, $P\in\mathcal Prog$, te $\vec u\in\N^k$ (u logici prvog reda obično individualne varijable označavamo s $x_i$, pa ćemo ovdje koristiti $u_i$ kao uobičajenu oznaku za ulazne podatke). Trebamo konstruirati skup formula $\Gamma$ i formulu $\zeta$, koji ovise o $P$ i $\vec u$, tako da $P$-izračunavanje s $\vec u$ stane ako i samo ako vrijedi $\Gamma\models\zeta$. Štoviše, zbog korolara~\ref{kor:RAMhaltnodl}, zapravo možemo cijelu konstrukciju provesti za fiksni $P$ (i za $k=1$), pa ga nećemo pisati (iako smo svjesni da će $\Gamma$ i $\zeta$ ovisiti o $P$).
+Dakle, neka su $k\in\N_+$, $P\in\mathscr Prog$, te $\vec u\in\N^k$ (u logici prvog reda obično individualne varijable označavamo s $x_i$, pa ćemo ovdje koristiti $u_i$ kao uobičajenu oznaku za ulazne podatke). Trebamo konstruirati skup formula $\Gamma$ i formulu $\zeta$, koji ovise o $P$ i $\vec u$, tako da $P$-izračunavanje s $\vec u$ stane ako i samo ako vrijedi $\Gamma\models\zeta$. Štoviše, zbog korolara~\ref{kor:RAMhaltnodl}, zapravo možemo cijelu konstrukciju provesti za fiksni $P$ (i za $k=1$), pa ga nećemo pisati (iako smo svjesni da će $\Gamma$ i $\zeta$ ovisiti o $P$).
 
 Logičko zaključivanje je, u osnovi, traženje "puta" od premisa do zaključka, i osnovni razlog zašto je to težak problem je što znamo da put (\emph{izvod}) postoji kad ga nađemo, ali dok ga nismo našli, ne znamo je li to zato što ne postoji, ili samo nismo tražili dovoljno dugo. To vrlo podsjeća na traženje "puta" od početne do završne konfiguracije pri rješavanju problema zaustavljanja --- možemo li nekako formalizirati tu vezu?
 
@@ -247,7 +247,7 @@ Za svaki $u\in\N$, zatvoreni term $\mathsf s(\mathsf s(\dotsb(\mathsf s(\mathsf0
 \end{equation}
 gdje nakon $\overline{u_k}$ ima još $m-k-1$ simbola $\mathsf0$ (po definiciji je $m=m_{P^k}=\max\,\{m_P,k+1\}\ge k+1$, pa je $m-k-1=m-(k+1)\in\N$).
 
-Za svaki $i\in[0..n\rangle$, definiramo formulu $\iota_i$ ovisno o tipu instrukcije s rednim brojem $i$ u programu $P$:
+Za svaki $i\in[0\dd n\rangle$, definiramo formulu $\iota_i$ ovisno o tipu instrukcije s rednim brojem $i$ u programu $P$:
 \smallskip
 
 $\rhd$ Ako je to $i.\;\incr j$, definiramo
@@ -277,7 +277,7 @@ $\rhd$ Ako je to $i.\;\goto\;l$, definiramo
 \noindent Definiramo skup
 \begin{align}
 \SwapAboveDisplaySkip
-    \Gamma_{\vec u}&:=\{\pi_{\vec u}\}\cup\{\iota_i\mid i\in[0..n\rangle\}
+    \Gamma_{\vec u}&:=\{\pi_{\vec u}\}\cup\{\iota_i\mid i\in[0\dd n\rangle\}
 \shortintertext{i formulu}
 \label{eq:defzeta}
     \zeta&:=\exists\,x_0\dotsm\exists\, x_{m-1}R_n(x_0,\dotsc,x_{m-1})\text.
@@ -294,7 +294,7 @@ Također, neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Promotrimo $\s
 \begin{itemize}
     \item $\phi(\mathsf0):=0$,
     \item $\phi(\mathsf s):=\f{Sc}$, te
-    \item za svaki $i\in[0..n]$,
+    \item za svaki $i\in[0\dd n]$,
     $
         \phi(R_i):=\bigl\{
         \bigl(c_t(\reg0),\dotsc,c_t(\reg{m-1})\bigr)
@@ -303,20 +303,20 @@ Također, neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Promotrimo $\s
         \bigr\}
     $.
 \end{itemize}
-Indukcijom po $r$ lako dokažemo $\phi(\overline r)=r$ za sve $r\in\N$, pa $\mathfrak N\models R_{pc}(\overline{r_0},\overline{r_1},\dotsc,\overline{r_{m-1}})$ --- odnosno $\mathfrak N\models_v R_{pc}(x_0,x_1,\dotsc,x_{m-1})$, gdje je $v$ valuacija takva da je $v(x_j)=r_j$ za sve $j\in[0..m\rangle$ --- neformalno znači da RAM-stroj s programom $P$ i ulazom $\vec u$ može doći u konfiguraciju $(r_0,r_1,\dotsc,r_{m-1},0,0,\dotsc,pc)$ (nakon $t$ koraka izračunavanja). 
+Indukcijom po $r$ lako dokažemo $\phi(\overline r)=r$ za sve $r\in\N$, pa $\mathfrak N\models R_{pc}(\overline{r_0},\overline{r_1},\dotsc,\overline{r_{m-1}})$ --- odnosno $\mathfrak N\models_v R_{pc}(x_0,x_1,\dotsc,x_{m-1})$, gdje je $v$ valuacija takva da je $v(x_j)=r_j$ za sve $j\in[0\dd m\rangle$ --- neformalno znači da RAM-stroj s programom $P$ i ulazom $\vec u$ može doći u konfiguraciju $(r_0,r_1,\dotsc,r_{m-1},0,0,\dotsc,pc)$ (nakon $t$ koraka izračunavanja). 
 
 \begin{lema}[{name=[istinitost početne formule u $\mathfrak N$]}]\label{lm:Npiu}
 Vrijedi $\mathfrak N\models\pi_{\vec u}$.
 \end{lema}
 \begin{proof}
 Gledajući~\eqref{eq:defpiu}, samo treba vidjeti da postoji $t\in\N$ takav da je $c_t(\textsc{pc})=0$ i $c_t(\reg j)=\begin{cases}
-u_j,&j\in[1..k]\\
+u_j,&j\in[1\dd k]\\
 0,&\text{inače}
 \end{cases}$; drugim riječima, $c_t$ je početna konfiguracija s ulazom $\vec u$, a ona se sigurno postiže za $t=0$ (možda i za neke druge $t$, ali jedan nam je dovoljan).
 \end{proof}
 
 \begin{lema}[{name=[istinitost instrukcijskih formula u $\mathfrak N$]}]\label{lm:Niotai}
-Za svaki $i\in[0..n\rangle$ vrijedi $\mathfrak N\models\iota_i$.
+Za svaki $i\in[0\dd n\rangle$ vrijedi $\mathfrak N\models\iota_i$.
 \end{lema}
 \begin{proof}
 Očekivano, imat ćemo slučajeve ovisno o tipu $i$-te instrukcije programa $P$.
@@ -350,18 +350,18 @@ Pretpostavka $\Gamma_{\vec u}\models\zeta$ znači da u svakoj strukturi u kojoj 
 \begin{equation}
     \bigl(v'(x_0),\dotsc,v'(x_{m-1})\bigr)\in\phi(R_n)\text.
 \end{equation}
-Valuacije nam zapravo ovdje uopće nisu bitne --- jedino što je bitno je da iz toga slijedi $\phi(R_n)\not=\emptyset$, pa postoji $t\in\N$ takav da je $c_t(\textsc{pc})=n$. No to znači da je $c_t$ završna konfiguracija, pa $P$-izračunavanje s $\vec u$ stane nakon $t$ koraka.
+Valuacije nam zapravo ovdje uopće nisu bitne --- jedino što je bitno je da iz toga slijedi $\phi(R_n)\ne\emptyset$, pa postoji $t\in\N$ takav da je $c_t(\textsc{pc})=n$. No to znači da je $c_t$ završna konfiguracija, pa $P$-izračunavanje s $\vec u$ stane nakon $t$ koraka.
 \end{proof}
 
 %\subsection{Zaustavljanje povlači zaključivanje}
 
 Sada nam je cilj dokazati obrat propozicije~\ref{pp:models>stop}. Bitna razlika je što sad moramo \emph{dokazati} da je $\zeta$ logička posljedica od $\Gamma_{\vec u}$, pa više ne možemo koristiti "intendiranu interpretaciju" s prirodnim brojevima, nego moramo provesti argumentaciju za proizvoljnu $\sigma$-strukturu $\mathfrak M$ u kojoj vrijedi $\Gamma_{\vec u}$. Ta struktura ne mora biti izomorfna s $\mathfrak N$, ne mora čak ni zadovoljavati jednostavne aksiome poput injektivnosti sljedbenika (iskreno, ne možemo ih ni \emph{iskazati} jer nemamo jednakost u teoriji), ali svejedno ćemo moći pokazati da u njoj vrijedi $\zeta$.
 
-Pa neka je $\mathfrak M=(M,\phi)\cong(M,\Theta,g,S_0,S_1,\dotsc,S_n)$ proizvoljna $\sigma$-struktura (redom imamo $\phi(\mathsf0)=:\Theta\in M$, $\phi(\mathsf s)=:g\colon M\to M$, a za svaki $i\in[0..n]$, $\phi(R_i)=:S_i\subseteq M^m$), i neka vrijedi $\mathfrak M\models\Gamma_{\vec u}$.
+Pa neka je $\mathfrak M=(M,\phi)\cong(M,\Theta,g,S_0,S_1,\dotsc,S_n)$ proizvoljna $\sigma$-struktura (redom imamo $\phi(\mathsf0)=:\Theta\in M$, $\phi(\mathsf s)=:g:M\to M$, a za svaki $i\in[0\dd n]$, $\phi(R_i)=:S_i\subseteq M^m$), i neka vrijedi $\mathfrak M\models\Gamma_{\vec u}$.
 
-Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0..m\rangle$, označimo $a_{jt}:=\phi\bigl(\overline{c_t(\reg j)}\bigr)=g\bigl(g(\dotsb g(\Theta)\dotsb)\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
+Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo $a_{jt}:=\phi\bigl(\overline{c_t(\reg j)}\bigr)=g\bigl(g(\dotsb g(\Theta)\dotsb)\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
 
-\begin{lema}[{name=[izračunavanje čuva istinitost formulskih reprezentacija konfiguracija]}]\label{lm:formcomputesteps}
+\begin{lema}[{name=[izračunavanje čuva istinitost formula pojedinih konfiguracija]}]\label{lm:formcomputesteps}
 Za svaki $t\in\N$, vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$, odnosno $(a_{0t},a_{1t},\dotsc,a_{(m-1)t})\in S_{c_t(\textsc{pc})}$.
 \end{lema}
 \begin{proof}
@@ -376,11 +376,11 @@ Ako je ta instrukcija tipa \inc, recimo $i.\;\incr j$ za neki $j<m$, tada u $\ma
 a_{j(b+1)}=\phi\bigl(\overline{c_{b+1}(\reg j)}\bigr)=\phi\bigl(\overline{1+c_b(\reg j)}\bigr)=\phi\bigl(\mathsf s\bigl(\overline{c_b(\reg j)}\bigr)\bigr)=\\
 =\phi(\mathsf s)\bigl(\phi\bigl(\overline{c_b(\reg j)}\bigr)\bigr)=g(a_{jb})\text.
 \end{multline}
-Ako je ta instrukcija tipa \goto, s odredištem $l\le n$, uz istu valuaciju imamo da $\vec a\in S_i$ povlači $\vec a\in S_l$. Ova prva tvrdnja je pretpostavka indukcije, a druga je upravo ona koja nam treba za korak (stanje registara ostaje isto, odnosno $a_{jb}=a_{j(b+1)}$ za svaki $j\in[0..m\rangle$).
+Ako je ta instrukcija tipa \goto, s odredištem $l\le n$, uz istu valuaciju imamo da $\vec a\in S_i$ povlači $\vec a\in S_l$. Ova prva tvrdnja je pretpostavka indukcije, a druga je upravo ona koja nam treba za korak (stanje registara ostaje isto, odnosno $a_{jb}=a_{j(b+1)}$ za svaki $j\in[0\dd m\rangle$).
 
 Ako je ta instrukcija tipa \dec, recimo $\decr jl$, promotrimo slučajeve s obzirom na to je li $c_b(\reg j)=0$ (krivo je reći "s obzirom na to je li $a_{jb}=\Theta$", jer nitko ne brani da bude npr.\ $g(\Theta)=\Theta$, odnosno $\phi(\overline1)=\phi(\overline0)$). Ako jest, imamo istu argumentaciju kao u prethodnom odlomku, jer se stanje registara tada ne mijenja: $\vec a\in S_i$ povlači $\vec a\in S_l$ po prvom konjuktu u~\eqref{eq:formDEC}. Ako nije, tada je sigurno $c_b(\reg j)\ge1$, pa promotrimo~\eqref{eq:formDEC} (odnosno njen drugi konjunkt) uz valuaciju
 $v'(x_h):=\begin{cases}
-a_{hb}=\phi\bigl(\overline{c_b(\reg h)}\bigr),&h\not=j\\
+a_{hb}=\phi\bigl(\overline{c_b(\reg h)}\bigr),&h\ne j\\
 \phi\bigl(\overline{c_b(\reg j)-1}\bigr),&h=j
 \end{cases}$.
 Uz tu valuaciju vrijedi antecedens, jer je $v'\bigl(\mathsf s(x_j)\bigr)=a_{jb}$ --- pa onda vrijedi i konsekvens, odnosno formula s istim sadržajem registara, osim što je $c_{b+1}(\reg j)$ za jedan manji, i $c_{b+1}(\textsc{pc})$ za jedan veći, kao što i treba biti.
@@ -403,7 +403,7 @@ Ne postoji algoritam koji za proizvoljnu formulu logike prvog reda odlučuje je 
 \begin{proof}
 Pretpostavimo da imamo takav algoritam $\mathcal A$, i opišimo sljedeći neformalni algoritam za odluku Russellovog skupa:
 \begin{quote}
-Kao u dokazu korolara~\ref{kor:RAMhaltnodl} (kompajliranjem), dobijemo RAM-program $P_0$ koji računa Russellovu funkciju. Za taj program uvedimo oznake $m$ i $n$, te formule $\iota_i,i<n$ i $\zeta$ nad signaturom $\sigma$ (koja također ovisi o $P_0$ preko $m$).
+Kao u dokazu korolara~\ref{kor:RAMhaltnodl} (kompiliranjem), dobijemo RAM-program $P_0$ koji računa Russellovu funkciju. Za taj program uvedimo oznake $m$ i $n$, te formule $\iota_i,i<n$ i $\zeta$ nad signaturom $\sigma$ (koja također ovisi o $P_0$ preko $m$).
 
 Za ulaz $u\in\N$ (koji dalje promatramo kao $(u)\in\N^1$):
 \begin{enumerate}
@@ -664,20 +664,20 @@ U prethodnoj točki uveli smo, za svaki prirodni broj $u$, formulu $\varphi_u$, 
 \begin{definicija}[{name=[G\"odelov skup]}]
 \emph{G\"odelov skup} je skup formula
 %\begin{equation}
-    $\mathcal G\ddot o:=\{\lnot\varphi_u\mid u\in K\kompl\}$.
+    $\mathscr G\ddot o:=\{\lnot\varphi_u\mid u\in K\kompl\}$.
 %\end{equation}
 \end{definicija}
 Kako je negacija rečenice ponovo rečenica, G\"odelov skup je skup rečenica.
 
 \begin{propozicija}[{name=[istinitost G\"odelovog skupa rečenica u $\mathfrak N$]}]
-Vrijedi $\mathfrak N\models\mathcal G\ddot o$.
+Vrijedi $\mathfrak N\models\mathscr G\ddot o$.
 \end{propozicija}
 \begin{proof}
-Po kontrapoziciji propozicije~\ref{pp:models>stop}, za svaki $u\in K\kompl$ formula $\varphi_u$ nije valjana, a iz dokaza te propozicije slijedi da ne vrijedi upravo na strukturi $\mathfrak N$ (jer tamo vrijedi $\pi_u$ i sve $\iota_i$, ali ne vrijedi $\zeta$). Iz logike znamo da $\mathfrak N\not\models\varphi_u$ povlači $\mathfrak N\models\lnot\varphi_u$, jer je $\varphi_u$ rečenica. Drugim riječima, za svaki $u\in K\kompl$ vrijedi $\mathfrak N\models\lnot\varphi_u$, što smo trebali dokazati.
+Po kontrapoziciji propozicije~\ref{pp:models>stop}, za svaki $u\in K\kompl$ formula $\varphi_u$ nije valjana, a iz dokaza te propozicije slijedi da ne vrijedi upravo na strukturi $\mathfrak N$ (jer tamo vrijedi $\pi_u$ i sve $\iota_i$, ali ne vrijedi $\zeta$). Iz logike znamo da $\mathfrak N\nvDash\varphi_u$ povlači $\mathfrak N\models\lnot\varphi_u$, jer je $\varphi_u$ rečenica. Drugim riječima, za svaki $u\in K\kompl$ vrijedi $\mathfrak N\models\lnot\varphi_u$, što smo trebali dokazati.
 \end{proof}
 
 \begin{teorem}[{name=[G\"odel]}]
-Postoji rečenica $\gamma\in\mathcal G\ddot o$ (\emph{G\"odelova rečenica}) koja nije dokaziva u PA.
+Postoji rečenica $\gamma\in\mathscr G\ddot o$ (\emph{G\"odelova rečenica}) koja nije dokaziva u PA.
 \end{teorem}
 \begin{proof}[Skica dokaza]
 Ključno je vidjeti da je jezik nad $\Sigma_{\log}$,
@@ -728,11 +728,11 @@ Pogledajmo sada sljedeći \emph{paralelni} algoritam:
 
 Očito, ako je $u\in K$, prva dretva će stati, pa će i cijeli algoritam stati i vratiti $1$ --- pod pretpostavkom da druga dretva ne zaustavi algoritam prije. No PA je konzistentna teorija, pa ne dokazuje ono što nije istina. Kako $\neg\varphi_u$ nije istinita u $\mathfrak N$, tako niti $\neg\varphi_u'$ nije istinita u $\N$, dakle ne može se dogoditi da neki $p\in Proof_{\text{PA}}$ završi njome.
 
-S druge strane, ako $u\not\in K$, prva dretva po definiciji neće stati, no hoće li druga? Ako bi PA bila i \emph{potpuna} teorija, odnosno dokazivala sve što je istina u strukturi $\N$, tada bi s vremenom na red došao i dokaz za $\neg\varphi_u'$. To bi značilo da za sve $u\not\in K$, naš algoritam također stane i vraća $0$.
+S druge strane, ako $u\notin K$, prva dretva po definiciji neće stati, no hoće li druga? Ako bi PA bila i \emph{potpuna} teorija, odnosno dokazivala sve što je istina u strukturi $\N$, tada bi s vremenom na red došao i dokaz za $\neg\varphi_u'$. To bi značilo da za sve $u\notin K$, naš algoritam također stane i vraća $0$.
 
 No to bi značilo da smo upravo napisali (vrlo neformalni) algoritam za računanje funkcije $\chi_{K}$, što je po Church--\!Turingovoj tezi u kontradikciji s teoremom~\ref{tm:DRnrek}.
 
-Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathcal G\ddot o$ koja nije dokaziva u PA.
+Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathscr G\ddot o$ koja nije dokaziva u PA.
 \end{proof}
 
 \subsection{Problemi u skici dokaza G\"odelovog teorema}
