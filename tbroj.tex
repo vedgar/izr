@@ -114,7 +114,7 @@ Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da
 
 U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučitelj, pa $\mathcal T$-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\notin\{1,2\}$ za $n<n_0$, i očito $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_{\mathit{true}}$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
 \end{proof}
-\newpage
+%\newpage
 
 \begin{teorem}[{name=[Turing-odlučivost rekurzivnog jezika]}]\label{tm:krio}
 Neka je $L$ jezik (nad nekom abecedom $\Sigma$).\newline Ako je relacija $\kr L$ rekurzivna, tada postoji Turingov odlučitelj za $L$.
@@ -133,12 +133,13 @@ Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju $bool$ u $\Sigma^*$:
 
 %Kako izvršavanje RAM-programa o kojem govorimo stane za svaki $\kr w$, po korolaru~\ref{kor:faza3} i napomeni~\ref{nap:snstane} slijedi da će Turingov stroj koji konstruiramo stati za svaki $w$ --- samo trebamo malo promijeniti način na koji stane, da ne komunicira izlaz putem trake nego putem završnog stanja.
 
-Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (zadnje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze~\eqref{d:88} i~\eqref{d:89} s
+    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (zadnje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\bl}$ s
 \begin{gather}
+    \SwapAboveDisplaySkip
 \label{eq:d88j}
-    \delta(q_9,\alpha):=(q_\mathit{true},\alpha,1)\text{, za sve }\alpha\in\Sigma\text,\\
+    \delta(m_{\bl},\alpha):=(q_\mathit{true},\alpha,1)\text{, za sve }\alpha\in\Sigma\text,\\
 \label{eq:d89j}
-    \delta(q_9,\t\$):=(q_\mathit{false},\bl,-1)\text.
+    \delta(m_{\bl},\t\$):=(q_\mathit{false},\bl,-1)\text.
 \end{gather}
 Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan, te će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_\mathit{true}$. Za $w\notin L$, rezultat će biti $\varepsilon$, te će stroj doći do graničnika, obrisati ga i ući u stanje $q_\mathit{false}$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
 \end{proof}
@@ -146,7 +147,7 @@ Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlu
 
 Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
 \begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
-\node[state] (q9) {$q_9$};
+    \node[state] (q9) {$m_{\bl}$};
 \node[state,accepting,right of=q9] (qt) {$q_\mathit{true}$};
 \node[state,accepting,below right=0.5 and 1.6 of q9] (qf) {$q_\mathit{false}$};
 \draw
@@ -155,7 +156,7 @@ Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
 (q9) edge[dashed] node[below] {\t\$:\bl} (qf)
 ;
 \end{tikzpicture}\;.
-%\vspace{-12mm}
+\vspace{-12mm}
 
 \subsection{Turing-izračunljivost višemjesnih funkcija}
 
@@ -339,7 +340,7 @@ Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in\Sigma_b^*$ takve da je $x=\kr u$ 
     \dulj{uv}=
     \f{slh}(\kr{uv},b)={}\\
     \text{[propozicija \ref{pp:krkonkkr}]}{}=\f{slh}(\kr u\conc b\kr v,b)=
-    \f{slh}(x\conc b y,b)\text{\qedhere\;.}
+    \f{slh}(x\conc b y,b)\text{.\;\qedhere}
 \end{multline}
 \end{proof}
 
@@ -355,7 +356,7 @@ Primitivna rekurzivnost slijedi direktno iz leme~\ref{lm:ldcpprn}. Za asocijativ
     \text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{slh}\bigl(y\conc b z\,,\,b\bigr)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
 \end{multline}
 \end{proof}
-Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Primijetimo samo da je za asocijativnost ključno da se radi o pomaknutoj bazi: recimo, u običnoj bazi 10 je $(1\conc{10}'0)\conc{10}'2=10\conc{10}'2=102\ne\conc{10}'(0\conc{10}'2)=1\conc{10}'2=12$, pa ne vrijedi asocijativnost.
+Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Primijetimo da je za asocijativnost ključno da se radi o \textbf{pomaknutoj} bazi: u običnoj bazi 10 je $(1\conc{10}'0)\conc{10}'2=10\conc{10}'2=102\ne\conc{10}'(0\conc{10}'2)=1\conc{10}'2=12$, pa ne vrijedi asocijativnost.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost višemjesnog binarnog kodiranja]}]\label{pp:binkprn}
 Za svaki $k\in\N_+$, funkcija $\f{bin}^k$ je primitivno rekurzivna.
@@ -375,7 +376,7 @@ te primitivna rekurzivnost od $\f{bin}^{l+1}$ slijedi iz pretpostavke indukcije,
 
 %\subsection{Turing-izračunljive funkcije su parcijalno rekurzivne}
 
-Promotrimo sada dijagram lijevo u~\eqref{dia:Nbeta}, u svjetlu definicije~\ref{def:bink}, odnosno gledajući i točkane strelice. Definicija~\ref{def:bink} zapravo kaže da "kružni odsječak" sa svake strane tog dijagrama komutira, pa iz toga i leme~\ref{lm:pravkomut} slijedi da čitav "\!vanjski oval" također komutira.
+Promotrimo sada dijagram lijevo u~\eqref{dia:Nbeta}, gledajući i točkane strelice. Definicija~\ref{def:bink} zapravo kaže da "kružni odsječak" sa svake strane tog dijagrama komutira, pa iz toga i leme~\ref{lm:pravkomut} slijedi da čitav "\!vanjski oval" također komutira.
 
 \begin{korolar}[{name=[brojevni-brojevni dijagram komutira]}]\label{kor:binf=Nbetafbin}
 Neka je $k\in\N_+$, te $f^k$ funkcija. Tada vrijedi
@@ -387,7 +388,7 @@ To je jednakost~\eqref{eq:pravkomut} u koju je uvrštena (s obje strane) definic
 
 %\subsection{Inverz binarnog kodiranja}
 
-Sjetimo se, naš cilj je izraziti $f$ pomoću $\N\beta f$. S korolarom~\ref{kor:binf=Nbetafbin} smo već jako blizu, treba nam samo još (izračunljiv) lijevi inverz za $\f{bin}^1$. Kako možemo iz $63=(111111)_2=\f{bin}(6)$ natrag dobiti $6$? Samo treba prebrojiti jedinice, odnosno znamenke.
+Da bismo izrazili $f$ pomoću $\N\beta f$, treba nam (izračunljiv) lijevi inverz za $\f{bin}^1$. Kako možemo iz $63=(111111)_2=\f{bin}(6)$ natrag dobiti $6$? Samo treba prebrojiti jedinice, odnosno znamenke.
 
 \begin{lema}[{name=[primitivna rekurzivnost i specifikacija duljine binarnog zapisa]}]\label{lm:blh}
 Definiramo funkciju $\f{blh}$ s\, $\f{blh}(n):=\f{slh}(n,2)$. 
@@ -417,25 +418,25 @@ pa je očito najmanji takav $t$ upravo $n=\f I_1^1(n)$.\qedhere
 Neka je $k\in\N_+$, i\, $\f f^k$\! funkcija takva da je $\beta\f f$ Turing-izračunljiva.\newline Tada je $\f f$ parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
-    Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\beta$, kodiranje $\{\t\textbullet\mapsto1,\t/\mapsto2\}$ i funkciju $\beta\f f$, funkcija $\N\beta\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:blh} i korolara~\ref{kor:binf=Nbetafbin} sada imamo
+    Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\beta$, kodiranje $\{\t\textbullet\mapsto1,\t/\mapsto2\}$ i funkciju $\beta\f f$, $\N\beta\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:blh} i korolara~\ref{kor:binf=Nbetafbin} sada imamo
 \begin{equation}
     \f f=\f I_1^1\circ\f f=\f{blh}\circ\f{bin}^1\!\circ\f f=\f{blh}\circ\N\beta\f f\circ\f{bin}^k\text,
 \end{equation}
 odnosno $\f f$ je dobivena kompozicijom iz tri funkcije, od kojih je srednja parcijalno rekurzivna, a prva i zadnja su primitivno rekurzivne (lema~\ref{lm:blh} i propozicija~\ref{pp:binkprn}), pa su rekurzivne (korolar~\ref{kor:prnrek}) a time i parcijalno rekurzivne. Kako je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju, $\f f$ je parcijalno rekurzivna.
 \end{proof}
 
-Sad je jasno da isti komutirajući dijagram može poslužiti i za dokazivanje obrata teorema~\ref{tm:btip}. Jednadžba
+Sad je jasno da istim dijagramom možemo dokazati i obrat teorema~\ref{tm:btip}. Jednadžba
 \begin{equation}
     \f{bin}^1\!\circ f=\N\beta f\circ\f{bin}^k
 \end{equation}
 iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$ iz $f$ --- samo trebamo umjesto desne obrnuti lijevu stranicu pravokutnika, odnosno naći desni inverz za $\f{bin}^k$. Nažalost, to je iz tri razloga zapetljanije nego ovo što smo napravili u prethodnoj točki.
 
-Prvi razlog je birokratski, i tiče se naše odluke sa samog početka (napomena~\ref{nap:brip}) da ćemo promatrati brojevne funkcije s jednim izlaznim podatkom. Kako je $\dom{\f{bin}^k}=\N^k$, traženi desni inverz bi morao imati $k$ izlaznih podataka, te ćemo ga reprezentirati kroz $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. (Te funkcije bit će neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih nećemo morati označavati s dva broja, kao što smo recimo morali označavati koordinatne projekcije $\f I_n^k$.)
+Prvi razlog tiče se napomene~\ref{nap:brip}. Zbog $\dom{\f{bin}^k}=\N^k$, traženi desni inverz ima $k$ izlaznih podataka, pa ga reprezentiramo s $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. Te funkcije su neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih ne moramo označavati s dva broja, poput $\f I_n^k$.
 
-Drugi razlog je tehnički: implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Na neki način, dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatiju strukturu, i za njeno raščlanjivanje treba nam neka vrst "standardne biblioteke" za rad sa stringovima. Ovdje ćemo napraviti samo minimum potreban za primitivnu rekurzivnost funkcija $\f{arg}_i$, ali lako je vidjeti kako tu ima puno mogućnosti za implementaciju raznih algoritama.
+Drugo, implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatu strukturu, za čije raščlanjivanje trebamo svojevrsni \texttt{<string.h>}. Napravit ćemo minimum potreban za implementaciju $\f{arg}_i$.
 
-Treći razlog, napokon, sasvim je stvaran i nije tako lako rješiv programskim tehnikama: funkcija $\f{bin}^k$ nije surjekcija, i kao takva \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "krive mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana; 
-Recimo u slučaju kad $a$ ima $5$ znamenaka $2$ u pomaknutoj bazi $2$, vrijednost $\N\beta\f{mul}^3(a)$ nije definirana, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
+Treće, funkcija $\f{bin}^k$ nije surjekcija, pa \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "krive mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana; 
+Recimo u slučaju kad $a$ ima $7$ znamenaka $2$ u pomaknutoj bazi $2$, vrijednost $\N\beta\f{mul}^3(a)$ nije definirana, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
 
 \subsection{Standardna biblioteka za \texorpdfstring{$\Sigma_\beta^*$}{binarne stringove}}\label{sec:stdstring}
 
@@ -464,7 +465,7 @@ Dvomjesna brojevna relacija $\sqsubseteq_\beta$, zadana s
 Recimo, vrijedi $4=(12)_2=\kr{\t{\textbullet/}}\sqsubseteq_\beta\kr{\t{\textbullet/\textbullet\textbullet\textbullet}}=(12111)_2=39$.
 \end{primjer}
 
-Za sljedeću lemu, trebat će nam \emph{uokvireni} brojevi: oni čiji zapisi u pomaknutoj bazi~$2$ imaju bar dvije znamenke, te počinju i završavaju znamenkom $2$. Naime, ono što zapravo želimo napraviti je "isprogramirati" dokaz propozicije~\ref{prop:betabij}, no taj dokaz ima nekoliko slučajeva ovisno o tome nalazimo li se prije prvog separatora, nakon zadnjeg, ili između njih. Jednostavnije je kad riječ ima separatore na lijevom i na desnom kraju: tada svaki $x_i$ možemo odrediti brojeći jedinice između susjednih separatora.
+Za sljedeću lemu, trebat će nam \emph{uokvireni} brojevi: oni čiji zapisi u pomaknutoj bazi~$2$ počinju i završavaju znamenkom $2$. Želimo "isprogramirati" dokaz propozicije~\ref{prop:betabij}, koji ima nekoliko slučajeva ovisno o tome nalazimo li se prije prvog separatora, nakon zadnjeg, ili između njih. Jednostavnije je kad riječ ima separatore na oba kraja: tada svaki $x_i$ možemo odrediti brojeći jedinice između susjednih separatora.
 
 \begin{lema}[{name=[primitivna rekurzivnost raščlambe binarnih zapisa]}]\label{lm:pos2streak1prn}
 Postoje primitivno rekurzivne funkcije $\f{pos2}$ i $\f{streak1}$, takve da za svaki uokvireni broj $x$, za svaki $i\in\N$, vrijedi:
@@ -492,15 +493,13 @@ Za $i<\f{count2}(x)$, uvjet pod operatorom minimizacije jednoznačno određuje $
     i=\f{count2}(z')=\f{count2}(\kr{v'})\ge\f{count2}(\kr{v\t/})=\f{count2}(\kr v\conc2\kr{\t/})=\\
     =\f{count2}(\kr v\conc22)=\f{count2}(\kr v)+1=\f{count2}(z)+1=i+1\text,
 \end{multline}
-kontradikcija. No ako je $z$ jedinstven, to znači da je dovoljno naći \emph{neki} takav i taj će biti minimalan, a "prefiks" od $x$ do isključivo pozicije $i$-te dvojke zadovoljava to svojstvo. Njegova duljina je onda upravo ta pozicija (brojeći od $0$), kao što i treba biti.
+    kontradikcija. No kako je $z$ jedinstven, dovoljno je naći \emph{neki} takav i taj će biti minimalan, a $\f{sprefix}$ od $x$ do isključivo pozicije $i$-te dvojke zadovoljava to svojstvo. Njegova duljina je onda upravo ta pozicija (brojeći od $0$), kao što i treba biti.
 
-Za $i\ge\f{count2}(x)$, takav $z$ ne postoji (jer $z\conc22$ ima više dvojki nego $x$, pa ne može biti $z\conc22\sqsubseteq_\beta x$), te minimizacija $(\mu z<x)$ dade $x$, odnosno $\f{pos2}(x,i)=\f{blh}(x)$, opet, kao što i treba biti po specifikaciji.
+Za $i\ge\f{count2}(x)$, takav $z$ ne postoji (jer $z\conc22$ ima više dvojki nego $x$, pa ne može biti $z\conc22\sqsubseteq_\beta x$), te minimizacija $(\mu z<x)$ dade $x$, odnosno $\f{pos2}(x,i)=\f{blh}(x)$, kao što treba.
 
-Sada je za funkciju $\f{streak1}$ dovoljno oduzeti odgovarajuće pozicije: poziciju prvog znaka nakon $i$-te dvojke, od pozicije sljedeće dvojke. Za $i<\f{count2}(x)-1$, to funkcionira točno kako treba: kako pomaknuta baza $2$ ima samo znamenke $1$ i $2$, između susjednih dvojki nalaze se samo jedinice.
+Sada je za $\f{streak1}$ dovoljno oduzeti odgovarajuće pozicije: poziciju prvog znaka nakon $i$-te dvojke, od pozicije sljedeće dvojke. Za $i<\f{count2}(x)-1$, to očito funkcionira: jer su jedine znamenke $1$ i $2$, između susjednih dvojki nalaze se samo jedinice.
 
-Za $i=\f{count2}(x)-1$, $i$-ta dvojka je upravo zadnja, pa je $\f{pos2}(x,i)=\f{blh}(x)-1$ (možemo pisati obične minuse jer uokvireni brojevi imaju bar dvije dvojke --- na početku i na kraju). Također po specifikaciji $\f{pos2}$ vrijedi $\f{pos2}(x,i+1)=\f{blh}(x)$, pa je $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{blh}(x)-1\bigr)=0$.
-
-Za $i\ge\f{count2}(x)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{blh}(x)$, pa je opet $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{blh}(x)\bigr)=0$.
+    Za $i=\f{count2}(x)-1$, $i$-ta dvojka je upravo zadnja, pa je $\f{pos2}(x,i)=\f{pd}\bigl(\f{blh}(x)\bigr)$. Također po specifikaciji $\f{pos2}$ vrijedi $\f{pos2}(x,i+1)=\f{blh}(x)$, pa je $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{pd}(\f{blh}(x))\bigr)=0$. A za $i\ge\f{count2}(x)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{blh}(x)$, pa je opet $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{blh}(x)\bigr)=0$.
 \end{proof}
 
 %\subsection{Funkcije \texorpdfstring{$\f{arg}_i$}{arg} --- ekstrakcija argumenata}\label{sec:arg}
@@ -508,10 +507,7 @@ Za $i\ge\f{count2}(x)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{blh}(x)$, pa je o
 Sada je za ekstrakciju pojedinog $x_i$ samo potrebno uokviriti $\f{bin}^k(\vec x)$ dvojkama, i pozvati funkciju $\f{streak1}$ s odgovarajućim argumentom.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost ekstrakcije argumenata]}]\label{pp:argnprn}
-Za svaki $n\in\N_+$ postoji primitivno rekurzivna funkcija $\f{arg}_n$, takva da za sve $\vec x=(x_1,\dotsc,x_k)\in\N^+$, za sve $i\in\N_+$ vrijedi $\f{arg}_i\bigl(\f{bin}(\vec x)\bigr)=\begin{cases}
-x_i,&i\le k\\
-0,&\text{inače}
-\end{cases}$.
+    Za svaki $n\in\N_+$ postoji primitivno rekurzivna funkcija $\f{arg}_n$, takva da za sve $\vec x\in\N^+$, za sve $n\in\N_+$ vrijedi $\f{arg}_n\bigl(\f{bin}(\vec x)\bigr)=\kr{\vec x}[n-1]$.
 \end{propozicija}
 
 \begin{proof}
@@ -531,7 +527,8 @@ Za $i>k$ imat ćemo $i-1\ge k=\f{count2}(y)-1$, pa će po lemi~\ref{lm:pos2strea
 Za svaku parcijalno rekurzivnu funkciju $\f f$, $\beta\f f$ je Turing-izračunljiva.
 \end{teorem}
 \begin{proof}
-Označimo s $k\in\N_+$ mjesnost od $\f f$. Cilj nam je dokazati da je $\N\beta\f f$ parcijalno rekurzivna. Tu funkciju možemo dobiti (iz dijagrama) kao $\f{bin}^1\!\circ\f f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, restringiranu na sliku od $\f{bin}^k$. Ta slika je primitivno rekurzivan skup, jer samo treba provjeriti da njegov element ima točno $k-1$ dvojku ($k-1\in\N$ je konstanta).
+Označimo s $k\in\N_+$ mjesnost od $\f f$. %Cilj nam je dokazati da je $\N\beta\f f$ parcijalno rekurzivna.
+    Funkciju $\N\beta\f f$ možemo dobiti (iz dijagrama) kao $\f{bin}^1\!\circ\f f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, restringiranu na $\im{\f{bin}^k}$. Ta slika je primitivno rekurzivna: samo treba provjeriti broj dvojki ($k-1\in\N$ je konstanta).
 Dakle,
 \begin{equation}
 \label{eq:defNbetaf}
@@ -540,18 +537,18 @@ Dakle,
 --- iz čega slijedi, po korolaru~\ref{kor:restrprek}, da je $\N\beta\f f$ parcijalno rekurzivna. Sada je po teoremu~\ref{tm:pir}, $\N\beta\f f$ RAM-izračunljiva, te je po teoremu~\ref{tm:krit} $\beta\f f$ Turing-iz\-rač\-un\-lji\-va.
 \end{proof}
 
-%Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj parametara. Definiramo pomoćne (primitivno rekurzivne) funkcije
+%Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne (primitivno rekurzivne) funkcije
 %\begin{align}
 %\SwapAboveDisplaySkip
-  %  \f{argc}(a)&:=\f{Sc}\bigl(\f{count2}(a)\bigr)\text,\\
- %   \f{arg}(a,i)&:=\f{streak1}(2\conc2a\conc22,i)\text.
+  %\f{argc}&:=\f{Sc}\circ\f{count2}\text,\\
+  %\f{arg}(a,i)&:=\f{streak1}(2\conc2a\conc22,i)\text.
 %\end{align}
-
+%
 %\begin{primjer}
 %Recimo, $\f{add}^{\cdots}$, koja zbraja sve svoje argumente (koliko god da ih ima), je primitivno rekurzivna, jer je funkcija zadana s
 %\begin{equation}
- %   \N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i<\f{argc}(a)}}\f{arg}(a,i)
+   %\N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i<\f{argc}(a)}}\f{arg}(a,i)
 %\end{equation}
-%primitivno rekurzivna po lemi~\ref{lm:sumrek} i prethodnim rezultatima.
+%primitivno rekurzivna po lemi~\ref{lm:sumprodrek} i prethodnim rezultatima.
 %\end{primjer}
 %To nam neće bitno trebati u nastavku, ali zgodno je znati da imamo i tu mogućnost.
