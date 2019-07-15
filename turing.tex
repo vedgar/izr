@@ -515,14 +515,14 @@ Sada $\f H_1$ jednostavno treba vratiti $\f{newstate}(q,g)$. $\f H_2$ treba vrat
 \begin{align}
     \f H_1(x,n,q,p,t)&:=\f{newstate}(q,g)\text,\\
     \f H_2(x,n,q,p,t)&:=\f{pd}\bigl(p+\f{direction}(q,g)\bigr)\text,\\
-    \f H_3(x,n,q,p,t)&:=t\ominus g\cdot b^p+\f{newsymbol}(q,g)\cdot b^p\text,\\
-    \text{uz pokratu }g&:=t\sslash b^p\bmod b\text,
+    \f H_3(x,n,q,p,t)&:=t\dotminus g\cdot b^p+\f{newsymbol}(q,g)\cdot b^p\text,\\
+    \text{uz pokratu }g&:=t\div b^p\bmod b\text,
 \end{align}
 zadovoljavaju parcijalnu specifikaciju koju smo napisali. Sada su $\f{State}$, $\f{Position}$ i $\f{Tape}$ definirane simultanom primitivnom rekurzijom iz $\f G_1$, $\f G_2$, $\f G_3$, $\f H_1$, $\f H_2$ i $\f H_3$, te su primitivno rekurzivne. Tvrdnju leme sada dokazujemo matematičkom indukcijom po $n$, sasvim analogno kao u RAM-modelu.
 
 Za $n=0$, početno stanje je $q_0$, pa je $\f{State}(x,0)=\f G_1(x)=\f Z(x)=0=\N Q_0(q_0)$ doista njegov kod. Početna pozicija je $0=\f Z(x)=\f G_2(x)=\f{Position}(x,0)$. Početna traka je $w\bl\ldots$, čiji kod $\knk{w\bl\ldots}$ je prema~\eqref{eq:recodein} jednak $\f{Recode}(\kr w,b',b)=G_3(\kr w)=\f{Tape}(\kr w,0)$.
 
-Sada pretpostavimo da je nakon $k$ koraka, $q:=\f{State}(\kr w,k)$ kod stanja, $p:=\f{Position}(\kr w,k)$ pozicija, a $t:=\f{Tape}(\kr w,k)$ kod trake stroja. Ako je ta konfiguracija završna, tada je $q=\N Q_0(q_z)=1$, pa prema definicijama iz leme~\ref{lm:newssdprn} vrijedi $\f{newstate}(q,g)=\f{direction}(q,g)=1$ i $\f{newsymbol}(q,g)=g$. Tada $\f H_1$ daje $q$, $\f H_2$ daje $\f{pd}(p+1)=\f{pd}\bigl(\f{Sc}(p)\bigr)=p$, a $\f H_3$ daje $t\ominus g\cdot b^p+g\cdot b^p=t$ (jer je $g=t\sslash b^p\bmod b\le t\sslash b^p\le\frac{t}{b^p}$, pa je $g\cdot b^p\le t$, odnosno $\ominus$ je zapravo $-$). Dakle $\f{State}(\kr w,k+1)=\f{State}(\kr w,k)$, i analogno za $\f{Position}$ i $\f{Tape}$, odnosno završna konfiguracija ostaje ista, kao što i treba.
+Sada pretpostavimo da je nakon $k$ koraka, $q:=\f{State}(\kr w,k)$ kod stanja, $p:=\f{Position}(\kr w,k)$ pozicija, a $t:=\f{Tape}(\kr w,k)$ kod trake stroja. Ako je ta konfiguracija završna, tada je $q=\N Q_0(q_z)=1$, pa prema definicijama iz leme~\ref{lm:newssdprn} vrijedi $\f{newstate}(q,g)=\f{direction}(q,g)=1$ i $\f{newsymbol}(q,g)=g$. Tada $\f H_1$ daje $q$, $\f H_2$ daje $\f{pd}(p+1)=\f{pd}\bigl(\f{Sc}(p)\bigr)=p$, a $\f H_3$ daje $t\dotminus g\cdot b^p+g\cdot b^p=t$ (jer je $g=t\div b^p\bmod b\le t\div b^p\le\frac{t}{b^p}$, pa je $g\cdot b^p\le t$, odnosno $\dotminus$ je zapravo $-$). Dakle $\f{State}(\kr w,k+1)=\f{State}(\kr w,k)$, i analogno za $\f{Position}$ i $\f{Tape}$, odnosno završna konfiguracija ostaje ista, kao što i treba.
 
 Ako ta konfiguracija nije završna, tad je $q\in[0\dd a\rangle\setminus\{1\}$, pa su vrijednosti $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ zadane preko funkcije $\delta_0$, i predstavljaju upravo novo stanje, novi znak na trenutnoj poziciji, i pomak na novu poziciju. Recimo, ako s $g$ označimo kod trenutno čitanog znaka, a s $d$ treću komponentu odgovarajuće vrijednosti $\delta_0(q,g)$, tada je $\f{direction}(q,g)=d+1$, pa je
 \begin{multline}

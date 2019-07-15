@@ -107,9 +107,9 @@ Dokazujemo niz rezultata o primitivnoj rekurzivnosti, navodeći uglavnom samo to
 Sjetimo se napomene~\ref{nap:crtica}: često brojevnoteorijske funkcije nisu definirane u nuli, te ćemo je zamijeniti jedinicom, pišući $n\bump$ za $n$ ako je pozitivan, a $1$ ako je $n=0$.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost dijeljenja s ostatkom]}]\label{prop:divmodprn}
-    Cjelobrojno dijeljenje, zadano s $x\sslash y:=\bigl\lfloor\frac{x}{y\bump\!}\bigr\rfloor$, kao i ostatak cjelobrojnog dijeljenja ($x\bmod y$), primitivno su rekurzivne operacije.
+    Cjelobrojno dijeljenje, zadano s $x\div y:=\bigl\lfloor\frac{x}{y\bump\!}\bigr\rfloor$, kao i ostatak cjelobrojnog dijeljenja ($x\bmod y$), primitivno su rekurzivne operacije.
 \end{propozicija}
-Prije dokaza samo primijetimo da je nula problematična u operaciji $\sslash$, ali nije u operaciji $\bmod$: uobičajeno se u modernoj teoriji brojeva definira $x\bmod 0:=x$.
+Prije dokaza samo primijetimo da je nula problematična u operaciji $\div$, ali nije u operaciji $\bmod$: uobičajeno se u modernoj teoriji brojeva definira $x\bmod 0:=x$.
 \begin{proof}
 Cjelobrojno dijeljenje zapravo je ponovljeno oduzimanje, onoliko puta koliko se može. Dakle, za zadane $x$ i $y$, tražimo najveći $t$ takav da je $t\cdot y\le x$. Relacija $t\cdot y\le x$ je svakako primitivno rekurzivna, ali nemamo operator maksimizacije. S razlogom ga općenito nemamo: ako malo razmislimo, vidjet ćemo da ne postoji općeniti algoritam kojim bismo odredili najveći broj s nekim svojstvom, čak ni ako znamo da taj broj postoji, jer nikad ne znamo jesmo li tražili dovoljno dugo --- u svakom trenutku iznad najvećeg broja koji smo ispitali postoji još beskonačno mnogo kandidata, svaki od kojih može biti traženi broj.
 
@@ -117,17 +117,17 @@ Srećom, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y$ postan
 
 Ipak, to je neograničena minimizacija, a mi bismo htjeli primitivno rekurzivnu funkciju --- možemo li je nekako ograničiti? Svakako: $y\bump\ge 1$ znači $t\cdot y\bump\ge t$ za svaki $t$, te specijalno $(x+1)\cdot y\bump\ge x+1>x$. Dakle, dovoljno je tražiti $t$ do $x+1$ --- odnosno do $x$ uključivo, jer znamo da će ograničena minimizacija tada dati $x+1$ ako ne pronađe nijedan broj s traženim svojstvom u zadanom rasponu. Sve u svemu, tvrdimo da vrijedi
 \begin{equation}\label{eq:sslash}
-    x\sslash y=\f{pd}\bigl((\mu t\le x)(t\cdot y>x)\bigr)\text.
+    x\div y=\f{pd}\bigl((\mu t\le x)(t\cdot y>x)\bigr)\text.
 \end{equation}
-Za $y>0$, samo trebamo formalizirati navedeni argument: označimo $z:=x\sslash y$. Tada je $zy\le x$ (i očito $ty\le zy\le x$ za sve $t\le z$) a $(z+1)y>x$, dakle $z+1$ je najmanji $t$ koji pomnožen s $y$ daje broj veći od $x$. S druge strane je $z\le x\sslash1=x$, pa je $z+1\le x+1$. Ako je $z+1\le x$, tada će ga ograničena minimizacija u~\eqref{eq:sslash} naći, a ako je $z+1=x+1$, tada ga neće naći do uključivo $x$ (isključivo $x+1$), pa će po definiciji vratiti upravo $x+1$. U svakom slučaju vrijednost te ograničene minimizacije bit će $z+1$, pa će njen prethodnik biti $z=x\sslash y$, što smo trebali.
+Za $y>0$, samo trebamo formalizirati navedeni argument: označimo $z:=x\div y$. Tada je $zy\le x$ (i očito $ty\le zy\le x$ za sve $t\le z$) a $(z+1)y>x$, dakle $z+1$ je najmanji $t$ koji pomnožen s $y$ daje broj veći od $x$. S druge strane je $z\le x\div1=x$, pa je $z+1\le x+1$. Ako je $z+1\le x$, tada će ga ograničena minimizacija u~\eqref{eq:sslash} naći, a ako je $z+1=x+1$, tada ga neće naći do uključivo $x$ (isključivo $x+1$), pa će po definiciji vratiti upravo $x+1$. U svakom slučaju vrijednost te ograničene minimizacije bit će $z+1$, pa će njen prethodnik biti $z=x\div y$, što smo trebali.
 
-Za $y=0$, samo trebamo izračunati lijevu i desnu stranu. Na lijevoj je $x\sslash 0=\bigl\lfloor\frac{x}{1}\bigr\rfloor=x$, a na desnoj je prethodnik minimizacije po $t\le x$, relacije $t\cdot 0=0>x$. Ta relacija je očito uvijek lažna (nema negativnih brojeva), pa minimizacija daje $x+1$, a njen prethodnik onda daje upravo $x$, kao što i treba.
+Za $y=0$, samo trebamo izračunati lijevu i desnu stranu. Na lijevoj je $x\div 0=\bigl\lfloor\frac{x}{1}\bigr\rfloor=x$, a na desnoj je prethodnik minimizacije po $t\le x$, relacije $t\cdot 0=0>x$. Ta relacija je očito uvijek lažna (nema negativnih brojeva), pa minimizacija daje $x+1$, a njen prethodnik onda daje upravo $x$, kao što i treba.
 
 Sada je jednostavno dobiti ostatak: tvrdimo da je
 \begin{equation}
-    x\bmod y=x\ominus x\sslash y\cdot y
+    x\bmod y=x\dotminus x\div y\cdot y
 \end{equation}
-(redoslijed izvođenja operacija je: $\sslash$, pa $\cdot$, pa $\ominus$). Za $y>0$ iz teorema o dijeljenju s ostatkom dobijemo da je ostatak $x-z\cdot y$ (sa $z$ smo označili količnik), a iz provedenog razmatranja se vidi da je $z\cdot y\le x$, pa se oduzimanje može ograničiti nulom. Za $y=0$ na lijevoj strani piše $x$, a na desnoj također $x\ominus x\sslash0\cdot 0=x\ominus x\cdot0=x\ominus0=x$.
+(redoslijed izvođenja operacija je: $\div$, pa $\cdot$, pa $\dotminus$). Za $y>0$ iz teorema o dijeljenju s ostatkom dobijemo da je ostatak $x-z\cdot y$ (sa $z$ smo označili količnik), a iz provedenog razmatranja se vidi da je $z\cdot y\le x$, pa se oduzimanje može ograničiti nulom. Za $y=0$ na lijevoj strani piše $x$, a na desnoj također $x\dotminus x\div0\cdot 0=x\dotminus x\cdot0=x\dotminus0=x$.
 \end{proof}
 
 \begin{korolar}[{name=[primitivna rekurzivnost djeljivosti]}]\label{kor:midprn}
@@ -138,7 +138,7 @@ Svatko tko je ikad provjeravao djeljivost u programiranju zna kako se to radi:
 \begin{equation}
     y\mid x\Longleftrightarrow x\bmod y\eq0\text.
 \end{equation}
-Zaista, za $y>0$, postojanje broja $z$ takvog da je $z\cdot y=x$ (definicija djeljivosti) zapravo znači da je $z=x\sslash y$, pa je $x\bmod y=x\ominus z\cdot y=x\ominus x=0$. U drugom smjeru, ako je $x\ominus x\sslash y\cdot y=0$, iz toga slijedi (kao i prije, vrijedi $x\sslash y\cdot y\le x$) $x=x\sslash y\cdot y$, pa postoji $z:=x\sslash y$ takav da vrijedi $x=z\cdot y$, odnosno $y\mid x$.
+Zaista, za $y>0$, postojanje broja $z$ takvog da je $z\cdot y=x$ (definicija djeljivosti) zapravo znači da je $z=x\div y$, pa je $x\bmod y=x\dotminus z\cdot y=x\dotminus x=0$. U drugom smjeru, ako je $x\dotminus x\div y\cdot y=0$, iz toga slijedi (kao i prije, vrijedi $x\div y\cdot y\le x$) $x=x\div y\cdot y$, pa postoji $z:=x\div y$ takav da vrijedi $x=z\cdot y$, odnosno $y\mid x$.
 
 Za $y=0$, na desnoj strani stoji $x\bmod 0=x=0$, a to stoji i na lijevoj strani, jer je jedino $0$ djeljiva nulom --- "postoji $z$ takav da je $0\cdot z=x$" zapravo znači da je $x=0$.
 \end{proof}
@@ -149,7 +149,7 @@ Za $y=0$, na desnoj strani stoji $x\bmod 0=x=0$, a to stoji i na lijevoj strani,
 \begin{proof}
 Direktno pomoću korolara~\ref{kor:midprn} i ograničenog brojenja (lema~\ref{lm:brojrek}): prim-brojevi imaju točno dva prirodna djelitelja, a za pozitivne $x$, svaki djelitelj od $x$ je manji ili jednak $x$:
 \begin{equation}\label{eq:Pprn}
-    x\in\mathbb P\Longleftrightarrow(\#d\le x)(d\mid x)\eq2\text.
+    x\in\mathbb P\Longleftrightarrow(\num d\le x)(d\mid x)\eq2\text.
 \end{equation}
 Za nulu će tom metodom ispasti da ima jedan djelitelj (samu sebe), a zapravo ih ima beskonačno mnogo --- ali bitno je samo da ih nema točno $2$, jer $0\notin\mathbb P$.
 \end{proof}
@@ -204,7 +204,7 @@ Postoje primitivno rekurzivne funkcije $\f{lh}^1$ i $\f{part}^2$, takve da za sv
 \begin{proof}
 Tvrdimo da funkcije zadane s
 \begin{align}
-\f{lh}(c)&:=(\#i<c)\bigl(\f{prime}(i)\mid c\bigr)\text,\\
+\f{lh}(c)&:=(\num i<c)\bigl(\f{prime}(i)\mid c\bigr)\text,\\
 c[i]:=\f{part}(c,i)&:=\f{pd}\bigl(\f{ex}(c,i)\bigr)\text,
 \end{align}
 zadovoljavaju sve uvjete. Prije svega, primitivno su rekurzivne: $\f{lh}$ je dobivena og\-ra\-ni\-če\-nim brojenjem primitivno rekurzivne relacije do primitivno rekurzivne granice, a $\f{part}$ je jednostavno kompozicija $\f{pd}\circ\f{ex}$.
@@ -290,7 +290,7 @@ Preciznije, definirajmo funkciju $\f G^3$ točkovno po slučajevima:
 \begin{align}
     \label{eq:starG}\f G(x,y,i)&:=\begin{cases}
     x[i],&i<\f{lh}(x)\\
-    y[i\ominus\f{lh}(x)],&\text{inače}
+    y[i\dotminus\f{lh}(x)],&\text{inače}
     \end{cases}\text,
 \shortintertext{i pomoću nje}
 \label{eq:star}
@@ -403,7 +403,7 @@ Vjerojatno najpoznatija funkcija definirana rekurzijom s poviješću je Fibonacc
 Dokažimo da je $\f{Fib}^1$ primitivno rekurzivna. Po propoziciji~\ref{prop:rekpov}, dovoljno je naći primitivno rekurzivnu funkciju $\f G$ koja prima povijest $p:=\overline{\f{Fib}}(n)$ (kod prvih $n$ vrijednosti Fibonaccijevog niza), te vraća sljedeću vrijednost $\f{Fib}(n)$. Kao što smo rekli, $n$ uvijek možemo dobiti kao $\f{lh}(p)$. Pomoću njega možemo i napisati pomoćnu funkciju za indeksiranje "s kraja" (koja je i inače prilično korisna; moderni programski jezici često dozvoljavaju indeksiranje s kraja pomoću negativnih indeksa, ali mi nemamo negativne brojeve pa ćemo upotrijebiti drugu funkciju):
 \begin{align}\label{eq:rpartdef}
     \f{rpart}(c,i)&:=\begin{cases}
-    c[\f{lh}(c)\ominus\f{Sc}(i)],&i<\f{lh}(c)\\
+    c[\f{lh}(c)\dotminus\f{Sc}(i)],&i<\f{lh}(c)\\
     0,&\text{inače}
     \end{cases}\text.
 \intertext{Sada nije teško napisati točkovnu definiciju funkcije $\f G$:}
@@ -462,7 +462,7 @@ Dok još nije dio RAM-programa, instrukcija ima samo tip (\inc, \dec\ ili \goto)
 te smo time dobili injekciju s $\mathscr Ins$ u $\N^*$, čije kodiranje iskoristimo. Primijetimo da smo sličnu stvar već napravili manje formalno u dokazu leme~\ref{lema:alef0ins} --- disjunktifikacija unije skupova $A$ i $B$ u obliku $\{0\}\times A\cup\{1\}\times B$, koju poznajemo iz teorije skupova, upravo odgovara ovakvom kodiranju.
 
 \begin{definicija}[{name=[kodiranje skupa $\mathscr Ins$]}]\label{def:kodIns}
-Za proizvoljnu RAM-instrukciju $I$, definiramo \emph{kod instrukcije} $\kins{I}$, jednadžbama:
+    Za proizvoljnu RAM-instrukciju $I$, definiramo \emph{kod instrukcije} $\N\mathscr Ins(I)=:\kins{I}$, jednadžbama:
 \begin{alignat}{3}
 \SwapAboveDisplaySkip
     \kins{\incr j}&:=\langle0,j\rangle&\;=\;&&\f{codeINC}(j)&=6\cdot3^j\text,\\
@@ -522,7 +522,7 @@ $P:=\begin{prog}
 t.&I_t
 \end{prog}_{t<n}$
 definiramo \emph{kod programa} $P$ kao
-$\kprog P:=\langle\kins{I_0},\kins{I_1},\dotsc,\kins{I_{n-1}}\rangle$.
+    $\kprog P:=\N\mathscr Prog(P):=\langle\kins{I_0},\kins{I_1},\dotsc,\kins{I_{n-1}}\rangle$.
 \end{definicija}
 
 To je također kodiranje, iako bismo za konstruktore trebali napraviti dinamičke \emph{generatore koda} (jer većina programskih konstrukcija koje smo napravili nemaju fiksnu, statičku duljinu), koji primaju izračunljivu funkciju koja za svaki $i<n$ daje kod instrukcije s rednim brojem $i$. To se može napraviti sasvim općenito, i vidjeti da su sve konstrukcije programa koje smo dosad sreli (i koje ćemo još sresti u nastavku) primitivno rekurzivne, ali dva su razloga zašto to nećemo raditi.
@@ -546,7 +546,7 @@ Evo i jednog statičkog primjera: u primjeru~\ref{pr:flat} naveden je RAM-progra
     \kprog{Q^\flat}=\langle\kins{\decr12},\!\kins{\goto\;0},\!\kins{\decr22},\!\kins{\decr16},\!\kins{\incr0},\dotsc,\!\kins{\goto\;9}\rangle\\
     =\langle\langle1,\!1,\!2\rangle,\langle2,\!0\rangle,\langle1,\!2,\!2\rangle,\langle1,\!1,\!6\rangle,\langle0,\!0\rangle,\langle2,\!3\rangle,\langle1,\!2,\!9\rangle,\langle0,\!0\rangle,\langle2,\!6\rangle,\langle1,\!3,\!12\rangle,\langle0,\!0\rangle,\langle2,\!9\rangle\rangle=\\
     =\langle4\,500,24,13\,500,2\,812\,500,6,648,1\,054\,687\,500,6,\dotsc,6,472\,392\rangle=\\
-    =2^{4501}\cdot3^{25}\cdot5^{13501}\dotsm31^7\cdot37^{472393}=:e_0\text.
+    =2^{4501}\cdot3^{25}\cdot5^{13501}\dotsm\,31^7\cdot37^{472393}=:e_0\text.
 \end{multline}
 Taj kod ćemo koristiti u kasnijim primjerima.
 \end{primjer}
@@ -613,7 +613,7 @@ Za samo izvršavanje instrukcija na registrima, koristit ćemo množenje odnosno
 \\%\intertext{te ako je $r_i>0$,}
 \label{eq:knkkpj}\knk{r_0,r_1,\dotsc,r_{j-1},r_j-1,r_{j+1},r_{j+2},\dotsc,0,0,\dotsc}
 &=
-\knk{r_0,r_1,\dotsc,0,0,\dotsc}\sslash p_j
+\knk{r_0,r_1,\dotsc,0,0,\dotsc}\div p_j
 \end{align}
 (jasno, \eqref{eq:knkkpj} vrijedi samo ako je $r_j>0$).
 
@@ -634,7 +634,7 @@ $\f{NextReg}$ treba pomnožiti ili podijeliti (ako je djeljiv) $r$ s $p_j$, ako 
 %\SwapAboveDisplaySkip
     \label{eq:NextRegdef}\f{NextReg}(i,r)&:=\begin{cases}
     r\cdot pj,&Up\\
-    r\sslash pj,&Down\\
+    r\div pj,&Down\\
     r,&\text{inače}
     \end{cases}%\text,
 \\
@@ -658,7 +658,7 @@ Ako je $I$ tipa $\inc$, recimo $I=(\incr j)$, tada vrijedi $Up$ i $pj=\f{prime}(
 
 Ako je $I$ tipa $\goto$, recimo $I=(\goto\;l)$, tada ne vrijedi ni $Up$ ni $Down$, te je $r'=r$, a $p'=\f{dest}(i)=\f{dest}(\kins{\goto\;l})=l$, kao što i treba biti.
 
-Ako je pak $I$ tipa $\dec$, recimo $I=(\decr jl)$, tada je opet $pj=p_j$, te $Up$ ne vrijedi, a $Down\Leftrightarrow p_j\mid r=c(\reg{*})\Leftrightarrow c(\reg j)>0$. Ako je to istina, $p'=p+1$ i $r'=r\sslash p_j$, a ako nije, $p'=\f{dest}(\kins{\decr jl})=l$ i $r'=r$, kao što i treba biti po semantici instrukcije tipa $\dec$.
+Ako je pak $I$ tipa $\dec$, recimo $I=(\decr jl)$, tada je opet $pj=p_j$, te $Up$ ne vrijedi, a $Down\Leftrightarrow p_j\mid r=c(\reg{*})\Leftrightarrow c(\reg j)>0$. Ako je to istina, $p'=p+1$ i $r'=r\div p_j$, a ako nije, $p'=\f{dest}(\kins{\decr jl})=l$ i $r'=r$, kao što i treba biti po semantici instrukcije tipa $\dec$.
 \end{proof}
 
 \subsection{Kodiranje RAM-izračunavanja}
@@ -777,7 +777,7 @@ Pozabavimo se sada čitanjem rezultata izračunavanja (izlaznog podatka algoritm
 \begin{equation}
 \label{eq:univdef}\f{univ}(x,e):\simeq\f{result}\bigl(\f{Reg}\bigl(x,e,\f{step}(x,e)\bigr)\bigr)\text,
 \end{equation}
-\emph{univerzalnu} funkciju koja preslikava RAM-program i ulaz za njega u rezultat iz\-ra\-ču\-na\-va\-nja, ako i samo ako je taj rezultat definiran.
+\emph{univerzalnu} funkciju koja preslikava RAM-program i ulaz za njega u rezultat iz\-ra\-ču\-na\-va\-nja, i to ako i samo ako je taj rezultat definiran.
 
 \begin{lema}[{name=[parcijalna rekurzivnost univerzalne funkcije]}]\label{lm:univspec}
 Funkcija $\f{univ}^2$ je parcijalno rekurzivna, i za sve $x,e\in\N$ vrijedi:

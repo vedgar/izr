@@ -31,7 +31,7 @@ Smatramo li nulu prirodnim brojem? Treba li brojenje početi od $0$ ili od $1$, 
 \begin{napomena}[{name=[samo jedan izlazni podatak]}]\label{nap:brip}
 Pričali smo o izlaznim podacima u množini, no lako je vidjeti da --- s obzirom na to da nas samo zanima postojanje algoritma, ne i njegove performanse --- ništa ne gubimo fiksiranjem broja izlaznih podataka na $1$. Algoritam s $k$ ulaznih i $l$ izlaznih podataka uvijek možemo promatrati kao $l$ algoritama s istih $k$ ulaznih podataka i s po jednim izlaznim podatkom.
 
-    Na primjer, u nekim programskim jezicima postoji operacija $\texttt{divmod}$ iz $\mathbb Z^2$ u $\mathbb Z^2$, koja provodi dijeljenje s ostatkom u $\mathbb Z$, te vraća količnik i ostatak. Nju uvijek možemo, čak i da je nemamo kao osnovnu, emulirati pomoću dvije operacije, $\sslash$ i $\bmod$, koje vraćaju količnik i ostatak istog dijeljenja zasebno. Naravno, razlog zašto neki jezici imaju $\texttt{divmod}$ kao posebnu funkciju leži u tome da algoritmi za te dvije operacije imaju mnogo zajedničkih koraka, te ako smo odredili količnik, obično je lako iz postupka kojim smo to učinili pročitati i ostatak (sjetite se npr.\ algoritma za dijeljenje višeznamenkastih brojeva). Zato bismo ponovnim provođenjem algoritma ispočetka za ostatak nepotrebno duplicirali korake. No ako nas samo zanima koje su funkcije izračunljive, očito postoji algoritam za $\texttt{divmod}$ ako i samo ako postoje algoritmi za \emph{koordinatne funkcije} $\sslash$ i $\bmod$, te nam je dovoljno baviti se pitanjem jesu li $\sslash$ i $\bmod$ izračunljive --- u ovom slučaju, dakako, jesu.
+    Na primjer, u nekim programskim jezicima postoji operacija $\texttt{divmod}$ iz $\mathbb Z^2$ u $\mathbb Z^2$, koja provodi dijeljenje s ostatkom u $\mathbb Z$, te vraća količnik i ostatak. Nju uvijek možemo, čak i da je nemamo kao osnovnu, emulirati pomoću dvije operacije, $\div$ i $\bmod$, koje vraćaju količnik i ostatak istog dijeljenja zasebno. Naravno, razlog zašto neki jezici imaju $\texttt{divmod}$ kao posebnu funkciju leži u tome da algoritmi za te dvije operacije imaju mnogo zajedničkih koraka, te ako smo odredili količnik, obično je lako iz postupka kojim smo to učinili pročitati i ostatak (sjetite se npr.\ algoritma za dijeljenje višeznamenkastih brojeva). Zato bismo ponovnim provođenjem algoritma ispočetka za ostatak nepotrebno duplicirali korake. No ako nas samo zanima koje su funkcije izračunljive, očito postoji algoritam za $\texttt{divmod}$ ako i samo ako postoje algoritmi za \emph{koordinatne funkcije} $\div$ i $\bmod$, te nam je dovoljno baviti se pitanjem jesu li $\div$ i $\bmod$ izračunljive --- u ovom slučaju, dakako, jesu.
 \end{napomena}
 
 Kad promatramo broj \emph{ulaznih} podataka (tzv.\ \emph{mjesnost}) algoritma, situacija je bitno drugačija. Jasno je da algoritam za npr.\ potenciranje prirodnih brojeva prima bazu i eksponent kao dva ulazna podatka, i ne može se jednostavno zapisati pomoću algoritama koji primaju po jedan ulazni podatak. %Doduše, korištenjem tehnike \emph{currying}, svaku izračunljivu funkciju možemo računati pomoću algoritama koji primaju po \emph{dva} ulazna podatka, i neki autori doista ograničavaju mjesnost na $2$, ali to stvara dosta tehničkih problema za minimalni dobitak.
@@ -59,9 +59,9 @@ Budući da želimo algoritme moći reprezentirati u računalu, moramo ih moći p
 
 Ipak, bitno je  lakše raditi s algoritmima koji računaju totalne funkcije. Parcijalne funkcije moramo dozvoliti u krajnjoj općenitosti, ali mnoge funkcije koje ćemo koristiti u izgradnji teorije bit će ne samo totalne, nego i \emph{sintaksno} totalne unutar teorije koju gradimo: već iz oblika njihovih definicija bit će jasno da algoritmi koji ih računaju uvijek stanu. Takve funkcije zvat ćemo \emph{primitivno rekurzivnima}.
 
-Kad smo već kod toga, recimo nekoliko riječi i o klasičnim izuzecima poput dijeljenja nulom. Primitivno rekurzivne funkcije po definiciji moraju biti totalne, pa si ne možemo priuštiti jednostavno reći nešto poput "$3\sslash0$ nije definirano" (dokazat ćemo da je $\sslash$ primitivno rekurzivna operacija). U mnogim slučajevima to ćemo rješavati jednostavno tako da kažemo "\emph{postoji} primitivno rekurzivna funkcija $\f{f}$ koja se podudara s traženom funkcijom $g$ na domeni $\dom{g}$", ne govoreći ništa o vrijednostima $\f{f}(\vec x)$ za $\vec x\notin\dom{g}$. Još općenitije, ponekad ćemo umjesto funkcije $g$ navesti samo neko \emph{svojstvo} koje vrijednosti od $\f{f}$ moraju zadovoljavati na nekom skupu. Kazat ćemo tada da smo \emph{parcijalno specificirali} (totalnu) funkciju $\f{f}$: u smislu, $\f{f}$ je definirana svuda, ali nas zanimaju samo vrijednosti na nekom užem skupu.
+Kad smo već kod toga, recimo nekoliko riječi i o klasičnim izuzecima poput dijeljenja nulom. Primitivno rekurzivne funkcije po definiciji moraju biti totalne, pa si ne možemo priuštiti jednostavno reći nešto poput "$3\div0$ nije definirano" (dokazat ćemo da je $\div$ primitivno rekurzivna operacija). U mnogim slučajevima to ćemo rješavati jednostavno tako da kažemo "\emph{postoji} primitivno rekurzivna funkcija $\f{f}$ koja se podudara s traženom funkcijom $g$ na domeni $\dom{g}$", ne govoreći ništa o vrijednostima $\f{f}(\vec x)$ za $\vec x\notin\dom{g}$. Još općenitije, ponekad ćemo umjesto funkcije $g$ navesti samo neko \emph{svojstvo} koje vrijednosti od $\f{f}$ moraju zadovoljavati na nekom skupu. Kazat ćemo tada da smo \emph{parcijalno specificirali} (totalnu) funkciju $\f{f}$: u smislu, $\f{f}$ je definirana svuda, ali nas zanimaju samo vrijednosti na nekom užem skupu.
 
-Treba napomenuti da je važna odlika ove knjige da će svi algoritmi biti precizno specificirani --- ništa neće ostati na pseudokodu. Dakle, uvijek ćemo moći precizno izračunati vrijednosti primitivno rekurzivne funkcije i izvan skupa na kojem je specificirana --- na primjer, algoritam za $\sslash$ reći će nam da je $3\sslash 0=3$. Ponekad će čak to "nedokumentirano ponašanje" imati neko značenje, u smislu da će takvu funkciju biti lakše uklopiti u kasnije definicije bez puno rastava na slučajeve. No to nećemo često koristiti, i svaki put ćemo naglasiti kad se to dogodi.
+Treba napomenuti da je važna odlika ove knjige da će svi algoritmi biti precizno specificirani --- ništa neće ostati na pseudokodu. Dakle, uvijek ćemo moći precizno izračunati vrijednosti primitivno rekurzivne funkcije i izvan skupa na kojem je specificirana --- na primjer, algoritam za $\div$ reći će nam da je $3\div 0=3$. Ponekad će čak to "nedokumentirano ponašanje" imati neko značenje, u smislu da će takvu funkciju biti lakše uklopiti u kasnije definicije bez puno rastava na slučajeve. No to nećemo često koristiti, i svaki put ćemo naglasiti kad se to dogodi.
 
 %\subsection{Relacije}
 
@@ -165,7 +165,7 @@ Dakle, RAM-instrukcija može biti jednog od tri oblika, čiji efekti su:
 Skup $\mathscr Ins$ svih RAM-instrukcija je prebrojiv.
 \end{lema}
 \begin{proof}
-Skup $\mathscr Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikavanje $f_1:\N\to\mathscr Ins_\inc$ zadano s $f_1(j):=(\incr{j})$ je bijekcija. Analogno, koristeći odredište (iako je broj odredišta ograničen za fiksni program $P$, svaka instrukcija $\goto\;l$ se može pojaviti u \emph{nekom} programu), skup $\mathscr Ins_{\goto}$ je prebrojiv, a skup $\mathscr Ins_\dec$ je ek\-vi\-po\-ten\-tan sa $\N\times\N$, te je i on prebrojiv. Sada je $\mathscr Ins$ prebrojiv kao (disjunktna) unija tih triju prebrojivih skupova.
+Skup $\mathscr Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikavanje $f_1:\N\to\mathscr Ins_\inc$ zadano s $f_1(j):=(\incr{j})$ je bijekcija. Analogno, koristeći odredište (iako je broj odredišta ograničen za fiksni program $P$, svaka instrukcija $\goto\;l$ se može pojaviti u \emph{nekom} programu), skup $\mathscr Ins_{\goto}$ je prebrojiv, a skup $\mathscr Ins_\dec$ je ek\-vi\-po\-ten\-tan s $\N\times\N$, te je i on prebrojiv. Sada je $\mathscr Ins$ prebrojiv kao (disjunktna) unija tih triju prebrojivih skupova.
 \end{proof}
 
 \begin{korolar}[{name=[prebrojivost skupa $\mathscr Prog$]}]\label{kor:alef0prog}
@@ -251,7 +251,7 @@ Taj $i_0$ nije $0$, jer je $c_0=c_0'=\text{početna konfiguracija s ulazom $\vec
 U svakom RAM-izračunavanju koje stane postoji jedinstvena završna konfiguracija.
 \end{propozicija}
 \begin{proof}
-Pretpostavimo da je $(c_i)_{i\in\N}$ $P$-izračunavanje s $\vec x$ u kojem postoje dvije završne konfiguracije, i označimo indekse na kojima se one prvi put pojavljuju sa $i_1$ i $i_2$. Bez smanjenja općenitosti (različitost je simetrična) možemo pretpostaviti $i_1<i_2$. No budući da je $c_{i_1}$ završna, ona prelazi (samo) u samu sebe, pa indukcijom imamo
+Pretpostavimo da je $(c_i)_{i\in\N}$ $P$-izračunavanje s $\vec x$ u kojem postoje dvije završne konfiguracije, i označimo s $i_1$ i $i_2$ indekse na kojima se one prvi put pojavljuju. Bez smanjenja općenitosti (različitost je simetrična) možemo pretpostaviti $i_1<i_2$. No budući da je $c_{i_1}$ završna, ona prelazi (samo) u samu sebe, pa indukcijom imamo
 \begin{equation}
     c_{i_1}=c_{i_1+1}=c_{i_1+2}=\dotsb=c_{i_2}\text,
 \end{equation}
@@ -605,11 +605,11 @@ Neka je $k\in\N_+$ i\, $\f f^k$ funkcija.
 \begin{proof}
 Za jedan smjer, ako je $\f f$ RAM-izračunljiva, postoji RAM-algoritam iste mjesnosti $P^k$ koji je računa.  RAM-program $P$ je i makro-program, a vidjeli smo u napomeni~\ref{nap:rem} da je svejedno izvršava li se na makro-stroju ili RAM-stroju. Drugim riječima, $P$ na makro-stroju također računa funkciju $\f f$, odnosno makro-algoritam $P^k$ računa $\f f$, pa je $\f f$ makro-izračunljiva.
 
-Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$ koji je računa. Po teoremu~\ref{tm:rem}, $Q^\flat$ je ekvivalentan s $Q$, dakle za svaki $k$ pa specijalno i za mjesnost funkcije $\f f$, $Q^k$ i $(Q^\flat)^k$ (pišemo skraćeno $Q^{\flat\,k}$) računaju istu funkciju. Drugim riječima, RAM-algoritam $Q^{\flat\,k}$ računa funkciju $\f f$, pa je ona RAM-izračunljiva.
+Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$ koji je računa. Po teoremu~\ref{tm:rem}, $Q^\flat$ je ekvivalentan s $Q$, dakle za svaki $k$ pa specijalno i za mjesnost funkcije $\f f$, $Q^k$ i $(Q^\flat)^k$ (pišemo skraćeno $Q^{\flat k}$) računaju istu funkciju. Drugim riječima, RAM-algoritam $Q^{\flat k}$ računa funkciju $\f f$, pa je ona RAM-izračunljiva.
 \end{proof}
 
 \begin{napomena}[{name=[makroi višeg reda]}]
-Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$ gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat\,*}$\!, koji ima istu semantiku što se efekata na registrima tiče.
+Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$ gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat*}$\!, koji ima istu semantiku što se efekata na registrima tiče.
 \end{napomena}
 
 %\subsection{Primjeri makroa}
@@ -632,7 +632,7 @@ Nije teško vidjeti, sličnom tehnikom kao za \textsc{zero}, da za sve \emph{raz
     1.&\decr{i}{4}\\
     2.&\incr{j}\\
     3.&\goto\;1
-    \end{prog}^{\flat\;*}
+    \end{prog}^{\flat*}
 \end{equation}
 ima semantiku $r_i'=0\land r_j'=r_i$: riječima, prebacuje sadržaj $\reg{i}$ u $\reg{j}$ i pritom resetira $\reg{i}$. Ovdje je bitan uvjet $i\ne j$; pokušajte odrediti što se događa kad taj uvjet nije ispunjen. Općenito ćemo imati uvjete na "parametre" makroa pod kojima on ima traženu semantiku. Naravno, onda smo dužni pri svakom korištenju makroa u programu provjeriti da konkretne vrijednosti parametara zadovoljavaju te uvjete.
 
@@ -640,7 +640,7 @@ Evo primjera makroa s malo kompliciranijim uvjetom: neka su $i,j,n\in\N$ takvi d
 \begin{equation}
     (\textsc{mmove $n$ from $\reg{i}..$ to $\reg{j}..$}):=\begin{prog}
     t.&\remove{i+t}{j+t}
-    \end{prog}_{t<n}^{\flat\;*}
+    \end{prog}_{t<n}^{\flat*}
 \end{equation}
 sa semantikom $(\forall t<n)(r_{j+t}'=r_{i+t}\land r_{i+t}'=0)$ --- koristimo $(\forall t<n)$ kao pokratu za $(\forall t\in[0\dd n\rangle)$. Riječima, \textsc{mmove} prebacuje komad memorije duljine $n$ registara počevši od $\reg{i}$, na drugo mjesto koje počinje od $\reg{j}$, ostavljajući nule na originalnim lokacijama. Svrha korištenja te instrukcije bit će emulacija \emph{stoga} pri funkcijskim pozivima.
 
@@ -662,7 +662,7 @@ Upravo konstruirani makroi su u redu ako nam je prihvatljivo da se registar rese
     4.&\incr{k}\\
     5.&\goto\;2\\
     6.&\remove{k}{i}
-    \end{prog}^{\flat\;*}
+    \end{prog}^{\flat*}
 \end{equation}
 ima semantiku $r_j'=r_i\land r_k'=0$ (nismo napisali $r_i'$, što u skladu s našom konvencijom znači da je $r_i'=r_i$). To se dokaže po koracima, praćenjem stanja relevantnih registara kroz instrukcije:
 \begin{equation}
@@ -687,7 +687,7 @@ Glavna svrha upravo definirane instrukcije je prijenos argumenata u funkciju: ka
 U tu svrhu, neka je $k\in\N_+$, te $j_1,j_2,\dotsc,j_k>k$ prirodni brojevi (ne moraju biti međusobno različiti, ali moraju biti veći od $k$). Definiramo makro
 \begin{equation}
     (\textsc{args} \;\reg{j_1},\reg{j_2},\dotsc,\reg{j_k}):=\begin{prog} t.&\move{j_{t+1}\!}{t+1}{0}
-    \end{prog}^{\flat\;*}_{t<k}\text,
+    \end{prog}^{\flat*}_{t<k}\text,
 \end{equation}
 čija je semantika $(\forall t\in[1\dd k])(r_t'=r_{j_t})\land r_0'=0$. Primijetimo da je svaki uvjet za parametre od \textsc{move} zadovoljen, jer za svaki $t\in[1\dd k]$ vrijedi $0<1\le t\le k<j_t$, pa su $\reg{0}$, $\reg{t}$ i $\reg{j_t}$ različiti registri. Također primijetimo da u procesu prijenosa argumenata resetiramo izlazni registar, što je u redu jer ionako nakon prijenosa argumenata slijedi prijenos kontrole na pozvanu funkciju, koja će očekivati nulu tamo.
 
@@ -714,7 +714,7 @@ te pomoću tog broja definiramo \emph{funkcijski makro}
     2.&P_{\f{f}}^*\\
     3.&\remove{0}{b+j_0}\\
     4.&\textsc{mmove}\;b\;\textsc{from}\;\reg{b}..\;\textsc{to}\;\reg0..
-    \end{prog}^{\flat\;*}\text{\!\!\!\!.\!\!\!\!\qedhere}
+    \end{prog}^{\flat*}\text{\!\!\!\!.\!\!\!\!\qedhere}
 \end{equation*}
 \end{definicija}
 

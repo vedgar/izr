@@ -687,7 +687,7 @@ Ključno je vidjeti da je jezik nad $\Sigma_{\log}$,
 \end{equation}
 odlučiv. To sigurno nećemo napraviti u potpunosti, ali sve osnovne ideje već imamo. Prvo, slično kao u točki~\ref{sec:stdstring}, možemo napraviti funkcije $\f{arg}'_i$, koje iz kodiranog \t\#-separiranog niza formula ekstrahiraju pojedinu formulu (zapravo njen kod). Dinamizacijom možemo napraviti i $(\f{arg}')^2$, pomoću koje onda možemo pričati o svim formulama u dokazu (i osigurati da su dijelovi između separatora doista formule). Sad je jasno da, kako bi takav niz bio u $Proof$, svaka formula u njemu mora biti ili instanca sheme aksioma (A1), (A2), (A3), (A4) ili (A5) (iz Hilbertovog računa predikata), ili pak mora biti dobivena modus ponensom ili generalizacijom iz neke prethodne formule.
 \begin{multline}
-    p\in\langle Proof\rangle\Leftrightarrow\Bigl(\forall i<2+\bigl(\#j<\f{slh}(p,12)\bigr)\bigl(\f{sdigit}(p,j,12)=12\bigr)\Bigr)\Bigl(\f{arg}'(p,i)\in\kr{F1}\land{}\\
+    p\in\langle Proof\rangle\Longleftrightarrow\Bigl(\forall i<2+\bigl(\num j<\f{slh}(p,12)\bigr)\bigl(\f{sdigit}(p,j,12)=12\bigr)\Bigr)\Bigl(\f{arg}'(p,i)\in\kr{F1}\land{}\\
     \bigl(\f{IsA1}\bigl(\f{arg'}(p,i)\bigr)\lor\f{IsA2}\bigl(\f{arg'}(p,i)\bigr)\lor\f{IsA3}\bigl(\f{arg'}(p,i)\bigr)\lor\f{IsA4}\bigl(\f{arg'}(p,i)\bigr)\lor\f{IsA5}\bigl(\f{arg'}(p,i)\bigr)\\
     {}\lor(\exists j<i)(\exists k<i)\f{ModPon}\bigl(\f{arg}'(p,i),\f{arg}'(p,j),\f{arg}'(p,k)\bigr)\lor{}\\
     {}\lor(\exists j<i)\f{Gen}\bigl(\f{arg}'(p,i),\f{arg}'(p,j)\bigr)\bigr)\Bigr)

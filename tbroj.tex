@@ -390,7 +390,7 @@ To je jednakost~\eqref{eq:pravkomut} u koju je uvrštena (s obje strane) definic
 Sjetimo se, naš cilj je izraziti $f$ pomoću $\N\beta f$. S korolarom~\ref{kor:binf=Nbetafbin} smo već jako blizu, treba nam samo još (izračunljiv) lijevi inverz za $\f{bin}^1$. Kako možemo iz $63=(111111)_2=\f{bin}(6)$ natrag dobiti $6$? Samo treba prebrojiti jedinice, odnosno znamenke.
 
 \begin{lema}[{name=[primitivna rekurzivnost i specifikacija duljine binarnog zapisa]}]\label{lm:blh}
-Definiramo funkciju $\f{blh}$ s $\f{blh}(n):=\f{slh}(n,2)$. 
+Definiramo funkciju $\f{blh}$ s\, $\f{blh}(n):=\f{slh}(n,2)$. 
 
 Funkcija $\f{blh}$ je primitivno rekurzivna, i vrijedi $\f{blh}\circ\f{bin}^1\!=\f I_1^1$.
 \end{lema}
@@ -430,7 +430,7 @@ Sad je jasno da isti komutirajući dijagram može poslužiti i za dokazivanje ob
 \end{equation}
 iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$ iz $f$ --- samo trebamo umjesto desne obrnuti lijevu stranicu pravokutnika, odnosno naći desni inverz za $\f{bin}^k$. Nažalost, to je iz tri razloga zapetljanije nego ovo što smo napravili u prethodnoj točki.
 
-Prvi razlog je sasvim birokratski, i tiče se naše odluke sa samog početka, da ćemo promatrati brojevne funkcije s jednim izlaznim podatkom. Kako je $\dom{\f{bin}^k}=\N^k$, traženi desni inverz bi morao imati $k$ izlaznih podataka, te ćemo ga reprezentirati kroz $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. (Te funkcije bit će neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih nećemo morati označavati s dva broja, kao što smo recimo morali označavati koordinatne projekcije $\f I_n^k$.)
+Prvi razlog je birokratski, i tiče se naše odluke sa samog početka (napomena~\ref{nap:brip}) da ćemo promatrati brojevne funkcije s jednim izlaznim podatkom. Kako je $\dom{\f{bin}^k}=\N^k$, traženi desni inverz bi morao imati $k$ izlaznih podataka, te ćemo ga reprezentirati kroz $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. (Te funkcije bit će neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih nećemo morati označavati s dva broja, kao što smo recimo morali označavati koordinatne projekcije $\f I_n^k$.)
 
 Drugi razlog je tehnički: implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Na neki način, dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatiju strukturu, i za njeno raščlanjivanje treba nam neka vrst "standardne biblioteke" za rad sa stringovima. Ovdje ćemo napraviti samo minimum potreban za primitivnu rekurzivnost funkcija $\f{arg}_i$, ali lako je vidjeti kako tu ima puno mogućnosti za implementaciju raznih algoritama.
 
@@ -457,8 +457,7 @@ Dvomjesna brojevna relacija $\sqsubseteq_\beta$, zadana s
 (kodovi su po $\N\Sigma_\beta^*$), primitivno je rekurzivan refleksivni parcijalni uređaj na $\N$.
 \end{korolar}
 \begin{proof}
-Činjenica da se radi o parcijalnom uređaju slijedi iz propozicija~\ref{pp:prefiksrpu} i~\ref{pp:bijkr}, a
-primitivna rekurzivnost iz leme~\ref{lm:ldcpprn}: $x\sqsubseteq_\beta y\Longleftrightarrow x=\f{sprefix}\bigl(y,\f{blh}(x),2\bigr)$.
+    Činjenica da se radi o parcijalnom uređaju slijedi iz propozicija~\ref{pp:prefiksrpu} i~\ref{pp:bijkr}, a primitivna rekurzivnost iz lema~\ref{lm:ldcpprn} i~\ref{lm:blh}: $x\sqsubseteq_\beta y\Longleftrightarrow x=\f{sprefix}\bigl(y,\f{blh}(x),2\bigr)$.
 \end{proof}
 
 \begin{primjer}[{name=[prateća relacija "prefiks"]}]
@@ -478,13 +477,13 @@ počevši od $i=0$ slijeva, u zapisu broja $x$ u pomaknutoj bazi $2$.
 \begin{proof}
 Za početak, definirajmo pomoćnu primitivno rekurzivnu (lema~\ref{lm:brojrek}) funkciju koja broji dvojke (separatore) u zapisu broja u pomaknutoj bazi $2$.
 \begin{equation}
-    \f{count2}(x):=\bigl(\#i<\f{blh}(x)\bigr)\bigl(\f{sdigit}(x,i,2)=2\bigr)
+    \f{count2}(x):=\bigl(\num i<\f{blh}(x)\bigr)\bigl(\f{sdigit}(x,i,2)=2\bigr)
 \end{equation}
 
 Tvrdimo da funkcije zadane točkovno s
 \begin{align}
     \f{pos2}(x,i)&:=\f{blh}\bigl((\mu z<x)(z\conc22\,\sqsubseteq_\beta x\,\land\,\f{count2}(z)=i)\bigr),\\
-    \f{streak1}(x,i)&:=\f{pos2}\bigl(x,\f{Sc}(i)\bigr)\ominus\f{Sc}\bigl(\f{pos2}(x,i)\bigr),
+    \f{streak1}(x,i)&:=\f{pos2}\bigl(x,\f{Sc}(i)\bigr)\dotminus\f{Sc}\bigl(\f{pos2}(x,i)\bigr),
 \end{align}
 zadovoljavaju tražene specifikacije (očito su primitivno rekurzivne).
 
@@ -499,9 +498,9 @@ Za $i\ge\f{count2}(x)$, takav $z$ ne postoji (jer $z\conc22$ ima više dvojki ne
 
 Sada je za funkciju $\f{streak1}$ dovoljno oduzeti odgovarajuće pozicije: poziciju prvog znaka nakon $i$-te dvojke, od pozicije sljedeće dvojke. Za $i<\f{count2}(x)-1$, to funkcionira točno kako treba: kako pomaknuta baza $2$ ima samo znamenke $1$ i $2$, između susjednih dvojki nalaze se samo jedinice.
 
-Za $i=\f{count2}(x)-1$, $i$-ta dvojka je upravo zadnja, pa je $\f{pos2}(x,i)=\f{blh}(x)-1$ (možemo pisati obične minuse jer uokvireni brojevi imaju bar dvije dvojke --- na početku i na kraju). Također po specifikaciji $\f{pos2}$ vrijedi $\f{pos2}(x,i+1)=\f{blh}(x)$, pa je $\f{streak1}(x,i)=\f{blh}(x)\ominus\f{Sc}\bigl(\f{blh}(x)-1\bigr)=0$.
+Za $i=\f{count2}(x)-1$, $i$-ta dvojka je upravo zadnja, pa je $\f{pos2}(x,i)=\f{blh}(x)-1$ (možemo pisati obične minuse jer uokvireni brojevi imaju bar dvije dvojke --- na početku i na kraju). Također po specifikaciji $\f{pos2}$ vrijedi $\f{pos2}(x,i+1)=\f{blh}(x)$, pa je $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{blh}(x)-1\bigr)=0$.
 
-Za $i\ge\f{count2}(x)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{blh}(x)$, pa je opet $\f{streak1}(x,i)=\f{blh}(x)\ominus\f{Sc}\bigl(\f{blh}(x)\bigr)=0$.
+Za $i\ge\f{count2}(x)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{blh}(x)$, pa je opet $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{blh}(x)\bigr)=0$.
 \end{proof}
 
 %\subsection{Funkcije \texorpdfstring{$\f{arg}_i$}{arg} --- ekstrakcija argumenata}\label{sec:arg}

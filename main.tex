@@ -1,86 +1,43 @@
-\documentclass[
-  twoside=semi,
-  open=any,
-  fontsize=12pt,
-  DIV=12,
-  BCOR=0pt,
-  headings=twolinechapter,
-  numbers=endperiod,
-  %draft
-]{scrbook}
+\documentclass[ twoside=semi, open=any, fontsize=12pt, DIV=12, BCOR=0pt,
+     headings=twolinechapter, numbers=endperiod ]{scrbook}
 %\includeonly{rek,re} %dolje isključiti listoftheorems
-%%%%
 % TODO za iduću godinu:
 % * po instrukciji vs po programu prijelaz eksplicirati
-% \emphove razdvojiti na engl, defn (-> indeks jednog dana) i nagl
+% * \emphove razdvojiti na engl, defn (-> indeks jednog dana) i nagl
 % * == umjesto = za algoritamsku jednakost; rješava i probleme s parcijalnošću
 % * if kao spec umjesto {:...} oznake; možda u smallcaps kao i spec
 \raggedbottom
 %\pdfmapline{+dummy-space <dummy-space.pfb}
-\pdfinterwordspaceon
-\input glyphtounicode
-\pdfgentounicode=1
-%\usepackage{mmap}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[croatian]{babel}
-\usepackage{csquotes}
-\MakeOuterQuote{"}
-\usepackage[backend=biber]{biblatex}
-%\addtokomafont{sectionentry}{\bfseries}
-\usepackage{amsmath,amsthm}
-\usepackage{thmtools}
-\usepackage{stmaryrd}
-\usepackage[unicode]{hyperref}
-\usepackage{bookmark}
-\usepackage[euler-digits]{eulervm}
-\usepackage{beton}
-\usepackage[mathscr]{eucal}
-\usepackage{MnSymbol}
-\renewcommand{\bfdefault}{sbc}
-%\usepackage{concmath}
-\usepackage{microtype}
-\usepackage{xcolor}
-\hypersetup{
-    colorlinks,
-    linkcolor={red!50!black},
-    citecolor={blue!50!black},
-    urlcolor={blue!80!black}
-}
-\usepackage{menukeys}
-\renewmenumacro{\keys}[+]{roundedkeys}
-\usepackage[artemisia]{textgreek}
-\addbibresource{literatura.bib}
-\usepackage{mathtools}
+\pdfinterwordspaceon \input glyphtounicode \pdfgentounicode=1
+\usepackage[utf8]{inputenc} \usepackage[T1]{fontenc}
+\usepackage[croatian]{babel} \usepackage{csquotes} \MakeOuterQuote{"}
+\usepackage[backend=biber]{biblatex} \addbibresource{literatura.bib}
+\usepackage[unicode]{hyperref} \usepackage{xcolor} \hypersetup{
+    colorlinks, linkcolor={red!50!black},
+    citecolor={blue!50!black}, urlcolor={blue!80!black} }
+\usepackage{amsmath,amsthm,thmtools} \usepackage{mathtools}
+\usepackage[euler-digits]{eulervm} \usepackage{beton} \usepackage{MnSymbol}
+\usepackage[mathscr]{eucal} \usepackage[artemisia]{textgreek}
+\renewcommand{\bfdefault}{sbc} \usepackage{microtype} \usepackage{bookmark}
+\usepackage{menukeys} \renewmenumacro{\keys}[+]{roundedkeys}
 \usepackage[draft=false]{scrlayer-scrpage}
-%\pagestyle{plain.scrheadings}
 
-\declaretheorem[style=definition,qed=$\vartriangleleft$,parent=chapter]{definicija}
+\declaretheorem[style=definition,qed=$\lhd$,parent=chapter]{definicija}
 \declaretheorem[sibling=definicija]{propozicija}
 \declaretheorem[sibling=definicija]{korolar}
 \declaretheorem[sibling=definicija]{lema}
 \declaretheorem[sibling=definicija]{teorem}
-\declaretheorem[sibling=definicija,style=definition,qed=$\vartriangleleft$]{primjer}
-\declaretheorem[sibling=definicija,style=definition,qed=$\vartriangleleft$]{napomena}
+\declaretheorem[sibling=definicija,style=definition,qed=$\lhd$]{primjer}
+\declaretheorem[sibling=definicija,style=definition,qed=$\lhd$]{napomena}
 \declaretheorem[numbered=no,name={Church--\!Turingova teza}]{ctteza}
-\renewcommand{\listtheoremname}{Popis definicija, teorema, primjera, lema, napomena i korolara}
+\renewcommand{\listtheoremname}{Popis definicija, propozicija, teorema, primjera, lema, napomena i korolara}
 
-%\usepackage{dsfont}
-\usepackage{mathbbol}
-%\usepackage[defaultlines=3,all]{nowidow}
-\usepackage{textcomp}
-%\usepackage{ae}
-\usepackage{etoolbox}
-\usepackage{tikz}
-\usetikzlibrary{automata, positioning, arrows, cd}
-\usetikzlibrary{external} 
-\tikzexternalize[prefix=tikzcache/]
+\usepackage{mathbbol} \usepackage{textcomp} \usepackage{etoolbox}
+\usepackage{tikz} \usetikzlibrary{automata, positioning, arrows, cd}
+\usetikzlibrary{external} \tikzexternalize[prefix=tikzcache/]
 \AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
 \AtEndEnvironment{tikzcd}{\tikzexternalenable}
-\tikzset{->,>=stealth',
-node distance=3cm,
-%every state/.style={thick, fill=gray!10},
-initial text=$ $}
+\tikzset{->,>=stealth', node distance=3cm, initial text=$ $}
 
 \newcommand{\N}{{\mathbb N}}
 \newcommand{\dom}[1]{\mathcal D_{#1}}
@@ -95,52 +52,41 @@ initial text=$ $}
 \newcommand{\remove}[2]{\textsc{remove}\;\reg{#1}\;\textsc{to}\;\reg{#2}}
 \newcommand{\move}[3]{\textsc{move}\;\reg{#1}\;\textsc{to}\;\reg{#2}\;\textsc{using}\;\reg{#3}}
 \newcommand{\pr}{\mathbin{\raisebox{1pt}{\textsc{\scriptsize{p\!r}}}}}
-\newcommand{\kompl}{\sp{\,\textup{\textsf c}}}
-\newcommand{\bump}{\sp{\sp{\centerdot}}}
+\newcommand{\kompl}{\sp{{\scriptscriptstyle\complement}}}
+\newcommand{\bump}{\sp{\text{\normalsize.}}}
 \newcommand{\bl}{\t\textvisiblespace}
 \newcommand{\T}[4]{\t{#1}\underset{\mathclap{#2}}{\t{#3}}\t{#4}}
-\newcommand{\dcup}{\mathbin{\dot\cup}}
-\newcommand{\bdcup}{\mathop{\dot\bigcup}}
+\newcommand{\dcup}{\cupdot}
+\newcommand{\bdcup}{\bigcupdot}
 \newcommand{\conc}[1]{\mathbin{\renewcommand{\arraystretch}{0.1}\begin{array}{@{}c@{}}{\smallfrown}\\[-0.3ex]{\scriptstyle #1}\end{array}}}
 \newcommand{\rus}{\textit{$R\widetilde{usse}ll$}}
 \newcommand{\boo}{$\begin{array}{@{}c@{}}
-    \t\textopenbullet\\
-    \t\textopenbullet
-    \end{array}$}
+    \t\textopenbullet\\ \t\textopenbullet \end{array}$}
 \newcommand{\boi}{$\begin{array}{@{}c@{}}
-    \t\textopenbullet\\
-    \t\textbullet
-    \end{array}$}
+    \t\textopenbullet\\ \t\textbullet \end{array}$}
 \newcommand{\bio}{$\begin{array}{@{}c@{}}
-    \t\textbullet\\
-    \t\textopenbullet
-    \end{array}$}
+    \t\textbullet\\ \t\textopenbullet \end{array}$}
 \newcommand{\bii}{$\begin{array}{@{}c@{}}
-    \t\textbullet\\
-    \t\textbullet
-    \end{array}$}
+    \t\textbullet\\ \t\textbullet \end{array}$}
 \newcommand{\mund}[1]{\raisebox{3pt}{\smash{\scriptsize $#1$}}}
 \newcommand{\TComp}{\mathscr{TC}omp_\Sigma}
 \newcommand{\eq}{=}
-\newcommand{\dd}{\mathbin{\cdot\cdot}}
+\newcommand{\dd}{\hdotdot}
+\newcommand{\num}{\texttt{\textup{\#}}\,}
+\renewcommand{\varnothing}{\mathord{\textcolor{dark-blue}{\otimes}}}
 
 \newenvironment{prog}{\left[\begin{array}{r@{\;}l}}{\end{array}\right]}
-
 \DeclareMathOperator{\card}{card}
 \DeclareTextFontCommand{\t}{\ttfamily\upshape\color{brown}}
-%\DeclareTextFontCommand{\f}{\mathsf\color{dark-blue}}
 \newcommand{\f}[1]{\textcolor{dark-blue}{\mathsf{#1}}}
-
 \DeclarePairedDelimiter{\knk}{\langlebar}{\ranglebar}
 \DeclarePairedDelimiter{\kins}{\ulcorner}{\urcorner}
-\DeclarePairedDelimiter{\kprog}{\ulcorner}{\lrcorner}
+\DeclarePairedDelimiter{\kprog}{\ullcorner}{\ulrcorner}
 \DeclarePairedDelimiter{\kf}{\t{\color{dark-blue}\char`\{}}{\t{\color{dark-blue}\char`\}}}
 \DeclarePairedDelimiter{\kr}{\langle}{\rangle}
 \DeclarePairedDelimiter{\dulj}{|}{|}
-\definecolor{title-gray}{gray}{0.1}
-\definecolor{dark-blue}{HTML}{000055}
-\definecolor{dark-red}{HTML}{550000}
-\definecolor{brown}{HTML}{6F5A21}
+\definecolor{title-gray}{gray}{0.1} \definecolor{dark-blue}{HTML}{000055}
+\definecolor{dark-red}{HTML}{550000} \definecolor{brown}{HTML}{6F5A21}
 
 \begin{document}
 %\tracingall
@@ -160,11 +106,11 @@ initial text=$ $}
 \node[blue] at(8.5,-1.6) {$C$};
 \node[blue] at(11,-0.5) {$E$};
 \node[red] at(15.5,-1) {$B$};
-%\node[green] at(3,0.6) {$start$};
-%\node[green] at(13,1.2) {$result$};
+\node[blue] at(3,0.6) {$s$};
+\node[blue] at(13,1.2) {$r$};
 \node[red] at(3,-1.5) {$f$};
 \draw[blue,fill] (5,0) coordinate (c0) circle (0.1) node[above]{$c_0$};
-\draw[blue,fill] (6,-1) coordinate (c1) circle (0.1) node[right,yshift=-3]{$c_1$};
+\draw[blue,fill] (6,-1)coordinate(c1)circle(0.1)node[right,yshift=-3]{$c_1$};
 \draw[blue,fill] (7,0) coordinate (c2) circle (0.1) node[right]{$c_2$};
 \draw[blue,fill] (6.5,2) coordinate (c3) circle (0.1) node[left]{$c_3$};
 \draw[blue,fill] (10,0.5) coordinate (cn0) circle (0.1) node[below]{$c_{n_0}$};
@@ -175,41 +121,19 @@ initial text=$ $}
 \draw[blue,shorten <=2mm,shorten >=2mm,->] (c2) -- (c3);
 \draw[blue,dotted,shorten <=2mm,shorten >=2mm,->] (c3) -- (cn0);
 \draw[blue,shorten <=2mm,shorten >=1.5mm,->] (cn0) -- (y);
-\draw[red,shorten <=1.5mm, shorten >=1.5mm,dashed,->] (x) to[in=240,out=-50] (y);
-%\draw[-] (-2,-1) arc (-130:-50:3);
-\end{tikzpicture}    
-\end{equation*}
-\vspace{1cm}
-}
+\draw[red,shorten <=1.5mm, shorten >=1.5mm,dashed,->] (x)to[in=240,out=-50](y);
+\end{tikzpicture} \end{equation*} \vspace{1cm} }
 \title{\vspace{-2cm}\normalfont Izračunljivost}
 \subtitle{\normalfont\Huge{za\; računarce}}
 \author{\textit{V\!edran Č\hspace{-0.5mm}ačić}}
-\date{\today}
-
-\maketitle
-
-\tableofcontents
-{\renewcommand\thesection{\alph{section}}
-\include{uvod}}
-
+\date{\today} \maketitle \tableofcontents
+{\renewcommand\thesection{\alph{section}} \include{uvod}}
 \mainmatter
-\include{ram}
-\addtocontents{toc}{\protect\newpage}
-\include{rek}
-\include{univ}
-\addtocontents{toc}{\protect\newpage}
-\addtocontents{loe}{\protect\newpage}
-\include{turing}%\include{tbroj}
-%\addtocontents{toc}{\protect\newpage}
-\addtocontents{loe}{\protect\newpage}
-\include{neizr}%\include{church}
-\addtocontents{loe}{\protect\newpage}
-\include{meta}
-\include{re}
-
-\backmatter
-\pagenumbering{Roman}
-\listoftheorems[ignore=ctteza]
-\printbibliography
-
+\include{ram} \addtocontents{toc}{\protect\newpage}
+\include{rek} \include{univ} \addtocontents{toc}{\protect\newpage}
+\addtocontents{loe}{\protect\newpage} \include{turing}%\include{tbroj}
+\addtocontents{loe}{\protect\newpage} \include{neizr}%\include{church}
+\addtocontents{loe}{\protect\newpage} \include{meta} \include{re}
+\backmatter \pagenumbering{Roman}
+\listoftheorems[ignore=ctteza] \printbibliography
 \end{document}
