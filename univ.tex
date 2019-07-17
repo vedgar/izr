@@ -34,7 +34,7 @@ Za $i\in\N$, sa $p_i$ označimo $i$-ti po redu prim-broj (počevši od $p_0=2$).
 \begin{equation}\label{eq:Codek}
     \f{Code}^k(x_1,x_2,\dotsc,x_k):=\langle x_1,x_2,\dotsc,x_k\rangle:=2^{x_1+1}\cdot3^{x_2+1}\dotsm p_{k-1}^{x_k+1}\text.
 \end{equation}
-Time je definirana funkcija $\langle\,\cdots\rangle:\N^*\to\N$.
+Time je definirana funkcija $\langle\cdots\rangle:\N^*\to\N$.
 \end{definicija}
 
 To doduše nije brojevna funkcija jer nema fiksnu mjesnost, ali ipak možemo reći da je izračunljiva u istom smislu u kojem su višestruko zbrajanje i množenje izračunljive operacije po lemi~\ref{lm:addmulk}.
@@ -52,13 +52,13 @@ Za svaki $k\in\N_+$, funkcija $\f{Code}^k$ je primitivno rekurzivna.
 Ovaj put smo napisali simboličku definiciju da bi bilo jasno da nigdje nismo trebali izračunljivost funkcije $n\mapsto p_n$. To svakako vrijedi, i trebat će nam kasnije, ali za pojedinu funkciju $\f{Code}^k$, dovoljno je da znamo da postoji bar $k$ prim-brojeva, te da su konstante s tim vrijednostima izračunljive.
 
 \begin{propozicija}[{name=[injektivnost kodiranja konačnih nizova]}]\label{prop:codeinj}
-Preslikavanje $\langle\,\cdots\rangle:\N^*\to\N$ je injekcija.
+Preslikavanje $\langle\cdots\rangle:\N^*\to\N$ je injekcija.
 \end{propozicija}
 \begin{proof}
     Pretpostavimo da su $\vec x^k,\vec y^{\,l}\in\N^*$ takvi da je $\langle\vec x\rangle=\langle\vec y\rangle$. Ako je $k>l$, tada je $k-1\in\N$, te je $\langle\vec x\rangle$ djeljiv s $p_{k-1}$, dok $\langle\vec y\rangle$ to nije (konkretno, $p_{k-1}\notin\{p_0,p_1,\dotsc,p_{l-1}\}$, pa ne dijeli njihov produkt), kontradikcija. Analogno ne može biti $k<l$. Dakle je $k=l$. Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. Kada bi bilo, tada bi kod bio djeljiv s $p_{i-1}^{y_i}$, te bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da ne može biti $x_i<y_i$, dakle mora biti $x_i=y_i$. Kako je $i$ bio proizvoljan, zaključujemo $\vec x=\vec y$.
 \end{proof}
 
-Sljedeće bismo trebali pokazati da je $\f{Seq}:=\im{\langle\,\cdots\rangle}$ rekurzivan skup, te da na tom skupu imamo izračunljivu funkciju koja nam na neki način daje originalni $\vec x$ iz kojeg je pojedini kod dobiven. Za taj dokaz potrebno nam je ponešto teorije brojeva, no prije toga samo precizirajmo u kakvom obliku tražimo naš inverz.
+Sljedeće bismo trebali pokazati da je $\f{Seq}:=\im{\langle\cdots\rangle}$ rekurzivan skup, te da na tom skupu imamo izračunljivu funkciju koja nam na neki način daje originalni $\vec x$ iz kojeg je pojedini kod dobiven. Za taj dokaz potrebno nam je ponešto teorije brojeva, no prije toga samo precizirajmo u kakvom obliku tražimo naš inverz.
 
 Recimo odmah da tražimo primitivno rekurzivne, dakle totalne funkcije. Njihovo djelovanje će nas zanimati samo na skupu $\f{Seq}$: bit će parcijalno specificirano, iako naravno, kad damo algoritme, moći će se izračunati u svakom prirodnom broju.
 
@@ -244,7 +244,7 @@ odakle slijedi (primitivna) rekurzivnost od $\f G$, iz (primitivne) rekurzivnost
 Napokon možemo dokazati primitivnu rekurzivnost slike kodiranja.
 
 \begin{korolar}[{name=[primitivna rekurzivnost slike kodiranja konačnih nizova]}]\label{kor:Seqprn}
-    Relacija $\f{Seq}^1:=\im{\langle\,\cdots\rangle}$ je primitivno rekurzivna.
+    Relacija $\f{Seq}^1:=\im{\langle\cdots\rangle}$ je primitivno rekurzivna.
 \end{korolar}
 \begin{proof}
 Formalnije,  \begin{equation}
@@ -266,7 +266,7 @@ Za $c=\langle\rangle=1$, također vrijedi $\overline{\f{part}}\bigl(1,\f{lh}(1)\
 Sada primitivna rekurzivnost slijedi na uobičajeni način: prema propoziciji~\ref{prop:lhpartprn} funkcija $\f{part}$ je primitivno rekurzivna, prema lemi~\ref{lm:povijestrek} je tada i $\overline{\f{part}}$ primitivno rekurzivna, a onda je $\chi_{\f{Seq}}=\chi_\eq\circ\bigl(\f I_1^1,\overline{\f{part}}\circ(\f I_1^1,\f{lh})\bigr)$ simbolička definicija karakteristične funkcije od $\f{Seq}$, iz koje se vidi da je ona primitivno rekurzivna.
 \end{proof}
 
-Time smo u potpunosti opisali kodiranje skupa $\N^*$, koje ćemo kasnije koristiti na brojnim mjestima. Što možemo njime? Rekli smo da nam kodiranje pruža mogućnost rada s kodiranim skupom kao \emph{klasom}, gdje konstruktori i komponente pružaju mo\-guć\-nost pisanja svih ostalih metoda. Striktno, ulogu konstruktora za $\N^*$ igra familija funkcija $\f{Code}^k,k\in\N_+$, dinamizirana kroz operator povijesti, a ulogu komponenata funkcije $\f{lh}$ i $\f{part}$. Ideju da sad sve metode klase $\N^*$ možemo napisati pomoću tih funkcija, možemo shvatiti kao da je $\N^*$\! \emph{apstraktni tip podataka}, čija konkretna implementacija (umnožak prim-brojeva potenciranih sljedbenicima elemenata niza) nam nije bitna, dok god koristimo $\langle\,\cdots\rangle$ odnosno $\overline{\cdots}$, te $\f{lh}$ i $\f{part}$ prema njihovoj specifikaciji. Pogledajmo jedan jednostavni primjer.
+Time smo u potpunosti opisali kodiranje skupa $\N^*$, koje ćemo kasnije koristiti na brojnim mjestima. Što možemo njime? Rekli smo da nam kodiranje pruža mogućnost rada s kodiranim skupom kao \emph{klasom}, gdje konstruktori i komponente pružaju mo\-guć\-nost pisanja svih ostalih metoda. Striktno, ulogu konstruktora za $\N^*$ igra familija funkcija $\f{Code}^k,k\in\N_+$, dinamizirana kroz operator povijesti, a ulogu komponenata funkcije $\f{lh}$ i $\f{part}$. Ideju da sad sve metode klase $\N^*$ možemo napisati pomoću tih funkcija, možemo shvatiti kao da je $\N^*$\! \emph{apstraktni tip podataka}, čija konkretna implementacija (umnožak prim-brojeva potenciranih sljedbenicima elemenata niza) nam nije bitna, dok god koristimo $\langle\cdots\rangle$ odnosno $\overline{\cdots}$, te $\f{lh}$ i $\f{part}$ prema njihovoj specifikaciji. Pogledajmo jedan jednostavni primjer.
 
 \begin{primjer}[{name=[konkatenacija konačnih nizova]}]\label{pr:concat}
 \emph{Konkatenacija} je preslikavanje  $concat:\N^*\times\N^*\to\N^*$, zadano s
@@ -551,7 +551,7 @@ Evo i jednog statičkog primjera: u primjeru~\ref{pr:flat} naveden je RAM-progra
 Taj kod ćemo koristiti u kasnijim primjerima.
 \end{primjer}
 
-Injektivnost preslikavanja $\kprog{\cdots}$ slijedi direktno iz injektivnosti od $\kins{\cdots}$ i $\langle\,\cdots\rangle$: dva različita programa se razlikuju ili po duljini (pa njihovi kodovi imaju različit $\f{lh}$), ili u nekoj instrukciji, recimo onoj na rednom broju $i$ (pa njihovi kodovi imaju različit $\f{part}$ na mjestu $i$, jer je kodiranje instrukcija injektivno).
+Injektivnost preslikavanja $\kprog{\cdots}$ slijedi direktno iz injektivnosti od $\kins{\cdots}$ i $\langle\cdots\rangle$: dva različita programa se razlikuju ili po duljini (pa njihovi kodovi imaju različit $\f{lh}$), ili u nekoj instrukciji, recimo onoj na rednom broju $i$ (pa njihovi kodovi imaju različit $\f{part}$ na mjestu $i$, jer je kodiranje instrukcija injektivno).
 
 \begin{lema}[{name=[primitivna rekurzivnost slike kodiranja RAM-programa]}]
     Slika kodiranja RAM-programa, $\f{Prog}^1:=\im{\,\kprog{\cdots}}=\{\kprog P\mid P\in\mathscr Prog\}$, primitivno je rekurzivna.
@@ -711,7 +711,7 @@ Funkcije $\f H_1$ i $\f H_2$ su primitivno rekurzivne po teoremu o grananju~\ref
 \end{align}
 dobivene simultanom primitivnom rekurzijom iz primitivno rekuzivnih funkcija $\f G_1$, $\f G_2$, $\f H_1$ i $\f H_2$, te su primitivno rekurzivne po propoziciji~\ref{prop:simultrek}.
 
-    Dokažimo da doista ispunjavaju navedenu parcijalnu specifikaciju. U tu svrhu, neka je $\vec x$ neprazni konačni niz, $P$ RAM-program, te $x$ i $e$ njihovi kodovi redom. Tvrdnju dokazujemo indukcijom po $n$, broju koraka. Za $n=0$, $\f{Count}(x,e,n)=0$, što je po definiciji vrijednost programskog brojača nakon $0$ koraka izračunavanja. Također, iz leme~\ref{lm:startprn} slijedi da je $\f{Reg}(x,e,0)$ kod stanja registara na početku izračunavanja.
+    Dokažimo da doista ispunjavaju navedenu parcijalnu specifikaciju. U tu svrhu, neka je $\vec x$ neprazni konačni niz, $P$ RAM-program, te $x$ i $e$ njihovi kodovi redom. Tvrdnju dokazujemo indukcijom po broju koraka $n$. Za $n=0$, $\f{Count}(x,e,n)=0$, što je po definiciji vrijednost programskog brojača nakon $0$ koraka izračunavanja. Također, iz leme~\ref{lm:startprn} slijedi da je $\f{Reg}(x,e,0)$ kod stanja registara na početku izračunavanja.
 
 Pretpostavimo da je parcijalna specifikacija zadovoljena nakon $n$ koraka, i pogledajmo što se događa u ($n+1$).\ koraku. Ako je konfiguracija $c_n$ (nakon $n$ koraka) završna, tada je po pretpostavci indukcije $\f{Count}(x,e,n)=c_n(\textsc{pc})=\f{lh}(e)$, te ne vrijedi uvjet grananja u definiciji $\f H_2$, pozvanoj  iz~\eqref{eq:stepCount}. Također je prema propoziciji~\ref{prop:lhpartprn} $e[\f{lh}(e)]=0\notin\f{Ins}$, što znači da funkcija $\f H_1$ vraća nepromijenjen kod stanja registara (ne vrijedi ni $Up$ ni $Down$ u~\eqref{eq:NextRegdef}). Iz toga je $\f{Reg}(x,e,n+1)=\f{Reg}(x,e,n)$ i $\f{Count}(x,e,n+1)=\f{Count}(x,e,n)$, što i treba biti jer je $c_{n+1}=c_n$.
 
@@ -757,8 +757,8 @@ Za primitivnu rekurzivnost: jednočlana relacija $\{\langle\rangle\}=\{1\}$ je p
 
 Za specifikaciju, smjer slijeva nadesno, raspetljavanjem definicije od $\f{Final}(x,e,n)$ vidimo da mora vrijediti:
 \begin{itemize}
-    \item $\f{Seq}(x)$, dakle $x=\langle\vec x\rangle$ za neki $\vec x\in\N^*$, jer je $\f{Seq}=\im{\langle\,\cdots\rangle}$;
-    \item $x\ne1=\langle\rangle$, dakle $\vec x$ je neprazan, jer je $\langle\,\cdots\rangle$ injekcija;
+    \item $\f{Seq}(x)$, dakle $x=\langle\vec x\rangle$ za neki $\vec x\in\N^*$, jer je $\f{Seq}=\im{\langle\cdots\rangle}$;
+    \item $x\ne1=\langle\rangle$, dakle $\vec x$ je neprazan, jer je $\langle\cdots\rangle$ injekcija;
     \item $\f{Prog}(e)$, dakle $e=\kprog{P}$ za neki RAM-program $P$, jer je $\f{Prog}=\im{\kprog{\cdots}}$;
     \item $\f{Count}(x,e,n)\eq\f{lh}(e)$, što prema lemi~\ref{lm:RegCountprn} (koju možemo primijeniti zbog prethodne tri stavke) znači da je $n$-ta konfiguracija u $P$-izračunavanju s $\vec x$ završna --- iz čega slijedi da ono stane, te je prvi indeks završne konfiguracije u izračunavanju manji ili jednak $n$.
 \end{itemize}

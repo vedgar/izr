@@ -759,7 +759,7 @@ Na neki način, do na nezgodnu činjenicu da je $\mathcal P(\mathscr Comp_k)$ ne
 
 % \subsection{Invarijantnost}
 
-Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo %recimo skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi oblika $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
+Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo recimo %skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi oblika $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
 %
 %Dobro, uzmimo onda neki manji skup,
 recimo jednočlan skup $\{1\}$. On je svakako rekurzivan (lema~\ref{lm:r1prn}), ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili $1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
@@ -767,7 +767,7 @@ recimo jednočlan skup $\{1\}$. On je svakako rekurzivan (lema~\ref{lm:r1prn}), 
 Dakle, skupovi indeksa nisu bilo kakvi skupovi prirodnih brojeva. Oni moraju imati specijalno svojstvo \emph{invarijantnosti} na relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma. 
 
 \begin{primjer}[{name=[Sortiranje kao jedna funkcija s raznim implementacijama]}]
-    Recimo, mogli bismo zamisliti funkciju $\f{sort}^1:\f{Seq}\to\f{Seq}$ koja sortira konačne nizove, zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
+    Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\!:\f{Seq}\to\f{Seq}$ koja sortira konačne nizove, zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
 \begin{align}
     \f{tail}(s)&:\simeq\mu t(\kr{s[0]}*t=s)\\
     \f{min}(s)&:\simeq\mu n\bigl(\exists i<\f{lh}(s)\bigr)(s[i]=n)\\
@@ -851,7 +851,7 @@ U oba slučaja došli smo do kontradikcije, pa pod pretpostavkom da je $S$ rekur
 
 Riceov teorem smo izrekli u "pozitivnom" obliku --- no on se češće koristi "negativno".
 
-\begin{korolar}[{name=[nerekurzivnost netrivijalnog $k$-invarijantnog skupa brojeva]}]
+\begin{korolar}[{name=[nerekurzivnost netrivijalnog $k$-invarijantnog skupa brojeva]}]\label{kor:Rice!rek}
 Neka je $S\subset\N$ neprazan skup koji je $k$-invarijantan za neki $k\in\N_+$. Tada $S$ nije rekurzivan.
 \end{korolar}
 \begin{proof}
@@ -862,7 +862,7 @@ Ovo je samo obrat po kontrapoziciji teorema~\ref{tm:Rice}.
 Neka je $k\in\N_+$, i \,$\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Tada $\mathcal F$ nije odlučiv.
 \end{korolar}
 \begin{proof}
-Označimo $S:=\kins{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\ne\kins{\emptyset}=\emptyset$ i $S\ne\kins{\mathscr Comp_k}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po prethodnom korolaru $S$ nije rekurzivan.
+    Označimo $S:=\kins{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\ne\kins{\emptyset}=\emptyset$ i $S\ne\kins{\mathscr Comp_k}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po korolaru~\ref{kor:Rice!rek} $S$ nije rekurzivan, što znači da $\mathcal F$ nije odlučiv.
 \end{proof}
 
 \begin{korolar}[{name=[neodlučivost netrivijalnih semantičkih svojstava]}]

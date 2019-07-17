@@ -445,7 +445,7 @@ Vrlo je slična stvar i u logici prvog reda: $x_2$ i $x_{58}$ su različite indi
 
 Mogli bismo dakle doslovno tako raditi, osim što je dekadski zapis supskripta nespretan. Već smo mnogo puta jezično prikazivali prirodne brojeve u unarnom zapisu, zašto ne i ovdje? Štoviše, tradicionalna matematika već poznaje taj zapis u obliku (recimo za varijable) $x$, $x'$, $x''$, $x'''$,~\ldots\ --- što nije ništa drugo nego prebrojiv skup individualnih varijabli koji smo već promatrali, samo nad jednostavnijom abecedom $\{x,'\!\}$. Isti pristup upotrijebit ćemo za konstantske ($c$, $c'$, $c''$,~\ldots), funkcijske ($f$, $f'$,~\ldots) i relacijske ($R$, $R'$,~\ldots) simbole.
 
-Ostatak alfabeta logike prvog reda je konačan, i možemo ga jednostavno ubaciti u našu abecedu, ali radi jednostavnosti uzet ćemo minimalan skup veznika i kvantifikatora $\{\lnot,\to,\forall\}$ (tzv.\ \emph{osnovni jezik} --- pogledajte~\cite{skr:VukML} za obrazloženje). Još moramo imati zarez i zagrade za konstrukciju složenih terma i atomarnih formula, a zagrade ćemo (vanjske) koristiti i pri pisanju kondicionala --- negacija i univerzalna kvantifikacija su prefiksni operatori, i smatramo ih operatorima višeg prioriteta od kondicionala, tako da njima ne trebamo pisati zagrade.
+Ostatak alfabeta logike prvog reda je konačan, i možemo ga jednostavno ubaciti u našu abecedu, ali radi jednostavnosti uzet ćemo minimalan skup veznika i kvantifikatora $\{\lnot,\to,\forall\}$ (tzv.\ \emph{osnovni jezik} --- pogledajte~\cite[str.\ 124]{skr:VukML} za obrazloženje). Još moramo imati zarez i zagrade za konstrukciju složenih terma i atomarnih formula, a zagrade ćemo (vanjske) koristiti i pri pisanju kondicionala --- negacija i univerzalna kvantifikacija su prefiksni operatori, i smatramo ih operatorima višeg prioriteta od kondicionala, tako da njima ne trebamo pisati zagrade.
 
 U abecedu ćemo dodati i separator \t\#, koji ćemo koristiti u radu s konačnim nizovima formula --- najvažniji primjer bit će \emph{dokazi}, odnosno izvodi iz nekog konačnog (ili barem odlučivog) skupa aksioma.
 
@@ -556,9 +556,9 @@ Naravno, koristili smo propoziciju~\ref{pp:F1odl} i teorem~\ref{tm:oikr}, te či
 Što se univerzalnog zatvorenja tiče, bitno je uočiti da zapravo uopće ne moramo nalaziti slobodne varijable u formuli --- s obzirom na to da je $\forall x\varphi$ ekvivalentna s $\varphi$ ako $x$ nije slobodna u $\varphi$, dovoljno je naći neki konačni nadskup skupa slobodnih varijabli. A kako za svaku varijablu $x_n$ koja se pojavljuje (slobodno ili vezano) u $\varphi$ vrijedi da je odgovarajuća riječ $\t{x{}'{}'}\dotsm\t'$ podriječ duljine $n+1$ od $\varphi$, slijedi da mora biti $n<n+1\le\dulj\varphi=\f{slh}(\kr{\varphi},12)$. Dakle, ako nam je zadan kod $c$ formule $\varphi$, dovoljno je ispred "nalijepiti" samo one kvantifikatore $\forall x_i$ za $i<\f{slh}(c,12)$, i možemo biti sigurni da smo dobili univerzalno zatvorenje.
 
 \noindent\begin{align}
-    \f{UnivQuant}(i)&:=\kr{\,\forall x_i}=\kr{\,\forall\,}\conc{}\kr{x_i}=11\conc{}\f{Var}(i)\\
+    \f{UnivQuant}(i)&:=\kr{\forall x_i}=\kr{\forall}\conc{}\kr{x_i}=11\conc{}\f{Var}(i)\\
     \f{UnivQuants}(0)&:=\kr{\varepsilon}=0\\
-    \f{UnivQuants}(i+1)&:=\kr{\,\forall x_0\forall x_1\forall x_2\dotsm\forall x_i}=\f{UnivQuants}(i)\conc{}\f{UnivQuant}(i)\\
+    \f{UnivQuants}(i+1)&:=\kr{\forall x_0\forall x_1\forall x_2\dotsm\forall x_i}=\f{UnivQuants}(i)\conc{}\f{UnivQuant}(i)\\
     \f{UnivClosure}(c)&:=\f{UnivQuants}\bigl(\f{slh}(c,12)\bigr)\conc{}\,c
 \end{align}
 Sada je funkcija $\f{UnivQuant}$ primitivno rekurzivna po lemi~\ref{lm:lexF1} i propoziciji~\ref{pp:concprn}, a onda je $\f{UnivQuants}$ primitivno rekurzivna po propoziciji~\ref{prop:F1prn}, te je $\f{UnivClosure}$ primitivno rekurzivna po propoziciji~\ref{pp:concprn} i lemi~\ref{lm:ldcpprn}.
@@ -571,7 +571,7 @@ Pogledajmo malo detaljnije kako u osnovnom jeziku izgleda formula $\varphi_u$ iz
 
 Preciznije, neka je $P_0=[t.\;I_t]_{t<n}$. Za svaki $t<n$ imamo u $\Gamma_u$ jednu formulu $\iota_t$, tako da se njihova univerzalna zatvorenja, obrnutim redom, prebacuju s desne strane~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je u tom trenutku na desnoj stani označimo s $\psi$), i nju možemo prebaciti lijevo bez univerzalnog zatvorenja jer je ona rečenica. Ključno je da formula $\psi$, koliko god ogromna bila, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će jednostavno biti neka jako velika konstanta.
 
-    Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsb(\overline{\iota_{n-1}}\to\zeta)\dotsb)\bigr)\bigr)$\text.
+    Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsm\,(\overline{\iota_{n-1}}\to\zeta)\,\dotsm)\bigr)\bigr)$\text.
 Uz očite reprezentacije ($\mathsf0$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, te $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), lako je svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Jedino što je još potrebno su kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili jednostavno proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. U praksi je lakše koristiti ovaj drugi pristup.
 
 \begin{primjer}[{name=[zaustavljanje RAM-izračunavanja kao valjanost jedne formule]}]
@@ -616,7 +616,7 @@ Funkcija $\f{Phi}$, koja svakom prirodnom broju $u$ pridružuje kod formule $\va
 \begin{proof}
     Za početak, označimo s $psi:=\kr{\psi}$ kod formule $\psi$ koja nastane prebacivanjem svih $\overline{\iota_i}$ na desnu stranu relacije $\models$. Taj broj ne ovisi o $u$.
 
-Drugo, označimo s $\f{Pi}$ funkciju koja preslikava $u\mapsto\kr{\pi_u}$. Ta funkcija je primitivno rekurzivna, jer je funkcija $\f{Numeral}$, koja preslikava $u\mapsto\kr{\,\overline u\,}$, primitivno rekurzivna.
+Drugo, označimo s $\f{Pi}$ funkciju koja preslikava $u\mapsto\kr{\pi_u}$. Ta funkcija je primitivno rekurzivna, jer je funkcija $\f{Numeral}$, koja preslikava $u\mapsto\kr{\overline u}$, primitivno rekurzivna.
 \begin{align}
     \f{Numeral}(u)&:=\kr{\t{f(f(}\dotsm\t{f(c)}\dotsm\t{))}}=\f{Repeat}(43,u)\conc{}2\conc{}\f{Repeat}(8,u)\\
     \f{Pi}(u)&:=\kr{\pi_u}=\kr{R_0(\mathsf0,\overline u,\mathsf0,\dotsc,\mathsf0)}=
