@@ -498,14 +498,14 @@ Izraz "parcijalno rekurzivna relacija" je beskoristan: svaka karakteristična fu
 Skup rekurzivnih funkcija zatvoren je na kompoziciju.
 \end{lema}
 \begin{proof}
-Neka su $k,l\in\N_+$, te $\f G_1^k$,~\ldots, $\f G_l^k$ i $\f H^l$ rekurzivne funkcije. Tada su one po definiciji totalne i parcijalno rekurzivne. Skup parcijalno rekurzivnih funkcija je zatvoren na kompoziciju, pa je $H\circ(G_1,\dotsc,G_l)$ parcijalno rekurzivna, no prema propoziciji~\ref{prop:comptot}, ona je i totalna --- dakle rekurzivna funkcija.
+Neka su $k,l\in\N_+$, te $\f G_1^k$,~\ldots, $\f G_l^k$ i $\f H^l$ rekurzivne funkcije. Tada su one po definiciji totalne i parcijalno rekurzivne. Skup parcijalno rekurzivnih funkcija je zatvoren na kompoziciju, pa je $\f H\circ(\f G_1,\dotsc,\f G_l)$ parcijalno rekurzivna, no prema propoziciji~\ref{prop:comptot}, ona je i totalna --- dakle rekurzivna funkcija.
 \end{proof}
 
 \begin{lema}[{name=[zatvorenost skupa rekurzivnih funkcija na primitivnu rekurziju]}]\label{lm:prrek}
 Skup rekurzivnih funkcija zatvoren je na primitivnu rekurziju.
 \end{lema}
 \begin{proof}
-Neka je $k\in\N_+$, te $\f G^k$ i $\f H^{k+2}$ rekurzivne funkcije. Jer su $\f G$ i $\f H$ totalne, postoji $\f G\pr\f H$, i ona je totalna po napomeni~\ref{nap:prtot}. Također, kako su $\f G$ i $\f H$ parcijalno rekurzivne, a skup parcijalno rekurzivnih funkcija je po definiciji zatvoren na primitivnu rekurziju, $\f G\pr\f H$ je parcijalno rekurzivna. Iz toga dvojeg slijedi: $\f G\pr\f H$ je rekurzivna funkcija.
+    Neka je $k\in\N_+$, te $\f G^k$ i $\f H^{k+2}$ rekurzivne funkcije. Jer su $\f G$ i $\f H$ totalne, postoji $\f F^{k+1}:=\f G\pr\f H$, i ona je totalna po napomeni~\ref{nap:prtot}. Također, kako su $\f G$ i $\f H$ parcijalno rekurzivne, a skup parcijalno rekurzivnih funkcija je po definiciji zatvoren na primitivnu rekurziju, $\f F$ je parcijalno rekurzivna. Iz toga dvojeg slijedi: $\f F$ je rekurzivna funkcija.
 \end{proof}
 
 \begin{korolar}[{name=[rekurzivnost primitivno rekurzivnih funkcija]}]\label{kor:prnrek}
@@ -515,8 +515,8 @@ Svaka primitivno rekurzivna funkcija je rekurzivna.
 Direktno po svojstvu najmanjeg skupa: sve inicijalne funkcije su totalne po napomeni~\ref{nap:inittot}, a parcijalno su rekurzivne po definiciji, dakle rekurzivne su. Sada samo treba primijeniti leme~\ref{lm:comprek} i~\ref{lm:prrek}.
 \end{proof}
 
-\begin{korolar}[{name=[degenerirana primitivna rekurzija iz rekurzivnih funkcija]}]\label{kor:F1rek}
-Neka je $a\in\N$, te $\f H^2$ rekurzivna funkcija. Tada je funkcija $a\pr\f H$ također rekurzivna.
+\begin{korolar}[{name=[degenerirana primitivna rekurzija iz rekurzivne funkcije]}]\label{kor:F1rek}
+Neka je $a\in\N$, te\, $\f H^2$ rekurzivna funkcija. Tada je funkcija $a\pr\f H$ također rekurzivna.
 \end{korolar}
 \begin{proof}
 Iz dokaza propozicije~\ref{prop:F1prn}
@@ -726,7 +726,7 @@ Sada ćemo nešto reći o višestrukim zbrojevima, umnošcima, unijama i presjec
 Za svaki $k\in\N_+$, funkcije $\f{add}^k$ i\, $\f{mul}^k$, zadane s
 \begin{align}
     \f{add}(x_1,x_2,\dotsc,x_k)&:=x_1+x_2+\dotsb+x_k\text,\\
-    \f{mul}(x_1,x_2,\dotsc,x_k)&:=x_1\cdot x_2\dotsm x_k\text,
+    \f{mul}(x_1,x_2,\dotsc,x_k)&:=x_1\!\cdot x_2\mathbin{\dotsb}x_k\text,
 \end{align}
 primitivno su rekurzivne.
 \end{lema}
@@ -749,9 +749,9 @@ Neka su $k,l\in\N_+$, te $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ (primitivno)
 \end{propozicija}
 \begin{proof}
 Za presjek, koristimo istu tehniku kao u dokazu propozicije~\ref{prop:vezn} za $\f Q_1$, samo umjesto funkcije $\f f_1=\f{mul}^2$ koristimo $\f{mul}^l$. Konkretno, tvrdimo da je \begin{equation}
-    \chi_{\bigcap_{i=1}^l\!\f R_i}=\chi_{\f R_1}\cdot\chi_{\f R_2}\dotsm\chi_{\f R_l}=\f{mul}^l\circ(\chi_{\f R_1},\chi_{\f R_2},\dotsc,\chi_{\f R_l})
+    \chi_{\bigcap_{i=1}^l\!\f R_i}=\chi_{\f R_1}\!\cdot\chi_{\f R_2}\dotsb\,\chi_{\f R_l}=\f{mul}^l\circ(\chi_{\f R_1},\chi_{\f R_2},\dotsc,\chi_{\f R_l})
 \end{equation}
---- doista, ako je $\vec x$ u presjeku, imamo jednakost $1=1\cdot1\dotsm1$, a ako nije, tada po De Morganovom pravilu nije u nekoj $\f{R}_i$, pa na lijevoj strani stoji $0$, a na desnoj je umnožak u kojem je barem jedan faktor jednak $0$, te jednakost vrijedi.
+    --- doista, ako je $\vec x$ u presjeku, imamo jednakost $1=1\cdot1\mathbin{\dotsb}1$, a ako nije, tada po De Morganovom pravilu nije u nekoj $\f{R}_i$, pa na lijevoj strani stoji $0$, a na desnoj je umnožak u kojem je barem jedan faktor jednak $0$, te jednakost vrijedi.
 
 Za uniju, možemo opet iskoristiti De Morganovo pravilo i propoziciju~\ref{prop:kompl}, ali možemo i upotrijebiti drugačiju tehniku, koja će nam biti korisna kasnije. Naime, u našem skupu nema negativnih brojeva, te je zbroj $0$ jedino ako su svi pribrojnici $0$ --- odnosno, zbroj je pozitivan ako i samo ako je neki pribrojnik pozitivan. To znači da ako u širem smislu shvatimo sve pozitivne prirodne brojeve (a ne samo broj $1$) kao istinite, $l$-struka unija jednostavno odgovara funkciji $\f{add}^l$ --- odnosno preciznije, $\chi_{\N_+}\!\circ\f{add}^l$, jer želimo sve pozitivne brojeve preslikati natrag u $1$. Dakle,
 \begin{equation}

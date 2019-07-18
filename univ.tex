@@ -32,7 +32,7 @@ Ipak, mala modifikacija tog postupka dat će nam kodiranje. Zapravo, jedini prob
 \begin{definicija}[{name=[kodiranje konačnih nizova prirodnih brojeva]}]
 Za $i\in\N$, sa $p_i$ označimo $i$-ti po redu prim-broj (počevši od $p_0=2$). Definiramo $\langle\rangle:=1$, te za svaki $k\in\N_+$ definiramo funkciju
 \begin{equation}\label{eq:Codek}
-    \f{Code}^k(x_1,x_2,\dotsc,x_k):=\langle x_1,x_2,\dotsc,x_k\rangle:=2^{x_1+1}\cdot3^{x_2+1}\dotsm p_{k-1}^{x_k+1}\text.
+    \f{Code}^k(x_1,x_2,\dotsc,x_k):=\langle x_1,x_2,\dotsc,x_k\rangle:=2^{x_1+1}\cdot3^{x_2+1}\mathbin{\dotsm}p_{k-1}^{x_k+1}\text.
 \end{equation}
 Time je definirana funkcija $\langle\cdots\rangle:\N^*\to\N$.
 \end{definicija}
@@ -168,9 +168,9 @@ Kako uopće znamo da je ta funkcija \emph{totalna}, odnosno da možemo pomoću n
 \end{equation}
 Upravo napisani izraz zapravo kaže da je $\f{nextprime}^1$ \emph{rekurzivna} funkcija (parcijalno je rekurzivna jer je dobivena minimizacijom konjunkcije dvije rekurzivne relacije, a totalna je zbog beskonačnosti skupa $\mathbb P$), pa je i $\f{prime}$ rekurzivna po korolaru~\ref{kor:F1rek}.
 
-Za primitivnu rekurzivnost, moramo nekako ograničiti minimizaciju, odnosno moramo "isprogramirati" dokaz da je $\mathbb P$ beskonačan. Uzmimo Euklidov dokaz: ako imamo $p_0,p_1,\dotsc,p_n\in\mathbb P$, novi prim-broj možemo dobiti tako da potražimo prim-djelitelj broja $m:=p_0\cdot p_1\dotsm p_n+1>1$. Aha! Znamo da je djelitelje pozitivnog broja dovoljno tražiti do samog tog broja, dakle samo trebamo primitivno rekurzivno izračunati $m$ iz $n$ i $p_n$. Tu bismo mogli upotrijebiti primorijel iz primjera~\ref{pr:primorijel} --- konkretno, $m=\f{Sc}\bigl(\overline{\f Z}\bigl(\f{Sc}(n)\bigr)\bigr)$ --- ali nažalost još ne znamo da je funkcija $\overline{\f Z}$ primitivno rekurzivna, jer nismo dokazali da povijest čuva primitivnu rekurzivnost. I to s razlogom: pokazat će se da za tu lemu treba rezultat koji upravo dokazujemo.
+    Za primitivnu rekurzivnost, moramo nekako ograničiti minimizaciju, odnosno moramo "isprogramirati" dokaz da je $\mathbb P$ beskonačan. Uzmimo Euklidov dokaz: ako imamo $p_0,p_1,\dotsc,p_n\in\mathbb P$, novi prim-broj možemo dobiti tako da potražimo prim-djelitelj broja $m:=p_0\cdot p_1\mathbin{\dotsm}p_n+1>1$. Aha! Znamo da je djelitelje pozitivnog broja dovoljno tražiti do samog tog broja, dakle samo trebamo primitivno rekurzivno izračunati $m$ iz $n$ i $p_n$. Tu bismo mogli upotrijebiti primorijel iz primjera~\ref{pr:primorijel} --- konkretno, $m=\f{Sc}\bigl(\overline{\f Z}\bigl(\f{Sc}(n)\bigr)\bigr)$ --- ali nažalost još ne znamo da je funkcija $\overline{\f Z}$ primitivno rekurzivna, jer nismo dokazali da povijest čuva primitivnu rekurzivnost. I to s razlogom: pokazat će se da za tu lemu treba rezultat koji upravo dokazujemo.
 
-Kako se izvući? Spas leži u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Naime, ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. Sada je lako: umjesto primorijela, možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a očito je $p_n!\ge p_0\cdot p_1\dotsm p_n$ (jer je $p_n!$ umnožak svih brojeva na desnoj strani, i eventualno još nekih, koji su veći ili jednaki $1$).
+    Kako se izvući? Spas leži u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Naime, ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. Sada je lako: umjesto primorijela, možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a očito je $p_n!\ge p_0\cdot p_1\mathbin{\dotsm}p_n$ (jer je $p_n!$ umnožak svih brojeva na desnoj strani, i eventualno još nekih, koji su veći ili jednaki $1$).
 \begin{equation}
     \f{nextprime}(p)=(\mu q\le p!+1)(q\in\mathbb P\land q>p)%\text,
 \end{equation}
@@ -209,7 +209,7 @@ c[i]:=\f{part}(c,i)&:=\f{pd}\bigl(\f{ex}(c,i)\bigr)\text,
 \end{align}
 zadovoljavaju sve uvjete. Prije svega, primitivno su rekurzivne: $\f{lh}$ je dobivena og\-ra\-ni\-če\-nim brojenjem primitivno rekurzivne relacije do primitivno rekurzivne granice, a $\f{part}$ je jednostavno kompozicija $\f{pd}\circ\f{ex}$.
 
-Što se tiče tvrdnje~\ref{stav:lh}, prema definiciji $\f{lh}$ broji prim-djelitelje od $c$ (kako je $\f{prime}$ strogo rastuća i $0<p_0$, vrijedi $i<p_i\le c$, pa je dovoljno brojiti do $c$), a kako je $c=\langle\vec x\rangle=2^{x_1+1}\cdot3^{x_2+1}\dotsm p_{k-1}^{x_k+1}$, te su svi napisani eksponenti pozitivni, $c$ ima točno $k$ prim-djelitelja.
+    Što se tiče tvrdnje~\ref{stav:lh}, prema definiciji $\f{lh}$ broji prim-djelitelje od $c$ (kako je $\f{prime}$ strogo rastuća i $0<p_0$, vrijedi $i<p_i\le c$, pa je dovoljno brojiti do $c$), a kako je $c=\langle\vec x\rangle=2^{x_1+1}\cdot3^{x_2+1}\mathbin{\dotsm}p_{k-1}^{x_k+1}$, te su svi napisani eksponenti pozitivni, $c$ ima točno $k$ prim-djelitelja.
 
 Za tvrdnju~\ref{stav:part<k}, neka je $i<k$ proizvoljan. Tada je eksponent od $p_i$ u rastavu $c>0$ na prim-faktore upravo $\f{ex}(c,i)=x_{i+1}+1$, te je $c[i]=\f{pd}(x_{i+1}+1)=x_{i+1}$.
 
@@ -436,7 +436,7 @@ Pokušajmo sada dokazati da je slika tog kodiranja (nazovimo je $\f{PF}$) primit
 \end{equation}
 Dakle, pretpostavimo da imamo $n$, i razmislimo kako bismo odlučili je li kod neke formule. Očito, to će vrijediti ako i samo ako je ili kod propozicijske varijable, ili kod negacije, ili kod kondicionala. Prvi disjunkt možemo napisati kao $\exists i(n\eq\langle0,i\rangle)$, ali to nije dovoljno dobro jer je kvantifikacija neograničena. Možemo li je ograničiti? Svakako. Lako je vidjeti da je svaki element konačnog niza manji od koda tog niza:
 \begin{equation}\label{eq:elem<kod}
-    x_i<x_i+1<2^{x_i+1}=p_0^{x_i+1}\le p_i^{x_i+1}\le(\,\dotsm)\cdot p_i^{x_i+1}\cdot(\,\dotsm)=\langle\dotsc,x_i,\dotsc\rangle\text.
+    x_i<x_i+1<2^{x_i+1}=p_0^{x_i+1}\le p_i^{x_i+1}\le(\dotsb)\cdot p_i^{x_i+1}\cdot(\dotsb)=\langle\,\dotsc,x_i,\dotsc\rangle\text.
 \end{equation}
 Dakle, ako postoji takav $i$, on je sigurno manji od $n$, te prvi disjunkt možemo napisati u obliku ograničene kvantifikacije $(\exists i<n)(n\eq\langle0,i\rangle)$, što je primitivno rekurzivno.
 
@@ -546,7 +546,7 @@ Evo i jednog statičkog primjera: u primjeru~\ref{pr:flat} naveden je RAM-progra
     \kprog{Q^\flat}=\langle\kins{\decr12},\!\kins{\goto\;0},\!\kins{\decr22},\!\kins{\decr16},\!\kins{\incr0},\dotsc,\!\kins{\goto\;9}\rangle\\
     =\langle\langle1,\!1,\!2\rangle,\langle2,\!0\rangle,\langle1,\!2,\!2\rangle,\langle1,\!1,\!6\rangle,\langle0,\!0\rangle,\langle2,\!3\rangle,\langle1,\!2,\!9\rangle,\langle0,\!0\rangle,\langle2,\!6\rangle,\langle1,\!3,\!12\rangle,\langle0,\!0\rangle,\langle2,\!9\rangle\rangle=\\
     =\langle4\,500,24,13\,500,2\,812\,500,6,648,1\,054\,687\,500,6,\dotsc,6,472\,392\rangle=\\
-    =2^{4501}\cdot3^{25}\cdot5^{13501}\dotsm\,31^7\cdot37^{472393}=:e_0\text.
+    =2^{4501}\cdot3^{25}\cdot5^{13501}\mathbin{\dotsm}31^7\cdot37^{472393}=:e_0\text.
 \end{multline}
 Taj kod ćemo koristiti u kasnijim primjerima.
 \end{primjer}
@@ -825,7 +825,7 @@ Propozicija~\ref{prop:ramdet}, restringirana samo na izračunavanja koja stanu (
 \end{equation}
 ima funkcijsko svojstvo. Tada će i $\f{\hat T}^3:=\N Trace$ imati funkcijsko svojstvo. Cilj nam je dokazati da je $Trace$ izračunljiva, odnosno da je $\f{\hat T}$ primitivno rekurzivna.
 
-U skladu s napomenom u primjeru~\ref{pr:concat}, $Trace$ ćemo shvatiti kao ($k+2$)-mjesnu relaciju, tako da svaki $x_i$ shvatimo kao zasebni argument. To vodi na promatranje familije brojevnih relacija $\f T_k^{k+2},k\in\N_+$. A jednom kad dobijemo primitivnu rekurzivnost od $\f{\hat T}$, dobit ćemo i primitivnu rekurzivnost svih $\f T_k$, jer vrijedi
+U skladu s napomenom u primjeru~\ref{pr:concat}, $Trace$ ćemo shvatiti kao ($k+2$)-mjesnu relaciju, tako da svaki $x_i$ shvatimo kao zasebni argument. To vodi na promatranje familije relacija $\f T_k^{k+2},k\in\N_+$ --- a jednom kad dobijemo primitivnu rekurzivnost od $\f{\hat T}$, dobit ćemo i primitivnu rekurzivnost svih $\f T_k$, jer vrijedi
 \begin{equation}\label{eq:TkviadotT}
 \f T_k(\vec x,e,y)\Longleftrightarrow\f{\hat T}(\langle\vec x\rangle,e,y)\text,
 \end{equation}
@@ -835,7 +835,7 @@ dakle $\f T_k$ je dobivena iz $\f{\hat T}$ kompozicijom s $\f{Code}^k$ i koordin
 U primjeru~\ref{pr:makro} je naveden primjer makro-programa $Q$ i $Q$-izračunavanja s $(2,4)$, koje stane. Kako $Q^\flat$-izračunavanje s $(2,4)$ prolazi kroz ista stanja registara, možemo iz~\eqref{ml:Qstane} izračunati kod tog izračunavanja (iz definicije~\ref{def:makrolead} trebamo zanemariti prijelaze tipa~\ref{stav:carry}, jer oni ne odgovaraju nikakvim prijelazima RAM-stroja, kao i one tipa~\ref{stav:zav}, jer smo već stigli do završne konfiguracije):
 \begin{multline}
     c_0:=\langle5625,1875,1875,625,625,625,125,125,25,50,50,10,20,20,4,8,8,8,8\rangle=\\
-    =2^{5626}\cdot3^{1876}\cdot5^{1876}\cdot7^{626}\cdot11^{626}\cdot13^{626}\cdot17^{126}\dotsm61^9\cdot67^9\text.
+    =2^{5626}\cdot3^{1876}\cdot5^{1876}\cdot7^{626}\cdot11^{626}\cdot13^{626}\cdot17^{126}\mathbin{\dotsm}61^9\cdot67^9\text.
 \end{multline}
 Recimo, $c_0[6]=\f{part}(c_0,6)=\f{pd}\bigl(\f{ex}(c_0,6)\bigr)=\f{pd}(126)=125=5^3=\knk{0,0,3,0,\dotsc}$, jer nakon $6$ koraka $Q^\flat$-izračunavanja s $(2,4)$ u $\reg2$ bude broj $3$, a u svim ostalim registrima broj $0$.
 

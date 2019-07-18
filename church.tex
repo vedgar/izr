@@ -280,7 +280,7 @@ $\rhd$ Ako je to $i.\;\goto\;l$, definiramo
     \Gamma_{\vec u}&:=\{\pi_{\vec u}\}\cup\{\iota_i\mid i\in[0\dd n\rangle\}
 \shortintertext{i formulu}
 \label{eq:defzeta}
-    \zeta&:=\exists\,x_0\dotsm\exists\, x_{m-1}R_n(x_0,\dotsc,x_{m-1})\text.
+    \zeta&:=\exists\,x_0\,\dotsm\,\exists\, x_{m-1}R_n(x_0,\dotsc,x_{m-1})\text.
 \end{align}
 
 \subsection{Zaključivanje kao zaustavljanje}
@@ -571,7 +571,7 @@ Pogledajmo malo detaljnije kako u osnovnom jeziku izgleda formula $\varphi_u$ iz
 
 Preciznije, neka je $P_0=[t.\;I_t]_{t<n}$. Za svaki $t<n$ imamo u $\Gamma_u$ jednu formulu $\iota_t$, tako da se njihova univerzalna zatvorenja, obrnutim redom, prebacuju s desne strane~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je u tom trenutku na desnoj stani označimo s $\psi$), i nju možemo prebaciti lijevo bez univerzalnog zatvorenja jer je ona rečenica. Ključno je da formula $\psi$, koliko god ogromna bila, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će jednostavno biti neka jako velika konstanta.
 
-    Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsm\,(\overline{\iota_{n-1}}\to\zeta)\,\dotsm)\bigr)\bigr)$\text.
+    Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsb(\overline{\iota_{n-1}}\to\zeta)\dotsm)\bigr)\bigr)$\text.
 Uz očite reprezentacije ($\mathsf0$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, te $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), lako je svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Jedino što je još potrebno su kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili jednostavno proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. U praksi je lakše koristiti ovaj drugi pristup.
 
 \begin{primjer}[{name=[zaustavljanje RAM-izračunavanja kao valjanost jedne formule]}]
@@ -618,9 +618,9 @@ Funkcija $\f{Phi}$, koja svakom prirodnom broju $u$ pridružuje kod formule $\va
 
 Drugo, označimo s $\f{Pi}$ funkciju koja preslikava $u\mapsto\kr{\pi_u}$. Ta funkcija je primitivno rekurzivna, jer je funkcija $\f{Numeral}$, koja preslikava $u\mapsto\kr{\overline u}$, primitivno rekurzivna.
 \begin{align}
-    \f{Numeral}(u)&:=\kr{\t{f(f(}\dotsm\t{f(c)}\dotsm\t{))}}=\f{Repeat}(43,u)\conc{}2\conc{}\f{Repeat}(8,u)\\
+    \f{Numeral}(u)&:=\kr{\t{f(f(}\dotsb\t{f(c)}\dotsm\t{))}}=\f{Repeat}(43,u)\conc{}2\conc{}\f{Repeat}(8,u)\\
     \f{Pi}(u)&:=\kr{\pi_u}=\kr{R_0(\mathsf0,\overline u,\mathsf0,\dotsc,\mathsf0)}=
-    \kr{\t{R(c,}}\conc{}\kr{\overline u}\conc{}\kr{(\t{,c})^{m-2}}\conc{}\kr{\t)}=\notag\\
+    \kr{\,\t{R(c,}}\conc{}\kr{\overline u}\conc{}\kr{(\t{,c})^{m-2}}\conc{}\kr{\t)}=\notag\\
     &=7949\conc{}\f{Numeral}(u)\conc{}\f{Repeat}(62,m-2)\conc{}8\\
     \f{Phi}(u)&:=\kr{\varphi_u}=\kr{\t(\pi_u\!\,\t\textrightarrow\,\psi\t)}=7\conc{}\f{Pi}(u)\conc{}10\conc{}psi\conc{}8
 \end{align}
@@ -683,7 +683,7 @@ Postoji rečenica $\gamma\in\mathscr G\ddot o$ (\emph{G\"odelova rečenica}) koj
 Ključno je vidjeti da je jezik nad $\Sigma_{\log}$,
 \begin{equation}
     %Proof\bigl((\psi_i)_{i=0}^n,\psi\bigr):\Longleftrightarrow\text{$(\psi_i)_{i=0}^n$ je dokaz za formulu $\psi$,}
-    Proof:=\{\,\psi_0\t\#\psi_1\t\#\dotsm\t\#\psi_n\mid (\psi_i)_{i=0}^n\text{ je dokaz u logici prvog reda}\,\}\text,
+    Proof:=\{\,\psi_0\t\#\,\psi_1\t\#\,\dotsb\,\t\#\,\psi_n\mid (\psi_0,\psi_1,\dots,\psi_n)\text{ je dokaz u logici prvog reda}\,\}\text,
 \end{equation}
 odlučiv. To sigurno nećemo napraviti u potpunosti, ali sve osnovne ideje već imamo. Prvo, slično kao u točki~\ref{sec:stdstring}, možemo napraviti funkcije $\f{arg}'_i$, koje iz kodiranog \t\#-separiranog niza formula ekstrahiraju pojedinu formulu (zapravo njen kod). Dinamizacijom možemo napraviti i $(\f{arg}')^2$, pomoću koje onda možemo pričati o svim formulama u dokazu (i osigurati da su dijelovi između separatora doista formule). Sad je jasno da, kako bi takav niz bio u $Proof$, svaka formula u njemu mora biti ili instanca sheme aksioma (A1), (A2), (A3), (A4) ili (A5) (iz Hilbertovog računa predikata), ili pak mora biti dobivena modus ponensom ili generalizacijom iz neke prethodne formule.
 \begin{multline}
