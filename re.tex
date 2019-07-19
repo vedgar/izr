@@ -6,9 +6,9 @@ Vidjeli smo već nekoliko puta da domena izračunljive funkcije ne mora biti izr
 
 Pokušajmo ustanoviti što bi bio pandan parcijalnim funkcijama za relacije. Tražiti "parcijalnu karakterističnu funkciju" kao funkciju iz $\N$ u $bool$ je vjerojatno preslabo: korisnost parcijalno rekurzivnih funkcija je u tome što iako nisu definirane svuda, tamo gdje jesu definirane mogu poprimiti proizvoljne vrijednosti. Kad bismo čak i u slučaju da je funkcija definirana mogli dobiti samo jedan bit informacije, imali bismo tri moguća ishoda ($\mathit{true}$, $\mathit{false}$ i "ne znam") koji bi odgovarali četirima mogućim situacijama (u slučaju izostanka izlaza, ulaz i dalje može biti ili ne biti u skupu). Odnosno, parcijalna karakteristična funkcija nije jednoznačno određena skupom.
 
-Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan, i možemo zamišljati da je $\mathit{true}$, iako ćemo vidjeti u jednom trenutku da će biti korisno pretpostaviti da je zapravo $0$. Ono što jest bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Upravo napisanu ideju možemo formalizirati koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi}, te dijagram~\eqref{dia:alg}.
+Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan, i možemo zamišljati da je $\mathit{true}$, iako ćemo vidjeti u jednom trenutku da će biti korisno pretpostaviti da je zapravo $0$. Ono što jest bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Upravo napisanu ideju možemo formalizirati koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi} te dijagram~\eqref{dia:alg}.
 
-\begin{definicija}[{name=[rekurzivna prebrojivost]}]
+\begin{definicija}[{name=[rekurzivna prebrojivost]}]\label{def:re}
 Neka je $k\in\N_+$. Za brojevnu relaciju $R^k$ kažemo da je \emph{rekurzivno prebrojiva} ako postoji $\f F\in\mathscr Comp_k$ takva da je $R=\dom{\f F}$.
 \end{definicija}
 
@@ -23,7 +23,7 @@ Svaka rekurzivna relacija je rekurzivno prebrojiva.
 \end{propozicija}
 Ideja je jednostavna: ako imamo rekurzivnu karakterističnu funkciju, samo trebamo "zaboraviti" vrijednosti $0$ (ukloniti tu prasliku iz domene), i ostaviti samo vrijednosti $1$. Drugim riječima, trebamo restringirati $\chi_{\f R}$ na $\f R$.
 \begin{proof}
-Neka je $k\in\N$, i $\f R^k$ rekurzivna relacija. Tada je prema korolaru~\ref{kor:restrprek}, $\chi_{\f R}|_{\f R}$ parcijalno rekurzivna, te je očito $\dom{\chi_{\f R}|_{\f R}}=\dom{\chi_{\f R}}\cap\f R=\N^k\cap\f R=\f R$.
+Neka je $k\in\N$, i $\f R^k$ rekurzivna relacija. Tada je prema korolaru~\ref{kor:restrprek}, $\chi_{\f R}|_{\f R}$ parcijalno rekurzivna, a očito je $\dom{\chi_{\f R}|_{\f R}}=\dom{\chi_{\f R}}\cap\f R=\N^k\cap\f R=\f R$.
 \end{proof}
 
 No kad već pričamo o restrikciji, funkcija koju restringiramo je nebitna: s bilo kojom rekurzivnom funkcijom dobit ćemo istu domenu. Ponekad je zgodno fiksirati njene vrijednosti na $0$ --- usporedite s napomenom~\ref{nap:re0}.
@@ -39,10 +39,10 @@ Relacija je rekurzivno prebrojiva ako i samo ako je domena neke parcijalno rekur
 \end{proof}
 
 \begin{lema}[{name=[svedivost čuva rekurzivnu prebrojivost]}]\label{lm:re<re}
-Neka su $k,l\in\N_+$, te $R^k$ i $P^l$ relacije takve da je $R\preceq P$. Ako je $P$ rekurzivno prebrojiva, tada je i $R$ takva.
+Neka su $k,l\in\N_+$ te $R^k$ i $P^l$ relacije takve da je $R\preceq P$. Ako je $P$ rekurzivno prebrojiva, tada je i $R$ takva.
 \end{lema}
 \begin{proof}
-Po definiciji, $P=\dom{\f H}$ za neku parcijalno rekurzivnu funkciju $\f H^l$, te postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_l^k$ takve da je $\chi_R=\chi_P\circ(\f G_1,\dotsc,\f G_l)$. Sada označimo $\f F:=\f H\circ(\f G_1,\dotsc,\f G_l)$ --- to je parcijalno rekurzivna funkcija kao kompozicija parcijalno rekurzivnih. No kako su sve $\f G_i$ rekurzivne, dakle totalne, formula~\eqref{eq:domkomp} daje
+    Po definiciji~\ref{def:re} $P=\dom{\f H}$ za neku parcijalno rekurzivnu funkciju $\f H^l$, a po definiciji~\ref{def:svod} postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_l^k$ takve da je $\chi_R=\chi_P\circ(\f G_1,\dotsc,\f G_l)$. Sada označimo $\f F:=\f H\circ(\f G_1,\dotsc,\f G_l)$ --- to je parcijalno rekurzivna funkcija kao kompozicija parcijalno rekurzivnih. No kako su sve $\f G_i$ rekurzivne, dakle totalne, formula~\eqref{eq:domkomp} daje
 \begin{multline}
     \vec x\in\dom{\f F}\Longleftrightarrow
     \vec x\in\bigcap\nolimits_{i=1}^l\dom{\f G_i}\land
@@ -60,7 +60,7 @@ Dakle, skup rekurzivnih relacija je pravi podskup skupa rekurzivno prebrojivih r
 Koristeći kompoziciju s nekom totalnom "\!vanjskom" funkcijom po lemi~\ref{lm:comptot} lako dobijemo zatvorenost na presjeke. Svejedno je koju funkciju upotrijebimo kao vanjsku (može biti i inicijalna $\f I_1^l$), ali simetrije radi uzmimo $\f{add}^l$.
 
 \begin{propozicija}[{name=[rekurzivna prebrojivost presjeka rekurzivno prebrojivih]}]\label{pp:prlre}
-Neka su $k,l\in\N_+$, te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije. Tada je $\bigcap_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
+Neka su $k,l\in\N_+$ te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije. Tada je $\bigcap_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
 Po definiciji, postoje parcijalno rekurzivne funkcije $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ takve da je za svaki $i\in[1\dd l]$, $R_i=\dom{\f G_i}$. Funkcija $\f F:=\f G_1+\dotsb+\f G_l=\f{add}^l\circ(\f G_1,\dotsc,\f G_l)$ je parcijalno rekurzivna kao kompozicija parcijalno rekurzivnih, a njena domena je
@@ -114,7 +114,7 @@ je primitivno rekurzivna jer joj je karakteristična funkcija dobivena kompozici
 Jednom kad imamo karakterizaciju preko projekcije, lako je dokazati zatvorenost na konačne unije, jer se projekcija i unija (disjunkcija) obje mogu zapisati pomoću egzistencijalne kvantifikacije, a dva egzistencijalna kvantifikatora komutiraju.
 
 \begin{propozicija}[{name=[rekurzivna prebrojivost unije rekurzivno prebrojivih relacija]}]\label{pp:unlre}
-Neka su $k,l\in\N_+$, te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je i\, $\bigcup_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
+Neka su $k,l\in\N_+$ te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je i\, $\bigcup_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
 Po teoremu~\ref{tm:rpeproj}, za svaki $i\in[1\dd l]$ postoji rekurzivna relacija $\f P^k_i$ takva da je $R_i=\exists_*\f P_i$. Sada je
@@ -133,7 +133,7 @@ Primijetimo, projekcijska karakterizacija zapravo kaže da je ulaz $\vec x$ u do
     \exists n\,\f{Final}(\kr{\vec x},\kprog P,n)\lor\exists n\,\f{Final}(\kr{\vec x},\kprog Q,n)\Longleftrightarrow{}\\
     {}\Longleftrightarrow\exists n\,\bigl(\f{Final}(\kr{\vec x},\kprog P,n)\lor\f{Final}(\kr{\vec x},\kprog Q,n)\bigr)
 \end{multline}
-odgovara paralelnom pokretanju dva RAM-programa $P$ i $Q$ s istim ulaznim podacima $\vec x$, te čekanju dok jedan od njih ne stane. Efektivno, prvo pitamo za $n=0$ vrijedi li desna strana u~\eqref{eq:parallel}, odnosno je li ikoje od ta dva izračunavanja već na početku u završnoj konfiguraciji. Ako nije, pitamo istu stvar za $n=1$: je li ikoje od tih izračunavanja nakon jednog koraka u završnoj konfiguraciji. Ako nije, pustimo ih još jedan korak ($n=2$), i tako dalje. Jedini način da taj algoritam radi beskonačno dugo s $\vec x$, je da ni $P$-izračunavanje s $\vec x$ ni $Q$-izračunavanje s $\vec x$ ne stanu. Pritom je ključno da se radi o RAM-programima, gdje svaki korak mora završiti u konačnom vremenu.
+odgovara paralelnom pokretanju dva RAM-programa $P$ i $Q$ s istim ulaznim podacima $\vec x$ te čekanju dok jedan od njih ne stane. Efektivno, prvo pitamo za $n=0$ vrijedi li desna strana u~\eqref{eq:parallel}, odnosno je li ikoje od ta dva izračunavanja već na početku u završnoj konfiguraciji. Ako nije, pitamo istu stvar za $n=1$: je li ikoje od tih izračunavanja nakon jednog koraka u završnoj konfiguraciji. Ako nije, pustimo ih još jedan korak ($n=2$), i tako dalje. Jedini način da taj algoritam radi beskonačno dugo s $\vec x$, je da ni $P$-izračunavanje s $\vec x$ ni $Q$-izračunavanje s $\vec x$ ne stanu. Pritom je ključno da se radi o RAM-programima, gdje svaki korak mora završiti u konačnom vremenu.
 
 \subsection{Kontrakcija relacije}
 
@@ -198,7 +198,7 @@ Za primitivnu rekurzivnost slike, koristimo istu tehniku kao u dokazu korolara~\
 Sad kada imamo specifikaciju sparivanja, pogledajmo detaljnije što smo napravili s relacijom $\f{Final}$ na kraju prethodne točke. Zapravo smo dva njena zadnja argumenta ($e$ i $n$) "spojili" u jedan, po kojem smo onda enumerirali testove završetka. Tamo smo za $e$ imali samo dvije mogućnosti, $\kprog P$ i $\kprog Q$, ali lako je zamisliti da ih možemo imati i više --- pa čak i sve prirodne brojeve na njihovom mjestu.
 
 \begin{definicija}[{name=[kontrakcija brojevne relacije]}]
-Neka je $k\in\N_+$, te $P^{k+1}$ relacija. Za $k$-mjesnu relaciju $\hat P$, zadanu s
+Neka je $k\in\N_+$ te $P^{k+1}$ relacija. Za $k$-mjesnu relaciju $\hat P$, zadanu s
 \begin{equation}
     \hat P(\vec x,y):\Longleftrightarrow P\bigl(\vec x,\f{fst}(y),\f{snd}(y)\bigr)\text,
 \end{equation}
@@ -253,7 +253,7 @@ Neka je $k\ge2$ i $R^k$ rekurzivno prebrojiva relacija. Po teoremu~\ref{tm:rpepr
 \end{proof}
 
 \begin{korolar}[{name=[višestruka projekcija čuva rekurzivnu prebrojivost]}]\label{kor:projre}
-Neka su $k,l\in\N_+$, te $R^{k+l}$ rekurzivno prebrojiva relacija. Tada je i relacija $Q^k$, zadana s $Q(\vec x):\Longleftrightarrow(\exists\vec y\in\N^l)R(\vec x,\vec y)$, također rekurzivno prebrojiva.
+Neka su $k,l\in\N_+$ te $R^{k+l}$ rekurzivno prebrojiva relacija. Tada je i relacija $Q^k$, zadana s $Q(\vec x):\Longleftrightarrow(\exists\vec y\in\N^l)R(\vec x,\vec y)$, također rekurzivno prebrojiva.
 \end{korolar}
 \begin{proof}
 %Jednostavnom indukcijom po $l$. Baza: za $l=1$, to je upravo propozicija~\ref{pp:projre}. %Pretpostavimo sada da za $l=m$, za sve $k'\in\N_+$ i za sve rekurzivno prebrojive relacije $R'$ mjesnosti $k'+m$ vrijedi: relacija zadana s $Q'(\vec x^{k'}):\Longleftrightarrow(\exists\vec y'\!\in\N^m)R'(\vec x,\vec y')$ je rekurzivno prebrojiva.
@@ -264,8 +264,7 @@ Neka su $k,l\in\N_+$, te $R^{k+l}$ rekurzivno prebrojiva relacija. Tada je i rel
 %\end{equation}
 %rekurzivno prebrojiva.
 %U koraku treba samo dodati još jednu projekciju na relaciju koja je rekurzivno prebrojiva po pretpostavci indukcije, što će opet po propoziciji~\ref{pp:projre} dati rekurzivno prebrojivu relaciju. Detalji su tehnički komplicirani, ali u njima nema ništa konceptualno teško. Sve ideje smo već vidjeli kod dokaza korolara~\ref{kor:pars}. Ključno je vidjeti da je
-Definiciju od $Q$ možemo zapisati kao $Q=\exists_*\exists_*\dotsi\exists_*R=(\exists_*\!)^lR$, 
-te tvrdnju možemo dokazati indukcijom po $l$. Baza ($l=1$) je jednostavno propozicija~\ref{pp:projre}, a u koraku iz pretpostavke da je $(\exists_*\!)^mR$ rekurzivno prebrojiva dokažemo da je $(\exists_*\!)^{m+1}R=\exists_*(\exists_*\!)^mR$ rekurzivno prebrojiva po istoj toj propoziciji.
+Definiciju od $Q$ možemo zapisati kao $Q=\exists_*\exists_*\dotsi\exists_*R=(\exists_*\!)^lR$ te tvrdnju možemo dokazati indukcijom po $l$. Baza ($l=1$) je jednostavno propozicija~\ref{pp:projre}, a u koraku iz pretpostavke da je $(\exists_*\!)^mR$ rekurzivno prebrojiva dokažemo da je $(\exists_*\!)^{m+1}R=\exists_*(\exists_*\!)^mR$ rekurzivno prebrojiva po istoj toj propoziciji.
 \end{proof}
 
 \section{Teorem o grafu za parcijalne funkcije}
@@ -288,7 +287,7 @@ Neka je $k\in\N_+$, i $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi}
 \end{equation}
     Doista, ako je $(\vec x,y)\in\graf{\f F}$, tada je $\graf{\f F}\ne\emptyset$, odnosno $\f F\ne\varnothing$, iz čega slijedi $\f{Prog}(e)$ (kontrapozicijom propozicije~\ref{prop:computeind}\eqref{it:nprogind}), pa postoji (jedinstven) RAM-program $P$ takav da je $e=\kprog P$. Po korolaru~\ref{kor:computeind}, $P^k$ računa $\kf e^k=\f F$.
 
-Također, iz $(\vec x,y)\in\graf{\f F}$ zaključujemo $\vec x\in\dom{\f F}$, pa po definiciji~\ref{def:compute}, $P$-izračunavanje s $\vec x$ stane. Označimo sa $z$ kod tog izračunavanja. Tada po propoziciji~\ref{prop:Tkprn} vrijedi $\f T_k(\vec x,e,z)$, te je $y=\f U(z)$ jer je to izlazni podatak tog izračunavanja.
+Također, iz $(\vec x,y)\in\graf{\f F}$ zaključujemo $\vec x\in\dom{\f F}$, pa po definiciji~\ref{def:compute}, $P$-izračunavanje s $\vec x$ stane. Označimo sa $z$ kod tog izračunavanja. Tada po propoziciji~\ref{prop:Tkprn} vrijedi $\f T_k(\vec x,e,z)$, a $y=\f U(z)$ jer je to izlazni podatak tog izračunavanja.
 
 U drugom smjeru, pretpostavimo da postoji $z\in\N$ takav da vrijedi $\f T_k(\vec x,e,z)$ i $y=\f U(z)$. Opet po propoziciji~\ref{prop:Tkprn}, slijedi da postoji RAM-program $P$ takav da je $e=\kprog P$, i $z$ je upravo kod $P$-izračunavanja s $\vec x$. Kako taj kod postoji, zaključujemo da izračunavanje stane, pa je $\vec x\in\dom{\f F}$ (kao i prije, $P^k$ računa $\f F^k$).
 Tada je $y=\f U(z)$ izlazni podatak tog izračunavanja, pa je po definiciji~\ref{def:compute} $y=\f F(\vec x)$, odnosno $(\vec x,y)\in\graf{\f F}$.
@@ -307,12 +306,12 @@ Sljedeći veliki zalogaj je dokazati obrat teorema~\ref{tm:grafprre}. Kod teorem
 
 Razmislimo malo detaljnije o tome. Zamislimo da imamo poluodlučivu relaciju $R^2$, i želimo računati vrijednosti funkcije $f:=\mu R$. Za zadani $x$, recimo $x=5$, dakle, tražimo najmanji $y$ takav da vrijedi $R(5,y)$ --- no problem je u tome što za zadani par $(5,y)$ možemo jedino sa sigurnošću ustanoviti da \emph{jest} u $R$, ne i da nije (ako nije, postupak jednostavno neće nikada stati). Ako takvog $y$ nema, to da algoritam neće nikad stati je sasvim u redu, ali što ako ga ima? Pomoću paralelizacije možemo pokrenuti sva testiranja $R(5,0)$, $R(5,1)$, $R(5,2)$,~\ldots\ dok neko od njih ne stane --- i ako to upravo bude $R(5,0)$, onda imamo sreće: $\f f(5)=0$. No pretpostavimo da smo umjesto toga dobili $R(5,7)$. Iz toga sigurno možemo zaključiti $5\in\exists_*R=\dom{\mu R}=\dom f$, dakle $f(5)$ je neki broj. Štoviše, to je broj koji sigurno nije veći od $7$, ali koji? Imamo $8$ mogućnosti, i dok god testovi $R(5,t),t<7$ ne stanu, ne znamo koja od njih je prava vrijednost $f(5)$. Paradoksalno, ako to \emph{jest} $7$, tada nijedan od tih "manjih testova" neće stati, pa više nećemo dobiti nikakvu novu informaciju. Ako u međuvremenu saznamo da vrijedi i $R(5,11)$, to neće nimalo utjecati na naš problem. Ali zamislimo da smo (nakon još puno koraka) dobili da vrijedi $R(5,4)$. Imamo li se razloga radovati? S jedne strane, da --- eliminirali smo brojeve $5$, $6$ i $7$ kao potencijalne vrijednosti $f(5)$. Ali s druge strane, i dalje ne znamo koliko je $f(5)$. Ukratko, na ovaj način možemo dobiti $f(x)$ jedino ako je $f(x)=0$ --- što se ne čini pretjerano korisnim.
 
-Ipak, funkcija $\f g$, koju dobijemo ako za svaki $x$ uzmemo prvi $y$ na koji naiđemo paralelnim izvršavanjem svih testova $R(x,y)$ (recimo, u gornjem scenariju je $\f g(5)=7$), je izračunljiva, i nije baš sasvim bez veze s funkcijom $f$. Vidimo da ona \emph{dominira} funkciju $f$: kad god je $f(x)$ definirano, tada je i $\f g(x)$ definirano, te vrijedi $\f g(x)\ge f(x)$.
+Ipak, funkcija $\f g$, koju dobijemo ako za svaki $x$ uzmemo prvi $y$ na koji naiđemo paralelnim izvršavanjem svih testova $R(x,y)$ (recimo, u gornjem scenariju je $\f g(5)=7$), je izračunljiva, i nije baš sasvim bez veze s funkcijom $f$. Vidimo da ona \emph{dominira} funkciju $f$: kad god je $f(x)$ definirano, tada je i $\f g(x)$ definirano, i to tako da vrijedi $\f g(x)\ge f(x)$.
 
 Jedini problem je što nama nije zadana funkcija $f$, nego relacija $R$. Možemo li $\f g$ karakterizirati pomoću $R$? Da: prvo svojstvo kaže $\dom{\f g}\supseteq\dom f=\dom{\mu R}=\exists_*R$, a drugo kaže (za $x\in\exists_*R$) $f(x)=\mu yR(x,y)\le\f g(x)$, što jednostavno možemo osigurati tako da tražimo $R\bigl(x,\f g(x)\bigr)$. Reći da to vrijedi za sve $x$ zapravo znači zahtijevati inkluziju $\graf{\f g}\subseteq R$, a tada po~\eqref{eq:projgraf} slijedi (lako se vidi da je projekcija monotona) $\dom{\f g}=\exists_*\graf{\f g}\subseteq\exists_*R$, što s prvim svojstvom daje $\dom{\f g}=\exists_*R$. Formalizirajmo to svojsvo.
 
 \begin{definicija}[{name=[selektor]}]
-Neka je $k\in\N_+$, te $R^{k+1}$ relacija.
+Neka je $k\in\N_+$ te $R^{k+1}$ relacija.
 
 Za funkciju $g^k$ kažemo da je \emph{selektor} za $R$ ako vrijedi $\dom g=\exists_*R$ i $\graf g\subseteq R$.
 %\begin{align}
@@ -329,7 +328,7 @@ Točkovno, uvjete na selektor možemo zapisati kao
 Selektor je sasvim općenit pojam, i u skupovnoteorijskom smislu odgovara \emph{izbornoj funkciji}: Ako za svaki $\vec x\in\N^k$ definiramo "prerez" (\emph{section}) $R_{\vec x}^1(y):\Longleftrightarrow R(\vec x,y)$,
 tada je $(R_{\vec x})_{\vec x\in\exists_*R}$ indeksirana familija nepraznih skupova (jednomjesnih relacija), i selektor za $R$ je upravo izborna funkcija za tu familiju (pogledajte~\cite[str.\ 92]{skr:VukTS} za detalje).
 
-U teoriji skupova postoji aksiom izbora, koji kaže da svaka takva familija ima izbornu funkciju, odnosno svaka relacija ima selektor. Zapravo, ovdje aksiom izbora nije ni potreban, jer je skup $\N$ dobro uređen, pa uvijek možemo odabrati najmanji $y$ za svaki $\vec x$ za koji takav $y$ postoji. Drugim riječima, trivijalno je $\mu R$ selektor za $R$. Doista, vrijedi $\dom{\mu R}=\exists_*R$ po definiciji, te za $\graf{\mu R}(\vec x,y)$ vrijedi $y=\mu z R(\vec x,z)=\min R_{\vec x}\in R_{\vec x}$, dakle vrijedi $R_{\vec x}(y)$, odnosno $R(\vec x,y)$.
+U teoriji skupova postoji aksiom izbora, koji kaže da svaka takva familija ima izbornu funkciju, odnosno svaka relacija ima selektor. Zapravo, ovdje aksiom izbora nije ni potreban, jer je skup $\N$ dobro uređen, pa uvijek možemo odabrati najmanji $y$ za svaki $\vec x$ za koji takav $y$ postoji. Drugim riječima, trivijalno je $\mu R$ selektor za $R$. Doista, vrijedi $\dom{\mu R}=\exists_*R$ po definiciji, a za $\graf{\mu R}(\vec x,y)$ vrijedi $y=\mu z R(\vec x,z)=\min R_{\vec x}\in R_{\vec x}$, dakle vrijedi $R_{\vec x}(y)$, odnosno $R(\vec x,y)$.
 
 Nas, međutim, ne zanimaju proizvoljni selektori, već samo oni izračunljivi --- a postupak koji smo opisali (paralelno testiranje svih $R(\vec x,y),y\in\N$) pokazuje da svaka poluodlučiva relacija ima izračunljiv selektor.
 
@@ -359,7 +358,7 @@ $\hat{\f P}(\vec x,v)$ i $y=\f{fst}(v)$. No ovo prvo po definiciji znači da vri
 % o normalnoj formi: ako definiramo (primitivno rekurzivnu) relaciju M^4 s
 % M(x,e,y,n) :<=> Final(x,e,n) && result(Reg(x,e,n))=y
 % sa specifikacijom "e je kod RAM-programa P, x je kod nepraznog konačnog niza
-% xs, te P-izračunavanje s xs stane u najviše n koraka i dade rezultat y",
+% xs te P-izračunavanje s xs stane u najviše n koraka i dade rezultat y",
 % tada je univ = fst o mu hat M, što je istog oblika kao nađeni selektor.
 % Precizno, graf univ je upravo projekcija M.
 
@@ -417,11 +416,11 @@ Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija, i $\f R^k$ konačna re
 \end{lema}
 \begin{proof}
 Po definiciji je $P\mathbin\triangle\f R:=(P\setminus\f R)\cup(\f R\setminus P)$. 
-$\f R$ je rekurzivna po korolarima~\ref{kor:konprn} i~\ref{kor:prnrek}, dakle prva razlika je rekurzivno prebrojiva po lemi~\ref{lm:re-rek}. Iz teorije skupova znamo da je podskup konačnog skupa konačan, pa je druga razlika $\f R\setminus P\subseteq\f R$ konačna, te je primitivno rekurzivna po korolaru~\ref{kor:konprn}, rekurzivna po korolaru~\ref{kor:prnrek}, i rekurzivno prebrojiva po propoziciji~\ref{pp:rekire}. Sada tvrdnja slijedi iz propozicije~\ref{pp:unlre} (unija dvije rekurzivno prebrojive relacije iste mjesnosti je ponovo rekurzivno prebrojiva).
+$\f R$ je rekurzivna po korolarima~\ref{kor:konprn} i~\ref{kor:prnrek}, dakle prva razlika je rekurzivno prebrojiva po lemi~\ref{lm:re-rek}. Iz teorije skupova znamo da je podskup konačnog skupa konačan, pa je druga razlika $\f R\setminus P\subseteq\f R$ konačna, i primitivno rekurzivna po korolaru~\ref{kor:konprn}, rekurzivna po korolaru~\ref{kor:prnrek}, i rekurzivno prebrojiva po propoziciji~\ref{pp:rekire}. Sada tvrdnja slijedi iz propozicije~\ref{pp:unlre} (unija dvije rekurzivno prebrojive relacije iste mjesnosti je ponovo rekurzivno prebrojiva).
 \end{proof}
 
 \begin{propozicija}[{name=[teorem o editiranju za parcijalne funkcije]}]
-Neka je $k\in\N_+$, te $\f F^k$ parcijalno rekurzivna, i $\f G^k$ funkcija iste mjesnosti takva da je skup $\graf{\f F}\mathbin\triangle\graf{\f G}$ konačan. Tada je i $\f G$ parcijalno rekurzivna.
+Neka je $k\in\N_+$, $\f F^k$ parcijalno rekurzivna te $\f G^k$ takva da je skup $\graf{\f F}\mathbin\triangle\graf{\f G}$ konačan. Tada je i $\f G$ parcijalno rekurzivna.
 \end{propozicija}
 \begin{proof}
 Po teoremu o grafu, $\graf{\f F}$ je rekurzivno prebrojiv skup (mjesnosti $k$). Ako označimo zadani konačni "\emph{\!diff}" grafova s $\f E:=\graf{\f F}\mathbin\triangle\graf{\f G}$, iz teorije skupova znamo --- $\bigl(\mathcal P(\N^k),\mathbin\triangle\bigr)$ je grupa u kojoj je svaki element sam sebi inverz --- da iz toga slijedi $\graf{\f G}=\graf{\f F}\mathbin\triangle\f E$, što je rekurzivno prebrojiv skup po lemi~\ref{lm:retrkon}. Opet po teoremu o grafu, iz toga slijedi da je $\f G$ parcijalno rekurzivna funkcija.
@@ -442,7 +441,7 @@ Time smo opisali već poznatu konstrukciju grananja, ali ovaj put s \emph{poluod
 Na operacijskom sustavu UNIX (i mnogim srodnim sustavima) postoji sistemski poziv \texttt{select} koji, do na implementacijske detalje, radi upravo to: prima listu uvjeta oblika "postoji li vrsta aktivnosti $x$ (čitanje, pisanje, greška,~\ldots) na deskriptoru $y$", i vraća se čim neki od tih uvjeta bude ispunjen. Iz praktičnih razloga, taj poziv ima i granu "inače", u obliku isteka vremena (\emph{timeout}) određenog pri pozivu. Kako nemamo sistemski sat (iako ga možemo emulirati brojenjem koraka izračunavanja --- pokušajte!), nama će taj dio jednostavno biti beskonačna petlja, što je u skladu s konvencijom da ako u grananju ne navedemo granu $\f G_0$, podrazumijeva se prazna funkcija.
 
 \begin{teorem}[Teorem o grananju, rekurzivno prebrojiva verzija]\label{tm:gre}
-Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u parovima disjunktne rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\{R_1\colon\f G_1,R_2\colon\f G_2,\dotsc,R_l\colon\f G_l\}$ također parcijalno rekurzivna.
+Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u parovima disjunktne rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\{R_1\colon\f G_1,R_2\colon\f G_2,\dotsc,R_l\colon\f G_l\}$ također parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
 Prvo, osigurajmo da nijedna grana nije definirana izvan svog uvjeta. Dakle, za svaki $i\in[1\dd l]$ definiramo $\f H_i:=\f G_i|_{R_i}$. Svaka $\f H_i$ je parcijalno rekurzivna po korolaru~\ref{kor:restre}, i vrijedi $\f F=\{\dom{\f H_1}\colon\f H_1,\dom{\f H_2}\colon\f H_2,\dotsc,\dom{\f H_l}\colon\f H_l\}$. Doista, domene su im iste: $\bdcup_{i=1}^l\dom{\f H_i}=\bdcup_{i=1}^l(\dom{\f G_i}\cap R_i)$; i za svaki $\vec x$ iz te domene postoji jedinstveni $j\in[1\dd l]$ takav da je $\vec x\in\dom{\f H_{j}}$, pa je $\f F(\vec x)=\f G_{j}(\vec x)=\f H_{j}(\vec x)$.
@@ -451,9 +450,9 @@ Drugo, dokažimo
 \begin{equation}
     \graf{\f F}=\,\bigcup\nolimits_{i=1}^l\graf{\f H_i}\text.
 \end{equation}
-Za inkluziju ($\subseteq$), neka je $(\vec x,y)\in\graf{\f F}$. To znači da je $\vec x\in\dom{\f F}$ i $y=\f F(\vec x)$. Prvo znači da postoji (jedinstveni) $j\in[1\dd l]$ takav da vrijedi $\vec x\in\dom{\f H_{j}}$, te ovo drugo onda znači $y=\f H_{j}(\vec x)$. No tada je $(\vec x,y)\in\graf{\f H_{j}}\!\subseteq\bigcup_{i=1}^l\graf{\f H_i}$.
+Za inkluziju ($\subseteq$), neka je $(\vec x,y)\in\graf{\f F}$. To znači da je $\vec x\in\dom{\f F}$ i $y=\f F(\vec x)$. Prvo znači da postoji (jedinstveni) $j\in[1\dd l]$ takav da vrijedi $\vec x\in\dom{\f H_{j}}$, pa ovo drugo onda znači $y=\f H_{j}(\vec x)$. No tada je $(\vec x,y)\in\graf{\f H_{j}}\!\subseteq\bigcup_{i=1}^l\graf{\f H_i}$.
 
-Za inkluziju ($\supseteq$), neka je $(\vec x,y)\in\bigcup_{i=1}^l\graf{\f H_i}$. Tada postoji $j\in[1\dd l]$ takav da je $(\vec x,y)\in\graf{\f H_j}$. To znači da je $\vec x\in\dom{\f H_j}=\dom{\f G_j|_{R_j}}=\dom{\f G_j}\cap R_j\subseteq R_j$, pa je $\f F(\vec x)\simeq\f G_j(\vec x)$. No $\vec x\in\dom{\f G_j}$ znači da postoji $y'\in\N$ takav da je $\f G_j(\vec x)=y'$, pa je i $\f F(\vec x)=y'$. S druge strane $(\vec x,y)\in\graf{\f H_j}\subseteq\graf{\f G_j}$ znači da su $(\vec x,y)$ i $(\vec x,y')$ oba u $\graf{\f G_j}$, te je $y=y'$ jer $\graf{\f G_j}$ ima funkcijsko svojstvo. Iz toga slijedi $\f F(\vec x)=y$, odnosno $(\vec x,y)\in\graf{\f F}$.
+Za inkluziju ($\supseteq$), neka je $(\vec x,y)\in\bigcup_{i=1}^l\graf{\f H_i}$. Tada postoji $j\in[1\dd l]$ takav da je $(\vec x,y)\in\graf{\f H_j}$. To znači da je $\vec x\in\dom{\f H_j}=\dom{\f G_j|_{R_j}}=\dom{\f G_j}\cap R_j\subseteq R_j$, pa je $\f F(\vec x)\simeq\f G_j(\vec x)$. No $\vec x\in\dom{\f G_j}$ znači da postoji $y'\in\N$ takav da je $\f G_j(\vec x)=y'$, pa je i $\f F(\vec x)=y'$. S druge strane $(\vec x,y)\in\graf{\f H_j}\subseteq\graf{\f G_j}$ znači da su $(\vec x,y)$ i $(\vec x,y')$ oba u $\graf{\f G_j}$, iz čega je $y=y'$ jer $\graf{\f G_j}$ ima funkcijsko svojstvo. Slijedi $\f F(\vec x)=y$, odnosno $(\vec x,y)\in\graf{\f F}$.
 
 Sada je lako: po teoremu~\ref{tm:grafprre}, svaki $\graf{\f H_i}$ je rekurzivno prebrojiv. Po propoziciji~\ref{pp:unlre}, $\graf{\f F}$ je rekurzivno prebrojiv. I za kraj, onda je $\f F$ parcijalno rekurzivna po teoremu~\ref{tm:graf}.
 \end{proof}
@@ -533,7 +532,7 @@ Kao i u teoremu~\ref{tm:rpeproj}, da \texttt{(3)} povlači \texttt{(2)} je trivi
 Da \texttt{(2)} povlači \texttt{(1)} je malo kompliciranije, ali i dalje sasvim jasno koristeći ono što znamo o projekcijama: naime, $y\in\im{\f F}$ znači $(\exists\vec x\in\dom{\f F})\bigl(y=\f F(\vec x)\bigr)$, odnosno $\exists\vec x\,\graf{\f F}(\vec x,y)$. Htjeli bismo tu egzistencijalnu kvantifikaciju prikazati kao višestruku projekciju, ali za to nam $y$ treba biti na prvom mjestu. Definiramo $P(y,\vec x):=\graf{\f F}(\vec x,y)$ --- tada je očito $P\preceq\graf{\f F}$, a po teoremu~\ref{tm:grafprre} je $\graf{\f F}$ rekurzivno prebrojiv, pa je po lemi~\ref{lm:re<re} i $P$ rekurzivno prebrojiva. Sada je $\im{\f F}(y)\Longleftrightarrow\exists\vec x\,P(y,\vec x)$, što je rekurzivno prebrojivo po korolaru~\ref{kor:projre}.
 
 Opet je najzanimljiviji dio da \texttt{(1)} povlači \texttt{(3)}. %Krenimo kao u dokazu teorema~\ref{tm:rpeproj}: $R^1$ je rekurzivno prebrojiva, dakle $R=\dom{\f F}$ za neku parcijalno rekurzivnu funkciju $\f F^1$. Također, $\f F$ ima indeks, označimo ga s $e$ (napomena~\ref{nap:>1ind}). Sada znamo 
-Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpeproj} --- možemo \emph{iskoristiti} taj teorem da se dočepamo primitivne rekurzivnosti: postoji primitivno rekurzivna relacija $\f P^2$ takva da je $R=\exists_*\f P$. To znači da vrijedi $R(x)\Longleftrightarrow\exists y\f P(x,y)$, i već smo vidjeli u prethodnom odlomku da projekcije možemo zamijeniti dodatnim argumentima. Dakle, htjeli bismo definirati $\f G(x,y):=x$ u slučaju da vrijedi $\f P(x,y)$ --- no što ako ne vrijedi? Pa, ako \emph{nikada} ne vrijedi, to zapravo znači da je $R=\emptyset$, te nemamo što dokazivati. Ako pak $R\ne\emptyset$, tada postoji neki fiksni (recimo najmanji) element $r\in R$, pa ga možemo iskoristiti kao \emph{joker} u slučajevima kada ne vrijedi $\f P(x,y)$. Sve u svemu, funkcija $\f G$ zadana s
+Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpeproj} --- možemo \emph{iskoristiti} taj teorem da se dočepamo primitivne rekurzivnosti: postoji primitivno rekurzivna relacija $\f P^2$ takva da je $R=\exists_*\f P$. To znači da vrijedi $R(x)\Longleftrightarrow\exists y\f P(x,y)$, i već smo vidjeli u prethodnom odlomku da projekcije možemo zamijeniti dodatnim argumentima. Dakle, htjeli bismo definirati $\f G(x,y):=x$ u slučaju da vrijedi $\f P(x,y)$ --- no što ako ne vrijedi? Ako \emph{nikada} ne vrijedi, to zapravo znači da je $R=\emptyset$ pa nemamo što dokazivati. Ako pak $R\ne\emptyset$, tada postoji neki fiksni (recimo najmanji) element $r\in R$, pa ga možemo iskoristiti kao \emph{joker} u slučajevima kada ne vrijedi $\f P(x,y)$. Sve u svemu, funkcija $\f G$ zadana s
 \begin{equation}\label{eq:defG}
     \f G(x,y):=\begin{cases}
         x,&\f P(x,y)\\
@@ -565,7 +564,7 @@ Drugo, možemo prevesti samu definiciju. Kako su rekurzivno prebrojive relacije 
 
 Treće, sama ta definicija znači da postoji RAM-stroj čije izračunavanje s $\vec x$ stane ako i samo ako je $\vec x$ element relacije za koju tvrdimo da je rekurzivno prebrojiva. Analogni iskaz u jezičnom modelu --- postoji Turingov stroj $\mathcal T$ takav da $\mathcal T$-izračunavanje s $w$ stane ako i samo ako je $w\in L$ (kažemo da $\mathcal T$ \emph{prepoznaje} $L$) --- obično se u teoriji formalnih jezika uzima za definiciju rekurzivno prebrojivih jezika.
 
-I četvrto, analogon jezik\^a u brojevnom modelu su zapravo \emph{jednomjesne} relacije, pa ih možemo shvatiti kao slike, odnosno enumeracije nekih izračunljivih funkcija. Formalizacija toga u jezičnom modelu vodi na pojam \emph{Turingovih enumeratora}, koji imaju dvije trake: radnu i izlaznu, te umjesto završnog stanja imaju \emph{izlazno} stanje $q_p$. Enumerator nema ulaza (obje trake su na početku prazne) i očito radi beskonačno dugo (nema završnog stanja), te kažemo da \emph{nabraja} jezik svih riječi koje se nalaze na izlaznoj traci u trenucima u kojima se enumerator nađe u stanju $q_p$.
+I četvrto, analogon jezik\^a u brojevnom modelu su zapravo \emph{jednomjesne} relacije, pa ih možemo shvatiti kao slike, odnosno enumeracije nekih izračunljivih funkcija. Formalizacija toga u jezičnom modelu vodi na pojam \emph{Turingovih enumeratora}, koji imaju dvije trake: radnu i izlaznu, a umjesto završnog stanja imaju \emph{izlazno} stanje $q_p$. Enumerator nema ulaza (obje trake su na početku prazne) i očito radi beskonačno dugo (nema završnog stanja) te kažemo da \emph{nabraja} jezik svih riječi koje se nalaze na izlaznoj traci u trenucima u kojima se enumerator nađe u stanju $q_p$.
 
 Nakon svega što ste naučili, ne biste trebali biti začuđeni time da sva ta četiri pristupa karakteriziraju istu klasu jezika.
 

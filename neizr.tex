@@ -7,7 +7,7 @@
 Dokazali smo brojne teoreme koji pokazuju ekvivalentnost različitih modela iz\-ra\-čun\-ljiv\-os\-ti. Za početak ih sve objedinimo na jednom mjestu. Najvažniji je svakako onaj koji govori o brojevnim funkcijama, odnosno karakterizira skup $\mathscr Comp$.
 
 \begin{teorem}[Teorem ekvivalencije za brojevne funkcije]
-Neka je $k\in\N_+$, te\, $\f f:\N^k\rightharpoonup\N$ brojevna funkcija mjesnosti $k$. Tada su sljedeće tvrdnje ekvivalentne:
+Neka je $k\in\N_+$ te\, $\f f:\N^k\rightharpoonup\N$ brojevna funkcija mjesnosti $k$. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
     \item[\texttt{\textup{(r)}}] $\f f$ je RAM-izračunljiva (\,$f\in\mathscr Comp_k$);
     \item[\texttt{\textup{(m)}}] $\f f$ je makro-izračunljiva (postoji makro-algoritam koji računa $\f f$);
@@ -50,7 +50,7 @@ Dijagramatski, usmjeren graf
 Za jednomjesne funkcije imamo korolar~\ref{kor:peuf}, koji je zgodniji zbog jednočlane abecede i bijektivnosti kodiranja. Za dokaz ekvivalencije parcijalne rekurzivnosti i Turing-izračunljivosti koristili smo ekvivalenciju brojevnog i jezičnog modela za jezične funkcije.
 
 \begin{teorem}[Teorem ekvivalencije za jezične funkcije]
-Neka je $\Sigma\ne\emptyset$ abeceda, te $\varphi:\Sigma^*\rightharpoonup\Sigma^*$ jezična funkcija nad njom. Tada su sljedeće tvrdnje ekvivalentne:
+Neka je $\Sigma\ne\emptyset$ abeceda te $\varphi:\Sigma^*\rightharpoonup\Sigma^*$ jezična funkcija nad njom. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
     \item[\texttt{\textup{(T)}}] $\varphi$ je Turing-izračunljiva;
     \item[\texttt{\textup{(P)}}] $\N\varphi$ je parcijalno rekurzivna;
@@ -71,7 +71,7 @@ Opet, sve bitno je već dokazano; slijedi rekapitulacija glavnih ideja.
 Karakteristična funkcija je totalna, dakle za izračunljive jezike mora biti rekurzivna.
 
 \begin{teorem}[Teorem ekvivalencije za jezike]
-Neka je $\Sigma\ne\emptyset$ abeceda, te $L\subseteq\Sigma^*$ jezik nad njom. Tada su sljedeće tvrdnje ekvivalentne:
+Neka je $\Sigma\ne\emptyset$ abeceda te $L\subseteq\Sigma^*$ jezik nad njom. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
     \item[\texttt{\textup{(\textsc r)}}] relacija $\kr L:=\{\kr w\mid w\in L\}$ je rekurzivna;
     \item[\texttt{\textup{(\textsc o)}}] postoji Turingov odlučitelj $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_\mathit{true},q_\mathit{false})$ koji prepoznaje $L$.
@@ -90,7 +90,7 @@ Još uvijek ostaje otvoreno pitanje što je s jezicima koje prepoznaju općeniti
 \begin{napomena}[{name=[za problem zaustavljanja završno stanje trake nije bitno]}]\label{nap:re0}
 Formalno, morali bismo još osigurati da im traka na kraju bude oblika $v\bl\ldots$ za $v\in\Sigma^*$, ali nije teško vidjeti, tehnikama koje se obrade u proučavanju formalnih jezika, da za svaki Turingov stroj (koji ne računa nužno neku funkciju) postoji Turingov stroj koji stane za točno iste ulaze, ali s praznom trakom ($v=\varepsilon$).
 
-Skica dokaza: uvedemo novi znak \t/ u radnu abecedu i proglasimo ga prazninom (znak $\bl$ time postaje običan znak radne abecede), te za svaki prijelaz koji čita bivšu prazninu $\delta(p,\bl)=(q,\gamma,d)$ dodamo prijelaz $\delta(p,\t/)=(q,\gamma,d)$ (pisanja praznina ostavimo na $\bl$). Semantički, i $\bl$ i \t/ su sada praznine, ali stroj ne može napisati \t/ na traku --- odnosno, jedine pojave znaka \t/ na traci su tamo gdje stroj još nije bio. Kako su pomaci mogući samo na susjedne ćelije, nosač takve trake je nužno povezan.
+Skica dokaza: uvedemo novi znak \t/ u radnu abecedu i proglasimo ga prazninom (znak $\bl$ time postaje običan znak radne abecede) te za svaki prijelaz koji čita bivšu prazninu $\delta(p,\bl)=(q,\gamma,d)$ dodamo prijelaz $\delta(p,\t/)=(q,\gamma,d)$ (pisanja praznina ostavimo na $\bl$). Semantički, i $\bl$ i \t/ su sada praznine, ali stroj ne može napisati \t/ na traku --- odnosno, jedine pojave znaka \t/ na traci su tamo gdje stroj još nije bio. Kako su pomaci mogući samo na susjedne ćelije, nosač takve trake je nužno povezan.
 
 Sada na bivše završno stanje dodamo fragment koji odlazi desno do prvog znaka \t/ (zna da su nadalje samo praznine), i vraća se lijevo, zamjenjujući sve znakove s \t/. Kada u tom stanju pročita \t/, stane jer je došao do lijevog ruba trake (taj \t/ sigurno nije mogao prije zapisati).
 \end{napomena}
@@ -179,7 +179,7 @@ Iako je to intuitivno jasno, iz toga nipošto ne slijedi da je svaki model jedno
 
 \subsection{Fiksiranje pojma algoritma}
 
-Zapravo, postoji širok (i višedimenzijski!) "prostor kompromisa" (\emph{tradeoffs}) prilikom dizajniranja takvih sustava. Na jednom kraju su sasvim jednostavni "konkretni" sustavi za koje je odmah jasno što su konfiguracije i kako je funkcija $nextconf$ zadana --- recimo, RAM-strojevi. Na drugom kraju su sasvim apstraktni sustavi kod kojih su tri nabrojene esencijalne operacije (ograničena i neograničena petlja, te slijed) aksiomatski propisane --- recimo, u sustavu parcijalno rekurzivnih funkcija, redom kao primitivna rekurzija, minimizacija i kompozicija.
+Zapravo, postoji širok (i višedimenzijski!) "prostor kompromisa" (\emph{tradeoffs}) prilikom dizajniranja takvih sustava. Na jednom kraju su sasvim jednostavni "konkretni" sustavi za koje je odmah jasno što su konfiguracije i kako je funkcija $nextconf$ zadana --- recimo, RAM-strojevi. Na drugom kraju su sasvim apstraktni sustavi kod kojih su tri nabrojene esencijalne operacije (ograničena i neograničena petlja te slijed) aksiomatski propisane --- recimo, u sustavu parcijalno rekurzivnih funkcija, redom kao primitivna rekurzija, minimizacija i kompozicija.
 
 Osim s obzirom na apstraktnost, možemo gledati i kompromise s obzirom na druge dimenzije: smanjivanje broja različitih koncepata u sustavu (\emph{Occamova britva}) vodi na sustave u kojima je gotovo sve prikazano prirodnim brojevima (jer, kao što smo rekli, prirodne brojeve moramo imati za reprezentaciju samog izračunavanja). Intuitivna bliskost onom što doista činimo kad provodimo algoritam vodi na sustave koji emuliraju naše stanje uma, i mentalne operacije (pamćenja simbola i jednostavnih odluka na nižoj razini, ili uočavanja obrazaca i vizualizacije njihove supstitucije na višoj razini apstrakcije) --- kao što su jezični modeli izračunavanja.
 \begin{equation}\label{eq:vrste-alg}
@@ -201,7 +201,7 @@ Svaka dovoljno općenita formalizacija pojma algoritma na istoj vrsti podataka r
 
 Teoremi ekvivalencije mogu se sada izreći kao: sve ćelije u tablici~\eqref{eq:vrste-alg} jesu dovoljno općenite formalizacije pojma algoritma. (Nismo definirali $\lambda$-račun, ali i za njega vrijedi teorem ekvivalencije. Zainteresirani čitatelj može naći detalje u~\cite{lovnicki}.)
 
-Povijesno, Alonzo Church je autor teze, i prvi koji je primijetio da je teza potrebna kako bi se dokazali rezultati o nepostojanju algoritma. Ipak, njegova formalizacija ($\lambda$-račun) bila je preapstraktna da bi zadovoljila vodeće eksperte za izračunljivost toga doba. To je između ostalog potaklo Turinga na detaljnu analizu intuitivnog pojma algoritma, te je njegova formalizacija, kad je dokazana ekvivalentnom ostalima do tad poznatima, vrlo brzo prihvaćena kao "mjera" (\!\emph{Turing completeness}) pomoću koje se procjenjuju algoritamski sustavi (primjerice, programski jezici) sve do danas.
+Povijesno, Alonzo Church je autor teze, i prvi koji je primijetio da je teza potrebna kako bi se dokazali rezultati o nepostojanju algoritma. Ipak, njegova formalizacija ($\lambda$-račun) bila je preapstraktna da bi zadovoljila vodeće eksperte za izračunljivost toga doba. To je između ostalog potaklo Turinga na detaljnu analizu intuitivnog pojma algoritma te je njegova formalizacija, kad je dokazana ekvivalentnom ostalima do tad poznatima, vrlo brzo prihvaćena kao "mjera" (\!\emph{Turing completeness}) pomoću koje se procjenjuju algoritamski sustavi (primjerice, programski jezici) sve do danas.
 
 \begin{quote}
     Church: ``\!{\emph{Turing's notion made the identification with effectiveness in the ordinary (not explicitly defined) sense evident immediately.}}''
