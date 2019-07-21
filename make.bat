@@ -1,1 +1,1 @@
-pdflatex -shell-escape -halt-on-error -interaction=nonstopmode main.tex
+pdflatex -shell-escape -halt-on-error -interaction=nonstopmode Komputonomikon.tex

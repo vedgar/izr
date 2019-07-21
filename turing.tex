@@ -88,7 +88,7 @@ Neka je $\varphi$ jezična funkcija nad $\Sigma$. Kažemo da $\mathcal T$ \emph{
 Za jezičnu funkciju $\varphi$ kažemo da je \emph{Turing-izračunljiva} ako postoji Turingov stroj koji je računa.
 \end{definicija}
 
-Kao i za RAM-model, mogli bismo dokazati da za svaki Turingov stroj $\mathcal T$ i njegov ulaz $w$ postoji jedinstveno $\mathcal T$-izračunavanje s $w$, ali više ne vrijedi da svaki Turingov stroj računa neku jezičnu funkciju. Naime, traka u završnoj konfiguraciji ne mora biti oblika $v\bl\ldots$ za $v\in\Sigma^*$: može sadržavati znakove iz $\Gamma_+\!\setminus\Sigma$, ili sadržavati neki znak iz $\Sigma$ nakon prve praznine. Za takve Turingove strojeve nećemo reći da računaju ikakvu funkciju. Zapravo ih nećemo uopće promatrati, ali dobro ih je imati na umu ako iskazujemo teoreme univerzalno po svim Turingovim strojevima.
+Kao i za RAM-model, mogli bismo dokazati da za svaki Turingov stroj $\mathcal T$ i njegov ulaz $w$ postoji jedinstveno $\mathcal T$-izračunavanje s $w$, ali više ne vrijedi da svaki Turingov stroj računa neku jezičnu funkciju. Traka u završnoj konfiguraciji ne mora biti oblika $v\bl\ldots$ za $v\in\Sigma^*$: može sadržavati znakove iz $\Gamma_+\!\setminus\Sigma$, ili sadržavati neki znak iz $\Sigma$ nakon prve praznine. Za takve Turingove strojeve nećemo reći da računaju ikakvu funkciju. Zapravo ih nećemo uopće promatrati, ali dobro ih je imati na umu ako iskazujemo teoreme univerzalno po svim Turingovim strojevima.
 
 \subsection{Primjer Turing-izračunavanja}
 
@@ -182,7 +182,7 @@ pa to izračunavanje ne stane, iz čega vidimo $\t{aba}\notin\dom{\varphi_h}$.
 
 Kao što je već najavljeno, cilj je pokazati ekvivalentnost Turing-modela s RAM-modelom, odnosno funkcijskim modelom izračunljivosti. Za početak ćemo, koristeći pristup sličan onome iz poglavlja~\ref{ch:univ}, dokazati da su Turing-izračunljive jezične funkcije "parcijalno rekurzivne".
 
-Da bismo to dokazali, moramo prvo precizirati što to uopće znači. Neka je $\Sigma$ abeceda, i $\varphi$ jezična funkcija nad njom. Očito samu funkciju $\varphi$ ne možemo dobiti kompozicijom, primitivnom rekurzijom i minimizacijom iz inicijalnih (brojevnih) funkcija. Čak i da smislimo neke odgovarajuće "inicijalne jezične funkcije", kompozicija je jasna (čak jednostavnija nego u brojevnom slučaju, jer su sve funkcije jednomjesne), ali kako definirati primitivnu rekurziju kad riječ nema jedinstvenog sljedbenika? Kako definirati minimizaciju kad kanonski leksikografski uređaj na $\Sigma^*$ nije dobar uređaj? Kako uopće definirati izračunljive jezike ("relacije") kad karakteristična funkcija jezika nije ni brojevna ni jezična funkcija?
+Da bismo to dokazali, moramo prvo precizirati što to uopće znači. Neka je $\Sigma$ abeceda, i $\varphi$ jezična funkcija nad njom. Očito $\varphi$ ne možemo dobiti kompozicijom, primitivnom rekurzijom i minimizacijom iz inicijalnih (brojevnih) funkcija. Čak i da smislimo neke odgovarajuće "inicijalne jezične funkcije", kompozicija je jasna (čak jednostavnija nego u brojevnom slučaju, jer su sve funkcije jednomjesne), ali kako definirati primitivnu rekurziju kad riječ nema jedinstvenog sljedbenika? Kako definirati minimizaciju kad kanonski leksikografski uređaj na $\Sigma^*$ nije dobar uređaj? Kako uopće definirati izračunljive jezike ("relacije") kad karakteristična funkcija jezika nije ni brojevna ni jezična funkcija?
 
 Sve su to problemi o kojima smo već govorili, ponajviše u uvodu. No sada znamo dovoljno o kodiranju da nas to ne treba previše obeshrabriti. Kodirat ćemo $\Sigma^*$ nekom funkcijom $\N\Sigma^*$ (po uzoru na kodiranje $\N^*$, označavamo $\kr w:=\N\Sigma^*(w)$) te ćemo pomoću tog kodiranja definirati prateću funkciju $\N\varphi=\N\Sigma^*\circ\varphi\circ(\N\Sigma^*)^{-1}$, za koju je dobro definirano što znači da je parcijalno rekurzivna.
 Štoviše, pazit ćemo da $\N\Sigma^*$ bude \emph{bijekcija} između $\Sigma^*$ i $\N$, tako da će prateće funkcije totalnih funkcija doista biti totalne funkcije. To je bitno jer će onda \emph{rekurzivne} jezične funkcije biti dobro definirane, kao totalne izračunljive jezične funkcije, odnosno one čije su prateće funkcije rekurzivne.
@@ -191,7 +191,7 @@ Sve su to problemi o kojima smo već govorili, ponajviše u uvodu. No sada znamo
 
 Prvo recimo nešto o kodiranju abecede $\Sigma$. Kako je to konačan skup, iskoristit ćemo \texttt{enum}-tehniku, kao što smo već napravili kod kodiranja tipova instrukcija RAM-stroja. Ipak, ovdje ćemo početi brojiti od $1$ (ne želimo $0$ u slici od $\N\Sigma$), iz tehničkog razloga koji će uskoro biti jasan.
 
-Još jedan mali filozofski problem je u tome što su elementi od $\Sigma$ "apstraktni znakovi" bez ikakve imanentne semantike i međusobnog odnosa, tako da ne možemo fiksirati jedan poredak kao što smo to učinili za tipove RAM-instrukcija. Ipak, za svaku konkretnu abecedu moći ćemo fiksirati kodiranje (\emph{encoding}), a za apstraktne abecede moći ćemo univerzalno kvantificirati tvrdnje u obliku "Za svako kodiranje od $\Sigma$~\ldots", podrazumijevajući da je očito ("Zermelov teorem za konačne skupove") da kodiranje \emph{postoji}. U praksi, ti znakovi će obično biti dio standarda Unikod, pa ćemo ih moći poredati, ako baš nemamo pametniji kriterij, po rednim brojevima u Unikodu.
+Još jedan mali filozofski problem je u tome što su elementi od $\Sigma$ "apstraktni znakovi" bez ikakve imanentne semantike i međusobnog odnosa, tako da ne možemo fiksirati jedan poredak kao što smo to učinili za tipove RAM-instrukcija. Ipak, za svaku konkretnu abecedu moći ćemo fiksirati kodiranje (\emph{encoding}), a za apstraktne abecede moći ćemo univerzalno kvantificirati tvrdnje u obliku "Za svako kodiranje od $\Sigma$~\ldots", podrazumijevajući ("Zermelov teorem za konačne skupove") da kodiranje \emph{postoji}. U praksi, ti znakovi će obično biti dio standarda Unikod, pa ćemo ih moći poredati, ako baš nemamo pametniji kriterij, po rednim brojevima u Unikodu.
 
 \begin{definicija}[{name=[kodiranje abecede]}]
 Neka je $\Sigma$ abeceda. Označimo $b':=\card\Sigma$. %(taj broj zovemo \emph{baza} abecede $\Sigma$, iz razloga koji će uskoro postati jasan). 
@@ -200,7 +200,7 @@ Neka je $\Sigma$ abeceda. Označimo $b':=\card\Sigma$. %(taj broj zovemo \emph{b
 
 % \subsection{Pomaknute baze i kodiranje riječi}
 
-Sada bismo mogli, kao za kodiranje RAM-programa, jednostavno kodirati riječi kao kodove konačnih nizova kodova njihovih znakova --- ali to je nezgrapno (i ne bi bilo bijekcija). Naime, kodovi RAM-instrukcija mogli su biti proizvoljno veliki, dok za fiksnu abecedu, kodovi znakova mogu biti najviše $b'$. To sugerira da nam je dovoljno jednostavnije kodiranje.
+Sada bismo mogli, kao za kodiranje RAM-programa, jednostavno kodirati riječi kao kodove konačnih nizova kodova njihovih znakova --- ali to je nezgrapno (i ne bi bilo bijekcija). Kodovi RAM-instrukcija mogli su biti proizvoljno veliki, dok za fiksnu abecedu, kodovi znakova mogu biti najviše $b'$ --- što sugerira da nam je dovoljno jednostavnije kodiranje.
 
 Najprirodnije kodiranje ograničenih nizova, toliko prirodno da možda nismo ni svjesni kako ga koristimo (za $b'=10$) svaki put kad čitamo i pišemo višeznamenkaste brojeve, je \textbf{zapis u bazi} $b'$. Ipak, s njime postoje dva problema. Prvi problem su početne nule ($(001121)_3=(1121)_3$), što smo riješili tako što smo počeli kodirati znakove od $1$, ali smo na račun toga dobili uključenu gornju granicu. Kako opravdati znamenku $b'$ u bazi $b'$? Drugi problem su jednočlane abecede: znamo da se obični pozicijski brojevni sustavi definiraju samo za baze od $2$ nadalje. Da, postoji i unarni zapis, ali on nije pozicijski --- ili jest?
 
@@ -301,11 +301,11 @@ Postoje primitivno rekurzivne funkcije $\f{slh}^2$\!, $\f{sdigit}^3$\!, $\f{scon
     \f{sdigit}(n,i,b)&:=\f{mod}'\bigl(\f{sprefix}\bigl(n,\f{Sc}(i),b\bigr),b\bigr)
 \end{align}
 \begin{proof}
-Za $\f{slh}$, treba uočiti da zapisa duljine $i$ ima točno $b^i$. Dakle, samo trebamo zbrajati takve brojeve dok ne prijeđemo $n$. Također, očito je $\f{slh}(n,b)\le n$.~\eqref{eq:deflh}
+Za $\f{slh}$, treba uočiti da zapisa duljine $i$ ima točno $b^i$. Dakle, samo trebamo zbrajati takve brojeve dok ne prijeđemo $n$. Očito je $\f{slh}(n,b)\le n$.~\eqref{eq:deflh}
 
 Sada jednostavno možemo dobiti konkatenaciju: $m$ pomaknemo udesno da $n$ taman stane u dobiveni prostor, i samo ga pribrojimo.~\eqref{eq:defconcat}
 
-Pomoću konkatenacije možemo dobiti $\f{sprefix}$: prefiks je ono što se može konkatenirati s nečim tako da se dobije početni zapis $n$. Očito su dijelovi manji ili jednaki $n$.~\eqref{eq:defprefix}
+Pomoću konkatenacije možemo dobiti $\f{sprefix}$: prefiks je ono što se može konkatenirati s nečim tako da se dobije početni zapis $n$. Očito su dijelovi manji ili jednaki $n$.~\eqref{eq:defprefix} %I ovdje: podriječ ima manji kod.
 
 Sada nije teško napisati ni $\f{sdigit}$: to je posljednja znamenka prefiksa čija je duljina za jedan veća od pozicije znamenke.~\eqref{eq:defdigit}
 %Sve te funkcije su primitivno rekurzivne, koristeći dosadašnje rezultate.
@@ -359,9 +359,7 @@ Tada za svaku $w\in\Sigma^*$ imamo $\mathcal T'$-izračunavanje s $w$: $(0,0,w\b
 
 Slično možemo kodirati i $\Gamma_0$ --- ali kako već imamo kodiranje skupa $\Sigma_0\subset\Gamma_0$, želimo da znakovi ulazne abecede imaju iste kodove. Dakle, označimo $b:=\card\Gamma_0$, i proširimo bijekciju $\N\Sigma_0:\Sigma_0\leftrightarrow[1\dd b']$ na bijekciju $\N\Gamma_0:\Gamma_0\leftrightarrow[0\dd b\rangle$, tako da $\bl$ preslikamo u $0$, a ostale elemente iz $\Gamma_0\!\setminus\Sigma_0$ bijektivno u skup $\langle b'\dd b\rangle$.
 
-Primijetite da smo sada upotrijebili nulu, i to kao $\N\Gamma_0(\bl)$. To pruža opravdanje za frazu "traka je s konačnim nosačem" (praznine su kodirane nulama, pa ne-nula ima konačno mnogo), a bit će esencijalno i za kodiranje trake.
-
-Naime, sada imamo sličan problem kao sa stanjem registara RAM-stroja: da bismo kodirali proizvoljnu traku, moramo nekako skupiti kodove beskonačno mnogo ćelija, ali takve da su svi osim konačno mnogo njih jednaki $0$. Alternativno, želimo "kodiranje" konačnih nizova, ali tako da dodavanje nule na kraj ne promijeni kod.
+Ovaj put smo upotrijebili nulu, kao $\N\Gamma_0(\bl)$. To pruža opravdanje za frazu "traka je s konačnim nosačem" (praznine su kodirane nulama, pa ne-nula ima konačno mnogo), a bit će esencijalno i za kodiranje trake. Naime, sada imamo sličan problem kao sa stanjem registara RAM-stroja: da bismo kodirali proizvoljnu traku, moramo nekako skupiti kodove beskonačno mnogo ćelija, ali takve da su svi osim konačno mnogo njih jednaki $0$. Alternativno, želimo "kodiranje" konačnih nizova, ali tako da dodavanje nule na kraj ne promijeni kod.
 
 U slučaju RAM-registara to smo riješili rastavom na prim-faktore, odnosno malom modifikacijom kodiranja $\N^*$ --- umjesto od $1$, eksponenti su išli od $0$. Možemo li ovdje naći neku malu modifikaciju kodiranja $\Sigma^*$ (zapis u bazi) da dobijemo analogni rezultat?
 
@@ -375,7 +373,7 @@ Za proizvoljnu traku $t:\N\to\Gamma_0$ (takvu da je skoro svuda $\bl$), definira
 Zbog konačnog nosača i činjenice da je $\N\Gamma_0(\bl)=0$, samo konačno mnogo članova tog "reda potencija" bit će pozitivno, pa je suma dobro definirana.
 \end{definicija}
 
-S ovom idejom postoje dvije smetnje. Prva je što, očito, moramo promijeniti bazu iz $b'$ u $b$, jer na traci se mogu naći i znakovi s većim kodovima. Druga je posljedica nesretne povijesne okolnosti da u zapadnom svijetu pišemo riječi slijeva nadesno (i tako doživljavamo traku), ali smo zapis brojeva preuzeli iz jezika (arapskog) koji se piše u suprotnom smjeru. Zato dodavanje nule \emph{slijeva} u zapis broja u bazi $b$ odgovara dodavanju prazne ćelije \emph{zdesna} pri pomaku udesno od zadnje posjećene ćelije.
+S ovom idejom postoje dvije smetnje. Prvo, moramo promijeniti bazu iz $b'$ u $b$, jer na traci se mogu naći i znakovi s većim kodovima. Drugo, u zapadnom svijetu pišemo riječi slijeva nadesno (i tako doživljavamo traku), ali smo zapis brojeva preuzeli iz arapskog jezika koji se piše u suprotnom smjeru. Zato dodavanje nule \emph{slijeva} u zapis broja u bazi $b$ odgovara dodavanju prazne ćelije \emph{zdesna} pri pomaku udesno od zadnje posjećene ćelije.
 
 Iskusniji računarci, posebno oni s iskustvom mrežnog programiranja, znaju da taj problem postoji i u njihovom svijetu. Radi se o \emph{byteorder}-dilemi, sasvim analognoj upravo opisanom problemu, iz sličnih razloga. Većina modernih procesora pamti višebajtne podatke tako da na početnoj adresi podatka stoji najmanje značajni bajt, jer se na taj način semantika \emph{casta} pokazivača podudara sa semantikom \emph{casta} pokazanih vrijednosti. Nakon \texttt{int x=0x61626364;}, izraz \texttt{(char)x} ima vrijednost \texttt{0x64}, pa bi se moglo očekivati da i \texttt{*(char*)\&x} ima istu vrijednost. (Gledano s druge strane, nakon \texttt{y=25} htjeli bismo da se na adresi \texttt{\&y} nalazi bajt $25$, neovisno o tome kojeg je \texttt y tipa.) No to je jedino moguće ako se \texttt x stavlja na adrese $[p\dd p+\texttt{sizeof x}\rangle$ tako da se na adresu $p$ stavi bajt \texttt{0x64}, na adresu $p+1$ bajt \texttt{0x63} (za \emph{cast} u \texttt{short}),~\ldots, odnosno "obrnutim" redom (\emph{little-endian}).
 
@@ -542,7 +540,7 @@ Funkcija $\f{stop}^1$, definirana sa
 \begin{equation}
     \f{stop}(\kr w):\simeq\text{"broj koraka nakon kojeg $\mathcal T_0$-izračunavanje s $w$ stane",}
 \end{equation}
-    parcijalno je rekurzivna (naravno, $\dom{\f{stop}}=\dom{\N\varphi_0}=\{\kr w\mid w\in\dom{\varphi_0}\}=:\kr{\dom{\varphi_0}}$).
+    parcijalno je rekurzivna ($\dom{\f{stop}}=\dom{\N\varphi_0}=\{\kr w\mid w\in\dom{\varphi_0}\}=:\kr{\dom{\varphi_0}}$).
 \end{lema}
 \begin{proof}
 Tvrdimo da je
@@ -586,7 +584,7 @@ Stroj $\mathcal T_0$ ćemo konstruirati u pet dijelova (\emph{fragmenata}), koji
 
 Stanja ćemo uvoditi postepeno, kako budemo specificirali funkciju $\delta$. Dodat ćemo još jedno stanje, stanje greške $q_x$, uz standardnu konvenciju da za bilo koji par $(q,\alpha)$ na kojem nismo eksplicitno definirali $\delta$, vrijedi $\delta(q,\alpha):=(q_x,\alpha,1)$. To je samo birokratski detalj da bi $\delta$ bila totalna, jer $\mathcal T_0$ nikada neće otići u stanje $q_x$: jedini način da računa beskonačno dugo bit će da odgovarajuće $P_0$-izračunavanje ne stane.
 
-S druge strane, radnu abecedu već možemo preciznije specificirati. Prvo, u njoj se svakako nalaze svi znakovi iz $\Sigma_0$, kodirani po $\N\Sigma_0$ brojevima iz $[1\dd b']$. Znak ${\N\Sigma_0}^{-1}(t)$ označit ćemo s $\alpha_t$. Oni predstavljaju "znamenke" od $1$ do $b'$ u pomaknutoj bazi $b'$. 
+S druge strane, radnu abecedu već možemo preciznije specificirati. Prvo, u njoj se moraju nalaziti svi znakovi iz $\Sigma_0$, kodirani po $\N\Sigma_0$ brojevima iz $[1\dd b']$. Znak ${\N\Sigma_0}^{-1}(t)$ označit ćemo s $\alpha_t$. Oni predstavljaju "znamenke" od $1$ do $b'$ u pomaknutoj bazi $b'$. 
 
 Za označavanje početka i kraja (upotrijebljenog dijela) trake koristimo graničnik, koji se obično piše $\t\$$. Također, moramo nekako odvojiti dio za ulaz i dio za računanje (simulaciju): za to ćemo koristiti separator koji se obično piše $\t\#$. Traka će u početku izgledati otprilike kao $\t\$\bl^lv\t\#u\bl\ldots$, a kasnije kao $\t\$\bl^k\t\#uv\t\$\bl\ldots$, gdje je $v\in\Sigma_0^*$ dio za ulaz odnosno izlaz, a $u\in(B^m)^*$ dio za reprezentaciju konfiguracije od $\mathcal S_0$ --- o kojem ćemo govoriti nešto kasnije. Sve u svemu, zasad znamo
 %\begin{equation}
@@ -731,7 +729,7 @@ Za riječ $\t{aab}$ imamo šetnju kroz konfiguracije (pišemo samo neke od njih)
 %{}\leadsto
 \T{\$\bl\bl\bl\#}{p_0}{\t{$r_1^{22}$}}{}\text,
 \end{multline}
-što je točno kako treba biti jer je $b'=4$, pa je $\kr{\t{aab}}=(112)_4=22$. Primijetimo da je "invarijanta petlje" zadovoljena u svim istaknutim konfiguracijama gdje se $q_0$ nalazi ispod zadnjeg znaka prije separatora --- npr.\ za $\t{\$\bl cd\#$r_1^6$}$ je $w'=\t{cd}$, čiji je kod $\kr{\t{cd}}=(34)_4=16$, a $\kr w-\kr{w'}=22-16=6$.
+što je točno kako treba biti jer je $b'=4$, pa je $\kr{\t{aab}}=(112)_4=22$. "Invarijanta petlje" zadovoljena je u svim istaknutim konfiguracijama gdje se $q_0$ nalazi ispod zadnjeg znaka prije separatora --- npr.\ za $\t{\$\bl cd\#$r_1^6$}$ je $w'=\t{cd}$, čiji je kod $\kr{\t{cd}}=(34)_4=16$, a $\kr w-\kr{w'}=22-16=6$.
 \end{primjer}
 
 %I to je to. Spremni smo za simulaciju $P_0$-izračunavanja s $\kr w$.
@@ -858,7 +856,7 @@ Konkretno, ako (za $m=4$) u nekom trenutku imamo konfiguraciju $(1,4,0,5,0,0,\do
     \t\textopenbullet
     \end{array}\dotsm\text,
 \end{equation}
-iz čega vidimo dvije stvari. Prvo, $\bl$ je očito ovaj prvi element u $B^m$, koji ima sve kružiće prazne. Tako direktno postižemo da traka bude prazna od nekog mjesta nadalje (konkretno, maksimum svih $m$ vrijednosti u registrima), odnosno da bude s konačnim nosačem. Drugo, naš znak $r_1$, koji smo upotrijebili da postavimo $\reg1$ na ulaznu vrijednost $\kr w$, je treći element u $B^m$, napisan transponirano kao $(\t{\textopenbullet\textbullet\textopenbullet}^{m-2})^\intercal$. Stupčano,
+iz čega vidimo dvije stvari. Prvo, $\bl$ mora biti ovaj prvi element u $B^m$, koji ima sve kružiće prazne. Tako postižemo da traka bude prazna od nekog mjesta nadalje (konkretno, maksimum svih $m$ vrijednosti u registrima), odnosno da bude s konačnim nosačem. Drugo, naš znak $r_1$, koji smo upotrijebili da postavimo $\reg1$ na ulaznu vrijednost $\kr w$, je treći element u $B^m$, napisan transponirano kao $(\t{\textopenbullet\textbullet\textopenbullet}^{m-2})^\intercal$. Stupčano,
 \begin{equation}
 \renewcommand{\arraystretch}{0.1}
     \bl\,:=\begin{array}{c}
@@ -959,7 +957,7 @@ Recimo, u~\eqref{eq:bitmap} je navedena traka konfiguracije $Turing_{74n}\bigl((
     Neka je $P=[t.\,I_t]_{t<n}$ RAM-program, i označimo $m:=m_{P^1}$. Tada za svaki $i<n$ postoji fragment Turingovog stroja, koji za svaku RAM-konfiguraciju $c$ takvu da je $c(\textsc{pc})=i$, za svaki $k\in\N$, prevodi reprezentaciju $Turing_{kmn}(c)$ u reprezentaciju $Turing_{kmn}(d)$, gdje smo s $d$ označili jedinstvenu RAM-konfiguraciju takvu da $c\leadsto d$ po programu $P$.
 \end{propozicija}
 \begin{proof}
-Prvo primijetimo da zbog $c(\textsc{pc})=i<n=n_P$ konfiguracija $c$ sigurno nije završna, pa postoji instrukcija $I_i=I_{c(\textsc{pc})}$. Konstruiramo traženi fragment ovisno o tipu te instrukcije. Taj fragment počinje u stanju $s_i$, a trebao bi završiti u stanju $s_{i'}$, gdje smo označili $i':=d(\textsc{pc})$ --- no zbog leme~\ref{lm:pi>si} dovoljno je stati u $p_{i'}$, na bilo kojoj poziciji $p>k$, i s trakom kakva je u $Turing_{kmn}(d)$.
+Zbog $c(\textsc{pc})=i<n=n_P$ konfiguracija $c$ sigurno nije završna, pa postoji instrukcija $I_i=I_{c(\textsc{pc})}$. Konstruiramo traženi fragment ovisno o tipu te instrukcije. Taj fragment počinje u stanju $s_i$, a trebao bi završiti u stanju $s_{i'}$ za $i':=d(\textsc{pc})$ --- no zbog leme~\ref{lm:pi>si} dovoljno je stati u $p_{i'}$, na bilo kojoj poziciji $p>k$, i s trakom kakva je u $Turing_{kmn}(d)$.
 
 Ako je $I_i$ tipa $\inc$, recimo  $i.\;\incr j$, trebamo otići do kraja znakova \t\textbullet\ u tragu $j$~\eqref{d:41}, i dopisati još jedan \t\textbullet\ tamo, a zatim se pripremiti za sljedeću instrukciju, onu rednog broja $i+1$~\eqref{d:42}.
 \begin{gather*}
@@ -988,7 +986,7 @@ Ako je $I_i$ tipa $\goto$, recimo $i.\;\goto\;l$, samo odemo na pripremu za inst
 \end{equation*}
 Sada samo još treba na svako stanje oblika $p_{i'}$ "našarafiti" konstrukciju iz leme~\ref{lm:pi>si}. Lako je vidjeti da je pozicija u svakom od tih stanja strogo veća od $k$, ako je na početku u stanju $s_i$ bila $k+2$; recimo primjenom~\eqref{d:53} će pozicija biti upravo $k+2>k$, a primjenom~\eqref{d:54} će biti $k+c(\reg j)$, što je veće od $k$ jer je u tom slučaju $c(\reg j)>0$.
 \end{proof}
-%Radi jednostavnosti, pretpostavit ćemo da za svaku instrukciju (i još za $i=n$) imamo sva tri stanja $s_i$, $p_i$ i $t_i$ --- iako, naravno, stanja $t_i$ će biti povezana s ostalim stanjima samo ako je instrukcija s rednim brojem $i$ tipa $\dec$; inače će biti nedostupna, i ni na koji način neće utjecati na $\mathcal T_0$-izračunavanje. Nećemo ih ni crtati na dijagramima (baš kao ni stanje greške $q_x$), ali tako će definicija biti jednostavnija.
+%Radi jednostavnosti, pretpostavit ćemo da za svaku instrukciju (i još za $i=n$) imamo sva tri stanja $s_i$, $p_i$ i $t_i$ --- iako će stanja $t_i$ biti povezana s ostalim stanjima samo ako je instrukcija s rednim brojem $i$ tipa $\dec$; inače će biti nedostupna, i ni na koji način neće utjecati na $\mathcal T_0$-izračunavanje. Nećemo ih ni crtati na dijagramima (baš kao ni stanje greške $q_x$), ali tako će definicija biti jednostavnija.
 
 Sva tri tipa fragmenata iz dokaza možemo prikazati sljedećim dijagramima:
 \begin{itemize}
@@ -1235,7 +1233,7 @@ $\Sigma_0$} (q6)
 \end{equation}
 \end{primjer}
 
-Primijetimo da zbog $\kr v=y=\kr{\varphi_0(w)}$ i propozicije~\ref{pp:bijkr} zapravo vrijedi $v=\varphi_0(w)$, odnosno (ako uopće dođemo u situaciju da možemo primijeniti lemu~\ref{lm:faza4}) već imamo izlaznu riječ na traci. Još je treba premjestiti na početak, i obrisati s trake sve ostalo.
+Zbog $\kr v=y=\kr{\varphi_0(w)}$ i propozicije~\ref{pp:bijkr} zapravo vrijedi $v=\varphi_0(w)$, odnosno (ako uopće dođemo u situaciju da možemo primijeniti lemu~\ref{lm:faza4}) već imamo izlaznu riječ na traci. Još je treba premjestiti na početak, i obrisati s trake sve ostalo.
 
 % \subsection{Pospremanje za sobom}
 
@@ -1260,7 +1258,7 @@ Drugi korak je uzimanje jednog po jednog znaka od $v$, i njegov prijenos na poč
 
 Treći korak počinje čitanjem i brisanjem završnog graničnika \t\$, i nastavlja prolaskom kroz praznine ulijevo~\eqref{d:87}, sve dok ne udarimo u zadnji znak od $v$ ako je $v\ne\varepsilon$~\eqref{d:85}, odnosno u početni graničnik (koji tada treba obrisati, ostavivši traku sasvim praznom) u slučaju $v=\varepsilon$~\eqref{d:89}.
 
-U slučaju neprazne riječi $v$, očito će završna pozicija biti neposredno iza zadnjeg znaka od $v$, dakle $\dulj{v}$. U slučaju prazne riječi, prijelaz~\eqref{d:89} će se dogoditi na lijevom rubu trake, pokušati pomak lijevo, i ostati na istoj poziciji $0=\dulj{\varepsilon}=\dulj{v}$. U svakom slučaju dobili smo stanje $l_{\bl}$, traku $v\bl\ldots$\,, i poziciju $\dulj{v}$.
+Za nepraznu riječ $v$, završna će pozicija biti neposredno iza zadnjeg znaka od $v$, dakle $\dulj{v}$. Za praznu riječ, prijelaz~\eqref{d:89} će se dogoditi na lijevom rubu trake, pokušati pomak lijevo, i ostati na istoj poziciji $0=\dulj{\varepsilon}=\dulj{v}$. U svakom slučaju dobili smo stanje $l_{\bl}$, traku $v\bl\ldots$ i poziciju $\dulj{v}$.
 \end{proof}
 
 \begin{primjer}[{name=[peti fragment transpiliranog stroja]}]
@@ -1299,7 +1297,7 @@ Za $\Sigma_0:=\{\t a,\t b\}$, peti fragment možemo prikazati dijagramom
 Za općenitu abecedu $\Sigma_0$, umjesto dva "viseća trokuta" ispod $q_6$, bit će ih $b'$: po jedan $\triangle q_6 m_\alpha l_\alpha$ za svaki znak $\alpha\in\Sigma_0$.
 \end{primjer}
 
-%Primijetite da smo stigli do završnog stanja $l_{\bl}$. Time smo napokon završili konstrukciju Turingovog stroja $\mathcal T_0$, i sve je spremno za dokaz "obrata" teorema~\ref{tm:tikp}.
+%Stigli smo do završnog stanja $l_{\bl}$. Time smo napokon završili konstrukciju Turingovog stroja $\mathcal T_0$, i sve je spremno za dokaz "obrata" teorema~\ref{tm:tikp}.
 
 \subsection{Objedinjavanje}
 
@@ -1325,7 +1323,7 @@ Doista, neka je $w\in\Sigma_0^*$ proizvoljna riječ, i označimo s $k:=\dulj{w}$
     Ako pak $w\notin\dom{\varphi_0}$, tada će se prve dvije faze izvršiti jednako, ali iz $x\notin\dom{\N\varphi_0}$ slijedi da $P_0$-izračunavanje s $x$ nikad neće stati, pa po korolaru~\ref{kor:faza3} niti $\mathcal T_0$-izračunavanje neće doći do $s_n$. Prema napomeni~\ref{nap:snstane}, to znači da ono nikad neće stati (doći do $l_{\bl}$), jer jedini put od $n_{\t\$}$ do $l_{\bl}$ vodi kroz stanje $s_n$.
 \end{proof}
 
-Primijetimo iznenađujuću sličnost upravo provedenog dokaza s dokazom propozicije~\ref{prop:semfmacro} (semantika funkcijskog makroa). Kao što smo tamo omogućili makro-stroju da u izoliranoj okolini izvrši neki konkretni RAM-program, tako smo to ovdje omogućili Turingovom stroju. Kao i u makro-programu iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (namještanje početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa) te, ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije, i "zatvaranje okvira" (pospremanje nereda koji smo napravili).
+Uočimo sličnost upravo provedenog dokaza s dokazom propozicije~\ref{prop:semfmacro} (semantika funkcijskog makroa). Kao što smo tamo omogućili makro-stroju da u izoliranoj okolini izvrši neki konkretni RAM-program, tako smo to ovdje omogućili Turingovom stroju. Kao i u makro-programu iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (namještanje početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa) te, ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije, i "zatvaranje okvira" (pospremanje nereda koji smo napravili).
 
 Prikažimo postupak Turing-iz\-ra\-ču\-na\-va\-nja kroz faze (sa $z$ je označen najveći broj u ikojem relevantnom registru od $\mathcal S_0$ u završnoj konfiguraciji $P_0$-izračunavanja s $\kr w$):
 \begin{equation}
@@ -1369,10 +1367,10 @@ Primjer~\ref{pr:+a} sad možemo pratiti kroz sve faze:
 \T{aba}{l_{\bl}}{\bl}{}\lcirclearrowleft\text.
 \end{align}
 
-Naravno, dodati \t a na kraj riječi Turingov stroj može puno jednostavnije --- ali ovaj primjer zapravo pokazuje kako može računati bilo koju funkciju koju RAM-stroj može računati. Pravo računanje odvija se u primjeru~\ref{pr:+a2} --- ovo je samo hrpa "papirologije" prije i poslije, koju treba riješiti da bi taj primjer bio koristan.
+Dodati \t a na kraj riječi Turingov stroj očito može puno jednostavnije --- ali ovaj primjer zapravo pokazuje kako može računati bilo koju funkciju koju RAM-stroj može računati. Pravo računanje odvija se u primjeru~\ref{pr:+a2} --- ovo je samo hrpa "papirologije" prije i poslije, koju treba riješiti da bi taj primjer bio koristan.
 \end{primjer}
 
-Ukratko, dokazali smo da je za \emph{jezične} funkcije izračunljivost u jezičnom modelu jednako snažna kao izračunljivost njihovih pratećih funkcija u brojevnom modelu. Primijetimo da smo time napokon opravdali neovisnost o korištenom \emph{encodingu}, i riješili "filozofski problem" s početka točke~\ref{sec:kSigma}.
+Ukratko, dokazali smo da je za \emph{jezične} funkcije izračunljivost u jezičnom modelu jednako snažna kao izračunljivost njihovih pratećih funkcija u brojevnom modelu. Time smo napokon opravdali neovisnost o korištenom \emph{encodingu}, i riješili "filozofski problem" s početka točke~\ref{sec:kSigma}.
 
 \begin{korolar}[{name=[neovisnost izračunljivosti jezične funkcije o kodiranju abecede]}]\label{kor:ikojiNSigma}
 Neka je $\Sigma$ abeceda te $\varphi$ jezična funkcija nad njom.\newline Tada parcijalna rekurzivnost funkcije $\N\varphi$ ne ovisi o izboru kodiranja $\N\Sigma$.
