@@ -12,7 +12,7 @@ Neka je $\Sigma$ proizvoljna abeceda, i $\N\Sigma$ proizvoljno njeno kodiranje. 
 \begin{proof}
 Teorem~\ref{tm:tikp} (zajedno s teoremom~\ref{tm:pir}) kaže da za svaku $\varphi\in\TComp$ vrijedi $\N\varphi\in\mathscr Comp_1$. Dakle preslikavanje doista "ide kamo treba".
 
-Injektivnost je lako dokazati: neka su $\varphi_1,\varphi_2\in\TComp$ različite. Ako imaju različite domene, bez smanjenja općenitosti možemo pretpostaviti da postoji $w\in\dom{\varphi_1}\!\setminus\dom{\varphi_2}$. Tada je $\kr w\in\dom{\N\varphi_1}$, ali isto tako $\kr w\notin\dom{\N\varphi_2}$ jer je kodiranje riječi injekcija, pa $\kr w$ ne može biti jednak nijednom $\kr{w'}$ za $w'\in\dom{\varphi_2}$. To znači da prateće funkcije $\N\varphi_1$ i $\N\varphi_2$ imaju različite domene, pa su različite.
+Za injektivnost, neka su $\varphi_1,\varphi_2\in\TComp$ različite. Ako imaju različite domene, bez smanjenja općenitosti možemo pretpostaviti da postoji $w\in\dom{\varphi_1}\!\setminus\dom{\varphi_2}$. Tada je $\kr w\in\dom{\N\varphi_1}$, ali isto tako $\kr w\notin\dom{\N\varphi_2}$ jer je kodiranje riječi injekcija, pa $\kr w$ ne može biti jednak nijednom $\kr{w'}$ za $w'\in\dom{\varphi_2}$. To znači da prateće funkcije $\N\varphi_1$ i $\N\varphi_2$ imaju različite domene, pa su različite.
 
 Ako pak $\varphi_1$ i $\varphi_2$ imaju istu domenu $D$, ali se razlikuju na nekoj riječi $w\in D$, tada (opet po injektivnosti kodiranja riječi) vrijedi
 \begin{equation}
@@ -93,7 +93,7 @@ Nije preteško vidjeti da su te dvije karakterizacije, brojevna i jezična, pove
 \begin{proof}
 Pretpostavimo da je $\mathcal T$ odlučitelj za $L$, i provedimo s tim strojem postupak iz točke~\ref{sec:tikp}. Ovdje navodimo samo detalje koje je potrebno promijeniti.
 
-Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_\mathit{true}):=1$, a $\N Q(q_\mathit{false}):=2$. (Lako je dokazati analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\ne q_\mathit{true}$ i $q_0\ne q_\mathit{false}$ --- a po definiciji odlučitelja mora biti $q_\mathit{true}\ne q_\mathit{false}$.)
+Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_\mathit{true}):=1$, a $\N Q(q_\mathit{false}):=2$. (Dokažite analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\ne q_\mathit{true}$ i $q_0\ne q_\mathit{false}$ --- a po definiciji odlučitelja mora biti $q_\mathit{true}\ne q_\mathit{false}$.)
 
     Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\notin\{q_\mathit{true},q_\mathit{false}\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica (vidjeti primjer~\ref{pr:polatable}) imati dva retka jedinica, a ne samo jedan.
 
@@ -101,7 +101,7 @@ I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$, imat ćemo funkciju
 \begin{equation}\label{eq:stop'def}
     \f{stop}'(x):=\mu n\bigl(\f{State}(x,n)\in\{1,2\}\bigr)\text,
 \end{equation}
-    za koju lako vidimo da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}), pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak \enquote*{:=}) po definiciji odlučitelja: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$ za neki $n$, jer $\mathcal T$-izračunavanje s $w$ mora stati --- i $\f{stop}'(x)=\f{stop}'(\kr w)$ je upravo broj koraka nakon kojeg ono stane.
+    i moći ćemo zaključiti da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}) pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak \enquote*{:=}) po definiciji odlučitelja: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$ za neki $n$, jer $\mathcal T$-izračunavanje s $w$ mora stati --- i $\f{stop}'(x)=\f{stop}'(\kr w)$ je upravo broj koraka nakon kojeg ono stane.
 
 Tvrdimo da je
 \begin{equation}
@@ -109,7 +109,7 @@ Tvrdimo da je
 \end{equation}
 iz čega odmah slijedi rekurzivnost od $\kr L$ po lemi~\ref{lm:comprek} i korolaru~\ref{kor:prnrek}. 
 
-Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$-izračunavanje s $w$ mora stati u stanju $q_\mathit{true}$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju), pa vrijedi $\f{State}(x,n)\notin\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
+Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$-izračunavanje s $w$ mora stati u stanju $q_\mathit{true}$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju) pa $\f{State}(x,n)\notin\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
 
 U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučitelj, pa $\mathcal T$-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\notin\{1,2\}$ za $n<n_0$, i $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_{\mathit{true}}$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
 \end{proof}
@@ -140,7 +140,7 @@ Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju $bool$ u $\Sigma^*$:
 \label{eq:d89j}
     \delta(m_{\bl},\t\$):=(q_\mathit{false},\bl,-1)\text.
 \end{gather}
-Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_\mathit{true}$. Za $w\notin L$, rezultat će biti $\varepsilon$, pa će stroj doći do graničnika, obrisati ga i ući u stanje $q_\mathit{false}$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
+Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_\mathit{true}$. Za $w\notin L$ rezultat će biti $\varepsilon$ pa će stroj doći do graničnika, obrisati ga i ući u stanje $q_\mathit{false}$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
 \end{proof}
 \vspace{-4mm}
 
@@ -155,11 +155,11 @@ Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
 (q9) edge[dashed] node[below] {\t\$:\bl} (qf)
 ;
 \end{tikzpicture}\;.
-\vspace{-12mm}
+\vspace{-8mm}
 
 \subsection{Turing-izračunljivost višemjesnih funkcija}
 
-Dosadašnji rezultati pokazuju da je za jezične funkcije, i za \emph{jednomjesne} brojevne funkcije, svejedno računamo li ih na Turingovom stroju ili na nekom brojevnom modelu izračunavanja (npr.\ RAM-stroju). Možemo li to isto dokazati i za \emph{višemjesne} brojevne funkcije? Možemo --- samo se prvo trebamo dogovoriti oko reprezentacije njihovog ulaza.
+Dosadašnji rezultati pokazuju da je za jezične funkcije, i za \emph{jednomjesne} brojevne funkcije, svejedno računamo li ih na Turingovom stroju ili na nekom brojevnom modelu izračunavanja (npr.\ RAM-stroju). Možemo li to isto dokazati i za \emph{višemjesne} brojevne funkcije? Prvo se trebamo dogovoriti oko reprezentacije njihovog ulaza.
 
 %Zapravo, sve potrebne ideje smo već vidjeli. Za ulazne podatke jednomjesnih funkcija, kao i za izlazne podatke, koristit ćemo unarni zapis: što je prirodnije nego broj $4$ zapisati na traku Turingovog stroja kao \textbullet\textbullet\textbullet\textbullet, a $0$ kao praznu riječ $\varepsilon$\@? Tako smo već prikazivali (u tragovima) sadržaj registara kod simulacije RAM-izračunavanja. Da smo opterećeni složenošću, morali bismo koristiti binarni ili neki drugi "pravi" pozicijski zapis, ali srećom nismo.
 
@@ -200,7 +200,7 @@ nad binarnom abecedom $\Sigma_\beta$, kažemo da je \emph{binarna reprezentacija
 
 Vjerojatno ste nekad napisali Turingov stroj za $\beta\f{add}^2$, koristeći $\beta\f{add}^2(u\t/v)=uv$, ako su $u,v\in\t\textbullet^*$. Ipak, već tada ste zasigurno vidjeli koliko je teško napisati $\beta\f{mul}^2$, a pogotovo $\beta\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\beta\f{part}$?!) da i ne spominjemo.
 
-Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\beta\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Ipak, prvo ćemo dokazati obrat: brojevne funkcije, čije su binarne reprezentacije Turing-izračunljive, parcijalno su rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a mnoge dijelove dokaza moći ćemo upotrijebiti i u dokazu obrata.
+Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\beta\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Ipak, prvo ćemo dokazati obrat: one brojevne funkcije čije binarne reprezentacije su Turing-izračunljive, parcijalno su rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a osnovnu ideju dokaza moći ćemo upotrijebiti i u dokazu obrata.
 
 %\subsection{Prateća funkcija binarne reprezentacije}
 
@@ -258,7 +258,7 @@ Drugim riječima, za svaki od ta dva pravokutnika, pa onda i za veliki pravokutn
 
 Prvo, dakle, trebamo dokazati (gornji pravokutnik) da je $\beta f\circ\beta^k =\beta^1\circ f$. Domena desne funkcije je $\dom f$ jer je $\beta^1$ totalna, a domena lijeve funkcije je $\{\vec x\in\N^k\mid\beta^k(\vec x)\in\dom{\beta f}\}$, što je opet jednako $\dom f$ po definiciji domene $\dom{\beta f}$. Neka je sad $\vec x\in\dom f$ proizvoljan. Na njemu je vrijednost lijeve funkcije $\beta f\bigl(\beta^k(\vec x)\bigr)$, što je po definiciji~\eqref{eq:betaf} jednako $\beta^1\bigl(f(\vec x)\bigr)=(\beta^1\circ f)(\vec x)$. Dakle, $\beta f\circ\beta^k$ i $\beta^1\circ f$ imaju istu domenu i na njoj se podudaraju, pa su to jednake funkcije.
 
-Donji pravokutnik je puno jednostavniji jer je $\N\Sigma_\beta^*$ bijekcija: ako označimo $\varphi:=\beta f$,
+Donji pravokutnik je jednostavniji jer je $\N\Sigma_\beta^*$ bijekcija: uz oznaku $\varphi:=\beta f$,
 \begin{equation}
     \N\beta f\circ\N\Sigma_\beta^*=\N\varphi\circ\N\Sigma_\beta^*=\N\Sigma_\beta^*\circ\varphi\circ(\N\Sigma_\beta^*)^{-1}\circ\N\Sigma_\beta^*=\N\Sigma_\beta^*\circ\varphi=\N\Sigma_\beta^*\circ\beta f\text.
 \end{equation}
@@ -278,7 +278,7 @@ Upravo dokazana jednakost je korisna, jer pruža način da se u potpunosti izbje
 Za svaki $k\in\N_+$, definiramo $\f{bin}^k:=\N\Sigma_\beta^*\circ\beta^k$.
 \end{definicija}
 
-Te funkcije su brojevne, i na dijagramu su prikazane točkanim strelicama: lijeva stranica vanjskog pravokutnika je $\f{bin}^k$, a desna $\f{bin}^1$. Svaka $\f{bin}^k$ je injekcija kao kompozicija dvije injekcije. Jesu li izračunljive bez pozivanja na jezični model? %Štoviše, funkcija $bin^{\cdots}:=\N\Sigma_\beta^*\circ\beta$ (koja nije brojevna funkcija jer nema fiksnu mjesnost) predstavlja jednostavan način da u funkciju prenesemo varijabilan broj argumenata: za funkciju $f^{\cdots}$ koja prima \emph{varargs}, $\N\beta f^{\cdots}$ je jednomjesna brojevna funkcija koja dobro modelira sve aspekte izračunljivosti funkcije $f^{\cdots}$, pa bismo mogli reći da je $f^{\cdots}$ izračunljiva (u nekom smislu) ako je $\N\beta f^{\cdots}$ izračunljiva (u tom istom smislu). O tome ćemo reći nešto više malo kasnije --- zasad se usredotočimo na izračunljivost funkcija $\f{bin}^k$.
+Te funkcije su brojevne, i na dijagramu su prikazane točkanim strelicama: lijeva stranica vanjskog pravokutnika je $\f{bin}^k$, a desna $\f{bin}^1$. Svaka $\f{bin}^k$ je injekcija kao kompozicija dvije injekcije. Jesu li izračunljive bez pozivanja na jezični model? %Štoviše, funkcija $bin^{\cdots}:=\N\Sigma_\beta^*\circ\beta$ (koja nije brojevna funkcija jer nema fiksnu mjesnost) predstavlja mogućnost da u funkciju prenesemo varijabilan broj argumenata: za funkciju $f^{\cdots}$ koja prima \emph{varargs}, $\N\beta f^{\cdots}$ je jednomjesna brojevna funkcija koja dobro modelira sve aspekte izračunljivosti funkcije $f^{\cdots}$, pa bismo mogli reći da je $f^{\cdots}$ izračunljiva (u nekom smislu) ako je $\N\beta f^{\cdots}$ izračunljiva (u tom istom smislu). O tome ćemo reći nešto više malo kasnije --- zasad se usredotočimo na izračunljivost funkcija $\f{bin}^k$.
 
 Kako bismo izračunali $\f{bin}(3,1,2)=(11121211)_2=275$ ili $\f{bin}(6)=(111111)_2=63$ koristeći samo brojevne funkcije? Ovo drugo se čini bitno lakšim.
 
@@ -318,7 +318,7 @@ Uz oznake $u=\alpha_1\alpha_2\dotsm\alpha_{\dulj{u}}$ i $v=\beta_1\beta_2\dotsm\
 \bigr)_b=\\
 =\kr{\alpha_1\dotsm\alpha_{\dulj u}}\conc b\kr{\beta_1\dotsm\beta_{\dulj v}}=\kr u\conc b\kr v\text.
 \end{multline}
-Za $u=\varepsilon$ ili $v=\varepsilon$ tvrdnja također vrijedi jer je $\varepsilon$ neutralni element za konkatenaciju, a lako se vidi da je $\kr\varepsilon=0$ neutralni element za $\conc b$:
+Za $u=\varepsilon$ ili $v=\varepsilon$ tvrdnja također vrijedi jer je $\varepsilon$ neutralni element za konkatenaciju, a $\kr\varepsilon=0$ je neutralni element za $\conc b$:
 \begin{align}
     0\conc bx&=\f{sconcat}(0,x,b)=0\cdot b^{\f{slh}(x,b)}+x=0+x=x\text,\\
     x\conc b0&=\f{sconcat}(x,0,b)=x\cdot b^{\f{slh}(0,b)}+0=x\cdot b^0=x\text,
@@ -352,10 +352,10 @@ Primitivna rekurzivnost slijedi iz leme~\ref{lm:ldcpprn}. Za asocijativnost,
     \left(x\conc b y\right)\conc b z=\left(x\cdot b^{\f{slh}(y,b)}+y\right)\cdot b^{\f{slh}(z,b)}+z=\\[1mm]
     =\left(x\cdot b^{\f{slh}(y,b)}\cdot b^{\f{slh}(z,b)}+y\cdot b^{\f{slh}(z,b)}\right)+z=
     x\cdot b^{\f{slh}(y,b)\,+\,\f{slh}(z,b)}+\left(y\cdot b^{\f{slh}(z,b)}+z\right)=\\[-1mm]
-    \text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{slh}\bigl(y\conc b z\,,\,b\bigr)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
+    \text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{slh}(y\,\conc b\,z\,,\,b)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
 \end{multline}
 \end{proof}
-Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Uočimo da je za asocijativnost ključno da se radi o \textbf{pomaknutoj} bazi: u običnoj bazi 10 je $(1\conc{10}'0)\conc{10}'2=10\conc{10}'2=102\ne\conc{10}'(0\conc{10}'2)=1\conc{10}'2=12$, pa ne vrijedi asocijativnost.
+Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Uočimo da je za asocijativnost ključno da se radi o \textbf{pomaknutoj} bazi: u običnoj bazi 10 je $(5\conc{10}'0)\conc{10}'2=50\conc{10}'2=502\ne5\conc{10}'(0\conc{10}'2)=5\conc{10}'2=52$ pa ne vrijedi asocijativnost.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost višemjesnog binarnog kodiranja]}]\label{pp:binkprn}
 Za svaki $k\in\N_+$, funkcija $\f{bin}^k$ je primitivno rekurzivna.
@@ -368,7 +368,7 @@ Matematičkom indukcijom po $k$. Za $k=1$ (baza), to je upravo lema~\ref{lm:bin1
     \kr{\text\textbullet^{x_1}\!\t/\dotsm\t/\text\textbullet^{x_l}\!\t/\text\textbullet^y}=
     \kr{\beta(\vec x)\t/\beta(y)}={}\\
     \text{[propozicija~\ref{pp:krkonkkr}]}{}=\kr{\beta(\vec x)}\conc 2\kr{\t/}\conc 2\kr{\beta(y)}=
-    \f{bin}^k(\vec x)\conc22\conc2\f{bin}^1(y)\text,
+    \f{bin}^k(\vec x)\conc22\conc2\f{bin}^1(y)
 \end{multline}
 te primitivna rekurzivnost od $\f{bin}^{l+1}$ slijedi iz pretpostavke indukcije, propozicije~\ref{pp:concprn} i leme~\ref{lm:bin1prn}.
 \end{proof}
@@ -444,7 +444,7 @@ Za riječi $v,w\in\Sigma_\beta^*$ kažemo da je $v$ \emph{prefiks} od $w$ ako po
 Ta relacija je refleksivni parcijalni uređaj na skupu $\Sigma_\beta^*$.
 \end{propozicija}
 \begin{proof}
-Za refleksivnost, dovoljno je staviti $u:=\varepsilon$. Za tranzitivnost, ako je $w=vu$ i $v=v'u'$, tada je $w=(v'u')u=v'(u'u)$, pa je $v'$ prefiks od $w$.
+Za refleksivnost stavimo $u:=\varepsilon$. Za tranzitivnost, ako je $w=vu$ i $v=v'u'$, tada je $w=(v'u')u=v'(u'u)$ pa je $v'$ prefiks od $w$.
 
 Za antisimetričnost, ako je $w=vu$ i $v=wu'$, tada je kao za tranzitivnost $w=w(uu')$ pa je $\dulj w=\dulj{w(uu')}=\dulj w+\dulj{uu'}$, iz čega $\dulj{uu'}=0$. Kako je $\varepsilon$ jedina riječ duljine $0$, imamo $uu'=\varepsilon$, i analogno $u=u'=\varepsilon$, dakle $w=vu=v\varepsilon=v$.
 \end{proof}
@@ -457,14 +457,14 @@ Dvomjesna brojevna relacija $\sqsubseteq_\beta$, zadana s
 (kodovi su po $\N\Sigma_\beta^*$), primitivno je rekurzivan refleksivni parcijalni uređaj na $\N$.
 \end{korolar}
 \begin{proof}
-    Činjenica da se radi o parcijalnom uređaju slijedi iz propozicija~\ref{pp:prefiksrpu} i~\ref{pp:bijkr}, a primitivna rekurzivnost iz lema~\ref{lm:ldcpprn} i~\ref{lm:blh}: $x\sqsubseteq_\beta y\Longleftrightarrow x=\f{sprefix}\bigl(y,\f{blh}(x),2\bigr)$.
+    Da se radi o parcijalnom uređaju slijedi iz propozicija~\ref{pp:prefiksrpu} i~\ref{pp:bijkr}, a primitivna rekurzivnost iz lema~\ref{lm:ldcpprn} i~\ref{lm:blh}: $x\sqsubseteq_\beta y\Longleftrightarrow x=\f{sprefix}\bigl(y,\f{blh}(x),2\bigr)$.
 \end{proof}
 
 \begin{primjer}[{name=[prateća relacija "prefiks"]}]
 Recimo, vrijedi $4=(12)_2=\kr{\t{\textbullet/}}\sqsubseteq_\beta\kr{\t{\textbullet/\textbullet\textbullet\textbullet}}=(12111)_2=39$.
 \end{primjer}
 
-Za sljedeću lemu, trebat će nam \emph{uokvireni} brojevi: oni čiji zapisi u pomaknutoj bazi~$2$ počinju i završavaju znamenkom $2$. Želimo "isprogramirati" dokaz propozicije~\ref{prop:betabij}, koji ima nekoliko slučajeva ovisno o tome nalazimo li se prije prvog separatora, nakon zadnjeg, ili između njih. Jednostavnije je kad riječ ima separatore na oba kraja: tada svaki $x_i$ možemo odrediti brojeći jedinice između susjednih separatora.
+Za sljedeću lemu, trebat će nam \emph{uokvireni} brojevi: oni čiji zapisi u pomaknutoj bazi~$2$ počinju i završavaju znamenkom $2$. Želimo "isprogramirati" dokaz propozicije~\ref{prop:betabij}, koji ima nekoliko slučajeva ovisno o tome nalazimo li se prije prvog separatora, nakon zadnjeg, ili između njih. Ako riječ ima separatore na oba kraja, svaki $x_i$ možemo odrediti brojeći jedinice između susjednih separatora.
 
 \begin{lema}[{name=[primitivna rekurzivnost raščlambe binarnih zapisa]}]\label{lm:pos2streak1prn}
 Postoje primitivno rekurzivne funkcije $\f{pos2}$ i $\f{streak1}$, takve da za svaki uokvireni broj $x$, za svaki $i\in\N$, vrijedi:
