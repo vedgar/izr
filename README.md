@@ -16,4 +16,6 @@ Instalirajte distribuciju TeX live (https://www.tug.org/texlive/acquire-netinsta
 
 Na Linuxu ćete vjerojatno `make` trebati izvršiti kao `./make.bat` (i `chmod u+x make.bat` prvo).
 
-Alternativno: pošaljite mi email (veky@math.hr) ako želite gotovi PDF. :-)
+Ako dobijete nekakav `Font Warning`, vjerojatno trebate instalirati paket `texlive-cbfonts`.
+
+Alternativno: pošaljite mi email (veky@math.hr) ako samo želite gotovi PDF. :-)
