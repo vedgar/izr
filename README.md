@@ -9,12 +9,10 @@ Instalirajte distribuciju TeX live (https://www.tug.org/texlive/acquire-netinsta
     git clone https://github.com/vedgar/izr.git
     cd izr
     mkdir tikzcache
-    make
+    pdflatex -shell-escape Komputonomikon
     biber Komputonomikon
-    make
-    make
-
-Na Linuxu ćete vjerojatno `make` trebati izvršiti kao `./make.bat` (i `chmod u+x make.bat` prvo).
+    pdflatex Komputonomikon
+    pdflatex Komputonomikon
 
 Ako dobijete nekakav `Font Warning`, vjerojatno trebate instalirati paket `texlive-cbfonts`.
 
