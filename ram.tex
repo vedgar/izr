@@ -181,8 +181,10 @@ Neka je $\mathcal S$ RAM-stroj s programom $P$, registrima $\reg j,j\in\N$ te pr
     c:\{\reg{j}\mid j\in\N\}\cup\{\textsc{pc}\}\to\N
 \end{equation} takvo da je skoro svuda $0$ (skup $c^{-1}[\N_+]$ je konačan), a $c(\textsc{pc})\le n_P$. Skraćeno je pišemo kao $c=\bigl(c(\reg0),c(\reg1),\dotsc,c(\textsc{pc})\bigr)$. Konfiguracija $c$ je \emph{završna} ako je $c(\textsc{pc})=n_P$. \emph{Početna konfiguracija} s ulazom $\vec x=(x_1,x_2,\dotsc,x_k)\in\N^k$ je $(0,x_1,x_2,\dotsc,x_k,0,0,\dotsc,0)$ (za $j\in[1\dd k]$ u $\reg j$ je $x_j$, svugdje drugdje su nule).
 
-    Za konfiguracije $c=(r_0,r_1,\dotsc,pc)$ i $d=(r_0',r_1',\dotsc,pc')$ istog RAM-stroja s programom $P=(I_0,\dotsc,I_{n_P-1})$, kažemo da $c$ \emph{prelazi} u $d$ (\emph{po programu} $P$, ili \emph{po instrukciji} $I_{pc}$), i pišemo $c\leadsto d$, ako je $c$ završna i $c=d$ (pišemo $c\!\lcirclearrowleft$), ili vrijedi jedno od sljedećeg:
+    Za konfiguracije $c=(r_0,r_1,\dotsc,pc)$ i $d=(r_0',r_1',\dotsc,pc')$ istog RAM-stroja s programom $P=(I_0,\dotsc,I_{n_P-1})$, kažemo da $c$ \emph{prelazi} u $d$ (\emph{po programu} $P$, ili \emph{po instrukciji} $I_{pc}$), i pišemo $c\leadsto d$, ako vrijedi jedno od sljedećeg:
 \begin{enumerate}
+    \item\label{stav:leadzav}
+    $c$ je završna ($pc=n_P$) i $c=d$ --- to skraćeno pišemo $c\!\lcirclearrowleft$\!;
     \item\label{stav:leadINC}
     $I_{pc}=\incr{j}$ (za neki $j$), $r_j'=r_j+1$, $pc'=pc+1$ te $r'_i=r_i$ za sve $i\ne j$;
     \item\label{stav:leadDEC-}
@@ -202,7 +204,7 @@ Sada možemo formalizirati determinističnost RAM-stroja.
 Svaka konfiguracija prelazi u neku, jedinstvenu, konfiguraciju.
 \end{lema}
 \begin{proof}
-Neka je $\mathcal S$ RAM-stroj s programom $(I_0, I_1,\dotsc, I_{n-1})$ te $c=(r_0,r_1,\dotsc,pc)$ njegova proizvoljna konfiguracija. Po definiciji je $pc\le n$ --- ako vrijedi jednakost, $c$ je završna, pa prelazi u samu sebe (i nijednu drugu konfiguraciju, jer $I_{pc}$ ne postoji). Ako je pak $pc<n$, pogledajmo tip od $I_{pc}$. Ako je ona tipa $\inc$ ili $\goto$, definicija~\ref{def:RAMconf} točno propisuje novu konfiguraciju u koju $c$ prelazi.
+    Neka je $\mathcal S$ RAM-stroj s programom $(I_0, I_1,\dotsc, I_{n-1})$ te $c=(r_0,r_1,\dotsc,pc)$ njegova proizvoljna konfiguracija. Po definiciji je $pc\le n$ --- ako vrijedi jednakost, $c$ je završna, pa po pravilu~\ref{stav:leadzav} prelazi u samu sebe (i nijednu drugu konfiguraciju, jer $I_{pc}$ ne postoji). Ako je pak $pc<n$, pogledajmo tip od $I_{pc}$. Ako je to $\inc$ ili $\goto$, pravilo~\ref{stav:leadINC} odnosno~\ref{stav:leadGOTO} točno propisuje novu konfiguraciju u koju $c$ prelazi.
 
     Inače, $I_{pc}$ je tipa $\dec$, recimo $\decr{j}{l}$, i tada je opet nova konfiguracija jedinstveno određena, s obzirom na $r_j$. Ako je $r_j>0$ ("istina"), tada je primjenjivo samo pravilo~\ref{stav:leadDEC-}, a ako je $r_j=0$ ("laž"), tada je primjenjivo samo pravilo~\ref{stav:leadDEC0}; pravilo~\ref{stav:leadDEC-} nije primjenjivo jer po definiciji konfiguracije mora biti $r_j'\in\N$, a primjenom pravila~\ref{stav:leadDEC-} bismo dobili $r_j'=-1$. Svako od tih pravila također jednoznačno određuje novu konfiguraciju.
 \end{proof}

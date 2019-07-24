@@ -156,7 +156,7 @@ Koristeći tu notaciju, početna konfiguracija $\mathcal T_h$ s ulazom $w_1:=\t{
 \t{ad}\underset{\textsc c}{\t a}\leadsto
 \t{a}\underset{\textsc d}{\t d}\leadsto
 \t{ab}\underset{\textsc a}{\bl}\leadsto
-\t{ab}\bl\underset{\textsc e}{\bl}\lcirclearrowleft\text,
+\t{ab}\bl\underset{\textsc e}{\bl}\lcirclearrowleft\!\text,
 \end{multline}
 iz čega se vidi izlazni podatak $\t{ab}=\varphi_h(w_1)$. $\mathcal T_h$-izračunavanje s $w_2:=\t{aba}$ je
 \begin{multline}
@@ -170,8 +170,8 @@ iz čega se vidi izlazni podatak $\t{ab}=\varphi_h(w_1)$. $\mathcal T_h$-izraču
 \t{a}\underset{\textsc a}{\t b}\leadsto
 \t{ad}\underset{\textsc b}{\bl}\leadsto
 \t{a}\underset{\textsc c}{\t d}\leadsto
-\t{}\underset{\textsc f}{\t{ad}}\leadsto
-\t{}\underset{\textsc f}{\t{ad}}\leadsto\dotsb\text,
+\t{}\underset{\textsc f}{\t a}\t d\leadsto
+\t{}\underset{\textsc f}{\t a}\t d\leadsto\dotsb\;\text,
 \end{multline}
 pa to izračunavanje ne stane, iz čega vidimo da $\t{aba}\notin\dom{\varphi_h}$.
 \end{primjer}
@@ -198,7 +198,7 @@ Neka je $\Sigma$ abeceda. Označimo $b':=\card\Sigma$. %(taj broj zovemo \emph{b
 
 % \subsection{Pomaknute baze i kodiranje riječi}
 
-Sada bismo mogli kao u definiciji~\ref{def:kodProg} kodirati riječi kao kodove konačnih nizova kodova njihovih znakova --- ali to ne bi bilo bijekcija. Kodovi RAM-instrukcija mogli su biti proizvoljno veliki, dok za fiksnu abecedu, kodovi znakova mogu biti najviše $b'$ --- što sugerira da nam je dovoljno jednostavnije kodiranje.
+Sada bismo mogli kao u definiciji~\ref{def:kodProg} kodirati riječi kao kodove konačnih nizova kodova njihovih znakova --- ali to ne bi bilo bijektivno. Osim toga, kodovi RAM-instrukcija mogli su biti proizvoljno veliki, dok za fiksnu abecedu kodovi znakova mogu biti najviše $b'$ --- što sugerira da nam je dovoljno jednostavnije kodiranje.
 
 Najprirodnije kodiranje ograničenih nizova, toliko prirodno da možda nismo ni svjesni kako ga koristimo (za $b'=10$) svaki put kad čitamo i pišemo višeznamenkaste brojeve, je \textbf{zapis u bazi} $b'$. Problem su početne nule ($(001121)_3=(1121)_3$), što smo riješili početkom kodiranja znakova od $1$, ali smo zato dobili uključenu gornju granicu. Možemo li imati znamenku $b'$ u bazi $b'$? Drugi problem su jednočlane abecede: obični pozicijski brojevni sustavi definiraju se samo za baze od $2$ nadalje. Postoji i unarni zapis, ali on nije pozicijski --- ili jest?
 
@@ -263,7 +263,7 @@ za svaku riječ $w=\alpha_{n-1}\dotsm\alpha_0\in\Sigma^*$ (uz oznake $n:=\dulj{w
 \end{definicija}
 
 \begin{primjer}[{name=[prateća funkcija jezične funkcije]}]
-U primjeru~\ref{pr:pola} uveli smo abecedu $\Sigma=\{\t a,\t b\}$ i riječ nad njome $w_0=\t{aababa}$. Za tu abecedu je $b'=2$ --- fiksirajmo kodiranje $\N\Sigma(\t a):=1$, $\N\Sigma(\t b):=2$. Tada je $\kr{w_0}=(112121)_2=73$.
+U primjeru~\ref{pr:pola} uveli smo abecedu $\Sigma=\{\t a,\t b\}$ i riječ $w_0=\t{aababa}$ nad njom. Za tu abecedu je $b'=2$; fiksirajmo kodiranje $\N\Sigma(\t a):=1$, $\N\Sigma(\t b):=2$. Tada je $\kr{w_0}=(112121)_2=73$.
 Također je $w_0\in\dom{\varphi_h}$, pa je $73\in\dom{\N\varphi_h}$; a iz $\varphi_h(w_0)=\t{aab}$ vidimo $\N\varphi_h(73)=\kr{\t{aab}}=(112)_2=8$.
 
 Za broj $153$ pretvaranje u pomaknutu bazu $2$ daje
@@ -309,7 +309,9 @@ Sada možemo napisati i $\f{sdigit}$: to je posljednja znamenka prefiksa čija j
 \end{proof}
 
 \begin{propozicija}[{name=[bijektivnost kodiranja riječi]}]\label{pp:bijkr}
-Neka je $\Sigma$ abeceda, i $\N\Sigma$ njeno kodiranje. Tada je $\N\Sigma^*$ bijekcija između $\Sigma^*$ i $\N$.
+Neka je $\Sigma$ abeceda i $\N\Sigma$ njeno kodiranje.
+    
+    Tada je $\N\Sigma^*$ bijekcija između $\Sigma^*$ i $\N$.
 \end{propozicija}
 \begin{proof}
 Označimo $b':=\card\Sigma$. Ako je $w\ne w'$ za $w,w'\in\Sigma^*$, tada su $w$ i $w'$ ili različitih duljina (pa je $\f{slh}(\kr w,b')\ne\f{slh}(\kr{w'},b')$), ili su jednake duljine ali se na nekom mjestu razlikuju (pa je za neki $i$, $\f{sdigit}(\kr w,i,b')\ne\f{sdigit}(\kr{w'},i,b')$).
@@ -351,7 +353,7 @@ Dakle, sad samo trebamo konstruirati Turingov stroj s različitim početnim i za
 %\shortintertext{gdje je}
     \delta'(0,\alpha)&:=(1,\alpha,1)\text{ za sve $\alpha\in\Sigma\cup\{\bl\}$.}
 \end{align}
-Tada za svaku $w\in\Sigma^*$ imamo $\mathcal T'$-izračunavanje s $w$: $(0,0,w\bl\ldots)\leadsto(1,1,w\bl\ldots)\lcirclearrowleft$, iz čega je izlazni podatak opet $w$, odnosno $\mathcal T'$ računa identitetu.
+Tada za svaku $w\in\Sigma^*$, $\mathcal T'$-izračunavanje s $w$ je $(0,0,w\bl\ldots)\leadsto(1,1,w\bl\ldots)\lcirclearrowleft$, iz čega je izlazni podatak opet $w$, odnosno $\mathcal T'$ računa identitetu.
 \end{proof}
 
 Slično možemo kodirati i $\Gamma_0$ --- ali kako već imamo kodiranje skupa $\Sigma_0\subset\Gamma_0$, želimo da znakovi ulazne abecede imaju iste kodove. Dakle, označimo $b:=\card\Gamma_0$, i proširimo bijekciju $\N\Sigma_0:\Sigma_0\leftrightarrow[1\dd b']$ na bijekciju $\N\Gamma_0:\Gamma_0\leftrightarrow[0\dd b\rangle$, tako da $\bl$ preslikamo u $0$, a ostale elemente iz $\Gamma_0\!\setminus\Sigma_0$ bijektivno u skup $\langle b'\dd b\rangle$.
@@ -448,7 +450,7 @@ tada su funkcije $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ redom zadane 
 5& 2 & 5 & 5 & 0 & 0 & \multicolumn{1}{|c}{0} & \cdots\\ \cline{2-6}
 6& 0 & 0 & 0 & 0 & 0 & 0 & \cdots\\
 \vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots
-\end{array}\text,\;
+\end{array}\text,\;\;
 \begin{array}{r|ccccccc}
 %\f{newsymbol}
     &0&1&2&3&4&5&\cdots\\\hline
@@ -460,19 +462,19 @@ tada su funkcije $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ redom zadane 
 5& 0 & 1 & 2 & 1 & 2 & \multicolumn{1}{|c}{0} & \cdots\\ \cline{2-6}
 6& 0 & 0 & 0 & 0 & 0 & 0 & \cdots\\
 \vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots
-\end{array}\text,\;
+\end{array}\text,\;\;
 %\end{equation}
 %\begin{equation}
 %\label{eq:directiontable}
 \begin{array}{r|ccccccc}
 %\f{direction}
     &0&1&2&3&4&5&\cdots\\\hline
-0& 2 & 2 & 2 & 2 & 2 & \multicolumn{1}{|c}{0} & \cdots\\
+0& 2 & 2 & 2 & 0 & 0 & \multicolumn{1}{|c}{0} & \cdots\\
 1& 1 & 1 & 1 & 1 & 1 & \multicolumn{1}{|c}{0} & \cdots\\
 2& 0 & 0 & 0 & 0 & 0 & \multicolumn{1}{|c}{0} & \cdots\\
-3& 0 & 2 & 2 & 2 & 2 & \multicolumn{1}{|c}{0} & \cdots\\
-4& 2 & 0 & 0 & 2 & 2 & \multicolumn{1}{|c}{0} & \cdots\\
-5& 2 & 0 & 0 & 2 & 2 & \multicolumn{1}{|c}{0} & \cdots\\ \cline{2-6}
+3& 0 & 2 & 2 & 0 & 0 & \multicolumn{1}{|c}{0} & \cdots\\
+4& 0 & 0 & 0 & 0 & 0 & \multicolumn{1}{|c}{0} & \cdots\\
+5& 0 & 0 & 0 & 2 & 2 & \multicolumn{1}{|c}{0} & \cdots\\ \cline{2-6}
 6& 0 & 0 & 0 & 0 & 0 & 0 & \cdots\\
 \vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots
 \end{array}\text.\!\!\!\qedhere
