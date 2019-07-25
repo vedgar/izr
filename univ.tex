@@ -123,7 +123,7 @@ Za $y>0$, samo trebamo formalizirati navedeni argument: označimo $z:=x\div y$. 
 
 Za $y=0$, samo trebamo izračunati lijevu i desnu stranu. Na lijevoj je $x\div 0=\bigl\lfloor\frac{x}{1}\bigr\rfloor=x$, a na desnoj je prethodnik minimizacije po $t\le x$, relacije $t\cdot 0=0>x$. Ta relacija je uvijek lažna (nemamo negativnih brojeva), pa minimizacija daje $x+1$, a njen prethodnik onda daje upravo $x$, kao što i treba.
 
-Za ostatak, tvrdimo da je
+Ostatak: tvrdimo da je
 \begin{equation}
     x\bmod y=x\dotminus x\div y\cdot y
 \end{equation}
@@ -170,7 +170,7 @@ Upravo napisani izraz zapravo kaže da je $\f{nextprime}^1$ \emph{rekurzivna} fu
 
     Za primitivnu rekurzivnost, moramo nekako ograničiti minimizaciju, odnosno moramo "isprogramirati" dokaz da je $\mathbb P$ beskonačan. Uzmimo Euklidov dokaz: ako imamo $p_0,p_1,\dotsc,p_n\in\mathbb P$, novi prim-broj možemo dobiti tako da potražimo prim-djelitelj broja $m:=p_0\cdot p_1\mathbin{\dotsm}p_n+1>1$. Aha! Znamo da je djelitelje pozitivnog broja dovoljno tražiti do samog tog broja, dakle samo trebamo primitivno rekurzivno izračunati $m$ iz $n$ i $p_n$. Tu bismo mogli upotrijebiti primorijel iz primjera~\ref{pr:primorijel} --- konkretno, $m=\f{Sc}\bigl(\overline{\f Z}\bigl(\f{Sc}(n)\bigr)\bigr)$ --- ali nažalost još ne znamo da je funkcija $\overline{\f Z}$ primitivno rekurzivna, jer nismo dokazali da povijest čuva primitivnu rekurzivnost. I to s razlogom: pokazat će se da za tu lemu treba rezultat koji upravo dokazujemo.
 
-    Kako se izvući? Spas leži u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. To znači da umjesto primorijela možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a vrijedi $p_n!\ge p_0\cdot p_1\mathbin{\dotsm}p_n$ jer je $p_n!$ umnožak svih brojeva na desnoj strani i eventualno još nekih koji su veći ili jednaki $1$).
+    Kako se izvući? Spas leži u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. To znači da umjesto primorijela možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a vrijedi $p_n!\ge p_0\cdot p_1\mathbin{\dotsm}p_n$ jer je $p_n!$ umnožak svih brojeva na desnoj strani i eventualno još nekih koji su barem $1$).
 \begin{equation}
     \f{nextprime}(p)=(\mu q\le p!+1)(q\in\mathbb P\land q>p)%\text,
 \end{equation}

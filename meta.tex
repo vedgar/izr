@@ -741,7 +741,7 @@ Neka je $k\in\N_+$. Za svaki $\mathcal F\subseteq\mathscr Comp_k$ definiramo \em
 \begin{equation}
     \kins{\mathcal F}:=\{e\in\N\mid\kf e^k\in\mathcal F\,\}\,\text.
 \end{equation}
-(U oznaci nigdje ne spominjemo $k$, jer se može rekonstruirati iz $\mathcal F$ ako je $\mathcal F$ neprazan. U suprotnom, $\kins{\emptyset}=\emptyset$, bez obzira na $k$.)
+(U oznaci nigdje ne spominjemo $k$, jer se može rekonstruirati iz $\mathcal F$ ako je $\mathcal F$ neprazan --- a $\kins{\emptyset}=\emptyset^1$ bez obzira na $k$.)
 \end{definicija}
 
 Primijetite sličnost s definicijom~\eqref{eq:kodLdef} --- kao što smo tamo kodirali riječi zapisom u bazi, ovdje kodiramo funkcije njihovim indeksima. Već smo rekli da relacija $index\subseteq\N\times\N_+\times\mathscr Comp$, zadana s $index(e,k,\f F)\Longleftrightarrow\kf e^k=\f F$, nema funkcijsko svojstvo po prvoj varijabli: ne možemo govoriti o jedinstvenom indeksu neke konkretne funkcije --- ali zato možemo govoriti o skupu indeksa nekog skupa funkcija.
@@ -768,26 +768,27 @@ recimo jednočlan skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nij
 Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju imati specijalno svojstvo \emph{invarijantnosti} na neku relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma. 
 
 \begin{primjer}[{name=[Sortiranje kao jedna funkcija s raznim implementacijama]}]
-    Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\!:\f{Seq}\to\f{Seq}$ koja sortira konačne nizove, zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
+    Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\!:\f{Seq}\to\f{Seq}$ koja sortira konačne nizove zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
 \begin{align}
     \f{tail}(s)&:\simeq\mu t(\kr{s[0]}*t=s)\\
     \f{min}(s)&:\simeq\mu n\bigl(\exists i<\f{lh}(s)\bigr)(s[i]=n)\\
+    \f{count}(s,x)&:=\bigl(\num i<\f{lh}(s)\bigr)(s[i]=x)\\
     \f{up}(s,x)&\simeq\begin{cases}
         \kr{},&s=\kr{}\\
-        \f{up}\bigl(\f{tail}(s),x\bigr),&s[0]<x\\
-        \kr{s[0]}*\f{up}\bigl(\f{tail}(s),x\bigr),&s[0]\ge x
+        \f{up}\bigl(\f{tail}(s),x\bigr),&\f{Seq'}(s)\land s[0]\le x\\
+        \kr{s[0]}*\f{up}\bigl(\f{tail}(s),x\bigr),&\f{Seq'}(s)\land s[0]>x
     \end{cases}\\
     \f{sort}(s)&\simeq\begin{cases}
         \kr{},&s=\kr{}\\
-        \kr{\f{min}(s)}*\f{sort}\bigl(\f{up}\bigl(s,\f{min}(s)\bigr)\bigr),&\f{Seq}'(s)
+        \overline{\f I_1^2}\bigl(\f{min}(s),\f{count}\bigl(s,\f{min}(s)\bigr)\bigr)*\f{sort}\bigl(\f{up}\bigl(s,\f{min}(s)\bigr)\bigr),&\f{Seq}'(s)
     \end{cases}
 \end{align}
 (funkcije $\f{up}$ i $\f{sort}$ definirane su općim rekurzijama), dok bi \emph{quicksort} bio nešto poput
 \begin{align}
     \f{dn}(s,x)&\simeq\begin{cases}
         \kr{},&s=\kr{}\\
-        \f{dn}\bigl(\f{tail}(s),x\bigr),&s[0]\ge x\\
-        \kr{s[0]}*\f{dn}\bigl(\f{tail}(s),x\bigr),&s[0]<x
+        \f{dn}\bigl(\f{tail}(s),x\bigr),&\f{Seq'}(s)\land s[0]>x\\
+        \kr{s[0]}*\f{dn}\bigl(\f{tail}(s),x\bigr),&\f{Seq'}(s)\land s[0]\le x
     \end{cases}\\
     \f{sort}(s)&\simeq\begin{cases}
         \kr{},&s=\kr{}\\
@@ -841,7 +842,7 @@ Pretpostavimo da je $S$ rekurzivan, i da $S$ nije ni $\emptyset$ ni $\N$. $S\ne\
         s,&\text{inače}
     \end{cases}\text,
 \end{equation}
-    rekurzivna po teoremu~\ref{tm:grek} (rekurzivna verzija) --- simbolički, $F=\{S\colon\f C_n^1,\f C_s^1\}$.
+    rekurzivna po teoremu~\ref{tm:grek} (rekurzivna verzija) --- simbolički, $F=\{S\,\colon\f C_n^1,\f C_s^1\}$.
 
 Jer je $F$ rekurzivna, ima fiksnu točku: postoji broj $e\in\N$ takav da je $e\approx_k F(e)$. No to je nemoguće: ako je $e\in S$, tada je po $k$-invarijantnosti i $F(e)\in S$ --- što je u kontradikciji s činjenicom da je $F(e)=n$ za $e\in S$.
 

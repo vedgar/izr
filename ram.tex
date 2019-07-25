@@ -204,7 +204,7 @@ Sada možemo formalizirati determinističnost RAM-stroja.
 Svaka konfiguracija prelazi u neku, jedinstvenu, konfiguraciju.
 \end{lema}
 \begin{proof}
-    Neka je $\mathcal S$ RAM-stroj s programom $(I_0, I_1,\dotsc, I_{n-1})$ te $c=(r_0,r_1,\dotsc,pc)$ njegova proizvoljna konfiguracija. Po definiciji je $pc\le n$ --- ako vrijedi jednakost, $c$ je završna, pa po pravilu~\ref{stav:leadzav} prelazi u samu sebe (i nijednu drugu konfiguraciju, jer $I_{pc}$ ne postoji). Ako je pak $pc<n$, pogledajmo tip od $I_{pc}$. Ako je to $\inc$ ili $\goto$, pravilo~\ref{stav:leadINC} odnosno~\ref{stav:leadGOTO} točno propisuje novu konfiguraciju u koju $c$ prelazi.
+    Neka je $\mathcal S$ RAM-stroj s programom $(I_0, I_1,\dotsc, I_{n-1})$ te $c=(r_0,r_1,\dotsc,pc)$ njegova proizvoljna konfiguracija. Po definiciji je $pc\le n$ --- ako vrijedi jednakost, $c$ je završna pa po pravilu~\ref{stav:leadzav} prelazi u samu sebe (nijedno drugo pravilo nije primjenjivo jer $I_{pc}$ ne postoji). Ako je pak $pc<n$, pogledajmo tip od $I_{pc}$. Ako je to $\inc$ ili $\goto$, pravilo~\ref{stav:leadINC} odnosno~\ref{stav:leadGOTO} točno propisuje novu konfiguraciju u koju $c$ prelazi.
 
     Inače, $I_{pc}$ je tipa $\dec$, recimo $\decr{j}{l}$, i tada je opet nova konfiguracija jedinstveno određena, s obzirom na $r_j$. Ako je $r_j>0$ ("istina"), tada je primjenjivo samo pravilo~\ref{stav:leadDEC-}, a ako je $r_j=0$ ("laž"), tada je primjenjivo samo pravilo~\ref{stav:leadDEC0}; pravilo~\ref{stav:leadDEC-} nije primjenjivo jer po definiciji konfiguracije mora biti $r_j'\in\N$, a primjenom pravila~\ref{stav:leadDEC-} bismo dobili $r_j'=-1$. Svako od tih pravila također jednoznačno određuje novu konfiguraciju.
 \end{proof}
@@ -322,7 +322,7 @@ RAM-programe za konstantne funkcije vidjeli smo već u dokazu teorema~\ref{tm:al
 
 Napišimo RAM-program koji računa praznu funkciju $\varnothing^k$. Iz definicije zaključujemo da je to program čije izračunavanje s $\vec x$ ne stane ni za koji $\vec x$ (bez obzira na mjesnost). Dakle, moramo spriječiti $\textsc{pc}$ da dođe do $n$, odnosno treba nam instrukcija s odredištem, koja će vratiti $\textsc{pc}$ na staru vrijednost tako da se ne poveća za $1$ (\emph{petlja}), i to ona koja se izvrši uvijek (\emph{beskonačna} petlja). Takav program je $\begin{prog}0.&\goto\;0\end{prog}$.
 
-Dosadašnji programi nisu uopće koristili svoje ulaze. Najjednostavnija funkcija koja koristi svoj argument je identiteta (označena s $\f I_1^1$). Da bismo je izračunali, moramo prebaciti vrijednost iz $\reg{1}$ (ulazni registar za jednomjesne algoritme) u $\reg{0}$ (izlazni registar). Koristeći naše razumijevanje izvršavanja imperativnih programa, vidimo da tu svrhu ispunjava RAM-algoritam
+Dosadašnji programi nisu uopće koristili svoje ulaze. Najjednostavnija funkcija koja koristi svoj argument je identiteta (označena s $\f I_1^1$). Da bismo je izračunali, moramo prebaciti vrijednost iz $\reg{1}$ (ulazni registar za jednomjesne algoritme) u $\reg{0}$ (izlazni registar). Koristeći naše razumijevanje izvršavanja imperativnih programa, vidimo da to čini RAM-algoritam
 \begin{equation}\label{eq:RAMid}
     P_{\f I_1}^1:=\begin{prog}
         0.&\decr13\\
@@ -399,7 +399,7 @@ Definirat ćemo brojne makroe, što će kulminirati \emph{funkcijskim makroom} -
 \end{align}
 svih makro-instrukcija, i svih makro-programa, prebrojivi. Ti rezultati nisu toliko bitni zbog tehnika koje ćemo uskoro razviti, ali predstavljaju dobru vježbu. % Sljedeći korak u tom smjeru je konstatacija da makro-izračunljivih funkcija ima prebrojivo mnogo, i kao posljedica toga, postoje brojevne funkcije koje nisu ni makro-izračunljive. No
 
-\subsection{Konfiguracije i izračunavanja}
+% \subsection{Konfiguracije i izračunavanja}
 
 \begin{definicija}[{name=[makro-konfiguracija]}]\label{def:macroconf}
 \emph{Konfiguracija makro-stroja} s programom $Q=(I_0,I_1,\dotsc,I_{n_Q-1})$, registrima $\reg{j}$, $j\in\N$ te programskim brojačima $\textsc{pc}$ i $\textsc{ac}$ je bilo koje preslikavanje $c:\{\reg{j}\mid j\in\N\}\cup\{\textsc{pc},\textsc{ac}\}\to\N$, takvo da je $c^{-1}[\N_+]$ konačan skup, $c(\textsc{pc})\le n_Q$, i još vrijedi $c(\textsc{ac})=0$ --- osim u slučaju $I_{c(\textsc{pc})}=P^*$, kada je $c(\textsc{ac})\le n_P$. Skraćeno pišemo $c=\bigl(c(\reg0),c(\reg1),\dotsc,c(\textsc{pc}),c(\textsc{ac})\bigr)$.
@@ -573,7 +573,7 @@ i gotovi smo: $Q'''=Q^\flat$, jer više nema makroa u programu. (Za objašnjenje
 
 Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathscr{MP}rog$ i $\mathscr Prog$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Vratit ćemo se na ovaj postupak u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa. To će biti jedan specijalni slučaj (dokaz teorema o parametru), za koji ćemo tada pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
 
-% \subsection{Ekvivalencija RAM-programa i makro-programa}
+\subsection{Ekvivalentnost RAM-programa i makro-programa}
 
 Kad smo već kod neformalnih objašnjenja, izrecimo i osnovni rezultat --- koji se doduše može formalno dokazati, ali je vrlo mukotrpno i zapetljano, a zapravo dokaz ne daje ništa novo ako već imamo intuiciju \emph{inlininga} kao programske tehnike.
 
