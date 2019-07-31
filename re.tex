@@ -23,7 +23,7 @@ Svaka rekurzivna relacija je rekurzivno prebrojiva.
 \end{propozicija}
 Ako imamo rekurzivnu karakterističnu funkciju, trebamo "zaboraviti" vrijednosti $0$ (ukloniti tu prasliku iz domene) i ostaviti samo vrijednosti $1$ --- drugim riječima, restringirati $\chi_{\f R}$ na $\f R$.
 \begin{proof}
-Neka je $k\in\N$ i $\f R^k$ rekurzivna relacija. Tada je prema korolaru~\ref{kor:restrprek}, $\chi_{\f R}|_{\f R}$ parcijalno rekurzivna, a $\dom{\chi_{\f R}|_{\f R}}=\dom{\chi_{\f R}}\cap\f R=\N^k\cap\f R=\f R$.
+Neka je $k\in\N$ te $\f R^k$ rekurzivna relacija. Tada je prema korolaru~\ref{kor:restrprek}, $\chi_{\f R}|_{\f R}$ parcijalno rekurzivna, a $\dom{\chi_{\f R}|_{\f R}}=\dom{\chi_{\f R}}\cap\f R=\N^k\cap\f R=\f R$.
 \end{proof}
 
 No kad već pričamo o restrikciji, funkcija koju restringiramo je nebitna: s bilo kojom rekurzivnom funkcijom dobit ćemo istu domenu. Ponekad je zgodno fiksirati njene vrijednosti na $0$ --- usporedite s napomenom~\ref{nap:re0}.
@@ -75,7 +75,7 @@ Tehnički, zahtjev da su sve relacije iste mjesnosti zapravo nije bitan: ako nis
 Sličnim trikom možemo pokazati da restringiranjem na rekurzivno prebrojiv skup čuvamo izračunljivost --- samo tada moramo paziti i na vrijednosti funkcije na čiju domenu restringiramo. Ideju smo vidjeli u napomeni~\ref{nap:restrprek}.
 
 \begin{korolar}[{name=[teorem o restrikciji]}]\label{kor:restre}
-Neka je $k\in\N_+$, $\f F^k$ parcijalno rekurzivna funkcija i $R^k$ rekurzivno prebrojiva relacija. Tada je i restrikcija $\f F|_R$ također parcijalno rekurzivna.
+Neka je $k\in\N_+$, $\f F^k$ parcijalno rekurzivna funkcija te $R^k$ rekurzivno prebrojiva relacija. Tada je i restrikcija $\f F|_R$ također parcijalno rekurzivna.
 \end{korolar}
 \begin{proof}
 Po korolaru~\ref{kor:redom0im} postoji parcijalno rekurzivna funkcija $\f G$ takva da je $R=\dom{\f G}$ i $\im{\f G}\subseteq\{0\}$. Tvrdimo da je tada $\f F|_R=\f F+\f G$. Doista, po lemi~\ref{lm:comptot} je
@@ -249,7 +249,7 @@ Posljedica upravo dokazanog rezultata i projekcijske karakterizacije je da proje
 Projekcija rekurzivno prebrojive relacije (ako je ova mjesnosti barem~$2$) je ponovo rekurzivno prebrojiva.
 \end{propozicija}
 \begin{proof}
-Neka je $k\ge2$ i $R^k$ rekurzivno prebrojiva relacija. Po teoremu~\ref{tm:rpeproj}, postoji rekurzivna relacija $\f P$ takva da je $R=\exists_*\f P$. No tada je projekcija $\exists_*R=\exists_*\exists_*\f P=\exists_*\hat{\f P}$ po propoziciji~\ref{pp:projproj}, što je rekurzivno prebrojivo opet po teoremu~\ref{tm:rpeproj}. Naime, iz leme~\ref{lm:hatPeqP} imamo $\hat{\f P}\preceq\f P$, pa je $\hat{\f P}$ također rekurzivna po propoziciji~\ref{pp:rek<rek}.
+Neka je $k\ge2$ te $R^k$ rekurzivno prebrojiva relacija. Po teoremu~\ref{tm:rpeproj}, postoji rekurzivna relacija $\f P$ takva da je $R=\exists_*\f P$. No tada je projekcija $\exists_*R=\exists_*\exists_*\f P=\exists_*\hat{\f P}$ po propoziciji~\ref{pp:projproj}, što je rekurzivno prebrojivo opet po teoremu~\ref{tm:rpeproj}. Naime, iz leme~\ref{lm:hatPeqP} imamo $\hat{\f P}\preceq\f P$, pa je $\hat{\f P}$ također rekurzivna po propoziciji~\ref{pp:rek<rek}.
 \end{proof}
 
 \begin{korolar}[{name=[višestruka projekcija čuva rekurzivnu prebrojivost]}]\label{kor:projre}
@@ -280,7 +280,7 @@ Graf svake parcijalno rekurzivne funkcije je rekurzivno prebrojiv.
 Ideja je slična kao kod projekcijske karakterizacije; jedina razlika između domene i grafa je što kod grafa moramo voditi računa i o funkcijskim vrijednostima. Zato nam više nije dovoljna relacija $\exists_*\f{Final}$ koja kaže "postoji neki broj koraka", već "postoji neko izračunavanje koje stane" (iz kojeg možemo izvući funkcijsku vrijednost). Srećom, upravo to nam daje Kleenejev teorem o normalnoj formi.
 
 \begin{proof}
-Neka je $k\in\N_+$ i $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi} $\f F$ ima indeks, označimo ga (napomena~\ref{nap:>1ind}) s $e$. Tada po teoremu~\ref{tm:Kleene} imamo: \begin{equation}\label{eq:Grafproj}
+Neka je $k\in\N_+$ te $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi} $\f F$ ima indeks, označimo ga (napomena~\ref{nap:>1ind}) s $e$. Tada po teoremu~\ref{tm:Kleene} imamo: \begin{equation}\label{eq:Grafproj}
     \graf{\f F}(\vec x,y)\Longleftrightarrow\vec x\in\dom{\kf e^k}\land\kf e^k(\vec x)=y\Longleftrightarrow\exists z\bigl(
     \f T_k(\vec x,e,z)\land
     \f U(z)=y\bigr)\text.
@@ -336,7 +336,7 @@ Nas, međutim, ne zanimaju proizvoljni selektori, već samo oni izračunljivi --
 Svaka rekurzivno prebrojiva relacija (mjesnosti barem $2$) ima parcijalno rekurzivan selektor.
 \end{lema}
 \begin{proof}
-Neka je $k'\ge2$ i $R^{k'}$ rekurzivno prebrojiva. Označimo $k:=k'-1\in\N_+$. Trebamo parcijalno rekurzivnu funkciju $\f F^k$ takvu da vrijedi $\dom{\f F}=\exists_*R$ i $\graf{\f F}\subseteq R$. 
+Neka je $k'\ge2$ te $R^{k'}$ rekurzivno prebrojiva. Označimo $k:=k'-1\in\N_+$. Trebamo parcijalno rekurzivnu funkciju $\f F^k$ takvu da vrijedi $\dom{\f F}=\exists_*R$ i $\graf{\f F}\subseteq R$. 
 
 Prvo, projekcijskom karakterizacijom se dočepamo \emph{izračunljive} relacije, po cijenu još jednog egzistencijalnog kvantifikatora: po teoremu~\ref{tm:rpeproj} postoji rekurzivna relacija $\f P^{k+2}$ takva da je $R=\exists_*\f P$.
 
@@ -402,7 +402,7 @@ Jedna posljedica teorema o grafu je generalizacija propozicije~\ref{prop:konprom
 Prvo dokažimo nekoliko lema koje govore o skupovnim operacijama koje čuvaju parcijalnu rekurzivnost. Za unije i presjeke smo to već vidjeli (propozicije~\ref{pp:unlre} i~\ref{pp:prlre}), vrijeme je da se pozabavimo razlikama. Napomenimo samo da općenito skupovna razlika dvije rekurzivno prebrojive relacije nije rekurzivno prebrojiva, jer \emph{komplement} kao specijalni slučaj razlike ($(R^k)\kompl=\N^k\setminus R$) ne čuva rekurzivnu prebrojivost. Detaljnije ćemo vidjeti što se tu zbiva kad dokažemo Postov teorem.
 
 \begin{lema}[{name=[rekurzivna prebrojivost razlike s rekurzivnom relacijom]}]\label{lm:re-rek}
-Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija i $\f R$ rekurzivna relacija. Tada je $P\setminus\f R$ također rekurzivno prebrojiva.
+Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija te $\f R$ rekurzivna relacija. Tada je $P\setminus\f R$ također rekurzivno prebrojiva.
 \end{lema}
 \begin{proof}
     Znamo iz teorije skupova (uz $\N^k$ kao univerzalni skup) da je $P\setminus\f R=P\cap\f R\kompl$. Sada je po propoziciji~\ref{prop:kompl}, $\f R\kompl$ rekurzivna, pa je po propoziciji~\ref{pp:rekire} rekurzivno prebrojiva --- a onda tvrdnja slijedi po propoziciji~\ref{pp:prlre} ($l=2$).
@@ -411,7 +411,7 @@ Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija i $\f R$ rekurzivna rel
 Za \emph{simetričnu} razliku, više nije dovoljno zahtijevati da $\f R$ bude rekurzivna, pa čak ni primitivno rekurzivna --- isti kontraprimjer, zapisan u obliku $(R^k)\kompl=R\mathbin\triangle\N^k$, funkcionira. Ali ako je $\f R$ \emph{konačna}, dokaz prolazi.
 
 \begin{lema}[{name=[rekurzivna prebrojivost simetrične razlike s konačnom relacijom]}]\label{lm:retrkon}
-Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija i $\f R^k$ konačna relacija. Tada je $P\mathbin\triangle\f R$ također rekurzivno prebrojiva.
+Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija te $\f R^k$ konačna relacija. Tada je $P\mathbin\triangle\f R$ također rekurzivno prebrojiva.
 \end{lema}
 \begin{proof}
 Po definiciji je $P\mathbin\triangle\f R:=(P\setminus\f R)\cup(\f R\setminus P)$. 
@@ -569,7 +569,7 @@ I četvrto, analogon jezik\^a u brojevnom modelu su zapravo \emph{jednomjesne} r
 Nakon svega što ste naučili, ne biste trebali biti začuđeni time da sva ta četiri pristupa karakteriziraju istu klasu jezika.
 
 \begin{teorem}[{name=[teorem ekvivalencije za poluodlučive jezike]}]
-Neka je $\Sigma$ abeceda, i $L\subseteq\Sigma^*$ jezik nad njom.
+Neka je $\Sigma$ abeceda te $L\subseteq\Sigma^*$ jezik nad njom.
 
 Tada su sljedeće tvrdnje ekvivalentne:
 \begin{enumerate}
@@ -585,7 +585,7 @@ Tada su sljedeće tvrdnje ekvivalentne:
 Po definiciji, postoji parcijalno rekurzivna funkcija $\f F^1$ takva da je $\dom{\f F}=\kr L$. Po korolaru~\ref{kor:pent}, jezična funkcija $\varphi:=\N^{-1}\f F$ je Turing-izračunljiva, i domena joj je $\dom\varphi=\{w\in\Sigma^*\mid\kr w\in\kr L\}=L$.
 
 \item[$(\mathcal D)\Rightarrow(\mathcal T)$] 
-Neka je $L=\dom\varphi$, i $\mathcal T$ Turingov stroj koji računa $\varphi$. Po definiciji~\ref{def:Tcomputefi}, imamo da $\mathcal T$-izračunavanje s $w$ stane ako i samo ako je $w\in\dom\varphi=L$ --- što po definiciji znači da $\mathcal T$ prepoznaje $L$.
+Neka je $L=\dom\varphi$ te $\mathcal T$ Turingov stroj koji računa $\varphi$. Po definiciji~\ref{def:Tcomputefi}, imamo da $\mathcal T$-izračunavanje s $w$ stane ako i samo ako je $w\in\dom\varphi=L$ --- što po definiciji znači da $\mathcal T$ prepoznaje $L$.
 
 \item[$(\mathcal T)\Rightarrow(\mathcal E)$] 
 Ovo je relativno standardni dokaz koji se napravi u teoriji formalnih jezika, iako je teško raspisati sve detalje. Osnovna ideja je emulirati paralelizaciju na Turingovom stroju. Skicu dokaza možete vidjeti u~\cite[\emph{theorem}~3.21]{sipser}.

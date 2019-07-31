@@ -599,7 +599,7 @@ Samo treba napisati definiciju:
 Primitivna rekurzivnost slijedi iz propozicija~\ref{pp:primeprn} i~\ref{prop:lhpartprn}, napomene~\ref{nap:sumprodH} i primjera~\ref{pr:addmulpow}. Prim-brojevi su pomaknuti jer adrese ulaznih registara počinju od $1$.
 \end{proof}
 
-Napomenimo da funkcija $\f{start}$ nije injekcija: recimo, $\f{start}(\langle2,1\rangle)=\f{start}(\langle2,1,0,0\rangle)=\knk{0,2,1,0,0,\dotsc}$, odnosno $\f{start}(72)=\f{start}(2520)=45$. Ali preslikavanje $\knk{\cdots}$ jest injekcija (kao što kodiranje i treba biti), po osnovnom teoremu aritmetike. Također po osnovnom teoremu aritmetike, slika mu je $\im{\knk{\cdots}}=\N_+$, primitivno rekurzivna po primjeru~\ref{pr:N+prn}.
+Funkcija $\f{start}$ nije injekcija: recimo, $\f{start}(\langle2,1\rangle)=\f{start}(\langle2,1,0,0\rangle)=\knk{0,2,1,0,0,\dotsc}$, odnosno $\f{start}(72)=\f{start}(2520)=45$. Ali preslikavanje $\knk{\cdots}$ jest injekcija (kao što kodiranje i treba biti), po osnovnom teoremu aritmetike. Također po osnovnom teoremu aritmetike, slika mu je $\im{\knk{\cdots}}=\N_+$, primitivno rekurzivna po primjeru~\ref{pr:N+prn}.
 
 Što se komponenata tiče, $\f{lh}$ nema smisla, a za indeksiranje služi funkcija $\f{ex}$ iz leme~\ref{lm:exprn}. Doista, $\f{ex}(\knk{r_0,r_1,\dotsc,0,0,\dotsc},i)=r_i$, jer je to upravo eksponent od $p_i$ u tom kodu. Koristit ćemo je u očitavanju rezultata (sadržaj registra $\reg0$ u završnoj konfiguraciji).
 \begin{equation}\label{eq:resultdef}
@@ -862,7 +862,7 @@ Zapravo, uvjet $\vec x\in\dom f$ ne treba pisati jer slijedi iz $y=f(\vec x)$, a
 \end{definicija}
 
 \begin{napomena}[{name=[funkcijsko svojstvo grafova]}]\label{nap:graf=funsv}
-Iz elementarne matematike znamo da je relacija $R$ graf neke funkcije ako i samo ako ima \emph{funkcijsko svojstvo}: $x\mathrel R y_1\land x\mathrel R y_2\Rightarrow y_1=y_2$. Riječima, "svaka vertikala siječe graf u najviše jednoj točki".
+    Iz elementarne matematike znamo da je relacija $R$ graf neke funkcije ako i samo ako ima \emph{funkcijsko svojstvo}: $R(\vec x,y_1)\land R(\vec x,y_2)\Rightarrow y_1=y_2$. Riječima, "svaka vertikala siječe graf u najviše jednoj točki".
 \end{napomena}
 
 \begin{lema}[{name=[projekcija i minimizacija grafa]}]\label{lm:projmugraf}
@@ -887,7 +887,7 @@ Za smjer ($\Rightarrow$): po pretpostavci, $\chi_{\graf{\f f}}$ je rekurzivna, d
 Za smjer ($\Leftarrow$): kako je $\f f$ totalna, $\vec x^k\in\dom f=\N^k$ uvijek vrijedi, pa~\eqref{eq:defgraf} postaje $\graf{\f f}(\vec x,y)\Longleftrightarrow y=\f f(\vec x)$, odnosno $\chi_{\graf{\f f}}$ je dobivena kompozicijom iz $\chi_=$, $\f f$ i koordinatnih projekcija. $\chi_=$ i koordinatne projekcije su rekurzivne po korolarima~\ref{kor:jednakost} i~\ref{kor:prnrek}, a $\f f$ je rekurzivna po pretpostavci, pa je $\chi_{\graf{\f f}}$ rekurzivna po lemi~\ref{lm:comprek}.
 \end{proof}
 
-Napomenimo samo da u teoremu~\ref{tm:graftot} ne možemo staviti riječ "primitivno" u zagrade, kao što smo činili u mnogim rezultatima do sada: postoje rekurzivne funkcije čiji grafovi su primitivno rekurzivni, ali one same nisu primitivno rekurzivne. \emph{Ackermannova} funkcija, uvedena u~\cite[dodatak]{skr:Vuk}, primjer je takve funkcije.
+Istaknimo da u teoremu~\ref{tm:graftot} ne možemo staviti riječ "primitivno" u zagrade, kao što smo činili u mnogim rezultatima do sada: postoje rekurzivne funkcije čiji grafovi su primitivno rekurzivni, ali one same nisu primitivno rekurzivne. \emph{Ackermannova} funkcija, uvedena u~\cite[dodatak]{skr:Vuk}, primjer je takve funkcije.
 
 \subsection{Relacije \texorpdfstring{$\f{Step}$ i $\f T_k$}{Step i Tk}}
 %\subsection{Univerzalne funkcije \texorpdfstring{$\f{comp}_k$}{comp}}
@@ -981,7 +981,7 @@ Funkcija $\f U$ je primitivno rekurzivna. Za svaki $k\in\N_+$, funkcija $\f{comp
 \begin{proof}
 Prvo, $\f U=\f{result}\circ\f{rpart}\circ(\f I_1^1,\f Z)$ je simbolička definicija od $\f U$: $\f{result}$ je točkovno definirana u~\eqref{eq:resultdef}, a $\f{rpart}$ u~\eqref{eq:rpartdef}, pomoću primitivno rekurzivnih funkcija ($\f{ex}$, $\f{part}$, $\f{pd}$ i $\f{lh}$), pa su $\f{result}$ i $\f{rpart}$ --- a onda i $\f U$ --- primitivno rekurzivne.
 
-Sada je $\f{comp}_k=\f U\circ\mu\f T_k$ parcijalno rekurzivna jer je dobivena kompozicijom i minimizacijom iz primitivno rekurzivnih $\f U$ i $\f T_k$. Prema korolaru~\ref{kor:funHaltTk} domena joj je $Halt_k$, baš kao i domena funkcije $(\vec x,e)\mapsto\f{univ}(\langle\vec x\rangle,e)$ (po definiciji domene kompozicije, uzevši u obzir da je $\f{Code}^k$ totalna). Još treba samo vidjeti da se te dvije funkcije podudaraju na toj domeni. Za svaki $(\vec x,e)\in Halt_k$ vrijedi (uz oznake $x:=\langle\vec x\rangle$ i $n:=\f{step}(x,e)$, dakle vrijedi $\f{Step}(x,e,n)$):
+Sada je $\f{comp}_k=\f U\circ\mu\f T_k$ parcijalno rekurzivna jer je dobivena kompozicijom i minimizacijom iz primitivno rekurzivnih $\f U$ i $\f T_k$. Prema korolaru~\ref{kor:funHaltTk} domena joj je $Halt_k$, baš kao i domena funkcije $(\vec x,e)\mapsto\f{univ}(\langle\vec x\rangle,e)$ (po definiciji domene kompozicije, uzevši u obzir da je $\f{Code}^k$ totalna). Još treba samo vidjeti da se te dvije funkcije podudaraju na toj domeni. Za svaki $(\vec x,e)\in Halt_k$ (uz oznake $x:=\langle\vec x\rangle$ i $n:=\f{step}(x,e)$, tako da vrijedi $\f{Step}(x,e,n)$) imamo:
 \begin{multline}
     \f{univ}(x,e)=
     \f{result}\bigl(\f{Reg}(x,e,n)\bigr)=
@@ -1003,7 +1003,7 @@ iz čega slijedi tražena parcijalna jednakost.
 Za svaki $k\in\N_+$, za sve $(\vec x,e)\in\N^{k+1}$ vrijedi:
 \begin{enumerate}
     \item\label{tv:comp} Ako je $e$ kod nekog RAM-programa $P$ te ako $P$-izračunavanje s $\vec x$ stane, tada je $\f{comp}_k(\vec x,e)$ rezultat tog izračunavanja.
-    \item\label{tv:ncomp} U ostalim slučajevima ($e\notin\f{Prog}$, ili $e=\kprog{P}$ ali $P$-izračunavanje s $\vec x$ ne stane), izraz $\f{comp}_k(\vec x,e)$ nema smisla.
+    \item\label{tv:ncomp} U ostalim slučajevima ($e=\kprog{P}$ tako da $P$-izračunavanje s $\vec x$ ne stane, ili uopće $e\notin\f{Prog}$), izraz $\f{comp}_k(\vec x,e)$ nema smisla.
 \end{enumerate}
 \end{korolar}
 \begin{proof}
@@ -1047,7 +1047,7 @@ Vidimo da su $\f U$, $\f T_k$, $\f I_n^k$ i $\f C_e^k$ primitivno rekurzivne, da
 Kad fiksiramo $\f U$ i sve $\f T_k$ te pomoću njih definiramo funkcije $\f{comp}_k$ (kao što smo učinili), Kleenejev teorem o normalnoj formi možemo izreći jednostavnije.
 
 \begin{korolar}[{name=[svaka izračunljiva funkcija je specijalizacija univerzalne]}]\label{kor:pimi}
-Za svaku $\f f\in\mathscr Comp$ postoje $k\in\N_+$ i $e\in\N$ takvi da je funkcija $\vec x\mapsto\f{comp}_k(\vec x,e)$ jednaka $\f f$.
+Za svaku funkciju $\f f\in\mathscr Comp$ postoje $k\in\N_+$ i $e\in\N$ takvi da je funkcija $\vec x\mapsto\f{comp}_k(\vec x,e)$ jednaka $\f f$.
 \end{korolar}
 
 \begin{proof}
@@ -1057,7 +1057,7 @@ Za $k$ stavimo mjesnost funkcije $\f f$, a za $e$ kod nekog RAM-programa koji ra
 \begin{definicija}[{name=[indeks]}]\label{def:indeks}
 Za fiksne $k\in\N_+$ i $e\in\N$, $k$-mjesnu brojevnu funkciju $\vec x\mapsto\f{comp}_k(\vec x,e)$ označavamo s $\kf e^k$, ili samo s $\kf e$ ako joj ne trebamo istaknuti mjesnost.
 
-Broj $e$ zovemo \emph{indeksom} funkcije $\kf e^k$ (broj $k$ zovemo \emph{mjesnošću} funkcije $\kf e^k$). 
+Broj $e$ zovemo \emph{indeksom} funkcije $\kf e^k$ (broj $k$ je mjesnost funkcije $\kf e^k$). 
 
 Za funkciju $f^k$ kažemo da \emph{ima indeks} ako postoji $e\in\N$ takav da je $\kf e^k=f^k$.
 \end{definicija}

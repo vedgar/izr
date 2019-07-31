@@ -33,7 +33,7 @@ Vidimo da inicijalnih funkcija zapravo ima beskonačno (prebrojivo) mnogo, ali s
 Svaka inicijalna funkcija je makro-izračunljiva.
 \end{propozicija}
 \begin{proof}
-    Već smo vidjeli da prazan (makro ili RAM) program (algoritam $[\,]^1$) računa funkciju $\f Z$. Iz semantike instrukcije \textsc{remove} vidimo da za sve $k\ge n\ge 1$ makro-algoritam $\begin{prog}0.&\remove{n}{0}\end{prog}^k$ računa $\f I_n^k$. Također, makro-algoritam $\begin{prog}
+    Već smo vidjeli da prazan (makro- ili RAM-\!) program (algoritam $[\,]^1$) računa funkciju $\f Z$. Iz semantike instrukcije \textsc{remove} vidimo da za sve $k\ge n\ge 1$ makro-algoritam $\begin{prog}0.&\remove{n}{0}\end{prog}^k$ računa $\f I_n^k$. Također, makro-algoritam $\begin{prog}
 0.&\remove10\\
 1.&\incr0
 \end{prog}^1$ računa $\f{Sc}$:
@@ -77,7 +77,7 @@ Ta dilema je dobro poznata u modernom računarstvu, i oba pristupa nalazimo u da
 \end{verbatim}
 \end{minipage}\end{equation}
 
-Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i prisutan je u gotovo svim imperativnim jezicima, pa i mnogim funkcijskima (kao što je ML). Prednost je lakša implementacija, i lakše razmišljanje o kodu (a time i lakši \emph{debugging}). Primjer u Pythonu:
+Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i prisutan je u gotovo svim imperativnim jezicima, pa i mnogim funkcijskima (kao što je ML\@). Prednost je lakša implementacija, i lakše razmišljanje o kodu (a time i lakši \emph{debugging}). Primjer u Pythonu:
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
     >>> def i12(x, y): return x

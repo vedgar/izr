@@ -570,7 +570,7 @@ Zapravo, kako u našem slučaju (reprezentacija problema zaustavljanja RAM-stroj
 
 Pogledajmo malo detaljnije kako u osnovnom jeziku izgleda formula $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\eqref{step:varphi_u}. To svakako ovisi o instrukcijama konkretnog programa $P_0$ koji računa Russellovu funkciju, ali dio koji ovisi o $u$ (koji nam je jedini bitan za svođenje) je prilično malen i odnosi se samo na formulu $\pi_u$.
 
-Preciznije, neka je $P_0=[t.\;I_t]_{t<n}$. Za svaki $t<n$ imamo u $\Gamma_u$ jednu formulu $\iota_t$, tako da se njihova univerzalna zatvorenja, obrnutim redom, prebacuju s desne strane~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je u tom trenutku na desnoj stani označimo s $\psi$), i nju možemo prebaciti lijevo bez univerzalnog zatvorenja jer je ona rečenica. Ključno je da formula $\psi$, koliko god ogromna bila, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će biti neka jako velika konstanta.
+Preciznije, neka je $P_0=\begin{prog}t.&I_t\end{prog}_{t<n}$. Za svaki $t<n$ imamo u $\Gamma_u$ jednu formulu $\iota_t$, tako da se njihova univerzalna zatvorenja, obrnutim redom, prebacuju s desne strane~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je u tom trenutku na desnoj stani označimo s $\psi$), i nju možemo prebaciti lijevo bez univerzalnog zatvorenja jer je ona rečenica. Ključno je da formula $\psi$, koliko god ogromna bila, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će biti neka jako velika konstanta.
 
     Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsb(\overline{\iota_{n-1}}\to\zeta)\dotsm)\bigr)\bigr)$\text.
 Uz standardne reprezentacije ($\mathsf0$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, a $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), možemo svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Jedino što je još potrebno su kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. U praksi je lakše koristiti ovaj drugi pristup.
@@ -658,7 +658,7 @@ Kada bi $Valid$ bio odlučiv, po teoremu~\ref{tm:oikr} bi jednomjesna relacija $
 
 \section{Prema G\"odelovom prvom teoremu nepotpunosti}
 
-Argumentima koji su potrebni za dokaz Churchovog teorema već smo se poprilično približili dokazu G\"odelovog prvog teorema, izrečenog u obliku: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA}. Za pravi dokaz trebalo bi ispeglati još puno tehničkih detalja, ali pogledajmo samo osnovnu ideju.
+Argumentima koji su potrebni za dokaz Churchovog teorema već smo se poprilično približili dokazu G\"odelovog prvog teorema, izrečenog u obliku: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za pravi dokaz trebalo bi ispeglati još puno tehničkih detalja, ali pogledajmo samo osnovnu ideju.
 
 U prethodnoj točki uveli smo, za svaki prirodni broj $u$, formulu (štoviše, rečenicu) $\varphi_u$ koja je valjana ako i samo ako je $u$ element Kleenejevog skupa. Također smo uveli strukturu $\mathfrak N=(\N,0,\f{Sc},\dotsc)$, čiji konstantsko-funkcijski fragment se podudara sa standardnim modelom od PA (prirodni brojevi, nula i sljedbenik).
 
@@ -678,7 +678,7 @@ Po kontrapoziciji propozicije~\ref{pp:models>stop}, za svaki $u\in K\kompl$ form
 \end{proof}
 
 \begin{teorem}[{name=[G\"odelov prvi teorem nepotpunosti]}]
-Postoji rečenica $\gamma\in\mathscr G\ddot o$ (\emph{G\"odelova rečenica}) koja nije dokaziva u PA.
+Postoji rečenica $\gamma\in\mathscr G\ddot o$ (\emph{G\"odelova rečenica}) koja nije dokaziva u PA\@.
 \end{teorem}
 \begin{proof}[Skica dokaza]
 Ključno je vidjeti da je jezik nad $\Sigma_{\log}$,
@@ -716,7 +716,7 @@ Modus ponens i generalizaciju je jednostavno zapisati.
 
 Odnosno, $\alpha$ je dobivena modus ponensom iz $\beta$ i $\gamma$ ako i samo ako je $\beta=(\gamma\to\alpha)$. Također, $\alpha$ je dobivena generalizacijom iz $\beta$ ako postoji $k$ takav da je $\alpha=\forall x_k\beta$. Pri tome je $k<k+1=\dulj{x_k}<\dulj{\forall x_k}<\dulj{\alpha}\le\kr\alpha=a$ po lemi~\ref{lm:dulj<=kr}, pa možemo ograničiti kvantifikaciju po $k$.
 
-Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, i još provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana. Za elegantan pristup koji zaobilazi supstituciju u slučaju PA, pogledajte~\cite{smullyan}.
+    Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, i još provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana. Za elegantan pristup koji zaobilazi supstituciju u slučaju PA\@, pogledajte~\cite{smullyan}.
 
 Pogledajmo sada sljedeći \emph{paralelni} algoritam:
 \begin{quote}
@@ -733,7 +733,7 @@ S druge strane, ako $u\notin K$, prva dretva po definiciji neće stati, no hoće
 
 No to bi značilo da smo upravo napisali (vrlo neformalni) algoritam za računanje funkcije $\chi_{K}$, što je po Church--\!Turingovoj tezi u kontradikciji s teoremom~\ref{tm:DRnrek}.
 
-Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathscr G\ddot o$ koja nije dokaziva u PA.
+Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathscr G\ddot o$ koja nije dokaziva u PA\@.
 \end{proof}
 
 \subsection{Problemi u skici dokaza G\"odelovog teorema}

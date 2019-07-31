@@ -15,7 +15,7 @@ Ipak, skup $\{0,1\}^*$, kao i općeniti $\Sigma^*$, matematički je nespretan; r
 
 Za dokazivanje teorema bolje je uzeti jednostavniji skup --- u najvećem dijelu knjige promatrat ćemo \emph{brojevne} algoritme, kojima su ulazni i izlazni podaci \textbf{prirodni brojevi}. U nekom smislu, skup prirodnih brojeva je najjednostavniji mogući skup na kojem se može obrađivati teorija izračunljivosti --- svakako je najjednostavniji među beskonačnim skupovima, a izračunljivost na konačnim skupovima je trivijalna: algoritam za svaku funkciju se može napisati kao tablica (\emph{lookup table}).
 
-Odabir skupa $\N$ kao osnovnog isplatit će se kroz jednostavnost mnogih dokaza (jer imamo matematičku indukciju, jasan početak i sljedbenika, dobar uređaj,~\ldots), ali s druge strane, zato će biti kompliciranije \emph{kodirati} razne druge matematičke objekte kao prirodne brojeve. Za usporedbu, skup $\Sigma^*$ je zgodniji za kodiranje, jer već imamo intuitivnu predodžbu raznih objekata kao nizova znakova ($\Sigma=$ ASCII): nitko nam ne mora objasniti kodiranje da bismo znali koji element od $\mathbb Q$ predstavlja "\t{-22/3}".
+Odabir skupa $\N$ kao osnovnog isplatit će se kroz jednostavnost mnogih dokaza (jer imamo matematičku indukciju, jasan početak i sljedbenika, dobar uređaj,~\ldots), ali s druge strane, zato će biti kompliciranije \emph{kodirati} razne druge matematičke objekte kao prirodne brojeve. Za usporedbu, skup $\Sigma^*$ je zgodniji za kodiranje, jer već imamo intuitivnu predodžbu raznih objekata kao nizova znakova ($\Sigma=$ ASCII\@): nitko nam ne mora objasniti kodiranje da bismo znali koji element od $\mathbb Q$ predstavlja "\t{-22/3}".
 
 Ipak, neintuitivnost kodiranja nadomjestit će jednostavnost algoritama: dok je, uz odgovarajuće tehnike~\cite{posav}, lako napisati algoritam za npr.\ zbrajanje racionalnih brojeva kodiranih prirodnim brojevima, analogni algoritam za ASCII-kodirane razlomke gotovo nikada ne stigne dalje od grubog pseudokoda. Ponegdje, gdje su naši objekti već \emph{definirani} kao nizovi znakova (najvažniji primjer su formule logike prvog reda), koristit ćemo njihovu jezičnu reprezentaciju, ali to će biti nakon što objasnimo općenito kodiranje sa $\Sigma^*$ u $\N$ (i obrnuto).
 
@@ -42,7 +42,7 @@ Direktna posljedica toga je da u našem modelu ne postoje algoritmi s "varijabil
 Iako mjesnost smatramo neodvojivim dijelom funkcije odnosno algoritma, u slučaju nespecificirane mjesnosti $k$ nespretno je pisati $x_1,x_2,\dotsc,x_k$ svugdje gdje trebamo napisati argumente odnosno ulazne podatke. Zato ćemo često tih $k$ prirodnih brojeva skraćeno pisati $\vec x$, ili $\vec x^k$ ako želimo naglasiti koliko ih ima --- no najčešće će se to moći zaključiti iz konteksta: recimo, u $f^7(\vec x,y,z)$, vidimo da je duljina od $\vec x$ jednaka $5$.
 
 \begin{napomena}[{name=[svi argumenti moraju biti eksplicitno navedeni]}]\label{nap:blokovi}
-S obzirom na to da promatramo samo determinističke algoritme, naglasimo da nema "implicitnih argumenata": sve vrijednosti o kojima ovisi izlaz funkcije (ako se doista mijenjaju od poziva do poziva) moraju biti prenesene u nju kao argumenti. Često ćemo pisati opće funkcijske pozive kao $f(\vec x,y,z)$ --- gdje su $y$ i $z$ "lokalne varijable" s kojima doista nešto radimo u konkretnom algoritmu, a $\vec x$ predstavlja samo kontekst (\emph{environment}) nekog vanjskog algoritma koji je pozvao $f$ --- koji također moramo prenijeti u $f$ ako želimo da mu ona može pristupiti.
+S obzirom na to da promatramo samo determinističke algoritme, naglasimo da nema "implicitnih argumenata": sve vrijednosti o kojima ovisi izlaz funkcije (ako se doista mijenjaju od poziva do poziva) moraju biti prenesene u nju kao argumenti. Često ćemo pisati opće funkcijske pozive kao $f(\vec x,y,z)$, gdje su $y$ i $z$ "pravi" argumenti s kojima doista nešto radimo u konkretnom algoritmu, a $\vec x$ predstavlja samo kontekst (\emph{environment}) nekog vanjskog algoritma koji je pozvao $f$ --- koji također moramo prenijeti u $f$ ako želimo da mu ona može pristupiti.
 \end{napomena}
 
 Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivna, odnosno ne promatramo algoritme s $0$ ulaznih podataka. Ovo nije bitna restrikcija (možete se zabaviti pokušavajući otkriti koje sve tehničke detalje u knjizi treba promijeniti da bismo uključili i takve algoritme u razmatranje), ali komplicira izlaganje, a takvi algoritmi nam nisu zanimljivi iz perspektive izračunljivosti: budući da zahtijevamo determinističnost, nul-mjesni algoritmi mogu računati jedino konstante, a ne treba nam jako napredni formalizam da bismo zaključili da konstante \emph{jesu} izračunljive.
@@ -573,7 +573,8 @@ i gotovi smo: $Q'''=Q^\flat$, jer više nema makroa u programu. (Za objašnjenje
 
 Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathscr{MP}rog$ i $\mathscr Prog$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Vratit ćemo se na ovaj postupak u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa. To će biti jedan specijalni slučaj (dokaz teorema o parametru), za koji ćemo tada pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
 
-\subsection{Ekvivalentnost RAM-programa i makro-programa}
+%\subsection{Ekvivalentnost RAM-programa i makro-programa}
+\subsection{Primjeri makroa}
 
 Kad smo već kod neformalnih objašnjenja, izrecimo i osnovni rezultat --- koji se doduše može formalno dokazati, ali je vrlo mukotrpno i zapetljano, a zapravo dokaz ne daje ništa novo ako već imamo intuiciju \emph{inlininga} kao programske tehnike.
 
@@ -607,9 +608,9 @@ Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$
 Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$ gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat*}$\!, koji ima istu semantiku što se efekata na registrima tiče.
 \end{napomena}
 
-\subsection{Primjeri makroa}
+% \subsection{Primjeri makroa}
 
-%Evo primjera korištenja te tehnike.
+Evo primjera korištenja te tehnike.
 Prisjetimo se: za svaki $j\in\N$,
 \begin{equation}
 (\textsc{zero}\;\reg{j}):=\begin{prog}
