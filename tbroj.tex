@@ -20,13 +20,13 @@ Ako pak $\varphi_1$ i $\varphi_2$ imaju istu domenu $D$, ali se razlikuju na nek
 \end{equation}
 pa su $\N\varphi_1$ i $\N\varphi_2$ različite jer se razlikuju na elementu $\kr w$.
 
-Za surjektivnost, uzmimo proizvoljnu $\f F^1\in\mathscr Comp_1$ i tražimo $\varphi\in\TComp$ takvu da je $\f F=\N\varphi$. Očito, u domeni joj moraju biti upravo sve riječi $w$ za koje je $\kr w\in\dom{\f F}$, a svaku takvu riječ mora preslikavati u (jedinstvenu) riječ $v$ čiji kod je $\f F(\kr w)$. Time je jezična funkcija $\varphi$ potpuno određena, a iz $\N\varphi=\f F\in\mathscr Comp_1$ po teoremu~\ref{tm:krit} slijedi $\varphi\in\TComp$. Dobivenu funkciju označavamo s $\N^{-1}\f F$.
+Za surjektivnost, uzmimo proizvoljnu $\f F^1\in\mathscr Comp_1$ i tražimo $\varphi\in\TComp$ takvu da je $\f F=\N\varphi$. Očito, u domeni joj moraju biti upravo sve riječi $w$ za koje je $\kr w\in\dom{\f F}$, a svaku takvu riječ mora preslikavati u (jedinstvenu) riječ $v$ čiji kod je $\f F(\kr w)$. Time je jezična funkcija $\varphi$ potpuno određena, a iz $\N\varphi=\f F\in\mathscr Comp_1$ po teoremu~\ref{tm:krit} slijedi $\varphi\in\TComp$. Dobivenu funkciju $\varphi$ označavamo s $\N^{-1}\f F$.
 \end{proof}
-Precizno, imamo vezu
-\begin{equation}
-\f F=\N\varphi=\N\Sigma^*\circ\varphi\circ(\N\Sigma^*)^{-1}\Longleftrightarrow
-\varphi=\N^{-1}\f F=(\N\Sigma^*)^{-1}\circ\f F\circ\N\Sigma^*
-\end{equation}
+Precizno, uz oznaku $\kappa:=\N\Sigma^*$, imamo vezu
+%\begin{equation}
+$\f F=\N\varphi=\kappa\circ\varphi\circ\kappa^{-1}\Leftrightarrow
+\varphi=\N^{-1}\f F=\kappa^{-1}\circ\f F\circ\kappa$
+%\end{equation}
 te vrijedi $\N\,\N^{-1}\f F=F$ i $\N^{-1}\N\varphi=\varphi$.
 
 \begin{korolar}[{name=[jednomjesne brojevne funkcije u različitim modelima]}]\label{kor:pent}
@@ -78,9 +78,9 @@ Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\empt
 
 U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_{\mathit{true}}$ i $q_{\mathit{false}}$, kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
-Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što je propisano da konfiguracija sa stanjem $q_{\mathit{false}}$ (kao i ona s $q_{\mathit{true}}$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja). Za takve strojeve kažemo da su \emph{odlučitelji} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ tako dijeli $\Sigma^*$ na dva dijela,
+Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što konfiguracija sa stanjem $q_{\mathit{false}}$ (kao i ona s $q_{\mathit{true}}$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja) i zovemo ih \emph{odlučiteljima} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
-    \SwapAboveDisplaySkip
+    %\SwapAboveDisplaySkip
     L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{true}}$}\}
     \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{false}}$}\}\text,
 \end{align} i kažemo da \emph{prepoznaje} $L(\mathcal T)$.
@@ -330,8 +330,8 @@ a $\f{slh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ jer je već $\su
 Za sve $x,y\in\N$, za sve $b\in\N_+$, vrijedi $\f{slh}(x\conc b y,b)=\f{slh}(x,b)+\f{slh}(y,b)$.
 \end{korolar}
 \begin{proof}
-Neka su $x,y,b$ proizvoljni ($b$ pozitivan). Abeceda $\Sigma_b:=[1\dd b]$ ima $b$ elemenata --- kodirajmo je identitetom.
-Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in\Sigma_b^*$ takve da je $x=\kr u$ i $y=\kr v$. Po definiciji $\f{slh}$, vrijedi $\f{slh}(\kr w,b)=\dulj w$ za sve $w\in\Sigma_b^*$, pa specijalno za $w=x$, $w=y$ i $w=xy$. Sada imamo
+Neka su $x,y,b$ proizvoljni ($b$ pozitivan). Uzmimo neku $b$-članu abecedu: recimo $[1\dd b]$.
+    Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in[1\dd b]^*$ takve da je $x=\kr u$ i $y=\kr v$. Po definiciji $\f{slh}$, vrijedi $\f{slh}(\kr w,b)=\dulj w$ za sve $w\in[1\dd b]^*$, pa imamo
 \begin{multline}
     \f{slh}(x,b)+\f{slh}(y,b)=
     \f{slh}(\kr u,b)+\f{slh}(\kr v,b)=
@@ -424,11 +424,11 @@ Neka je $k\in\N_+$ te $\f f^k$\! funkcija takva da je $\beta\f f$ Turing-izraču
 odnosno $\f f$ je dobivena kompozicijom iz tri funkcije, od kojih je srednja parcijalno rekurzivna, a prva i zadnja su primitivno rekurzivne (lema~\ref{lm:blh} i propozicija~\ref{pp:binkprn}), pa su rekurzivne (korolar~\ref{kor:prnrek}) a time i parcijalno rekurzivne. Kako je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju, $\f f$ je parcijalno rekurzivna.
 \end{proof}
 
-Sad je jasno da istim dijagramom možemo dokazati i obrat teorema~\ref{tm:btip}. Jednadžba
+Istim dijagramom možemo dokazati i obrat teorema~\ref{tm:btip}. Jednadžba
 \begin{equation}
     \f{bin}^1\!\circ f=\N\beta f\circ\f{bin}^k
 \end{equation}
-iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$ iz $f$ --- samo trebamo umjesto desne obrnuti lijevu stranicu pravokutnika, odnosno naći desni inverz za $\f{bin}^k$. Nažalost, to je iz tri razloga zapetljanije nego ovo što smo napravili u prethodnoj točki.
+iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$ iz $f$ --- umjesto desne trebamo obrnuti lijevu stranicu pravokutnika, odnosno naći desni inverz za $\f{bin}^k$. Nažalost, to je iz tri razloga zapetljanije nego ovo što smo napravili u prethodnoj točki.
 
 Prvi razlog tiče se napomene~\ref{nap:brip}. Zbog $\dom{\f{bin}^k}=\N^k$, traženi desni inverz ima $k$ izlaznih podataka, pa ga reprezentiramo s $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. Te funkcije su neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih ne moramo označavati s dva broja, poput $\f I_n^k$.
 
@@ -514,7 +514,7 @@ Za svaki $n\in\N_+$ vrijedi $n-1\in\N$, pa definiramo
 \begin{equation}
     \f{arg}_n(x):=\f{streak1}(2\conc2x\conc22,n-1)\text.
 \end{equation}
-Neka je $\vec x\in\N^k$ proizvoljan ($k\in\N_+$). Tada u $\beta(\vec x)$ ima točno $k-1$ separatora, pa je $\f{count2}\bigl(\f{bin}(\vec x)\bigr)=k-1$, odnosno za $y:=2\conc2\f{bin}(\vec x)\conc22$ vrijedi $\f{count2}(y)=k-1+2=k+1$. Sada za svaki $i\in[1\dd k]$ vrijedi $\f{arg}_i\bigl(\f{bin}(\vec x)\bigr)=\f{streak1}(y,i-1)$, što je upravo $x_i$ (recimo, za $i=2<k$ imat ćemo $\f{streak}(\kr{\t{/\textbullet}^{x_1}\!\t{/\textbullet}^{x_2}\!\t/\dotsm\t{/\textbullet}^{x_k}\!\t/},1)=\f{pos2}(y,2)-\f{Sc}\bigl(\f{pos2}(y,1)\bigr)=(1+x_1+1+x_2)-\f{Sc}(1+x_1)=x_2$).
+Neka je $\vec x\in\N^k$ proizvoljan ($k\in\N_+$). Tada u $\beta(\vec x)$ ima točno $k-1$ separatora, pa je $\f{count2}\bigl(\f{bin}(\vec x)\bigr)=k-1$, odnosno za $y:=2\conc2\f{bin}(\vec x)\conc22$ vrijedi $\f{count2}(y)=k-1+2=k+1$. Sada za svaki $i\in[1\dd k]$ vrijedi $\f{arg}_i\bigl(\f{bin}(\vec x)\bigr)=\f{streak1}(y,i-1)$, što je upravo $x_i$ (recimo, za $i=2<k$ imat ćemo $\f{streak1}(\kr{\t{/\textbullet}^{x_1}\!\t{/\textbullet}^{x_2}\!\t/\dotsm\t{/\textbullet}^{x_k}\!\t/},1)=\f{pos2}(y,2)-\f{Sc}\bigl(\f{pos2}(y,1)\bigr)=(1+x_1+1+x_2)-\f{Sc}(1+x_1)=x_2$).
 Za $i>k$ imat ćemo $i-1\ge k=\f{count2}(y)-1$, pa će po lemi~\ref{lm:pos2streak1prn} biti $\f{streak1}(y,i-1)=0$, kao što i treba.
 \end{proof}
 
@@ -536,18 +536,18 @@ Dakle,
 --- iz čega slijedi, po korolaru~\ref{kor:restrprek}, da je $\N\beta\f f$ parcijalno rekurzivna. Sada je po teoremu~\ref{tm:pir}, $\N\beta\f f$ RAM-izračunljiva, pa je $\beta\f f$ Turing-iz\-rač\-un\-lji\-va po teoremu~\ref{tm:krit}.
 \end{proof}
 
-%Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne (primitivno rekurzivne) funkcije
-%\begin{align}
-%\SwapAboveDisplaySkip
-  %\f{argc}&:=\f{Sc}\circ\f{count2}\text,\\
-  %\f{arg}(a,i)&:=\f{streak1}(2\conc2a\conc22,i)\text.
-%\end{align}
-%
-%\begin{primjer}
-%Recimo, $\f{add}^{\cdots}$, koja zbraja sve svoje argumente (koliko god da ih ima), je primitivno rekurzivna, jer je funkcija zadana s
-%\begin{equation}
-   %\N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i<\f{argc}(a)}}\f{arg}(a,i)
-%\end{equation}
-%primitivno rekurzivna po lemi~\ref{lm:sumprodrek} i prethodnim rezultatima.
-%\end{primjer}
-%To nam neće bitno trebati u nastavku, ali zgodno je znati da imamo i tu mogućnost.
+Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne (primitivno rekurzivne) funkcije
+\begin{align}
+\SwapAboveDisplaySkip
+\f{argc}&:=\f{Sc}\circ\f{count2}\text,\\
+\f{arg}(a,i)&:=\f{streak1}(2\conc2a\conc22,i)\text.
+\end{align}
+
+\begin{primjer}[{name=[implementacija \emph{varargs} pomoću binarnog kodiranja]}]
+Recimo, $\f{add}^{\cdots}$, koja zbraja sve svoje argumente (koliko god da ih ima), je primitivno rekurzivna, jer je funkcija zadana s
+\begin{equation}
+\N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i<\f{argc}(a)}}\f{arg}(a,i)
+\end{equation}
+primitivno rekurzivna po lemi~\ref{lm:sumprodrek} i prethodnim rezultatima.
+\end{primjer}
+To nam neće bitno trebati u nastavku, ali zgodno je znati da imamo i tu mogućnost.
