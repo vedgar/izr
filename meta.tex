@@ -118,7 +118,7 @@ Još treba vidjeti da $k$-mjesna funkcija s tim indeksom zadovoljava jednadžbu~
 pa je izlazni podatak doista $\kf e^{k+1}(\vec x,y)\simeq\f{comp}_{k+1}(\vec x,y,e)$ --- ako $P$-iz\-ra\-ču\-na\-va\-nje s $(\vec x,y)$ uopće stane. Ako ne stane, onda ne stane ni $Q$-izračunavanje s $\vec x$, jer zapne na donjoj razini izvršavajući zadnju makro-instrukciju.
 
     Još smo ostali dužni riješiti slučaj kad ne postoji program $P$, jer $e\nin\f{Prog}$. Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind} je tada $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je i $spec(y,f)$ prazna --- formula~\eqref{eq:domkomp} kaže da funkcija~\eqref{eq:paramcompose} ima praznu domenu. Za povratnu vrijednost od $\f S_k^2$ nam treba neki indeks od $\varnothing^k$, pa po istoj propoziciji možemo upotrijebiti upravo $e$% --- zbog $e\nin\f{Prog}$, za svaku mjesnost $k$ će biti $\kf e^k=\varnothing^k$, opet prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}
-. Dakle, %$\f S_k:=\{\f{Prog}\,\colon\f F,\f C_e^{k+1}\}$, primitivno rekurzivna po teoremu~\ref{tm:grek}
+. Dakle, %$\f S_k:=\IF{\f{Prog}:\f F,\f C_e^{k+1}}$, primitivno rekurzivna po teoremu~\ref{tm:grek}
 \begin{equation}\label{eq:Skprn}
    \f S_k(y,e):=\begin{cases}
        \f F(y,e),&{Prog}(e)\\
@@ -293,7 +293,7 @@ može se točkovno zapisati kao
         1,&\text{inače}
     \end{cases}
 \end{equation}
-ili simbolički, kao $\f{factorial}=\{\N_+\colon\f{mul}^2\circ(\f I_1^1,\f{factorial}\circ\f{pd}),\f{Sc}\circ\f Z\}$.
+ili simbolički, kao $\f{factorial}=\IF{\N_+:\f{mul}^2\circ(\f I_1^1,\f{factorial}\circ\f{pd}),\f{Sc}\circ\f Z}$.
 
 Kao \emph{definicija} taj izraz nema smisla, jer je cirkularan --- ali može poslužiti kao funkcijska \emph{jednadžba} koju trebamo riješiti po "nepoznanici" $\f{factorial}$. Osnovna prednost definicija pred jednadžbama sastoji se u tome da (dobra) definicija uvijek jednoznačno određuje definirani objekt, dok jednadžba može nemati rješenja, ili ih može imati više.
 
@@ -852,7 +852,7 @@ Pretpostavimo da je $S$ rekurzivan, i da $S$ nije ni $\emptyset$ ni $\N$. $S\ne\
         s,&\text{inače}
     \end{cases}\text,
 \end{equation}
-    rekurzivna po teoremu~\ref{tm:grek} (rekurzivna verzija) --- simbolički, $F=\{S\,\colon\f C_n^1,\f C_s^1\}$.
+    rekurzivna po teoremu~\ref{tm:grek} (rekurzivna verzija) --- simbolički, $F=\IF{S:\f C_n^1,\f C_s^1}$.
 
 Jer je $F$ rekurzivna, ima fiksnu točku: postoji broj $e\in\N$ takav da je $e\approx_k F(e)$. No to je nemoguće: ako je $e\in S$, tada je po $k$-invarijantnosti i $F(e)\in S$ --- što je u kontradikciji s činjenicom da je $F(e)=n$ za $e\in S$.
 

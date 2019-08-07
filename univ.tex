@@ -1136,12 +1136,12 @@ Na početku točke~\ref{sec:tech} nešto smo rekli o teškoćama koje marljiva e
 Dakle, način da se izvučemo je da našoj funkciji $if$ ne damo već izračunate \emph{vrijednosti} $\f g(\vec x)$ i $\f h(\vec x)$, već neevaluirane \emph{funkcije} $\f g$ i $\f h$. Tada s obzirom na uvjet odaberemo jednu od njih, i onda je tek izračunamo na $\vec x$: umjesto $\f f(\vec x,y)\simeq if\bigl(y,\f g(\vec x),\f h(\vec x)\bigr)$ imamo $\f f(\vec x,y)\simeq if(y,\f g,\f h)(\vec x)$. Koristeći indekse, to možemo i doslovno napraviti.
 
 \begin{teorem}[Teorem o grananju, parcijalno rekurzivna verzija]\label{tm:gprek}
-Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne rekurzivne relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\{\f R_1\colon\f G_1,\f R_2\colon\f G_2,\dotsc,\f R_l\colon\f G_l,\f G_0\}$ također parcijalno rekurzivna.
+Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne rekurzivne relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\IF{\f R_1:\f G_1,\f R_2:\f G_2,\dots,\f R_l:\f G_l,\f G_0}$ također parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
 Za svaki $i\in[0\dd l]$, funkcija $\f G_i^k$ je parcijalno rekurzivna, pa prema korolaru~\ref{kor:pii} ima indeks, označimo ga s $e_i$ (pogledajte napomenu~\ref{nap:>1ind} za značenje ove fraze). Prema teoremu~\ref{tm:grek} (rekurzivna verzija), funkcija
 %\begin{equation}
-$\f H^k:=\{\f R_1\colon\f C_{e_1}^k,\f R_2\colon\f C_{e_2}^k,\dotsc,\f R_l\colon\f C_{e_l}^k,\f C_{e_0}^k\}$
+$\f H^k:=\{\f R_1:\f C_{e_1}^k,\f R_2:\f C_{e_2}^k,\dots,\f R_l:\f C_{e_l}^k,\f C_{e_0}^k\}$
 %\end{equation}
 je rekurzivna (konstante su primitivno rekurzivne pa su rekurzivne, a uvjeti su u parovima disjunktni i rekurzivni po pretpostavci). Tvrdimo da je
 \begin{equation}\label{eq:gprekdef}
@@ -1161,7 +1161,7 @@ U teoremu~\ref{tm:grek} nismo mogli ispustiti $\f G_0$, jer njena podrazumijevan
 Za to možemo iskoristiti propoziciju~\ref{prop:computeind}\eqref{it:nprogind} --- svi brojevi iz $\f{Prog}\kompl$ indeksi su prazne funkcije. Posebno lijep takav broj je $0$, koji nije u $\f{Prog}$ jer uopće nije u $\f{Seq}$: $\overline{\f{part}}\bigl(0,\f{lh}(0)\bigr)=\overline{\f{part}}(0,0)=\langle\rangle=1\ne0$.
 
 \begin{korolar}[{name=[{teorem o grananju, parcijalno rekurzivna verzija, bez "inače"}]}]\label{kor:gprek}
-Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne rekurzivne relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\{\f R_1\colon\f G_1,\f R_2\colon\f G_2,\dotsc,\f R_l\colon\f G_l\}$ parcijalno rekurzivna.
+Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne rekurzivne relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\IF{\f R_1:\f G_1,\f R_2:\f G_2,\dots,\f R_l:\f G_l}$ parcijalno rekurzivna.
 \end{korolar}
 \begin{proof}
 Tvrdnja slijedi iz teorema~\ref{tm:gprek}, uvrštavajući za $\f G_0$ parcijalno rekurzivnu funkciju $\varnothing^k$, odnosno njen indeks $e_0=0$ u dokaz.
@@ -1171,7 +1171,7 @@ Tvrdnja slijedi iz teorema~\ref{tm:gprek}, uvrštavajući za $\f G_0$ parcijalno
 Neka je $k\in\N_+$, neka je $\f G^k$ parcijalno rekurzivna funkcija i $\f R^k$ rekurzivna relacija iste mjesnosti. Tada je i restrikcija $\f G|_{\f R}$ parcijalno rekurzivna.
 \end{korolar}
 \begin{proof}
-Tvrdnja slijedi iz korolara~\ref{kor:gprek}, uvrštavajući $l:=1$, $\f G_1:=\f G$ te $\f R_1:=R$. Funkcija $\{\f R\,\colon\f G\}$ je upravo jednaka $\f G|_{\f R}$: domena joj je $\dom{\f G}\cap\f R$, a vrijednosti su joj jednake vrijednostima funkcije $\f G$ na tom skupu.
+Tvrdnja slijedi iz korolara~\ref{kor:gprek}, uvrštavajući $l:=1$, $\f G_1:=\f G$ te $\f R_1:=R$. Funkcija $\IF{\f R:\f G}$ je upravo jednaka $\f G|_{\f R}$: domena joj je $\dom{\f G}\cap\f R$, a vrijednosti su joj jednake vrijednostima funkcije $\f G$ na tom skupu.
 \end{proof}
 
 %\begin{napomena}\label{nap:restrprekcomp}
