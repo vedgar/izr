@@ -649,7 +649,7 @@ Postoji fragment Turingovog stroja koji prevodi konfiguraciju\newline $\T{\$}{q_
 \vspace{-1em}
 \noindent\begin{gather*}
     \label{d:21}\tag{$\delta$2a}\delta(q_0,\alpha_t):=(q_1,\alpha_{t-1},1)\text{, za sve }t\in[2\dd b']\\
-\label{d:22}\tag{$\delta$2b}\delta(q_1,\alpha):=(q_1,\alpha,1)\text{, za sve }\alpha\in\Sigma_0\mathbin{\dot\cup}\{\t\#,r_1\}\\
+\label{d:22}\tag{$\delta$2b}\delta(q_1,\alpha):=(q_1,\alpha,1)\text{, za sve }\alpha\in\Sigma_0\mathbin{\dcup}\{\t\#,r_1\}\\
 \label{d:23}\tag{$\delta$2c}\delta(q_1,\bl):=(q_0,r_1,-1)\\
 \label{d:24}\tag{$\delta$2d}\delta(q_0,\gamma):=(q_0,\gamma,-1)\text{, za }\gamma\in\{\t\#,r_1\}\\
     \label{d:25}\tag{$\delta$2e}\delta(q_0,\alpha_1):=(q_0,\alpha_{b'},-1)\\
@@ -735,7 +735,7 @@ Za riječ $\t{aab}$ imamo šetnju kroz konfiguracije (pišemo samo neke od njih)
 
 \subsection{Registri kao tragovi trake}
 
-Vrijeme je da opišemo kako ćemo točno reprezentirati konfiguraciju RAM-stroja $\mathcal S_0$ na traci.  Zapravo, vrijednost programskog brojača je jedna od konačno mnogo njih i na njoj su dopuštene proizvoljne transformacije, pa ju je bolje prikazati kroz stanje stroja. Na traci će stajati samo stanje registara --- i to samo onih relevantnih. U tu svrhu, označimo s $m:=m_{P_0^1}=\max\,\{m_{P_0},2\}$ širinu algoritma $P_0^1$; tada znamo da je dovoljno pratiti registre $\reg0$ do $\reg{m-1}$.
+Vrijeme je da opišemo kako ćemo točno reprezentirati konfiguraciju RAM-stroja $\mathcal S_0$ na traci.  Zapravo, vrijednost programskog brojača je jedna od konačno mnogo njih i na njoj su dopuštene proizvoljne transformacije, pa ju je bolje prikazati kroz stanje stroja. Na traci će stajati samo stanje registara --- i to samo onih relevantnih. U tu svrhu, označimo s $m:=m_{P_0^1}=\max\,\{m_{P_0},2\}$ širinu algoritma $P_0^1$; tada znamo da je dovoljno pratiti prvih $m$ registara.
 
 Kako to najbolje učiniti? Kao što smo rekli na početku ovog poglavlja, jezični model je "transponirani" brojevni model: u jezičnom modelu broj ćelija nije ograničen, ali broj mogućih sadržaja svake ćelije jest, dok je u brojevnom modelu obrnuto. To znači da možemo stanje relevantnih (prvih $m$) registara prikazati kao riječ nad "abecedom $m$-bitnih procesorskih riječi"
 \begin{equation}
