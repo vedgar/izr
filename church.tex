@@ -363,7 +363,7 @@ Pa neka je $\mathfrak M=(M,\phi)\cong(M,\Theta,g,S_0,S_1,\dotsc,S_n)$ proizvoljn
 Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo $a_{jt}:=\phi\bigl(\overline{c_t(\reg j)}\bigr)=g\bigl(g(\dotsb g(\Theta)\dotsb)\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
 
 \begin{lema}[{name=[izračunavanje čuva istinitost formula pojedinih konfiguracija]}]\label{lm:formcomputesteps}
-Za svaki $t\in\N$, vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$, odnosno $(a_{0t},a_{1t},\dotsc,a_{(m-1)t})\in S_{c_t(\textsc{pc})}$.
+Za svaki $t\in\N$ vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$,\newline odnosno $(a_{0t},a_{1t},\dotsc,a_{(m-1)t})\in S_{c_t(\textsc{pc})}$.
 \end{lema}
 \begin{proof}
 Indukcijom po $t$. Za $t=0$, tražena formula je upravo $\pi_{\vec u}$, koja je u $\Gamma_{\vec u}$ pa po pretpostavci vrijedi u $\mathfrak M$. Pretpostavimo da tvrdnja vrijedi za $t=b$, i pogledajmo tvrdnju za $t=b+1$. Ako je $c_b$ završna konfiguracija, tada je $c_{b+1}=c_b$ jer završne konfiguracije prelaze (jedino) u same sebe, pa je formula za $c_{b+1}$ ista kao formula za $c_b$, i vrijedi u $\mathfrak M$ po pretpostavci indukcije. Inače, $i:=c_b(\textsc{pc})<n$, pa postoji instrukcija programa $P$ s rednim brojem $i$, i također je $\iota_i\in\Gamma_{\vec u}$, dakle $\mathfrak M\models\iota_i$.

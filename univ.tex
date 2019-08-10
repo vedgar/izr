@@ -144,7 +144,7 @@ Za $y=0$, na desnoj strani stoji $x\bmod 0=x=0$, a to stoji i na lijevoj strani 
 \end{proof}
 
 \begin{korolar}[{name=[primitivna rekurzivnost skupa svih prim-brojeva]}]
-    Skup\, $\mathbb P$ svih prim-brojeva je primitivno rekurzivan.
+    Skup $\mathbb P$ svih prim-brojeva je primitivno rekurzivan.
 \end{korolar}
 \begin{proof}
 Direktno pomoću korolara~\ref{kor:midprn} i ograničenog brojenja (lema~\ref{lm:brojrek}): prim-brojevi imaju točno dva prirodna djelitelja, a za pozitivne $x$, svaki djelitelj od $x$ je manji ili jednak $x$:
@@ -157,7 +157,7 @@ Za nulu će tom metodom ispasti da ima jedan djelitelj (samu sebe), a zapravo ih
 U "stvarnom životu", provjera je li $x\in\mathbb P$ odvija se drugačije: nulu, jedinicu i dvojku te sve ostale parne brojeve odvojimo kao specijalne slučajeve, a onda provjeravamo samo neparne kandidate za djelitelje od 3 do uključivo $\lfloor\!\sqrt{x}\rfloor$. Ipak, to su sve samo praktične optimizacije, koje bitno ubrzavaju algoritam --- ostavljajući ga doduše u istoj klasi složenosti. Zanimljivo je napomenuti da je početkom ovog stoljeća pronađen \emph{polinomni} algoritam za provjeru je li zadani broj prim-broj, ali je dosta kompliciraniji. Kako mi ovdje nismo opterećeni performansama, tražimo samo najelegantniji zapis algoritma, a to je bez sumnje~\eqref{eq:Pprn}.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost enumeracije skupa $\mathbb P$]}]\label{pp:primeprn}
-    Niz $(p_i)_{i\in\N}$ (strogo rastući niz slike $\mathbb P$\!, tzv.\ \emph{enumeracija} skupa $\mathbb P$\!) je primitivno rekurzivan.
+    Niz $(p_i)_{i\in\N}$ (strogo rastući niz slike $\mathbb P$, tzv.\ \emph{enumeracija} skupa $\mathbb P$) je primitivno rekurzivan.
 \end{propozicija}
 \begin{proof}
     Zapravo trebamo algoritam za funkciju $\f{prime}^1$, koja svakom broju $n$ pridružuje $p_n$, $n$-ti prim-broj po veličini. Treba nam primitivna rekurzija --- i to degenerirana jer definiramo funkciju mjesnosti $1$. Za inicijalizaciju stavimo samo vrijednost $p_0=2$, a u koraku trebamo funkciju $\f{nextprime}$ koja prima ($n$ i) $p_n$, i mora vratiti $p_{n+1}$. Je li ta funkcija izračunljiva?
@@ -274,7 +274,7 @@ Time smo u potpunosti opisali kodiranje skupa $\N^*$, koje ćemo kasnije koristi
 \begin{equation}
     concat\bigl((x_1,x_2,\dotsc,x_k),(y_1,y_2,\dotsc,y_l)\bigr):=(x_1,x_2,\dotsc,x_k,y_1,y_2,\dotsc,y_l)\text.
 \end{equation}
-Pomalo neprecizno, ali sasvim jasno, pišemo $concat(\vec x^k,\vec y^{\,l}):=(\vec x,\vec y)$. I ubuduće ćemo smatrati da su takvi konstrukti "spljošteni" na jednu razinu --- duljina od $(\vec x,\vec y)$ nije $2$, već $k+l$. To smo zapravo već koristili svaki put kad smo napisali npr.\ $\f{f}(\vec x,y)$.
+Pomalo neprecizno, ali sasvim jasno, pišemo $concat(\vec x^k,\vec y^{l}):=(\vec x,\vec y)$. I ubuduće ćemo smatrati da su takvi konstrukti "spljošteni" na jednu razinu --- duljina od $(\vec x,\vec y)$ nije $2$, već $k+l$. To smo zapravo već koristili svaki put kad smo napisali npr.\ $\f{f}(\vec x,y)$.
 \end{primjer}
 
 Prateća funkcija $\N concat$ definirana je samo na $\f{Seq}\times\f{Seq}$, ali u svrhu primitivne rekurzivnosti, to shvaćamo kao parcijalnu specifikaciju. Također, njeno primitivno rekurzivno proširenje često pišemo infiksno kao operaciju $*$.
@@ -494,7 +494,7 @@ Vidimo
 \end{proof}
 
 \begin{lema}[{name=[primitivna rekurzivnost komponenata instrukcije]}]\label{lm:regndestprn}
-    Definiramo $\f{regn}(t)$ kao adresu registra na koji djeluje instrukcija koda $t$, ako takva postoji i djeluje na neki registar, a $0$ inače. Analogno definiramo $\f{dest}(t)$ za odredište. Funkcije $\f{regn}^1$ i\, $\f{dest}^1$ su primitivno rekurzivne.
+    Definiramo $\f{regn}(t)$ kao adresu registra na koji djeluje instrukcija koda $t$, ako takva postoji i djeluje na neki registar, a $0$ inače. Analogno definiramo $\f{dest}(t)$ za odredište. Funkcije $\f{regn}^1$ i $\f{dest}^1$ su primitivno rekurzivne.
 \end{lema}
 \begin{proof}
     Iz dokaza leme~\ref{lm:InsTYPEprn} odmah se vidi da ako je $t$ kod instrukcije tipa $\inc$, adresa njenog registra je $t[1]$. Ako je tipa $\dec$, adresa registra je i dalje $t[1]$, a odredište je $t[2]$. Ako je tipa $\goto$, odredište je $t[1]$.
@@ -589,7 +589,7 @@ Treba nam jedan važan konstruktor, a to je %\emph{proširenje nulom} zadanog ko
 početna konfiguracija RAM-stroja s ulazom $\vec x$ (prenesenim preko koda, jer želimo imati jednu funkciju za sve mjesnosti).
 
 \begin{lema}[{name=[primitivna rekurzivnost generatora početne konfiguracije]}]\label{lm:startprn}
-    Postoji primitivno rekurzivna funkcija $\f{start}^1$\!, s parcijalnom specifikacijom: za svaki $\vec x\in\N^+$\! (neprazni konačni niz), $\f{start}(\langle\vec x\rangle)=\knk{0,\vec x,0,0,0,\dotsc}$.
+    Postoji primitivno rekurzivna funkcija $\f{start}^1$\!, s parcijalnom specifikacijom: za svaki $\vec x\in\N^+$ (neprazni konačni niz), $\f{start}(\langle\vec x\rangle)=\knk{0,\vec x,0,0,0,\dotsc}$.
 \end{lema}
 \begin{proof}
 Samo treba napisati definiciju:
@@ -674,7 +674,7 @@ Izrazimo taj zadatak preko brojevnih funkcija. Umjesto $\vec x$ i $P$ prenijet �
 gdje smo označili $\f D:=\f{Seq}'\times\f{Prog}\times\N$ --- dakle zapravo želimo dvije tromjesne funkcije s ulaznim podacima $(x,e,n)\in\f D$, gdje je $n$ broj koraka izračunavanja koje smo napravili. Ukratko, nizove kodiramo "točkovno" tako da zapravo kodiramo njihove članove, dodavši indeks u nizu kao još jedan ulazni podatak, a algoritam s dva izlazna podatka (kod stanja registara i vrijednost programskog brojača) već standardno shvaćamo kao dva algoritma s istim ulaznim podacima. Sada je još samo potrebno proširiti te funkcije do totalnih tako da budu primitivno rekurzivne.
 
 \begin{lema}[{name=[primitivna rekurzivnost RAM-izračunavanja]}]\label{lm:RegCountprn}
-Postoje primitivno rekurzivne funkcije $\f{Reg}^3$ i\, $\f{Count}^3$, čija parcijalna specifikacija glasi:
+Postoje primitivno rekurzivne funkcije $\f{Reg}^3$ i $\f{Count}^3$, čija parcijalna specifikacija glasi:
 za svaki RAM-program $P$, za svaki neprazni konačni niz $\vec x$, za svaki prirodni broj $n$, $\f{Reg}(\langle \vec x\rangle,\kprog{P},n)$ je kod stanja registara, a $\f{Count}(\langle \vec x\rangle,\kprog{P},n)$ je vrijednost programskog brojača, nakon $n$ koraka $P$-izračunavanja s $\vec x$.
 \end{lema}
 Preciznije, ako je $P$-izračunavanje s $\vec x$ niz $(c_n)_{n\in\N}$, tada je $\f{Reg}(\langle\vec x\rangle, \kprog{P},n)=c_n(\reg{*})$, a $\f{Count}(\langle\vec x\rangle,\kprog{P},n)=c_n(\textsc{pc})$.
@@ -879,7 +879,7 @@ Dokažimo sada~\eqref{eq:mugraf}. Iz~\eqref{eq:projgraf} slijedi da te dvije fun
 \end{proof}
 
 \begin{teorem}[Teorem o grafu za totalne funkcije]\label{tm:graftot}
-Neka je $k\in\N_+$ te\, $\f{f}^k$ totalna funkcija. Tada je\, $\graf{\f f}$ rekurzivan ako i samo ako je\, $\f f$ rekurzivna.
+Neka je $k\in\N_+$ te $\f{f}^k$ totalna funkcija. Tada je $\graf{\f f}$ rekurzivan ako i samo ako je $\f f$ rekurzivna.
 \end{teorem}
 \begin{proof}
 Za smjer ($\Rightarrow$): po pretpostavci, $\chi_{\graf{\f f}}$ je rekurzivna, dakle parcijalno rekurzivna. Skup parcijalno rekurzivnih funkcija je zatvoren na minimizaciju, pa je $\mu\,\graf f$ također parcijalno rekurzivna --- no ta funkcija je jednaka $\f f$ po~\eqref{eq:mugraf}. Dakle, $\f f$ je parcijalno rekurzivna, a po pretpostavci teorema je totalna, pa je rekurzivna.

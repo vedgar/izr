@@ -74,7 +74,7 @@ class TuringMachine(typing.NamedTuple):
     def simulate(machine, input, debug=True):
         q, pos = machine.initial, 0
         tape = collections.defaultdict(lambda: machine.space, enumerate(input))
-        show(q, pos, tape, 0)
+        machine.show(q, pos, tape, 0)
         visited, steps = set(), 0
         states = []
         try:
@@ -87,21 +87,38 @@ class TuringMachine(typing.NamedTuple):
                         statnum = 0
                         for statkey, statgroup in itertools.groupby(states[1:]):
                             statcount = sum(1 for stat in statgroup)
-                            print(statkey.replace(space, '_'), end='')
+                            print(statkey.replace(machine.space, '_'), end='')
                             if statcount > 1: print('*', statcount, end=' ', sep='')
                             else: print(end=' ')
                             statnum += 1
                             if statnum > 99: print(end='...'); break
                         print()
                     states.clear()
-                    show(q, pos, tape, steps)
+                    machine.show(q, pos, tape, steps)
                     visited.add(q)
                 states.append(q)
-            show(q, pos, tape, steps)
+            machine.show(q, pos, tape, steps)
         except KeyError as exc:
-            show(q, pos, tape, steps)
+            machine.show(q, pos, tape, steps)
             print(repr(exc), file=sys.stderr)
 
+    def show_gen(machine, q, pos, tape, steps):
+        while tape and tape[max(tape)] == machine.space: del tape[max(tape)]
+        yield str(steps) + ': '
+        for i in range(2 + max(tape, default=0)):
+            if i == pos: yield q.replace(machine.space,'_').join('(>')
+            yield '_' if tape[i] == machine.space else tape[i].join('[]')
+        if tape[max(tape, default=0)] == machine.space:
+            del tape[max(tape)]
+        yield '...'
+
+    def show(machine, q, pos, tape, steps):
+        for key, group in itertools.groupby(machine.show_gen(q, pos, tape, steps)):
+            print(end=key)
+            count = sum(1 for cell in group)
+            if count > 5: print(end='^' + str(count) + ' ')
+            else: print(end=key*(count-1))
+        print()
 delta = {}
 Q = {'n$'}
 alfa = dict(enumerate(eSigma, 1))
@@ -200,24 +217,5 @@ for α in Sigma:
     rule('l' + α, space, 'q6', α)  # (δ5d')
 rule('m$', '$', 'l$', space, -1)  # (δ5e)
 
-def show_gen(q, pos, tape, steps):
-    while tape and tape[max(tape)] == space: del tape[max(tape)]
-    yield str(steps) + ':'
-    for i in range(2 + max(tape, default=0)):
-        if i == pos: yield q.replace(space,'_').join('(>')
-        yield '_' if tape[i] == space else tape[i].join('[]')
-    if tape[max(tape, default=0)] == space:
-        del tape[max(tape)]
-    yield '...'
-
-def show(q, pos, tape, steps):
-    for key, group in itertools.groupby(show_gen(q, pos, tape, steps)):
-        print(end=key)
-        count = sum(1 for cell in group)
-        if count > 5: print(end='^' + str(count) + ' ')
-        else: print(end=key*(count-1))
-    print()
-
-
 M = TuringMachine(Q, Sigma, Gamma, space, delta, 'n$', 'l$')
-M.simulate('17', debug=True)
+M.simulate(word, debug=True)

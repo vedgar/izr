@@ -392,7 +392,7 @@ Definirat ćemo brojne makroe, što će kulminirati \emph{funkcijskim makroom} -
     \end{itemize}
 \end{itemize}
 \end{definicija}
-\noindent Slično kao lemu~\ref{lema:alef0ins} i korolar~\ref{kor:alef0prog}, možemo dokazati da su skupovi
+\noindent Sada možemo, slično kao lemu~\ref{lema:alef0ins} i korolar~\ref{kor:alef0prog}, dokazati da su skupovi
 \begin{align}
 \mathscr{MI}ns&:=\mathscr Ins\mathbin{\dcup}\{P^*\mid P\in\mathscr Prog\}\text{, i}\\
 \mathscr{MP}rog&:=\{Q\in\mathscr{MI}ns^*\mid\text{sva odredišta u $Q$ su manja ili jednaka $n_Q$}\}\text,
@@ -517,7 +517,7 @@ Kako je u svakom makrou $P^*$, $P$ \emph{RAM}-program, u koraku~\ref{korak:dodaj
 \end{proof}
 
 \begin{primjer}[{name=[spljoštenje makro-programa $Q$]}]\label{pr:flat}
-Spljoštimo program $Q$ iz primjera~\ref{pr:makro}. Prvi makro u $Q$ nalazi se odmah na početku ($i=0$)	 pa ne moramo renumerirati instrukcije koje implementiraju $\textsc{zero}\;\reg1$ --- samo ove ispod njih: trebamo im povećati odredišta i redne brojeve za $2-1=1$. Nakon prvog prolaza kroz petlju tako dobijemo makro-program $Q'$.
+Spljoštimo program $Q$ iz primjera~\ref{pr:makro}. Prvi makro u $Q$ nalazi se odmah na početku ($i=0$) pa ne moramo renumerirati instrukcije koje implementiraju $\textsc{zero}\;\reg1$, već samo one ispod njih: trebamo im povećati odredišta i redne brojeve za $2-1=1$. Nakon prvog prolaza kroz petlju tako dobijemo makro-program $Q'$.
 
 Sljedeći makro je onaj koji odgovara praznom RAM-programu, s rednim brojem $i=2$. Za njega očito ne treba provoditi korak~\ref{korak:dodaj}; samo ga uklonimo i smanjimo redne brojeve i odredišta veće od $2$ za $1$. Specijalno, to znači da u instrukciji $(3.\;\decr22)$, odredište ostaje $2$, dok se redni broj smanjuje za $1$ i postaje također $2$. Dobivamo $Q''$.
 \begin{equation}
@@ -594,7 +594,7 @@ Iz toga onda slijedi da se pri izvršavanju programa i njegovog spljoštenja zap
 Teorem~\ref{tm:rem} ima dvije važne posljedice. Prvu možemo uobličiti kao korolar.
 
 \begin{korolar}[{name=[RAM-izračunljivost je ekvivalentna makro-izračunljivosti]}]\label{kor:rem}
-Neka je $k\in\N_+$ i\, $\f f^k$ funkcija.
+Neka je $k\in\N_+$ te $\f f^k$ funkcija.
 
     Tada je $\f f$ RAM-izračunljiva ako i samo ako je makro-izračunljiva.
 \end{korolar}
@@ -693,7 +693,7 @@ Neka je $k\in\N_+$ te $j_1,j_2,\dotsc,j_k>k$ prirodni brojevi. %(ne moraju biti 
 
 Napokon možemo, kako je najavljeno, definirati makro koji će nam omogućiti funkcijske pozive za bilo koju RAM-izračunljivu funkciju (za koju imamo RAM-program) na bilo kojim registrima kao argumentima, spremajući rezultat u po volji odabrani registar i čuvajući po volji velik početni komad memorije.
 
-Prvo definiramo jedan korisni pojam. Kako svaka RAM-instrukcija djeluje na najviše jednom registru, čitav RAM-program kao konačan niz instrukcija djeluje na konačno mnogo registara. To znači da za svaki RAM-program $P$ postoji tzv.\ \emph{širina} --- najmanji broj $m_P\in\N$ takav da $P$ ne koristi nijedan registar $\reg{i}$ za $i\ge m_P$. Može biti i $m_P=0$, ako program uopće ne koristi registre (prazan program, ili onaj koji se sastoji samo od instrukcija tipa \goto).
+Prvo definiramo jedan korisni pojam. Kako svaka RAM-instrukcija djeluje na najviše jednom registru, čitav RAM-program kao konačan niz instrukcija djeluje na konačno mnogo registara. To znači da za svaki RAM-program $P$ postoji tzv.\ \emph{širina} --- najmanji broj $m_P\in\N$ takav da $P$ ne koristi nijedan registar $\reg{i}$ za $i\ge m_P$. Može biti i $m_P=0$, ako program uopće ne koristi registre (ako je prazan, ili se sastoji samo od instrukcija tipa \goto).
 
 Za makro-program $Q$, možemo prirodno definirati $m_Q:=m_{Q^\flat}$ --- iako nam to zapravo neće trebati. Ali (RAM- i makro-\!) algoritmi $P^k$, pored registara koje koriste u instrukcijama, koriste i registre $\reg{1}$ do $\reg{k}$ za ulazne podatke. Moguće je da bude $m_P\le k$, ako računamo funkciju koja ne ovisi o zadnjih nekoliko argumenata. Ipak, registar $\reg{k}$ jest bitan za postupak računanja te funkcije jer, iako ga ne postavlja nijedna instrukcija, postavlja ga sam rad stroja koji u početnoj konfiguraciji u njega spremi agrument $x_k$. Zato definiramo širinu algoritma kao $m_{P^k}:=\max\,\{m_P,k+1\}$. Zbog $k\in\N_+$, uvijek je $m_{P^k}\ge 2$.
 

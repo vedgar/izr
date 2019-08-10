@@ -24,7 +24,7 @@ U literaturi se za specijalizaciju još koristi naziv \emph{parcijalna evaluacij
 Ono što je sasvim nesporno (i već smo to dokazali u svim specijalnim slučajevima navedenima na početku ove točke) je da specijalizacija čuva izračunljivost. Zbog teorema ekvivalencije, svejedno je u kom obliku konkretiziramo tu izračunljivost, a dokaz je najlakši za parcijalnu rekurzivnost.
 
 \begin{propozicija}[{name=[specijalizacija čuva parcijalnu rekurzivnost]}]
-    Neka su $k\in\N_+$, $y\in\N$ te\, $\f f^{k+1}$ parcijalno rekurzivna funkcija.\newline
+    Neka su $k\in\N_+$, $y\in\N$ te $\f f^{k+1}$ parcijalno rekurzivna funkcija.\newline
     Tada je i funkcija $\f g^k=spec(y,\f f)$, zadana s
 %\begin{equation}
     $\f g(\vec x)\simeq\f f(\vec x,y)$,
@@ -871,14 +871,14 @@ Ovo je samo obrat po kontrapoziciji teorema~\ref{tm:Rice}.
 \end{proof}
 
 \begin{korolar}[{name=[neodlučivost netrivijalnog skupa izračunljivih funkcija]}]\label{kor:Rice!odl}
-Neka je $k\in\N_+$, i \,$\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Tada $\mathcal F$ nije odlučiv.
+Neka je $k\in\N_+$ te $\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Tada $\mathcal F$ nije odlučiv.
 \end{korolar}
 \begin{proof}
     Označimo $S:=\kins{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\ne\kins{\emptyset}=\emptyset$ i $S\ne\kins{\mathscr Comp_k}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po korolaru~\ref{kor:Rice!rek} $S$ nije rekurzivan, što znači da $\mathcal F$ nije odlučiv.
 \end{proof}
 
 \begin{korolar}[{name=[neodlučivost netrivijalnih semantičkih svojstava]}]
-Neka je $k\in\N_+$ te neka je $\wp$ bilo koje netrivijalno svojstvo $k$-mjesnih izračunljivih funkcija. Tada nijedan algoritam ne može točno odrediti, za proizvoljnu $\f F\in\mathscr Comp_k$, ima li\, $\f F$ svojstvo $\wp$.
+Neka je $k\in\N_+$ te neka je $\wp$ bilo koje netrivijalno svojstvo $k$-mjesnih izračunljivih funkcija. Tada nijedan algoritam ne može točno odrediti, za proizvoljnu $\f F\in\mathscr Comp_k$, ima li $\f F$ svojstvo $\wp$.
 \end{korolar}
 \begin{proof}
 Budući da je $\wp$ netrivijalno svojstvo, postoji $k$-mjesna funkcija koja ga ima i neka druga $k$-mjesna funkcija koja ga nema. To znači da za skup $\mathcal F:=\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}$ vrijedi $\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Kad bi takav algoritam postojao, morao bi primati funkciju u nekom obliku (točkovna definicija, simbolička definicija, RAM-program, Turingov stroj,~\ldots) --- a svaki od njih znamo, neformalnim algoritmom, pretvoriti u indeks. Štoviše, imamo i (neformalne) algoritme pretvorbe u suprotnom smjeru, što znači da algoritam kojim bismo htjeli odlučiti $\wp$ mora raditi za \emph{sve} indekse traženih funkcija.
