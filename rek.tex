@@ -37,6 +37,7 @@ Svaka inicijalna funkcija je makro-izračunljiva.
 0.&\remove10\\
 1.&\incr0
 \end{prog}^1$ računa $\f{Sc}$:
+\vspace{-1em}
 \begin{equation}
     \begin{array}{r@{\;}l|cc}
 \SwapAboveDisplaySkip
@@ -57,9 +58,9 @@ Spljoštenja makro-programa iz dokaza propozicije~\ref{prop:initmacro} daju nam 
 
 \section{Kompozicija}
 
-Kompozicija je intuitivno jednostavna operacija (kao i slijedno izvršavanje naredaba u imperativnim programima): izračunamo vrijednost jedne funkcije, i uvrstimo je u definiciju druge funkcije. No definicija je dosta tehnička, uglavnom zbog nekih odluka koje smo donijeli na početku, o tome kako shvaćamo algoritme.
+Kompozicija je intuitivno jednostavna operacija (kao i slijedno izvršavanje naredaba u imperativnim programima): izračunamo vrijednost jedne funkcije, i uvrstimo je u definiciju druge funkcije. No definicija je dosta tehnička.%, uglavnom zbog nekih odluka koje smo donijeli na početku, o tome kako shvaćamo algoritme.
 
-Konkretno, htjeli bismo reći: "kompozicija $\f H\circ\f G$ dviju izračunljivih funkcija, $\f G^k$ i $\f H^l$, je izračunljiva funkcija". Da bi ta kompozicija imala smisla, kodomena od $\f G^k$ bi morala biti $\N^l$. U skladu s napomenom~\ref{nap:brip}, to zapravo znači da imamo $l$ izračunljivih koordinatnih funkcija, $\f G_1^k,\dotsc,\f G_l^k$, svaka od kojih daje po jedan ulazni podatak za funkciju $\f H^l$. Zato komponiranje više nije nužno binarna operacija: kompoziciju označavamo s $\f H\circ(\f G_1,\dotsc,\f G_l)$.
+Htjeli bismo reći: "kompozicija $\f H\circ\f G$ dviju izračunljivih funkcija, $\f G^k$ i $\f H^l$, je izračunljiva funkcija". Da bi ta kompozicija imala smisla, kodomena od $\f G^k$ bi morala biti $\N^l$. U skladu s napomenom~\ref{nap:brip}, to znači da imamo $l$ izračunljivih koordinatnih funkcija, $\f G_1^k,\dotsc,\f G_l^k$, svaka od kojih daje po jedan ulazni podatak za $\f H^l$. Zato komponiranje $\f H\circ(\f G_1,\dotsc,\f G_l)$ više nije nužno binarna operacija.
 
 Drugi tehnički detalj tiče se domene kompozicije. Promotrimo kompoziciju $\f F^1:=\f I_1^2\circ(\f Z^1,\varnothing^1)$. Ta funkcija je svakako izračunljiva, ali \emph{što} je ona? Konkretno, koliko je $\f F(5)$? Na prvi pogled, $\f F(5)=\f I_1(\f Z(5),\varnothing(5))=\f Z(5)=0$ --- i tako za svaki ulaz, dakle $\f F =\f Z$. Na drugi pogled, da bismo izračunali $\f F(5)$, moramo izračunati $\f Z(5)=:y_1$, zatim "izračunati" $\varnothing(5)=:y_2$, i na kraju izračunati $\f I_1(y_1,y_2)=y_1$. Tako algoritam za računanje $\f F$ ne stane s ulazom $5$ (niti s ikojim drugim ulazom), jer njegov drugi korak ne stane --- dakle $\f F=\varnothing$. Što je od toga?
 
@@ -77,7 +78,7 @@ Ta dilema je dobro poznata u modernom računarstvu, i oba pristupa nalazimo u da
 \end{verbatim}
 \end{minipage}\end{equation}
 
-Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i prisutan je u gotovo svim imperativnim jezicima, pa i mnogim funkcijskima (kao što je ML\@). Prednost je lakša implementacija, i lakše razmišljanje o kodu (a time i lakši \emph{debugging}). Primjer u Pythonu:
+Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i prisutan je u gotovo svim imperativnim jezicima, pa i mnogim funkcijskima (kao što je ML\@). Prednost je lakša implementacija, i lakše razmišljanje o kodu (a time i lakši \emph{debugging}). %Primjer u Pythonu:
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
     >>> def i12(x, y): return x
@@ -141,12 +142,12 @@ Svaka kompozicija totalnih funkcija je totalna.
 $\f C_2^3=\f{Sc}\circ\f{Sc}\circ\f Z\circ\f I_1^3$. Doista,
 \begin{multline}
 (\f{Sc}\circ\f{Sc}\circ\f Z\circ\f I_1^3)(x,y,z)=(\f{Sc}\circ\f{Sc}\circ\f Z)\bigl(\f I_1^3(x,y,z)\bigr)=(\f{Sc}\circ\f{Sc}\circ\f Z)(x)=\\
-=(\f{Sc}\circ\f{Sc})\bigl(\f Z(x)\bigr)=(\f{Sc}\circ\f{Sc})(0)=\f{Sc}\bigl(\f{Sc}(0)\bigr)=\f{Sc}(1)=2=\f C_2^3(x,y,z).
+=(\f{Sc}\circ\f{Sc})\bigl(\f Z(x)\bigr)=(\f{Sc}\circ\f{Sc})(0)=\f{Sc}\bigl(\f{Sc}(0)\bigr)=\f{Sc}(1)=2=\f C_2^3(x,y,z).\text\qedhere
 \end{multline}
-    Sve konstante $\f C_n^k$ se mogu slično tako prikazati (propozicija~\ref{prop:konst}).
+    %Sve konstante $\f C_n^k$ se mogu slično tako prikazati (propozicija~\ref{prop:konst}).
 \end{primjer}
 
-\subsection{RAM-izračunljivost kompozicije}
+%\subsection{RAM-izračunljivost kompozicije}
 
 \begin{lema}[{name=[zatvorenost skupa $\mathscr Comp$ na kompoziciju]}]\label{lm:compram}
 Skup RAM-izračunljivih funkcija, $\mathscr Comp$, zatvoren je na kompoziciju.
@@ -180,7 +181,7 @@ l.    &P_{\f H}\dots  &\f F(\vec x)&x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&
 \end{equation}
 \smallskip
 
-S druge strane, ako $\vec x\notin\dom{\f F}$, prema~\eqref{eq:domkomp} to se može dogoditi na dva načina. Ako $\vec x\notin\bigcap_{i=1}^l\dom{\f G_i}$, postoji neki $i$ takav da $\vec x\notin\dom{\f G_i}$, pa označimo s $i_0$ najmanji takav. Tada će izvršavanje programa $Q_{\f F}$ doći do instrukcije s rednim brojem $i_0-1$, ali izvršavanje te instrukcije neće nikada stati prema propoziciji~\ref{prop:semfmacro}, pa ni $Q_{\f F}$-izračunavanje s $\vec x$ neće stati. Ako pak $l$-torka dobivenih povratnih vrijednosti nije u $\dom{\f H}$, izvršavanje $Q_{\f F}$ će zapeti u beskonačnoj petlji na posljednjoj instrukciji, pa opet $Q_{\f F}$-izračunavanje s $\vec x$ neće stati.
+Ako $\vec x\notin\dom{\f F}$, prema~\eqref{eq:domkomp} to se može dogoditi na dva načina. Ako $\vec x\notin\bigcap_{i=1}^l\dom{\f G_i}$, postoji neki $i$ takav da $\vec x\notin\dom{\f G_i}$, pa označimo s $i_0$ najmanji takav. Tada će izvršavanje programa $Q_{\f F}$ doći do instrukcije s rednim brojem $i_0-1$, ali izvršavanje te instrukcije neće nikada stati prema propoziciji~\ref{prop:semfmacro}, pa ni $Q_{\f F}$-izračunavanje s $\vec x$ neće stati. Ako pak $l$-torka dobivenih povratnih vrijednosti nije u $\dom{\f H}$, izvršavanje $Q_{\f F}$ će zapeti u beskonačnoj petlji na posljednjoj instrukciji, pa opet $Q_{\f F}$-izračunavanje s $\vec x$ neće stati.
 Sada prema teoremu~\ref{tm:rem} RAM-algoritam $Q_{\f F}^{\flat k}$ također računa $\f F$, pa je $\f F\in\mathscr Comp$.
 \end{proof}
 
@@ -323,8 +324,6 @@ Simboličke definicije su koncizne i izražajne, ali nisu baš čitljive. Umjest
 
 Točkovne definicije znaju biti neprecizne, i na nekim mjestima morat ćemo pribjeći simboličkoj definiciji da bi se znalo što zapravo pokušavamo definirati. No u ogromnom broju slučajeva, posebno za kompliciranije funkcije (i relacije), pisat ćemo točkovne definicije. Važno je imati na umu da se svaka takva točkovna definicija može \emph{pretvoriti} u simboličku --- pokušajte ako ne vjerujete!
 
-Stroga formalizacija točkovnih definicija i njihovog pretvaranja u simboličke, zahtijevala bi alate iz logike prvog reda: funkcije kompozicijski definiramo kao terme, a relacije kao formule prvog reda s ograničenim kvantifikatorima. Koristimo prirodne brojeve kao konstantske simbole te već dokazano primitivno rekurzivne funkcije i relacije kao funkcijske odnosno relacijske simbole. To ne trebamo raditi u potpunoj općenitosti, iz vrlo sličnog razloga iz kojeg nismo napravili ni strogi dokaz teorema~\ref{tm:rem} --- jer nam sveukupno do univerzalnosti treba samo konačno mnogo oblika takvih definicija, pa možemo svaki od njih zasebno pretvoriti u simbolički oblik ako treba.
-
 \begin{primjer}[{name=[pretvorba točkovne definicije u simboličku]}]
 Točkovna definicija
 \begin{align}
@@ -335,6 +334,8 @@ Točkovna definicija
 \end{align}
 Kompozicijom s odgovarajućim koordinatnim projekcijama možemo postići i da primitivna rekurzija ne ide po zadnjem argumentu.
 \end{primjer}
+
+Stroga formalizacija točkovnih definicija i njihovog pretvaranja u simboličke, zahtijevala bi alate iz logike prvog reda: funkcije kompozicijski definiramo kao terme, a relacije kao formule prvog reda s ograničenim kvantifikatorima. Koristimo prirodne brojeve kao konstantske simbole te već dokazano primitivno rekurzivne funkcije i relacije kao funkcijske odnosno relacijske simbole. To ne trebamo raditi u potpunoj općenitosti, iz vrlo sličnog razloga iz kojeg nismo napravili ni strogi dokaz teorema~\ref{tm:rem} --- jer nam sveukupno do univerzalnosti treba samo konačno mnogo oblika takvih definicija, pa možemo svaki od njih zasebno pretvoriti u simbolički oblik ako treba.
 
 Definiciju~\ref{def:prn} možemo iskoristiti za  dokazivanje da sve primitivno rekurzivne funkcije imaju neko svojstvo $\wp$, baš kao što smo to učinili u dokazu propozicije~\ref{prop:symbdef}. Definiramo $\mathcal S$ kao skup svih brojevnih funkcija sa svojstvom $\wp$, dokažemo da sve inicijalne funkcije imaju svojstvo $\wp$ te da je skup $\mathcal S$ zatvoren na kompoziciju i na primitivnu rekurziju. Skup primitivno rekurzivnih funkcija je podskup bilo kojeg skupa koji ima ta svojstva, pa tako i od $\mathcal S$. (Zaključivanje matematičkom indukcijom također je takvog oblika: $\N$ je najmanji skup koji sadrži $0$ i zatvoren je na $\f{Sc}$.) Evo dva primjera.
 

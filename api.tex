@@ -1,0 +1,197 @@
+\setlength{\parindent}{0pt}
+
+\chapter{Funkcijski API}
+
+\section{Osnovne funkcije i operatori}
+
+\subsection{Nulfunkcija}
+\textbf{Vrsta}: inicijalna funkcija\\
+\textbf{Ime}: $\f Z$\\
+\textbf{Mjesnost}: $1$\\
+\textbf{Argumenti}: $x$: "dummy"\\
+\textbf{Vraća}: $0$
+
+\subsection{Sljedbenik}
+\textbf{Vrsta}: inicijalna funkcija\\
+\textbf{Ime}: $\f{Sc}$\\
+\textbf{Mjesnost}: $1$\\
+\textbf{Argumenti}: $x$: bilo koji prirodni broj\\
+\textbf{Vraća}: $x+1$
+
+\subsection{Koordinatna projekcija}
+\textbf{Vrsta}: familija inicijalnih funkcija\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$n$: broj iz $[1\dd k]$\\
+\textbf{Ime}: $\f I_n$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: $k$ prirodnih brojeva\\
+\textbf{Vraća}: $x_n$
+
+\subsection{Kompozicija}
+\textbf{Vrsta}: osnovni operator\\
+\textbf{Parametri}: $k,l$: pozitivni prirodni brojevi\\
+\phantom{\textbf{Parametri}: }$G_1,G_2,\dots,G_l$: $l$ brojevnih funkcija mjesnosti $k$\\
+\phantom{\textbf{Parametri}: }$H$: brojevna funkcija mjesnosti $l$\\
+\textbf{Oznaka}: $H\circ(G_1,G_2,\dots,G_l)$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Domena}: $(\forall i\in[1\dd l])(\vec x\in\dom{G_i})\land(G_1(\vec x),G_2(\vec x),\dots,G_l(\vec x))\in\dom{H}$\\
+\textbf{Vraća}: $H(G_1(\vec x),G_2(\vec x),\dots,G_l(\vec x))$
+
+\subsection{Konstanta}
+\textbf{Vrsta}: familija primitivno rekurzivnih funkcija\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$n$: prirodni broj\\
+\textbf{Ime}: $\f C_n$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: "dummy"\\
+\textbf{Vraća}: $n$
+
+\subsection{Primitivna rekurzija}
+\textbf{Vrsta}: osnovni operator\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$G$: totalna brojevna funkcija mjesnosti $k$\\
+\phantom{\textbf{Parametri}: }$H$: totalna brojevna funkcija mjesnosti $k+2$\\
+\textbf{Oznaka}: $G\pr H$\\
+\textbf{Mjesnost}: $k+1$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: kontekst\\
+\phantom{\textbf{Argumenti}: }$y$: broj poziva funkcije $H$\\
+\textbf{Domena}: funkcija je totalna\\
+\textbf{Vraća}: $z$ nakon $z\leftarrow G(\vec x);\,z\leftarrow H(\vec x,0,z);\,z\leftarrow H(\vec x,1,z);\,\dotsm;\,z\leftarrow H(\vec x,y-1,z)$
+
+\subsection{Zbrajanje}
+\textbf{Vrsta}: familija primitivno rekurzivnih funkcija\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\textbf{Ime}: $\f{add}$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: pribrojnici\\
+\textbf{Vraća}: $x_1+x_2+\dots+x_k$
+
+\subsection{Množenje}
+\textbf{Vrsta}: familija primitivno rekurzivnih funkcija\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\textbf{Ime}: $\f{mul}$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: faktori\\
+\textbf{Vraća}: $x_1\cdot x_2\,\dotsm\,x_k$
+
+\subsection{Potenciranje}
+\textbf{Vrsta}: primitivno rekurzivna funkcija\\
+\textbf{Ime}: $\f{pow}$\\
+\textbf{Mjesnost}: $2$\\
+\textbf{Argumenti}: $x$: baza\\
+\phantom{\textbf{Argumenti}: }$y$: eksponent\\
+\textbf{Vraća}: $x^y$
+
+\subsection{Degenerirana primitivna rekurzija}
+\textbf{Vrsta}: operator koji čuva (primitivnu) rekurziju\\
+\textbf{Parametri}: $a$: prirodni broj, početni uvjet\\
+\phantom{\textbf{Parametri}: }$H$: totalna brojevna funkcija mjesnosti $2$\\
+\textbf{Oznaka}: $a\pr H$\\
+\textbf{Mjesnost}: $1$\\
+\textbf{Argumenti}: $y$: broj poziva funkcije $H$\\
+\textbf{Vraća}: $z$ nakon $z\leftarrow a;\,z\leftarrow H(0,z);\,z\leftarrow H(1,z);\,\dotsm;\,z\leftarrow H(y-1,z)$
+
+\subsection{Faktorijel}
+\textbf{Vrsta}: primitivno rekurzivna funkcija\\
+\textbf{Ime}: $\f{factorial}$\\
+\textbf{Mjesnost}: $1$\\
+\textbf{Argumenti}: $n$: prirodni broj\\
+\textbf{Vraća}: $n!$
+
+\subsection{Prethodnik}
+\textbf{Vrsta}: primitivno rekurzivna funkcija\\
+\textbf{Ime}: $\f{pd}$\\
+\textbf{Mjesnost}: $1$\\
+\textbf{Argumenti}: $x$: prirodni broj\\
+\textbf{Vraća}: $\max\,\{x-1,0\}$
+
+\subsection{Ograničeno oduzimanje}
+\textbf{Vrsta}: primitivno rekurzivna operacija\\
+\textbf{Ime}: $\f{sub}$\\
+\textbf{Mjesnost}: $2$\\
+\textbf{Argumenti}: $x$: umanjenik\\
+\phantom{\textbf{Argumenti}: }$y$: umanjitelj\\
+\textbf{Oznaka}: $x\dotminus y$\\
+\textbf{Vraća}: $\max\,\{x-y,0\}$
+
+\subsection{Pozitivnost}
+\textbf{Vrsta}: primitivno rekurzivna relacija\\
+\textbf{Oznaka}: $\N_+$\\
+\textbf{Mjesnost}: $1$\\
+\textbf{Argumenti}: $x$: prirodni broj promatran kao istinitosna vrijednost\\
+\textbf{Vraća}: je li $x>0$
+
+\subsection{Obrnuti strogi uređaj}
+\textbf{Vrsta}: primitivno rekurzivna relacija\\
+\textbf{Oznaka}: $>$\\
+\textbf{Mjesnost}: $2$\\
+\textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
+\textbf{Vraća}: je li $x>y$
+
+\subsection{Strogi uređaj}
+\textbf{Vrsta}: primitivno rekurzivna relacija\\
+\textbf{Oznaka}: $<$\\
+\textbf{Mjesnost}: $2$\\
+\textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
+\textbf{Vraća}: je li $x<y$
+
+\subsection{Projekcija}
+\textbf{Vrsta}: operator koji ne čuva rekurzivnost\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$R$: brojevna relacija mjesnosti $k+1$\\
+\textbf{Oznaka}: $\exists_*R$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: kontekst\\
+\textbf{Vraća}: postoji li $y$ takav da vrijedi $R(\vec x,y)$
+
+\subsection{Minimizacija}
+\textbf{Vrsta}: osnovni operator\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$R$: brojevna relacija mjesnosti $k+1$\\
+\textbf{Oznaka}: $\mu R$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: kontekst\\
+\textbf{Domena}: $\exists y\,R(\vec x,y)$\\
+\textbf{Vraća}: najmanji $y$ takav da vrijedi $R(\vec x,y)$
+
+\subsection{Prazna relacija}
+\textbf{Vrsta}: familija primitivno rekurzivnih relacija\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\textbf{Oznaka}: $\emptyset$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: "dummy"\\
+\textbf{Vraća}: laž
+
+\subsection{Prazna funkcija}
+\textbf{Vrsta}: familija parcijalno rekurzivnih funkcija\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\textbf{Oznaka}: $\varnothing$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: "dummy"\\
+\textbf{Domena}: prazan skup
+
+\subsection{Komplement}
+\textbf{Vrsta}: operator na relacijama koji čuva (primitivnu) rekurzivnost\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$R$: brojevna relacija mjesnosti $k$\\
+\textbf{Oznaka}: $R\kompl$\\
+\textbf{Mjesnost}: $k$
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Vraća}: laž ako je $R(\vec x)$, inače istinu
+
+\subsection{Nestrogi uređaj}
+\textbf{Vrsta}: primitivno rekurzivna relacija\\
+\textbf{Oznaka}: $\le$\\
+\textbf{Mjesnost}: $2$\\
+\textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
+\textbf{Vraća}: je li $x\le y$
+
+\subsection{Obrnuti nestrogi uređaj}
+\textbf{Vrsta}: primitivno rekurzivna relacija\\
+\textbf{Oznaka}: $\ge$\\
+\textbf{Mjesnost}: $2$\\
+\textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
+\textbf{Vraća}: je li $x\ge y$
+
+
