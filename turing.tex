@@ -133,7 +133,7 @@ Recimo ponešto o konvencijama pri crtanju takvih dijagrama. Crtamo konačni usm
 
 Više prijelaza s istim $p$, $q$ i $d$ prikazujemo strelicom s više oznaka $\alpha_1\mathord:\beta_1,\dotsc,\alpha_k\mathord:\beta_k$. Ako se znak ne mijenja ($\alpha=\beta$), umjesto $\alpha\!:\!\alpha$ pišemo samo $\alpha$. Ako već imamo oznaku za skup $S\subseteq\Gamma$, možemo je napisati na brid umjesto pojedinih elemenata (kao što smo na dijagramu učinili sa $\Sigma$).
 
-    Početno stanje označavamo "strelicom niotkud" --- kako je na dijagramu označeno stanje $\textsc a$. Završno stanje označavamo dvostrukim krugom --- kako je na dijagramu označeno stanje $\textsc e$. I još jedno pravilo koje bitno povećava preglednost dijagrama: ne pišemo stanja ni prijelaze koji više ne mogu voditi do završnog stanja. Običaj je prilikom konstrukcije Turingovog stroja imati jedno stanje $q_x$ (u slučaju $\mathcal T_h$ to je stanje $\textsc f$), takvo da $\delta$ svaku "nemoguću situaciju" $(q,\alpha)$ preslika u $(q_x,\alpha,-1)$. Specijalno to vrijedi i za $q=q_x$ (za sve $\alpha\in\Gamma$) pa Turingov stroj, ako se ikad nađe u nekoj od tih nedozvoljenih konfiguracija, više nikada neće stati. 
+    Početno stanje označavamo "strelicom niotkud" --- kako je na dijagramu označeno stanje $\textsc a$. Završno stanje označavamo dvostrukim krugom --- kako je na dijagramu označeno stanje $\textsc e$. I još jedno pravilo koje bitno povećava preglednost dijagrama: ne pišemo stanja ni prijelaze koji više ne mogu voditi do završnog stanja. Običaj je prilikom konstrukcije Turingovog stroja imati jedno stanje $q_x$ (u slučaju $\mathcal T_h$ to je stanje $\textsc f$), takvo da $\delta$ svaku "nemoguću situaciju" $(q,\alpha)$ preslika u $(q_x,\alpha,-1)$. Specijalno to vrijedi i za $q=q_x$ (za sve $\alpha\in\Gamma$) pa Turingov stroj, ako se ikad nađe u nekoj od tih nedozvoljenih konfiguracija, više nikada neće stati.
 
     Efektivno, to je "stanje greške" i ne moramo ga (kao ni prijelaze prema njemu) crtati na dijagramu: podrazumijevamo da riječi za koje se dogodi neka od tih "nemogućih situacija" nisu u domeni funkcije koju Turingov stroj računa. Važno je da ne mora vrijediti obrat: Turingov stroj ne mora nikada ući u stanje $q_x$, a da ipak nikada ne stane. Možemo to usporediti s instrukcijom RAM-stroja $i.\;\goto\;i$ --- ako $\textsc{pc}$ ikad postane $i$, RAM-stroj sigurno ne stane, ali može ne stati i na druge načine.
 
@@ -192,7 +192,7 @@ Prvo kodirajmo abecedu $\Sigma$. Kako je to konačan skup iskoristit ćemo \text
 Mali filozofski problem je u tome što su elementi od $\Sigma$ "apstraktni znakovi" bez ikakve imanentne semantike i međusobnog odnosa, tako da ne možemo fiksirati jedan poredak kao što smo to učinili za tipove RAM-instrukcija. Ipak, za svaku konkretnu abecedu moći ćemo fiksirati kodiranje (\emph{encoding}), a za apstraktne abecede moći ćemo univerzalno kvantificirati tvrdnje u obliku "Za svako kodiranje od $\Sigma$~\ldots", podrazumijevajući ("Zermelov teorem za konačne skupove") da kodiranje \emph{postoji}. U praksi, ti znakovi će obično biti dio standarda Unikod, pa ćemo ih moći poredati, ako baš nemamo pametniji kriterij, po rednim brojevima u Unikodu.
 
 \begin{definicija}[{name=[kodiranje abecede]}]
-Neka je $\Sigma$ abeceda. Označimo $b':=\card\Sigma$. %(taj broj zovemo \emph{baza} abecede $\Sigma$, iz razloga koji će uskoro postati jasan). 
+Neka je $\Sigma$ abeceda. Označimo $b':=\card\Sigma$. %(taj broj zovemo \emph{baza} abecede $\Sigma$, iz razloga koji će uskoro postati jasan).
 \emph{Kodiranje} od $\Sigma$ je bilo koja bijekcija $\N\Sigma:\Sigma\leftrightarrow[1\dd b']$.
 \end{definicija}
 
@@ -242,12 +242,12 @@ To po tranzitivnosti zapravo znači da smo zapise poredali po duljini, a zapise 
 \end{proof}
 
 \begin{primjer}[{name=[\emph{shortlex ordering} svih riječi nad dvočlanom abecedom]}]
-\emph{Shortlex ordering} $\{\t a,\t b\}^*$ je: $\underset{0}{\varepsilon}$, 
-$\underset{1}{\t a}$, 
-$\underset{2}{\t b}$, 
-$\underset{3}{\t{aa}}$, 
+\emph{Shortlex ordering} $\{\t a,\t b\}^*$ je: $\underset{0}{\varepsilon}$,
+$\underset{1}{\t a}$,
+$\underset{2}{\t b}$,
+$\underset{3}{\t{aa}}$,
 $\underset{4}{\t{ab}}$,
-$\underset{5}{\t{ba}}$, 
+$\underset{5}{\t{ba}}$,
 $\underset{6}{\t{bb}}$,
 $\underset{7}{\t{aaa}}$,
 $\underset{8}{\t{aab}}$,
@@ -310,7 +310,7 @@ Sada možemo napisati i $\f{sdigit}$: to je posljednja znamenka prefiksa čija j
 
 \begin{propozicija}[{name=[bijektivnost kodiranja riječi]}]\label{pp:bijkr}
 Neka je $\Sigma$ abeceda i $\N\Sigma$ njeno kodiranje.
-    
+
     Tada je $\N\Sigma^*$ bijekcija između $\Sigma^*$ i $\N$.
 \end{propozicija}
 \begin{proof}
@@ -387,7 +387,7 @@ Postoji primitivno rekurzivna funkcija $\f{Recode}^3$ takva da za svaku riječ $
 \end{align}
 \end{lema}
 \begin{proof}
-Kao što smo već rekli, $\f{Recode}(n,b_1,b_2)$ samo treba ekstrahirati znamenke od $n$ u bazi $b_1$ te ih slagati obrnutim redom u bazi $b_2$. Kako je $w\in\Sigma_0^*$, u zapisu nema znamenke $0$, pa 
+Kao što smo već rekli, $\f{Recode}(n,b_1,b_2)$ samo treba ekstrahirati znamenke od $n$ u bazi $b_1$ te ih slagati obrnutim redom u bazi $b_2$. Kako je $w\in\Sigma_0^*$, u zapisu nema znamenke $0$, pa
 možemo koristiti funkcije $\f{slh}$ i $\f{sdigit}$ bez obzira na to je li baza $b_1$ pomaknuta.
 \begin{equation}
     \f{Recode}(n,b_1,b_2):=\quad\sum_{\mathclap{i\,<\,\f{slh}(n,b_1\!)}}\f{sdigit}(n,i,b_1)\cdot{b_2}^i
@@ -412,7 +412,7 @@ Na redu je kodiranje funkcije prijelaza $\delta_0$. Mogli bismo se uplašiti, zn
 Prvo, $\delta_0$ je funkcija s dva ulaza i tri izlaza, tako da je zapravo kodiramo kroz tri koordinatne funkcije. Drugo, već imamo kodiranja za ulaze i prva dva izlaza, $\N Q_0:Q_0\leftrightarrow[0\dd a\rangle$ i $\N\Gamma_0:\Gamma_0\leftrightarrow[0\dd b\rangle$, samo još trebamo kodirati pomake. Kako oni već jesu "numerički" u $\mathbb Z$, najlakše ih je samo povećati za $1$ da upadnu u $\N$, tako da "pomak ulijevo" $-1$ kodiramo brojem $0$, a "pomak udesno" $1$ kodiramo brojem $2$.
 
 \begin{lema}[{name=[primitivna rekurzivnost funkcije prijelaza]}]\label{lm:newssdprn}
-Postoje primitivno rekurzivne dvomjesne funkcije $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ koje preslikavaju $\bigl(\N Q_0(q),\N\Gamma_0(\gamma)\bigr)$ redom u $\N Q_0(q')$, $\N\Gamma_0(\gamma')$ i $1+d$, gdje je 
+Postoje primitivno rekurzivne dvomjesne funkcije $\f{newstate}$, $\f{newsymbol}$ i $\f{direction}$ koje preslikavaju $\bigl(\N Q_0(q),\N\Gamma_0(\gamma)\bigr)$ redom u $\N Q_0(q')$, $\N\Gamma_0(\gamma')$ i $1+d$, gdje je
 $(q',\gamma',d):=\begin{cases}
 \delta_0(q,\gamma),& q\ne q_z\\
 (q,\gamma,0),&\text{inače}\end{cases}$.
@@ -575,7 +575,7 @@ Ako je pak $w\in\dom{\varphi_0}$, tada $\mathcal T_0$-izračunavanje s $w$ stane
 
 Pokušajmo sada dokazati obrat teorema~\ref{tm:tikp}. Kako za parcijalno rekurzivne funkcije imamo kompajler u RAM-strojeve, možemo ga iskoristiti i za kompiliranje u Turingove strojeve. To je također poznata pojava u računarstvu: dolaskom nove arhitekture, često ne moramo iznova kompilirati izvorni kod. Ako već imamo kod na sličnoj razini (kao što je recimo već kompilirani RAM-program), možemo ga direktno prevesti ("transpilirati") u kompilirani kod za drugu arhitekturu. To ćemo učiniti ovdje.
 
-Kroz čitavu ovu točku imat ćemo fiksiranu abecedu $\Sigma_0$, njeno kodiranje $\N\Sigma_0$, kodiranje $\kr{\cdots}=\N\Sigma_0^*$ zapisom u pomaknutoj bazi $b'=\card\Sigma_0$, jezičnu funkciju $\varphi_0$ nad $\Sigma_0$ takvu da je $\N\varphi_0\in\mathscr Comp_1$ te fiksni RAM-algoritam $P_0^1$ koji računa $\N\varphi_0$. 
+Kroz čitavu ovu točku imat ćemo fiksiranu abecedu $\Sigma_0$, njeno kodiranje $\N\Sigma_0$, kodiranje $\kr{\cdots}=\N\Sigma_0^*$ zapisom u pomaknutoj bazi $b'=\card\Sigma_0$, jezičnu funkciju $\varphi_0$ nad $\Sigma_0$ takvu da je $\N\varphi_0\in\mathscr Comp_1$ te fiksni RAM-algoritam $P_0^1$ koji računa $\N\varphi_0$.
 
 Cilj će nam biti konstruirati Turingov stroj $\mathcal T_0$ koji računa $\varphi_0$, tako da primi ulaz $w$ na traci, kodira ga u $x:=\kr w$, od toga konstruira početnu konfiguraciju RAM-stroja $\mathcal S_0$ s programom $P_0$ i ulazom $x$ (efektivno, stavi $x$ u $\reg1$) te simulira redom korake kroz koje $P_0$-izračunavanje s $x$ prolazi. Ako\slash kad $\mathcal S_0$ uđe u završnu konfiguraciju, $\mathcal T_0$ će sadržaj $\reg0$ "dekodirati" u riječ $v:=\varphi_0(w)$, premjestiti $v$ na početak trake i obrisati sve ostalo s nje. Ako se to nikad ne dogodi, $\mathcal T_0$ će vječno simulirati rad $\mathcal S_0$, odnosno nikad neće otići u završno stanje --- što i treba da bi računao $\varphi_0$, jer činjenica da $P_0$-izračunavanje s $\kr w$ ne stane znači da $w\notin\dom{\varphi_0}$. Efektivno, definiciju prateće funkcije smo "izvrnuli" iznutra van: $\N\varphi_0=\N\Sigma_0^*\circ\varphi_0\circ(\N\Sigma_0^*)^{-1}$ znači $\varphi_0=(\N\Sigma_0^*)^{-1}\circ\N\varphi_0\circ\N\Sigma_0^*$.
 
@@ -583,7 +583,7 @@ Stroj $\mathcal T_0$ ćemo konstruirati u pet dijelova (\emph{fragmenata}), koji
 
 Stanja ćemo uvoditi postepeno, kako budemo specificirali funkciju $\delta$. Dodat ćemo još jedno stanje, stanje greške $q_x$, uz standardnu konvenciju da za bilo koji par $(q,\alpha)$ na kojem nismo eksplicitno definirali $\delta$, vrijedi $\delta(q,\alpha):=(q_x,\alpha,1)$. To je samo birokratski detalj da bi $\delta$ bila totalna, jer $\mathcal T_0$ nikada neće otići u stanje $q_x$: jedini način da računa beskonačno dugo bit će da odgovarajuće $P_0$-izračunavanje ne stane.
 
-S druge strane, radnu abecedu već možemo preciznije specificirati. Prvo, u njoj se moraju nalaziti svi znakovi iz $\Sigma_0$, kodirani po $\N\Sigma_0$ brojevima iz $[1\dd b']$. Znak ${\N\Sigma_0}^{-1}(t)$ označit ćemo s $\alpha_t$. Oni predstavljaju "znamenke" od $1$ do $b'$ u pomaknutoj bazi $b'$. 
+S druge strane, radnu abecedu već možemo preciznije specificirati. Prvo, u njoj se moraju nalaziti svi znakovi iz $\Sigma_0$, kodirani po $\N\Sigma_0$ brojevima iz $[1\dd b']$. Znak ${\N\Sigma_0}^{-1}(t)$ označit ćemo s $\alpha_t$. Oni predstavljaju "znamenke" od $1$ do $b'$ u pomaknutoj bazi $b'$.
 
 Za označavanje početka i kraja (upotrijebljenog dijela) trake koristimo graničnik, koji se obično piše $\t\$$. Također moramo nekako odvojiti dio za ulaz i dio za računanje (simulaciju): za to ćemo koristiti separator koji se obično piše $\t\#$. Traka će u početku izgledati otprilike kao $\t\$\bl^lv\t\#u\bl\ldots$, a kasnije kao $\t\$\bl^k\t\#uv\t\$\bl\ldots$, gdje je $v\in\Sigma_0^*$ dio za ulaz odnosno izlaz, a $u\in(B^m)^*$ dio za reprezentaciju konfiguracije od $\mathcal S_0$ --- o kojem ćemo govoriti nešto kasnije. Sve u svemu, zasad znamo
 %\begin{equation}
@@ -636,7 +636,7 @@ Za $\Sigma_0:=\{\t a,\t b\}$, prvi fragment je prikazan dijagramom
 \end{tikzpicture}\text.
 \end{equation}
 Za ulaz \t{aab} izračunavanje počinje s
-   $ 
+   $
     \underset{\mathclap{n_{\t\$}}}{\t a}\t{ab}\leadsto\t\$\underset{\mathclap{n_{\t a}}}{\t a}\t b\leadsto\t{\$a}\underset{\mathclap{n_{\t a}}}{\t b}\leadsto\t{\$aa}\underset{\mathclap{n_{\t b}}}{\bl}\leadsto\t{\$aab}\underset{\mathclap{n_{\bl}}}{\bl}\leadsto\t{\$aa}\underset{\mathclap{q_0}}{\t b}\t\#
     $.
 \end{primjer}
@@ -894,7 +894,7 @@ Nad abecedom $\Sigma:=\{\t a,b\}$ (kodiranom s $\t a\mapsto1$, $\t b\mapsto2$) p
 \T{\$a}{q_0}{b}{\#}\leadsto^*
     \T{\$\boo\boo\#}{\mund{p_0}}{\boi}{\boi\boi\boi}\,\text{.\qedhere}
 \end{equation}
-%te smo spremni za početak simulacije. 
+%te smo spremni za početak simulacije.
 \end{primjer}
 
 Rekli smo da ćemo vrijednost programskog brojača držati u stanju stroja --- i to je već učinjeno kroz supskript stanja $p_0$: ta nula znači da je \textsc{pc} upravo postao $0$. Općenito, ako je $P_0$ duljine $n:=n_{P_0}$ imat ćemo stanja $p_i,i\in[0\dd n]$, a ulazak u stanje $p_n$ značit će završetak $P_0$-izračunavanja.
@@ -916,7 +916,7 @@ Dijagramatski,
 \begin{tikzpicture}[baseline=0]
 \node[state] (pi) {$p_i$};
 \node[state, right of=pi] (si) {$s_i$};
-\draw 
+\draw
 (pi) edge[loop left,dashed] node[left]{$B^m$} (pi)
 (pi) edge[below] node{$\t\#$} (si)
 ;
@@ -1032,7 +1032,7 @@ Sva tri tipa fragmenata iz dokaza možemo prikazati sljedećim dijagramima:
 \begin{propozicija}[{name=[treći fragment transpiliranog stroja]}]\label{pp:faza3}
     Neka RAM-algoritam $P^1$ računa funkciju $\f f^1$.
     Za sve $k,x\in\N$ označimo s $t_{kx}$ reprezentaciju (\/$Turing_{km_{P^1}n_P}$) početne konfiguracije s ulazom $x$.
-    
+
     Postoji fragment Turingovog stroja koji za sve $k,x\in\N$:
 \begin{itemize}
     \item ako je $x\in\dom{\f f}$, prevodi\/ $t_{kx}$ u reprezentaciju završne konfiguracije;
@@ -1065,7 +1065,7 @@ $P_{\t a}$-izračunavanje s $\kr{\t{ab}}=4$ je ($c$ skraćeno zapisujemo kao $c(
 %4&3&3&3&3&2&2&2&2&1&1&1&1&0&0&0&0&0&0&0\\
 %c_i(\textsc{pc})&
 %0&1&2&3&0&1&2&3&0&1&2&3&0&1&2&3&0&4&5&5
-%\end{array}    
+%\end{array}
 \end{multline}
 s izlaznim podatkom $9=2\cdot4+1$, i odgovara mu (po preslikavanju $Turing_{225}$) šetnja %kroz Turing-konfiguracije %(ne pišemo, svima zajednički, početak \t{\renewcommand{\arraystretch}{0.1}\$\boo\boo\#})
     %$P_{\t a}$-izračunavanju s $\kr{\t{ab}}=4$, s izlaznim podatkom $9=2\cdot4+1$, po preslikavanju $Turing_{225}$ odgovara šetnja kroz Turing-konfiguracije
@@ -1312,7 +1312,9 @@ Za općenitu abecedu $\Sigma_0$, umjesto dva "viseća trokuta" ispod $q_6$, bit 
 \subsection{Objedinjavanje}
 
 \begin{teorem}[{name=[Turing-izračunljivost parcijalno rekurzivnih jezičnih funkcija]}]\label{tm:krit}
-Neka je $\Sigma_0$ abeceda, $\N\Sigma_0$ njeno kodiranje te $\varphi_0$ funkcija nad njom. Ako je $\N\varphi_0\in\mathscr Comp_1$, tada je $\varphi_0$ Turing-izračunljiva.
+Neka je $\Sigma_0$ abeceda, $\N\Sigma_0$ njeno kodiranje te $\varphi_0$ funkcija nad njom.
+
+Ako je $\N\varphi_0\in\mathscr Comp_1$, tada je $\varphi_0$ Turing-izračunljiva.
 \end{teorem}
 \begin{proof}
 Po pretpostavci postoji RAM-program $P_0$ koji računa $\N\varphi_0$. Označimo $n:=n_{P_0}$ i $m:=m_{P_0^1}$. Tvrdimo da tada funkciju $\varphi_0$ računa Turingov stroj

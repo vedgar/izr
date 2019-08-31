@@ -107,7 +107,7 @@ Tvrdimo da je
 \begin{equation}
     x\in\kr L\Longleftrightarrow\f{State}\bigl(x,\f{stop}'(x)\bigr)=1\text,
 \end{equation}
-iz čega odmah slijedi rekurzivnost od $\kr L$ po lemi~\ref{lm:comprek} i korolaru~\ref{kor:prnrek}. 
+iz čega odmah slijedi rekurzivnost od $\kr L$ po lemi~\ref{lm:comprek} i korolaru~\ref{kor:prnrek}.
 
 Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$-izračunavanje s $w$ mora stati u stanju $q_\mathit{true}$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju) pa $\f{State}(x,n)\notin\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
 
@@ -218,10 +218,10 @@ U traženju tih funkcija može pomoći dijagram.
 \arrow{d}{\beta^1}
 \arrow[bend left=75,dotted]{dd}{\f{bin}^1}
 \\
-\Sigma_\beta^* 
+\Sigma_\beta^*
 \arrow[harpoon]{r}{\beta f}
 \arrow{d}{\N\Sigma_\beta^*}
-& \t\textbullet^*\!\!\subset\!\Sigma_\beta^* 
+& \t\textbullet^*\!\!\subset\!\Sigma_\beta^*
 \arrow{d}{\N\Sigma_\beta^*}
 \\
 \N
@@ -239,7 +239,7 @@ U traženju tih funkcija može pomoći dijagram.
 \t{\textbullet\textbullet\textbullet/\textbullet/\textbullet\textbullet}
 \arrow[mapsto]{r}{\beta\f{mul}^3}
 \arrow[mapsto]{d}{\N\Sigma_\beta^*}
-& \t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet} 
+& \t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}
 \arrow[mapsto]{d}{\N\Sigma_\beta^*}
 \\
 275
@@ -253,10 +253,9 @@ Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}
 \begin{lema}[{name=[brojevni-jezični-brojevni dijagram komutira]}]\label{lm:pravkomut}
 Dijagram prikazan lijevo u~\eqref{dia:Nbeta} (samo pune strelice) komutira.
 \end{lema}
+Drugim riječima, za svaki od ta dva pravokutnika, pa onda i za veliki pravokutnik sastavljen od ta dva, svejedno je kojim putom dođemo od njegovog gornjeg lijevog do donjeg desnog vrha.
 \begin{proof}
-Drugim riječima, za svaki od ta dva pravokutnika, pa onda i za veliki pravokutnik sastavljen od ta dva, je svejedno kojim putem dođemo od njegovog gornjeg lijevog do donjeg desnog vrha.
-
-Prvo, dakle, trebamo dokazati (gornji pravokutnik) da je $\beta f\circ\beta^k =\beta^1\circ f$. Domena desne funkcije je $\dom f$ jer je $\beta^1$ totalna, a domena lijeve funkcije je $\{\vec x\in\N^k\mid\beta^k(\vec x)\in\dom{\beta f}\}$, što je opet jednako $\dom f$ po definiciji domene $\dom{\beta f}$. Neka je sad $\vec x\in\dom f$ proizvoljan. Na njemu je vrijednost lijeve funkcije $\beta f\bigl(\beta^k(\vec x)\bigr)$, što je po definiciji~\eqref{eq:betaf} jednako $\beta^1\bigl(f(\vec x)\bigr)=(\beta^1\circ f)(\vec x)$. Dakle, $\beta f\circ\beta^k$ i $\beta^1\circ f$ imaju istu domenu i na njoj se podudaraju, pa su to jednake funkcije.
+Prvo trebamo dokazati (gornji pravokutnik) da je $\beta f\circ\beta^k =\beta^1\circ f$. Domena desne funkcije je $\dom f$ jer je $\beta^1$ totalna, a domena lijeve funkcije je $\{\vec x\in\N^k\mid\beta^k(\vec x)\in\dom{\beta f}\}$, što je opet jednako $\dom f$ po definiciji domene $\dom{\beta f}$. Neka je sad $\vec x\in\dom f$ proizvoljan. Na njemu je vrijednost lijeve funkcije $\beta f\bigl(\beta^k(\vec x)\bigr)$, što je po definiciji~\eqref{eq:betaf} jednako $\beta^1\bigl(f(\vec x)\bigr)=(\beta^1\circ f)(\vec x)$. Dakle, $\beta f\circ\beta^k$ i $\beta^1\circ f$ imaju istu domenu i na njoj se podudaraju, pa su to jednake funkcije.
 
 Donji pravokutnik je jednostavniji jer je $\N\Sigma_\beta^*$ bijekcija: uz oznaku $\varphi:=\beta f$,
 \begin{equation}
@@ -390,7 +389,7 @@ To je jednakost~\eqref{eq:pravkomut} u koju je uvrštena (s obje strane) definic
 Da bismo izrazili $f$ pomoću $\N\beta f$, treba nam (izračunljiv) lijevi inverz za $\f{bin}^1$. Kako možemo iz $63=(111111)_2=\f{bin}(6)$ natrag dobiti $6$? Samo treba prebrojiti jedinice, odnosno znamenke.
 
 \begin{lema}[{name=[primitivna rekurzivnost i specifikacija duljine binarnog zapisa]}]\label{lm:blh}
-Definiramo funkciju $\f{blh}$ s $\f{blh}(n):=\f{slh}(n,2)$. 
+Definiramo funkciju $\f{blh}$ s $\f{blh}(n):=\f{slh}(n,2)$.
 
 Funkcija $\f{blh}$ je primitivno rekurzivna te vrijedi $\f{blh}\circ\f{bin}^1\!=\f I_1^1$.
 \end{lema}
@@ -434,7 +433,7 @@ Prvi razlog tiče se napomene~\ref{nap:brip}. Zbog $\dom{\f{bin}^k}=\N^k$, traž
 
 Drugo, implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatu strukturu, za čije raščlanjivanje trebamo svojevrsni \texttt{<string.h>}. Napravit ćemo minimum potreban za implementaciju $\f{arg}_i$.
 
-Treće, funkcija $\f{bin}^k$ nije surjekcija, pa \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "krive mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana; 
+Treće, funkcija $\f{bin}^k$ nije surjekcija, pa \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "krive mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana;
 Recimo u slučaju kad $a$ ima $7$ znamenaka $2$ u pomaknutoj bazi $2$, vrijednost $\N\beta\f{mul}^3(a)$ nije definirana, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
 
 \subsection{Standardna biblioteka za \texorpdfstring{$\Sigma_\beta^*$}{binarne stringove}}\label{sec:stdstring}

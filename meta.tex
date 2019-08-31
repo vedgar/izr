@@ -190,7 +190,7 @@ Programirat ćemo postupak računanja kompozicije u proizvoljnom $\vec x\in\N^k$
     \f{comp}_k(\vec x,g_l),
     h\bigr)\text.
 \end{equation}
-Funkcija $\f F$ je definirana kompozicijom iz parcijalno rekurzivnih funkcija $\f{comp}_k$ i $\f{comp}_l$ te koordinatnih projekcija --- pa je parcijalno rekurzivna. Po korolaru~\ref{kor:pii}, $\f F$ ima indeks; označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind}). 
+Funkcija $\f F$ je definirana kompozicijom iz parcijalno rekurzivnih funkcija $\f{comp}_k$ i $\f{comp}_l$ te koordinatnih projekcija --- pa je parcijalno rekurzivna. Po korolaru~\ref{kor:pii}, $\f F$ ima indeks; označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind}).
 
     Sada definiramo $\f{compose}_k^{l+1}$ kao funkciju koja prima $\f g_1$,~\ldots, $\f g_l$ i $\f h$ te fiksira zadnjih $l+1$ argumenata od $\f F$ na te vrijednosti:
 \begin{equation}
@@ -295,7 +295,7 @@ može se točkovno zapisati kao
 \end{equation}
 ili simbolički, kao $\f{factorial}=\IF{\N_+:\f{mul}^2\circ(\f I_1^1,\f{factorial}\circ\f{pd}),\f{Sc}\circ\f Z}$.
 
-Kao \emph{definicija} taj izraz nema smisla, jer je cirkularan --- ali može poslužiti kao funkcijska \emph{jednadžba} koju trebamo riješiti po "nepoznanici" $\f{factorial}$. Osnovna prednost definicija pred jednadžbama sastoji se u tome da (dobra) definicija uvijek jednoznačno određuje definirani objekt, dok jednadžba može nemati rješenja, ili ih može imati više.
+Kao \emph{definicija} ta jednakost nema smisla, jer je cirkularna --- ali može poslužiti kao funkcijska \emph{jednadžba} koju trebamo riješiti po "nepoznanici" $\f{factorial}$. Osnovna prednost definicija pred jednadžbama sastoji se u tome da (dobra) definicija uvijek jednoznačno određuje definirani objekt, dok jednadžba može nemati rješenja, ili ih može imati više.
 
 Još jedan detalj treba razmotriti: u~\eqref{eq:factorialrek} smo koristili znak jednakosti jer otprije znamo da je faktorijel totalna funkcija --- ali opće rekurzije koje koriste samo totalne funkcije mogu kao rješenja imati parcijalne funkcije koje nisu totalne. Recimo,
 \begin{equation}\begin{minipage}{0.8\textwidth}
@@ -331,7 +331,7 @@ Dakle, neformalno, \emph{opća rekurzija} je funkcijska jednadžba $F=\mathcal M
     \item[(Jedinstvenost)] Ako ima, je li jedinstveno?
     \item[(Totalnost)] Ako jest, je li totalno?
 \end{labeling}
-Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači puno ako rješenje nije jedinstveno. Recimo, vidjeli smo jednadžbu~\eqref{eq:halfmany} koja ima totalno rješenje $\f h_1$, ali svejedno nijedan programski jezik ne bi pronašao to rješenje, već bi računao netotalnu funkciju $\f h_0$.
+Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači puno ako ono nije jedinstveno. Recimo, vidjeli smo jednadžbu~\eqref{eq:halfmany} koja ima totalno rješenje $\f h_1$, ali svejedno nijedan programski jezik ne bi pronašao to rješenje, već bi računao netotalnu funkciju $\f h_0$.
 
 % \subsection{Opće rekurzije s izračunljivim funkcijama}
 
@@ -353,7 +353,7 @@ Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. \emph{Opća r
     Ako konkretni broj $e\in\N$ zadovoljava tu jednadžbu, funkciju $\kf e^k=spec(e,\f G)$ zovemo \emph{rješenjem} opće rekurzije.
 \end{definicija}
 
-Ponekad neformalno govorimo i da je indeks $e$ rješenje, ali bitno je da kažemo da je rješenje \emph{jedinstveno} ako je funkcija jedinstvena, ne indeks. To je bitno jer u uobičajenim situacijama, gdje $\f G$ koristi $e$ samo za pozivanje $\f F$, inače nikad ne bismo imali jedinstvenost: čim postoji neki $e$, svi ostali indeksi za $\kf e^k$ su također "rješenja", a intuitivno znamo (i dokazat ćemo u ovom poglavlju) da ih ima beskonačno mnogo.
+Ponekad i indeks $e$ neformalno zovemo "rješenjem", ali jedinstvenošću uvijek smatramo jedinstvenost \emph{funkcije}, ne indeksa. To je bitno jer inače u uobičajenim situacijama, gdje $\f G$ koristi $e$ samo za pozivanje $\f F$, nikad ne bismo imali jedinstvenost: čim postoji neki $e$, svi ostali indeksi funkcije $\kf e^k$ su također "rješenja", a intuitivno znamo (i~dokazat ćemo u ovom poglavlju) da ih ima beskonačno mnogo.
 
 Pitanje totalnosti tada postaje pitanje \emph{rekurzivnosti} --- jer $\f F$ ima indeks $e$, po teoremu ekvivalencije je parcijalno rekurzivna, a takve totalne funkcije zovemo rekurzivnima.
 
@@ -521,7 +521,7 @@ Slično je i ovdje: svaka primjena primitivne rekurzije može povećati $z$ samo
 $\f A^3$ je totalna funkcija.
 \end{korolar}
 \begin{proof}
-Neka je $(x,y,z)\in\N^3$ proizvoljna. Kako je $\f A_z$ primitivno rekurzivna po propoziciji~\ref{pp:Anprn}, ona je totalna, pa je $\dom{\f A_z}=\N^2$. Specijalno je $(x,y)\in\dom{\f A_z}$, pa izraz $\f A_z(x,y)$ ima smisla --- označimo njegovu vrijednost s $t$. No tada je i $\f A(x,y,z)=t$, dakle izraz $\f A(x,y,z)$ također ima smisla, pa je $(x,y,z)\in\dom{\f A}$.
+Neka je $(x,y,z)\in\N^3$ proizvoljna. Kako je $\f A_z$ primitivno rekurzivna po propoziciji~\ref{pp:Anprn}, ona je totalna, pa je $\dom{\f A_z}=\N^2$. Specijalno je $(x,y)\in\dom{\f A_z}$, pa izraz $\f A_z(x,y)$ ima smisla --- označimo njegovu vrijednost s $t$. No tada je i $\f A(x,y,z)=t$, dakle izraz $\f A(x,y,z)$ također ima smisla, pa je $(x,y,z)\in\dom{\f A^3}$.
 \end{proof}
 
 Kako je svaka $\f A_n$ izračunljiva, i funkcija $\f A$ bi trebala biti izračunljiva u intuitivnom smislu: ako nam netko dade $(x,y,z)$ i traži od nas da izračunamo $\f A(x,y,z)$, zapravo traži da izračunamo $\f A_z(x,y)$, a to sigurno (za konkretni $z$) znamo učiniti. Po Church--\!Turingovoj tezi $\f A$ bi trebala biti parcijalno rekurzivna, dakle rekurzivna, ali možemo li to dokazati bez primjene Church--\!Turingove teze? Svakako --- korištenjem teorema rekurzije.
@@ -649,9 +649,9 @@ Također, za svaki $e\in\f{Prog}$, za sve $j,k\in\N_+$, vrijedi $e*\kr{\f{codeIN
 \end{propozicija}
 \begin{proof}
 Refleksivnost, simetričnost i tranzitivnost su trivijalne: recimo, $e\approx_kf\approx_kg$ znači $\kf e^k=\kf f^k=\kf g^k$, pa je $\kf e^k=\kf g^k$, iz čega $e\approx_kg$. Inače, u refleksivnosti se, kroz samu oznaku $\kf e^k$, krije korolar~\ref{kor:ram1fun} koji kaže da za fiksni $k$, svaki RAM-program računa jedinstvenu $k$-mjesnu funkciju.
-    
+
 Prebrojivost kvocijentnog skupa slijedi iz činjenice da postoji prebrojivo mnogo izračunljivih funkcija (teorem~\ref{tm:alef0izr}). Konkretno, za svaki $k\in\N_+$ su sve funkcije $\f C_y^k,y\in\N$, različite, pa je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)\napprox_k\overline{\f C_6}(z)$ za sve $y\ne z$. Iz toga slijedi da različitih klasa ima beskonačno, a ne može ih biti neprebrojivo jer su neprazni disjunktni podskupovi od $\N$ (recimo, $\min:\N/_{\!\approx_k\!}\to\N$, koja svakoj klasi ekvivalencije pridružuje njen najmanji element, je injekcija, pa je $\card\bigl(\N/_{\!\approx_k\!}\bigr)\le\card\N=\aleph_0$).
-    
+
 Prebrojivost svake klase slijedi iz primjera~\ref{pr:alef0ind}: neka je $e\in\N$ proizvoljan. Ako je $e\in\f{Prog}\kompl$, tada je čitav $\f{Prog}\kompl$ u njegovoj klasi. Na primjer, $n\mapsto 2n+3$ je injekcija s $\N$ u $\f{Seq}\kompl\subseteq\f{Prog}\kompl\subseteq[e]_{\approx_k}\subseteq\N$, pa je $[e]_{\approx_k}$ prebrojiva. Ako je pak $e\in\f{Prog}$, tada je $\f F:\N_+\!\to[e]_{\approx_k}$, zadana s $\f F(j):=e*\kr{\f{codeINC}(j)}$, injekcija --- jer $j$ možemo rekonstruirati iz $f:=\f F(j)$ kao $\f{regn}\bigl(\f{rpart}(f,0)\bigr)$.
 \end{proof}
 
@@ -686,7 +686,7 @@ Za sve $k,l\in\N_+$, za sve $\vec x\in\N^k$ i za sve $e\in\N$, vrijedi
 Na neformalnoj razini tvrdnja korolara~\ref{kor:0nSk} je očita: za bilo koji RAM-program $P$, $P$-izračunavanje s $\vec x$ je \emph{isto} (isti niz istih konfiguracija) kao i $P$-izračunavanje s $(\vec x,0,0,\dotsc,0)$, za bilo koji broj dodanih nula na kraj ulaza --- jer je izračunavanje determinističko, a početna konfiguracija $c_0=(0,\vec x,0,0,\dotsc,0)$ je ista. Samo smo rekli da će još $l$ registara nakon $\reg k$ biti postavljeno na nule, no oni bi ionako bili postavljeni na nule u izračunavanju s $\vec x^k$, jer u tom izračunavanju nisu ulazni.
 
 \begin{propozicija}[{name=[niz relacija $k$-ekvivalentnosti je padajući]}]
-Za sve $k,l\in\N_+$ takve da je $k>l$ vrijedi $(\approx_k)\subset(\approx_l)$. 
+Za sve $k,l\in\N_+$ takve da je $k>l$ vrijedi $(\approx_k)\subset(\approx_l)$.
 \end{propozicija}
 \begin{proof}
 Označimo $m:=k-l\in\N_+$. Za $(\subseteq)$, neka je $e\approx_kf$. Tada je $\kf e^k=\kf f^k$ (a $k=l+m$), pa je prema prethodnom korolaru, za sve $\vec x\in\N^l$,
@@ -718,7 +718,7 @@ Drugo, $\f F$ ne mora biti primitivno rekurzivna --- vidjet ćemo da je dovoljno
 
 Treće, $\f F$ mora biti jednomjesna: broj $k$ je mjesnost funkcije $\kf e^k$, koja je jednaka funkciji $\kf{\f F(e)}^k$. Mjesnost od $\f F$ mora biti $1$ jer želimo u nju uvrstiti $e\in\N^1$.
 
-I četvrto, $\f F$ mora biti izračunljiva: nije dovoljno da zahtijevamo samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $Emp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{Emp}(e)$, tada bi $e\in Emp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{Emp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija.
+I četvrto, $\f F$ mora biti izračunljiva: nije dovoljno zahtijevati samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $Emp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{Emp}(e)$, tada bi $e\in Emp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{Emp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija.
 ($\kf0(0)$ nema smisla po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\nsimeq\kf1(0)$, dakle $\kf0^1\ne\kf1^1$.) No $e\notin Emp$ je također kontradikcija, jer bi to značilo $e\approx_1\chi_{Emp}(e)=0$, dakle $e\in[0]_{\approx_1}=Emp$. Dakle, $\chi_{Emp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
 
 Primijetite sličnost upravo provedenog razmišljanja s Russellovim paradoksom. Iz toga će slijediti, jednom kad dokažemo teorem o fiksnoj točki, da skup $Emp$ nije rekurzivan. No zapravo će to biti samo jedna posljedica Riceovog teorema, koji ćemo dokazati kasnije.
@@ -775,7 +775,7 @@ Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo recimo %skup
 %Dobro, uzmimo onda neki manji skup,
 recimo jednočlan skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili $1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
 
-Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju imati specijalno svojstvo \emph{invarijantnosti} na neku relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma. 
+Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju imati specijalno svojstvo \emph{invarijantnosti} na neku relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma.
 
 \begin{primjer}[{name=[Sortiranje kao jedna funkcija s raznim implementacijama]}]
     Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\!:\f{Seq}\to\f{Seq}$ koja sortira konačne nizove zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
@@ -894,7 +894,7 @@ Mnoga od tih svojstava (ali ne nužno sva) prirodno svrstavamo u dvije grupe: na
 
 Semantička svojstva su ona vezana uz RAM-izračunavanje: govore o zaustavljanju, totalnosti, funkcijama koje se računaju, njihovim domenama, slikama, grafovima, i sličnom. Važno okvirno pravilo koje pruža dobru intuiciju je: \textbf{sintaksna svojstva su uglavnom odlučiva, semantička svojstva su uglavnom neodlučiva}.
 
-Dobru empirijsku potvrdu prvog dijela pravila vidjeli smo u poglavlju~\ref{ch:univ}, gdje smo hrpu sintaksnih svojstava pokazali odlučivima, i razvili alate koji nam omogućavaju za još veću hrpu to pokazati bez puno muke. Recimo, $\reg{15}$ je relevantan za $P$ ako i samo ako vrijedi 
+Dobru empirijsku potvrdu prvog dijela pravila vidjeli smo u poglavlju~\ref{ch:univ}, gdje smo hrpu sintaksnih svojstava pokazali odlučivima, i razvili alate koji nam omogućavaju za još veću hrpu to pokazati bez puno muke. Recimo, $\reg{15}$ je relevantan za $P$ ako i samo ako vrijedi
 $\bigl(\exists i<\f{lh}(e)\bigr)\bigl(\f{regn}(e[i])\ge15\bigr)$ (gdje je $e:=\kprog P$), što je primitivno rekurzivno svojstvo od $e$.
 
 S druge strane, Riceov teorem pruža dobar uvid u drugi dio tog pravila. Među semantičkim svojstvima izdvajaju se ona koja govore \emph{samo} o računatoj funkciji, bez ikakvog spominjanja konkretne implementacije. Recimo, "$P$-izračunavanje s $(2,5)$ stane" se može tako zapisati, jer zapravo kaže $(2,5)\in\dom{\f F}$, gdje je $\f F$ funkcija koju $P$ računa. Riceov teorem kaže da su sva takva svojstva sigurno neodlučiva --- osim dva trivijalna, naravno. Primjerice, svojstvo "ovaj RAM-program rješava \emph{halting problem}" jest odlučivo: za svaki RAM-program vratimo $\mathit{false}$. Također, "ovaj RAM-program računa parcijalno rekurzivnu funkciju" jest odlučivo: uvijek vratimo $\mathit{true}$.
@@ -908,7 +908,7 @@ Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupo
 \begin{enumerate}
     \item Utvrdimo da trebamo dokazati da neki skup $S$ nije rekurzivan.
     \item\label{korak:skupfun} Pomoću skupa $S$ nađemo skup $\mathcal F$ u kojem se nalaze izračunljive funkcije neke fiksne mjesnosti $k$.
-    %\item 
+    %\item
     Skup svih indeksa svih funkcija iz $\mathcal F$ označimo s $T:=\kins{\mathcal F}$.
     \item\label{korak:elemT} Nađemo neki element od $T$ (najčešće tako da nađemo neku jednostavnu funkciju $\f F\in\mathcal F$, napišemo RAM-program koji je računa, i nađemo njegov kod).
     \item Analogno, nađemo neki element od $T\kompl$. Skupa s korakom~\ref{korak:elemT} imamo $\emptyset\subset T\subset\N$.
@@ -918,5 +918,5 @@ Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupo
 \end{enumerate}
 
 \begin{primjer}[{name=[neodlučivost $k$-mjesnog brojevnog problema zaustavljanja]}]
-    Za svaki $k\in\N_+$, skup $Halt_k$ nije rekurzivan. Naime, ako definiramo $T(e):\Longleftrightarrow Halt_k(\vec 0,e)$, skup $T=\kins{\{\f f\in\mathscr Comp_k\mid\vec 0\in\dom{\f f}\}}$ $k$-invarijantan po lemi~\ref{lm:kinv=sind} te vrijedi $0\notin T$ i $1\in T$. Dakle $T$ nije rekurzivan, pa zbog $Halt_k\preceq T$ niti $Halt_k$ nije rekurzivan.
+    Za svaki $k\in\N_+$, skup $Halt_k$ nije rekurzivan. Naime, ako definiramo $T(e):\Longleftrightarrow Halt_k(\vec 0,e)$, skup $T=\kins{\{\f f\in\mathscr Comp_k\mid\vec 0\in\dom{\f f}\}}$ je $k$-invarijantan po lemi~\ref{lm:kinv=sind} te vrijedi $0\notin T$ i $1\in T$. Dakle $T$ nije rekurzivan, pa zbog $Halt_k\preceq T$ niti $Halt_k$ nije rekurzivan.
 \end{primjer}
