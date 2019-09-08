@@ -271,7 +271,7 @@ Tvrdimo da svaka konfiguracija oblika $d_i$ za $i<y$, prelazi u konačno mnogo k
 \begin{multline}\label{eq:prkonf}
     d_i=\bigl(\f F(\vec x,i),\vec x,y-i,i,?,\dotsc,1,0\bigr)\leadsto
     \bigl(\f F(\vec x,i),\vec x,y-i-1,i,?,\dotsc,2,0\bigr)\leadsto^*\\
-    \leadsto^*\bigl(\f H\bigl(\vec x,i,\f F(\vec x,i)\bigr),\vec x,y-i-1,i,?,\dotsc,3,0\bigr)\leadsto\\
+	\leadsto^*\bigl(\f H\bigl(\vec x,i,\f F(\vec x,i)\bigr),\vec x,y-i-1,i,?,\dotsc,3,0\bigr)%\leadsto{}\\
     \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-i-1,i+1,?,\dotsc,4,0\bigr)\leadsto\\
     \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-(i+1),i+1,?,\dotsc,1,0\bigr)= d_{i+1}\text.
 \end{multline}
@@ -458,11 +458,9 @@ Rastavom na slučajeve vidimo da je $x>y$ ako i samo ako je $x\dotminus y$ pozit
 
 \section{Minimizacija}
 
-Primitivno rekurzivne funkcije su korisne i pogodne za rad, ali njihova totalnost je na neki način i nedostatak. Recimo, u funkcijskoj paradigmi još uvijek nismo dobili izračunljivost prazne funkcije $\varnothing^1$, koja je bila gotovo trivijalna u RAM-paradigmi. Da bismo dobili i parcijalne (ne-totalne) funkcije, moramo uvesti novi operator, pored $\circ$ i $\pr$. Taj operator --- \emph{minimizacija} --- djelovat će na \emph{relacijama} (zadanim karakterističnim funkcijama) i tražit će najmanji prirodni broj koji zadovoljava neko svojstvo. Intuitivno, odgovarat će \emph{neograničenim} petljama (poput \texttt{while}-petlji u Pythonu, samo s negiranim uvjetom) koje se ne izvršavaju određeni broj puta, nego dok se ne ispuni neki uvjet.
+Primitivno rekurzivne funkcije su korisne i pogodne za rad, ali njihova totalnost je na neki način i nedostatak. Recimo, u funkcijskoj paradigmi još uvijek nismo dobili izračunljivost prazne funkcije $\varnothing^1$, koja je bila gotovo trivijalna u RAM-paradigmi. Da bismo dobili i parcijalne (netotalne) funkcije, moramo uvesti novi operator, pored $\circ$ i $\pr$. Taj operator --- \emph{minimizacija} --- djelovat će na \emph{relacijama} (zadanim karakterističnim funkcijama) i tražit će najmanji prirodni broj koji zadovoljava neko svojstvo. Intuitivno, odgovarat će \emph{neograničenim} petljama (poput petlje \texttt{while} u Pythonu, samo s negiranim uvjetom) koje se ne izvršavaju određeni broj puta, nego dok se ne ispuni neki uvjet.
 
-Općenite neograničene petlje su raznolike i između provjeravanja uvjeta mogu na razne načine mijenjati stanje memorije, ali aksiomatski ćemo pretpostaviti samo izračunljivost petlji oblika
-\texttt{for(unsigned y=0; !R(y); ++y);}.
-Kasnije ćemo vidjeti da u tom modelu možemo pisati i općenite petlje.
+Općenite neograničene petlje su raznolike i između provjeravanja uvjeta mogu na razne načine mijenjati stanje memorije, ali aksiomatski ćemo pretpostaviti samo izračunljivost petlji oblika \texttt{for(unsigned y=0; !R(y); ++y);}. Kasnije ćemo vidjeti da u tom modelu možemo pisati i općenite petlje.
 
 \begin{definicija}[{name=[minimizacija]}]
 Neka je $k\in\N_+$ i $R^{k+1}$ relacija. Za funkciju $F^k$ definiranu s
@@ -624,7 +622,7 @@ ali ne možemo napisati odgovarajuću funkciju $If^3$ takvu da $f(\vec x,y):\sim
  Za početak, za $\textsc{else}$ trebamo dokazati da negiranje uvjeta ne kvari izračunljivost.% moći negirati uvjete i ostati u istoj "klasi" izračunljivosti.
 
 \begin{propozicija}[{name=[komplement čuva (primitivnu) rekurzivnost]}]\label{prop:kompl}
-Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija. Tada je i relacija $(\f R\kompl)^k$, zadana s $\f R\kompl(\vec x)\Longleftrightarrow\lnot \f R(\vec x)$, također (primitivno) rekurzivna.
+Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija.\newline Tada je i relacija $(\f R\kompl)^k$, zadana s $\f R\kompl(\vec x)\Longleftrightarrow\lnot \f R(\vec x)$, također (primitivno) rekurzivna.
 \end{propozicija}
 
 Uočimo nekoliko važnih detalja u upravo iskazanoj propoziciji. Prvo, kako smo već rekli u uvodu, na $k$-mjesne relacije gledamo simultano kao na formule s $k$ slobodnih varijabli, i na skupove $k$-torki. Zato koristimo oznaku za skupovni komplement, dok u definiciji formulom koristimo logičku negaciju. U sljedećoj propoziciji to ćemo generalizirati na dvomjesne logičke veznike odnosno skupovne operacije.
