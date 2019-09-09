@@ -76,13 +76,13 @@ i prirodno je reći da $L$ ima neko svojstvo izračunljivosti (npr.\ da je primi
 
 Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}=\chi_\emptyset=\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
 
-U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_{\mathit{true}}$ i $q_{\mathit{false}}$, kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
+U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_a$ i $q_r$, kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
-Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što konfiguracija sa stanjem $q_{\mathit{false}}$ (kao i ona s $q_{\mathit{true}}$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja) i zovemo ih \emph{odlučiteljima} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ dijeli $\Sigma^*$ na dva dijela,
+Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što konfiguracija sa stanjem $q_r$ (kao i ona s $q_a$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja) i zovemo ih \emph{odlučiteljima} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
     %\SwapAboveDisplaySkip
-    L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{true}}$}\}
-    \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_{\mathit{false}}$}\}\text,
+    L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_a$}\}
+    \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_r$}\}\text,
 \end{align} i kažemo da \emph{prepoznaje} $L(\mathcal T)$.
 
 Nije preteško vidjeti da su te dvije karakterizacije, brojevna i jezična, povezane --- pogotovo jer već imamo napravljen najveći dio posla.
@@ -93,9 +93,9 @@ Nije preteško vidjeti da su te dvije karakterizacije, brojevna i jezična, pove
 \begin{proof}
 Pretpostavimo da je $\mathcal T$ odlučitelj za $L$ i provedimo s tim strojem postupak iz točke~\ref{sec:tikp}. Ovdje navodimo samo detalje koje je potrebno promijeniti.
 
-Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_\mathit{true}):=1$, a $\N Q(q_\mathit{false}):=2$. (Dokažite analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\ne q_\mathit{true}$ i $q_0\ne q_\mathit{false}$ --- a po definiciji odlučitelja mora biti $q_\mathit{true}\ne q_\mathit{false}$.)
+Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_a):=1$, a $\N Q(q_r):=2$. (Dokažite analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\ne q_a$ i $q_0\ne q_r$ --- a po definiciji odlučitelja mora biti $q_a\ne q_r$.)
 
-    Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\notin\{q_\mathit{true},q_\mathit{false}\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica (vidjeti primjer~\ref{pr:polatable}) imati dva retka jedinica, a ne samo jedan.
+    Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\notin\{q_a,q_r\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica (vidjeti primjer~\ref{pr:polatable}) imati dva retka jedinica, a ne samo jedan.
 
 I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$ imat ćemo funkciju zadanu sa
 \begin{equation}\label{eq:stop'def}
@@ -109,9 +109,9 @@ Tvrdimo da je
 \end{equation}
 iz čega odmah slijedi rekurzivnost od $\kr L$ po lemi~\ref{lm:comprek} i korolaru~\ref{kor:prnrek}.
 
-Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$-izračunavanje s $w$ mora stati u stanju $q_\mathit{true}$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju) pa $\f{State}(x,n)\notin\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
+Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$-izračunavanje s $w$ mora stati u stanju $q_a$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju) pa $\f{State}(x,n)\notin\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
 
-U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučitelj, pa $\mathcal T$-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\notin\{1,2\}$ za $n<n_0$, a $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_{\mathit{true}}$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
+U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučitelj, pa $\mathcal T$-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\notin\{1,2\}$ za $n<n_0$, a $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_a$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
 \end{proof}
 %\newpage
 
@@ -136,19 +136,19 @@ Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju $bool$ u $\Sigma^*$:
 \begin{gather}
     \SwapAboveDisplaySkip
 \label{eq:d88j}
-    \delta(m_{\t\$},\alpha):=(q_\mathit{true},\alpha,1)\text{, za sve }\alpha\in\Sigma\text,\\
+    \delta(m_{\t\$},\alpha):=(q_a,\alpha,1)\text{, za sve }\alpha\in\Sigma\text,\\
 \label{eq:d89j}
-    \delta(m_{\t\$},\t\$):=(q_\mathit{false},\bl,-1)\text.
+    \delta(m_{\t\$},\t\$):=(q_r,\bl,-1)\text.
 \end{gather}
-Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_\mathit{true}$. Za $w\notin L$ rezultat će biti $\varepsilon$ pa će stroj doći do graničnika, obrisati ga i ući u stanje $q_\mathit{false}$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
+Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_a$. Za $w\notin L$ rezultat će biti $\varepsilon$ pa će stroj doći do graničnika, obrisati ga i ući u stanje $q_r$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
 \end{proof}
 \vspace{-4mm}
 
 Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
 \begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
     \node[state] (q9) {$m_{\t\$}$};
-\node[state,accepting,right of=q9] (qt) {$q_\mathit{true}$};
-\node[state,accepting,below right=0.5 and 1.6 of q9] (qf) {$q_\mathit{false}$};
+\node[state,accepting,right of=q9] (qt) {$q_a$};
+\node[state,accepting,below right=0.5 and 1.6 of q9] (qf) {$q_r$};
 \draw
 %(q9) edge[dashed,loop left] node[left] {\t/:\bl} (q9)
 (q9) edge node[above] {$\Sigma$} (qt)
@@ -163,7 +163,7 @@ Dosadašnji rezultati pokazuju da je za jezične funkcije, i za \emph{jednomjesn
 
 %Zapravo, sve potrebne ideje smo već vidjeli. Za ulazne podatke jednomjesnih funkcija, kao i za izlazne podatke, koristit ćemo unarni zapis: što je prirodnije nego broj $4$ zapisati na traku Turingovog stroja kao \textbullet\textbullet\textbullet\textbullet, a $0$ kao praznu riječ $\varepsilon$\@? Tako smo već prikazivali (u tragovima) sadržaj registara kod simulacije RAM-izračunavanja. Da smo opterećeni složenošću, morali bismo koristiti binarni ili neki drugi "pravi" pozicijski zapis, ali srećom nismo.
 
-Već smo u uvodu nagovijestili, koristit ćemo kontrakciju: u abecedu ćemo dodati separator \t/ kojim ćemo razdvojiti više ulaznih podataka: npr.\ $(1,0,5,0)$ prenijet ćemo kao \t{\textbullet//\textbullet\textbullet\textbullet\textbullet\textbullet/}.
+Već smo u uvodu nagovijestili, koristit ćemo kontrakciju --- u abecedu ćemo dodati separator \t/ kojim ćemo razdvojiti više ulaznih podataka: npr.\ $(1,0,5,0)$ prenijet ćemo kao \t{\textbullet//\textbullet\textbullet\textbullet\textbullet\textbullet/}.
 
 \begin{definicija}[{name=[binarna abeceda i binarna reprezentacija]}]\label{def:beta}
 \emph{Binarna abeceda} je abeceda $\Sigma_\beta:=\{\t\textbullet,\t/\}$. Za svaki neprazni konačni niz prirodnih brojeva $\vec x=(x_1,x_2,\dotsc,x_k)$, definiramo \emph{binarnu reprezentaciju} kao
@@ -535,7 +535,7 @@ Dakle,
 --- iz čega slijedi, po korolaru~\ref{kor:restrprek}, da je $\N\beta\f f$ parcijalno rekurzivna. Sada je po teoremu~\ref{tm:pir}, $\N\beta\f f$ RAM-izračunljiva, pa je $\beta\f f$ Turing-iz\-rač\-un\-lji\-va po teoremu~\ref{tm:krit}.
 \end{proof}
 
-Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne (primitivno rekurzivne) funkcije
+Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne primitivno rekurzivne funkcije
 \begin{align}
 \SwapAboveDisplaySkip
 \f{argc}&:=\f{Sc}\circ\f{count2}\text,\\
@@ -545,7 +545,7 @@ Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i
 \begin{primjer}[{name=[implementacija \emph{varargs} pomoću binarnog kodiranja]}]
 Recimo, $\f{add}^{\cdots}$, koja zbraja sve svoje argumente (koliko god da ih ima), je primitivno rekurzivna, jer je funkcija zadana s
 \begin{equation}
-\N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i<\f{argc}(a)}}\f{arg}(a,i)
+\N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i\,<\,\f{argc}(a)}}\f{arg}(a,i)
 \end{equation}
 primitivno rekurzivna po lemi~\ref{lm:sumprodrek} i prethodnim rezultatima.
 \end{primjer}

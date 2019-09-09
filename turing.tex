@@ -342,7 +342,7 @@ Prvo kodirajmo skup $Q_0$. Kako se radi o konačnom skupu, možemo jednostavno s
 Hm, hoće li onda $\N Q_0$ biti dobro definirana --- što ako je $q_0=q_z$? U definiciji Turingovog stroja ništa ne sprečava da se to dogodi. Ipak, $q_0\ne q_z$ smijemo pretpostaviti bez smanjenja općenitosti.
 
 \begin{lema}[{name=[možemo pretpostaviti $q_0\ne q_z$]}]\label{lm:bsomp-q0neqz}
-Za svaki Turingov stroj $\mathcal T$ koji računa neku jezičnu funkciju $\varphi$, postoji ekvivalentan (računa istu funkciju $\varphi$) Turingov stroj $\mathcal T'$, kojem se početno i završno stanje razlikuju.
+	Za svaki Turingov stroj $\mathcal T$ koji računa neku jezičnu funkciju $\varphi$, postoji \emph{ekvivalentni} (računa istu funkciju $\varphi$) Turingov stroj $\mathcal T'$, kojem se početno i završno stanje razlikuju.
 \end{lema}
 \begin{proof}
 Ako već u $\mathcal T$ vrijedi $q_0\ne q_z$, stavimo $\mathcal T':=\mathcal T$. Inače vrijedi $q_0=q_z$ i tvrdimo da je tada $\varphi$ identiteta na $\Sigma^*$. Doista, za svaku riječ $w\in\Sigma^*$, početna konfiguracija stroja $\mathcal T$ s ulazom $w$, $(q_0,0,w\bl\ldots)=(q_z,0,w\bl\ldots)$, ujedno je i završna konfiguracija, pa izračunavanje uvijek stane ($\varphi$ je totalna) i iz završnog oblika trake čitamo $\varphi(w)=w$.

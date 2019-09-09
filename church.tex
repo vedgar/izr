@@ -227,7 +227,7 @@ U tom smislu, instrukcije programa $P$ mogli bismo shvatiti kao pravila zaključ
 
 Taj pristup ćemo koristiti ovdje, odnosno u $\Gamma$ ćemo imati po jednu formulu $\iota_i$ za svaku instrukciju programa $P$ (s rednim brojem $i$). Još je preostalo objasniti što ćemo s ovim trotočkama u konfiguracijama (odnosno kako reprezentirati konačni nosač), i što s aritmetičkim operacijama ($+$ za \inc, $-$ za \dec).
 
-Konfiguracije prikazujemo određenim atomarnim formulama. Sadržaj programskog brojača, budući da je jedan od konačno mnogo njih (za fiksan RAM-program $P$), kodirat ćemo statički, kroz supskript relacijskog simbola odgovarajuće atomarne formule --- a sadržaj pojedinih registara preko terma u toj formuli. Ipak, kako svaka (atomarna) formula može imati samo konačno mnogo terma, morat ćemo se ograničiti samo na relevantne registre.
+Konfiguracije prikazujemo određenim atomarnim formulama. Sadržaj programskog brojača, budući da je jedan od konačno mnogo njih (za fiksni RAM-program $P$), kodirat ćemo statički, kroz supskript relacijskog simbola odgovarajuće atomarne formule --- a sadržaj pojedinih registara preko terma u toj formuli. Ipak, kako svaka (ne samo atomarna) formula može imati samo konačno mnogo terma, morat ćemo se ograničiti samo na relevantne registre.
 
 Aritmetiku bismo mogli prikazati nekom
 varijantom Peanove aritmetike, ali zapravo možemo i lakše: budući da je sve što nam treba sljedbenik i prethodnik, dovoljno je imati jedan konstantski simbol (koji predstavlja nulu) i jedan jednomjesni funkcijski simbol (koji predstavlja funkciju sljedbenik). Zatvoreni termi onda na očit način predstavljaju prirodne brojeve: broj $u$ je predstavljen termom koji predstavlja $u$-struku primjenu tog funkcijskog simbola na taj konstantski simbol.
@@ -241,7 +241,7 @@ Vrijeme je da počnemo pričati formalnije: krenimo od RAM-programa $P$, i mjesn
     \item $n+1$ $m$-mjesnih relacijskih simbola $R_0^m$,~$R_1^m$,~\ldots,~$R_n^m$.
 \end{itemize}
 
-Za svaki $u\in\N$, $\overline u$ označava zatvoreni term $\mathsf s(\mathsf s(\dotsb(\mathsf s(\mathsf0))\dotsb))$ s $u$ pojava funkcijskog simbola $\mathsf s$: $\overline 0=\mathsf 0$, $\overline 1=\mathsf s(\mathsf0)$, $\overline 2=\mathsf s\bigl(\mathsf s(\mathsf0)\bigr)$ itd. Za proizvoljni $\vec u=(u_1,u_2,\dotsc,u_k)\in\N^k$ definiramo formulu
+Za svaki $u\in\N$, $\overline u$ označava zatvoreni term $\mathsf s(\mathsf s(\dotsb(\mathsf s(\mathsf0))\dotsb))$ s $u$ pojava funkcijskog simbola $\mathsf s$: $\overline 0=\mathsf 0$, $\overline 1=\mathsf s(\mathsf0)$, $\overline 2=\mathsf s\bigl(\mathsf s(\mathsf0)\bigr)$ i tako dalje. Za svaki $\vec u=(u_1,u_2,\dotsc,u_k)\in\N^k$ definiramo formulu
 \begin{equation}\label{eq:defpiu}
     \pi_{\vec u}:=R_0(\mathsf0,\overline{u_1},\overline{u_2},\dotsc,\overline{u_k},\mathsf0,\mathsf0,\dotsc,\mathsf0)\text,
 \end{equation}
