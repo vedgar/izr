@@ -323,7 +323,7 @@ $
     \end{cases}
 $ --- provjerite!
 
-To samo znači ono što već znamo, da trebamo biti puno oprezniji s parcijalnim funkcijama nego s totalnima, pa će nam od posebnog značaja biti one opće rekurzije koje definiraju (isključivo) totalne funkcije.
+To samo znači ono što već znamo, da trebamo biti mnogo oprezniji s parcijalnim funkcijama nego s totalnima, pa će nam od posebnog značaja biti one opće rekurzije koje definiraju (isključivo) totalne funkcije.
 
 Dakle, neformalno, \emph{opća rekurzija} je funkcijska jednadžba $F=\mathcal M(\vec G,F)$, kojoj s desne strane stoji neka simbolička definicija koja pored nekih već poznatih funkcija $G_1$, $G_2$,~\ldots\ koristi i funkciju $F$. Kao i obično, konkretnu funkciju $F$ koja zadovoljava tu funkcijsku jednadžbu zovemo \emph{rješenjem} te jednadžbe. Za konkretnu opću rekurziju, zanimat će nas tri pitanja:
 \begin{labeling}{(Jedinstvenost)}
@@ -331,7 +331,7 @@ Dakle, neformalno, \emph{opća rekurzija} je funkcijska jednadžba $F=\mathcal M
     \item[(Jedinstvenost)] Ako ima, je li jedinstveno?
     \item[(Totalnost)] Ako jest, je li totalno?
 \end{labeling}
-Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači puno ako ono nije jedinstveno. Recimo, vidjeli smo jednadžbu~\eqref{eq:halfmany} koja ima totalno rješenje $\f h_1$, ali svejedno nijedan programski jezik ne bi pronašao to rješenje, već bi računao netotalnu funkciju $\f h_0$.
+Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači mnogo ako ono nije jedinstveno. Recimo, vidjeli smo jednadžbu~\eqref{eq:halfmany} koja ima totalno rješenje $\f h_1$, ali svejedno nijedan programski jezik ne bi pronašao to rješenje, već bi računao netotalnu funkciju $\f h_0$.
 
 % \subsection{Opće rekurzije s izračunljivim funkcijama}
 
@@ -413,7 +413,7 @@ C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{
 
 Ovdje treba znati neke tehničke pojedinosti o kompiliranju jezika C. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
 
-Na procesorima s puno registara, ponekad se argumenti u funkciju male mjesnosti ne prenose preko stoga nego preko registara --- ali slično razmišljanje funkcionira: poziv \texttt{f(n-1)} dekrementira registar u kojem se prenosi prvi argument, ali registar u kojem se prenosi drugi argument ostaje nepromijenjen, kao da smo pozvali \texttt{f(n-1,G)}.
+Na procesorima s velikim brojem registara, ponekad se argumenti u funkciju male mjesnosti ne prenose preko stoga nego preko registara --- ali slično razmišljanje funkcionira: poziv \texttt{f(n-1)} dekrementira registar u kojem se prenosi prvi argument, ali registar u kojem se prenosi drugi argument ostaje nepromijenjen, kao da smo pozvali \texttt{f(n-1,G)}.
 
 Možemo li to iskoristiti da bismo eksplicitno napisali taj poziv u kodu, i izbjegli \emph{warning}? Da, jer C nam dopušta da ne specificiramo tipove parametara funkcije.
 \begin{equation}\begin{minipage}{0.8\textwidth}
@@ -882,7 +882,7 @@ Neka je $k\in\N_+$ te neka je $\wp$ bilo koje netrivijalno svojstvo $k$-mjesnih 
 \end{korolar}
 \begin{proof}
 Budući da je $\wp$ netrivijalno svojstvo, postoji $k$-mjesna funkcija koja ga ima i neka druga $k$-mjesna funkcija koja ga nema. To znači da za skup $\mathcal F:=\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}$ vrijedi $\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Kad bi takav algoritam postojao, morao bi primati funkciju u nekom obliku (točkovna definicija, simbolička definicija, RAM-program, Turingov stroj,~\ldots) --- a svaki od njih znamo, neformalnim algoritmom, pretvoriti u indeks. Štoviše, imamo i (neformalne) algoritme pretvorbe u suprotnom smjeru, što znači da algoritam kojim bismo htjeli odlučiti $\wp$ mora raditi za \emph{sve} indekse traženih funkcija.
-%Ovo vjerojatno treba puno bolje raspisati.
+%Ovo vjerojatno treba mnogo bolje raspisati.
 No po Church--\!Turingovoj tezi, to znači da bi taj algoritam računao $\chi_{\kins{\mathcal F}}$, što je u kontradikciji s korolarom~\ref{kor:Rice!odl}.
 \end{proof}
 
@@ -894,7 +894,7 @@ Mnoga od tih svojstava (ali ne nužno sva) prirodno svrstavamo u dvije grupe: na
 
 Semantička svojstva su ona vezana uz RAM-izračunavanje: govore o zaustavljanju, totalnosti, funkcijama koje se računaju, njihovim domenama, slikama, grafovima, i sličnom. Važno okvirno pravilo koje pruža dobru intuiciju je: \textbf{sintaksna svojstva su uglavnom odlučiva, semantička svojstva su uglavnom neodlučiva}.
 
-Dobru empirijsku potvrdu prvog dijela pravila vidjeli smo u poglavlju~\ref{ch:univ}, gdje smo hrpu sintaksnih svojstava pokazali odlučivima, i razvili alate koji nam omogućavaju za još veću hrpu to pokazati bez puno muke. Recimo, $\reg{15}$ je relevantan za $P$ ako i samo ako vrijedi
+Dobru empirijsku potvrdu prvog dijela pravila vidjeli smo u poglavlju~\ref{ch:univ}, gdje smo hrpu sintaksnih svojstava pokazali odlučivima, i razvili alate koji nam omogućavaju za još veću hrpu to pokazati bez muke. Recimo, $\reg{15}$ je relevantan za $P$ ako i samo ako vrijedi
 $\bigl(\exists i<\f{lh}(e)\bigr)\bigl(\f{regn}(e[i])\ge15\bigr)$ (gdje je $e:=\kprog P$), što je primitivno rekurzivno svojstvo od $e$.
 
 S druge strane, Riceov teorem pruža dobar uvid u drugi dio tog pravila. Među semantičkim svojstvima izdvajaju se ona koja govore \emph{samo} o računatoj funkciji, bez ikakvog spominjanja konkretne implementacije. Recimo, "$P$-izračunavanje s $(2,5)$ stane" se može tako zapisati, jer zapravo kaže $(2,5)\in\dom{\f F}$, gdje je $\f F$ funkcija koju $P$ računa. Riceov teorem kaže da su sva takva svojstva sigurno neodlučiva --- osim dva trivijalna, naravno. Primjerice, svojstvo "ovaj RAM-program rješava \emph{halting problem}" jest odlučivo: za svaki RAM-program vratimo $\mathit{false}$. Također, "ovaj RAM-program računa parcijalno rekurzivnu funkciju" jest odlučivo: uvijek vratimo $\mathit{true}$.
