@@ -2,11 +2,11 @@
 
 \section{Pojam izračunljive funkcije}
 
-Da bismo odgovorili na pitanje što je algoritam, zapitajmo se za početak što algoritam \emph{radi}  --- ili, što mi algoritmom radimo. Algoritam možemo \emph{pokrenuti} na nekim \emph{ulaznim podacima}, izvršavati njegove \emph{korake} preciznim \emph{redom} te, u nekom trenutku kad algoritam to zatraži, \emph{zaustaviti} postupak i dobiti \emph{izlazne podatke}. Algoritam, u tom pogledu, obavlja nekakvu \emph{transformaciju} podataka. Štoviše, algoritam bi trebao biti \emph{deterministički}: isti ulazni podaci trebali bi proizvesti iste izlazne podatke. Matematička formalizacija te transformacije je pojam \emph{funkcije}: algoritam \emph{preslikava} ulazne podatke u izlazne. Kažemo da algoritam \emph{računa} funkciju, i takve funkcije (za koje imamo algoritme) zovemo \emph{izračunljivima}. Tako pitanje "Koji su algoritmi mogući?" postaje nešto preciznije pitanje "Koje su funkcije izračunljive?".
+Da bismo odgovorili na pitanje što je algoritam, zapitajmo se za početak što algoritam \emph{radi}  --- ili, što mi algoritmom radimo. Algoritam možemo \emph{pokrenuti} na nekim \emph{ulaznim podacima}, izvršavati njegove \emph{korake} preciznim \emph{redom} te, u nekom trenutku kad algoritam to zatraži, \emph{zaustaviti} postupak i dobiti \emph{izlazne podatke}. Algoritam, u tom pogledu, obavlja nekakvu \emph{transformaciju} podataka. Štoviše, algoritam bi trebao biti \emph{deterministički}: isti ulazni podaci trebali bi proizvesti iste izlazne podatke. Matematička formalizacija te transformacije je pojam \emph{funkcije}: algoritam \emph{preslikava} ulazne podatke u izlazne. Kažemo da algoritam \emph{računa} funkciju, i takve funkcije (za koje imamo algoritme) zovemo \emph{izračunljivima}. Tako pitanje "Kakvi su algoritmi mogući?" postaje nešto preciznije pitanje "Koje su funkcije izračunljive?".
 
 % \subsection{Vrste i količina podataka}
 
-Da bismo funkciju mogli matematički zapisati, moramo imati preciziranu domenu i kodomenu. Što su naši podaci?
+Da bismo funkciju mogli matematički zapisati, moramo precizirati domenu i kodomenu. \emph{Što} su naši podaci?
 Na prvi pogled, mogu biti bilo što: imamo algoritme koji rade na cijelim brojevima, realnim brojevima (preciznije, njihovim aproksimacijama --- vidjet ćemo zašto je to bitno), tekstnim podacima (\emph{strings}), datotekama, mrežnim vezama (\emph{sockets}), drugim algoritmima (\emph{higher order programming}), grafovima, objektima, regularnim izrazima, i tko zna čemu. No iskustvo programiranja nas uči da se svi ti raznorazni \emph{tipovi} podataka uvijek mogu --- i moraju, ako želimo nešto raditi s njima --- reprezentirati u memoriji računala kao neki binarni podaci: konačni nizovi nula i jedinica.
 
 Dakle, mogli bismo uzeti $\{0,1\}^*:=\bigcup_{k\in\mathbb N}\,\{0,1\}^k$ kao univerzalni skup naših podataka --- ali pokazuje se da je zgodnije ako umjesto $\{0,1\}$ uzmemo proizvoljni konačni neprazni skup ("abecedu") $\Sigma$. Funkcije iz $\Sigma^*$ u $\Sigma^*$ zovemo \emph{jezične funkcije}, i to je povijesno bio prvi pokušaj formalizacije algoritma: Turingov stroj, kojim ćemo se baviti u poglavlju~\ref{ch:Turing}.
@@ -19,7 +19,7 @@ Odabir skupa $\N$ kao osnovnog isplatit će se kroz jednostavnost mnogih dokaza 
 
 Ipak, neintuitivnost kodiranja nadomjestit će jednostavnost algoritama: dok je, uz odgovarajuće tehnike~\cite{posav}, lako napisati algoritam za npr.\ zbrajanje racionalnih brojeva kodiranih prirodnim brojevima, analogni algoritam za ASCII-kodirane razlomke gotovo nikada ne stigne dalje od grubog pseudokoda. Ponegdje, gdje su naši objekti već \emph{definirani} kao nizovi znakova (najvažniji primjer su formule logike prvog reda), koristit ćemo njihovu jezičnu reprezentaciju, ali to će biti nakon što objasnimo općenito kodiranje sa $\Sigma^*$ u $\N$ (i obrnuto).
 
-Smatramo li nulu prirodnim brojem? Treba li brojenje početi od $0$ ili od $1$, dilema je stara koliko i samo računarstvo~\cite{note:EWD831}. Kao i drugdje u matematici, postoje dobri razlozi za obje opcije. Zato ćemo koristiti oba skupa, no kako će nam češće trebati nula među prirodnim brojevima (pogledajmo definiciju od $\{0,1\}^*$, na primjer), skup s nulom imat će kraću oznaku.
+Smatramo li nulu prirodnim brojem? Treba li brojenje početi od $0$ ili od $1$, dilema je stara koliko i samo računarstvo~\cite{note:EWD831}. Kao i drugdje u matematici, postoje dobri razlozi za obje opcije. Zato ćemo koristiti oba skupa, no kako će nam češće trebati nula među prirodnim brojevima (pogledajte na primjer definiciju od $\{0,1\}^*$), skup s nulom imat će kraću oznaku.
 \begin{align}
     \SwapAboveDisplaySkip
 \N&:=\{\,0,1,2,3,\dotsc\}\\
@@ -45,7 +45,7 @@ Iako mjesnost smatramo neodvojivim dijelom funkcije odnosno algoritma, u slučaj
 S obzirom na to da promatramo samo determinističke algoritme, naglasimo da nema "implicitnih argumenata": sve vrijednosti o kojima ovisi izlaz funkcije (ako se doista mijenjaju od poziva do poziva) moraju biti prenesene u nju kao argumenti. Često ćemo pisati opće funkcijske pozive kao $f(\vec x,y,z)$, gdje su $y$ i $z$ "pravi" argumenti s kojima doista nešto radimo u konkretnom algoritmu, a $\vec x$ predstavlja samo kontekst (\emph{environment}) nekog vanjskog algoritma koji je pozvao $f$ --- koji također moramo prenijeti u $f$ ako želimo da mu ona može pristupiti.
 \end{napomena}
 
-Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivna, odnosno ne promatramo algoritme s $0$ ulaznih podataka. Ovo nije bitna restrikcija (možete se zabaviti pokušavajući otkriti koje sve tehničke detalje u knjizi treba promijeniti da bismo uključili i takve algoritme u razmatranje), ali komplicira izlaganje, a takvi algoritmi nam nisu zanimljivi iz perspektive izračunljivosti: budući da zahtijevamo determinističnost, nul-mjesni algoritmi mogu računati jedino konstante, a ne treba nam jako napredni formalizam da bismo zaključili da konstante \emph{jesu} izračunljive.
+Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivna, odnosno ne promatramo algoritme s $0$ ulaznih podataka. Ovo nije bitna restrikcija (možete se zabaviti pokušavajući otkriti koje sve tehničke detalje u knjizi treba promijeniti da bismo uključili i takve algoritme u razmatranje), ali komplicira izlaganje, a takvi algoritmi nam nisu zanimljivi iz perspektive izračunljivosti: iz napomene~\ref{nap:blokovi} slijedi da nul-mjesni algoritmi mogu računati jedino konstante, a ne treba nam jako napredni formalizam da bismo zaključili da konstante \emph{jesu} izračunljive.
 
 \subsection{Parcijalnost}
 
@@ -149,8 +149,7 @@ Svaka \emph{RAM-instrukcija} ima:
 \end{itemize}
 \end{definicija}
 
-Dakle, RAM-instrukcija može biti jednog od tri oblika, čiji efekti su:
-
+Dakle, RAM-instrukcija može biti jednog od tri oblika (s navedenim učincima):
 \begin{labeling}{$\decr{j}{l}$:}
     \item[$\incr{j}$:] Povećava sadržaj registra $\reg{j}$ za $1$.
     \item[$\decr{j}{l}$:] Ako je sadržaj od $\reg{j}$ pozitivan, smanjuje ga za $1$. Inače postavlja \textsc{pc} na $l$.
@@ -306,7 +305,7 @@ Sada je $\mathscr Comp=\bigcup_{k\in\N_+}\!\mathscr Comp_k$ prebrojiv kao unija 
 \end{proof}
 
 \begin{korolar}[{name=[postojanje ne-RAM-izračunljivih funkcija]}]\label{kor:exneizrk}
-Za svaki $k\in\N_+$, postoji brojevna funkcija mjesnosti $k$ koja nije RAM-izračunljiva.
+Za svaki $k\in\N_+$ postoji brojevna funkcija mjesnosti $k$ koja nije RAM-izračunljiva.
 \end{korolar}
 \begin{proof}
 Opet, fiksirajmo mjesnost $k\in\N_+$. Skup svih $k$-mjesnih brojevnih funkcija $\mathscr Func_k$ je neprebrojiv, jer je nadskup skupa svih \emph{totalnih} $k$-mjesnih brojevnih funkcija, čija je kardinalnost
@@ -365,8 +364,9 @@ Vidimo da su mnoge funkcije (prazna, konstante, identiteta, zbrajanje,~\ldots) R
 
 \section{Makro-izračunljivost}
 
-Izvršavanje RAM-programa na RAM-stroju, pored prevođenja početne konfiguracije (s ulazom $\vec x$) u završnu (s izlazom $\f{f}(\vec x)$), proizvede mnoge "popratne efekte" (\emph{side-effects}) na njegovim registrima. Te efekte možemo objediniti (\emph{enkapsulirati}) tako da čitav RAM-program $P$ shvatimo kao jednu instrukciju $P^*$ nekog kompliciranijeg stroja. 
-Oznaka sugerira dualnu upotrebu RAM-programa $P$: ako ga koristimo za računanje $k$-mjesne funkcije ($k$ ulaznih registara), promatramo ga kao algoritam $P^k$, a ako ga koristimo radi efekta na registre (svi registri "ulazni"), promatramo ga kao \emph{makro} $P^*$.
+Izvršavanje RAM-programa na RAM-stroju, pored prevođenja početne konfiguracije (s ulazom $\vec x$) u završnu (s izlazom $\f{f}(\vec x)$), proizvede mnoge "popratne učinke" (\emph{side-effects}) na njegovim registrima. Te učinke možemo objediniti (\emph{enkapsulirati}) tako da čitav RAM-program $P$ shvatimo kao jednu instrukciju $P^*$ nekog kompliciranijeg stroja. 
+
+Ta oznaka sugerira dualnu upotrebu RAM-programa $P$: ako ga koristimo radi računanja $k$-mjesne funkcije ($k$ ulaznih registara), promatramo ga kao algoritam $P^k$, a ako ga koristimo radi djelovanja na registre (svi registri "ulazni"), promatramo ga kao \emph{makro} $P^*$.
 
 Primjerice, za svaki $j\in\N$, RAM-program $P_j:=\begin{prog}
 0.&\decr j2\\
@@ -574,7 +574,6 @@ i gotovi smo: $Q'''=Q^\flat$, jer više nema makroa u programu. (Za objašnjenje
 Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathscr{MP}rog$ i $\mathscr Prog$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Vratit ćemo se na ovaj postupak u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa. To će biti jedan specijalni slučaj (dokaz teorema o parametru), za koji ćemo tada pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
 
 %\subsection{Ekvivalentnost RAM-programa i makro-programa}
-\subsection{Primjeri makroa}
 
 Kad smo već kod neformalnih objašnjenja, izrecimo i osnovni rezultat --- koji se doduše može formalno dokazati, ali je vrlo mukotrpno i zapetljano, a zapravo dokaz ne daje ništa novo ako već imamo intuiciju \emph{inlininga} kao programske tehnike.
 
@@ -591,6 +590,7 @@ Treba definirati funkciju $v$ iz $\N\times\N$ u $\N$, takvu da prijelaz između 
 Iz toga onda slijedi da se pri izvršavanju programa i njegovog spljoštenja zapravo izvršavaju iste instrukcije, samo su im odredišta i redni brojevi transformirani po funkciji $v$. Dakle, semantike su tih instrukcija --- promjene sadržaja registara --- iste i odvijaju se na istim registrima, istim redom. To pak znači da ako počnemo od iste konfiguracije (početna konfiguracija s ulazom $\vec x$) što se registara tiče, registri će mijenjati svoje vrijednosti na isti način prilikom izvršavanja $Q$ i $Q^\flat$, pa će specijalno i sadržaj registra $\reg0$ biti isti. Štoviše, jer je $v(n_Q,0)=n_{Q^\flat}$, $Q^\flat$-izračunavanje s $\vec x$ će stati ako i samo ako $Q$-izračunavanje s $\vec x$ stane, i tada će u $\reg0$ biti isti broj. Kako je $\vec x$ bio proizvoljan, zaključujemo da su $Q$ i $Q^\flat$ ekvivalentni.
 \end{proof}
 
+\subsection{Primjeri makroa}
 Teorem~\ref{tm:rem} ima dvije važne posljedice. Prvu možemo uobličiti kao korolar.
 
 \begin{korolar}[{name=[RAM-izračunljivost je ekvivalentna makro-izračunljivosti]}]\label{kor:rem}
@@ -605,7 +605,7 @@ Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$
 \end{proof}
 
 \begin{napomena}[{name=[makroi višeg reda]}]
-Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$ gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat*}$\!, koji ima istu semantiku što se efekata na registrima tiče.
+Druga posljedica teorema~\ref{tm:rem} je programska tehnika koja će bitno povećati izražajnost makro-programa koje pišemo. Rekli smo da je makro uvijek oblika $P^*$ gdje je $P$ \emph{RAM}-program, no zbog teorema~\ref{tm:rem} smijemo se ponašati kao da $P$ može biti i \emph{makro}-program, koji koristi već napisane makroe. Formalno, pri tome mislimo na $P^{\flat*}$\!, koji ima istu semantiku što se učinka na registre tiče.
 \end{napomena}
 
 % \subsection{Primjeri makroa}
@@ -727,13 +727,13 @@ Semantika funkcijskog makroa, uz oznake iz definicije~\ref{def:funmakro} te pokr
 \begin{proof}
 Prvo dokažimo da su zadovoljeni svi uvjeti na parametre korištenih makroa: za prvu i zadnju instrukciju to je $\dulj{b-0}=\dulj{0-b}=b\ge b$, za prijenos argumenata je $b+j_t\ge b>k$, a za prijenos povratne vrijednosti je $b+j_0\ge b\ge 1>0$.
 
-Za tvrdnju~\ref{case:in}, pogledajmo redom efekte pojedinih makro-instrukcija iz definicije~\ref{def:funmakro}.
+Za tvrdnju~\ref{case:in}, pogledajmo redom učinke pojedinih makro-instrukcija iz definicije~\ref{def:funmakro}.
 
 	Nakon prve instrukcije \textsc{mmove}, prvih $b$ registara bit će resetirano, a njihove stare vrijednosti $(r_0,r_1,\dots,r_{b-1})$ bit će u idućih $b$ registara. Konkretno, za svaki $t\in[1\dd k]$, u $\reg{b+j_t}$ nalazit će se $r_{j_t}$.
 
 Dakle, instrukcija \textsc{args} će u ulazne registre $\reg1,\dots,\reg{k}$ zapisati upravo vrijednosti $\vec r$. Ostale registre neće mijenjati, pa će $\reg0$ i dalje biti resetiran, kao i svi registri $\reg{i},i\in\langle k\dd b\rangle$, a u idućih $b$ registara će i dalje biti "\!\emph{backup}".
 
-Sada slijedi izvršavanje makroa $P_{\f{f}}^*$, odnosno RAM-programa $P_{\f{f}}$ na trenutnom stanju registara. Kako je to RAM-program, po napomeni~\ref{nap:rem} slijedi da će imati iste efekte na registre kao da se izvršava na RAM-stroju, a iz $b\ge m_{P_{\f{f}}^k}$ i prethodnog odlomka slijedi da će njegovo izvršavanje biti isto kao da se izvršava na  RAM-stroju u početnoj konfiguraciji. Kako $P_{\f{f}}^k$ računa funkciju $\f{f}$, a u "početnoj" konfiguraciji mu se u ulaznim registrima nalazi $\vec r\in\dom{\f{f}}$, slijedi da će izvršavanje tog makroa  (zapravo $P_{\f{f}}$-izračunavanje s $\vec r$) stati, i u "završnoj" konfiguraciji sadržaj registra $\reg0$ će biti $\f{f}(\vec r)$.
+Sada slijedi izvršavanje makroa $P_{\f{f}}^*$, odnosno RAM-programa $P_{\f{f}}$ na trenutnom stanju registara. Kako je to RAM-program, po napomeni~\ref{nap:rem} slijedi da će imati isti učinak na registre kao da se izvršava na RAM-stroju, a iz $b\ge m_{P_{\f{f}}^k}$ i prethodnog odlomka slijedi da će njegovo izvršavanje biti isto kao da se izvršava na  RAM-stroju u početnoj konfiguraciji. Kako $P_{\f{f}}^k$ računa funkciju $\f{f}$, a u "početnoj" konfiguraciji mu se u ulaznim registrima nalazi $\vec r\in\dom{\f{f}}$, slijedi da će izvršavanje tog makroa  (zapravo $P_{\f{f}}$-izračunavanje s $\vec r$) stati, i u "završnoj" konfiguraciji sadržaj registra $\reg0$ će biti $\f{f}(\vec r)$.
 
 Nakon toga izvršavanje funkcijskog makroa prijeći će na instrukciju \textsc{remove}, koja će tu vrijednost $\f{f}(\vec r)$ zapisati u registar $\reg{b+j_0}$, koji se nalazi u bloku $(\reg{i})_{i\in[b\dd 2b\rangle}$ jer je $j_0<b$. Svi ostali registri iz tog bloka i dalje će sadržavati \emph{backup} početnih vrijednosti prvih $b$ registara. Ne znamo što će biti u prvih $b$ registara (osim što će $\reg0$ biti resetiran) jer to ovisi o konkretnom programu $P_{\f{f}}$, ali zapravo to nije ni bitno.
 
