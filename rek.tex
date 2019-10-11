@@ -105,7 +105,7 @@ Neka su $k,l\in\N_+$ te neka su $G_1^k$, $G_2^k$,~\ldots, $G_l^k$ i $H^l$ funkci
 \end{align}
 kažemo da je dobivena \emph{kompozicijom} iz funkcija $G_1$, $G_2$,~\ldots, $G_l$ i $H$. Skraćeno pišemo $F:=H\circ(G_1,G_2,\dotsc,G_l)$. %Operator $\circ$ smatramo lijevo asociranim.
 
-Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na kompoziciju} ako za sve mjesnosti $k,l\in\N_+$, za sve $k$-mjesne $G_1,G_2,\dotsc,G_l\in\mathcal F$ te za sve $l$-mjesne $H\in\mathcal F$, vrijedi $H\circ(G_1,G_2,\dotsc,G_l)\in\mathcal F$.
+Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na kompoziciju} ako za sve $k,l\in\N_+$, za sve $k$-mjesne $G_1,G_2,\dotsc,G_l\in\mathcal F$ te za sve $l$-mjesne $H\in\mathcal F$, vrijedi $H\circ(G_1,G_2,\dotsc,G_l)\in\mathcal F$.
 \end{definicija}
 U skladu s napomenom~\ref{nap:parcdef}, izraze~\eqref{eq:domkomp} i~\eqref{eq:defkomp} zajedno skraćeno pišemo kao
 \begin{equation}
@@ -531,13 +531,13 @@ Slično kao propoziciju~\ref{prop:symbdef}, mogli bismo dokazati da je funkcija 
 
 Pogledajmo sada kako možemo proširiti rezultat iz propozicije~\ref{prop:prnram} na parcijalno rekurzivne funkcije. Vidimo da nam nedostaje još samo opis kako se neograničene petlje izvršavaju na RAM-stroju.
 
-Ideja nije ništa revolucionarno: kao "kontrolnu varijablu" koristimo upravo $\reg0$, iz istog razloga kao kod pisanja makro-programa za primitivnu rekurziju --- da eventualnim završetkom petlje bude već spremna kao izlazni podatak. U tom smislu, već je inicijalizirana na nulu na početku izračunavanja --- samo je treba inkrementirati poslije svake provjere uvjeta $R$.
+Ideja nije ništa revolucionarno: kao "kontrolnu varijablu" koristimo upravo $\reg0$, iz istog razloga kao u dokazu leme~\ref{lm:prram} --- da eventualnim završetkom petlje bude već spremna kao izlazni podatak. U tom smislu, već je inicijalizirana na nulu na početku izračunavanja --- samo je treba inkrementirati poslije svake provjere uvjeta $R$.
 
-Ili prije? Ovdje imamo mali tehnički problem: htjeli bismo da provjera bude na samom dnu programa, jer tako najbolje odgovara semantici negiranog uvjeta. Terminologijom jezika Pascal, implementiramo \texttt{until}-petlju, ne \texttt{while}-petlju. Iz sličnog razloga kao naši strojevi, Pascal je \texttt{while}-uvjet provjeravao na vrhu, a \texttt{until}-uvjet na dnu petlje. Semantika samog skoka je ista: ako je uvjet istinit, nastavljamo dalje (ulazimo u \texttt{while}-petlju, ili izlazimo iz \texttt{until}-petlje), a ako je lažan, skačemo na drugi kraj petlje (izlazimo iz \texttt{while}-petlje, ili ponovo izvršavamo \texttt{until}-petlju) --- što je baš semantika instrukcije tipa $\dec$.
+Ili prije? Ovdje imamo mali tehnički problem: htjeli bismo da provjera bude na samom dnu programa, jer tako najbolje odgovara semantici negiranog uvjeta. Terminologijom jezika Pascal, implementiramo \texttt{until}, ne \texttt{while}. Iz sličnog razloga kao naši strojevi, Pascal je \texttt{while}-uvjet provjeravao na vrhu, a \texttt{until}-uvjet na dnu petlje. Semantika skoka je ista: ako je uvjet istinit nastavljamo (ulazimo u \texttt{while}-petlju, ili izlazimo iz \texttt{until}-petlje), a ako je lažan skačemo na drugi kraj (izlazimo iz \texttt{while}-petlje, ili ponovo izvršavamo \texttt{until}-petlju) --- što je baš semantika instrukcije tipa $\dec$.
 
-Ali \texttt{until}-petlje imaju jedan veliki nedostatak: uvijek se izvrše barem jednom (kao petlja \texttt{do...while} u jeziku C). Kako se u petlji mora nalaziti instrukcija $\incr0$, čini se da teško možemo postići da $\reg0$ na kraju bude $0$, što može biti problem: recimo, za univerzalnu relaciju, $\mu y\,\N^{k+1}(\vec x,y)=0$.
+Ali \texttt{until}-petlje imaju jedan veliki nedostatak: njihovo tijelo uvijek se izvrši barem jednom (kao kod petlje \texttt{do...while} u jeziku C). Kako se u petlji mora nalaziti instrukcija $\incr0$, čini se da teško možemo postići da $\reg0$ na kraju bude $0$, što može biti problem: recimo, za univerzalnu relaciju, $\mu y\,\N^{k+1}(\vec x,y)=0$.
 
-Rješenje problema se nalazi na drugom kraju, odnosno početku programa: program možemo početi izvršavati iz sredine! Odnosno preciznije, na sam početak programa možemo staviti instrukciju ($0.\;\goto\;2$), da preskočimo instrukciju ($1.\;\incr0$) kod prvog prolaza.
+Rješenje problema se nalazi na drugom kraju, odnosno početku programa: program možemo početi izvršavati iz sredine! Na početak programa možemo staviti instrukciju ($0.\;\goto\;2$), da preskočimo instrukciju ($1.\;\incr0$) kod prvog prolaza.
 
 \begin{lema}[{name=[zatvorenost skupa $\mathscr Comp$ na minimizaciju]}]\label{lm:muram}
 Skup $\mathscr Comp$ je zatvoren na minimizaciju.
@@ -880,7 +880,8 @@ Neka je $k\in\N_+$ te $\f g^k$ konačna funkcija ($\dom{\f g}$ je konačan skup)
     Za $\f F$ uzmemo $\tilde{\f g}$, proširenje funkcije $\f g$ nulom. Tada se $\f F^k$ i $\f C_0^k$ razlikuju samo na konačnom skupu $\dom{\f g}$, pa tvrdnja slijedi iz propozicija~\ref{prop:konprom} i~\ref{prop:konst}. 
 \end{proof}
 
-\subsection{Ograničene sume, produkti i brojenje}\label{sec:sumprodcount}
+%\subsection{Ograničene sume, produkti i brojenje}\label{sec:sumprodcount}
+\subsection{Programiranje s ograničenim petljama}\label{sec:ogrprog}
 
 Vidjeli smo da, kao što kompozicija odgovara slijednom izvršavanju naredaba u imperativnom modelu, primitivna rekurzija odgovara ograničenim petljama. Kad malo bolje pogledamo, postoji neka vrsta analogije između ta dva pojma.
 
@@ -975,7 +976,7 @@ također (primitivno) rekurzivna. Skraćeno pišemo $\f F(\vec x):=\bigl(\num y<
         $\sum_{y\in S}\chi_{\f R}(\vec x,y)=\sum_{y\in S_1}1+\sum_{y\in S_2}0=\card S_1$.
 \end{proof}
 
-\subsection{Ograničena kvantifikacija}
+%\subsection{Ograničena kvantifikacija}
 
 Još jedan čest obrazac (\emph{pattern}) u uvodnim algoritmima je provjera zadovoljava li neki element zadanog konačnog skupa neko zadano svojstvo --- ili dualno, zadovoljavaju li ga svi elementi tog skupa. U nekim modernim programskim jezicima to se ostvaruje kroz funkcije \texttt{any} i \texttt{all}. Na primjer, ustanoviti je li broj $n$ složen možemo tako da ispitamo postoji li $d\in[2\dd n\rangle$ (ili $d\in\bigl[2\dd \lfloor\!\sqrt{n}\rfloor\bigr]$) takav da $d\mathrel|n$. Vidimo da je prirodna matematička formalizacija tog obrasca \emph{ograničena kvantifikacija}, gdje univerzalno ili egzistencijalno kvantificiramo varijable u nekom uvjetu do neke granice.
 
@@ -1002,7 +1003,7 @@ također (primitivno) rekurzivne.
 \end{proof}
 
 \begin{napomena}[{name=[granice mogu biti i uključene]}]\label{nap:kvantSc}
-    U svim dosadašnjim rezultatima ove točke imali smo isključenu gornju granicu: $y<\f H(\vec x)$ kao pokrata za $y\in[0\dd \f H(\vec x)\rangle$. Često je uobičajenije koristiti uključene granice: recimo, $\sum_{y=0}^{\f H(\vec x)}\f G(\vec x,y)=\sum_{y\le\f H(\vec x)}\f G(\vec x,y)$. Sve takve funkcije su jednako izračunljive kao i s isključenom granicom, jer je $y\le\f H(\vec x)\Leftrightarrow y<1+\f H(\vec x)=\f{Sc}\bigl(\f H(\vec x)\bigr)$ --- dakle, umjesto funkcije $\f H$ koristimo $\f{Sc}\circ\f H$, koja je (primitivno) rekurzivna ako je $\f H$ takva.
+    U dosadašnjim rezultatima ove točke imali smo isključenu gornju granicu: $y<\f H(\vec x)$ kao pokrata za $y\in[0\dd \f H(\vec x)\rangle$. Često je uobičajenije koristiti uključene granice: recimo, $\sum_{y=0}^{\f H(\vec x)}\f G(\vec x,y)=\sum_{y\le\f H(\vec x)}\f G(\vec x,y)$. Sve takve funkcije su jednako izračunljive kao i s isključenom granicom, jer je $y\le\f H(\vec x)\Leftrightarrow y<1+\f H(\vec x)=\f{Sc}\bigl(\f H(\vec x)\bigr)$ --- dakle, umjesto funkcije $\f H$ koristimo $\f{Sc}\circ\f H$, koja je (primitivno) rekurzivna ako je $\f H$ takva.
 %
 %Analogno napomeni~\ref{nap:sumprodSc}, kompozicijom $\f{Sc}$ s $\f H$ dokazali bismo (primitivnu) rekurzivnost i egzistencijalnih kvantifikacija oblika $\bigl(\exists i\le\f H(\vec x)\bigr)\f R(\vec x,i)$, i dakako univerzalnih kvantifikacija s uključenom granicom.
 \end{napomena}
@@ -1032,9 +1033,7 @@ Drugim riječima, ograničena minimizacija čuva rekurzivnost. Važno je da čuv
 
 Pokušajmo otkriti kako bismo pomoću dosadašnjih konstrukcija --- ograničenog brojenja i kvantifikacije --- karakterizirali ograničenu minimizaciju. Dakle, imamo $k\in\N_+$, $(k+1)$-mjesnu relaciju $\f R$, $k$-mjesnu totalnu funkciju $\f H$, i $\vec x\in\N^k$. Gornju granicu $\f H(\vec x)$ označimo s $a$, i uvedimo jednomjesnu relaciju $\f P(y):\Longleftrightarrow\f R(\vec x,y)$ ($\vec x$ je ionako fiksiran). Za početak pretpostavimo da doista postoji $y<a$ za koji vrijedi $\f P(y)$. Dakle $a>0$, i imamo niz istinitosnih vrijednosti $\f P(0)$, $\f P(1)$,~\ldots, $\f P(a-1)$ u kojem trebamo naći prvu vrijednost $\mathit{true}$.
 
-Kad bismo imali naredbu \texttt{break}, mogli bismo brojiti vrijednosti $\mathit{false}$ i napustiti petlju čim naiđemo na $\mathit{true}$. Kako možemo emulirati \texttt{break}? Jedan način je da imamo još jednu $bool$ varijablu (\emph{flag}) $q$, inicijaliziramo je na $\mathit{false}$, kad naiđemo na $\mathit{true}$ postavimo $q:=\mathit{true}$, a uopće ne izvršavamo tijelo petlje ako je $q=\mathit{true}$. Gledajući kako se $q$ mijenja, vidimo da je u $y$-tom prolasku to upravo istinitosna vrijednost $\f Q(y):\Longleftrightarrow(\exists i\le y)\f P(i)$.
-
-Sada je brojenje prvog bloka nula (do prve jedinice) za $\f P$ ekvivalentno brojenju \emph{svih} nula za $\f Q$, jer je $\chi_{\f Q}$ rastuća: kad postane $1$, ostaje $1$. Dakle, još je potrebno negirati $\f Q$ i primijeniti operator brojenja.
+Kad bismo imali naredbu \texttt{break}, mogli bismo brojiti vrijednosti $\mathit{false}$ i napustiti petlju čim naiđemo na $\mathit{true}$. Kako možemo emulirati \texttt{break}? Jedan način je da imamo još jednu $bool$ varijablu (\emph{flag}) $q$, inicijaliziramo je na $\mathit{false}$, kad naiđemo na $\mathit{true}$ postavimo $q:=\mathit{true}$, a uopće ne izvršavamo tijelo petlje ako je $q=\mathit{true}$. Gledajući kako se $q$ mijenja, vidimo da je u $y$-tom prolasku to upravo istinitosna vrijednost $\f Q(y):\Longleftrightarrow(\exists i\le y)\f P(i)$. Sada je brojenje prvog bloka nula (do prve jedinice) za $\f P$ ekvivalentno brojenju \emph{svih} nula za $\f Q$, jer je $\chi_{\f Q}$ rastuća: kad postane $1$, ostaje $1$. Dakle, još je potrebno negirati $\f Q$ i primijeniti operator brojenja.
 
 To razmišljanje možemo prikazati tablicom: recimo da je $\f P$ svojstvo "biti prim-broj", i da tražimo $(\mu y<7)(y\in\mathbb P)$, najmanji prim-broj manji od $7$. Imali bismo
 \begin{equation}
@@ -1052,18 +1051,17 @@ Neka je $k\in\N_+$ te $\f R^{k+1}$ primitivno rekurzivna relacija i $\f H^k$ pri
 \end{propozicija}
 \begin{proof}
 Tvrdimo da je za svaki $\vec x\in\N^k$, vrijednost $\f F(\vec x)$ jednaka
-    \begin{equation}\label{eq:muHprn}
-        \bigl(\mu y<\f H(\vec x)\bigr)\f R(\vec x,y)
-        =
-        \bigl(\num y<\f H(\vec x)\bigr)(\nexists i\le y)\f R(\vec x,i).
-    \end{equation}
-iz čega će slijediti primitivna rekurzivnost $\f F$ kao posljedica (redom) napomene~\ref{nap:kvantSc}, propozicije~\ref{prop:kompl} i leme~\ref{lm:brojrek}.
+\begin{equation}\label{eq:muHprn}
+  \bigl(\mu y<\f H(\vec x)\bigr)\f R(\vec x,y) =
+  \bigl(\num y<\f H(\vec x)\bigr)(\nexists i\le y)\f R(\vec x,i)\text,
+\end{equation}
+pa je $\f F$ primitivno rekurzivna po napomeni~\ref{nap:kvantSc}, propoziciji~\ref{prop:kompl} i lemi~\ref{lm:brojrek}.
 
 Prvo, ako ne postoji $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, tada na lijevoj strani stoji $\f H(\vec x)$ po napomeni~\ref{nap:min=H}. S druge strane, za sve $y<\f H(\vec x)$, svaki $i\le y$ je također manji od $\f H(\vec x)$, pa ni za koji od njih ne vrijedi $\f R(\vec x,i)$. Dakle $(\nexists i\le y)\f R(\vec x,i)$ je uvijek istina, pa je desna strana jednaka $\bigl(\num y<\f H(\vec x)\bigr)\top$, što je također jednako $\f H(\vec x)$.
     
-Ako pak postoji neki $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, najmanji takav označimo s $y_0$. Tada je vrijednost lijeve strane upravo $y_0$. Kako je $y_0$ najmanji broj takav da vrijedi $\f R(\vec x,y_0)$, $(\nexists i\le y)\f R(\vec x,i)$ je još uvijek istina za sve $y<y_0$. Također, za sve $y\ge y_0$, ta relacija \emph{nije} istinita, jer uvijek možemo uzeti $i:=y_0$ kao kontraprimjer. Dakle svi oni $y$ za koje vrijedi $(\nexists i\le y)\f R(\vec x,i)$ su upravo svi oni manji od $y_0$, a na desnoj strani piše njihov broj, koji je također $y_0$.
+	Ako pak postoji neki $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, najmanji takav (vrijednost lijeve strane) označimo s $y_0$. Tada $(\nexists i\le y)\f R(\vec x,i)$ vrijedi za sve $y<y_0$. Također, za sve $y\ge y_0$ to \emph{ne} vrijedi: uvijek možemo uzeti $i:=y_0$ kao kontraprimjer. Dakle svi $y$ za koje vrijedi $(\nexists i\le y)\f R(\vec x,i)$ su upravo svi oni manji od $y_0$, a na desnoj strani piše njihov broj, koji je također $y_0$.
 \end{proof}
-U iskazu ove propozicije nismo trebali stavljati riječ "primitivno" u zagrade, jer tvrdnja čitana bez riječi "primitivno" slijedi iz napomene~\ref{nap:min=H}.
+%U iskazu ove propozicije nismo trebali stavljati riječ "primitivno" u zagrade, jer tvrdnja čitana bez riječi "primitivno" slijedi iz napomene~\ref{nap:min=H}.
 
 \begin{napomena}[{name=[uključena gornja granica ograničene minimizacije]}]\label{nap:muSc}
 Ista napomena o uključenoj gornjoj granici, poput~\ref{nap:kvantSc}, vrijedi i ovdje:
