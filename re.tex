@@ -6,7 +6,7 @@ Vidjeli smo već nekoliko puta da domena izračunljive funkcije ne mora biti izr
 
 Pokušajmo ustanoviti što bi bio pandan parcijalnim funkcijama za relacije. Tražiti "parcijalnu karakterističnu funkciju" kao funkciju iz $\N$ u $bool$ je vjerojatno preslabo: korisnost parcijalno rekurzivnih funkcija je u tome što iako nisu definirane svuda, tamo gdje jesu definirane mogu poprimiti proizvoljne vrijednosti. Kad bismo čak i u slučaju da je funkcija definirana mogli dobiti samo jedan bit informacije, imali bismo tri moguća ishoda ($\mathit{true}$, $\mathit{false}$ i "ne znam") koji bi odgovarali četirima mogućim situacijama (u slučaju izostanka izlaza, ulaz i dalje može biti ili ne biti u skupu). Odnosno, parcijalna karakteristična funkcija nije jednoznačno određena skupom.
 
-Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan i možemo zamišljati da je $\mathit{true}$, iako ćemo vidjeti u jednom trenutku da će biti korisno pretpostaviti da je zapravo $0$. Ono što jest bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Upravo napisanu ideju možemo formalizirati koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi} te dijagram~\eqref{dia:alg}.
+Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan: iz leme o restrikciji slijedit će da može biti propisan bilo kojom izračunljivom funkcijom. Ono što jest bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Upravo napisanu ideju možemo formalizirati koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi} te dijagram~\eqref{dia:alg}.
 
 \begin{definicija}[{name=[rekurzivna prebrojivost]}]\label{def:re}
 Neka je $k\in\N_+$. Za brojevnu relaciju $R^k$ kažemo da je \emph{rekurzivno prebrojiva} ako postoji $\f F\in\mathscr Comp_k$ takva da je $R=\dom{\f F}$.
@@ -21,25 +21,27 @@ Za početak pokažimo da intuicija "poluodlučivosti" doista smješta rekurzivno
 \begin{propozicija}[{name=[rekurzivna prebrojivost rekurzivnih relacija]}]\label{pp:rekire}
 Svaka rekurzivna relacija je rekurzivno prebrojiva.
 \end{propozicija}
-Ako imamo rekurzivnu karakterističnu funkciju, trebamo "zaboraviti" vrijednosti $0$ (ukloniti tu prasliku iz domene) i ostaviti samo vrijednosti $1$ --- drugim riječima, restringirati $\chi_{\f R}$ na $\f R$.
+Ako imamo rekurzivnu karakterističnu funkciju, trebamo "zaboraviti" vrijednosti~$0$ (ukloniti tu prasliku iz domene) i ostaviti samo vrijednosti $1$ --- drugim riječima, restringirati $\chi_{\f R}$ na $\f R$.
 \begin{proof}
-Neka je $k\in\N$ te $\f R^k$ rekurzivna relacija. Tada je prema korolaru~\ref{kor:restrprek}, $\chi_{\f R}|_{\f R}$ parcijalno rekurzivna, a $\dom{\chi_{\f R}|_{\f R}}=\dom{\chi_{\f R}}\cap\f R=\N^k\cap\f R=\f R$.
+Neka je $k\in\N$ te $\f R^k$ rekurzivna relacija. Tada je $\chi_{\f R}|_{\f R}$ parcijalno rekurzivna prema korolaru~\ref{kor:restrprek}, a $\dom{\chi_{\f R}|_{\f R}}=\dom{\chi_{\f R}}\cap\f R=\N^k\cap\f R=\f R$.
 \end{proof}
 
-No kad već pričamo o restrikciji, funkcija koju restringiramo je nebitna: s bilo kojom rekurzivnom funkcijom dobit ćemo istu domenu. Ponekad je zgodno fiksirati njene vrijednosti na $0$ --- usporedite s napomenom~\ref{nap:re0}.
-
-\begin{korolar}[{name=[za rekurzivno prebrojive domene vrijednosti funkcije nisu bitne]}]\label{kor:redom0im}
-Relacija je rekurzivno prebrojiva ako i samo ako je domena neke parcijalno rekurzivne funkcije koja ne poprima pozitivne vrijednosti.
-\end{korolar}
-
-(Ne možemo reći "poprima samo vrijednost $0$", jer prazna relacija je domena samo prazne funkcije, koja ne poprima nikakve vrijednosti.)
-
-\begin{proof}
-    Smjer ($\Leftarrow$) je trivijalan. Za smjer ($\Rightarrow$), neka je $R=\dom{\f F}$ rekurzivno prebrojiva. Prema korolaru~\ref{kor:comptot}, $\dom{\f Z\,\circ\,\f F}=\dom{\f F}=R$, a funkcija $\f Z\mathrel{\raisebox{1pt}{$\circ$}}\f F$ je parcijalno rekurzivna i ne poprima pozitivne vrijednosti.
-\end{proof}
+%No kad već pričamo o restrikciji, funkcija koju restringiramo je nebitna: s bilo kojom rekurzivnom funkcijom dobit ćemo istu domenu. Ponekad je zgodno fiksirati njene vrijednosti na $0$ --- usporedite s napomenom~\ref{nap:re0}.
+%
+%\begin{korolar}[{name=[za rekurzivno prebrojive domene vrijednosti funkcije nisu bitne]}]\label{kor:redom0im}
+%Relacija je rekurzivno prebrojiva ako i samo ako je domena neke parcijalno rekurzivne funkcije koja ne poprima pozitivne vrijednosti.
+%\end{korolar}
+%
+%(Ne možemo reći "poprima samo vrijednost $0$", jer prazna relacija je domena samo prazne funkcije, koja ne poprima nikakve vrijednosti.)
+%
+%\begin{proof}
+    %Smjer ($\Leftarrow$) je trivijalan. Za smjer ($\Rightarrow$), neka je $R=\dom{\f F}$ rekurzivno prebrojiva. Prema korolaru~\ref{kor:comptot}, $\dom{\f Z\,\circ\,\f F}=\dom{\f F}=R$, a funkcija $\f Z\mathrel{\raisebox{1pt}{$\circ$}}\f F$ je parcijalno rekurzivna i ne poprima pozitivne vrijednosti.
+%\end{proof}
 
 \begin{lema}[{name=[svedivost čuva rekurzivnu prebrojivost]}]\label{lm:re<re}
-Neka su $k,l\in\N_+$ te $R^k$ i $P^l$ relacije takve da je $R\preceq P$. Ako je $P$ rekurzivno prebrojiva, tada je i $R$ takva.
+Neka su $k,l\in\N_+$ te $R^k$ i $P^l$ relacije takve da je $R\preceq P$.
+
+	Ako je $P$ rekurzivno prebrojiva, tada je i $R$ takva.
 \end{lema}
 \begin{proof}
     Po definiciji~\ref{def:re} $P=\dom{\f H}$ za neku parcijalno rekurzivnu funkciju $\f H^l$, a po definiciji~\ref{def:svod} postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_l^k$ takve da je $\chi_R=\chi_P\circ(\f G_1,\dotsc,\f G_l)$. Sada označimo $\f F:=\f H\circ(\f G_1,\dotsc,\f G_l)$ --- to je parcijalno rekurzivna funkcija kao kompozicija parcijalno rekurzivnih. No kako su sve $\f G_i$ rekurzivne, dakle totalne, formula~\eqref{eq:domkomp} daje
@@ -59,39 +61,46 @@ Obrat propozicije~\ref{pp:rekire} ne vrijedi --- kanonski kontraprimjer je Kleen
 
 Dakle, skup rekurzivnih relacija je pravi podskup skupa rekurzivno prebrojivih relacija, koji je pak pravi podskup skupa svih relacija --- što se može vidjeti kardinalnim argumentom, kao u korolaru~\ref{kor:exneizrk}. Svakoj parcijalno rekurzivnoj funkciji odgovara jedinstvena domena, a svakom prirodnom broju $e$ odgovara jedinstvena parcijalno rekurzivna $k$-mjesna funkcija $\kf e^k$, dakle rekurzivno prebrojivih relacija ima prebrojivo mnogo --- dok svih brojevnih relacija ima $\card\bigl(\bigcup_{k\in\N_+}\!\mathcal P(\N^k)\bigr)=\aleph_0\cdot2^{\aleph_0}=\mathfrak c>\aleph_0$.
 
-Koristeći kompoziciju s nekom totalnom "\!vanjskom" funkcijom po lemi~\ref{lm:comptot} možemo dobiti zatvorenost na presjeke. Svejedno je koju funkciju upotrijebimo kao vanjsku (može biti i inicijalna $\f I_1^l$), ali simetrije radi uzmimo $\f{add}^l$.
+%Koristeći kompoziciju s bilo kojom totalnom "\!vanjskom" funkcijom po lemi~\ref{lm:comptot} možemo dobiti zatvorenost na presjeke. %Svejedno je koju funkciju upotrijebimo kao vanjsku (može biti i inicijalna $\f I_1^l$), ali simetrije radi uzmimo $\f{add}^l$.
+
+Poopćimo sada napomenu~\ref{nap:restrprek} na rekurzivno prebrojive relacije.
+
+\begin{lema}[Lema o restrikciji]\label{lm:restre}
+Neka je $k\in\N_+$, $\f G^k$ parcijalno rekurzivna funkcija te $R^k$ rekurzivno prebrojiva relacija. Tada je restrikcija $\f G|_R$ također parcijalno rekurzivna.
+\end{lema}
+\begin{proof}
+	Po definiciji~\ref{def:re} postoji parcijalno rekurzivna funkcija $\f F^k$ takva da je $\dom{\f F}=R$. Tvrdimo da je $\f G|_R=\f I_2^2\circ(\f F,\f G)$. Doista, domene su im jednake $R\cap\dom{\f G}$ po lemi~\ref{lm:comptot}, a na toj zajedničkoj domeni vrijednosti su im jednake vrijednostima funkcije $\f G$.
+%Po korolaru~\ref{kor:redom0im} postoji parcijalno rekurzivna funkcija $\f G$ takva da je $R=\dom{\f G}$ i $\im{\f G}\subseteq\{0\}$. Tvrdimo da je tada $\f F|_R=\f F+\f G$. Doista, po lemi~\ref{lm:comptot} je
+%\begin{equation}
+%\dom{\f F+\f G}=\dom{\f F}\cap\dom{\f G}=\dom{\f F}\cap R=\dom{\f F|_R}\text,
+%\end{equation}
+%te za svaki $\vec x$ iz te zajedničke domene vrijedi $(\f F+\f G)(\vec x)=\f F(\vec x)+\f G(\vec x)=\f F(\vec x)$, jer je $\f G(\vec x)=0$. Dakle, $\f F|_R=\f{add}^2\circ(\f F,\f G)$ je parcijalno rekurzivna kao kompozicija takvih.
+\end{proof}
+Funkcija $\f I_2^2$ u dokazu igra istu ulogu kao operator \texttt, u jeziku C: izračuna oba operanda i vraća drugi ako oba imaju smisla.
 
 \begin{propozicija}[{name=[rekurzivna prebrojivost presjeka rekurzivno prebrojivih]}]\label{pp:prlre}
-Neka su $k,l\in\N_+$ te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije. Tada je $\bigcap_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
+Neka je $k\in\N_+$ te $P^k$ i $R^k$ rekurzivno prebrojive relacije.
+	
+	Tada je $P\cap R$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
-Po definiciji, postoje parcijalno rekurzivne funkcije $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ takve da je za svaki $i\in[1\dd l]$, $R_i=\dom{\f G_i}$. Funkcija $\f F:=\f G_1+\dotsb+\f G_l=\f{add}^l\circ(\f G_1,\dotsc,\f G_l)$ je parcijalno rekurzivna kao kompozicija parcijalno rekurzivnih, a njena domena je
-\begin{equation}
-    \dom{\f F}=\bigcap_{i=1}^l\dom{\f G_i}=\bigcap_{i=1}^l R_i
-\end{equation}
-po lemi~\ref{lm:comptot}, dakle to je rekurzivno prebrojiv skup.
+	Po definiciji~\ref{def:re} postoji parcijalno rekurzivna funkcija $\f F$ takva da je $\dom{\f F}=P$. Po lemi~\ref{lm:restre} je $\f F|_R$ također parcijalno rekurzivna, s domenom $\dom{\f F}\cap R=P\cap R$.
+%Po definiciji, postoje parcijalno rekurzivne funkcije $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ takve da je za svaki $i\in[1\dd l]$, $R_i=\dom{\f G_i}$. Funkcija $\f F:=\f G_1+\dotsb+\f G_l=\f{add}^l\circ(\f G_1,\dotsc,\f G_l)$ je parcijalno rekurzivna kao kompozicija parcijalno rekurzivnih, a njena domena je
+%\begin{equation}
+    %\dom{\f F}=\bigcap_{i=1}^l\dom{\f G_i}=\bigcap_{i=1}^l R_i
+%\end{equation}
+%po lemi~\ref{lm:comptot}, dakle to je rekurzivno prebrojiv skup.
 \end{proof}
 
-Tehnički, zahtjev da su sve relacije iste mjesnosti zapravo nije bitan: ako nisu, presjek je prazan (jer su $\N^k$ i $\N^l$ disjunktni za $k\ne l$), pa je sigurno rekurzivno prebrojiv kao domena prazne funkcije. Isto vrijedi za idući korolar ($\f f^k|_{R^l}=\varnothing$ za $k\ne l$). Ipak, nastavit ćemo promatrati prazne relacije i funkcije odvojeno po različitim mjesnostima, kao što smo i dosada činili.
+Tehnički, zahtjev da su relacije iste mjesnosti zapravo nije bitan: ako nisu, presjek je prazan (jer su $\N^k$ i $\N^l$ disjunktni za $k\ne l$), pa je sigurno rekurzivno prebrojiv kao domena prazne funkcije. Isto vrijedi za lemu o restrikciji ($\f G^k|_{R^l}=\varnothing$ za $k\ne l$). Ipak, nastavit ćemo promatrati prazne relacije i funkcije odvojeno po različitim mjesnostima, kao što smo i dosada činili.
 
-Sličnim trikom možemo pokazati da restringiranjem na rekurzivno prebrojiv skup čuvamo izračunljivost --- samo tada moramo paziti i na vrijednosti funkcije na čiju domenu restringiramo. Ideju smo vidjeli u napomeni~\ref{nap:restrprek}.
-
-\begin{korolar}[{name=[teorem o restrikciji]}]\label{kor:restre}
-Neka je $k\in\N_+$, $\f F^k$ parcijalno rekurzivna funkcija te $R^k$ rekurzivno prebrojiva relacija. Tada je i restrikcija $\f F|_R$ također parcijalno rekurzivna.
-\end{korolar}
-\begin{proof}
-Po korolaru~\ref{kor:redom0im} postoji parcijalno rekurzivna funkcija $\f G$ takva da je $R=\dom{\f G}$ i $\im{\f G}\subseteq\{0\}$. Tvrdimo da je tada $\f F|_R=\f F+\f G$. Doista, po lemi~\ref{lm:comptot} je
-\begin{equation}
-\dom{\f F+\f G}=\dom{\f F}\cap\dom{\f G}=\dom{\f F}\cap R=\dom{\f F|_R}\text,
-\end{equation}
-te za svaki $\vec x$ iz te zajedničke domene vrijedi $(\f F+\f G)(\vec x)=\f F(\vec x)+\f G(\vec x)=\f F(\vec x)$, jer je $\f G(\vec x)=0$. Dakle, $\f F|_R=\f{add}^2\circ(\f F,\f G)$ je parcijalno rekurzivna kao kompozicija takvih.
-\end{proof}
-
-Dokazali smo zatvorenost skupa svih rekurzivno prebrojivih relacija (iste mjesnosti) na konačne presjeke. Što je sa zatvorenošću na konačne unije? Tu marljiva evaluacija nije pogodna. Ipak, pokazat ćemo da rekurzivno prebrojive relacije možemo gledati i na malo drugačiji "dualni" način, u kojem će unije biti vrlo prirodne.
+%Sličnim trikom možemo pokazati da restringiranjem na rekurzivno prebrojiv skup čuvamo izračunljivost --- samo tada moramo paziti i na vrijednosti funkcije na čiju domenu restringiramo. Ideju smo vidjeli u napomeni~\ref{nap:restrprek}.
 
 \section{Karakterizacija preko projekcije}
 
-U još jednom kontekstu smo vidjeli poluodlučivost: projekcija izračunljive relacije $\exists_*\f R$ ne mora biti izračunljiva, ali ako je $\vec x\in\exists_*\f R$, tada to možemo ustanoviti isprobavanjem, za sve $y\in\N$ redom, vrijedi li $\f R(\vec x,y)$. Te dvije formalizacije (zapravo \emph{tri} formalizacije, jer je svejedno formaliziramo li izračunljivost projicirane relacije kao primitivnu rekurzivnost ili kao rekurzivnost) su ekvivalentne.
+Dokazali smo zatvorenost skupa svih rekurzivno prebrojivih relacija (iste mjesnosti) na presjeke (dviju relacija, ali lako bi se indukcijom dokazalo i za proizvoljno konačno mnogo relacija). Što je sa zatvorenošću na unije? Tu marljiva evaluacija nije pogodna. Ipak, pokazat ćemo da rekurzivno prebrojive relacije možemo gledati i na malo drugačiji "dualni" način, u kojem će unije biti vrlo prirodne.
+
+U još jednom kontekstu smo susreli poluodlučivost: projekcija izračunljive relacije $\exists_*\f R$ ne mora biti izračunljiva, ali ako je $\vec x\in\exists_*\f R$, tada to možemo ustanoviti isprobavanjem, za sve $y\in\N$ redom, vrijedi li $\f R(\vec x,y)$. Te dvije formalizacije poluodlučivosti (zapravo \emph{tri} formalizacije, jer je svejedno formaliziramo li izračunljivost projicirane relacije kao primitivnu rekurzivnost ili kao rekurzivnost) su ekvivalentne.
 
 \begin{teorem}[{name=[projekcijska karakterizacija rekurzivno prebrojivih relacija]}]\label{tm:rpeproj}
 Neka je $R$ brojevna relacija. Tada su sljedeće tvrdnje ekvivalentne:
@@ -137,7 +146,7 @@ Projekcijska karakterizacija kaže da je ulaz $\vec x$ u domeni funkcije koju (R
 \end{multline}
 odgovara paralelnom pokretanju dva RAM-programa $P$ i $Q$ s istim ulaznim podacima $\vec x$ te čekanju dok jedan od njih ne stane. Efektivno, prvo pitamo za $n=0$ vrijedi li desna strana u~\eqref{eq:parallel}, odnosno je li ikoje od ta dva izračunavanja već na početku u završnoj konfiguraciji. Ako nije, pitamo istu stvar za $n=1$: je li ikoje od tih izračunavanja nakon jednog koraka u završnoj konfiguraciji. Ako nije, pustimo ih još jedan korak ($n=2$) i tako dalje. Jedini način da taj algoritam radi beskonačno dugo s $\vec x$, je da ni $P$-izračunavanje s $\vec x$ ni $Q$-izračunavanje s $\vec x$ ne stanu. Pritom je ključno da se radi o RAM-programima, gdje svaki korak mora završiti u konačnom vremenu.
 
-\subsection{Kontrakcija relacije}
+\subsection{Kontrakcija}
 
 Još jedan način gledanja na~\eqref{eq:parallel} je da smo poredali sve testove $\f{Final}(\kr{\vec x},\kprog P,0)$, $\f{Final}(\kr{\vec x},\kprog Q,0)$, $\f{Final}(\kr{\vec x},\kprog P,1)$, $\f{Final}(\kr{\vec x},\kprog Q,1)$,
 $\f{Final}(\kr{\vec x},\kprog P,2)$,~\ldots\ u niz tako da svaki dođe na red (svi početni komadi su konačni). Drugim riječima, imamo izračunljivu bijekciju između $\N+\N=\N\times\{0,1\}\cong\N\times bool$ i $\N$.
@@ -147,7 +156,7 @@ $\f{Final}(\kr{\vec x},\kprog P,2)$,~\ldots\ u niz tako da svaki dođe na red (s
 Na prvi pogled, treba nam izračunljiva bijekcija između $\N^2$ i $\N$, s izračunljivim inverzom (tzv.\ \emph{pairing function}), ali pokazat će se da je injekcija dovoljna. Drugim riječima, samo nam treba neko kodiranje $\N^2$. Napravili smo dva: $\f{Code}^2$ i $\f{bin}^2$. Zaista je svejedno koje od njih (ili neko treće) koristimo, pa možemo to uobličiti kao sučelje (\emph{interface}) za neki apstraktni tip podataka (\texttt{std::pair<unsigned,unsigned>}).
 
 \begin{lema}[{name=[primitivna rekurzivnost kodiranja i dekodiranja parova brojeva]}]\label{lm:pairfstsndprn}
-Postoje primitivno rekurzivne funkcije $\f{pair}^2$, $\f{fst}^1$ i $\f{snd}^1$, takve da je $\f{fst}\circ\f{pair}=\f I_1^2$ i $\f{snd}\circ\f{pair}=\f I_2^2$.
+Postoje primitivno rekurzivne funkcije $\f{pair}^2$, $\f{fst}^1$ i $\f{snd}^1$,\\ takve da je $\f{fst}\circ\f{pair}=\f I_1^2$ i $\f{snd}\circ\f{pair}=\f I_2^2$.
 \end{lema}
 Točkovno, za sve $x,y\in\N$ vrijedi $\f{fst}\bigl(\f{pair}(x,y)\bigr)=x\land\f{snd}\bigl(\f{pair}(x,y)\bigr)=y$.
 \begin{proof}[Prva implementacija]
@@ -228,7 +237,7 @@ budući da je po lemi~\ref{lm:pairfstsndprn} $\f{fst}\bigl(\f{pair}(y,z)\bigr)=y
 Štoviše, jer su "vezne funkcije" primitivno rekurzivne, vrijedi da je $P$ primitivno rekurzivna ako i samo ako je $\hat P$ primitivno rekurzivna. Ali to nam neće bitno trebati.
 \end{napomena}
 
-\subsection{Kontrakcija kvantifikatora}
+%\subsection{Kontrakcija kvantifikatora}
 
 Sada možemo i formalno dokazati da je više projekcija jednako izračunljivo kao i jedna --- jer dvije projekcije su kao jedna projekcija kontrahirane relacije. Intuitivno, recimo za tromjesne rekurzivne relacije, ispitujemo postoje li $y$ i $z$ takvi da vrijedi $\f R(x,y,z)$, tako da parove $(y,z)$ poredamo prema funkciji $\f{pair}$ (npr.\ po sporednim dijagonalama), kako bismo bili sigurni da će svaki doći na red.
 
@@ -255,7 +264,7 @@ Neka je $k\ge2$ te $R^k$ rekurzivno prebrojiva relacija. Po teoremu~\ref{tm:rpep
 \end{proof}
 
 \begin{korolar}[{name=[višestruka projekcija čuva rekurzivnu prebrojivost]}]\label{kor:projre}
-Neka su $k,l\in\N_+$ te $R^{k+l}$ rekurzivno prebrojiva relacija. Tada je i relacija $Q^k$, zadana s $Q(\vec x):\Longleftrightarrow(\exists\vec y\in\N^l)R(\vec x,\vec y)$, također rekurzivno prebrojiva.
+Neka su $k,l\in\N_+$ te $R^{k+l}$ rekurzivno prebrojiva relacija. Tada je relacija $Q^k$, zadana s $Q(\vec x):\Longleftrightarrow(\exists\vec y\in\N^l)R(\vec x,\vec y)$, također rekurzivno prebrojiva.
 \end{korolar}
 \begin{proof}
 %Indukcijom po $l$. Baza: za $l=1$, to je upravo propozicija~\ref{pp:projre}. %Pretpostavimo sada da za $l=m$, za sve $k'\in\N_+$ i za sve rekurzivno prebrojive relacije $R'$ mjesnosti $k'+m$ vrijedi: relacija zadana s $Q'(\vec x^{k'}):\Longleftrightarrow(\exists\vec y'\!\in\N^m)R'(\vec x,\vec y')$ je rekurzivno prebrojiva.
@@ -302,7 +311,7 @@ Sada zaključujemo ovako: za fiksni $e$, relacija zadana s
 je primitivno rekurzivna po propoziciji~\ref{prop:vezn}, kao konjunkcija dvije primitivno rekurzivne relacije. Tada je po~\eqref{eq:Grafproj} $\graf{\f F}=\exists_*\f R$, rekurzivno prebrojiva po teoremu~\ref{tm:rpeproj}.
 \end{proof}
 
-%\subsection{Selekcija}
+\subsection{Selekcija}
 
 Sljedeći veliki zalogaj je dokazati obrat teorema~\ref{tm:grafprre}. Kod teorema za totalne funkcije koristili smo minimizaciju: po~\eqref{eq:mugraf}, funkcija je jednaka minimizaciji svog grafa. To vrijedi za sve funkcije (čak i za neizračunljive), ali neće nam pomoći ako je graf samo poluodlučiv: skup rekurzivno prebrojivih relacija nije zatvoren na minimizaciju (što bi to uopće značilo?), a i intuitivno, minimizacija poluodlučive relacije ne mora biti izračunljiva.
 
@@ -397,17 +406,17 @@ Za smjer ($\Leftarrow$), neka je $\graf F$ rekurzivno prebrojiv. Prema lemi~\ref
 
 \subsection{Primjene teorema o grafu}
 
-Jedna posljedica teorema o grafu je generalizacija propozicije~\ref{prop:konprom} na parcijalne funkcije. Tamo smo vidjeli da možemo uzeti izračunljivu totalnu funkciju i promijeniti joj konačno mnogo vrijednosti, ne kvareći njenu izračunljivost. Bilo je ključno da tako dobivena funkcija također bude totalna.
+Jedna posljedica teorema o grafu je poopćenje propozicije~\ref{prop:konprom} na parcijalne funkcije. Tamo smo vidjeli da možemo uzeti izračunljivu totalnu funkciju i promijeniti joj konačno mnogo vrijednosti, ne kvareći njenu izračunljivost. Bilo je ključno da tako dobivena funkcija također bude totalna.
 
 Što ako bismo smjeli \emph{uklanjati} točke iz domene po volji? \emph{Dodavanje} točaka je neizvedivo za totalne funkcije, ali ako je polazna funkcija parcijalna, možemo i to. Hoćemo li time pokvariti izračunljivost? Pokazuje se da nećemo, ako napravimo konačno mnogo takvih promjena.
 
-Prvo dokažimo nekoliko lema koje govore o skupovnim operacijama koje čuvaju parcijalnu rekurzivnost. Za unije i presjeke smo to već vidjeli (propozicije~\ref{pp:unlre} i~\ref{pp:prlre}), vrijeme je da se pozabavimo razlikama. Napomenimo samo da općenito skupovna razlika dvije rekurzivno prebrojive relacije nije rekurzivno prebrojiva, jer \emph{komplement} kao specijalni slučaj razlike ($(R^k)\kompl=\N^k\setminus R$) ne čuva rekurzivnu prebrojivost. Detaljnije ćemo vidjeti što se tu zbiva kad dokažemo Postov teorem.
+Prvo dokažimo nekoliko lema koje govore o skupovnim operacijama koje čuvaju parcijalnu rekurzivnost. Za unije i presjeke smo to već vidjeli (propozicije~\ref{pp:unlre} i~\ref{pp:prlre}), vrijeme je da se pozabavimo razlikama. Napomenimo samo da općenito skupovna razlika dvije rekurzivno prebrojive relacije nije rekurzivno prebrojiva, jer \emph{komplement} kao specijalni slučaj razlike ($(R^k)\kompl=\N^k\setminus R$\,) ne čuva rekurzivnu prebrojivost. Detaljnije ćemo vidjeti što se tu zbiva kad dokažemo Postov teorem.
 
 \begin{lema}[{name=[rekurzivna prebrojivost razlike s rekurzivnom relacijom]}]\label{lm:re-rek}
 Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija te $\f R$ rekurzivna relacija. Tada je $P\setminus\f R$ također rekurzivno prebrojiva.
 \end{lema}
 \begin{proof}
-    Znamo iz teorije skupova (uz $\N^k$ kao univerzalni skup) da je $P\setminus\f R=P\cap\f R\kompl$. Sada je po propoziciji~\ref{prop:kompl}, $\f R\kompl$ rekurzivna, pa je po propoziciji~\ref{pp:rekire} rekurzivno prebrojiva --- a onda tvrdnja slijedi po propoziciji~\ref{pp:prlre} ($l=2$).
+    Znamo iz teorije skupova (uz $\N^k$ kao univerzalni skup) da je $P\setminus\f R=P\cap\f R\kompl$. Sada je po propoziciji~\ref{prop:kompl}, $\f R\kompl$ rekurzivna, pa je po propoziciji~\ref{pp:rekire} rekurzivno prebrojiva --- a onda tvrdnja slijedi po propoziciji~\ref{pp:prlre}.
 \end{proof}
 
 Za \emph{simetričnu} razliku, više nije dovoljno zahtijevati da $\f R$ bude rekurzivna, pa čak ni primitivno rekurzivna --- isti kontraprimjer, zapisan u obliku $(R^k)\kompl=R\mathbin\triangle\N^k$, funkcionira. Ali ako je $\f R$ \emph{konačna}, dokaz prolazi.
@@ -445,7 +454,7 @@ Na operacijskom sustavu UNIX (i mnogim srodnim sustavima) postoji sistemski pozi
 Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u parovima disjunktne rekurzivno prebrojive relacije, sve iste mjesnosti.\newline Tada je i funkcija $\f F:=\IF{R_1:\f G_1,R_2:\f G_2,\dots,R_l:\f G_l}$ također parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
-Prvo, osigurajmo da nijedna grana nije definirana izvan svog uvjeta. Dakle, za svaki $i\in[1\dd l]$ definiramo $\f H_i:=\f G_i|_{R_i}$. Svaka $\f H_i$ je parcijalno rekurzivna po korolaru~\ref{kor:restre}, i vrijedi $\f F=\IF{\dom{\f H_1}\!:\f H_1,\dom{\f H_2}\!:\f H_2,\dots,\dom{\f H_l}\!:\f H_l}$. Doista, domene su im iste: $\bdcup_{i=1}^l\dom{\f H_i}\!=\bdcup_{i=1}^l(\dom{\f G_i}\cap R_i)$; i za svaki $\vec x$ iz te domene postoji jedinstveni $j\in[1\dd l]$ takav da je $\vec x\in\dom{\f H_{j}}$, pa je $\f F(\vec x)=\f G_{j}(\vec x)=\f H_{j}(\vec x)$.
+Prvo, osigurajmo da nijedna grana nije definirana izvan svog uvjeta. Dakle, za svaki $i\in[1\dd l]$ definiramo $\f H_i:=\f G_i|_{R_i}$. Svaka $\f H_i$ je parcijalno rekurzivna po lemi~\ref{lm:restre}, i vrijedi $\f F=\IF{\dom{\f H_1}\!:\f H_1,\dom{\f H_2}\!:\f H_2,\dots,\dom{\f H_l}\!:\f H_l}$. Doista, domene su im iste: $\bdcup_{i=1}^l\dom{\f H_i}\!=\bdcup_{i=1}^l(\dom{\f G_i}\cap R_i)$; i za svaki $\vec x$ iz te domene postoji jedinstveni $j\in[1\dd l]$ takav da je $\vec x\in\dom{\f H_{j}}$, pa je $\f F(\vec x)=\f G_{j}(\vec x)=\f H_{j}(\vec x)$.
 
 Drugo, dokažimo
 \begin{equation}

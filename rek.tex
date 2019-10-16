@@ -355,7 +355,7 @@ Po definiciji~\ref{def:prn}, koristeći korolar~\ref{kor:initram} te leme~\ref{l
 
 \subsection{Primjeri primitivno rekurzivnih funkcija i relacija}
 
-Već smo vidjeli simboličke definicije od $\f{add}^2$ i $\f{mul}^2$, što prema propoziciji~\ref{prop:symbdef} znači da su one primitivno rekurzivne. Sada ćemo vidjeti još brojne druge primjere. Prvo generalizirajmo primjer~\ref{pr:C23}.
+Već smo vidjeli simboličke definicije od $\f{add}^2$ i $\f{mul}^2$, što prema propoziciji~\ref{prop:symbdef} znači da su one primitivno rekurzivne. Sada ćemo vidjeti još brojne druge primjere. Prvo poopćimo primjer~\ref{pr:C23}.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost konstantnih funkcija]}]\label{prop:konst}
 Za sve $n\in\N$ i za sve $k\in\N_+$, konstantna funkcija $\f C_n^k$, zadana s $\f C_n^k(\vec x):=n$, primitivno je rekurzivna.
@@ -363,12 +363,12 @@ Za sve $n\in\N$ i za sve $k\in\N_+$, konstantna funkcija $\f C_n^k$, zadana s $\
 \begin{proof}
 Fiksirajmo $k\in\N_+$, i dokažimo tvrdnju "sve $\f C_n^k$ su primitivno rekurzivne", indukcijom po $n$. Baza: $\f C_0^k=\f Z\circ\f I_1^k$ je simbolička definicija od $\f C_0^k$. Doista,
 \begin{equation}
-    (\f Z\circ\f I_1^k)(\vec x)=\f Z\bigl(\f I_1^k(\vec x)\bigr)=\f Z(x_1)=0=\f C_0^k(\vec x)\text.
+    (\f Z\circ\f I_1^k)(\vec x)=\f Z\bigl(\f I_1^k(\vec x)\bigr)=\f Z(x_1\!)=0=\f C_0^k(\vec x)\text.
 \end{equation}
 To znači da je $\f C_0^k$ dobivena iz dvije inicijalne funkcije kompozicijom, pa je primitivno rekurzivna (po propoziciji~\ref{prop:symbdef}, na koju se više nećemo eksplicitno pozivati).
 
 Pretpostavka: pretpostavimo da je $\f C_m^k$ primitivno rekurzivna, za neki $m\in\N$. 
-Korak: tvrdimo da je $\f C_{m+1}^k=\f{Sc}\circ\f C_m^k$ simbolička definicija od $\f C_{m+1}^k$. Doista,
+Korak: tvrdimo da je $\f C_{m+1}^k\!=\f{Sc}\circ\f C_m^k$ simbolička definicija od $\f C_{m+1}^k$. Doista,
 \begin{equation}
     (\f{Sc}\circ\f C_m^k)(\vec x)=\f{Sc}\bigl(\f C_m^k(\vec x)\bigr)=\f{Sc}(m)=m+1=\f C_{m+1}^k(\vec x)\text.
 \end{equation}
@@ -523,7 +523,7 @@ Neka je $a\in\N$ i $\f H^2$ rekurzivna funkcija.
 	Po definiciji~\ref{def:F1prn} je $a\pr\f H^2=\bigl(\f C_a^1\pr\f H^2\circ(\f I_2^3,\f I_3^3)\bigr)\circ(\f Z,\f I_1^1)$ pa tvrdnja slijedi iz propozicije~\ref{prop:konst}, korolara~\ref{kor:prnrek} te lema~\ref{lm:comprek} i~\ref{lm:prrek}.
 \end{proof}
 
-Slično kao propoziciju~\ref{prop:symbdef}, mogli bismo dokazati da je funkcija parcijalno rekurzivna ako i samo ako je dobivena iz inicijalnih pomoću konačno mnogo primjena kompozicije, primitivne rekurzije (samo na totalne dobivene funkcije) i minimizacije (na relacije čije su karakteristične funkcije već dobivene). To bi bila neka generalizacija simboličke definicije za parcijalno rekurzivne funkcije. Ipak, najčešće ćemo pisati točkovne definicije parcijalno rekurzivnih funkcija --- a i Kleenejev teorem o normalnoj formi, koji ćemo dokazati kasnije, reći će da nam tolika općenitost nije potrebna: dovoljno je promatrati funkcije oblika $\f U\circ\mu\f T$, gdje su $\f U$ i $\f T$ primitivno rekurzivne.
+Slično kao propoziciju~\ref{prop:symbdef}, mogli bismo dokazati da je funkcija parcijalno rekurzivna ako i samo ako je dobivena iz inicijalnih pomoću konačno mnogo primjena kompozicije, primitivne rekurzije (samo na totalne dobivene funkcije) i minimizacije (na relacije čije su karakteristične funkcije već dobivene). To bi bilo poopćenje simboličke definicije za parcijalno rekurzivne funkcije. Ipak, najčešće ćemo pisati točkovne definicije parcijalno rekurzivnih funkcija --- a i Kleenejev teorem o normalnoj formi, koji ćemo dokazati kasnije, reći će da nam tolika općenitost nije potrebna: dovoljno je promatrati funkcije oblika $\f U\circ\mu\f T$, gdje su $\f U$ i $\f T$ primitivno rekurzivne.
 
 %Zapravo, imamo još mnogo toga za reći o primitivno rekurzivnim funkcijama; razlog zašto već sad uvodimo minimizaciju je što će se nekoliko rezultata vezanih uz definiciju po slučajevima moći jednako dokazati za primitivno rekurzivne i za rekurzivne funkcije --- a za rekurzivne funkcije će nam ti rezultati trebati kasnije, tako da ih nećemo morati ponovo dokazivati. Naime, dokazi će transformirati neke \emph{ulazne} funkcije u \emph{izlazne}, komponirajući ih s primitivno rekurzivnim funkcijama. Tada je jasno, s obzirom na to da je skup rekurzivnih funkcija zatvoren na kompoziciju (i primitivnu rekurziju) --- kao presjek dva takva skupa --- da ako ulazne funkcije budu primitivno rekurzivne, i izlazne će biti primitivno rekurzivne, a ako ulazne budu rekurzivne, i izlazne će biti rekurzivne.
 
@@ -625,7 +625,7 @@ ali ne možemo napisati odgovarajuću funkciju $If^3$ takvu da $f(\vec x,y):\sim
 Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija.\newline Tada je i relacija $(\f R\kompl)^k$, zadana s $\f R\kompl(\vec x)\Longleftrightarrow\lnot \f R(\vec x)$, također (primitivno) rekurzivna.
 \end{propozicija}
 
-Uočimo nekoliko važnih detalja u upravo iskazanoj propoziciji. Prvo, kako smo već rekli u uvodu, na $k$-mjesne relacije gledamo simultano kao na formule s $k$ slobodnih varijabli, i na skupove $k$-torki. Zato koristimo oznaku za skupovni komplement, dok u definiciji formulom koristimo logičku negaciju. U sljedećoj propoziciji to ćemo generalizirati na dvomjesne logičke veznike odnosno skupovne operacije.
+Uočimo nekoliko važnih detalja u upravo iskazanoj propoziciji. Prvo, kako smo već rekli u uvodu, na $k$-mjesne relacije gledamo simultano kao na formule s $k$ slobodnih varijabli, i na skupove $k$-torki. Zato koristimo oznaku za skupovni komplement, dok u definiciji formulom koristimo logičku negaciju. U sljedećoj propoziciji to ćemo koristiti za dvomjesne logičke veznike odnosno skupovne operacije.
 
 Drugo, mjesnost  $\f R\kompl$ smatramo istom kao mjesnost od $\f R$. Čak i u slučaju prazne relacije, $(\emptyset^k)\kompl=\N^k$ ("univerzalni skup"), u skladu s našom odlukom da prazne relacije različitih mjesnosti gledamo kao različite relacije (komplementi su im različiti).
 
@@ -638,7 +638,7 @@ Sada točkovna jednakost $\chi_{\f R\kompl}(\vec x)=1\dotminus\chi_{\f R}(\vec x
 Ako pak samo znamo da je $\chi_{\f R}$ rekurzivna, tada zaključujemo ovako: $f_0$ je rekurzivna prema korolaru~\ref{kor:prnrek}. Prema lemi~\ref{lm:comprek}, tada je i $\chi_{\f R\kompl}$ rekurzivna kao kompozicija dvije rekurzivne funkcije.
 \end{proof}
 
-Ubuduće ćemo samo napisati simboličku definiciju tražene funkcije iz zadanih funkcija, koristeći neke pomoćne primitivno rekurzivne funkcije te kompoziciju i eventualno primitivnu rekurziju. Podrazumijevat ćemo da na kraju dokaza uvijek imamo argumentaciju poput ove u prethodnom odlomku, tako da ako su zadane funkcije primitivno rekurzivne, tada je i tražena funkcija primitivno rekurzivna, a ako su zadane funkcije rekurzivne, tada je i tražena funkcija rekurzivna. Efektivno, imamo generalizaciju napomene~\ref{nap:symbdef}, gdje polazimo od rekurzivnih funkcija umjesto od primitivno rekurzivnih.
+Ubuduće ćemo samo napisati simboličku definiciju tražene funkcije iz zadanih funkcija, koristeći neke pomoćne primitivno rekurzivne funkcije te kompoziciju i eventualno primitivnu rekurziju. Podrazumijevat ćemo da na kraju dokaza uvijek imamo argumentaciju poput ove u prethodnom odlomku, tako da ako su zadane funkcije primitivno rekurzivne, tada je i tražena funkcija primitivno rekurzivna, a ako su zadane funkcije rekurzivne, tada je i tražena funkcija rekurzivna. Efektivno, imamo poopćenje napomene~\ref{nap:symbdef}, gdje polazimo od rekurzivnih funkcija umjesto od primitivno rekurzivnih.
 
 \begin{korolar}[{name=[primitivna rekurzivnost relacija nestrogog uređaja]}]\label{kor:mj-vj}
 Brojevne relacije nestrogog uređaja $\le$ i $\ge$ su primitivno rekurzivne.
