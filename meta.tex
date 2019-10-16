@@ -7,9 +7,11 @@ U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička j
 Kao što smo već nagovijestili, počet ćemo sa \emph{specijalizacijom}: načinom da u od\-re\-đe\-nom algoritmu fiksiramo određeni (zadnji) ulazni podatak na neki konkretni broj. Dosad smo vidjeli mnoge primjere specijalizacije:
 
 \begin{itemize}
-    \item Funkcija $\f{blh}$ iz leme~\ref{lm:blh} dobivena je specijalizacijom funkcije $\f{slh}$, fiksirajući njen zadnji (drugi) argument na $2$. Skraćeno kažemo da je $\f{blh}$ $2$-specijalizacija $\f{slh}$, i pišemo $\f{blh}=spec(2,\f{slh})$.
+    \item Funkcija $\f{blh}$ iz leme~\ref{lm:blh} dobivena je specijalizacijom funkcije $\f{slh}$, fiksirajući njen zadnji (drugi) argument na $2$.\\ Skraćeno kažemo da je $\f{blh}$ $2$-specijalizacija $\f{slh}$, i pišemo $\f{blh}=spec(2,\f{slh})$.
     \item Operacija $\conc{}$ je $12$-specijalizacija funkcije $\f{sconcat}$ (propozicija~\ref{pp:concprn}).
-    \item Općenito u primitivnoj rekurziji~\eqref{eq:defprb}, baza je zapravo $0$-specijalizacija definirane funkcije: $G=spec(0,G\pr H)$.
+    %\item Općenito u primitivnoj rekurziji~\eqref{eq:defprb}, baza je zapravo $0$-specijalizacija definirane funkcije: $G=spec(0,G\pr H)$.
+    \item Bazu primitivne rekurzije~\eqref{eq:defprb} možemo zapisati kao $spec(0,G\pr H)=G$.
+    \item Prema~\eqref{eq:resultdef}, $\f{result}=spec(0,\f{ex})$.
     \item Za svaki konkretni $e\in\N$ i $k\in\N_+$, funkcija $\kf e^k$ je $e$-specijalizacija funkcije $\f{comp}_k$.
     \item Baza $\f G_3$ za funkciju $\f{Tape}$ (lema~\ref{lm:StateHeadTapeprn} --- $0$-specijalizacija $\f{Tape}$) je dobivena specijalizacijom funkcije $\f{Recode}$, fiksirajući njena dva zadnja argumenta na $b'$ i $b$ redom. Vidimo da možemo specijalizirati i s obzirom na više argumenata, što je samo višestruka primjena specijalizacije jednog argumenta.
 \begin{equation}\label{eq:multpar}
@@ -509,11 +511,11 @@ Dakle, za sve $n>1$ vrijedi $\f A_{n+1}:=\f C_1^1\pr\f A_n\circ(\f I_1^3,\f I_3^
 Običnom matematičkom indukcijom po $n$. Za $n=0$, to je kompozicija inicijalnih funkcija. Za $n\in\{1,2\}$ to smo već dokazali (primjer~\ref{pr:addmulpow}). Za $n\ge 2$, ako je $\f A_n$ primitivno rekurzivna, tada je $\f A_{n+1}=\f C_1^1\pr\f A_n\circ(\f I_1^3,\f I_3^3)$ simbolička definicija $\f A_{n+1}$, iz koje slijedi da je i ona primitivno rekurzivna.
 \end{proof}
 
-Primijetimo sličnost s dokazom propozicije~\ref{prop:konst}. No dok smo dinamizirani (zadan argumentom) broj iteracija operatora $\circ$ mogli shvatiti kao primitivnu rekurziju, dinamizirani broj iteracija operatora $\pr$ više ne možemo tako shvatiti. Zato dinamizacija familije $\f A_n,n\in\N$,
+Primijetimo sličnost s dokazom propozicije~\ref{prop:konst}. No dok smo dinamizirani (zadan argumentom) broj iteracija operatora $\circ$ mogli shvatiti kao primitivnu rekurziju (primjer~\ref{pr:IdinC}), dinamizirani broj iteracija operatora $\pr$ više ne možemo tako shvatiti. Zato dinamizacija familije $\f A_n,n\in\N$ --- tromjesna funkcija zadana s
 \begin{equation}
-    \f A(x,y,z):=\f A_z(x,y)\text,
+    \f A(x,y,z):=\f A_z(x,y)%\text,
 \end{equation}
-\emph{nije} primitivno rekurzivna. Formalni dokaz je kompliciran, ali ideja je ista kao i ideja dokaza da se npr.\ $\f{add}^2$ ne može dobiti samo kompozicijom iz inicijalnih funkcija: \emph{raste prebrzo}. Svaka kompozicija s inicijalnom funkcijom može u najboljem slučaju povećati bilo koji argument za $1$, dakle pomoću konačno mnogo operatora $\circ$ možemo dobiti samo funkcije oblika $x+c$, gdje je $c$ konstanta a $x$ jedan od argumenata. No $x+y$ raste brže od toga.
+{} --- \emph{nije} primitivno rekurzivna. Formalni dokaz je kompliciran, ali ideja je ista kao i ideja dokaza da se npr.\ $\f{add}^2$ ne može dobiti samo kompozicijom iz inicijalnih funkcija: \emph{raste prebrzo}. Svaka kompozicija s inicijalnom funkcijom može u najboljem slučaju povećati bilo koji argument za $1$, dakle pomoću konačno mnogo operatora $\circ$ možemo dobiti samo funkcije oblika $x+c$, gdje je $c$ konstanta a $x$ jedan od argumenata. No $x+y$ raste brže od toga.
 
 Slično je i ovdje: svaka primjena primitivne rekurzije može povećati $z$ samo za $1$, pa s konačno mnogo operatora $\pr$ možemo postići najviše $\f A_c(x,y)$, gdje je $c$ konstanta. No $\f A^3$ raste brže od toga.
 
@@ -673,17 +675,17 @@ I četvrto, to onda znači da je (za $e\in\f{Prog}$) $\f S_k(0,e)=1*e$, što je 
 \begin{korolar}[{name=[dodavanje nulâ na kraj ulaza ne mijenja RAM-izračunavanje]}]\label{kor:0nSk}
 Za sve $k,l\in\N_+$, za sve $\vec x\in\N^k$ i za sve $e\in\N$, vrijedi
 \begin{equation}
-    \kf e^{k+l}(\vec x,0,0,\dotsc,0)\simeq\kf e^k(\vec x)\text.
+	\kf e^{k+l}(\vec x^k,\vec 0^l):\simeq\kf e^{k+l}(\vec x,\vec 0)\simeq\kf e^k(\vec x)\text.
 \end{equation}
 \end{korolar}
 \begin{proof}
-    Prvo indukcijom po $l$, prateći dokaz korolara~\ref{kor:pars} i koristeći lemu~\ref{lm:0nSk} u svakom koraku, dokažemo $\f S_k^{l+1}(0,0,\dotsc,0,e)=e$. Iz toga onda slijedi
+    Prvo indukcijom po $l$, prateći dokaz korolara~\ref{kor:pars} i koristeći lemu~\ref{lm:0nSk} u svakom koraku, dokažemo $\f S_k^{l+1}(\vec 0,e)=e$. Iz toga onda slijedi
 \begin{equation}
-    \kf e^{k+l}(\vec x,0,0,\dotsc,0)\simeq\kf{\f S_k^{l+1}(0,0,\dotsc,0,e)}(\vec x)\simeq\kf e^k(\vec x)\text,
+    \kf e^{k+l}(\vec x,\vec 0)\simeq\kf{\f S_k^{l+1}(\vec 0,e)}(\vec x)\simeq\kf e^k(\vec x)\text,
 \end{equation}
 što smo i trebali dokazati.
 \end{proof}
-Na neformalnoj razini tvrdnja korolara~\ref{kor:0nSk} je očita: za bilo koji RAM-program $P$, $P$-izračunavanje s $\vec x$ je \emph{isto} (isti niz istih konfiguracija) kao i $P$-izračunavanje s $(\vec x,0,0,\dotsc,0)$, za bilo koji broj dodanih nula na kraj ulaza --- jer je izračunavanje determinističko, a početna konfiguracija $c_0=(0,\vec x,0,0,\dotsc,0)$ je ista. Samo smo rekli da će još $l$ registara nakon $\reg k$ biti postavljeno na nule, no oni bi ionako bili postavljeni na nule u izračunavanju s $\vec x^k$, jer u tom izračunavanju nisu ulazni.
+Na neformalnoj razini tvrdnja korolara~\ref{kor:0nSk} je očita: za bilo koji RAM-program $P$, $P$-izračunavanje s $\vec x$ je \emph{isto} (isti niz istih konfiguracija) kao i $P$-izračunavanje s $(\vec x,\vec 0)$, za bilo koji broj dodanih nula na kraj ulaza --- jer je izračunavanje determinističko, a početna konfiguracija $c_0=(0,\vec x,\vec 0)$ je ista. Samo smo rekli da će još $l$ registara nakon $\reg k$ biti postavljeno na nule, no oni bi ionako bili postavljeni na nule u izračunavanju s $\vec x^k$, jer u tom izračunavanju nisu ulazni.
 
 \begin{propozicija}[{name=[niz relacija $k$-ekvivalentnosti je padajući]}]
 Za sve $k,l\in\N_+$ takve da je $k>l$ vrijedi $(\approx_k)\subset(\approx_l)$.
@@ -691,7 +693,7 @@ Za sve $k,l\in\N_+$ takve da je $k>l$ vrijedi $(\approx_k)\subset(\approx_l)$.
 \begin{proof}
 Označimo $m:=k-l\in\N_+$. Za $(\subseteq)$, neka je $e\approx_kf$. Tada je $\kf e^k=\kf f^k$ (a $k=l+m$), pa je prema prethodnom korolaru, za sve $\vec x\in\N^l$,
 \begin{equation}
-    \kf e^l(\vec x)\simeq\kf e^{l+m}(\vec x,0,0,\dotsc,0)\simeq\kf f^{l+m}(\vec x,0,0,\dotsc,0)\simeq\kf f^l(\vec x)\text.
+    \kf e^l(\vec x)\simeq\kf e^{l+m}(\vec x^l,\vec 0^m)\simeq\kf f^{l+m}(\vec x,\vec 0)\simeq\kf f^l(\vec x)\text.
 \end{equation}
 Dakle vrijedi i $\kf e^l=\kf f^l$, pa je $e\approx_lf$.
 
@@ -699,11 +701,11 @@ Za $(\ne)$, moramo naći dva RAM-programa koji su ekvivalentni za sve moguće $l
 
 Tada je $1\approx_l i_k$, jer za svaki $\vec x\in\N^l$ vrijedi
 \begin{equation}
-    \kf{i_k}^l(\vec x)\simeq\kf{i_k}^{l+m}(\vec x,0,0,\dotsc,0)=\f I_k^k(\vec x,0,0,\dotsc,0)=0=\f C_0^l(\vec x)=\kf1^l(\vec x)\text;
+    \kf{i_k}^l(\vec x)\simeq\kf{i_k}^{l+m}(\vec x,\vec 0)=\f I_k^k(\vec x,\vec 0)=0=\f C_0^l(\vec x)=\kf1^l(\vec x)\text;
 \end{equation}
-ali za $\vec y:=(0,0,\dotsc,0,1)\in\N^k$ vrijedi
+	ali za $\vec y:=(\vec 0^{k-1},1)\in\N^k$ vrijedi
 \begin{equation}
-    \kf{i_k}^k(\vec y)=\f I_k^k(0,0,\dotsc,0,1)=1\ne0=\f C_0^k(\vec y)=\kf1^k(\vec y)\text,
+    \kf{i_k}^k(\vec y)=\f I_k^k(\vec 0,1)=1\ne0=\f C_0^k(\vec y)=\kf1^k(\vec y)\text,
 \end{equation}
 iz čega slijedi $1\napprox_ki_k$.
 \end{proof}
@@ -864,7 +866,9 @@ U oba slučaja došli smo do kontradikcije, pa pod pretpostavkom da je $S$ rekur
 Riceov teorem smo izrekli u "pozitivnom" obliku --- no on se češće koristi "negativno".
 
 \begin{korolar}[{name=[nerekurzivnost netrivijalnog $k$-invarijantnog skupa brojeva]}]\label{kor:Rice!rek}
-Neka je $S\subset\N$ neprazan skup koji je $k$-invarijantan za neki $k\in\N_+$. Tada $S$ nije rekurzivan.
+Neka je $S\subset\N$ neprazan skup koji je $k$-invarijantan za neki $k\in\N_+$.
+	
+	Tada $S$ nije rekurzivan.
 \end{korolar}
 \begin{proof}
 Ovo je samo obrat po kontrapoziciji teorema~\ref{tm:Rice}.
@@ -899,7 +903,7 @@ $\bigl(\exists i<\f{lh}(e)\bigr)\bigl(\f{regn}(e[i])\ge15\bigr)$ (gdje je $e:=\k
 
 S druge strane, Riceov teorem pruža dobar uvid u drugi dio tog pravila. Među semantičkim svojstvima izdvajaju se ona koja govore \emph{samo} o računatoj funkciji, bez ikakvog spominjanja konkretne implementacije. Recimo, "$P$-izračunavanje s $(2,5)$ stane" se može tako zapisati, jer zapravo kaže $(2,5)\in\dom{\f F}$, gdje je $\f F$ funkcija koju $P$ računa. Riceov teorem kaže da su sva takva svojstva sigurno neodlučiva --- osim dva trivijalna, naravno. Primjerice, svojstvo "ovaj RAM-program rješava \emph{halting problem}" jest odlučivo: za svaki RAM-program vratimo $\mathit{false}$. Također, "ovaj RAM-program računa parcijalno rekurzivnu funkciju" jest odlučivo: uvijek vratimo $\mathit{true}$.
 
-S druge strane, parnost broja koraka ne možemo tako napisati. Najlakši način da se to vidi je invarijantnost: za svaki RAM-program koji napravi paran broj koraka prije zaustavljanja s ulazom $27$, postoji RAM-program koji računa istu funkciju, ali napravi neparan broj koraka prije zaustavljanja s ulazom $27$: standardni trik dodavanja instrukcije $\incr1$ na kraj programa, viđen u primjeru~\ref{pr:alef0ind}, "upalit" će i ovdje.
+S druge strane, parnost broja koraka ne možemo tako napisati. Najlakši način da se to vidi je invarijantnost: za svaki RAM-program koji napravi paran broj koraka prije zaustavljanja s ulazom $27$, postoji RAM-program koji računa istu funkciju, ali napravi neparan broj koraka prije zaustavljanja s ulazom $27$. Standardni trik dodavanja instrukcije $\incr1$ na kraj programa, viđen u primjeru~\ref{pr:alef0ind}, "upalit" će i ovdje.
 
 Svakako postoje i mnoga "hibridna" svojstva, za utvrđivanje čije odlučivosti je potrebna detaljna analiza --- ali Riceov teorem s jedne i Church--\!Turingova teza s druge strane pružaju dobar dio odgovora na takva pitanja.
 

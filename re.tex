@@ -328,14 +328,14 @@ Točkovno, uvjete na selektor možemo zapisati kao
 \end{equation}
 
 Selektor je sasvim općenit pojam koji u skupovnoteorijskom smislu odgovara \emph{izbornoj funkciji}: Ako za svaki $\vec x\in\N^k$ definiramo "prerez" (\emph{section}) $R_{\vec x}^1(y):\Longleftrightarrow R(\vec x,y)$,
-tada je $(R_{\vec x})_{\vec x\in\exists_*R}$ indeksirana familija nepraznih skupova (jednomjesnih relacija) i selektor za $R$ je upravo izborna funkcija za tu familiju (pogledajte~\cite[str.\ 92]{skr:VukTS} za detalje).
+tada je $(R_{\vec x})_{\vec x\,\in\,\exists_*\!R}$ indeksirana familija nepraznih skupova (jednomjesnih relacija) i selektor za $R$ je upravo izborna funkcija za tu familiju (pogledajte~\cite[str.\ 92]{skr:VukTS} za detalje).
 
 U teoriji skupova postoji aksiom izbora, koji kaže da svaka takva familija ima izbornu funkciju, odnosno svaka relacija ima selektor. Zapravo, ovdje aksiom izbora nije ni potreban, jer je skup $\N$ dobro uređen, pa uvijek možemo odabrati najmanji $y$ za svaki $\vec x$ za koji takav $y$ postoji. Drugim riječima, trivijalno je $\mu R$ selektor za $R$. Doista, vrijedi $\dom{\mu R}=\exists_*R$ po definiciji, a za $\graf{\mu R}(\vec x,y)$ vrijedi $y=\mu z R(\vec x,z)=\min R_{\vec x}\in R_{\vec x}$, dakle vrijedi $R_{\vec x}(y)$, odnosno $R(\vec x,y)$.
 
 Nas, međutim, ne zanimaju proizvoljni selektori, već samo oni izračunljivi --- a postupak koji smo opisali (paralelno testiranje svih $R(\vec x,y),y\in\N$) pokazuje da svaka poluodlučiva relacija ima izračunljiv selektor.
 
 \begin{lema}[Teorem o selektoru]\label{lm:tmsel}
-Svaka rekurzivno prebrojiva relacija (mjesnosti barem $2$) ima parcijalno rekurzivan selektor.
+Svaka rekurzivno prebrojiva relacija (mjesnosti barem~$2$) ima parcijalno rekurzivni selektor.
 \end{lema}
 \begin{proof}
 Neka je $k'\ge2$ te $R^{k'}$ rekurzivno prebrojiva. Označimo $k:=k'-1\in\N_+$. Trebamo parcijalno rekurzivnu funkciju $\f F^k$ takvu da vrijedi $\dom{\f F}=\exists_*R$ i $\graf{\f F}\subseteq R$.
@@ -392,7 +392,7 @@ Tada je $F$ parcijalno rekurzivna ako i samo ako je $\graf F$ rekurzivno prebroj
 \begin{proof}
 Smjer ($\Rightarrow$) smo već dokazali, pomoću projekcijske karakterizacije i Kleenejevog teorema o normalnoj formi (teorem~\ref{tm:grafprre}).
 
-Za smjer ($\Leftarrow$), neka je $\graf F$ rekurzivno prebrojiv. Prema lemi~\ref{lm:tmsel}, postoji parcijalno rekurzivan selektor $\f G$ za $\graf F$. No kako je prema lemi~\ref{lm:selgraf} jedini selektor za $\graf F$ upravo $F$, zaključujemo $F=\f G$, dakle $F$ je parcijalno rekurzivna.
+Za smjer ($\Leftarrow$), neka je $\graf F$ rekurzivno prebrojiv. Prema lemi~\ref{lm:tmsel}, postoji parcijalno rekurzivni selektor $\f G$ za $\graf F$. No kako je prema lemi~\ref{lm:selgraf} jedini selektor za $\graf F$ upravo $F$, zaključujemo $F=\f G$, dakle $F$ je parcijalno rekurzivna.
 \end{proof}
 
 \subsection{Primjene teorema o grafu}
@@ -445,7 +445,7 @@ Na operacijskom sustavu UNIX (i mnogim srodnim sustavima) postoji sistemski pozi
 Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u parovima disjunktne rekurzivno prebrojive relacije, sve iste mjesnosti.\newline Tada je i funkcija $\f F:=\IF{R_1:\f G_1,R_2:\f G_2,\dots,R_l:\f G_l}$ također parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
-Prvo, osigurajmo da nijedna grana nije definirana izvan svog uvjeta. Dakle, za svaki $i\in[1\dd l]$ definiramo $\f H_i:=\f G_i|_{R_i}$. Svaka $\f H_i$ je parcijalno rekurzivna po korolaru~\ref{kor:restre}, i vrijedi $\f F=\IF{\dom{\f H_1}:\f H_1,\dom{\f H_2}:\f H_2,\dots,\dom{\f H_l}:\f H_l}$. Doista, domene su im iste: $\bdcup_{i=1}^l\dom{\f H_i}=\bdcup_{i=1}^l(\dom{\f G_i}\cap R_i)$; i za svaki $\vec x$ iz te domene postoji jedinstveni $j\in[1\dd l]$ takav da je $\vec x\in\dom{\f H_{j}}$, pa je $\f F(\vec x)=\f G_{j}(\vec x)=\f H_{j}(\vec x)$.
+Prvo, osigurajmo da nijedna grana nije definirana izvan svog uvjeta. Dakle, za svaki $i\in[1\dd l]$ definiramo $\f H_i:=\f G_i|_{R_i}$. Svaka $\f H_i$ je parcijalno rekurzivna po korolaru~\ref{kor:restre}, i vrijedi $\f F=\IF{\dom{\f H_1}\!:\f H_1,\dom{\f H_2}\!:\f H_2,\dots,\dom{\f H_l}\!:\f H_l}$. Doista, domene su im iste: $\bdcup_{i=1}^l\dom{\f H_i}\!=\bdcup_{i=1}^l(\dom{\f G_i}\cap R_i)$; i za svaki $\vec x$ iz te domene postoji jedinstveni $j\in[1\dd l]$ takav da je $\vec x\in\dom{\f H_{j}}$, pa je $\f F(\vec x)=\f G_{j}(\vec x)=\f H_{j}(\vec x)$.
 
 Drugo, dokažimo
 \begin{equation}
@@ -453,7 +453,7 @@ Drugo, dokažimo
 \end{equation}
 Za inkluziju ($\subseteq$), neka je $(\vec x,y)\in\graf{\f F}$. To znači da je $\vec x\in\dom{\f F}$ i $y=\f F(\vec x)$. Prvo znači da postoji (jedinstveni) $j\in[1\dd l]$ takav da vrijedi $\vec x\in\dom{\f H_{j}}$, pa ovo drugo onda znači $y=\f H_{j}(\vec x)$. No tada je $(\vec x,y)\in\graf{\f H_{j}}\!\subseteq\bigcup_{i=1}^l\graf{\f H_i}$.
 
-Za inkluziju ($\supseteq$), neka je $(\vec x,y)\in\bigcup_{i=1}^l\graf{\f H_i}$. Tada postoji $j\in[1\dd l]$ takav da je $(\vec x,y)\in\graf{\f H_j}$. To znači da je $\vec x\in\dom{\f H_j}=\dom{\f G_j|_{R_j}}=\dom{\f G_j}\cap R_j\subseteq R_j$, pa je $\f F(\vec x)\simeq\f G_j(\vec x)$. No $\vec x\in\dom{\f G_j}$ znači da postoji $y'\in\N$ takav da je $\f G_j(\vec x)=y'$, pa je i $\f F(\vec x)=y'$. S druge strane $(\vec x,y)\in\graf{\f H_j}\subseteq\graf{\f G_j}$ znači da su $(\vec x,y)$ i $(\vec x,y')$ oba u $\graf{\f G_j}$, iz čega je $y=y'$ jer $\graf{\f G_j}$ ima funkcijsko svojstvo. Slijedi $\f F(\vec x)=y$, odnosno $(\vec x,y)\in\graf{\f F}$.
+Za inkluziju ($\supseteq$), neka je $(\vec x,y)\in\bigcup_{i=1}^l\graf{\f H_i}$. Tada postoji $j\in[1\dd l]$ takav da je $(\vec x,y)\in\graf{\f H_j}$. To znači da je $\vec x\in\dom{\f H_j}\!=\dom{\f G_j|_{R_j}}\!\!=\dom{\f G_j}\cap R_j\subseteq R_j$, pa je $\f F(\vec x)\simeq\f G_j(\vec x)$. No $\vec x\in\dom{\f G_j}$ znači da postoji $y'\in\N$ takav da je $\f G_j(\vec x)=y'$, pa je i $\f F(\vec x)=y'$. S druge strane $(\vec x,y)\in\graf{\f H_j}\subseteq\graf{\f G_j}$ znači da su $(\vec x,y)$ i $(\vec x,y')$ oba u $\graf{\f G_j}$, iz čega je $y=y'$ jer $\graf{\f G_j}$ ima funkcijsko svojstvo. Slijedi $\f F(\vec x)=y$, odnosno $(\vec x,y)\in\graf{\f F}$.
 
 Sada primijenimo opisanu tehniku: po teoremu~\ref{tm:grafprre}, svaki $\graf{\f H_i}$ je rekurzivno prebrojiv. Po propoziciji~\ref{pp:unlre}, $\graf{\f F}$ je rekurzivno prebrojiv. I za kraj, onda je $\f F$ parcijalno rekurzivna po teoremu~\ref{tm:graf}.
 \end{proof}
@@ -541,7 +541,7 @@ Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpepro
         r,&\text{inače}
     \end{cases}
 \end{equation}
-(simbolički $\f G=\IF{\f P:\f I_1^2,\f C_r^2}$) je primitivno rekurzivna po teoremu~\ref{tm:grek}, i tvrdimo $R=\im{\f G}$.
+(simbolički $\f G=\IF{\f P:\f I_1^2,\,\f C_r^2}$) je primitivno rekurzivna po teoremu~\ref{tm:grek}, i tvrdimo $R=\im{\f G}$.
 
 Za ($\subseteq$), neka vrijedi $x_0\in R=\exists_*\f P$. To po definiciji znači da postoji $y_0\in\N$ takav da vrijedi $\f P(x_0,y_0)$. No tada je po~\eqref{eq:defG} $\f G(x_0,y_0)=x_0\in\im{\f G}$.
 
@@ -564,7 +564,7 @@ Prvo, na početku točke~\ref{sec:Todl} definirali smo kodiranje jezika $\kr L$,
 
 Drugo, možemo prevesti samu definiciju. Kako su rekurzivno prebrojive relacije domene izračunljivih brojevnih funkcija, rekurzivno prebrojivi jezici bili bi domene (Turing-)izračunljivih jezičnih funkcija.
 
-Treće, sama ta definicija znači da postoji RAM-stroj čije izračunavanje s $\vec x$ stane ako i samo ako je $\vec x$ element relacije za koju tvrdimo da je rekurzivno prebrojiva. Analogni iskaz u jezičnom modelu --- postoji Turingov stroj $\mathcal T$ takav da $\mathcal T$-izračunavanje s $w$ stane ako i samo ako je $w\in L$ (kažemo da $\mathcal T$ \emph{prepoznaje} $L$) --- obično se u teoriji formalnih jezika uzima za definiciju rekurzivno prebrojivih jezika.
+Treće, sama ta definicija znači da postoji RAM-stroj čije izračunavanje s $\vec x$ stane ako i samo ako je $\vec x$ element relacije za koju tvrdimo da je rekurzivno prebrojiva. Analogni iskaz u jezičnom modelu --- postoji Turingov stroj $\mathcal T$ takav da $\mathcal T$\!-izračunavanje s $w$ stane ako i samo ako je $w\in L$ (kažemo da $\mathcal T$\! \emph{prepoznaje} $L$) --- obično se u teoriji formalnih jezika uzima za definiciju rekurzivno prebrojivih jezika.
 
 I četvrto, analogon jezik\^a u brojevnom modelu su zapravo \emph{jednomjesne} relacije, pa ih možemo shvatiti kao slike, odnosno enumeracije nekih izračunljivih funkcija. Formalizacija toga u jezičnom modelu vodi na pojam \emph{Turingovih enumeratora}, koji imaju dvije trake: radnu i izlaznu, a umjesto završnog stanja imaju \emph{izlazno} stanje $q_p$. Enumerator nema ulaza (obje trake su na početku prazne) i radi beskonačno dugo (jer nema završnog stanja) te kažemo da \emph{nabraja} jezik svih riječi koje se nalaze na izlaznoj traci u trenucima u kojima se enumerator nađe u stanju $q_p$.
 
@@ -587,7 +587,7 @@ Tada su sljedeće tvrdnje ekvivalentne:
 Po definiciji, postoji parcijalno rekurzivna funkcija $\f F^1$ takva da je $\dom{\f F}=\kr L$. Po korolaru~\ref{kor:pent}, jezična funkcija $\varphi:=\N^{-1}\f F$ je Turing-izračunljiva, i domena joj je $\dom\varphi=\{w\in\Sigma^*\mid\kr w\in\kr L\}=L$.
 
 \item[$(\mathcal D)\Rightarrow(\mathcal T)$]
-Neka je $L=\dom\varphi$ te $\mathcal T$ Turingov stroj koji računa $\varphi$. Po definiciji~\ref{def:Tcomputefi}, imamo da $\mathcal T$-izračunavanje s $w$ stane ako i samo ako je $w\in\dom\varphi=L$ --- što po definiciji znači da $\mathcal T$ prepoznaje $L$.
+Neka je $L=\dom\varphi$ te $\mathcal T$ Turingov stroj koji računa $\varphi$. Po definiciji~\ref{def:Tcomputefi} imamo da $\mathcal T$\!-izračunavanje s $w$ stane ako i samo ako je $w\in\dom\varphi=L$ --- što po definiciji znači da $\mathcal T$ prepoznaje $L$.
 
 \item[$(\mathcal T)\Rightarrow(\mathcal E)$]
 Ovo je relativno standardni dokaz koji se napravi u teoriji formalnih jezika, iako je teško raspisati sve detalje. Osnovna ideja je emulirati paralelizaciju na Turingovom stroju. Skicu dokaza možete vidjeti u~\cite[\emph{theorem}~3.21]{sipser}.
