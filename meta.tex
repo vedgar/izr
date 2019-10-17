@@ -367,7 +367,7 @@ Naravno, netrivijalan je samo u formalnom smislu: intuitivno objašnjenje kako i
 
 Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odnosno pozvana s argumentima $\vec x$, mora se ponašati kao funkcija $\f G$ pozvana s $\vec x$ i još indeksom $e$. Drugim riječima, želimo $\kf e^k=spec(e,G)$.
 
-Recimo, u slučaju funkcije \texttt{factorial}, kompajler se pobrine za to da poziv te funkcije u njenom kodu doista pozove nju samu (sa za jedan manjim argumentom), ali da kojim slučajem kompajler ne podržava rekurziju, mogli bismo (pokazivač na) funkciju \texttt{factorial} prenijeti u samu sebe kao dodatni parametar.
+Recimo, u slučaju funkcije \texttt{factorial}, kompajler se pobrine za to da poziv te funkcije u njenom kodu doista pozove nju samu (sa za $1$ manjim argumentom), ali da kojim slučajem kompajler ne podržava rekurziju, mogli bismo (pokazivač na) funkciju \texttt{factorial} prenijeti u samu sebe kao dodatni parametar.
 
 Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} funkciju \texttt{factorial} koju ćemo poslati kao argument, ali zasad pričamo samo o specifikaciji.
 \begin{equation}\label{eq:wishful}
@@ -389,10 +389,12 @@ Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} 
 Matematički, "pokazivač na funkciju" nije ništa drugo nego njen indeks, što motivira sljedeću definiciju.
 
 \begin{definicija}[{name=[dijagonala parcijalno rekurzivne funkcije]}]
-    Neka je $k\in\N_+$ te $\f H^{k+1}$ parcijalno rekurzivna funkcija. \emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $d\f H:=spec(h,\f H)$, gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
+    Neka je $k\in\N_+$ te $\f H^{k+1}$ parcijalno rekurzivna funkcija.
+	
+	\emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $d\f H:=spec(h,\f H)$,\\ gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
 \end{definicija}
 
-Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će ionako biti bitna samo prateća funkcija $\f D=\N d$, koja je definirana na indeksima.
+Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će prvenstveno biti bitna prateća funkcija $\f D=\N d$, koja je ionako definirana na indeksima.
 
 U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad radimo s pokazivačem na funkciju, funkcijski poziv. Standard jezika C čak zabranjuje ikakvu aritmetiku na funkcijskim pokazivačima, ali neki kompajleri to ipak dozvoljavaju. Slično, ovdje bismo mogli $h$ iskoristiti ne samo kao zadnji argument funkcije $\f{comp}_k$, nego raditi razne čudne stvari poput gledanja počinje li "strojni kod" funkcije $\f H$ instrukcijom \inc\ ($\f{InsINC}(h[0])$), i sličnog --- ali najčešće to ne činimo, a dok god $h$ koristimo samo za pozivanje funkcije $\f H$, svejedno je koji njen indeks smo uzeli.
 
@@ -411,7 +413,7 @@ Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, slu�
 
 Doslovno, to neće ići --- tipovi ne pašu. Drugi argument funkcije \texttt{G} trebao bi biti pokazivač na jednomjesnu funkciju, a \texttt{G} je dvomjesna. C-kompajler će nam samo dati \emph{warning}, jer za njega su svi pokazivači ionako samo "ukrašeni prirodni brojevi" --- baš kao i indeksi u svijetu parcijalno rekurzivnih funkcija --- ali u strože tipiziranom jeziku kompajler bi nam odbio prevesti kod, uz poruku o grešci.
 
-C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (sigurno radi na \texttt{gcc} 4.6.3 --- pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li \texttt{gcc} nešto što mi ne znamo?
+C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (provjereno radi na \texttt{gcc} 4.6.3 --- pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li \texttt{gcc} nešto što mi ne znamo?
 
 Ovdje treba znati neke tehničke pojedinosti o kompiliranju jezika C. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
 
@@ -420,7 +422,7 @@ Na procesorima s velikim brojem registara, ponekad se argumenti u funkciju male 
 Možemo li to iskoristiti da bismo eksplicitno napisali taj poziv u kodu, i izbjegli \emph{warning}? Da, jer C nam dopušta da ne specificiramo tipove parametara funkcije.
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
-       typedef unsigned funkcija(/* bilo što */);
+       typedef unsigned funkcija(/* prima bilo što */);
        unsigned G(unsigned n, funkcija f){
            if(n) return n * f(n-1, f);
            else return 1;
@@ -431,7 +433,7 @@ Možemo li to iskoristiti da bismo eksplicitno napisali taj poziv u kodu, i izbj
 \end{verbatim}
 \end{minipage}\end{equation}
 
-Ali ako već želimo tako zaobilaziti statičke tipove, jednostavnije je prebaciti se na dinamički tipiziran jezik. U Pythonu, stvari rade točno kako smo zamislili.
+Ali ako već želimo tako zaobilaziti statičke tipove, jednostavnije je prebaciti se na dinamički tipizirani jezik. U Pythonu, stvari rade točno kako smo zamislili.
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
             >>> def H(n, f):
@@ -490,7 +492,7 @@ Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. Tada postoji 
 
 Sada bismo htjeli vidjeti kako pomoću teorema rekurzije možemo definirati rekurzivne funkcije. Okvirno, metoda je uvijek ista: funkcijsku jednadžbu koju želimo riješiti (po $F^k$) zapišemo u obliku opće rekurzije (nađemo funkciju $\f G^{k+1}$) te nam teorem rekurzije dade parcijalno rekurzivno rješenje --- štoviše, dade nam njegov indeks $e_0$. Sada je potrebno dokazati dvije stvari (ako vrijede): prvo, da je $\f F_0:=\kf{e_0}^k$ jedinstveno rješenje, i drugo, da je $\f F_0$ totalna funkcija.
 
-I jedno i drugo su univerzalne tvrdnje na prirodnim brojevima --- recimo, jedinstvenost kaže da, kad god je $e_1$ "rješenje", za sve $\vec x\in\N^k$ vrijedi $\f{comp}(\vec x,e_1)\simeq\f F_0(\vec x)$; totalnost kaže da za sve $\vec x\in\N^k$ vrijedi $\vec x\in\dom{\f F_0}$ --- te ih je uobičajeno dokazivati indukcijom. Didaktički problem je u tome što ako je ta indukcija dovoljno jednostavna, najčešće je programabilna, pa recimo totalnost ne znači samo rekurzivnost već znači primitivnu rekurzivnost. A tada nam ne treba teorem rekurzije: primitivna rekurzija je dovoljna (kao što je uostalom slučaj i s funkcijom $\f{factorial}$).
+I jedno i drugo su univerzalne tvrdnje na prirodnim brojevima --- recimo, jedinstvenost kaže da, kad god je $e_1$ "rješenje", za sve $\vec x\in\N^k$ vrijedi $\f{comp}(\vec x,e_1\!)\simeq\f F_0(\vec x)$; totalnost kaže da za sve $\vec x\in\N^k$ vrijedi $\vec x\in\dom{\f F_0}$ --- te ih je uobičajeno dokazivati indukcijom. Didaktički problem je u tome što ako je ta indukcija dovoljno jednostavna, najčešće je programabilna, pa recimo totalnost ne znači samo rekurzivnost već znači primitivnu rekurzivnost. A tada nam ne treba teorem rekurzije: primitivna rekurzija je dovoljna (kao što je uostalom slučaj i s funkcijom $\f{factorial}$).
 
 Recimo, ako se totalnost od $\f F_0^1$ može dokazati običnom matematičkom indukcijom, to znači da imamo neku ogradu za broj koraka računanja $\f F_0(0)$ te neki izračunljiv način da iz ograde za broj koraka u računanju $\f F_0(n)$ dobijemo takvu ogradu za $\f F_0(n+1)$ --- a to zapravo znači da $\f F_0$ možemo dobiti (degeneriranom) primitivnom rekurzijom, samo trebamo u funkciji $\f{step}$ ograničiti minimizaciju tom nađenom ogradom. Ako umjesto obične indukcije moramo upotrijebiti jaku indukciju, to na isti način znači da se $\f F_0$ može dobiti rekurzijom s poviješću. U slučaju simultane indukcije, imamo simultanu rekurziju, i tako dalje.
 
@@ -652,7 +654,7 @@ Također, za svaki $e\in\f{Prog}$, za sve $j,k\in\N_+$, vrijedi $e*\kr{\f{codeIN
 \begin{proof}
 Refleksivnost, simetričnost i tranzitivnost su trivijalne: recimo, $e\approx_kf\approx_kg$ znači $\kf e^k=\kf f^k=\kf g^k$, pa je $\kf e^k=\kf g^k$, iz čega $e\approx_kg$. Inače, u refleksivnosti se, kroz samu oznaku $\kf e^k$, krije korolar~\ref{kor:ram1fun} koji kaže da za fiksni $k$, svaki RAM-program računa jedinstvenu $k$-mjesnu funkciju.
 
-Prebrojivost kvocijentnog skupa slijedi iz činjenice da postoji prebrojivo mnogo izračunljivih funkcija (teorem~\ref{tm:alef0izr}). Konkretno, za svaki $k\in\N_+$ su sve funkcije $\f C_y^k,y\in\N$, različite, pa je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)\napprox_k\overline{\f C_6}(z)$ za sve $y\ne z$. Iz toga slijedi da različitih klasa ima beskonačno, a ne može ih biti neprebrojivo jer su neprazni disjunktni podskupovi od $\N$ (recimo, $\min:\N/_{\!\approx_k\!}\to\N$, koja svakoj klasi ekvivalencije pridružuje njen najmanji element, je injekcija, pa je $\card\bigl(\N/_{\!\approx_k\!}\bigr)\le\card\N=\aleph_0$).
+Prebrojivost kvocijentnog skupa slijedi iz činjenice da postoji prebrojivo mnogo izračunljivih funkcija (teorem~\ref{tm:alef0izr}). Konkretno, za svaki $k\in\N_+$ su sve funkcije $\f C_y^k,y\in\N$, različite, pa je (primjer~\ref{pr:kodkonst}) $\overline{\f C_6}(y)\napprox_k\overline{\f C_6}(z)$ za sve $y\ne z$. Iz toga slijedi da različitih klasa ima beskonačno, a ne može ih biti neprebrojivo jer su neprazni disjunktni podskupovi od $\N$ (recimo, $\min:\N/_{\!\approx_k\!}\to\N$, koja svakoj klasi ekvivalencije pridružuje njen najmanji element, je injekcija, pa je $\card\,\bigl(\N/_{\!\approx_k\!}\bigr)\le\card\N=\aleph_0$).
 
 Prebrojivost svake klase slijedi iz primjera~\ref{pr:alef0ind}: neka je $e\in\N$ proizvoljan. Ako je $e\in\f{Prog}\kompl$, tada je čitav $\f{Prog}\kompl$ u njegovoj klasi. Na primjer, $n\mapsto 2n+3$ je injekcija s $\N$ u $\f{Seq}\kompl\subseteq\f{Prog}\kompl\subseteq[e]_{\approx_k}\subseteq\N$, pa je $[e]_{\approx_k}$ prebrojiva. Ako je pak $e\in\f{Prog}$, tada je $\f F:\N_+\!\to[e]_{\approx_k}$, zadana s $\f F(j):=e*\kr{\f{codeINC}(j)}$, injekcija --- jer $j$ možemo rekonstruirati iz $f:=\f F(j)$ kao $\f{regn}\bigl(\f{rpart}(f,0)\bigr)$.
 \end{proof}
@@ -685,13 +687,15 @@ Za sve $k,l\in\N_+$, za sve $\vec x\in\N^k$ i za sve $e\in\N$, vrijedi
 \end{equation}
 što smo i trebali dokazati.
 \end{proof}
-Na neformalnoj razini tvrdnja korolara~\ref{kor:0nSk} je očita: za bilo koji RAM-program $P$, $P$-izračunavanje s $\vec x$ je \emph{isto} (isti niz istih konfiguracija) kao i $P$-izračunavanje s $(\vec x,\vec 0)$, za bilo koji broj dodanih nula na kraj ulaza --- jer je izračunavanje determinističko, a početna konfiguracija $c_0=(0,\vec x,\vec 0)$ je ista. Samo smo rekli da će još $l$ registara nakon $\reg k$ biti postavljeno na nule, no oni bi ionako bili postavljeni na nule u izračunavanju s $\vec x^k$, jer u tom izračunavanju nisu ulazni.
+Na neformalnoj razini tvrdnja korolara~\ref{kor:0nSk} je očita: za bilo koji RAM-program $P$, $P$-izračunavanje s $\vec x$ je \emph{isto} (isti niz istih konfiguracija) kao i $P$-izračunavanje s $(\vec x,\vec 0)$, za bilo koji broj dodanih nula na kraj ulaza --- jer je izračunavanje determinističko, a početna konfiguracija $c_0=(0,\vec x,0,0,\dotsc)$ je ista. Samo smo rekli da će još $l$ registara nakon $\reg k$ biti postavljeno na nule, no oni bi ionako bili postavljeni na nule u izračunavanju s $\vec x^k$, jer u tom izračunavanju nisu ulazni.
 
 \begin{propozicija}[{name=[niz relacija $k$-ekvivalentnosti je padajući]}]
 Za sve $k,l\in\N_+$ takve da je $k>l$ vrijedi $(\approx_k)\subset(\approx_l)$.
 \end{propozicija}
 \begin{proof}
-Označimo $m:=k-l\in\N_+$. Za $(\subseteq)$, neka je $e\approx_kf$. Tada je $\kf e^k=\kf f^k$ (a $k=l+m$), pa je prema prethodnom korolaru, za sve $\vec x\in\N^l$,
+Označimo $m:=k-l\in\N_+$. Za $(\subseteq)$, neka je $e\approx_kf$.
+	
+	Tada je $\kf e^k=\kf f^k$ (a $k=l+m$), pa je prema prethodnom korolaru, za sve $\vec x\in\N^l$,
 \begin{equation}
     \kf e^l(\vec x)\simeq\kf e^{l+m}(\vec x^l,\vec 0^m)\simeq\kf f^{l+m}(\vec x,\vec 0)\simeq\kf f^l(\vec x)\text.
 \end{equation}
