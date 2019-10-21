@@ -218,7 +218,7 @@ Za tvrdnju~\ref{stav:part<k}, neka je $i<k$ proizvoljan. Tada je eksponent od $p
 
 Funkcija $\f{part}$ je parcijalno specificirana samo po $c$: jednom kad znamo da je $c\in\f{Seq}$, sve vrijednosti $c[i]$ su propisane. Još nam nedostaje dokaz da je $\f{Seq}$ primitivno rekurzivna relacija, no to će slijediti uskoro.
 
-\section{Funkcije definirane pomoću operatora povijesti}
+\section{Funkcije definirane kodiranjem konačnih nizova}
 
 \begin{lema}[Lema o povijesti]\label{lm:povijestrek}
 Neka je $k\in\N_+$ i $\f{G}^k$ totalna funkcija.
@@ -228,9 +228,9 @@ Tada je ${\f G}$ (primitivno) rekurzivna ako i samo ako je $\overline{\f G}$ (pr
 
 Za razliku od leme~\ref{lm:sumprodrek}, ovdje se tvrde dva smjera. (Zapravo, i u lemi~\ref{lm:sumprodrek} vrijedi obrat za $\f F_1$, dok za $\f F_2$ ne vrijedi. Zgodna je vježba pokušati to dokazati.)
 \begin{proof}
-Za jedan smjer (zapisati $\overline{\f G}$ primitivno rekurzivno pomoću $\f G$), treba uvrstiti~\eqref{eq:Codek} u~\eqref{eq:povijest}:
+Za jedan smjer (zapisati $\overline{\f G}$ primitivno rekurzivno pomoću $\f G$), trebamo uvrstiti~\eqref{eq:Codek} u~\eqref{eq:povijest}:
 \begin{equation}\label{eq:povijestrek}
-    \overline{\f G}(\vec x,y)=\prod_{i<y}\f{pow}\bigl(\f{prime}(i),\f{Sc}\bigl(\f{G}(\vec x,i)\bigr)\bigr)\text.
+    \overline{\f G}(\vec x,y)=\prod_{i<y}\f{pow}\bigl(\f{prime}(i),\f{Sc}\,\bigl(\f{G}(\vec x,i)\bigr)\bigr)\text.
 \end{equation}
 Ako $i$-ti faktor u~\eqref{eq:povijestrek} označimo s $\f H(\vec x,i)$, tada je $\f{pow}\circ(\f{prime}\circ\f I_{k+1}^{k+1},\f{Sc}\circ\f G)$ sim\-bo\-li\-čka definicija od $\f H^{k+1}$ kompozicijom iz funkcija za koje je već dokazano da su primitivno rekurzivne, i funkcije $\f G$ koja je (primitivno) rekurzivna --- pa je $\f H$ (primitivno) rekurzivna. Sada je $\overline{\f G}$ (primitivno) rekurzivna po lemi~\ref{lm:sumprodrek}.
 

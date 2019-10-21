@@ -49,7 +49,7 @@ Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivna, od
 
 \subsection{Parcijalnost}
 
-Gdje god smo u dosadašnjem tekstu pričali o općenitim izračunljivim funkcijama, pazili smo da  upotrijebimo prijedlog "iz": funkcija \emph{iz} $A$ u $B$. Općenito u matematici, takva fraza označava \emph{parcijalne} funkcije, koje ne moraju biti definirane u svim točkama od $A$ (precizno, domena im je podskup od $A$). Recimo, tangens je parcijalna funkcija iz $\mathbb R$ u $\mathbb R$, jer je $\frac{\pi}{2}\in\mathbb R\setminus \dom{\text{tg}}$. Takve funkcije označavamo oznakom $f:A\rightharpoonup B$, za razliku od \emph{totalnih} funkcija koje označavamo $f:A\to B$ i zovemo ih funkcije \emph{sa} $A$ u $B$. 
+Gdje god je dosad bilo govora o općenitim izračunljivim funkcijama, namjerno je upotrijebljen prijedlog "iz": funkcija \emph{iz} $A$ u $B$. Općenito u matematici, takva fraza označava \emph{parcijalne} funkcije, koje ne moraju biti definirane u svim točkama od $A$ (precizno, domena im je podskup od $A$). Recimo, tangens je parcijalna funkcija iz $\mathbb R$ u $\mathbb R$, jer je $\frac{\pi}{2}\in\mathbb R\setminus \dom{\text{tg}}$. Takve funkcije označavamo oznakom $f:A\rightharpoonup B$, za razliku od \emph{totalnih} funkcija koje označavamo $f:A\to B$ i zovemo ih funkcije \emph{sa} $A$ u $B$. 
 
 Dopuštajući algoritmima da računaju parcijalne funkcije, zapravo im omogućavamo da je za neke ulazne podatke njihov rad sasvim dobro definiran (dakle, ovdje ne mislimo na izuzetke, \emph{exceptions}, kao što je dijeljenje nulom), ali da ipak ne postoji završna konfiguracija iz koje bismo mogli pročitati izlazni podatak. Nakon malo razmišljanja dolazimo do zaključka da je to jedino moguće tako da algoritam za neke ulaze beskonačno radi, odnosno nikada ne stane.
 
@@ -74,7 +74,7 @@ Na primjer, reći da je dvomjesna relacija uređaja $<$ na prirodnim brojevima i
 
 U skladu s uobičajenom praksom mnogih programskih jezika, prešutno koristimo standardno ulaganje skupa $bool$ u $\N$, tako da preslikamo $\mathit{false}\mapsto 0$ i $\mathit{true}\mapsto 1$. Drugim riječima, na izračunljivost relacije $R$ gledamo kao na izračunljivost njene \emph{karakteristične funkcije} $\chi_R$, koja je iste mjesnosti kao i $R$. U suprotnom smjeru koristimo (opet standardnu) interpretaciju nule kao $\mathit{false}$, a svih ostalih prirodnih brojeva kao $\mathit{true}$: drugim riječima, koristimo kompoziciju s karakterističnom funkcijom $\chi_{\N_+}$ (za koju ćemo dokazati da je izračunljiva).
 
-Dakle, relacijama ćemo pripisivati svojstva izračunljivosti koja imaju njihove karakteristične funkcije: na primjer, reći ćemo da je $\f{R}$ primitivno rekurzivna ako je $\chi_{\f{R}}$ primitivno rekurzivna. Kod relacija ne moramo razmišljati o parcijalnosti: karakteristična funkcija je uvijek totalna. Relacije imaju drugi način iskazivanja parcijalnosti, \emph{rekurzivnu prebrojivost} o kojoj ćemo više reći u poglavlju~\ref{ch:re}.
+Dakle, relacijama ćemo pripisivati svojstva izračunljivosti koja imaju njihove karakteristične funkcije: na primjer, reći ćemo da je $\f{R}$ primitivno rekurzivna ako je $\chi_{\f{R}}$ primitivno rekurzivna. Kod relacija ne moramo razmišljati o parcijalnosti: \textbf{karakteristične funkcije su uvijek totalne}. Relacije imaju drugi način modeliranja parcijalnosti, \emph{rekurzivnu prebrojivost} o kojoj će biti više riječi u poglavlju~\ref{ch:re}.
 
 \section{Osnovni pojmovi i oznake}
 
@@ -134,7 +134,7 @@ P:=\begin{prog}
 \end{equation}
 Broj instrukcija programa $P$ zovemo još \emph{duljinom} programa $P$, i označavamo ga s $n_P$.
 
-Sadržaj registara se može mijenjati za vrijeme izvršavanja programa, ovisno o instrukcijama. Početni sadržaj određen je ulaznim podacima. Irelevantni registri (koji se ne spominju u instrukcijama niti služe za ulaz) formalno sadrže vrijednost $0$, iako (po definiciji irelevantnosti) zapravo nije bitno koju vrijednost sadrže.
+Sadržaj registara se može mijenjati za vrijeme izvršavanja programa, u skladu s instrukcijama. Početni sadržaj određen je ulaznim podacima. Irelevantni registri (koji se ne spominju u instrukcijama niti služe za ulaz) formalno sadrže vrijednost $0$, iako (po definiciji irelevantnosti) zapravo nije bitno koju vrijednost sadrže.
 
 Sadržaj programskog brojača također se mijenja, tako da se iz\-vr\-ša\-va\-njem svake instrukcije poveća za $1$, osim ako sama instrukcija kaže drugačije. Početna vrijednost programskog brojača je $0$. U svakom trenutku sadržaj programskog brojača je redni broj instrukcije koja se trenutno izvršava, dok vrijednost $n$ označava kraj izvođenja programa.
 
@@ -163,11 +163,11 @@ Skup $\mathscr Ins$ svih RAM-instrukcija je prebrojiv.
 Skup $\mathscr Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikavanje $f_1:\N\to\mathscr Ins_\inc$ zadano s $f_1(j):=(\incr{j})$ je bijekcija. Analogno, koristeći odredište (iako je broj odredišta ograničen za fiksni program $P$, svaka instrukcija $\goto\;l$ se može pojaviti u \emph{nekom} programu), skup $\mathscr Ins_{\goto}$ je prebrojiv, a skup $\mathscr Ins_\dec$ je ek\-vi\-po\-ten\-tan s $\N\times\N$, pa je i on prebrojiv. Sada je $\mathscr Ins$ prebrojiv kao (disjunktna) unija tih triju prebrojivih skupova.
 \end{proof}
 
-\begin{korolar}[{name=[prebrojivost skupa $\mathscr Prog$]}]\label{kor:alef0prog}
-Skup $\mathscr Prog$ svih RAM-programa je prebrojiv.
+\begin{korolar}[{name=[prebrojivost skupa $\mathscr Pr\mspace{-1mu}oi\mspace{-2mu}g$]}]\label{kor:alef0prog}
+	Skup $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ svih RAM-programa je prebrojiv.
 \end{korolar}
 \begin{proof}
-Direktno iz činjenice da je $\mathscr Ins_{\inc}^{\quad*}\subseteq\mathscr Prog\subseteq\mathscr Ins^*$, i leme~\ref{lema:alef0ins}. Iz teorije skupova znamo da je skup $A^*$ prebrojiv ako je $A$ prebrojiv.
+	Direktno iz činjenice da je $\mathscr Ins_{\inc}^{\quad*}\subseteq\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g\subseteq\mathscr Ins^*$, i leme~\ref{lema:alef0ins}. Iz teorije skupova znamo da je skup $A^*$ prebrojiv ako je $A$ prebrojiv.
 \end{proof}
 
 %\subsection{Konfiguracije i izračunavanja}
@@ -263,11 +263,11 @@ Neka je $P$ proizvoljni RAM-program te $k\in\N_+$. Definirajmo skup
 \begin{align}
 S&:=\{\vec x\in\N^k\mid\text{$P$-izračunavanje s $\vec x$ stane}\}
 \intertext{i na njemu funkciju}
-f(\vec x)&:=c(\reg{0})\text{, gdje je $c$ završna konfiguracija $P$-izračunavanja s $\vec x$}.
+f(\vec x)&:=c(\reg{0})\text{, gdje je $c$ završna konfiguracija $P$-izračunavanja s $\vec x$.}
 \end{align}
 Iz te definicije slijedi da je $f:S\to\N$ ($k$-mjesna) brojevna funkcija, a $P^k$ računa $f$.
 
-Za jedinstvenost, mjesnost funkcije je određena mjesnošću algoritma (uz prethodni dogovor da se prazne funkcije različitih mjesnosti razlikuju), njena domena je određena stajanjem izračunavanja (koje je jedinstveno zbog propozicije~\ref{prop:ramdet}), a vrijednost funkcije u svakoj točki domene određena je završnom konfiguracijom (koja je jedinstvena zbog propozicije~\ref{prop:ram1zav}).
+Za jedinstvenost, mjesnost funkcije je određena mjesnošću algoritma (uz prethodni dogovor da se prazne funkcije različitih mjesnosti razlikuju), njena domena je određena stajanjem izračunavanja (jedinstvenog zbog propozicije~\ref{prop:ramdet}), a vrijednost funkcije u svakoj točki domene određena je završnom konfiguracijom (koja je jedinstvena zbog propozicije~\ref{prop:ram1zav}).
 \end{proof}
 
 Važna posljedica prethodnog rezultata je ograničenje broja izračunljivih funkcija.
@@ -283,8 +283,8 @@ Za svaki $k\in\N_+$, skup $\mathscr Comp_k$ je prebrojiv. Skup $\mathscr Comp$ s
 \end{teorem}
 \begin{proof}
 Neka je $k$ fiksna mjesnost. Preslikavanje
-sa skupa $\mathscr Prog$ na skup $\mathscr Comp_k$,
-    koje svakom RAM-programu $P$ pridružuje funkciju koju algoritam $P^k$ računa, je dobro definirano prema korolaru~\ref{kor:ram1fun}, i surjekcija je po definiciji~\ref{def:ram-izr}. Iz toga je $\card(\mathscr Comp_k)\le\card(\mathscr Prog)$, što je $\aleph_0$ po korolaru~\ref{kor:alef0prog}.
+	sa skupa $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ na skup $\mathscr Comp_k$,
+	koje svakom RAM-programu $P$ pridružuje funkciju koju algoritam $P^k$ računa, je dobro definirano prema korolaru~\ref{kor:ram1fun}, i surjekcija je po definiciji~\ref{def:ram-izr}. Iz toga je $\card(\mathscr Comp_k)\le\card(\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g)$, što je $\aleph_0$ po korolaru~\ref{kor:alef0prog}.
 
 Za drugu nejednakost, uočimo da su za sve $n\in\N$ i $k\in\N_+$, konstantne funkcije $\f{C}_n^k$, zadane sa
 $\f{C}_n^k(\vec x):=n$, RAM-izračunljive: doista, računaju ih RAM-algoritmi
@@ -312,7 +312,7 @@ Opet, fiksirajmo mjesnost $k\in\N_+$. Skup svih $k$-mjesnih brojevnih funkcija $
 \begin{equation}
     \card\bigl(\N^{\N^k}\bigr)=\aleph_0^{\aleph_0^k}=\aleph_0^{\aleph_0}=\mathfrak c>\aleph_0\text.
 \end{equation}
-    Iz toga i teorema~\ref{tm:alef0izr} slijedi $\mathscr Func_k\nsubseteq\mathscr Comp_k$, pa je $\mathscr Func_k\setminus\mathscr Comp_k\ne\emptyset$.
+    Iz toga i teorema~\ref{tm:alef0izr} slijedi $\mathscr Func_k\nsubseteq\mathscr Comp_k$, pa je $\mathscr Func_k\!\setminus\mathscr Comp_k\ne\emptyset$.
 \end{proof}
 
 % \subsection{Primjeri RAM-programa}
@@ -394,8 +394,8 @@ Definirat ćemo brojne makroe, što će kulminirati \emph{funkcijskim makroom} -
 \end{definicija}
 \noindent Sada možemo, slično kao lemu~\ref{lema:alef0ins} i korolar~\ref{kor:alef0prog}, dokazati da su skupovi
 \begin{align}
-\mathscr{MI}ns&:=\mathscr Ins\mathbin{\dcup}\{P^*\mid P\in\mathscr Prog\}\text{, i}\\
-\mathscr{MP}rog&:=\{Q\in\mathscr{MI}ns^*\mid\text{sva odredišta u $Q$ su manja ili jednaka $n_Q$}\}\text,
+	\mathscr{MI}ns&:=\mathscr Ins\mathbin{\dcup}\{P^*\mid P\in\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g\}\text{, i}\\
+	\mathscr{MP}r\mspace{-1mu}o\mspace{-2mu}g&:=\{Q\in\mathscr{MI}ns^*\mid\text{sva odredišta u $Q$ su manja ili jednaka $n_Q$}\}\text,
 \end{align}
 svih makro-instrukcija, i svih makro-programa, prebrojivi. Ti rezultati nisu toliko bitni zbog tehnika koje ćemo uskoro razviti, ali predstavljaju dobru vježbu. % Sljedeći korak u tom smjeru je konstatacija da makro-izračunljivih funkcija ima prebrojivo mnogo, i kao posljedica toga, postoje brojevne funkcije koje nisu ni makro-izračunljive. No
 
@@ -505,15 +505,15 @@ Dok god postoji barem jedan makro u $Q$:
 \end{quotation}
 \end{definicija}
 
-\begin{propozicija}[{name=[spljoštenje projicira $\mathscr{MP}rog$ na $\mathscr Prog$]}]
-Preslikavanje ${}^\flat$ je totalna surjekcija sa skupa $\mathscr{MP}rog$ na skup $\mathscr Prog$.
+\begin{propozicija}[{name=[spljoštenje projicira $\mathscr{MP}r\mspace{-1mu}o\mspace{-2mu}g$ na $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$]}]
+	Preslikavanje ${}^\flat$ je totalna surjekcija sa skupa $\mathscr{MP}r\mspace{-1mu}o\mspace{-2mu}g$ na skup $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$.
 \end{propozicija}
 \begin{proof}
-Treba vidjeti da za proizvoljni makro-program $Q$, postupak iz definicije~\ref{def:flat} uvijek stane u konačno mnogo koraka, i pritom proizvede RAM-program.
+Za početak trebamo vidjeti da za proizvoljni makro-program $Q$, postupak iz definicije~\ref{def:flat} uvijek stane u konačno mnogo koraka, i pritom proizvede RAM-program.
 
 Kako je u svakom makrou $P^*$, $P$ \emph{RAM}-program, u koraku~\ref{korak:dodaj} ne dodajemo nove makroe. S druge strane, u koraku~\ref{korak:makni} uklanjamo jedan makro, a u koraku~\ref{korak:renumeriraj} ne mijenjamo broj makroa, dakle svaki prolaz kroz petlju smanjuje broj makroa za $1$. Kako svaki makro-program ima konačno mnogo makroa, postupak će sigurno završiti (nakon najviše $n_Q$ prolaza kroz petlju). A kada završi, uvjet petlje neće biti ispunjen, dakle u $Q$ više neće biti makroa: drugim riječima, pretvorili smo  $Q$ u RAM-program.
 
-    Surjektivnost slijedi iz činjenice da je $\mathscr Ins\subset\mathscr{MI}ns$ (dakle $\mathscr Prog\subset\mathscr{MP}rog$) te je ${}^\flat$ na RAM-programima identiteta: uvjet petlje već na početku nije ispunjen, pa se program uopće ne mijenja. Dakle za svaki RAM-program $P$ vrijedi $P^\flat=P$.
+	Surjektivnost slijedi iz činjenice da je $\mathscr Ins\subset\mathscr{MI}ns$ (dakle $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g\subset\mathscr{MP}r\mspace{-1mu}o\mspace{-2mu}g$) te je ${}^\flat$ na RAM-programima identiteta: uvjet petlje već na početku nije ispunjen, pa se program uopće ne mijenja. Dakle za svaki RAM-program $P$ vrijedi $P^\flat=P$.
 \end{proof}
 
 \begin{primjer}[{name=[spljoštenje makro-programa $Q$]}]\label{pr:flat}
@@ -571,7 +571,7 @@ Ostao nam je još jedan makro, koji je ovaj put zadnja instrukcija ($i=3$). To z
 i gotovi smo: $Q'''=Q^\flat$, jer više nema makroa u programu. (Za objašnjenje funkcije $v$ čije vrijednosti su napisane pored $Q^\flat$, pogledajte skicu dokaza teorema~\ref{tm:rem}.)
 \end{primjer}
 
-Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathscr{MP}rog$ i $\mathscr Prog$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Vratit ćemo se na ovaj postupak u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa. To će biti jedan specijalni slučaj (dokaz teorema o parametru), za koji ćemo tada pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
+Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathscr{MP}r\mspace{-1mu}o\mspace{-2mu}g$ i $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Vratit ćemo se na ovaj postupak u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa. To će biti jedan specijalni slučaj (dokaz teorema o parametru), za koji ćemo tada pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
 
 %\subsection{Ekvivalentnost RAM-programa i makro-programa}
 
