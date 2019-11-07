@@ -44,7 +44,7 @@ elif test == 3:
         (11, GOTO, 9),
         (12, GOTO, 4),
     ]
-    word = '17'
+    word = '61'
 elif test == 4:
     eSigma = '*'
     P = []
@@ -218,4 +218,4 @@ for α in Sigma:
 rule('m$', '$', 'l$', space, -1)  # (δ5e)
 
 M = TuringMachine(Q, Sigma, Gamma, space, delta, 'n$', 'l$')
-M.simulate(word, debug=True)
+M.simulate(word, debug=False)
