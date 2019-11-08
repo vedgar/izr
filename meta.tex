@@ -1,6 +1,6 @@
 \chapter{Metaprogramiranje}
 
-U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathscr Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathscr Comp$ --- već smo doista konstruirali funkciju $compose:\mathscr Prog^+\times\mathscr Prog\times\N_+\to\mathscr Prog$ koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije (i mjesnost $k$) te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_k^{l+1}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to dokazati. Nećemo baš programirati dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
+U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathscr Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathscr Comp$ --- već smo doista konstruirali funkciju $compose:\mathscr Prog^+\mspace{-2mu}\times\mathscr Prog\times\N_+\to\mathscr Prog$ koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije (i mjesnost $k$) te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_k^{l+1}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to dokazati. Nećemo baš programirati dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
 
 \section{Specijalizacija}
 
@@ -48,7 +48,7 @@ Definiciju od $\f g$ možemo zapisati u simboličkom obliku
 Isti kao gore --- zapravo lakši, jer ne moramo određivati domenu.
 \end{proof}
 
-Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne eksplicitno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Mogli bismo izračunati (neke) indekse od $\f I_i^k,i\in[1\dd k]$ i $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, kao specijalni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
+Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne eksplicitno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Mogli bismo izračunati (neke) indekse od $\f I_i^k,i\in[1\dd k]$ i $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, kao posebni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
 , a onda $\f{compose}$ pomoću te funkcije.
 
 Na neki način, $\f S=\N spec$, gdje funkcije kodiramo njihovim indeksima na način koji je detaljno objašnjen u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$ te vraća \emph{neki} indeks za $spec(y,\f f)$.
@@ -337,9 +337,9 @@ Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači mn
 
 % \subsection{Opće rekurzije s izračunljivim funkcijama}
 
-Kao i drugdje gdje se gledaju funkcijske jednadžbe (recimo u teoriji običnih diferencijalnih jednadžbi), rijetko se gledaju za sasvim općenite funkcije. Kod diferencijalnih jednadžbi najčešće se bavimo glatkim funkcijama --- ovdje, kod općih rekurzija, bavimo se izračunljivim funkcijama. Zbog teorema ekvivalencije, svejedno je kako manifestiramo tu izračunljivost --- uglavnom ćemo to činiti kroz parcijalnu rekurzivnost i postojanje indeksa.
+Kao i drugdje gdje se gledaju funkcijske jednadžbe (recimo u teoriji običnih diferencijalnih jednadžbi), rijetko se gledaju za sasvim općenite funkcije. Kod diferencijalnih jednadžbi najčešće se bavimo glatkim funkcijama --- ovdje, kod općih rekurzija, bavimo se izračunljivim funkcijama. Zbog teorema ekvivalencije, svejedno je kako manifestiramo tu izračunljivost --- uglavnom ćemo to činiti kroz parcijalnu rekurzivnost ili kroz postojanje indeksa.
 
-Dakle, zadane su nam parcijalno rekurzivne funkcije $\f G_1$, $\f G_2$,~\ldots\ preko svojih indeksa $g_1$, $g_2$,~\ldots\ --- i tražimo indeks $f$ funkcije $\f F$ koja zadovoljava opću rekurziju $\f F=\mathcal M(\vec{\f G},\f F)$. Simboličku definiciju $\mathcal M$ je, kao i obično, lakše napisati točkovno: u obliku jedne parcijalno rekurzivne funkcije $\f G$ koja prima ulazne podatke $\vec x$, indekse $\vec g$ i indeks $f$; te vraća vrijednost koja mora biti parcijalno jednaka $\f F(\vec x)\simeq\kf f(\vec x)\simeq\f{comp}(\vec x,f)$.
+Dakle, zadane su nam parcijalno rekurzivne funkcije $\f G_1$, $\f G_2$,~\ldots\ preko svojih indeksa $g_1$, $g_2$,~\ldots\ --- i tražimo indeks $f$ funkcije $\f F$ koja zadovoljava opću rekurziju $\f F=\mathcal M(\vec{\f G},\f F)$. Simboličku definiciju $\mathcal M$ je (kao i obično) lakše napisati točkovno: u obliku jedne parcijalno rekurzivne funkcije $\f G$ koja prima ulazne podatke $\vec x$, indekse $\vec g$ i indeks $f$; te vraća vrijednost koja mora biti parcijalno jednaka $\f F(\vec x)\simeq\kf f(\vec x)\simeq\f{comp}(\vec x,f)$.
 
 No ako već pišemo točkovnu definiciju, indeksi $\vec g$ nam ne trebaju --- s obzirom na to da su $\f G_i$ poznate funkcije, možemo ih uklopiti u definiciju funkcije $\f G$. Jedina funkcija s kojom to ne možemo učiniti (jer još nije poznata) je funkcija $\f F$, tako da njen indeks moramo prenijeti kao dodatni argument funkciji $\f G$. Kad $\f G$ želi pozvati $\f F$, na nekim argumentima $\vec y$ (koji će najčešće biti na neki način "manji" od $\vec x$), koristit će izraz $\f{comp}_k(\vec y,f)$.
 
@@ -781,7 +781,7 @@ Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo recimo %skup
 %Dobro, uzmimo onda neki manji skup,
 recimo jednočlan skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili $1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
 
-Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju imati specijalno svojstvo \emph{invarijantnosti} na neku relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma.
+Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju biti \emph{invarijantni} na neku relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma.
 
 \begin{primjer}[{name=[Sortiranje kao jedna funkcija s raznim implementacijama]}]
     Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\!:\f{Seq}\to\f{Seq}$ koja sortira konačne nizove zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
@@ -882,16 +882,16 @@ Ovo je samo obrat po kontrapoziciji teorema~\ref{tm:Rice}.
 Neka je $k\in\N_+$ te $\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Tada $\mathcal F$ nije odlučiv.
 \end{korolar}
 \begin{proof}
-    Označimo $S:=\kins{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\ne\kins{\emptyset}=\emptyset$ i $S\ne\kins{\mathscr Comp_k}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po korolaru~\ref{kor:Rice!rek} $S$ nije rekurzivan, što znači da $\mathcal F$ nije odlučiv.
+    Označimo $S:=\kins{\mathcal F}$. Prema lemi~\ref{lm:kinv=sind}, skup $S$ je $k$-invarijantan. S druge strane, po lemi~\ref{lm:kodCompinj} je $S\ne\kins{\emptyset}=\emptyset$ i $S\ne\kins{\mathscr Comp_k\!}=\N$ (svaki prirodni broj je indeks neke $k$-mjesne funkcije). Po korolaru~\ref{kor:Rice!rek} $S$ nije rekurzivan, što znači da $\mathcal F$ nije odlučiv.
 \end{proof}
 
 \begin{korolar}[{name=[neodlučivost netrivijalnih semantičkih svojstava]}]
 Neka je $k\in\N_+$ te neka je $\wp$ bilo koje netrivijalno svojstvo $k$-mjesnih izračunljivih funkcija. Tada nijedan algoritam ne može točno odrediti, za proizvoljnu $\f F\in\mathscr Comp_k$, ima li $\f F$ svojstvo $\wp$.
 \end{korolar}
 \begin{proof}
-Budući da je $\wp$ netrivijalno svojstvo, postoji $k$-mjesna funkcija koja ga ima i neka druga $k$-mjesna funkcija koja ga nema. To znači da za skup $\mathcal F:=\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}$ vrijedi $\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Kad bi takav algoritam postojao, morao bi primati funkciju u nekom obliku (točkovna definicija, simbolička definicija, RAM-program, Turingov stroj,~\ldots) --- a svaki od njih znamo, neformalnim algoritmom, pretvoriti u indeks. Štoviše, imamo i (neformalne) algoritme pretvorbe u suprotnom smjeru, što znači da algoritam kojim bismo htjeli odlučiti $\wp$ mora raditi za \emph{sve} indekse traženih funkcija.
+Budući da je $\wp$ netrivijalno svojstvo, postoji neka $k$-mjesna funkcija koja ima to svojstvo, a postoji i neka druga $k$-mjesna funkcija koja ga nema. To znači da za skup $\mathcal F:=\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}$ vrijedi $\emptyset\subset\mathcal F\subset\mathscr Comp_k$. Kad bi takav algoritam postojao, morao bi primati funkciju u nekom obliku (točkovna definicija, simbolička definicija, RAM-program, Turingov stroj,~\ldots) --- a svaki od njih znamo, neformalnim algoritmom, pretvoriti u indeks. Štoviše, imamo i (neformalne) algoritme pretvorbe u suprotnom smjeru, što znači da algoritam kojim bismo htjeli odlučiti $\wp$ mora raditi za \emph{sve} indekse traženih funkcija.
 %Ovo vjerojatno treba mnogo bolje raspisati.
-No po Church--\!Turingovoj tezi, to znači da bi taj algoritam računao $\chi_{\kins{\mathcal F}}$, što je u kontradikciji s korolarom~\ref{kor:Rice!odl}.
+Po Church--\!Turingovoj tezi, to znači da bi taj algoritam računao $\chi_{\kins{\!\mathcal F}}$, što je u kontradikciji s korolarom~\ref{kor:Rice!odl}.
 \end{proof}
 
 \subsection{Sintaksna i semantička svojstva RAM-programa}

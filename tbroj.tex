@@ -27,7 +27,7 @@ Precizno, uz oznaku $\kappa:=\N\Sigma^*$, imamo vezu
 $\f F=\N\varphi=\kappa\circ\varphi\circ\kappa^{-1}\Leftrightarrow
 \varphi=\N^{-1}\f F=\kappa^{-1}\circ\f F\circ\kappa$
 %\end{equation}
-te vrijedi $\N\,\N^{-1}\f F=F$ i $\N^{-1}\N\varphi=\varphi$.
+te vrijedi $\N\,\N^{-1}\f F=\f F$ i $\N^{-1}\N\varphi=\varphi$.
 
 \begin{korolar}[{name=[jednomjesne brojevne funkcije u različitim modelima]}]\label{kor:pent}
 Neka je $\Sigma$ abeceda s kodiranjem $\N\Sigma$ te $F^1$ brojevna funkcija.\newline Tada je $F$ parcijalno rekurzivna ako i samo ako je $\N^{-1}F$ Turing-izračunljiva.
@@ -36,7 +36,7 @@ Neka je $\Sigma$ abeceda s kodiranjem $\N\Sigma$ te $F^1$ brojevna funkcija.\new
 Ako je $F=\N\,\N^{-1}F$ parcijalno rekurzivna, tada je po teoremu~\ref{tm:pir} RAM-izračunljiva, pa je po teoremu~\ref{tm:krit} $\N^{-1}F$ Turing-izračunljiva. S druge strane, ako je $\N^{-1}F$ Turing-izračunljiva, onda je po teoremu~\ref{tm:tikp} $\N\,\N^{-1}F=F$ parcijalno rekurzivna.
 \end{proof}
 
-Vidimo da korolar~\ref{kor:pent} vrijedi bez obzira na abecedu i kodiranje. Važan specijalni slučaj dobijemo za jednočlanu abecedu, za koju je kodiranje jedinstveno i podudara se s duljinom (lema~\ref{lm:dulj<=kr}).
+Vidimo da korolar~\ref{kor:pent} vrijedi bez obzira na abecedu i kodiranje. Važan posebni slučaj dobijemo za jednočlanu abecedu, za koju je kodiranje jedinstveno i podudara se s duljinom (lema~\ref{lm:dulj<=kr}).
 
 \begin{definicija}[{name=[unarna abeceda i unarna reprezentacija brojevne funkcije]}]
 \emph{Unarna abeceda} je $\Sigma_{\t\textbullet}:=\{\t\textbullet\}$. Kad nema opasnosti od zabune, umjesto $\Sigma_{\t\textbullet}$ pišemo samo \t\textbullet. Kodiranje unarne abecede je jedino moguće: $\N\Sigma_{\t\textbullet}(\t\textbullet):=1$.
@@ -61,7 +61,7 @@ $\t\textbullet\f{factorial}\bigl(
 Neka je $F^1$ brojevna funkcija.\newline Tada je $F$ parcijalno rekurzivna ako i samo ako je $\t\textbullet F$ Turing-izračunljiva.
 \end{korolar}
 \begin{proof}
-Već rekosmo, ovo je specijalni slučaj korolara~\ref{kor:pent}, za unarnu abecedu.
+Već rekosmo, ovo je posebni slučaj korolara~\ref{kor:pent}, za unarnu abecedu.
 \end{proof}
 
 \subsection{Izračunljivost jezika}\label{sec:Todl}
@@ -189,10 +189,11 @@ To je također i lijevi inverz: odnosno, ako primijenimo taj postupak na riječ 
 Za same funkcije, koristit ćemo istu ideju kao u~\eqref{eq:kodfidef}: reprezentaciju ulaza preslikamo u reprezentaciju izlaza (ako je izlaz definiran), dok ne-reprezentacije ne preslikamo nikamo. Ovdje treba biti oprezan zbog propozicije~\ref{prop:betabij}, ali brojevne funkcije imaju fiksnu mjesnost. Zato ćemo ne-reprezentacijama za funkciju $f^k$ proglasiti sve one riječi koje nisu reprezentacije $k$-torki (odnosno one koje su reprezentacije $l$-torki za $l\ne k$). Na isti način, na izlazu ćemo dati reprezentaciju samog broja ($k=1$), dakle riječ bez separatora $\t\textbullet^y=\beta(y)\in\beta[\N]=\im{\beta^1}=\t\textbullet^*$.
 
 \begin{definicija}[{name=[binarna reprezentacija brojevne funkcije]}]
-Neka je $k\in\N_+$ te $f^k$ brojevna funkcija. Za jezičnu funkciju $\beta f$ zadanu s \begin{equation}\label{eq:betaf}
-    \beta f(u):\simeq\beta\bigl(f(\vec x)\bigr)\text{, za } u=\beta(\vec x^k)
+Neka je $k\in\N_+$ te $f^k$ brojevna funkcija. Jezičnu funkciju $\beta f$ nad $\Sigma_\beta$, zadanu s
+\begin{equation}\label{eq:betaf}
+  \beta f(u):\simeq\beta\bigl(f(\vec x)\bigr)\text{, za } u=\beta(\vec x^k)\text,
 \end{equation}
-nad binarnom abecedom $\Sigma_\beta$, kažemo da je \emph{binarna reprezentacija} funkcije $f$.
+zovemo \emph{binarnom reprezentacijom} funkcije $f$.
 \end{definicija}
 %\begin{primjer}
 %$\beta\f{mul}^2(\t{\textbullet\textbullet/\textbullet\textbullet\textbullet\textbullet\textbullet})=\t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}$, jer je $2\cdot5=10$, dok $\t\textbullet$ i $\t{//}$ nisu u $\dom{\beta\f{mul}^2}$, jer $(1)$ i $(0,0,0)$ nisu ulazi ispravne mjesnosti za $\f{mul}^2$.
@@ -248,7 +249,7 @@ U traženju tih funkcija može pomoći dijagram.
 63
 \end{tikzcd}
 \end{equation}
-Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}^3$ na $(3,1,2)$). Brojevi u donjem retku razumljiviji su u pomaknutoj bazi $2$: $275=(11121211)_2$, a $63=(111111)_2$. Gornji pravokutnik predstavlja definiciju~\eqref{eq:betaf}, dok donji predstavlja~\eqref{eq:kodfidef} za specijalni slučaj binarne abecede i jezične funkcije $\beta f$ nad njom.
+Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}^3$ na $(3,1,2)$). Brojevi u donjem retku razumljiviji su u pomaknutoj bazi $2$: $275=(11121211)_2$, a $63=(111111)_2$. Gornji pravokutnik predstavlja definiciju~\eqref{eq:betaf}, dok donji predstavlja~\eqref{eq:kodfidef} za posebni slučaj binarne abecede i jezične funkcije $\beta f$ nad njom.
 
 \begin{lema}[{name=[brojevni-jezični-brojevni dijagram komutira]}]\label{lm:pravkomut}
 Dijagram prikazan lijevo u~\eqref{dia:Nbeta} (samo pune strelice) komutira.

@@ -66,7 +66,7 @@ Treba napomenuti da je važna odlika ove knjige da će svi algoritmi biti preciz
 
 %\subsection{Relacije}
 
-Iako sva računanja možemo shvatiti kao računanja funkcija, izlaganje je jednostavnije ako uvedemo i \emph{relacije}, koje ćemo računati kao specijalni slučaj računanja funkcija. Iz standardne skupovnoteorijske perspektive to se čini čudnim: nisu li relacije općenit pojam, a funkcije samo specijalni slučaj --- relacije s funkcijskim svojstvom?
+Iako sva računanja možemo shvatiti kao računanja funkcija, izlaganje je jednostavnije ako uvedemo i \emph{relacije}, koje ćemo računati kao posebni slučaj računanja funkcija. Iz standardne skupovnoteorijske perspektive to se čini čudnim: nisu li relacije općenit pojam, a funkcije samo posebni slučaj --- relacije s funkcijskim svojstvom?
 
 Iz algoritamske perspektive, nisu. Ako izračunljivu funkciju $\f{f}$ reprezentiramo po\-mo\-ću algoritma koji za dani $\vec x$ računa njenu vrijednost $\f{f}(\vec x)$, izračunljivu relaciju $\f{R}$ prirodno je predstaviti algoritmom koji za dani $\vec x$ računa \emph{istinitosnu} vrijednost ($bool$: $\mathit{true}$ ili $\mathit{false}$), već prema tome je li $\vec x\in\f{R}$ ili nije. Većina programskih jezika nema mogućnost programiranja relacija kao zasebnog tipa algoritma, već ih reprezentiraju funkcijama čiji povratni tip je $bool$.
 
@@ -138,7 +138,7 @@ Sadržaj registara se može mijenjati za vrijeme izvršavanja programa, u skladu
 
 Sadržaj programskog brojača također se mijenja, tako da se iz\-vr\-ša\-va\-njem svake instrukcije poveća za $1$, osim ako sama instrukcija kaže drugačije. Početna vrijednost programskog brojača je $0$. U svakom trenutku sadržaj programskog brojača je redni broj instrukcije koja se trenutno izvršava, dok vrijednost $n$ označava kraj izvođenja programa.
 
-\begin{definicija}[{name=[RAM-instrukcija]}]
+\begin{definicija}[{name=[RAM-instrukcija]}]\label{def:ins}
 Svaka \emph{RAM-instrukcija} ima:
 \begin{itemize}
     \item (ako je dio RAM-programa $P$) \emph{redni broj}, element skupa $[0\dd n_P\rangle$;
@@ -571,7 +571,7 @@ Ostao nam je još jedan makro, koji je ovaj put zadnja instrukcija ($i=3$). To z
 i gotovi smo: $Q'''=Q^\flat$, jer više nema makroa u programu. (Za objašnjenje funkcije $v$ čije vrijednosti su napisane pored $Q^\flat$, pogledajte skicu dokaza teorema~\ref{tm:rem}.)
 \end{primjer}
 
-Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathscr{MP}r\mspace{-1mu}o\mspace{-2mu}g$ i $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Vratit ćemo se na ovaj postupak u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa. To će biti jedan specijalni slučaj (dokaz teorema o parametru), za koji ćemo tada pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
+Postupak za određivanje spljoštenja zapravo je neformalni algoritam, čiji je ulazni podatak makro-program, a izlazni RAM-program. Taj algoritam bismo mogli i formalizirati, tako da razvijemo kodiranja za skupove $\mathscr{MP}r\mspace{-1mu}o\mspace{-2mu}g$ i $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ --- no nema potrebe. Sve za što će nam trebati makro-programi je dokaz da se funkcijski programi mogu zapisati imperativno; a ta pretvorba, iako je mehanička i programabilna, je na meta-razini, "iznad" samih algoritama koji rade na prirodnim brojevima. Iako je jedan od važnih rezultata teorije izračunljivosti da se meta-algoritmi također mogu prikazati kao algoritmi, odnekud moramo početi i zadovoljiti se neformalnim objašnjenjima. Vratit ćemo se na ovaj postupak u formalnom okruženju, kad budemo imali razvijeno kodiranje RAM-programa. To će biti jedan posebni slučaj (dokaz teorema o parametru), za koji ćemo tada pokazati da je zapravo dovoljan za sva spljoštenja koja ćemo ovdje neformalno napraviti. Može se činiti cirkularnim, ali zapravo nije; baš kao ni npr.\ govor o modelu teorije skupova ZF kao o skupu --- koristimo neformalne pojmove da bismo opisali formalne.
 
 %\subsection{Ekvivalentnost RAM-programa i makro-programa}
 
@@ -587,7 +587,7 @@ Za svaki makro-program $Q$, RAM-program $Q^\flat$ je ekvivalentan s $Q$.
 \begin{proof}[Skica dokaza]
 Treba definirati funkciju $v$ iz $\N\times\N$ u $\N$, takvu da prijelaz između RAM-konfiguracija $\bigl(r_0,r_1,\dotsc,v(pc,ac)\bigr)$ i $\bigl(r_0',r_1',\dotsc,v(pc',ac')\bigr)$ po programu $Q^\flat$ odgovara jednom ili više prijelaza između makro-konfiguracija $(r_0,r_1,\dotsc,pc,ac)$ i $(r_0',r_1',\dotsc,pc',ac')$ po programu $Q$. Intuitivno, funkcija $v$ treba opisivati kako se točno transformiraju redni brojevi instrukcija pri spljoštenju, a mora i preslikavati "završnu konfiguraciju programskih brojača" $(n_Q,0)$ u $n_{Q^\flat}$. Recimo, ako je $(i.\,P^*)$ prvi makro u $Q$, znamo da je $v(j,0):=j$ za sve $j<i$. Na kraju primjera~\ref{pr:flat}, u~\eqref{eq:Qflat}, navedena je funkcija $v$ za konkretan makro-program $Q$ iz primjera~\ref{pr:makro}.
 
-Iz toga onda slijedi da se pri izvršavanju programa i njegovog spljoštenja zapravo izvršavaju iste instrukcije, samo su im odredišta i redni brojevi transformirani po funkciji $v$. Dakle, semantike su tih instrukcija --- promjene sadržaja registara --- iste i odvijaju se na istim registrima, istim redom. To pak znači da ako počnemo od iste konfiguracije (početna konfiguracija s ulazom $\vec x$) što se registara tiče, registri će mijenjati svoje vrijednosti na isti način prilikom izvršavanja $Q$ i $Q^\flat$, pa će specijalno i sadržaj registra $\reg0$ biti isti. Štoviše, jer je $v(n_Q,0)=n_{Q^\flat}$, $Q^\flat$-izračunavanje s $\vec x$ će stati ako i samo ako $Q$-izračunavanje s $\vec x$ stane, i tada će u $\reg0$ biti isti broj. Kako je $\vec x$ bio proizvoljan, zaključujemo da su $Q$ i $Q^\flat$ ekvivalentni.
+Iz toga onda slijedi da se pri izvršavanju programa i njegovog spljoštenja zapravo izvršavaju iste instrukcije, samo su im odredišta i redni brojevi transformirani po funkciji $v$. Dakle, semantike su tih instrukcija --- promjene sadržaja registara --- iste i odvijaju se na istim registrima, istim redom. To pak znači da ako počnemo od iste konfiguracije (početna konfiguracija s ulazom $\vec x$) što se registara tiče, registri će mijenjati svoje vrijednosti na isti način prilikom izvršavanja $Q$ i $Q^\flat$, pa će posebno i sadržaj registra $\reg0$ biti isti. Štoviše, jer je $v(n_Q,0)=n_{Q^\flat}$, $Q^\flat$-izračunavanje s $\vec x$ će stati ako i samo ako $Q$-izračunavanje s $\vec x$ stane, i tada će u $\reg0$ biti isti broj. Kako je $\vec x$ bio proizvoljan, zaključujemo da su $Q$ i $Q^\flat$ ekvivalentni.
 \end{proof}
 
 \subsection{Primjeri makroa}
@@ -601,7 +601,7 @@ Neka je $k\in\N_+$ te $\f f^k$ funkcija.
 \begin{proof}
 Za jedan smjer, ako je $\f f$ RAM-izračunljiva, postoji RAM-algoritam iste mjesnosti $P^k$ koji je računa.  RAM-program $P$ je i makro-program, a vidjeli smo u napomeni~\ref{nap:rem} da je svejedno izvršava li se na makro-stroju ili RAM-stroju. Drugim riječima, $P$ na makro-stroju također računa funkciju $\f f$, odnosno makro-algoritam $P^k$ računa $\f f$, pa je $\f f$ makro-izračunljiva.
 
-Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$ koji je računa. Po teoremu~\ref{tm:rem}, $Q^\flat$ je ekvivalentan s $Q$, dakle za svaki $k$ pa specijalno i za mjesnost funkcije $\f f$, $Q^k$ i $(Q^\flat)^k$ (pišemo skraćeno $Q^{\flat k}$) računaju istu funkciju. Drugim riječima, RAM-algoritam $Q^{\flat k}$ računa funkciju $\f f$, pa je ona RAM-izračunljiva.
+Za drugi smjer, ako je $\f f$ makro-izračunljiva, postoji makro-algoritam $Q^k$ koji je računa. Po teoremu~\ref{tm:rem}, $Q^\flat$ je ekvivalentan s $Q$, dakle za svaki $k$ pa posebno i za mjesnost funkcije $\f f$, $Q^k$ i $(Q^\flat)^k$ (pišemo skraćeno $Q^{\flat k}$) računaju istu funkciju. Drugim riječima, RAM-algoritam $Q^{\flat k}$ računa funkciju $\f f$, pa je ona RAM-izračunljiva.
 \end{proof}
 
 \begin{napomena}[{name=[makroi višeg reda]}]
