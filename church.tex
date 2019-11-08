@@ -74,7 +74,7 @@ Problem kojim smo se bavili --- za zadani $n$, je li $n$ u domeni od $\kf n^1$ -
 
 Metoda je ista ona pomoću koje iz već poznatih odlučivih problema (izračunljivih funkcija) dobivamo nove: \emph{svođenje} (redukcija). Ako možemo neku funkciju $f$ svesti na neku drugu $g$ --- napisati $f$ pomoću kompozicije, i eventualno primitivne rekurzije, funkcije $g$ s nekim izračunljivim funcijama, tada znamo da ako je $g$ izračunljiva, tada je i $f$ takva. To smo koristili mnogo puta u funkcijskom programiranju --- recimo, pogledajte primjer~\ref{pr:m-v}. Tamo nam je bila bitna primitivna rekurzivnost, pa smo govorili samo o totalnim funkcijama, i primitivna rekurzija je igrala bitnu ulogu. Kad govorimo o (ne)odlučivim problemima, primitivna rekurzivnost postaje luksuz koji si ne možemo uvijek priuštiti, pa ćemo zapravo promatrati samo kompoziciju. Kako se radi o problemima, dakle karakterističnim funkcijama relacija koje su totalne, zbog marljive evaluacije proizlazi da sve funkcije u kompoziciji moraju također biti totalne.
 
-Napomenimo da u literaturi postoje razne vrste svođenja problema, pa i općenitih funkcija. Mi ćemo odabrati najjednostavniju koja je dovoljno dobra za naše potrebe.
+Napomenimo, u literaturi postoje razne vrste svođenja problema, pa i općenitih funkcija. Odabiremo najjednostavniju prikladnu našim potrebama.
 
 \begin{definicija}[{name=[svedivost brojevnih relacija]}]\label{def:svod}
 Neka su $k,l\in\N_+$ te $R^k$ i $P^l$ relacije. Kažemo da je $R$ \emph{svediva} na $P$, i pišemo $R\preceq P$, ako postoje rekurzivne funkcije $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ takve da vrijedi $\chi_R=\chi_P\circ(\f G_1,\f G_2,\dotsc,\f G_l)$.

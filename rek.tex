@@ -516,7 +516,9 @@ Skup rekurzivnih funkcija zatvoren je na primitivnu rekurziju.
 Svaka primitivno rekurzivna funkcija je rekurzivna.
 \end{korolar}
 \begin{proof}
-    Po definiciji~\ref{def:prn}: sve inicijalne funkcije su totalne po napomeni~\ref{nap:inittot}, a parcijalno su rekurzivne po definiciji, dakle rekurzivne su. Sada samo treba primijeniti leme~\ref{lm:comprek} i~\ref{lm:prrek}.
+    Po definiciji~\ref{def:prn}: sve inicijalne funkcije su totalne po napomeni~\ref{nap:inittot}, a parcijalno su rekurzivne po definiciji, dakle rekurzivne su.
+	
+	Sada samo treba primijeniti leme~\ref{lm:comprek} i~\ref{lm:prrek}.
 \end{proof}
 
 \begin{korolar}[{name=[degenerirana primitivna rekurzija iz rekurzivne funkcije]}]\label{kor:F1rek}
@@ -539,11 +541,11 @@ Pogledajmo sada kako možemo proširiti rezultat iz propozicije~\ref{prop:prnram
 
 Ideja nije ništa revolucionarno: kao "kontrolnu varijablu" koristimo upravo $\reg0$, iz istog razloga kao u dokazu leme~\ref{lm:prram} --- da eventualnim završetkom petlje bude već spremna kao izlazni podatak. U tom smislu, već je inicijalizirana na nulu na početku izračunavanja --- samo je treba inkrementirati poslije svake provjere uvjeta $R$.
 
-Ili prije? Ovdje imamo mali tehnički problem: htjeli bismo da provjera bude na samom dnu programa, jer tako najbolje odgovara semantici negiranog uvjeta. Terminologijom jezika Pascal, implementiramo \texttt{until}, ne \texttt{while}. Iz sličnog razloga kao naši strojevi, Pascal je \texttt{while}-uvjet provjeravao na vrhu, a \texttt{until}-uvjet na dnu petlje. Semantika skoka je ista: ako je uvjet istinit nastavljamo (ulazimo u \texttt{while}-petlju, ili izlazimo iz \texttt{until}-petlje), a ako je lažan skačemo na drugi kraj (izlazimo iz \texttt{while}-petlje, ili ponovo izvršavamo \texttt{until}-petlju) --- što je baš semantika instrukcije tipa $\dec$.
+Ili prije? Ovdje imamo mali tehnički problem: htjeli bismo da provjera bude na samom dnu programa, jer tako najbolje odgovara semantici negiranog uvjeta. Terminologijom jezika Pascal, implementiramo \texttt{until}, ne \texttt{while}. Iz sličnog razloga kao naši strojevi, Pascal \texttt{while}-uvjet provjerava na vrhu, a \texttt{until}-uvjet na dnu petlje. Semantika skoka je ista: ako je uvjet istinit nastavljamo (ulazimo u \texttt{while}-petlju, ili izlazimo iz \texttt{until}-petlje), a ako je lažan skačemo na drugi kraj (izlazimo iz \texttt{while}-petlje, ili ponovo izvršavamo \texttt{until}-petlju) --- što je baš semantika instrukcije tipa $\dec$.
 
-Ali \texttt{until}-petlje imaju jedan veliki nedostatak: njihovo tijelo uvijek se izvrši barem jednom (kao kod petlje \texttt{do...while} u jeziku C). Kako se u petlji mora nalaziti instrukcija $\incr0$, čini se da teško možemo postići da $\reg0$ na kraju bude $0$, što može biti problem: recimo, za univerzalnu relaciju, $\mu y\,\N^{k+1}(\vec x,y)=0$.
+Ali \texttt{until}-petlje imaju jedan nedostatak: njihovo tijelo uvijek se izvrši barem jednom (kao kod petlje \texttt{do...while} u jeziku C). Kako se u petlji mora nalaziti instrukcija $\incr0$, čini se da teško možemo postići da $\reg0$ na kraju bude $0$, što može biti problem: recimo, za univerzalnu relaciju, $\mu y\,\N^{k+1}(\vec x,y)=0$.
 
-Rješenje problema se nalazi na drugom kraju, odnosno početku programa: program možemo početi izvršavati iz sredine! Na početak programa možemo staviti instrukciju ($0.\;\goto\;2$), da preskočimo instrukciju ($1.\;\incr0$) kod prvog prolaza.
+Rješenje problema se nalazi na drugom kraju, odnosno početku programa: program možemo početi izvršavati iz sredine! Na početak programa možemo staviti instrukciju tipa $\goto$, kako bismo preskočili instrukciju $\incr0$ kod prvog prolaza.
 
 \begin{lema}[{name=[zatvorenost skupa $\mathscr Comp$ na minimizaciju]}]\label{lm:muram}
 Skup $\mathscr Comp$ je zatvoren na minimizaciju.
@@ -606,11 +608,11 @@ Upravo napisani dokaz je zapravo sasvim konstruktivan: ako imamo zadanu parcijal
 
 Sada \emph{postorder}-obilaskom tog stabla možemo konstruirati preslikavanje (apstraktni tip podataka \texttt{Mapping}) $compile$ koje svaku od tih funkcija odnosno relacija preslikava u RAM-program koji je računa. Kad obilazimo list $L$, koristimo dokaz propozicije~\ref{prop:initmacro} da bismo pogledali koji makro-program $Q_L$ računa $L$ te definiramo $compile[L]:=Q_L^{\,\flat}$. Ako se nalazimo na unutarnjem čvoru $N$, ovisno o tome kako je dobiven iz svoje djece koristimo dokaz leme~\ref{lm:compram},~\ref{lm:prram} ili~\ref{lm:muram} da utvrdimo koji oblik makro-programa ---~\eqref{eq:compmacro},~\eqref{eq:prmacro} ili~\eqref{eq:mumacro} --- računa $N$, u taj predložak (\emph{template}) uvrštavajući funkcijske makroe koji na odgovarajućem mjestu pozivaju $compile[D_i]$, gdje su $D_i$ djeca čvora $N$. (Zbog \emph{postorder}-obilaska, $D_i$ su već kompilirani.) Dobivši tako makro-program $Q_N$, definiramo $compile[N]:=Q_N^{\,\flat}$. Na kraju \emph{postorder}-obilaska nalazi se korijen $K$, i $compile[K]$ će biti RAM-program koji računa parcijalno rekurzivnu funkciju (ili relaciju) zadanu simboličkom definicijom.
 
-Za obrat teorema~\ref{tm:pir} morat ćemo se više namučiti. To je tema poglavlja~\ref{ch:univ}.
+Za obrat teorema~\ref{tm:pir} morat ćemo se više potruditi. To je tema poglavlja~\ref{ch:univ}.
 
 \section{Tehnike za rad s (primitivno) rekurzivnim funkcijama}\label{sec:tech}
 
-Odluka da ćemo koristiti marljivu evaluaciju olakšala nam je dokaz RAM-izračunljivosti simbolički definiranih funkcija --- jer kompozicija uz marljivu evaluaciju direktno odgovara slijednom izvršavanju instrukcija u programu --- ali će otežati dokaz u suprotnom smjeru, jer neke u RAM-modelu jednostavne programske tehnike zasad ne znamo ostvariti u funkcijskom modelu s marljivom evaluacijom.
+gorištenje marljive evaluacije olakšalo nam je dokaz RAM-izračunljivosti simbolički definiranih funkcija --- jer marljiva kompozicija upravo odgovara slijednom izvršavanju instrukcija u programu --- ali će otežati dokaz suprotnog smjera, jer neke, u RAM-modelu jednostavne, programske tehnike zasad ne znamo ostvariti u funkcijskom modelu s marljivom evaluacijom.
 
 Jedan primjer je \emph{grananje}: imamo dva RAM-programa $P_{\mathit{true}}$ i $P_{\mathit{false}}$. Želimo izvršiti jedan od ta dva programa ovisno o tome je li $r_j$ pozitivan ili nije, ali tako da ako je npr.\ $P_{\mathit{true}}$ prazan program, $P_{\mathit{false}}$ beskonačna petlja, a $r_j=1$, čitavo izračunavanje stane. Možemo napisati makro
 \vspace{-2mm}
@@ -785,7 +787,7 @@ Neka su $k,l\in\N_+$, neka su $G_0^k$, $G_1^k$,~\ldots, $G_l^k$ funkcije, a $R_1
     G_0(\vec x),&\text{inače}
     \end{cases}\text{ za sve $\vec x\in\dom F$,}
 \end{align}
-kažemo da je dobivena \emph{grananjem} iz \emph{grana} $G_0,G_1,G_2,\dotsc,G_l$ i \emph{uvjeta} $R_1,R_2,\dotsc,R_l$. Simbolički pišemo $F:=\IF{R_1:G_1,R_2:G_2,\dots,R_l:G_l,G_0}$. Ako ne navedemo $G_0$, smatramo da je $G_0:=\varnothing^k$ (odnosno $F$ nije definirana izvan unije svih uvjeta).
+kažemo da je dobivena \emph{grananjem} iz \emph{grana} $G_0,G_1,G_2,\dotsc,G_l$ i \emph{uvjeta} $R_1,R_2,\dotsc,R_l$. Simbolički pišemo $F:=\IF{R_1\!:\!G_1,R_2\!:\!G_2,\dots,R_l\!:\!G_l,G_0}$. Ako ne navedemo $G_0$, smatramo da je $G_0:=\varnothing^k$ (odnosno $F$ nije definirana izvan unije svih uvjeta).
 \end{definicija}
 
 Zahtjev da su svi uvjeti u~parovima disjunktni znači da je za svaki $\vec x\in\N^k$ najviše jedan od njih ispunjen. Tako ne moramo brinuti o redoslijedu provjeravanja uvjeta --- no ako već imamo fiksiran redoslijed ne nužno disjunktnih uvjeta $R_1$, $R_2$,~\ldots, $R_l$, uvijek možemo napraviti nove disjunktne uvjete s istom unijom:
