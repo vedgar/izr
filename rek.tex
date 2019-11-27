@@ -189,17 +189,29 @@ Sada prema teoremu~\ref{tm:rem} RAM-algoritam $Q_{\f F}^{\flat k}$ također rač
 
 \section{Primitivna rekurzija}
 
-Iz dokaza leme~\ref{lm:compram} je jasno kako točno kompozicija odgovara slijednom iz\-vrša\-va\-nju naredbi. Ipak, već za funkcije poput zbrajanja nam trebaju \emph{petlje}: način da određene naredbe izvršimo neki broj puta koji ovisi o ulaznim podacima. Rekli smo da u funkcijskom programiranju tome odgovaraju rekurzije, no opće rekurzije su vrlo komplicirane za implementaciju, a osim toga teško je ustanoviti kada točno daju totalne funkcije. Zato ćemo aksiomatski propisati samo jedan jednostavni oblik rekurzije, koji odgovara petljama čiji je broj ponavljanja poznat prije početka njihovog izvršavanja. Tek kasnije ćemo vidjeti kako se u ovom modelu mogu definirati izračunljive funkcije kao rješenja općih rekurzija.
+Iz dokaza leme~\ref{lm:compram} je jasno kako točno kompozicija odgovara slijednom iz\-vrša\-va\-nju naredbi. Ipak, već za funkcije poput zbrajanja nam trebaju \emph{petlje}: način da određene naredbe izvršimo neki broj puta koji ovisi o ulaznim podacima. Rekli smo da u funkcijskom programiranju tome odgovaraju rekurzije, no opće rekurzije su vrlo komplicirane za implementaciju, a osim toga teško je ustanoviti kada točno daju totalne funkcije. Zato ćemo aksiomatski propisati samo jedan jednostavni oblik rekurzije, koji odgovara petljama čiji je broj ponavljanja zadan prije početka njihovog izvršavanja. Tek kasnije ćemo vidjeti kako se u ovom modelu mogu rješavati opće rekurzije.%definirati izračunljive funkcije kao rješenja općih rekurzija.
 
-"Broj ponavljanja je poznat" ne djeluje dovoljno precizno --- zapravo, broj ponavljanja bi trebao biti \emph{izračunljiv} nekom funkcijom $\f B$ istog tipa. Da bismo to omogućili, dat ćemo broj ponavljanja kao dodatni argument $y$ našoj funkciji, pa ćemo kompozicijom s $\f B$ na mjestu tog argumenta dobiti željeni broj ponavljanja. Primjer te tehnike vidjet ćete u napomeni~\ref{nap:sumprodH}.
+%"Broj ponavljanja je poznat" ne djeluje dovoljno precizno --- zapravo, broj ponavljanja bi trebao biti \emph{izračunljiv} nekom funkcijom $\f B$ istog tipa. Da bismo to omogućili, dat ćemo broj ponavljanja kao dodatni argument $y$ našoj funkciji, pa ćemo kompozicijom s $\f B$ na mjestu tog argumenta dobiti željeni broj ponavljanja. Primjer te tehnike vidjet ćete u napomeni~\ref{nap:sumprodH}.
 %Način da to preciziramo koristit ćemo još mnogo puta u razvoju teorije, pa je dobro zapamtiti ga: broj ponavljanja dat ćemo kao dodatni argument našoj funkciji, a onda ćemo kompozicijom (na mjestu zadnjeg argumenta) s nekom funkcijom za koju već znamo da je izračunljiva, dobiti željeni broj ponavljanja. Usporedite to s napomenom~\ref{nap:blokovi}.
 
-Da bismo funkcionalno opisali petlju, moramo prvo opisati \emph{inicijalizaciju} $\f G$, koja odgovara stanju prije početka izvršavanja petlje, a zatim \emph{tijelo} (ponekad ga zovemo i \emph{korak}) petlje kao funkciju $\f H$ koja preslikava stanje na početku jednog prolaza kroz petlju, u stanje na kraju tog prolaza. Vrlo grubo rečeno, želimo modelirati funkciju $\f G\pr\f H:=\f H\circ\f H\circ\dotsb\circ\f  H\circ\f G$, gdje je broj $\f H$-ova zadan kao posebni argument $y$.
+Da bismo funkcionalno opisali petlju, moramo prvo opisati \emph{inicijalizaciju} $\f G$, koja odgovara stanju prije početka izvršavanja petlje, a zatim \emph{tijelo} (ponekad ga zovemo i \emph{korak}) petlje kao funkciju $\f H$ koja preslikava stanje na početku jednog prolaza kroz petlju, u stanje na kraju tog prolaza. %Vrlo grubo rečeno, želimo modelirati funkciju $\f G\pr\f H:=\f H\circ\f H\circ\dotsb\circ\f H\circ\f G$, gdje je broj $\f H$-ova zadan kao posebni argument $y$.
 
-Ipak, dozvolit ćemo još jednu stvar koja je uobičajena u petljama: tijelu petlje $\f H$ kao još jedan argument prenijet ćemo "kontrolnu varijablu", koja broji koliko puta smo već prošli kroz petlju. Imperativni jezici niže razine obično implementiraju "primitivne" petlje kontrolnom varijablom koja ide od $0$ do isključivo $y$, recimo C:
-\begin{equation}\label{prog:Cprloop}
-\texttt{for(i=0; i<y; ++i) /* ovdje možemo koristiti i */;}
+Programski, recimo u Pythonu, ograničene petlje kakve promatramo imaju oblik:
+\begin{equation}
+	\begin{minipage}{0.8\textwidth}
+\begin{verbatim}
+z = ...  # inicijalizacija varijable z, u nekom kontekstu
+for i in range(y): z = ...z...  # tijelo, ažurira z
+\end{verbatim}
+	\end{minipage}
 \end{equation}
+
+U petljama je uobičajeno da tijelo, pored konteksta $\vec x$ i prethodno izračunate vrijednosti $z$, može koristiti i kontrolnu varijablu (u kodu nazvanu $i$), koja broji koliko puta smo već prošli kroz petlju.
+
+%Ipak, dozvolit ćemo još jednu stvar koja je uobičajena u petljama: tijelu petlje $\f H$ kao još jedan argument prenijet ćemo "kontrolnu varijablu", koja broji koliko puta smo već prošli kroz petlju. Imperativni jezici niže razine obično implementiraju "primitivne" petlje kontrolnom varijablom koja ide od $0$ do isključivo $y$, recimo C:
+%\begin{equation}\label{prog:Cprloop}
+%\texttt{for(i=0; i<y; ++i) /* ovdje možemo koristiti i */;}
+%\end{equation}
 %Ako nam u nekoj petlji ne treba kontrolna varijabla, samo ćemo kompozicijom s prikladnom koordinatnom projekcijom izvući ono što nam treba (npr.\ stanje prije prolaza kroz petlju).
 
 %Formalizirajmo sada to sve u obliku matematičke definicije.
@@ -228,9 +240,9 @@ Budući da ne promatramo brojevne funkcije s nula ulaznih podataka, funkcija $G$
 \begin{align}
 %\SwapAboveDisplaySkip
 \label{eq:faktb}
-    0!&:=1\text,\\
+	0!&:=1\text,&&\texttt{f = 1}\\
 \label{eq:faktk}
-    (n+1)!&:=(n+1)\cdot n!\text,
+	(n+1)!&:=(n+1)\cdot n!\text,&&\texttt{for i in range(n):~f = (i+1)*f}
 \end{align}
 samo zasad ne možemo reći da je funkcija $\f{factorial}^1$ ($n\mapsto n!$) dobivena primitivnom rekurzijom, jer ne postoji odgovarajuća funkcija $G$. Recimo, za $\f G:=\f C_1^1$, i odgovarajuću funkciju $\f H^3$, definicija~\ref{def:pr} bi nam dala $\f{factorial}^2$, što nije funkcija koju tražimo. (Ali nije ni daleko od nje, kao što ćemo vidjeti kasnije.)
 
@@ -255,7 +267,7 @@ Skup $\mathscr Comp$ je zatvoren na primitivnu rekurziju.
 \begin{proof}
 Neka je $k\in\N_+$ te neka su $\f G^k,\f H^{k+2}\in\mathscr Comp$ totalne funkcije. One su RAM-izračunljive, pa postoje RAM-algoritmi $P_{\f G}^k$ i $P_{\f H}^{k+2}$ koji ih redom računaju. Želimo naći program koji računa funkciju $\f F^{k+1}:=\f G\pr\f H$. Dakle, u registrima $\reg1$ do $\reg{k}$ se nalazi $\vec x$, dok se u $\reg{k+1}$ nalazi $y$, broj ponavljanja petlje odnosno broj izračunavanja funkcije $\f H$. Prvo, prije petlje moramo izračunati funkciju $\f G$ na prvih $k$ ulaznih registara. Rezultat između prolazaka kroz petlju držat ćemo u $\reg0$, tako da završetkom petlje već bude spreman kao izlazni podatak. Petlju pišemo na standardni način koji smo već vidjeli u makroima $\textsc{zero}$, $\textsc{remove}$, $\textsc{move}$, i programu $P_{\f{add}^3}$. Kontrolnu varijablu držimo u pomoćnom registru $\reg{k+2}$ --- ne možemo koristiti $\reg{k+1}$ jer ide u suprotnom smjeru: svakim izvršavanjem tijela petlje $\reg{k+1}$ se dekrementira, dok se kontrolna varijabla mora inkrementirati (brojeći prolaze kroz petlju).
 
-	Kontrolnu varijablu ne treba inicijalizirati: kako $\reg{k+2}$ nije ulazni registar, na početku izračunavanja njegov sadržaj već jest $0$. Također, inkrementiranjem kontrolne varijable \emph{nakon} izvođenja petlje (funkcijski makro s $P_{\f H}$) postižemo brojenje od nule; inkrementiranjem prije računanja $\f H$ postigli bismo brojenje od $1$ do uključivo $y$. Programski jezici koji broje od nule obično zahtijevaju inkrement poslije: recimo, standard jezika C propisuje da se u~\eqref{prog:Cprloop} inkrement \texttt{++i} obavi nakon tijela petlje (iako se piše prije).
+	Kontrolnu varijablu ne treba inicijalizirati: kako $\reg{k+2}$ nije ulazni registar, na početku izračunavanja njegov sadržaj već jest $0$. Također, inkrementirati kontrolnu varijablu moramo \emph{nakon} izvođenja tijela petlje (funkcijski makro s $P_{\f H}$) jer želimo brojiti samo "završene" prolaze. %inkrementiranjem prije računanja $\f H$ postigli bismo brojenje od $1$ do uključivo $y$. Programski jezici koji broje od nule obično zahtijevaju inkrement poslije: recimo, standard jezika C propisuje da se u~\eqref{prog:Cprloop} inkrement \texttt{++i} obavi nakon tijela petlje (iako se piše prije).
 
 Sve u svemu, tvrdimo da makro-program
 \begin{equation}
@@ -300,10 +312,10 @@ Tehnički, da bi definicija bila dobra, trebalo bi vidjeti da postoji \emph{ikoj
 Definicija~\ref{def:prn} je elegantna i matematički pogodna za dokazivanje, ali nije baš operativna. Za konkretne funkcije, lakše je dokazati da su primitivno rekurzivne korištenjem sljedeće karakterizacije.
 
 \begin{propozicija}[{name=[simboličke definicije primitivno rekurzivnih funkcija]}]\label{prop:symbdef}
-Neka je $f$ brojevna funkcija. Tada je $f$ primitivno rekurzivna ako i samo ako se može dobiti iz inicijalnih funkcija pomoću konačno mnogo primjena kompozicije i primitivne rekurzije.
+Neka je $F$ brojevna funkcija. Tada je $F$ primitivno rekurzivna ako i samo ako se $F$ može dobiti iz inicijalnih funkcija pomoću konačno mnogo primjena kompozicije i primitivne rekurzije.
 \end{propozicija}
 \begin{proof}
-Označimo sa $\mathcal S$ skup funkcija koje se mogu dobiti iz inicijalnih pomoću ko\-nač\-no mnogo primjena kompozicije i primitivne rekurzije. Ako je $f$ inicijalna funkcija, pripada skupu $\mathcal S$ jer ju je moguće dobiti iz inicijalnih pomoću $0$ primjena kompozicije i primitivne rekurzije.
+Označimo sa $\mathcal S$ skup funkcija koje se mogu dobiti iz inicijalnih pomoću ko\-nač\-no mnogo primjena kompozicije i primitivne rekurzije. Ako je $F$ inicijalna funkcija, pripada skupu $\mathcal S$ jer ju je moguće dobiti iz inicijalnih pomoću $0$ primjena kompozicije i primitivne rekurzije.
 
 Ako su $k,l\in\N_+$ te $G_1^k,\dotsc,G_l^k,H^l\in\mathcal S$, tada se svaka $G_i$ može dobiti iz inicijalnih pomoću, recimo, $c_i$ primjena kompozicije i $r_i$ primjena primitivne rekurzije. Također se $H$ može dobiti iz inicijalnih, recimo pomoću $c$ primjena kompozicije i $r$ primjena primitivne rekurzije. Tada se $H\circ(G_1,\dotsc,G_l)$ može dobiti iz inicijalnih funkcija pomoću najviše $1+c+\sum_{i=1}^lc_i$ primjena kompozicije, i najviše $r+\sum_{i=1}^lr_i$ primjena primitivne rekurzije, što je konačno mnogo, pa je $H\circ(G_1,\dotsc,G_l)\in\mathcal S$.
 
@@ -311,20 +323,28 @@ Ako je $k\in\N_+$ te $G^k,H^{k+2}\in\mathcal S$ totalne funkcije, tada se one mo
 
 Prethodna tri odlomka pokazuju da skup $\mathcal S$ sadrži sve inicijalne funkcije te da je zatvoren na kompoziciju i na primitivnu rekurziju. Kako je skup primitivno rekurzivnih funkcija najmanji takav skup, slijedi da je podskup od $\mathcal S$, odnosno svaka primitivno rekurzivna funkcija je u $\mathcal S$.
 
-Za drugi smjer, neka je $f\in\mathcal S$ proizvoljna funkcija. To znači da se može dobiti iz inicijalnih, recimo pomoću $c$ primjena kompozicije i $r$ primjena primitivne rekurzije. Dokažimo da je $f$ primitivno rekurzivna, jakom indukcijom po $c+r$.
+Za drugi smjer, neka je $F\in\mathcal S$ proizvoljna funkcija. To znači da se može dobiti iz inicijalnih, recimo pomoću $c$ primjena kompozicije i $r$ primjena primitivne rekurzije. Dokažimo da je $F$ primitivno rekurzivna, jakom indukcijom po $c+r$.
 
-Ako je $c+r=0$, tada mora biti $c=r=0$, drugim riječima, $f$ mora biti inicijalna. Kako skup primitivno rekurzivnih funkcija sadrži sve inicijalne funkcije, zaključujemo da je $f$ primitivno rekurzivna.
+Ako je $c+r=0$, tada mora biti $c=r=0$, drugim riječima, $F$ mora biti inicijalna. Kako skup primitivno rekurzivnih funkcija sadrži sve inicijalne funkcije, zaključujemo da je $F$ primitivno rekurzivna.
 
 Pretpostavimo da za sve $t<c+r$, za svaku funkciju $g\in\mathcal S$ dobivenu s $c'$ primjena kompozicije i $r'$ primjena primitivne rekurzije tako da je $c'+r'=t$, vrijedi da je $g$ primitivno rekurzivna.
 
-    Neka je sad $f\in\mathcal S$ dobivena s $c$ primjena kompozicije i $r$ primjena primitivne rekurzije ($c+r>0$), iz inicijalnih funkcija. Tada $f\in\mathcal S$ znači da je ili $f=H\circ(G_1,\dotsc,G_l)$ za neke $G_1,\dotsc,G_l,H\in\mathcal S$, ili pak $f=G\pr H$, za neke totalne $G,H\in\mathcal S$ (odgovarajućih mjesnosti). U svakom od tih slučajeva pojedine funkcije pomoću kojih je dobivena $f$, dobivene su iz inicijalnih funkcija sa strogo manje ukupno primjena kompozicije i primitivne rekurzije: recimo, ako je $f=G\pr H$, tada je $r>0$ te su $G$ i $H$ dobivene iz inicijalnih pomoću najviše $c$ primjena kompozicije i najviše $r-1$ primjena primitivne rekurzije. Po pretpostavci indukcije, $G$ i $H$ su primitivno rekurzivne. Kako je skup primitivno rekurzivnih funkcija zatvoren na primitivnu rekurziju, zaključujemo da je $f=G\pr H$ primitivno rekurzivna. Sasvim analogno bi se dokazalo da je $f$ oblika $H\circ(G_1,\dotsc,G_l)$ primitivno rekurzivna.
+    Neka je sad $F\in\mathcal S$ dobivena s $c$ primjena kompozicije i $r$ primjena primitivne rekurzije ($c+r>0$), iz inicijalnih funkcija. Tada $F\in\mathcal S$ znači da je ili $F=H\circ(G_1,\dotsc,G_l)$ za neke $G_1,\dotsc,G_l,H\in\mathcal S$, ili pak $F=G\pr H$, za neke totalne $G,H\in\mathcal S$ (odgovarajućih mjesnosti). U svakom od tih slučajeva pojedine funkcije pomoću kojih je dobivena $F$, dobivene su iz inicijalnih funkcija sa strogo manje ukupno primjena kompozicije i primitivne rekurzije: recimo, ako je $F=G\pr H$, tada je $r>0$ te su $G$ i $H$ dobivene iz inicijalnih pomoću najviše $c$ primjena kompozicije i najviše $r-1$ primjena primitivne rekurzije. Po pretpostavci indukcije, $G$ i $H$ su primitivno rekurzivne. Kako je skup primitivno rekurzivnih funkcija zatvoren na primitivnu rekurziju, zaključujemo da je $F=G\pr H$ primitivno rekurzivna. Sasvim analogno bi se dokazalo da je $F$ oblika $H\circ(G_1,\dotsc,G_l)$ primitivno rekurzivna.
 \end{proof}
 
 \begin{napomena}[{name=[ulančavanje simboličkih definicija]}]\label{nap:symbdef}
-Umjesto "\emph{ab ovo}" od inicijalnih funkcija, možemo krenuti od nekih funkcija za koje smo već utvrdili da su primitivno rekurzivne. Zapis koji pokazuje kako se neka funkcija $f$ može dobiti kompozicijom i primitivnom rekurzijom iz već utvrđeno primitivno rekurzivnih funkcija zovemo \emph{simboličkom definicijom} funkcije $f$. Recimo, u primjeru~\ref{pr:C23} navedena je simbolička definicija od $\f C_2^3$, a u primjeru~\ref{pr:addmulpow}, simboličke definicije od $\f{add}^2$ i $\f{mul}^2$.
+Umjesto "\emph{ab ovo}" od inicijalnih funkcija, možemo krenuti od nekih funkcija za koje smo već utvrdili da su primitivno rekurzivne. Zapis koji pokazuje kako se neka funkcija $F$ može dobiti kompozicijom i primitivnom rekurzijom iz već utvrđeno primitivno rekurzivnih funkcija zovemo \emph{simboličkom definicijom} funkcije $F$. Recimo, u primjeru~\ref{pr:C23} navedena je simbolička definicija od $\f C_2^3$, a u primjeru~\ref{pr:addmulpow}, simboličke definicije od $\f{add}^2$ i $\f{mul}^2$.
 \end{napomena}
 
-Simboličke definicije su koncizne i izražajne, ali nisu baš čitljive. Umjesto njih, često se pišu \emph{točkovne} definicije, gdje funkciju definiramo "po točkama" tako da kažemo što je $f(\vec x)$, umjesto da kažemo što je $f$. Većina modernih programskih jezika upravo tako definira funkcije. Lijevi stupac~\eqref{eq:addb}--\eqref{eq:addk} sadrži točkovnu definiciju zbrajanja dva broja, iz koje se vidi da je ono primitivno rekurzivno. U desnom stupcu je također točkovna definicija, ali manje čitljiva jer je namještena na oblik~\eqref{eq:defprb}--\eqref{eq:defprk}.
+Simboličke definicije su koncizne i izražajne, ali nisu baš čitljive. Umjesto njih, često se pišu \emph{točkovne} definicije, gdje funkciju definiramo "po točkama" tako da kažemo što je $F(\vec x)$, umjesto da kažemo što je $F$. Većina modernih programskih jezika upravo tako definira funkcije. Lijevi stupac~\eqref{eq:addb}--\eqref{eq:addk} sadrži točkovnu definiciju zbrajanja dvaju brojeva, iz koje se vidi da je ono primitivno rekurzivno. U desnom stupcu je također točkovna definicija, ali manje čitljiva jer je namještena na oblik~\eqref{eq:defprb}--\eqref{eq:defprk}, iz kojeg se odmah može pročitati simbolička definicija. Programski, imali bismo:
+\begin{equation}
+	\begin{minipage}{0.8\textwidth}
+		\begin{verbatim}
+z = x                         # G(x)=x
+for i in range(y): z = z + 1  # H(x,i,z)=Sc(z)
+		\end{verbatim}
+	\end{minipage}
+\end{equation}
 
 Točkovne definicije znaju biti neprecizne, i na nekim mjestima morat ćemo pribjeći simboličkoj definiciji da bi se znalo što zapravo pokušavamo definirati. No u ogromnom broju slučajeva, posebno za kompliciranije funkcije (i relacije), pisat ćemo točkovne definicije. Važno je imati na umu da se svaka takva točkovna definicija može \emph{pretvoriti} u simboličku --- pokušajte ako ne vjerujete!
 
@@ -424,11 +444,11 @@ Jednadžbe~\eqref{eq:faktb} i~\eqref{eq:faktk} kažu da je $\f{factorial}^1\!=1\
 \end{primjer}
 
 \begin{primjer}[{name=[primitivna rekurzivnost funkcije prethodnik]}]
-Funkcija \emph{prethodnik} zadana je s $\f{pd}(n):=\max\,\{x-1,0\}$. Iz toga slijedi $\f{pd}\bigl(\f{Sc}(x)\bigr)=x$ za sve $x\in\N$, dakle $\f{pd}$ je lijevi inverz funkcije $\f{Sc}$. Naravno, $\f{Sc}$ nema desni inverz jer nije surjekcija: ne poprima vrijednost $0$, pa $\f{pd}(0)=0$ moramo posebno definirati. Te dvije jednakosti:
+	Funkcija \emph{prethodnik} zadana je s $\f{pd}(n):=\max\,\{x-1,0\}$. Iz toga slijedi $\f{pd}\bigl(\f{Sc}(x)\bigr)=x$ za sve $x\in\N$, dakle $\f{pd}$ je lijevi inverz funkcije $\f{Sc}$. Naravno, $\f{Sc}$ nema desni inverz jer nije surjekcija: ne poprima vrijednost $0$, pa $\f{pd}(0)=0$ moramo posebno definirati. Te dvije jednakosti (napisane desno u obliku koda u Pythonu):
 \begin{align}
-\SwapAboveDisplaySkip
-    \f{pd}(0)&=0\text,\\
-    \f{pd}(y+1)&=y\text,
+%\SwapAboveDisplaySkip
+	\f{pd}(0)&=0\text,&&\texttt{p = 0}\\
+	\f{pd}(y+1)&=y\text,&&\texttt{for i in range(y):~p = i}
 \end{align}
 kažu da je $\f{pd}$ dobivena degeneriranom primitivnom rekurzijom $\f{pd}=0\pr\f I_1^2$, pa je primitivno rekurzivna po propoziciji~\ref{prop:F1prn}.
 \end{primjer}
@@ -440,10 +460,10 @@ Još jedan način definiranja funkcije $\f{pd}$, koji ćemo često koristiti kas
 Kad imamo prethodnik kao primitivno rekurzivnu funkciju, njenom iteracijom mo\-že\-mo definirati neku vrst oduzimanja. Ipak, zbog $\f{pd}(0)=0$, vrijednosti tog oduzimanja bit će "odsječene odozdo" na nuli.
 
 \begin{primjer}[{name=[primitivna rekurzivnost ograničenog oduzimanja]}]\label{pr:sub}
-Za $x,y\in\N$, označimo $x\dotminus y:=\max\,\{x-y,0\}$. Iz jednakosti
+Za $x,y\in\N$, označimo $x\dotminus y:=\max\,\{x-y,0\}$. Iz jednakosti\slash koda
 \begin{align}
-    x\dotminus0&=x\text,\\
-    x\dotminus(y+1)&=\f{pd}(x\dotminus y)\text,
+	x\dotminus0&=x\text,&&\texttt{s = x}\\
+	x\dotminus(y+1)&=\f{pd}(x\dotminus y)\text,&&\texttt{for i in range(y):~s = pd(s)}
 \end{align}
 vidimo da je \emph{ograničeno oduzimanje} dobiveno primitivnom rekurzijom iz funkcija $\f I_1^1$ i $\f{pd}\circ\f I_3^3$, pa je ono primitivno rekurzivna operacija. "Operacija" nam znači dvomjesnu totalnu brojevnu funkciju koja se piše infiksno između operanada. Kao funkciju, ograničeno oduzimanje zovemo $\f{sub}$. Dakle, $\f{sub}^2=\f I_1^1\pr\f{pd}\circ\f I_3^3$. Još jedan način dolaska do te simboličke definicije je da uzmemo simboličku definiciju za $\f{add}^2$ (primjer~\ref{pr:addmulpow}) i zamijenimo u njoj $\f{Sc}$ s $\f{pd}$.
 \end{primjer}
@@ -480,11 +500,11 @@ $F(\vec x):\simeq\mu yR(\vec x,y)$.
     Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na minimizaciju} ako za svaki $k\in\N_+$, za svaku $(k+1)$-mjesnu relaciju $R$, $\chi_R\in\mathcal F$ povlači $\mu R\in\mathcal F$. 
 \end{definicija}
 
-Domena funkcije $\mu R^{k+1}$ je $k$-mjesna relacija koju označavamo s $\exists_*R$ i zovemo je \emph{projekcija} relacije $R$. Motivaciju za taj naziv možemo vidjeti ako zamislimo tromjesnu relaciju $R^3$ grafički prikazanu kao skup točaka u 3D-prostoru. Tada je grafički prikaz od $\exists_*R^3$ upravo 2D-projekcija (niz os $z$) toga skupa na $x$-$y$ ravninu. Točka $(x,y)$ će biti element od $\exists_*R$ ako i samo ako iznad nje postoji neka točka $(x,y,z)\in R$ (može ih biti i više).
+Domena funkcije $\mu R^{k+1}$ je $k$-mjesna relacija koju označavamo s $\exists_*R$ i zovemo je \emph{projekcija} relacije $R$. Motivaciju za taj naziv možemo vidjeti ako zamislimo tromjesnu relaciju $R^3$ grafički prikazanu kao skup točaka u 3D-prostoru. Tada je grafički prikaz od $\exists_*R^3$ upravo 2D-projekcija (niz os $z$) toga skupa na $x$-$y$ ravninu. Točka $(x,y)$ će biti u $\exists_*R$ ako i samo ako iznad nje postoji neka točka $(x,y,z)\in R$ (može ih biti i više).
 
-U tom prikazu možemo vizualizirati i funkciju $\mu R$: za svaku točku $(x,y)$ iz projekcije, $\mu zR(x,y,z)$ je visina do koje vidimo prazan prostor, odnosno visina na kojoj vidimo prvu točku u relaciji iznad $(x,y)$. 
+U tom prikazu možemo vizualizirati i funkciju $\mu R$: za svaku točku $(x,y)$ iz projekcije, $\mu\mspace{2mu}z\mspace{2mu}R(x,y,z)$ je visina do koje vidimo prazan prostor, odnosno visina na kojoj vidimo prvu točku u relaciji $R$ iznad $(x,y)$. 
 
-Naravno, samo za $\vec x\in\exists_*R$ izraz $\mu yR(\vec x,y)$ uopće ima smisla --- inače je nedefiniran. Za obrat --- da je za \emph{svaki} $\vec x\in\exists_*R$, izraz $\mu yR(\vec x,y)$ dobro definiran --- zaslužna je dobra uređenost od $\N$: ako postoji neki $y\in\N$ takav da vrijedi $R(\vec x,y)$, tada postoji i najmanji takav.
+Samo za $\vec x\in\exists_*R$ izraz $\mu yR(\vec x,y)$ uopće ima smisla --- inače je nedefiniran. Za obrat --- da je za \emph{svaki} $\vec x\in\exists_*R$, izraz $\mu yR(\vec x,y)$ dobro definiran --- zaslužna je dobra uređenost od $\N$: ako postoji neki $y\in\N$ za koji vrijedi $R(\vec x,y)$, tada postoji i najmanji takav.
 
 \begin{primjer}[{name=[prazna funkcija minimizacijom]}]\label{pr:varnothingprek}
 Napokon možemo dobiti praznu funkciju minimizacijom prazne relacije: konkretno, za svaki $k\in\N_+$, $\varnothing^k=\mu\,\emptyset^{k+1}$. Naime, projekcija prazne relacije je opet prazna, a jedina funkcija s praznom domenom je prazna funkcija.
@@ -776,7 +796,8 @@ Napokon možemo dokazati teorem o grananju za totalne funkcije, samo prethodno m
 \begin{definicija}[{name=[grananje]}]\label{def:gr}
 Neka su $k,l\in\N_+$, neka su $G_0^k$, $G_1^k$,~\ldots, $G_l^k$ funkcije, a $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u~parovima disjunktne relacije iste mjesnosti. Za funkciju $F^k$ definiranu s
 \begin{align}
-\SwapAboveDisplaySkip
+%\SwapAboveDisplaySkip
+	\label{eq:domgran}
     \dom{F}&:=\bigcup_{i=0}^l\,(\dom{G_i}\cap R_i)\text{, \quad gdje je }
     R_0:=\Bigl(\bigcup\nolimits_{i=1}^{\,l}R_i\Bigr)\kompl\text,\\
     F(\vec x)&:=\begin{cases}
@@ -806,7 +827,7 @@ Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_
 Ovdje ne smijemo ispustiti $\f G_0$, jer $\varnothing^k$ nije (primitivno) rekurzivna!
 
 \begin{proof}
-$\f R_0:=\bigl(\bigcup\nolimits_{i=1}^{\,l}\f R_i\bigr)\kompl$ je (primitivno) rekurzivna po propozicijama~\ref{prop:skupl} i~\ref{prop:kompl}. Tvrdimo da je
+$\f R_0:=\bigl(\bigcup\nolimits_{i=1}^{\,l}\f R_i\bigr)\kompl$ je (primitivno) rekurzivna po propozicijama~\ref{prop:skupl} i~\ref{prop:kompl}.\newline Tvrdimo da je
 \begin{equation}\label{eq:grek}
     \f F=\chi_{\f R_0}\!\cdot \f G_0+\chi_{\f R_1}\!\cdot \f G_1+\chi_{\f R_2}\!\cdot \f G_2+\dotsb+\chi_{\f R_l}\!\cdot\f G_l\text,
 \end{equation}
@@ -817,7 +838,7 @@ dakle dobivena je kompozicijom iz (primitivno) rekurzivnih $\chi_{\f R_i}$, $\f 
 S druge strane, ako $\vec x$ nije ni u jednoj $\f R_i$, tada po De Morganovom pravilu nije ni u njihovoj uniji, dakle $\vec x\in\f R_0$, pa je početni pribrojnik u~\eqref{eq:grek} jednak $\f G_0(\vec x)$, a svi ostali pribrojnici, kao i u prethodnom odlomku, jednaki su $0$. Dakle tada je $\f F(\vec x)=\f G_0(\vec x)$, kao što i treba biti.
 \end{proof}
 
-Domena funkcije dobivene grananjem zapravo je još kompliciranija od domene funkcije dobivene kompozicijom. I ovdje zato koristimo definiciju u stilu napomene~\ref{nap:parcdef},
+Domena funkcije dobivene grananjem~\eqref{eq:domgran} zapravo je još kompliciranija od domene funkcije dobivene kompozicijom. I ovdje zato pišemo definiciju u stilu napomene~\ref{nap:parcdef},
 \begin{equation}
     F(\vec x):\simeq\begin{cases}
     G_1(\vec x),&R_1(\vec x)\\
@@ -912,6 +933,14 @@ Jedan primjer smo već vidjeli: sa statičke strane, za svaki $n$ imamo primitiv
 
 Evo malo kompliciranijeg primjera: lema~\ref{lm:addmulk} kaže da je za svaki $k$ funkcija $\f{add}^k$ primitivno rekurzivna; ako joj damo $k$ brojeva, ili je komponiramo s $k$ izračunljivih funkcija, ona će ih zbrojiti (funkcije će zbrojiti na presjeku njihovih domena). Sada ćemo promotriti dinamičku varijantu: operator $\sum$ koji za unaprijed zadanu \emph{totalnu} funkciju $\f G$ prima broj koji kaže koliko prvih njenih vrijednosti treba zbrojiti, i eventualno ostale argumente od $\f G$ ako je ona mjesnosti veće od $1$. Isto ćemo napraviti za množenje.
 
+\begin{napomena}[{name=[izračunljive granice i prazni konteksti]}]\label{nap:igpk}
+	U ostatku ove točke dokazat ćemo šest rezultata o ograničenom programiranju: neke direktno primitivnom rekurzijom, a neke kompozicijom iz već dobivenih rezultata. Svi će oni imati isto sučelje: (primitivno) rekurzivnu $k$-mjesnu funkciju $\f G$ ili relaciju $\f R$, kontekst $\vec x$ i granicu $y$; te će biti definirani iteracijom po svim $i<y$. U primjenama, najčešće će granica biti zadana kao neka funkcija konteksta: $i<\f B(\vec x)$. To samo znači da ćemo primijeniti kompoziciju s $\f B$ na mjestu posljednjeg argumenta $y$, što ostaje (primitivno) rekurzivno ako je $\f B$ takva.
+
+	Drugo, granica može biti uključena: $i\le\f B(\vec x)$ je ekvivalentno s $i<\f{Sc}\bigl(\f B(\vec x)\bigr)$, što samo znači da komponiramo sa $\f{Sc}\circ\f B$, koja je (primitivno) rekurzivna ako je $\f B$ takva.
+
+	I treće, kontekst može biti prazan: u slučaju $k=1$, ulaz za $\f G$ odnosno $\f R$ je samo $i$. Tada je primitivna rekurzija degenerirana, što također ne smeta jer ona čuva primitivnu rekurzivnost po propoziciji~\ref{prop:F1prn}, a rekurzivnost po korolaru~\ref{kor:F1rek}.
+\end{napomena}
+
 \begin{lema}[{name=[ograničene sume i produkti čuvaju (primitivnu) rekurzivnost]}]\label{lm:sumprodrek}
     Neka je $k\in\N_+$ te $\f G^k$ (primitivno) rekurzivna funkcija. Tada su (primitivno) rekurzivne i funkcije $\f F_1^k$ i $\f F_2^k$, zadane s
 \begin{equation}
@@ -930,21 +959,22 @@ Evo malo kompliciranijeg primjera: lema~\ref{lm:addmulk} kaže da je za svaki $k
         \f F_2(\vec x,y+1)&:=\f F_2(\vec x,y)\cdot\f G(\vec x,y)
         %& \f H^{k+1}(\vec x,y,z)&:=z+\f G(\vec x,y)
     \end{align}
-Treba primijetiti da su svi ti pozivi funkcija mjesnosti $k$, dakle $\vec x$ je duljine $k-1$, odnosno $x$-eva uopće nema ako je $k=1$. To ne smeta u napisanim jednadžbama jer nijednu funkciju ne pozivamo samo na $\vec x$, ali treba uzeti u obzir da je tim jednadžbama napisana obična primitivna rekurzija (definicija~\ref{def:pr}) za $k>1$, a degenerirana primitivna rekurzija (propozicija~\ref{prop:F1prn} ili korolar~\ref{kor:F1rek}) za $k=1$.
+%Treba primijetiti da su svi ti pozivi funkcija mjesnosti $k$, dakle $\vec x$ je duljine $k-1$, odnosno $x$-eva uopće nema ako je $k=1$. To ne smeta u napisanim jednadžbama jer nijednu funkciju ne pozivamo samo na $\vec x$, ali treba uzeti u obzir da je tim jednadžbama napisana obična primitivna rekurzija (definicija~\ref{def:pr}) za $k>1$, a degenerirana primitivna rekurzija (propozicija~\ref{prop:F1prn} ili korolar~\ref{kor:F1rek}) za $k=1$.
+	Tada je $\f F_2=\f C_1^{k-1}\pr\f H$ (ili $1\pr\f H$ za $k=1$), gdje je $\f H(\vec x,y,z)=z\cdot\f G(\vec x,y)$ (primitivno) rekurzivna pa je i $\f F_2$ takva. Sasvim analogno za $\f F_1$.
 \end{proof}
 %Sasvim analogno, možemo računati i ograničene produkte. 
 
-\begin{napomena}[{name=[(primitivno) rekurzivne granice]}]\label{nap:sumprodH}
-    Lema~\ref{lm:sumprodrek} nam omogućuje da zadamo broj pribrojnika ili faktora kao argument funkcije. To znači da možemo i \emph{izračunati} broj pribrojnika odnosno faktora kao izračunljivu funkciju ostalih argumenata. Precizno, za $k>1$ možemo računati i
-\begin{equation}
+%\begin{napomena}[{name=[(primitivno) rekurzivne granice]}]\label{nap:sumprodH}
+    %Lema~\ref{lm:sumprodrek} nam omogućuje da zadamo broj pribrojnika ili faktora kao argument funkcije. To znači da možemo i \emph{izračunati} broj pribrojnika odnosno faktora kao izračunljivu funkciju ostalih argumenata. Precizno, za $k>1$ možemo računati i
+%\begin{equation}
 %\SwapAboveDisplaySkip
-    \f F_3^{k-1}(\vec x):=\sum_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)
-    \text{\quad i\quad}\f F_4^{k-1}(\vec x):=\prod_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)\text,
-\end{equation}
-gdje je $\f H^{k-1}$ neka izračunljiva funkcija, komponiranjem funkcije $\f F_1$ odnosno $\f F_2$ s koordinatnim projekcijama i s funkcijom $\f H$.
+    %\f F_3^{k-1}(\vec x):=\sum_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)
+    %\text{\quad i\quad}\f F_4^{k-1}(\vec x):=\prod_{\mathclap{i<\f H(\vec x)}}\f G(\vec x,i)\text,
+%\end{equation}
+%gdje je $\f H^{k-1}$ neka izračunljiva funkcija, komponiranjem funkcije $\f F_1$ odnosno $\f F_2$ s koordinatnim projekcijama i s funkcijom $\f H$.
 
-Recimo, za $k=3$ vrijedi $\f F_4^2(x,y)=\prod_{i<\f H(x,y)}\f G(x,y,i)=\f F_2^3\bigl(x,y,\f H(x,y)\bigr)$.
-\end{napomena}
+%Recimo, za $k=3$ vrijedi $\f F_4^2(x,y)=\prod_{i<\f H(x,y)}\f G(x,y,i)=\f F_2^3\bigl(x,y,\f H(x,y)\bigr)$.
+%\end{napomena}
 
 %\begin{napomena}\label{nap:sumprodSc}
 %Oznaku $\sum_{i<y}$, i analogno za produkt, shvaćamo kao pokratu za $\sum_{i=0}^{y-1}$, uz dodatnu konvenciju (koja je uobičajena u konkretnoj matematici) da za $y=0$ vrijednost izraza $\sum_{i=0}^{-1}\dotsb$ bude $0$. Mogli bismo tu sumu zapisati i kao $\sum_{i\in[0\dd y\rangle}\dotsb$.
@@ -964,114 +994,128 @@ Recimo, za $k=3$ vrijedi $\f F_4^2(x,y)=\prod_{i<\f H(x,y)}\f G(x,y,i)=\f F_2^3\
 U uvodnom učenju programiranja, obično se prije sumiranja nauči \emph{brojiti} elemente koji zadovoljavaju neko svojstvo: inicijaliziramo brojač na $0$, prolazimo kroz sve elemente koji dolaze u obzir, i za svaki koji zadovoljava svojstvo, inkrementiramo brojač. Ali kako smatramo $bool$ podskupom od $\N$, uz $\mathit{false}=0$ i $\mathit{true}=1$, brojenje je upravo \emph{sumiranje istinitosnih vrijednosti}. Naredbu \texttt{if uvjet:\ brojač += 1} možemo zapisati kao \texttt{brojač += uvjet}, čime algoritam za brojenje postaje obični algoritam za sumiranje. Formalizirajmo to.
 
 \begin{lema}[{name=[ograničeno brojenje čuva (primitivnu) rekurzivnost]}]\label{lm:brojrek}
-Neka je $k\in\N_+$ te $\f R^{k+1}$ (primitivno) rekurzivna relacija i $\f H^k$ (primitivno) rekurzivna funkcija. Tada je funkcija $\f F^k$, zadana s
+Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija. Tada je funkcija $\f F^k$, zadana s
 \begin{equation}
-    \f F(\vec x):=\card\,\{y\in\N\mid y<\f H(\vec x)\land\f R(\vec x,y)\}\text,
+    \f F(\vec x,y):=\card\,\{i\in\N\mid i<y\land\f R(\vec x,i)\}\text,
 \end{equation}
-također (primitivno) rekurzivna. Skraćeno pišemo $\f F(\vec x):=\bigl(\num y<\f H(\vec x)\bigr)\f R(\vec x,y)$.
+također (primitivno) rekurzivna. Skraćeno pišemo $\f F(\vec x,y):=(\num i<y)\,\f R(\vec x,i)$.
 \end{lema}
 \begin{proof}
-    Prema pretpostavci, karakteristična funkcija $\chi_{\f R}^{k+1}$ je (primitivno) rekurzivna. Sada tvrdnja slijedi iz napomene~\ref{nap:sumprodH}, jer tvrdimo da vrijedi
+    Prema pretpostavci, karakteristična funkcija $\chi_{\f R}^k$ je (primitivno) rekurzivna. Sada tvrdnja slijedi iz leme~\ref{lm:sumprodrek}, jer tvrdimo da vrijedi
     \begin{equation}
-        \bigl(\num y<\f H(\vec x)\bigr)\f R(\vec x,y)=\sum_{\mathclap{y<\f H(\vec x)}}\chi_{\f R}(\vec x,y)\text.
+        (\num i<y)\,\f R(\vec x,i)=\sum_{i<y}\chi_{\f R}(\vec x,i)\text.
     \end{equation}
-    Doista, za svaki $\vec x\in\N^k$, ako skup $S:=[0\dd \f H(\vec x)\rangle$ rastavimo u dva dijela,
-    \begin{align}
-        S_1&:=\{y\in S\mid\f R(\vec x,y)\}\text{, i}\\
-        S_2&:=\{y\in S\mid\lnot\f R(\vec x,y)\}\text,
-    \end{align}
+    Doista, za svaki $\vec x\in\N^k$, ako skup $S:=[0\dd y\rangle$ rastavimo na dva dijela,
+    \begin{equation}
+	    S_1:=\{i\in S\mid\f R(\vec x,i)\}\quad\text i\quad
+        S_2:=\{i\in S\mid\lnot\f R(\vec x,i)\}\text,
+    \end{equation}
     tada je
-        $\sum_{y\in S}\chi_{\f R}(\vec x,y)=\sum_{y\in S_1}\!1+\sum_{y\in S_2}0=\card S_1$.
+        $\sum_{i\in S}\chi_{\f R}(\vec x,i)=\sum_{i\in S_1}\!1+\sum_{i\in S_2}0=\card S_1$.
 \end{proof}
 
 %\subsection{Ograničena kvantifikacija}
 
-Još jedan čest obrazac (\emph{pattern}) u uvodnim algoritmima je provjera zadovoljava li neki element zadanog konačnog skupa neko zadano svojstvo --- ili dualno, zadovoljavaju li ga svi elementi tog skupa. U nekim modernim programskim jezicima to se ostvaruje kroz funkcije \texttt{any} i \texttt{all}. Na primjer, ustanoviti je li broj $n$ složen možemo tako da ispitamo postoji li $d\in[2\dd n\rangle$ (ili $d\in\bigl[2\dd \lfloor\!\sqrt{n}\rfloor\bigr]$) takav da $d\mathrel|n$. Vidimo da je prirodna matematička formalizacija tog obrasca \emph{ograničena kvantifikacija}, gdje univerzalno ili egzistencijalno kvantificiramo varijable u nekom uvjetu do neke granice.
+Još jedan čest obrazac (\emph{pattern}) u uvodnim algoritmima je provjera zadovoljava li neki element zadanog konačnog skupa neko zadano svojstvo --- ili dualno, zadovoljavaju li ga svi elementi tog skupa. U nekim modernim programskim jezicima to se ostvaruje kroz funkcije \texttt{any} i \texttt{all}. Na primjer, ustanoviti je li broj $n$ složen možemo ispitujući postoji li $d\in[2\dd n\rangle$ (ili $d\in\bigl[2\dd \lfloor\!\sqrt{n}\rfloor\bigr]$) takav da $d\mathrel|n$. Vidimo da je prirodna matematička formalizacija tog obrasca \emph{ograničena kvantifikacija}, gdje univerzalno ili egzistencijalno kvantificiramo varijable u nekom uvjetu do neke granice.
 
-Razlog zašto se takav obrazac promatra posebno je mogućnost prijevremenog izlaska iz petlje (\emph{shortcircuit evaluation}, u ovom slučaju najčešće realizirana kroz naredbu \texttt{break}), jer ako provjeravamo postoji li element s nekim svojstvom, znamo da postoji onog trena kada ga nađemo --- ne moramo provjeravati ostale elemente. Tako možemo ubrzati pretraživanje po konačnim skupovima, a i dobiti odgovor u slučaju prebrojivih skupova \emph{ako} je taj odgovor pozitivan. O ovom drugom fenomenu reći ćemo više kasnije, kad budemo govorili o \emph{rekurzivno prebrojivim} relacijama --- a prvi fenomen nas ne zanima, jer smo rekli da se nećemo baviti performansama algoritama.
+Razlog zašto se takav obrazac promatra posebno je mogućnost prijevremenog izlaska iz petlje (\emph{shortcircuit evaluation}, u ovom slučaju najčešće realizirana kroz naredbu \texttt{break}), jer ako provjeravamo postoji li element s nekim svojstvom, znamo da postoji onog trena kada ga nađemo --- ne moramo provjeravati ostale elemente. Tako možemo brže pretraživati konačne skupove, a i dobiti odgovor za prebrojive skupove \emph{ako} je taj odgovor pozitivan. O ovom drugom fenomenu reći ćemo više kasnije, kad budemo govorili o \emph{rekurzivno prebrojivim} relacijama --- a prvi fenomen nas ne zanima, jer smo rekli da se nećemo baviti performansama algoritama.
 
-Drugim riječima, za nas se ograničena kvantifikacija svodi na brojenje. Prebrojivši elemente do $z$ koji imaju traženo svojstvo, takvi postoje ako ih ima pozitivan broj, a svi su takvi ako ih ima upravo $z$.
+Drugim riječima, za nas se ograničena kvantifikacija svodi na brojenje. Prebrojivši elemente do $y$ koji imaju traženo svojstvo, takvi postoje ako ih ima pozitivan broj, a svi su takvi ako ih ima upravo $y$.
 
 \begin{propozicija}[{name=[ograničena kvantifikacija čuva primitivnu rekurzivnost]}]\label{prop:okvantrek}
-Neka je $k\in\N_+$ te $\f R^{k+1}$ (primitivno) rekurzivna relacija i $\f H^k$ (primitivno) rekurzivna funkcija. Tada su i relacije $\f P^k$ i $\f Q^k$, zadane s
+Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija.
+	
+	Tada su takve i relacije $\f P^k$ i $\f Q^k$, zadane s
 \begin{align}
-    \f P(\vec x)&:\Longleftrightarrow\bigl(\exists y<\f H(\vec x)\bigr)\f R(\vec x,y)\text,\\
-    \f Q(\vec x)&:\Longleftrightarrow\bigl(\forall y<\f H(\vec x)\bigr)\f R(\vec x,y)\text,
+	\f P(\vec x,y)&:\Longleftrightarrow(\exists i<y)\,\f R(\vec x,i)\text,&
+        \f Q(\vec x,y)&:\Longleftrightarrow(\forall i<y)\,\f R(\vec x,y)\text.
 \end{align}
-također (primitivno) rekurzivne.
 \end{propozicija}
 \begin{proof}
-    Kao u dokazu leme~\ref{lm:brojrek}, fiksirajmo $\vec x$ i uvedimo oznake $S:=[0\dd \f H(\vec x)\rangle$ te $S_{\f R}:=\{y\in S\mid\f R(\vec x,y)\}\subseteq S$. Sada vrijedi
-    \begin{gather}
-    \label{eq:ogrekvantrek}
-        \f P(\vec x)\Longleftrightarrow S_{\f R}\ne\emptyset\Longleftrightarrow\card S_{\f R}>0\Longleftrightarrow\bigl(\num y<\f H(\vec x)\bigr)\f R(\vec x,y)\in\N_+\text{ te}\\
-        \f Q(\vec x)\Longleftrightarrow S=S_{\f R}\Longleftrightarrow\card S_{\f R}=\card S\Longleftrightarrow\bigl(\num y<\f H(\vec x)\bigr)\f R(\vec x,y)\eq\f H(\vec x)
-    \end{gather}
-    (za smjer $\card S_{\f R}=\card S\Rightarrow S_{\f R}=S$ koristimo rezultat iz teorije skupova da konačan skup ne može biti ekvipotentan svom pravom podskupu), pa (primitivna) rekurzivnost od $\f P$ slijedi iz primjera~\ref{pr:N+prn}, a (primitivna) rekurzivnost od $\f Q$ iz korolara~\ref{kor:jednakost}. Uočimo da je~\eqref{eq:ogrekvantrek} dinamizirani~\eqref{eq:unk}.
+    Kao u dokazu leme~\ref{lm:brojrek}, fiksirajmo $\vec x$ i uvedimo oznake $S:=[0\dd y\rangle$\newline te $S_{\f R}:=\{i\in S\mid\f R(\vec x,i)\}\subseteq S$. Sada vrijedi
+\begin{gather}
+\label{eq:oeqrek}\quad\f P(\vec x,y)\Longleftrightarrow S_{\f R}\ne\emptyset\Longleftrightarrow\card S_{\f R}>0\Longleftrightarrow(\num i<y)\,\f R(\vec x,i)\in\N_+\text{ te\quad}\\
+\f Q(\vec x,y)\Longleftrightarrow S_{\f R}=S\Longleftrightarrow\card S_{\f R}=\card S\Longleftrightarrow(\num i<y)\,\f R(\vec x,i)\eq y
+\end{gather}
+	(za smjer $\card S_{\f R}=\card S\Rightarrow S_{\f R}=S$ koristimo rezultat iz teorije skupova da konačan skup ne može biti ekvipotentan svom pravom podskupu), pa tvrdnja propozicije slijedi iz leme~\ref{lm:brojrek}, primjera~\ref{pr:N+prn} (za $\f P$) i korolara~\ref{kor:jednakost} (za $\f Q$). Uočimo da je~\eqref{eq:oeqrek} dinamizirani~\eqref{eq:unk}.
 \end{proof}
 
-\begin{napomena}[{name=[granice mogu biti i uključene]}]\label{nap:kvantSc}
-    U dosadašnjim rezultatima ove točke imali smo isključenu gornju granicu: $y<\f H(\vec x)$ kao pokrata za $y\in[0\dd \f H(\vec x)\rangle$. Često je uobičajenije koristiti uključene granice: recimo, $\sum_{y=0}^{\f H(\vec x)}\f G(\vec x,y)=\sum_{y\le\f H(\vec x)}\f G(\vec x,y)$. Sve takve funkcije su jednako izračunljive kao i s isključenom granicom, jer je $y\le\f H(\vec x)\Leftrightarrow y<1+\f H(\vec x)=\f{Sc}\bigl(\f H(\vec x)\bigr)$ --- dakle, umjesto funkcije $\f H$ koristimo $\f{Sc}\circ\f H$, koja je (primitivno) rekurzivna ako je $\f H$ takva.
+%\begin{napomena}[{name=[granice mogu biti i uključene]}]\label{nap:kvantSc}
+    %U dosadašnjim rezultatima ove točke imali smo isključenu gornju granicu: $y<\f H(\vec x)$ kao pokrata za $y\in[0\dd \f H(\vec x)\rangle$. Često je uobičajenije koristiti uključene granice: recimo, $\sum_{y=0}^{\f H(\vec x)}\f G(\vec x,y)=\sum_{y\le\f H(\vec x)}\f G(\vec x,y)$. Sve takve funkcije su jednako izračunljive kao i s isključenom granicom, jer je $y\le\f H(\vec x)\Leftrightarrow y<1+\f H(\vec x)=\f{Sc}\bigl(\f H(\vec x)\bigr)$ --- dakle, umjesto funkcije $\f H$ koristimo $\f{Sc}\circ\f H$, koja je (primitivno) rekurzivna ako je $\f H$ takva.
 %
 %Analogno napomeni~\ref{nap:sumprodSc}, kompozicijom $\f{Sc}$ s $\f H$ dokazali bismo (primitivnu) rekurzivnost i egzistencijalnih kvantifikacija oblika $\bigl(\exists i\le\f H(\vec x)\bigr)\f R(\vec x,i)$, i dakako univerzalnih kvantifikacija s uključenom granicom.
-\end{napomena}
+%\end{napomena}
 
-Još uvijek ne znamo ništa o izračunljivosti \emph{neograničene} kvantifikacije, odnosno onog što smo nazvali \emph{projekcija relacije} $\f R$. Kasnije ćemo pokazati da postoje izračunljive relacije $\f R$ čije projekcije $\exists_*\f R$ nisu izračunljive. Kako je po definiciji $\exists_*\f R=\dom{\mu\f R}$, zaključujemo da \textbf{domena izračunljive funkcije ne mora biti izračunljiva}! Što se tu točno zbiva, objasnit ćemo u poglavlju~\ref{ch:re}. Zasad pokažimo da \emph{ograničenom} minimizacijom čuvamo izračunljivost.
+Još ne znamo ništa o izračunljivosti \emph{neograničene} kvantifikacije (\emph{projekcije}) relacije. Kasnije ćemo pokazati da postoje izračunljive relacije $\f R$ čije projekcije $\exists_*\f R$ nisu izračunljive. Kako je po definiciji $\exists_*\f R=\dom{\mu\f R}$, zaključujemo da \textbf{domena izračunljive funkcije ne mora biti izračunljiva}! Što se tu točno zbiva, objasnit ćemo u poglavlju~\ref{ch:re}. %Zasad promotrimo \emph{ograničenu} minimizaciju. %pokažimo da \emph{ograničenom} minimizacijom čuvamo izračunljivost.
 
 \subsection{Ograničena minimizacija}
 
 \begin{definicija}[{name=[ograničena minimizacija]}]
-Neka je $k\in\N_+$, $R^{k+1}$ relacija te $H^k$ totalna funkcija. Za funkciju $F^k$ definiranu s
-\begin{equation}
-    F(\vec x):=\mu y\bigl(y<H(\vec x)\to R(\vec x,y)\bigr)\text,
+Neka je $k\in\N_+$ te $R^k$ relacija. Za funkciju $F^k$ definiranu s
+\begin{equation}\label{eq:defomin}
+	F(\vec x,y):=\mu i\bigl(i<y\to R(\vec x,i)\bigr)=:(\mu i<y)\,R(\vec x,i)\text,
 \end{equation}
-kažemo da je dobivena \emph{ograničenom minimizacijom} relacije $R$ do granice $H$. Skraćeno pišemo $F(\vec x):=\bigl(\mu y<H(\vec x)\bigr)R(\vec x,y)$.
+kažemo da je dobivena \emph{ograničenom minimizacijom} relacije $R$.
 \end{definicija}
 
-\begin{napomena}[{name=[ograničena minimizacija čuva rekurzivnost]}]\label{nap:min=H}
-U definiciji smo napisali znak $:=$ umjesto $:\simeq$, jer desna strana uvijek ima smisla: $y<H(\vec x)$ je sigurno laž za neki $y$ (prvi takav je upravo $H(\vec x)$, koji postoji jer je $H$ totalna), pa je kondicional tada istinit. Drugim riječima, $F(\vec x)$ će biti najmanji broj $y<H(\vec x)$ koji zadovoljava $R(\vec x,y)$ ako takav postoji, a inače će biti $F(\vec x)=H(\vec x)$.
+\begin{napomena}[{name=[ograničena minimizacija čuva rekurzivnost]}]\label{nap:mintot}
+U~\eqref{eq:defomin} smo napisali znak $:=$ umjesto $:\simeq$, jer izraz u sredini uvijek ima smisla: kondicional će sigurno nekada postati istinit, najkasnije za $i=y$, jer će tada antecedens $i<y$ postati lažan. Drugim riječima, $F(\vec x,y)$ će biti najmanji broj $i<y$ koji zadovoljava $R(\vec x,i)$ ako takav postoji, a inače će biti $F(\vec x,y)=y$.
 
-Dakle, ograničenom minimizacijom do totalne granice dobivamo totalnu funkciju. Štoviše, ako su $\f H$ i $\f R$ rekurzivne, $\f F$ će biti parcijalno rekurzivna --- jer je dobivena neograničenom minimizacijom relacije zadane s $\f P(\vec x,y):\Longleftrightarrow y<\f H(\vec x)\to\f R(\vec x,y)$, koja je rekurzivna zbog primjera~\ref{pr:m-v} i propozicije~\ref{prop:vezn}. Ukratko, ograničenom minimizacijom rekurzivne relacije do rekurzivne granice
-dobivamo rekurzivnu funkciju.
+	Dakle, $F$ je uvijek totalna funkcija. Štoviše, ako je $\f R$ rekurzivna, $\f F$ će biti parcijalno rekurzivna --- jer je dobivena (neograničenom) minimizacijom relacije $\f P$ zadane s $\f P(\vec x,y,i):\Leftrightarrow i<y\to\f R(\vec x,i)$, rekurzivne zbog primjera~\ref{pr:m-v} i propozicije~\ref{prop:vezn}. Ukratko, ograničenom minimizacijom rekurzivne relacije dobivamo rekurzivnu funkciju.
 \end{napomena}
 
-Drugim riječima, ograničena minimizacija čuva rekurzivnost. Važno je da čuva i \emph{primitivnu} rekurzivnost, što ćemo sada dokazati. Naravno, dokaz će biti teži jer ne možemo koristiti neograničenu minimizaciju u postupku.
+Drugim riječima, ograničena minimizacija čuva rekurzivnost. Važno je da čuva i \emph{primitivnu} rekurzivnost, što ćemo sada dokazati. U tom dokazu, naravno, ne možemo koristiti minimizaciju, već ćemo traženu funkciju definirati primitivnom rekurzijom.
 
 %OVO JE KRIVO; NAVESTI PAMETNIJI PRIMJER Ograničenu minimizaciju možemo koristiti svaki put kad znamo da je postojanje elementa koji zadovoljava zadani uvjet ekvivalentno s postojanjem takvog elementa ispod neke granice koju možemo izračunati. Recimo, broj $x$ je složen ako je djeljiv s nekim brojem $d$ različitim od $1$ i $x$, ali znamo da ako postoji takav $d$, tada postoji i takav $d\le x$; štoviše, postoji i takav $d\le\sqrt x$, ali (jer nas ne zanimaju performanse) bitno nam je samo postojanje granice, ne i njezina veličina.
 
-Pokušajmo otkriti kako bismo pomoću dosadašnjih konstrukcija --- ograničenog brojenja i kvantifikacije --- karakterizirali ograničenu minimizaciju. Dakle, imamo $k\in\N_+$, $(k+1\mspace{-1mu})$-mjesnu relaciju $\f R$, $k$-mjesnu totalnu funkciju $\f H$, i $\vec x\in\N^k$. Gornju granicu $\f H(\vec x)$ označimo s $a$, i uvedimo jednomjesnu relaciju $\f P(y):\Longleftrightarrow\f R(\vec x,y)$ ($\vec x$ je ionako fiksiran). Za početak pretpostavimo da doista postoji $y<a$ za koji vrijedi $\f P(y)$. Dakle $a>0$, i imamo niz istinitosnih vrijednosti $\f P(0)$, $\f P(1)$,~\ldots, $\f P(a-1)$ u kojem trebamo naći prvu vrijednost $\mathit{true}$.
+%Pokušajmo otkriti kako bismo pomoću dosadašnjih konstrukcija --- ograničenog brojenja i kvantifikacije --- karakterizirali ograničenu minimizaciju. Dakle, imamo $k\in\N_+$, $(k+1\mspace{-1mu})$-mjesnu relaciju $\f R$, $k$-mjesnu totalnu funkciju $\f H$, i $\vec x\in\N^k$. Gornju granicu $\f H(\vec x)$ označimo s $a$, i uvedimo jednomjesnu relaciju $\f P(y):\Longleftrightarrow\f R(\vec x,y)$ ($\vec x$ je ionako fiksiran). Za početak pretpostavimo da doista postoji $y<a$ za koji vrijedi $\f P(y)$. Dakle $a>0$, i imamo niz istinitosnih vrijednosti $\f P(0)$, $\f P(1)$,~\ldots, $\f P(a-1)$ u kojem trebamo naći prvu vrijednost $\mathit{true}$.
+%
+%Kad bismo imali naredbu \texttt{break}, mogli bismo brojiti vrijednosti $\mathit{false}$ i napustiti petlju čim naiđemo na $\mathit{true}$. Kako možemo emulirati \texttt{break}? Jedan način je da imamo još jednu $bool$ varijablu (\emph{flag}) $q$, inicijaliziramo je na $\mathit{false}$, kad naiđemo na $\mathit{true}$ postavimo $q:=\mathit{true}$, a uopće ne izvršavamo tijelo petlje ako je $q=\mathit{true}$. Gledajući kako se $q$ mijenja, vidimo da je u $y$-tom prolasku to upravo istinitosna vrijednost $\f Q(y):\Longleftrightarrow(\exists i\le y)\f P(i)$. Sada je brojenje prvog bloka nula (do prve jedinice) za $\f P$ ekvivalentno brojenju \emph{svih} nula za $\f Q$, jer je $\chi_{\f Q}$ rastuća: kad postane $1$, ostaje $1$. Dakle, još je potrebno negirati $\f Q$ i primijeniti operator brojenja.
+%
+%To razmišljanje možemo prikazati tablicom: recimo da je $\f P$ svojstvo "biti prim-broj", i da tražimo $(\mu y<7)(y\in\mathbb P)$, najmanji prim-broj manji od $7$. Imali bismo
+%\begin{equation}
+    %\begin{array}{r|cc|ccccc|c}
+%i & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\\hline
+%i\in\mathbb P\Leftrightarrow:\f P(i) & \bot & \bot & \top & \top & \bot & \top & \bot  \\
+%(\exists j\le i)\f P(j)\Leftrightarrow:\f Q(i) & \bot & \bot & \top & \top & \top & \top & \top \\
+%\lnot\f Q(i) & \top & \top & \bot & \bot & \bot & \bot & \bot\\
+%(\num j<i)\,\lnot\f Q(j) & 0 & 1 & 2 & 2 & 2 & 2 & 2 & 2
+%\end{array}\text.
+%\end{equation}
 
-Kad bismo imali naredbu \texttt{break}, mogli bismo brojiti vrijednosti $\mathit{false}$ i napustiti petlju čim naiđemo na $\mathit{true}$. Kako možemo emulirati \texttt{break}? Jedan način je da imamo još jednu $bool$ varijablu (\emph{flag}) $q$, inicijaliziramo je na $\mathit{false}$, kad naiđemo na $\mathit{true}$ postavimo $q:=\mathit{true}$, a uopće ne izvršavamo tijelo petlje ako je $q=\mathit{true}$. Gledajući kako se $q$ mijenja, vidimo da je u $y$-tom prolasku to upravo istinitosna vrijednost $\f Q(y):\Longleftrightarrow(\exists i\le y)\f P(i)$. Sada je brojenje prvog bloka nula (do prve jedinice) za $\f P$ ekvivalentno brojenju \emph{svih} nula za $\f Q$, jer je $\chi_{\f Q}$ rastuća: kad postane $1$, ostaje $1$. Dakle, još je potrebno negirati $\f Q$ i primijeniti operator brojenja.
-
-To razmišljanje možemo prikazati tablicom: recimo da je $\f P$ svojstvo "biti prim-broj", i da tražimo $(\mu y<7)(y\in\mathbb P)$, najmanji prim-broj manji od $7$. Imali bismo
-\begin{equation}
-    \begin{array}{r|cc|ccccc|c}
-i & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\\hline
-i\in\mathbb P\Leftrightarrow:\f P(i) & \bot & \bot & \top & \top & \bot & \top & \bot  \\
-(\exists j\le i)\f P(j)\Leftrightarrow:\f Q(i) & \bot & \bot & \top & \top & \top & \top & \top \\
-\lnot\f Q(i) & \top & \top & \bot & \bot & \bot & \bot & \bot\\
-(\num j<i)\,\lnot\f Q(j) & 0 & 1 & 2 & 2 & 2 & 2 & 2 & 2
-\end{array}\text.
-\end{equation}
-
-\begin{propozicija}[{name=[ograničena minimizacija čuva primitivnu rekurzivnost]}]\label{prop:muHprn}
-Neka je $k\in\N_+$ te $\f R^{k+1}$ primitivno rekurzivna relacija i $\f H^k$ primitivno rekurzivna funkcija. Tada je i funkcija $\f F^k$\!, dobivena ograničenom minimizacijom relacije $\f R$ do granice $\f H$, također primitivno rekurzivna.
+\begin{propozicija}[{name=[ograničena minimizacija čuva primitivnu rekurzivnost]}]\label{prop:ominprn}
+Neka je $k\in\N_+$ te $\f R^k$ primitivno rekurzivna relacija. Tada je i funkcija $\f F^k$\!, dobivena ograničenom minimizacijom relacije $\f R$, također primitivno rekurzivna.
 \end{propozicija}
 \begin{proof}
-Tvrdimo da je za svaki $\vec x\in\N^k$, vrijednost $\f F(\vec x)$ jednaka
-\begin{equation}\label{eq:muHprn}
-  \bigl(\mu y<\f H(\vec x)\bigr)\f R(\vec x,y) =
-  \bigl(\num y<\f H(\vec x)\bigr)(\nexists\,i\le y)\f R(\vec x,i)\text,
-\end{equation}
-pa je $\f F$ primitivno rekurzivna po napomeni~\ref{nap:kvantSc}, propoziciji~\ref{prop:kompl} i lemi~\ref{lm:brojrek}.
+	Za $y=0$, vrijednost funkcije $\f F$ je očito $0$, jer je antecedens kondicionala odmah na početku lažan: $0\not<0$, pa je kondicional istinit. Za korak, pretpostavimo da imamo već izračunatu vrijednost $z:=\f F(\vec x,y)$ (znamo da je $z\le y$ po napomeni~\ref{nap:mintot}), i pitamo se koliko je $\f F(\vec x,y+1)$. Imamo tri slučaja.
 
-Prvo, ako ne postoji $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, tada na lijevoj strani stoji $\f H(\vec x)$ po napomeni~\ref{nap:min=H}. S druge strane, za sve $y<\f H(\vec x)$, svaki $i\le y$ je također manji od $\f H(\vec x)$, pa ni za koji od njih ne vrijedi $\f R(\vec x,i)$. Dakle $(\nexists i\le y)\f R(\vec x,i)$ je uvijek istina, pa je desna strana jednaka $\bigl(\num y<\f H(\vec x)\bigr)\top$, što je također jednako $\f H(\vec x)$.
-    
-	Ako pak postoji neki $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, najmanji takav (vrijednost lijeve strane) označimo s $y_0$. Tada $(\nexists i\le y)\f R(\vec x,i)$ vrijedi za sve $y<y_0$. Također, za sve $y\ge y_0$ to \emph{ne} vrijedi: uvijek možemo uzeti $i:=y_0$ kao kontraprimjer. Dakle svi $y$ za koje vrijedi $(\nexists i\le y)\f R(\vec x,i)$ su upravo svi oni manji od $y_0$, a na desnoj strani piše njihov broj, koji je također $y_0$.
+	Ako je $z<y$, to znači da postoji "dobar" $i<y<y+1$ takav da vrijedi $\f R(\vec x,i)$, i $z$ je najmanji takav, pa je očito $\f F(\vec x,y+1)$ također jednako $z$.
+
+	Ako je $z=y$, to znači da ne postoji dobar $i<y$, pa se pitamo vrijedi li $\f R(\vec x,y)$. Ako vrijedi, $y$ je najmanji dobar $i<y+1$, pa je $\f F(\vec x,y+1)=y$, što je opet jednako $z$.
+	Inače, nismo našli dobar $i<y+1$, pa je $\f F(\vec x,y+1)=y+1$ u skladu s napomenom~\ref{nap:mintot}.
+
+	Sve u svemu, vidimo da je $\f F=\f C_0^{k-1}\pr\f H$ (ili $0\pr\f H$ za $k=1$), gdje je $\f H$, zadana s
+\begin{equation}
+	\f H(\vec x,y,z)=\begin{cases}
+		z,&z<y\vee\f R(\vec x,y)\\
+		y+1,&\text{inače}
+	\end{cases}\text,
+\end{equation}
+	primitivno rekurzivna po teoremu~\ref{tm:grek}, primjeru~\ref{pr:m-v} i propoziciji~\ref{prop:vezn}, pa je i $\f F$ takva.
+	%Tvrdimo da je za svaki $\vec x\in\N^k$, vrijednost $\f F(\vec x)$ jednaka
+	%\begin{equation}\label{eq:muHprn}
+	%\bigl(\mu y<\f H(\vec x)\bigr)\f R(\vec x,y) =
+	%\bigl(\num y<\f H(\vec x)\bigr)(\nexists\,i\le y)\f R(\vec x,i)\text,
+	%\end{equation}
+	%pa je $\f F$ primitivno rekurzivna po napomeni~\ref{nap:kvantSc}, propoziciji~\ref{prop:kompl} i lemi~\ref{lm:brojrek}.
+	%
+	%Prvo, ako ne postoji $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, tada na lijevoj strani stoji $\f H(\vec x)$ po napomeni~\ref{nap:min=H}. S druge strane, za sve $y<\f H(\vec x)$, svaki $i\le y$ je također manji od $\f H(\vec x)$, pa ni za koji od njih ne vrijedi $\f R(\vec x,i)$. Dakle $(\nexists i\le y)\f R(\vec x,i)$ je uvijek istina, pa je desna strana jednaka $\bigl(\num y<\f H(\vec x)\bigr)\top$, što je također jednako $\f H(\vec x)$.
+	%
+	%Ako pak postoji neki $y<\f H(\vec x)$ takav da vrijedi $\f R(\vec x,y)$, najmanji takav (vrijednost lijeve strane) označimo s $y_0$. Tada $(\nexists i\le y)\f R(\vec x,i)$ vrijedi za sve $y<y_0$. Također, za sve $y\ge y_0$ to \emph{ne} vrijedi: uvijek možemo uzeti $i:=y_0$ kao kontraprimjer. Dakle svi $y$ za koje vrijedi $(\nexists i\le y)\f R(\vec x,i)$ su upravo svi oni manji od $y_0$, a na desnoj strani piše njihov broj, koji je također $y_0$.
 \end{proof}
 %U iskazu ove propozicije nismo trebali stavljati riječ "primitivno" u zagrade, jer tvrdnja čitana bez riječi "primitivno" slijedi iz napomene~\ref{nap:min=H}.
 
-\begin{napomena}[{name=[uključena gornja granica ograničene minimizacije]}]\label{nap:muSc}
-Ista napomena o uključenoj gornjoj granici, poput~\ref{nap:kvantSc}, vrijedi i ovdje:
-$\mu y\le\f H(\vec x)$ shvaćamo kao $\mu y<\f{Sc}\bigl(\f H(\vec x)\bigr)$, a kompozicijom s inicijalnom funkcijom $\f{Sc}$ sigurno nismo pokvarili izračunljivost granice $\f H$.
-\end{napomena}
+%\begin{napomena}[{name=[uključena gornja granica ograničene minimizacije]}]\label{nap:muSc}
+%Ista napomena o uključenoj gornjoj granici, poput~\ref{nap:kvantSc}, vrijedi i ovdje:
+%$\mu y\le\f H(\vec x)$ shvaćamo kao $\mu y<\f{Sc}\bigl(\f H(\vec x)\bigr)$, a kompozicijom s inicijalnom funkcijom $\f{Sc}$ sigurno nismo pokvarili izračunljivost granice $\f H$.
+%\end{napomena}

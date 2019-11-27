@@ -12,9 +12,9 @@ Neka je $\Sigma$ proizvoljna abeceda te $\N\Sigma$ proizvoljno njeno kodiranje. 
 \begin{proof}
 Teorem~\ref{tm:tikp} (zajedno s teoremom~\ref{tm:pir}) kaže da za svaku $\varphi\in\TComp$ vrijedi $\N\varphi\in\mathscr Comp_1$. Dakle preslikavanje doista "ide kamo treba".
 
-Za injektivnost, neka su $\varphi_1,\varphi_2\in\TComp$ različite. Ako imaju različite domene, bez smanjenja općenitosti možemo pretpostaviti da postoji $w\in\dom{\varphi_1}\!\setminus\dom{\varphi_2}$. Tada je $\kr w\in\dom{\N\varphi_1}$, ali isto tako $\kr w\notin\dom{\N\varphi_2}$ jer je kodiranje riječi injekcija, pa $\kr w$ ne može biti jednak nijednom $\kr{w'}$ za $w'\in\dom{\varphi_2}$. To znači da prateće funkcije $\N\varphi_1$ i $\N\varphi_2$ imaju različite domene, pa su različite.
+Za injektivnost, neka su $\varphi_1,\varphi_2\in\TComp$ različite. Ako imaju različite domene, bez smanjenja općenitosti možemo pretpostaviti da postoji $w\in\dom{\varphi_1}\!\!\setminus\dom{\varphi_2}$. Tada je $\kr w\in\dom{\N\varphi_1}$, ali isto tako $\kr w\notin\dom{\N\varphi_2}$ jer je kodiranje riječi injekcija, pa $\kr w$ ne može biti jednak nijednom $\kr{w'}$ za $w'\in\dom{\varphi_2}$. To znači da prateće funkcije $\N\varphi_1$ i $\N\varphi_2$ imaju različite domene, pa su različite.
 
-Ako pak $\varphi_1$ i $\varphi_2$ imaju istu domenu $D$, ali se razlikuju na nekoj riječi $w\in D$, tada (opet po injektivnosti kodiranja riječi) vrijedi
+Ako pak $\varphi_1$ i $\varphi_2$ imaju istu domenu, ali se razlikuju na nekoj riječi $w$ iz te domene, tada (opet po injektivnosti kodiranja riječi) vrijedi
 \begin{equation}
     \N\varphi_1(\kr w)=\kr{\varphi_1(w)}\ne\kr{\varphi_2(w)}=\N\varphi_2(\kr w)\text,
 \end{equation}
@@ -74,7 +74,7 @@ Izračunljivost $L$ u brojevnom modelu gledamo preko kodova: definiramo jednomje
 \end{equation}
 i prirodno je reći da $L$ ima neko svojstvo izračunljivosti (npr.\ da je primitivno rekurzivan) ako relacija $\kr L$, odnosno njena karakteristična funkcija $\chi_{\kr L}$, ima to svojstvo.
 
-Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}=\chi_\emptyset=\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
+Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}=\chi_\emptyset=\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}\!=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
 
 U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_a$ i $q_r$, kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
@@ -95,13 +95,13 @@ Pretpostavimo da je $\mathcal T$ odlučitelj za $L$ i provedimo s tim strojem po
 
 Prvo, kako imamo dva završna stanja, moramo fiksirati njihove kodove: recimo, $\N Q(q_a):=1$, a $\N Q(q_r):=2$. (Dokažite analogon leme~\ref{lm:bsomp-q0neqz}, da bez smanjenja općenitosti možemo pretpostaviti $q_0\ne q_a$ i $q_0\ne q_r$ --- a po definiciji odlučitelja mora biti $q_a\ne q_r$.)
 
-    Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\notin\{q_a,q_r\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica (vidjeti primjer~\ref{pr:polatable}) imati dva retka jedinica, a ne samo jedan.
+    Drugo, kako nam $\delta$ sad nije definirana na oba završna stanja, treba promijeniti uvjet u lemi analognoj lemi~\ref{lm:newssdprn}, u $q\notin\{q_a,q_r\}$. Tu se ništa bitno ne mijenja, osim što će $\f{direction}$-tablica (vidjeti primjer~\ref{pr:polatable}) imati dva retka jedinicâ, a ne samo jedan.
 
 I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$ imat ćemo funkciju zadanu sa
 \begin{equation}\label{eq:stop'def}
     \f{stop}'(x):=\mu n\bigl(\f{State}(x,n)\in\{1,2\}\bigr)\text,
 \end{equation}
-    i moći ćemo zaključiti da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}) pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak \enquote*{:=}) po definiciji odlučitelja: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$ za neki $n$, jer $\mathcal T$-izračunavanje s $w$ mora stati --- i $\f{stop}'(x)=\f{stop}'(\kr w)$ je upravo broj koraka nakon kojeg ono stane.
+    za koju ćemo moći zaključiti da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}) pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak \enquote*{:=}) po definiciji odlučitelja: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$ za neki $n$, jer $\mathcal T$-izračunavanje s $w$ mora stati --- i $\f{stop}'(x)=\f{stop}'(\kr w)$ je upravo broj koraka nakon kojeg ono stane.
 
 Tvrdimo da je
 \begin{equation}
@@ -121,7 +121,7 @@ Neka je $L$ jezik (nad nekom abecedom $\Sigma$).\newline Ako je relacija $\kr L$
 \begin{proof}
 Pretpostavka zapravo znači da je $\chi_{\kr L}$ rekurzivna funkcija. Dakle $\chi_{\kr L}$ je parcijalno rekurzivna, pa po teoremu~\ref{tm:pir} postoji RAM-program koji je računa; i totalna je, pa taj RAM-program stane za svaki ulaz. Na taj RAM-program htjeli bismo primijeniti postupak iz točke~\ref{sec:RAM>Turing}. Da bismo to mogli, moramo $\chi_{\kr L}$ prikazati kao $\N\varphi$ za neku jezičnu funkciju $\varphi$ nad $\Sigma$. Možemo li to?
 
-Svakako: dokaz propozicije~\ref{pp:trackbij} kaže da je $\varphi:=\N^{-1}\chi_{\kr L}=(\N\Sigma^*)^{-1}\circ\chi_{\kr L}\circ\N\Sigma^*$. Ta funkcija je totalna kao kompozicija tri totalne, a Turing-izračunljiva je prema korolaru~\ref{kor:pent} (ako smo uzeli isto kodiranje pomoću kojeg smo izračunali $\kr L$). Pogledajmo malo detaljnije kako ona djeluje.
+Svakako: dokaz propozicije~\ref{pp:trackbij} kaže da je $\varphi:=\N^{-1}\chi_{\kr L}=(\N\Sigma^*)^{-1}\circ\chi_{\kr L}\circ\N\Sigma^*$. Ta funkcija je totalna kao kompozicija tri totalne, a Turing-izračunljiva je prema korolaru~\ref{kor:pent} (ako uzmemo isto kodiranje pomoću kojeg smo izračunali $\kr L$). Pogledajmo malo detaljnije kako ona djeluje.
 
 Ako joj damo riječ $w\in\Sigma^*\setminus L$, tada (kodiranje riječi je injekcija) vrijedi $\kr w\notin\kr L$, pa je $\chi_{\kr L}(\kr w)=0$. Po definiciji od $\varphi$ je tada
 \begin{equation}
@@ -293,7 +293,9 @@ $\f{bin}(x)=2^x-1=\f{pd}\bigl(\f{pow}(2,x)\bigr)$ (jer je uvijek $2^x\ge 1$).
 Kako sada pomoću funkcije $\f{bin}^1$ možemo dobiti $\f{bin}^2$? Riječ $\beta(x,y)=\t\textbullet^x\!\t/\t\textbullet^y$ je sastavljena od tri dijela: $\t\textbullet^x=\beta(x)$, $\t/$ i $\t\textbullet^y=\beta(y)$, čije kodove znamo --- to su redom $\f{bin}(x)$, $2$ i $\f{bin}(y)$. Dakle, da dobijemo njen kod, trebamo ih konkatenirati u pomaknutoj bazi $2$. Operacija je definirana s~\eqref{eq:defconcat}.
 
 \begin{propozicija}[{name=[prateća funkcija konkatenacije nad $\Sigma$]}]\label{pp:krkonkkr}
-Neka je $\Sigma$ abeceda, $\N\Sigma$ njeno kodiranje te $b$ broj znakova u njoj. Tada za sve $u,v\in\Sigma^*$ vrijedi
+Neka je $\Sigma$ abeceda, $\N\Sigma$ njeno kodiranje te $b$ broj znakova u njoj.
+	
+	Tada za sve riječi $u,v\in\Sigma^*$ vrijedi
     $\kr{uv}=\kr u\conc b\kr v$.
 \end{propozicija}
 \begin{proof}
@@ -316,14 +318,14 @@ Uz oznake $u=\alpha_1\alpha_2\dotsm\alpha_{\dulj{u}}$ i $v=\beta_1\beta_2\dotsm\
 \dotsm
 \N\Sigma(\beta_{\dulj v})
 \bigr)_b=\\
-=\kr{\alpha_1\dotsm\alpha_{\dulj u}}\conc b\kr{\beta_1\dotsm\beta_{\dulj v}}=\kr u\conc b\kr v\text.
+	=\kr{\alpha_1\dotsm\mspace{1mu}\alpha_{\dulj u}}\conc b\kr{\beta_1\dotsm\mspace{1mu}\beta_{\dulj v}}=\kr u\conc b\kr v\text.
 \end{multline}
-Za $u=\varepsilon$ ili $v=\varepsilon$ tvrdnja također vrijedi jer je $\varepsilon$ neutralni element za konkatenaciju, a $\kr\varepsilon=0$ je neutralni element za $\conc b$:
+Za $u=\varepsilon$ ili $v=\varepsilon$ tvrdnja također vrijedi jer je $\varepsilon$ neutralni element za konkatenaciju, a $\kr\varepsilon=0$ je neutralni element za $\conc b$: doista,
 \begin{align}
     0\conc bx&=\f{sconcat}(0,x,b)=0\cdot b^{\f{slh}(x,b)}+x=0+x=x\text,\\
     x\conc b0&=\f{sconcat}(x,0,b)=x\cdot b^{\f{slh}(0,b)}+0=x\cdot b^0=x\text,
 \end{align}
-a $\f{slh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ jer je već $\sum_{i\le0}b^i=b^0=1>0$.
+pri čemu je $\f{slh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ jer je već $\sum_{i\le0}b^i=b^0=1>0$.
 \end{proof}
 
 \begin{korolar}[{name=[duljina konkatenacije je zbroj duljina]}]\label{kor:lhkonk=lh+lh}
@@ -352,7 +354,7 @@ Primitivna rekurzivnost slijedi iz leme~\ref{lm:ldcpprn}. Za asocijativnost,
     \left(x\conc b y\right)\conc b z=\left(x\cdot b^{\f{slh}(y,b)}+y\right)\cdot b^{\f{slh}(z,b)}+z=\\[1mm]
     =\left(x\cdot b^{\f{slh}(y,b)}\cdot b^{\f{slh}(z,b)}+y\cdot b^{\f{slh}(z,b)}\right)+z=
     x\cdot b^{\f{slh}(y,b)\,+\,\f{slh}(z,b)}+\left(y\cdot b^{\f{slh}(z,b)}+z\right)=\\[-1mm]
-    \text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{slh}(y\,\conc b\,z\,,\,b)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
+	\text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{slh}(y\,\conc{{\scriptscriptstyle b}}\,z\,,\,b)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
 \end{multline}
 \end{proof}
 Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Uočimo da je za asocijativnost ključno da se radi o \textbf{pomaknutoj} bazi: u običnoj bazi 10 je $(5\conc{10}'0)\conc{10}'2=50\conc{10}'2=502\ne5\conc{10}'(0\conc{10}'2)=5\conc{10}'2=52$ pa ne vrijedi asocijativnost.
@@ -498,7 +500,7 @@ Za $i\ge\f{count2}(x)$, takav $z$ ne postoji (jer $z\conc22$ ima više dvojki ne
 
 Sada je za $\f{streak1}$ dovoljno oduzeti odgovarajuće pozicije: poziciju prvog znaka nakon $i$-te dvojke, od pozicije sljedeće dvojke. Za $i<\f{count2}(x)-1$, to očito funkcionira: jer su jedine znamenke $1$ i $2$, između susjednih dvojki nalaze se samo jedinice.
 
-    Za $i=\f{count2}(x)-1$, $i$-ta dvojka je upravo zadnja, pa je $\f{pos2}(x,i)=\f{pd}\bigl(\f{blh}(x)\bigr)$. Također po specifikaciji $\f{pos2}$ vrijedi $\f{pos2}(x,i+1)=\f{blh}(x)$, pa je $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{pd}(\f{blh}(x))\bigr)=0$. A za $i\ge\f{count2}(x)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{blh}(x)$, pa je opet $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{blh}(x)\bigr)=0$.
+	Za $i=\f{count2}(x)-1$, $i$-ta dvojka je upravo zadnja, pa je $\f{pos2}(x,i)=\f{pd}\bigl(\f{blh}(x)\bigr)$. Također po specifikaciji $\f{pos2}$ vrijedi $\f{pos2}(x,i+1)=\f{blh}(x)$, pa je $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{pd}(\f{blh}(x))\bigr)=0$ (jer je $\f{Sc}\bigl(\f{pd}(t)\bigr)=t\bump\ge t$). A za $i\ge\f{count2}(x)$ imamo $\f{pos2}(x,i+1)=\f{pos2}(x,i)=\f{blh}(x)$, pa je opet $\f{streak1}(x,i)=\f{blh}(x)\dotminus\f{Sc}\bigl(\f{blh}(x)\bigr)=0$.
 \end{proof}
 
 %\subsection{Funkcije \texorpdfstring{$\f{arg}_i$}{arg} --- ekstrakcija argumenata}\label{sec:arg}

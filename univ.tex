@@ -174,7 +174,7 @@ Upravo napisani izraz zapravo kaže da je $\f{nextprime}^1$ \emph{rekurzivna} fu
 \begin{equation}
     \f{nextprime}(p)=(\mu q\le p!+1)(q\in\mathbb P\land q>p)%\text,
 \end{equation}
-    Dakle $\f{nextprime}^1$ je dobivena ograničenom minimizacijom primitivno rekurzivne relacije do primitivno rekurzivne (uključive, napomena~\ref{nap:muSc}) granice, pa je primitivno rekurzivna. Sada je i $\f{prime}=2\pr\f{nextprime}\circ\f I_2^2$ primitivno rekurzivna po propoziciji~\ref{prop:F1prn}.
+	Dakle $\f{nextprime}^1$ je dobivena ograničenom minimizacijom primitivno rekurzivne relacije do primitivno rekurzivne granice, pa je primitivno rekurzivna po napomeni~\ref{nap:igpk} i propoziciji~\ref{prop:ominprn}. A tada je i $\f{prime}=2\pr\f{nextprime}\circ\f I_2^2$ primitivno rekurzivna po propoziciji~\ref{prop:F1prn}.
 \end{proof}
 
 \subsection{Rastav na prim-faktore}
@@ -598,7 +598,7 @@ Samo treba napisati definiciju:
 \begin{equation}
     \f{start}(x):=\;\prod_{i=0}^{\mathclap{\f{lh}(x)-1}}p_{i+1}^{x[i]}=\;\prod_{\mathclap{i<\f{lh}(x)}}\f{pow}\bigl(\f{prime}\bigl(\f{Sc}(i)\bigr),\f{part}(x,i)\bigr)\text.
 \end{equation}
-Primitivna rekurzivnost slijedi iz propozicija~\ref{pp:primeprn} i~\ref{prop:lhpartprn}, napomene~\ref{nap:sumprodH} i primjera~\ref{pr:addmulpow}. Prim-brojevi su pomaknuti jer adrese ulaznih registara počinju od $1$.
+Primitivna rekurzivnost slijedi iz propozicija~\ref{pp:primeprn} i~\ref{prop:lhpartprn}, leme~\ref{lm:sumprodrek} i primjera~\ref{pr:addmulpow}. Prim-brojevi su pomaknuti jer adrese ulaznih registara počinju od $1$.
 \end{proof}
 
 Funkcija $\f{start}$ nije injekcija: recimo, $\f{start}(\langle2,1\rangle)=\f{start}(\langle2,1,0,0\rangle)=\knk{0,2,1,0,0,\dotsc}$, odnosno $\f{start}(72)=\f{start}(2520)=45$. Ali preslikavanje $\knk{\cdots}$ jest injekcija (kao što kodiranje i treba biti), po osnovnom teoremu aritmetike. Također po osnovnom teoremu aritmetike, slika mu je $\im{\knk{\cdots}}=\N_+$, primitivno rekurzivna po primjeru~\ref{pr:N+prn}.
@@ -769,7 +769,7 @@ Za specifikaciju, smjer slijeva nadesno, raspetljavanjem definicije od $\f{Final
 Analogno, zaključivanjem u suprotnom smjeru, dobijemo i drugi smjer tvrdnje.
 \end{proof}
 
-To je u redu ako već imamo (kandidat za) $n$ --- ali možemo li \emph{izračunati} $n$? Svakako, minimizacijom: $\f{step}:=\mu\,\f{Final}$ je parcijalno rekurzivna funkcija taakva da je $\f{step}(\langle\vec x\rangle,\kprog P)\simeq\mu n\,\f{Final}(\langle\vec x\rangle,\kprog{P},n)$ upravo broj koraka $P$-izračunavanja s $\vec x$ do dolaska u završnu konfiguraciju. To je definirano samo za izračunavanja koja stanu: $HALT:=\dom{\f{step}}=\exists_*\f{Final}$ je dvomjesna relacija takva da $HALT(\langle \vec x\rangle,\kprog P)$ vrijedi ako i samo ako $P$-izračunavanje s $\vec x$ stane.
+To je u redu ako već imamo (kandidat za) $n$ --- ali možemo li \emph{izračunati} $n$? Svakako, minimizacijom: $\f{step}:=\mu\,\f{Final}$ je parcijalno rekurzivna funkcija takva da je $\f{step}(\langle\vec x\rangle,\kprog P)\simeq\mu n\,\f{Final}(\langle\vec x\rangle,\kprog{P},n)$ upravo broj koraka $P$-izračunavanja s $\vec x$ do dolaska u završnu konfiguraciju. To je definirano samo za izračunavanja koja stanu: $HALT:=\dom{\f{step}}=\exists_*\f{Final}$ je dvomjesna relacija takva da $HALT(\langle \vec x\rangle,\kprog P)$ vrijedi ako i samo ako $P$-izračunavanje s $\vec x$ stane.
 
 \begin{napomena}[{name=[totalna specifikacija zaustavljanja izračunavanja]}]\label{nap:HaltProg}
 Štoviše, zahvaljujući oprezu sa specifikacijom prije, sad možemo biti precizniji: kad god $e$ nije kod nekog programa, ili $x$ nije kod nepraznog konačnog niza, ne vrijedi $\f{Final}(x,e,n)$ ni za koji $n$. Dakle, tada $(x,e)\notin HALT$, odnosno izraz $\f{step}(x,e)$ nema smisla.
@@ -907,7 +907,7 @@ Kao što smo upravo rekli, cilj nam je dokazati
 \begin{equation}
     \f{Step}(x,e,m)\Longleftrightarrow m=(\mu n\le m)\f{Final}(x,e,n)
 \end{equation}
---- iz toga će onda slijediti primitivna rekurzivnost prema (redom) lemi~\ref{lm:Finalspec}, propoziciji~\ref{prop:muHprn}, napomeni~\ref{nap:muSc} i korolaru~\ref{kor:jednakost}.
+--- iz toga će onda slijediti primitivna rekurzivnost prema (redom) lemi~\ref{lm:Finalspec}, propoziciji~\ref{prop:ominprn}, napomeni~\ref{nap:igpkc} i korolaru~\ref{kor:jednakost}.
 
 Pretpostavimo da vrijedi $\f{Step}(x,e,m)$. Tada vrijedi $(x,e)\in\dom{\f{step}}=HALT$ i $m=\f{step}(x,e)$. Dakle vrijedi $\f{Final}(x,e,m)$, i ni za koji $n<m$ ne vrijedi $\f{Final}(x,e,n)$, pa je $\mu n\bigl(n\le m\to\f{Final}(x,e,n)\bigr)=\mu n\,\f{Final}(x,e,n)=\f{step}(x,e)=m$.
 
@@ -1020,11 +1020,11 @@ Sve bitno što smo dosad napravili u ovoj točki može se iskazati u jednom teor
 Postoji primitivno rekurzivna funkcija $\f U$, takva da za svaki $k\in\N_+$ postoji primitivno rekurzivna relacija $\f T_k$, takva da za svaku parcijalno rekurzivnu funkciju $\f f$ mjesnosti $k$ postoji prirodni broj $e$, takav da za svaki $\vec x\in\N^k$ vrijede sljedeće dvije tvrdnje:
 \begin{gather}
     \label{eq:kleenedom}\vec x\in\dom{\f f}\Longleftrightarrow\exists y\,\f T_k(\vec x,e,y)\text,\\
-    \label{eq:kleeneval}\f f(\vec x)\simeq\f U\bigl(\mu y\,\f T_k(\vec x,e,y)\bigr)\text.
+    \label{eq:kleeneval}\f f(\vec x)\simeq\f U\bigl(\mu y\,\f T_k(\vec x,e,y)\bigr)\,\text.
 \end{gather}
 \end{teorem}
 \begin{proof}
-Funkcija $\f U$ je definirana s~\eqref{eq:Udef} i dokazano je da je primitivno rekurzivna u propoziciji~\ref{prop:compspec}. Za svaki $k\in\N_+$, relacija $\f T_k$ je definirana, i dokazano je da je primitivno rekurzivna, u propoziciji~\ref{prop:Tkprn}. Neka je sada $\f f$ proizvoljna parcijalno rekurzivna funkcija. Prema teoremu~\ref{tm:pir}, postoji RAM-program koji računa $\f f$. Označimo $e:=\kprog P$, i neka je $\vec x\in\N^k$ proizvoljan.
+	Funkcija $\f U$ je definirana s~\eqref{eq:Udef} i dokazano je da je primitivno rekurzivna u propoziciji~\ref{prop:compspec}. Za svaki $k\in\N_+$, relacija $\f T_k$ je definirana s~\eqref{eq:Tkdef} i dokazano je da je primitivno rekurzivna u propoziciji~\ref{prop:Tkprn}. Neka je sada $\f f$ proizvoljna parcijalno rekurzivna funkcija. Prema teoremu~\ref{tm:pir}, postoji RAM-program koji računa $\f f$. Označimo $e:=\kprog P$, i neka je $\vec x\in\N^k$ proizvoljan.
 
 Prema definiciji~\ref{def:compute}, ako je $\vec x\in\dom{\f f}$, tada $P$-izračunavanje s $\vec x$ stane, pa postoji njegov kod $y_0$. Tada po definiciji~\eqref{eq:Tkdef} vrijedi $\f T_k(\vec x,e,y_0)$, pa postoji $y$ (konkretno, $y_0$) takav da vrijedi $\f T_k(\vec x,e,y)$. Ako pak $\vec x\notin\dom{\f f}$, tada opet po definiciji~\ref{def:compute} $P$-izračunavanje ne stane, pa nema kod, odnosno ne postoji $y$ takav da vrijedi $\f T_k(\vec x,e,y)$. Time je dokazano~\eqref{eq:kleenedom}, odnosno dokazano je da u~\eqref{eq:kleeneval} lijeva i desna strana imaju smisla za iste $\vec x$ (jer lijeva ima smisla za $\vec x\in\dom{\f f}$, a desna za $(\vec x,e)\in\exists_*\f T_k$).
 
@@ -1032,7 +1032,7 @@ Za takve $\vec x$, kao što smo vidjeli, postoji kod $P$-izračunavanja s $\vec 
 \end{proof}
 
 \begin{korolar}[{name=[jedna minimizacija je dovoljna]}]
-Za svaku parcijalno rekurzivnu funkciju postoji simbolička definicija u kojoj se operator $\mu$ pojavljuje točno jednom.
+Za svaku parcijalno rekurzivnu funkciju postoji simbolička definicija \newline u kojoj se operator $\mu$ pojavljuje točno jednom.
 \end{korolar}
 \begin{proof}
 Samo treba~\eqref{eq:kleeneval} zapisati u simboličkom obliku:
@@ -1113,7 +1113,7 @@ Recimo da imamo funkciju $F:\mathscr Comp_2\rightharpoonup\mathscr Comp_3$. Drug
 \begin{equation}\label{eq:parcspecind}
     \kf{\N F(e)}^3=F(\kf e^2)\text.
 \end{equation}
-Riječima, ako $F$ preslikava $\f f^2$ u $\f g^3$, tada $\N F$ mora preslikavati \emph{svaki} indeks za $\f f^2$ u \emph{neki} (ne nužno isti) indeks za $\f g^3$ --- a ako $\f f\notin\dom F$, tada \emph{nijedan} indeks za $\f f$ ne smije biti u $\dom{\N F}$. Takvih funkcija općenito ima neprebrojivo mnogo --- jer indeksa za svaku $\f g\in\im F$ ima beskonačno mnogo --- pa ih ima i neizračunljivih. Ali ako \emph{postoji} takva funkcija koja je izračunljiva u nekom smislu i zadovoljava~\eqref{eq:parcspecind}, kažemo da je $F$ izračunljiva u istom tom smislu.
+Riječima, ako $F$ preslikava $\f f^2$ u $\f g^3$, tada $\N F$ mora preslikavati \emph{svaki} indeks za $\f f^2$ u \emph{neki} (ne nužno isti) indeks za $\f g^3$ --- a ako $\f f\notin\dom F$, tada \emph{nijedan} indeks za $\f f$ ne smije biti u $\dom{\N F}$. Takvih funkcija općenito ima neprebrojivo mnogo --- jer indeksa za svaku $\f g\in\im F$ ima beskonačno mnogo --- pa ih ima i neizračunljivih. Ali ako \emph{postoji} takva funkcija $\N F$ koja je izračunljiva u nekom smislu i zadovoljava~\eqref{eq:parcspecind}, kažemo da je $F$ izračunljiva u istom tom smislu.
 
 Takve funkcije možemo i komponirati: ako imamo $G:\mathscr Comp_3\rightharpoonup\mathscr Comp_1$ sa sličnom specifikacijom, koja preslikava $\f g^3$ u $\f h^1$, tada iako ne znamo koji će nam indeks od $\f g$ funkcija $\N F$ dati, funkcija $\N G$ mora ispravno raditi za \emph{sve} indekse od $\f g$, pa će na kraju $\N G\circ\N F$ dati neki indeks za $\f h$, ako joj damo (bilo koji) indeks za $\f f$.
 \end{primjer}
@@ -1138,7 +1138,7 @@ Na početku točke~\ref{sec:tech} nešto smo rekli o teškoćama koje marljiva e
 Dakle, način da se izvučemo je da našoj funkciji $If$ ne damo već izračunate \emph{vrijednosti} $\f g(\vec x)$ i $\f h(\vec x)$, već neevaluirane \emph{funkcije} $\f g$ i $\f h$. Tada s obzirom na uvjet odaberemo jednu od njih, i onda je tek izračunamo na $\vec x$: umjesto $\f f(\vec x,y)\simeq If\bigl(y,\f g(\vec x),\f h(\vec x)\bigr)$ imamo $\f f(\vec x,y)\simeq If(y,\f g,\f h)(\vec x)$. Koristeći indekse, to možemo i doslovno napraviti.
 
 \begin{teorem}[Teorem o grananju, parcijalno rekurzivna verzija]\label{tm:gprek}
-Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne rekurzivne relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\IF{\f R_1:\f G_1,\f R_2:\f G_2,\dots,\f R_l:\f G_l,\f G_0}$ također parcijalno rekurzivna.
+Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne rekurzivne relacije, sve iste mjesnosti.\newline Tada je i funkcija $\f F:=\IF{\f R_1:\f G_1,\f R_2:\f G_2,\dots,\f R_l:\f G_l,\f G_0}$ također parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
 Za svaki $i\in[0\dd l]$, funkcija $\f G_i^k$ je parcijalno rekurzivna, pa prema korolaru~\ref{kor:pii} ima indeks, označimo ga s $e_i$ (pogledajte napomenu~\ref{nap:>1ind} za značenje ove fraze). Prema teoremu~\ref{tm:grek} (rekurzivna verzija), funkcija

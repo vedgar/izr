@@ -72,6 +72,7 @@ Naravno, to nije \emph{dokaz} da ne postoji možda neka druga metoda kojom bismo
 
 Problem kojim smo se bavili --- za zadani $n$, je li $n$ u domeni od $\kf n^1$ --- čini se vrlo umjetnim: nije da bismo ikad bili doista zainteresirani za općeniti odgovor na to pitanje. Ipak, jednom kad imamo neki neodlučiv problem, možemo se dočepati i ostalih.
 
+%Ovaj odlomak treba bolje napisati: pr nije luksuz, već uglavnom nepotrebna
 Metoda je ista ona pomoću koje iz već poznatih odlučivih problema (izračunljivih funkcija) dobivamo nove: \emph{svođenje} (redukcija). Ako možemo neku funkciju $f$ svesti na neku drugu $g$ --- napisati $f$ pomoću kompozicije, i eventualno primitivne rekurzije, funkcije $g$ s nekim izračunljivim funcijama, tada znamo da ako je $g$ izračunljiva, tada je i $f$ takva. To smo koristili mnogo puta u funkcijskom programiranju --- recimo, pogledajte primjer~\ref{pr:m-v}. Tamo nam je bila bitna primitivna rekurzivnost, pa smo govorili samo o totalnim funkcijama, i primitivna rekurzija je igrala bitnu ulogu. Kad govorimo o (ne)odlučivim problemima, primitivna rekurzivnost postaje luksuz koji si ne možemo uvijek priuštiti, pa ćemo zapravo promatrati samo kompoziciju. Kako se radi o problemima, dakle karakterističnim funkcijama relacija koje su totalne, zbog marljive evaluacije proizlazi da sve funkcije u kompoziciji moraju također biti totalne.
 
 Napomenimo, u literaturi postoje razne vrste svođenja problema, pa i općenitih funkcija. Odabiremo najjednostavniju prikladnu našim potrebama.
@@ -135,7 +136,7 @@ Tvrdimo da vrijedi $K(n)\Leftrightarrow Halt_1(n,n)$. Doista,
     =\left\{n\;\middle\vert\;\bigl(\f I_1^1(n),\f I_1^1(n)\bigr)\in\dom{\f{comp}_1}\right\}
     =\{n\mid(n,n)\in Halt_1\}\text,
 \end{multline}
-gdje smo koristili korolar~\ref{kor:comptot} da se riješimo sljedbenika. Iz toga slijedi $K\preceq Halt_1$, pa je $Halt_1$ neodlučiv po korolaru~\ref{kor:nrek<nrek} i teoremu~\ref{tm:DRnrek}.
+gdje smo koristili korolar~\ref{kor:comptot} da se riješimo sljedbenika.\newline Iz toga slijedi $K\preceq Halt_1$, pa je $Halt_1$ neodlučiv po korolaru~\ref{kor:nrek<nrek} i teoremu~\ref{tm:DRnrek}.
 
 Slično, po definiciji iz korolara~\ref{kor:funHaltTk}, vrijedi $Halt_1(x,e)\Leftrightarrow HALT(\kr x,e)$, a funkcija $\f{Code}^1$ je (primitivno) rekurzivna, pa je $Halt_1\!\preceq HALT$, iz čega je i $HALT$ neodlučiv.
 \end{proof}
