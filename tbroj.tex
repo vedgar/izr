@@ -132,7 +132,7 @@ Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju $bool$ u $\Sigma^*$:
 
 %Kako izvršavanje RAM-programa o kojem govorimo stane za svaki $\kr w$, po korolaru~\ref{kor:faza3} i napomeni~\ref{nap:snstane} slijedi da će Turingov stroj koji konstruiramo stati za svaki $w$ --- samo trebamo malo promijeniti način na koji stane, da ne komunicira izlaz putem trake nego putem završnog stanja.
 
-    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (zadnje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\t\$}$ s
+    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (posljednje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\t\$}$ s
 \begin{gather}
     \SwapAboveDisplaySkip
 \label{eq:d88j}
@@ -179,7 +179,7 @@ Ponekad se reprezentacija također zove "kodiranje", ali nama su kodiranja funkc
 Funkcija $\beta$ je bijekcija između $\N^+$ i $\Sigma_\beta^*$.
 \end{propozicija}
 \begin{proof}
-Najlakše je konstruirati inverznu funkciju i pokazati da je to doista inverz. Dakle, za proizvoljnu riječ $u\in\Sigma_\beta^*$, pitamo se kojeg niza je ona kod. Kao i uvijek kod konačnih nizova, trebamo odrediti njegovu duljinu $k$, a zatim pojedine članove $x_1$, $x_2$,~\ldots, $x_k$. Duljina je sljedbenik broja pojavljivanja separatora \t/ u riječi $u$ (jer u~\eqref{eq:betadef} ima $k-1$ separatora) i to je uvijek pozitivan broj, dakle niz je neprazan. Prvi član mu možemo odrediti brojeći kružiće do prvog separatora (ili do kraja riječi ako je $k=1$), drugi brojeći ih između prvog i drugog separatora, i tako dalje. Posljednji član $x_k$ je broj kružića od zadnjeg separatora do kraja riječi $u$.
+Najlakše je konstruirati inverznu funkciju i pokazati da je to doista inverz. Dakle, za proizvoljnu riječ $u\in\Sigma_\beta^*$, pitamo se kojeg niza je ona kod. Kao i uvijek kod konačnih nizova, trebamo odrediti njegovu duljinu $k$, a zatim pojedine članove $x_1$, $x_2$,~\ldots, $x_k$. Duljina je sljedbenik broja pojavljivanja separatora \t/ u riječi $u$ (jer u~\eqref{eq:betadef} ima $k-1$ separatora) i to je uvijek pozitivan broj, dakle niz je neprazan. Prvi član mu možemo odrediti brojeći kružiće do prvog separatora (ili do kraja riječi ako je $k=1$), drugi brojeći ih između prvog i drugog separatora, i tako dalje. Zadnji član $x_k$ je broj kružića od zadnjeg separatora do kraja riječi $u$.
 
 Tvrdimo da je tako konstruirano preslikavanje desni inverz od $\beta$: odnosno, ako tako dobijemo niz $\vec x$, tada je $\beta(\vec x)=u$. Doista, te dvije riječi imaju isti broj separatora ($k-1$) i isti broj kružića ($\sum\vec x$) te se podudaraju na pozicijama svih separatora (malo pomaknute parcijalne sume od $\vec x$) --- što je dovoljno za zaključak da su jednake.
 

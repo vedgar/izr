@@ -168,7 +168,7 @@ Precizno, neka su $k,l\in\N_+$ proizvoljni te neka su $\f G_1^k$, $\f G_2^k$,~\l
     l.&P_{\f H}(\reg{k+1},\reg{k+2},\dotsc,\reg{k+l})\to\reg0\textsc{ using }\reg{k+l+1}..
     \end{prog}
 \end{equation}
-računa $\f F:=\f H\circ(\f G_1,\f G_2,\dotsc,\f G_l)$. Prema definiciji~\ref{def:compute}, neka je $\vec x\in\N^k$ proizvoljan. Ako je $\vec x\in\dom F$, prema definiciji~\eqref{eq:domkomp} je za sve $i\in[1\dd l]$, $\vec x\in\dom{\f G_i}$, pa izvršavanje svake od prvih $l$ instrukcija programa $Q_{\f F}$ stane, i u $\reg{k+i}$ zapiše vrijednost $\f G_i(\vec x)=:y_i$. Pritom je važno da će, prema propoziciji~\ref{prop:semfmacro}, ulazni podaci ostati u ulaznim registrima, pa računanje kasnijih $y_j$ neće uništiti one ranije izračunate. Uvjet $\vec y^{l}\in\dom{\f H}$, također iz~\eqref{eq:domkomp}, znači da će i izvršavanje posljednje instrukcije u $Q_{\f F}$ stati, i u $\reg0$ zapisati $\f H(\vec y)=F(\vec x)$. Tablično,
+računa $\f F:=\f H\circ(\f G_1,\f G_2,\dotsc,\f G_l)$. Prema definiciji~\ref{def:compute}, neka je $\vec x\in\N^k$ proizvoljan. Ako je $\vec x\in\dom F$, prema definiciji~\eqref{eq:domkomp} je za sve $i\in[1\dd l]$, $\vec x\in\dom{\f G_i}$, pa izvršavanje svake od prvih $l$ instrukcija programa $Q_{\f F}$ stane, i u $\reg{k+i}$ zapiše vrijednost $\f G_i(\vec x)=:y_i$. Pritom je važno da će, prema propoziciji~\ref{prop:semfmacro}, ulazni podaci ostati u ulaznim registrima, pa računanje kasnijih $y_j$ neće uništiti one ranije izračunate. Uvjet $\vec y^{l}\in\dom{\f H}$, također iz~\eqref{eq:domkomp}, znači da će i izvršavanje zadnje instrukcije u $Q_{\f F}$ stati, i u $\reg0$ zapisati $\f H(\vec y)=F(\vec x)$. Tablično,
 \begin{equation}
     \begin{array}{r@{\;}l|ccccccc}
 %\SwapAboveDisplaySkip
@@ -183,7 +183,7 @@ l.    &P_{\f H}\dots  &\f F(\vec x)&x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&
 \end{equation}
 \smallskip
 
-Ako $\vec x\notin\dom{\f F}$, prema~\eqref{eq:domkomp} to se može dogoditi na dva načina. Ako $\vec x\notin\bigcap_{i=1}^l\dom{\f G_i}$, postoji neki $i$ takav da $\vec x\notin\dom{\f G_i}$, pa označimo s $i_0$ najmanji takav. Tada će izvršavanje programa $Q_{\f F}$ doći do instrukcije s rednim brojem $i_0-1$, ali izvršavanje te instrukcije neće nikada stati prema propoziciji~\ref{prop:semfmacro}, pa ni $Q_{\f F}$-izračunavanje s $\vec x$ neće stati. Ako pak $l$-torka dobivenih povratnih vrijednosti nije u $\dom{\f H}$, izvršavanje $Q_{\f F}$ će zapeti u beskonačnoj petlji na posljednjoj instrukciji, pa opet $Q_{\f F}$-izračunavanje s $\vec x$ neće stati.
+Ako $\vec x\notin\dom{\f F}$, prema~\eqref{eq:domkomp} to se može dogoditi na dva načina. Ako $\vec x\notin\bigcap_{i=1}^l\dom{\f G_i}$, postoji neki $i$ takav da $\vec x\notin\dom{\f G_i}$, pa označimo s $i_0$ najmanji takav. Tada će izvršavanje programa $Q_{\f F}$ doći do instrukcije s rednim brojem $i_0-1$, ali izvršavanje te instrukcije neće nikada stati prema propoziciji~\ref{prop:semfmacro}, pa ni $Q_{\f F}$-izračunavanje s $\vec x$ neće stati. Ako pak $l$-torka dobivenih povratnih vrijednosti nije u $\dom{\f H}$, izvršavanje $Q_{\f F}$ će zapeti u beskonačnoj petlji na zadnjoj instrukciji, pa opet $Q_{\f F}$-izračunavanje s $\vec x$ neće stati.
 Sada prema teoremu~\ref{tm:rem} RAM-algoritam $Q_{\f F}^{\flat k}$ također računa $\f F$, pa je $\f F\in\mathscr Comp$.
 \end{proof}
 
@@ -848,7 +848,7 @@ Domena funkcije dobivene grananjem~\eqref{eq:domgran} zapravo je još komplicira
     G_0(\vec x),&\text{inače}\text,
     \end{cases}
 \end{equation}
-uz dogovor da izraz na desnoj strani ima smisla samo za one $\vec x$ za koje izraz u $i$-tom retku ima smisla, ako uvjet u tom retku vrijedi, a za one $\vec x$ za koje izraz u posljednjem retku ima smisla, ako nijedan od prethodnih uvjeta ne vrijedi. Dakle, ne zahtijevamo (kao prije) da \emph{svaki} podizraz izraza na desnoj strani ima smisla, već samo oni koji se nalaze u "relevantnom retku" definicije.
+uz dogovor da izraz na desnoj strani ima smisla samo za one $\vec x$ za koje izraz u $i$-tom retku ima smisla, ako uvjet u tom retku vrijedi, a za one $\vec x$ za koje izraz u zadnjem retku ima smisla, ako nijedan od prethodnih uvjeta ne vrijedi. Dakle, ne zahtijevamo (kao prije) da \emph{svaki} podizraz izraza na desnoj strani ima smisla, već samo oni koji se nalaze u "relevantnom retku" definicije.
 
 No kao što smo već rekli, komplikacije s domenom bit će nam bitne kasnije. Zasad radimo s (primitivno) rekurzivnim funkcijama i relacijama, koje su totalne --- a pod tim uvjetima i funkcija dobivena grananjem je totalna, štoviše također (primitivno) rekurzivna, dok god navedemo i funkciju $G_0$ za "podrazumijevani slučaj" (\emph{default}).
 
@@ -934,7 +934,7 @@ Jedan primjer smo već vidjeli: sa statičke strane, za svaki $n$ imamo primitiv
 Evo malo kompliciranijeg primjera: lema~\ref{lm:addmulk} kaže da je za svaki $k$ funkcija $\f{add}^k$ primitivno rekurzivna; ako joj damo $k$ brojeva, ili je komponiramo s $k$ izračunljivih funkcija, ona će ih zbrojiti (funkcije će zbrojiti na presjeku njihovih domena). Sada ćemo promotriti dinamičku varijantu: operator $\sum$ koji za unaprijed zadanu \emph{totalnu} funkciju $\f G$ prima broj koji kaže koliko prvih njenih vrijednosti treba zbrojiti, i eventualno ostale argumente od $\f G$ ako je ona mjesnosti veće od $1$. Isto ćemo napraviti za množenje.
 
 \begin{napomena}[{name=[izračunljive granice i prazni konteksti]}]\label{nap:igpk}
-	U ostatku ove točke dokazat ćemo šest rezultata o ograničenom programiranju: neke direktno primitivnom rekurzijom, a neke kompozicijom iz već dobivenih rezultata. Svi će oni imati isto sučelje: (primitivno) rekurzivnu $k$-mjesnu funkciju $\f G$ ili relaciju $\f R$, kontekst $\vec x$ i granicu $y$; te će biti definirani iteracijom po svim $i<y$. U primjenama, najčešće će granica biti zadana kao neka funkcija konteksta: $i<\f B(\vec x)$. To samo znači da ćemo primijeniti kompoziciju s $\f B$ na mjestu posljednjeg argumenta $y$, što ostaje (primitivno) rekurzivno ako je $\f B$ takva.
+	U ostatku ove točke dokazat ćemo šest rezultata o ograničenom programiranju: neke direktno primitivnom rekurzijom, a neke kompozicijom iz već dobivenih rezultata. Svi će oni imati isto sučelje: (primitivno) rekurzivnu $k$-mjesnu funkciju $\f G$ ili relaciju $\f R$, kontekst $\vec x$ i granicu $y$; te će biti definirani iteracijom po svim $i<y$. U primjenama, najčešće će granica biti zadana kao neka funkcija konteksta: $i<\f B(\vec x)$. To samo znači da ćemo primijeniti kompoziciju s $\f B$ na mjestu zadnjeg argumenta $y$, što ostaje (primitivno) rekurzivno ako je $\f B$ takva.
 
 	Drugo, granica može biti uključena: $i\le\f B(\vec x)$ je ekvivalentno s $i<\f{Sc}\bigl(\f B(\vec x)\bigr)$, što samo znači da komponiramo sa $\f{Sc}\circ\f B$, koja je (primitivno) rekurzivna ako je $\f B$ takva.
 

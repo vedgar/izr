@@ -64,7 +64,7 @@ Recimo odmah da tražimo primitivno rekurzivne, dakle totalne funkcije. Njihovo 
 
 Da bismo odredili konačni niz iz kojeg je dobiven k\^od $c$, moramo prvo odrediti njegovu duljinu. Dakle, tražimo funkciju $lh$ takvu da za svaki $c\in\f{Seq}$, $lh(c)$ bude duljina konačnog niza čiji je $c$ k\^od. Takvih funkcija ima neprebrojivo mnogo jer je $\f{Seq}\kompl$ beskonačan (recimo, sadrži sve neparne brojeve veće od $3$), a na njemu $lh$ može djelovati proizvoljno --- pa sigurno postoje i neizračunljive takve funkcije. Ipak, dokazat ćemo da postoji takva funkcija $\f{lh}$ koja je primitivno rekurzivna.
 
-Kad smo odredili $\f{lh}(c)=:k$, na prvi pogled imamo tipičnu situaciju algoritma s više izlaza: od jednog broja $c$ trebamo dobiti $k$ njih, pa bismo u skladu s napomenom~\ref{nap:brip} to trebali reprezentirati pomoću koordinatnih funkcija $\f{part}_1,\f{part}_2,\dotsc,\f{part}_k$. Ipak, to nema baš smisla jer broj takvih funkcija ovisi o $c$ (po funkciji $\f{lh}$), a osim toga, ponekad će nam trebati i dinamički određeni indeksi. Recimo, kad budemo pisali funkciju $\f U$, koja k\^od izračunavanja koje stane preslikava u njegov rezultat, bit će potrebno odabrati \emph{zadnju} konfiguraciju u konačnom nizu. A čak i da imamo izračunljive funkcije $\f{part}_i$ za sve $i$, iz toga ne slijedi da je preslikavanje $c\mapsto\f{part}_{\f{lh}(c)}(c)$ izračunljivo (pokušajte napisati simboličku definiciju i vidjet ćete u čemu je problem).
+Kad smo odredili $\f{lh}(c)=:k$, na prvi pogled imamo tipičnu situaciju algoritma s više izlaza: od jednog broja $c$ trebamo dobiti $k$ njih, pa bismo u skladu s napomenom~\ref{nap:brip} to trebali reprezentirati pomoću koordinatnih funkcija $\f{part}_1,\f{part}_2,\dotsc,\f{part}_k$. Ipak, to nema baš smisla jer broj takvih funkcija ovisi o $c$ (po funkciji $\f{lh}$), a osim toga, ponekad će nam trebati i dinamički određeni indeksi. Recimo, kad budemo pisali funkciju $\f U$, koja k\^od izračunavanja koje stane preslikava u njegov rezultat, bit će potrebno odabrati \emph{posljednju} konfiguraciju u konačnom nizu. A čak i da imamo izračunljive funkcije $\f{part}_i$ za sve $i$, iz toga ne slijedi da je preslikavanje $c\mapsto\f{part}_{\f{lh}(c)}(c)$ izračunljivo (pokušajte napisati simboličku definiciju i vidjet ćete u čemu je problem).
 
 Srećom, ideja dinamizacije i ovdje pomaže: zapravo ćemo imati \emph{dvomjesnu} funkciju $\f{part}^2$, tako da $\f{part}(c,i)$ (skraćena oznaka $c[i]$) bude ono što smo bili nazvali $\f{part}_{i+1}(c)$ --- pomaknuli smo indekse za $1$ jer je ideja shvatiti konačne nizove kao polja (\emph{arrays}), a u većini modernih programskih jezika indeksiranje polja kreće od nule. Bitno nam je da to vrijedi samo za $c\in\f{Seq}$ i $i\in[0\dd \f{lh}(c)\rangle$ --- za ostale uređene parove mora biti nekako definirana jer je primitivno rekurzivna, ali nije nam bitno kako točno. Zapravo će se ispostaviti da za $c\in\f{Seq}$ i $i\ge\f{lh}(c)$ vrijedi $c[i]=0$, što će biti korisno u jednom trenutku, ali naglasit ćemo to kad nam bude trebalo.
 
@@ -109,11 +109,11 @@ Sjetimo se napomene~\ref{nap:crtica}: često brojevnoteorijske funkcije nisu def
 \begin{propozicija}[{name=[primitivna rekurzivnost dijeljenja s ostatkom]}]\label{prop:divmodprn}
     Cjelobrojno dijeljenje, zadano s $x\div y:=\bigl\lfloor\frac{x}{y\bump\!}\bigr\rfloor$, kao i ostatak cjelobrojnog dijeljenja ($x\bmod y$), primitivno su rekurzivne operacije.
 \end{propozicija}
-Prije dokaza napomenimo da je nula problematična u operaciji $\div$, ali nije u operaciji $\bmod$: uobičajeno se u modernoj teoriji brojeva definira $x\bmod 0:=x$.
+Prije dokaza napomenimo da je nula problematična u operaciji $\div$, ali ne i u operaciji $\bmod$: definicija $x\bmod 0:=x$ uobičajena je u modernoj teoriji brojeva.
 \begin{proof}
 Cjelobrojno dijeljenje zapravo je ponovljeno oduzimanje, onoliko puta koliko se može. Dakle, za zadane $x$ i $y$, tražimo najveći $t$ takav da je $t\cdot y\le x$. Relacija $t\cdot y\le x$ jest primitivno rekurzivna, ali nemamo operator maksimizacije. S razlogom ga općenito nemamo: ako malo razmislimo, vidjet ćemo da ne postoji općeniti algoritam kojim bismo odredili najveći broj s nekim svojstvom, čak ni ako znamo da taj broj postoji, jer nikad ne znamo jesmo li tražili dovoljno dugo --- u svakom trenutku iznad najvećeg broja koji smo ispitali postoji još beskonačno mnogo kandidata, svaki od kojih može biti traženi broj.
 
-Srećom, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y$ postane veće od $x$, ostat će veće od $x$ za sve veće $t$. Kod takvih relacija, "prva laž" i "zadnja istina" su susjedne, dakle možemo naći prethodnik najmanjeg $t$ za kojeg vrijedi suprotno.
+Srećom, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y$ postane veće od $x$, ostat će veće od $x$ za sve veće $t$. Kod takvih relacija, "prva laž" i "posljednja istina" su susjedne, dakle možemo naći prethodnik najmanjeg $t$ za kojeg vrijedi suprotno.
 
 Ipak, to je neograničena minimizacija, koja neće dati primitivno rekurzivnu funkciju --- možemo li je nekako ograničiti? Svakako: $y\bump\ge 1$ znači $t\cdot y\bump\ge t$ za svaki $t$, posebno $(x+1)\cdot y\bump\ge x+1>x$. Dakle, dovoljno je tražiti $t$ do $x+1$ --- odnosno do $x$ uključivo, jer znamo da će ograničena minimizacija tada dati $x+1$ ako ne pronađe nijedan broj s traženim svojstvom u zadanom rasponu. Sve u svemu, tvrdimo da vrijedi
 \begin{equation}\label{eq:sslash}
@@ -818,7 +818,7 @@ Drugo, od osnovnih operatora ($\circ$, $\pr$ i $\mu$) moramo koristiti minimizac
 
 Funkciji $\f U$ trebamo poslati izračunavanje --- možemo li ga kodirati prirodnim brojem? Ako ne stane, teško: može se ponavljati ciklički, ali se može i ponašati vrlo komplicirano. Ali izračunavanja koja ne stanu ionako nas ne zanimaju, jer ne želimo da $\f U\circ\mu\f{\check T}$ bude definirano u tom slučaju.
 
-Dakle, promotrimo izračunavanje koje stane. Vidjeli smo da ono mora biti oblika $(c_0,c_1,\dotsc,c_{n_0},c_{n_0},c_{n_0},\dotsc)$, gdje je $c_{n_0}$ završna, a nijedna $c_i$ za $i<n_0$ nije završna. Za potrebe kodiranja, dovoljno je gledati samo konačan niz $(c_0,c_1,\dotsc,c_{n_0})$ duljine $n_0+1$, jer se iz njega beskonačnim ponavljanjem zadnjeg elementa može dobiti i čitavo izračunavanje. Za kodirati pojedinu $c_i$, trebali bismo uračunati i $\f{Reg}(x,e,i)$ i $\f{Count}(x,e,i)$, no s obzirom na to da nam je u završnoj konfiguraciji po definiciji poznata ova druga vrijednost ($c_{n_0}(\textsc{pc})=\f{lh}(e\mspace{1mu})$) i zapravo nam treba sadržaj registra $\reg0$, pamtit ćemo samo vrijednosti funkcije $\f{Reg}$. Drugim riječima, treba nam povijest $\overline{\f{Reg}}(x,e,n_0+1)$, što je izračunljivo jednom kad imamo $n_0:=\f{step}(x,e)$.
+Dakle, promotrimo izračunavanje koje stane. Vidjeli smo da ono mora biti oblika $(c_0,c_1,\dotsc,c_{n_0},c_{n_0},c_{n_0},\dotsc)$, gdje je $c_{n_0}$ završna, a nijedna $c_i$ za $i<n_0$ nije završna. Za potrebe kodiranja, dovoljno je gledati samo konačan niz $(c_0,c_1,\dotsc,c_{n_0})$ duljine $n_0+1$, jer se iz njega beskonačnim ponavljanjem posljednjeg elementa može dobiti i čitavo izračunavanje. Za kodirati pojedinu $c_i$, trebali bismo uračunati i $\f{Reg}(x,e,i)$ i $\f{Count}(x,e,i)$, no s obzirom na to da nam je u završnoj konfiguraciji po definiciji poznata ova druga vrijednost ($c_{n_0}(\textsc{pc})=\f{lh}(e\mspace{1mu})$) i zapravo nam treba sadržaj registra $\reg0$, pamtit ćemo samo vrijednosti funkcije $\f{Reg}$. Drugim riječima, treba nam povijest $\overline{\f{Reg}}(x,e,n_0+1)$, što je izračunljivo jednom kad imamo $n_0:=\f{step}(x,e)$.
 
 \begin{definicija}[{name=[kod izračunavanja]}]\label{def:kodizr}
 Neka je $P^k$ RAM-algoritam te $\vec x\in\N^k$ takav da $P$-izračunavanje s $\vec x$ stane. \emph{Kod} tog izračunavanja definiramo kao povijest kodova stanja registara, do uključivo prvog indeksa završne konfiguracije u tom izračunavanju. Za izračunavanja koja ne stanu kod nije definiran.
@@ -907,7 +907,7 @@ Kao što smo upravo rekli, cilj nam je dokazati
 \begin{equation}
     \f{Step}(x,e,m)\Longleftrightarrow m=(\mu n\le m)\f{Final}(x,e,n)
 \end{equation}
---- iz toga će onda slijediti primitivna rekurzivnost prema (redom) lemi~\ref{lm:Finalspec}, propoziciji~\ref{prop:ominprn}, napomeni~\ref{nap:igpkc} i korolaru~\ref{kor:jednakost}.
+--- iz toga će onda slijediti primitivna rekurzivnost prema (redom) lemi~\ref{lm:Finalspec}, propoziciji~\ref{prop:ominprn}, napomeni~\ref{nap:igpk} i korolaru~\ref{kor:jednakost}.
 
 Pretpostavimo da vrijedi $\f{Step}(x,e,m)$. Tada vrijedi $(x,e)\in\dom{\f{step}}=HALT$ i $m=\f{step}(x,e)$. Dakle vrijedi $\f{Final}(x,e,m)$, i ni za koji $n<m$ ne vrijedi $\f{Final}(x,e,n)$, pa je $\mu n\bigl(n\le m\to\f{Final}(x,e,n)\bigr)=\mu n\,\f{Final}(x,e,n)=\f{step}(x,e)=m$.
 
@@ -970,7 +970,7 @@ Korolar~\ref{kor:funHaltTk} prema napomeni~\ref{nap:graf=funsv} kaže da je za s
 \begin{equation}\label{eq:Udef}
     \f U(y):=\f{result}\bigl(\f{rpart}(y,0)\bigr)=\f{ex}(y[\f{pd}(\f{lh}(y))],0)\text,
 \end{equation}
-doslovno "sadržaj izlaznog registra zadnje konfiguracije kodirane s $y$" te ćemo dobiti
+doslovno "sadržaj izlaznog registra posljednje konfiguracije kodirane s $y$" te ćemo dobiti
 \begin{equation}
     \f{comp}_k(\vec x,e):\simeq \f U\bigl(\mu y\,\f T_k(\vec x,e,y)\bigr)\text.
 \end{equation}
@@ -1028,7 +1028,7 @@ Postoji primitivno rekurzivna funkcija $\f U$, takva da za svaki $k\in\N_+$ post
 
 Prema definiciji~\ref{def:compute}, ako je $\vec x\in\dom{\f f}$, tada $P$-izračunavanje s $\vec x$ stane, pa postoji njegov kod $y_0$. Tada po definiciji~\eqref{eq:Tkdef} vrijedi $\f T_k(\vec x,e,y_0)$, pa postoji $y$ (konkretno, $y_0$) takav da vrijedi $\f T_k(\vec x,e,y)$. Ako pak $\vec x\notin\dom{\f f}$, tada opet po definiciji~\ref{def:compute} $P$-izračunavanje ne stane, pa nema kod, odnosno ne postoji $y$ takav da vrijedi $\f T_k(\vec x,e,y)$. Time je dokazano~\eqref{eq:kleenedom}, odnosno dokazano je da u~\eqref{eq:kleeneval} lijeva i desna strana imaju smisla za iste $\vec x$ (jer lijeva ima smisla za $\vec x\in\dom{\f f}$, a desna za $(\vec x,e)\in\exists_*\f T_k$).
 
-Za takve $\vec x$, kao što smo vidjeli, postoji kod $P$-izračunavanja s $\vec x$, koji smo označili s $y_0$ i vidjeli da vrijedi $\f T_k(\vec x,e,y_0)$. Ali $\f T_k$ ima funkcijsko svojstvo, dakle $y_0$ je \emph{jedini}, pa onda i najmanji, $y$ takav da vrijedi $\f T_k(\vec x,e,y)$. To znači da na desnoj strani zapravo piše $\f U(y_0)$, odnosno stanje registra $\reg0$ u zadnjoj konfiguraciji kodiranoj s $y_0$ --- što je opet po definiciji~\ref{def:compute} jednako $\f f(\vec x)$, jer ta konfiguracija mora biti završna.
+Za takve $\vec x$, kao što smo vidjeli, postoji kod $P$-izračunavanja s $\vec x$, koji smo označili s $y_0$ i vidjeli da vrijedi $\f T_k(\vec x,e,y_0)$. Ali $\f T_k$ ima funkcijsko svojstvo, dakle $y_0$ je \emph{jedini}, pa onda i najmanji, $y$ takav da vrijedi $\f T_k(\vec x,e,y)$. To znači da na desnoj strani zapravo piše $\f U(y_0)$, odnosno stanje registra $\reg0$ u posljednjoj konfiguraciji kodiranoj s $y_0$ --- što je opet po definiciji~\ref{def:compute} jednako $\f f(\vec x)$, jer ta konfiguracija mora biti završna.
 \end{proof}
 
 \begin{korolar}[{name=[jedna minimizacija je dovoljna]}]
