@@ -22,10 +22,10 @@ pa su $\N\varphi_1$ i $\N\varphi_2$ različite jer se razlikuju na elementu $\kr
 
 Za surjektivnost, uzmimo proizvoljnu $\f F^1\in\mathscr Comp_1$ i tražimo $\varphi\in\TComp$ takvu da je $\f F=\N\varphi$. Očito, u domeni joj moraju biti upravo sve riječi $w$ za koje je $\kr w\in\dom{\f F}$, a svaku takvu riječ mora preslikavati u (jedinstvenu) riječ $v$ čiji kod je $\f F(\kr w)$. Time je jezična funkcija $\varphi$ potpuno određena, a iz $\N\varphi=\f F\in\mathscr Comp_1$ po teoremu~\ref{tm:krit} slijedi $\varphi\in\TComp$. Dobivenu funkciju $\varphi$ označavamo s $\N^{-1}\f F$.
 \end{proof}
-Precizno, uz oznaku $\kappa:=\N\Sigma^*$, imamo vezu
+Precizno, za $\sigma:=\N\Sigma^*$, imamo vezu
 %\begin{equation}
-$\f F=\N\varphi=\kappa\circ\varphi\circ\kappa^{-1}\Leftrightarrow
-\varphi=\N^{-1}\f F=\kappa^{-1}\circ\f F\circ\kappa$
+	$\f F=\N\varphi=\sigma\circ\varphi\circ\sigma^{\,-1}\Leftrightarrow
+	\varphi=\N^{-1}\f F=\sigma^{\,-1}\circ\f F\circ\sigma$
 %\end{equation}
 te vrijedi $\N\,\N^{-1}\f F=\f F$ i $\N^{-1}\N\varphi=\varphi$.
 
@@ -74,7 +74,7 @@ Izračunljivost $L$ u brojevnom modelu gledamo preko kodova: definiramo jednomje
 \end{equation}
 i prirodno je reći da $L$ ima neko svojstvo izračunljivosti (npr.\ da je primitivno rekurzivan) ako relacija $\kr L$, odnosno njena karakteristična funkcija $\chi_{\kr L}$, ima to svojstvo.
 
-Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}=\chi_\emptyset=\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}\!=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
+Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}=\chi_{\mspace{1mu}\emptyset}=\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}\!=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
 
 U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_a$ i $q_r$, kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
@@ -505,7 +505,7 @@ Sada je za $\f{streak1}$ dovoljno oduzeti odgovarajuće pozicije: poziciju prvog
 
 %\subsection{Funkcije \texorpdfstring{$\f{arg}_i$}{arg} --- ekstrakcija argumenata}\label{sec:arg}
 
-Sada za ekstrakciju pojedinog $x_i$ trebamo uokviriti $\f{bin}^k(\vec x)$ dvojkama te pozvati funkciju $\f{streak1}$ s odgovarajućim argumentom.
+Za ekstrakciju pojedinog $x_n$ sada trebamo uokviriti $\f{bin}^k(\vec x)$ dvojkama te pozvati "metodu" $\f{streak1}$ s argumentom $n-1$.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost ekstrakcije argumenata]}]\label{pp:argnprn}
     Za svaki $n\in\N_+$ postoji primitivno rekurzivna funkcija $\f{arg}_n$, takva da za sve $\vec x\in\N^+$ vrijedi $\f{arg}_n\bigl(\f{bin}(\vec x)\bigr)=\kr{\vec x}[n-1]$.
