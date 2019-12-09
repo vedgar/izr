@@ -852,7 +852,7 @@ tako da se dio trake desno od separatora sastoji od $m$ "redaka" (\emph{tragova}
     \end{array}
     \biggr\}\text.
 \end{equation}
-Konkretno, ako (za $m=4$) u nekom trenutku imamo konfiguraciju $(1,4,0,5,0,0,\dotsc)$, uz $\dulj w=7$, traka će biti
+Konkretno, ako (za $m=4$) u nekom trenutku imamo konfiguraciju $(1,4,0,5,0,0,\dotsc\mspace{-1mu})$, uz $\dulj w=7$, traka će biti
 \begin{equation}\label{eq:bitmap}
 \renewcommand{\arraystretch}{0.1}
     \t{\$\bl\bl\bl\bl\bl\bl\bl\#}\begin{array}{@{}c@{}}
@@ -959,8 +959,8 @@ iz čega vidimo dvije stvari. Prvo, $\bl$ mora biti ovaj prvi element u $B^m$, k
 
 Rekli smo da ćemo vrijednost programskog brojača držati u stanju stroja --- i to je već učinjeno kroz supskript stanja $p_0$: ta nula znači da je \textsc{pc} upravo postao $0$. Općenito, ako je $P_0$ duljine $n:=n_{P_0}$ imat ćemo stanja $p_i,i\in[0\dd n]$, a ulazak u stanje $p_n$ značit će završetak $P_0$-izračunavanja.
 
-\begin{definicija}[{name=[Turing-reprezentacija RAM-konfiguracije]}]
-Neka je $P^1$ RAM-algoritam širine $m$, te $c=(r_0,r_1,\dots,r_{m-1},0,0,\dots,pc)$ konfiguracija RAM-stroja s programom $P$. \emph{Turing-reprezentacija} od $c$ je konfiguracija sa stanjem $p_{pc}$, trakom oblika $\t\$\bl^k\t\#v\bl\dots$ i pozicijom većom od $k$ --- pri čemu je $v$ riječ nad $B^m$ u čijem $i$-tom tragu piše $\t\textbullet^{r_i}\t\textopenbullet^{\dulj v-r_i}$.
+\begin{definicija}[{name=[$m$-reprezentacija RAM-konfiguracije]}]
+	Neka je $P^1$ RAM-algoritam širine $m$, te $c=(r_0,r_1,\dots,r_{m-1},0,0,\dots,pc)$ konfiguracija RAM-stroja s programom $P$. \emph{$m$-reprezentacija} od $c$ je konfiguracija sa stanjem $p_{pc}$, trakom oblika $\t\$\bl^k\t\#v\bl\dots$ i pozicijom većom od $k$ --- pri čemu je $v$ riječ nad $B^m$ u čijem $i$-tom tragu piše $\t\textbullet^{r_i}\t\textopenbullet^{\dulj v-r_i}$, za sve $i\in[0\dd m\rangle$.
 %Za $k,m,n\in\N$ takve da je $m\ge 2$, za proizvoljnu RAM-konfiguraciju $c$ sa svojstvima $c(\reg j)=0$ za sve $j\ge m$ i $c(\textsc{pc})\le n$, \emph{reprezentacija} je Turing-konfiguracija
 %\begin{equation}
 %Turing_{kmn}(c):=\biggl(p_{c(\textsc{pc})},k+2,\t\$\bl^k\t\#\!\left[\begin{array}{@{}l@{}}
@@ -975,36 +975,28 @@ Neka je $P^1$ RAM-algoritam širine $m$, te $c=(r_0,r_1,\dots,r_{m-1},0,0,\dots,
 %\end{equation}
 \end{definicija}
 
-Recimo,~\eqref{eq:bitmap} je primjer trake reprezentacije konfiguracije $(1,4,0,5,0,0,\dots)$. Također, zadnja konfiguracija u~\eqref{eq:+afaze} je reprezentacija početne konfiguracije RAM-stroja s programom $P_0$ iz~\eqref{eq:+aprog}, s ulazom \t{ab}.
+Recimo,~\eqref{eq:bitmap} je primjer trake $4$-reprezentacije konfiguracije $(1,4,0,5,0,0,\dots\mspace{-1mu})$. Također, zadnja konfiguracija u~\eqref{eq:+afaze} je $2$-reprezentacija početne konfiguracije RAM-stroja s programom $P_{\t a}$ iz~\eqref{eq:+aprog}, s ulazom \t{ab}.
 
 Ipak, stanja $p_i$ nisu dovoljna za izvršavanje RAM-instrukcija: za svaki $i<n$ imamo još jedno stanje $s_i$, koje tome služi. Stanje $p_i$ je "pripremno stanje" za $s_i$, s jedinim zadatkom fiksiranja pozicije odmah nakon znaka $\t\#$.
 
-%TODO: spojiti ovu lemu s kasnijom propozicijom
-\begin{lema}[{name=[{treći fragment transpiliranog stroja, priprema za instrukciju}]}]\label{lm:pi>si}
-Za svaki $i\in[0\dd n\rangle$, postoji fragment Turingovog stroja koji prevodi bilo koju konfiguraciju oblika $(p_i,t,\t\$\bl^k\,\t\#v\bl\ldots)$, gdje su $v\in(B^m)^*$ i $t>k\in\N$, u konfiguraciju $(s_i,k+2,\t\$\bl^k\,\t\#v\bl\ldots)$.
-\end{lema}
-\begin{proof}
-Dok god čitamo znak iz $B^m$, pomičemo se lijevo~\eqref{d:31}. Kad pročitamo \t\# (nakon $t-k-1$ koraka), pomaknemo se desno~\eqref{d:32}.
-\begin{gather*}
-\label{d:31}\tag{$\delta$3a}
-    \delta(p_i,\gamma):=(p_i,\gamma,-1)\text{, za sve }\gamma\in B^m\\
-\label{d:32}\tag{$\delta$3b}
-    \delta(p_i,\t\#):=(s_i,\t\#,1)
-\end{gather*}
-Dijagramatski,
-\begin{tikzpicture}[baseline=0]
-\node[state] (pi) {$p_i$};
-\node[state, right of=pi] (si) {$s_i$};
-\draw
-(pi) edge[loop left,dashed] node[left]{$B^m$} (pi)
-(pi) edge[below] node{$\t\#$} (si)
-;
-\end{tikzpicture}\;.
-\end{proof}
+%\begin{lema}[{name=[{treći fragment transpiliranog stroja, priprema za instrukciju}]}]\label{lm:pi>si}
+%Za svaki $i\in[0\dd n\rangle$, postoji fragment Turingovog stroja koji prevodi bilo koju konfiguraciju oblika $(p_i,t,\t\$\bl^k\,\t\#v\bl\ldots)$, gdje su $v\in(B^m)^*$ i $t>k\in\N$, u konfiguraciju $(s_i,k+2,\t\$\bl^k\,\t\#v\bl\ldots)$.
+%\end{lema}
+%\begin{proof}
+%Dijagramatski,
+%\begin{tikzpicture}[baseline=0]
+%\node[state] (pi) {$p_i$};
+%\node[state, right of=pi] (si) {$s_i$};
+%\draw
+%(pi) edge[loop left,dashed] node[left]{$B^m$} (pi)
+%(pi) edge[below] node{$\t\#$} (si)
+%;
+%\end{tikzpicture}\;.
+%\end{proof}
 
 %\subsection{Izvršavanje pojedinih RAM-instrukcija}
 
-Da bismo implementirali prijelaze iz stanja $s_i$, moramo naučiti "adresirati bitove" na traci Turing-reprezentacije. Svaki element od $B^m$ vidimo kao $m$-bitnu riječ, za promjenu pojedinog bita koristeći istu tehniku kao "pravi" procesor: čitavu procesorsku riječ zamijenimo drugom, koja se podudara s njom u svim bitovima osim onog koji želimo promijeniti. Primjerice, ako na traci~\eqref{eq:bitmap} želimo "dekrementirati $\reg1$", zamijenit ćemo njen trinaesti znak devetim znakom iz~\eqref{eq:B4}.
+Da bismo implementirali prijelaze iz stanja $s_i$, moramo naučiti "adresirati bitove" na traci $m$-reprezentacije. Svaki element od $B^m$ vidimo kao $m$-bitnu riječ, koristeći za promjenu pojedinog bita istu tehniku kao "pravi" procesor: čitavu procesorsku riječ zamijenimo drugom, koja se podudara s njom u svim bitovima osim onog koji želimo promijeniti. Primjerice, ako na traci~\eqref{eq:bitmap} želimo "dekrementirati $\reg1$", zamijenit ćemo njen trinaesti znak $(\t{\textopenbullet\textbullet\textopenbullet\textbullet})^\intercal$ znakom $(\t{\textopenbullet\textopenbullet\textopenbullet\textbullet})^\intercal$, devetim na popisu~\eqref{eq:B4}.
 
 \begin{definicija}[{name=[funkcija prijelaza u određenom tragu]}]\label{def:trag}
 Neka je $j\in[0\dd m\rangle$, neka su $q,q'\in Q$, neka su $\beta,\beta'\in B:=\{\t\textopenbullet,\t\textbullet\}$ te neka je $d\in\{-1,1\}$. Pišemo $\delta_{(j)}(q,\beta):=(q',\beta',d)$ kao pokratu za:
@@ -1020,10 +1012,18 @@ U dijagramima, na strelici od $q$ prema $q'$ pišemo $\beta\t:\beta'\texttt@j$, 
 \begin{propozicija}[{name=[{treći fragment transpiliranog stroja, izvršavanje instrukcija}]}]\label{prop:gadgets}
     Neka je $P=\begin{prog}t.&I_t\end{prog}_{t<n}$ RAM-program. Označimo $m:=m_{P^1}$.
 
-        Tada za svaki $i<n$ postoji fragment Turingovog stroja, koji za svaku RAM-konfiguraciju $c$ kojoj je $c(\textsc{pc})=i$, za svaki $k\in\N$, prevodi reprezentaciju $Turing_{kmn}(c)$ u $Turing_{kmn}(d)$, gdje $c\leadsto d$ po programu $P$.
+        Tada za svaki $i<n$ postoji fragment Turingovog stroja, koji prevodi svaku $m$-reprezentaciju RAM-konfiguracije $c$ kojoj je $c(\textsc{pc})=i$, u neku $m$-reprezentaciju od $d$, gdje $c\leadsto d$ po programu $P$.
 \end{propozicija}
 \begin{proof}
-Zbog $c(\textsc{pc})=i<n=n_P$ konfiguracija $c$ sigurno nije završna, pa postoji instrukcija $I_i=I_{c(\textsc{pc})}$. Konstruiramo traženi fragment ovisno o tipu te instrukcije. Taj fragment počinje u stanju $p_i$, a trebao bi završiti u stanju $p_{i'}$ za $i':=d(\textsc{pc})$ --- no zbog leme~\ref{lm:pi>si} dovoljno je stati u $p_{i'}$, na bilo kojoj poziciji $p>k$, s trakom kakva je u $Turing_{kmn}(d)$.
+Traženi fragment počinje s radom u stanju $p_i$ na poziciji većoj ili jednakoj poziciji separatora $k$, a treba završiti u stanju $p_{i'}$ za $i':=d(\textsc{pc})$ na poziciji s istim svojstvom. Prvi dio je uvijek isti: dok god čitamo znak iz $B^m$, pomičemo se lijevo~\eqref{d:31}. Kad pročitamo \t\#, pomaknemo se desno~\eqref{d:32}. 
+\begin{gather*}
+\label{d:31}\tag{$\delta$3a}
+    \delta(p_i,\gamma):=(p_i,\gamma,-1)\text{, za sve }\gamma\in B^m\\
+\label{d:32}\tag{$\delta$3b}
+    \delta(p_i,\t\#):=(s_i,\t\#,1)
+\end{gather*}
+
+Tako dođemo u stanje $s_i$, na poziciju neposredno desno od separatora. Zbog $c(\textsc{pc})=i<n=n_P$ konfiguracija $c$ sigurno nije završna, pa postoji instrukcija $I_i=I_{c(\textsc{pc})}$. Dalji postupak ovisi o tipu te instrukcije.
 
 Ako je $I_i$ tipa $\inc$, recimo  $i.\;\incr j$, trebamo otići do kraja znakova \t\textbullet\ u tragu $j$~\eqref{d:41} i dopisati još jedan \t\textbullet\ tamo, a zatim se pripremiti za sljedeću instrukciju, onu rednog broja $i+1$~\eqref{d:42}.
 \begin{gather*}
@@ -1050,30 +1050,37 @@ Ako je $I_i$ tipa $\goto$, recimo $i.\;\goto\;l$, samo odemo na pripremu za inst
 \label{d:61}\tag{$\delta$3i}
     \delta(s_i,\gamma):=(p_l,\gamma,-1)\text{, za sve $\gamma\in B^m$}
 \end{equation*}
-Sada samo još treba na svako stanje oblika $p_{i'}$ "našarafiti" konstrukciju iz leme~\ref{lm:pi>si}. Pozicija u svakom od tih stanja je strogo veća od $k$, ako je na početku u stanju $s_i$ bila $k+2$; recimo primjenom~\eqref{d:53} će pozicija biti upravo $k+2>k$, a primjenom~\eqref{d:54} će biti $k+c(\reg j)$, što je veće od $k$ jer je u tom slučaju $c(\reg j)>0$.
+	Lako je vidjeti da je pozicija ulaskom u $p_{i'}$ doista veća ili jednaka $k$ --- recimo, primjenom~\eqref{d:54} pozicija će biti $k+c(\reg j)-1\ge k$, jer je u tom slučaju $c(\reg j)>0$ --- dakle, postigli smo $m$-reprezentaciju od $d$.
+%Sada samo još treba na svako stanje oblika $p_{i'}$ "našarafiti" konstrukciju iz leme~\ref{lm:pi>si}. Pozicija u svakom od tih stanja je strogo veća od $k$, ako je na početku u stanju $s_i$ bila $k+2$; recimo primjenom~\eqref{d:53} će pozicija biti upravo $k+2>k$, a primjenom~\eqref{d:54} će biti $k+c(\reg j)$, što je veće od $k$ jer je u tom slučaju $c(\reg j)>0$.
 \end{proof}
 
 %Radi jednostavnosti, pretpostavit ćemo da za svaku instrukciju (i još za $i=n$) imamo sva tri stanja $s_i$, $p_i$ i $t_i$ --- iako će stanja $t_i$ biti povezana s ostalim stanjima samo ako je instrukcija s rednim brojem $i$ tipa $\dec$; inače će biti nedostupna i ni na koji način neće utjecati na $\mathcal T_0$-izračunavanje. Nećemo ih ni crtati na dijagramima (baš kao ni stanje greške $q_x$), ali tako će formalna definicija biti jednostavnija.
 
-Sva tri tipa fragmenata iz dokaza možemo prikazati sljedećim dijagramima:
+Tipove fragmenata iz dokaza možemo prikazati dijagramima:
 \begin{itemize}
     \item[$\rhd$] $i.\;\incr j$\;:
 \begin{tikzpicture}[baseline=(si)]
-\node[state] (si) {$s_i$};
-\node[state,right of=si] (pi1) {$p_{\!i\!+\!1}$};
+\node[state] (pi) {$p_i$};
+\node[state, right of=pi] (si) {$s_i$};
+\node[state, right of=si] (pi1) {$p_{\!i\!+\!1}$};
 \draw
+(pi) edge[loop left,dashed] node[left]{$B^m$} (pi)
+(pi) edge[above] node{$\t\#$} (si)
 (si) edge[loop below] node[above right,xshift=4]{\t\textbullet\,\texttt@$j$} (si)
 (si) edge[dashed] node[above]{\t\textopenbullet:\t\textbullet\,\texttt@$j$} (pi1)
 ;
 \end{tikzpicture}
 \vspace{-1.5cm}
-    \item[$\rhd$] $i.\;\decr jl$\;:\qquad
+    \item[$\rhd$] $i.\;\decr jl$\;:
 \begin{tikzpicture}[baseline=(si)]
-\node[state] (si) {$s_i$};
-\node[state,right of=si] (ti) {$t_i$};
+\node[state] (pi) {$p_i$};
+\node[state, right of=pi] (si) {$s_i$};
+\node[state, right of=si] (ti) {$t_i$};
 \node[state, above right=0.5 and 2 of ti] (pl) {$p_l$};
 \node[state, below right=0.5 and 2 of ti] (pi1) {$p_{\!i\!+\!1}$};
 \draw
+(pi) edge[loop left,dashed] node[left]{$B^m$} (pi)
+(pi) edge[above] node{$\t\#$} (si)
 (si) edge[loop below] node[above right,xshift=4]{\t\textbullet\,\texttt@$j$} (si)
 (si) edge[dashed] node[above]{\t\textopenbullet\,\texttt@$j$} (ti)
 (ti) edge node[above]{\t\#} (pl)
@@ -1081,101 +1088,47 @@ Sva tri tipa fragmenata iz dokaza možemo prikazati sljedećim dijagramima:
 ;
 \end{tikzpicture}
 \vspace{-0.8cm}
-    \item[$\rhd$] $i.\;\goto\;l$\;:
+    \item[$\rhd$] $i.\;\goto\;l$\;:\qquad
 \begin{tikzpicture}[baseline=(si)]
-\node[state] (si) {$s_i$};
-\node[state,right of=si] (pl) {$p_l$};
+\node[state] (pi) {$p_i$};
+\node[state, right of=pi] (si) {$s_i$};
+\node[state, right of=si] (pl) {$p_l$};
 \draw
-(si) edge[dashed] node[below]{$B^m$} (pl)
+(pi) edge[loop left,dashed] node[left]{$B^m$} (pi)
+(pi) edge[above] node{$\t\#$} (si)
+(si) edge[dashed] node[above]{$B^m$} (pl)
 ;
 \end{tikzpicture}
 \end{itemize}
 
 %\subsection{Prepoznavanje završne konfiguracije}
 \begin{propozicija}[{name=[treći fragment transpiliranog stroja]}]\label{pp:faza3}
-    Neka RAM-algoritam $P^1$ računa funkciju $\f f^1$.
-    Za sve $k,x\in\N$ označimo s $t_{kx}$ reprezentaciju (\/$Turing_{km_{P^1}n_P}$) početne konfiguracije s ulazom $x$.
+    Neka RAM-algoritam $P^1$ širine $m$ računa funkciju $\f f^1$.
+	Za svaki $x\in\N$ označimo s $t_x$ bilo koju $m$-reprezentaciju početne RAM-konfiguracije s ulazom $x$.
 
-    Postoji fragment Turingovog stroja koji za sve $k,x\in\N$:
+    Postoji fragment Turingovog stroja koji za sve $x\in\N$:
 \begin{itemize}
-    \item ako je $x\in\dom{\f f}$, prevodi\/ $t_{kx}$ u reprezentaciju završne konfiguracije;
-    \item inače, počevši od\/ $t_{kx}$ nikada ne stigne u stanje $p_n$.
+    \item ako je $x\in\dom{\f f}$, prevodi svaku $t_x$ u neku $m$-reprezentaciju završne konfiguracije;
+    \item inače, počevši od bilo koje $t_x$, nikada ne stigne u stanje $p_n$.
 \end{itemize}
 \end{propozicija}
 \begin{proof}
-	Za svaki $x\in\N$, označimo sa $(c_l)_l$ $P$-izračunavanje s $x$ i indukcijom po $l$ dokažimo da dosad sastavljeni fragment Turingovog stroja dostigne konfiguraciju $Turing_{km_{P^{\mspace{-2mu}1}}\!n_P}(c_l)$. Baza je primjena leme~\ref{lm:pi>si} (za $i=0$) na konfiguraciju koju smo dobili iz leme~\ref{lm:faza2}. Korak je primjena propozicije~\ref{prop:gadgets}. Dakle, ako $P$-izračunavanje stane u $l_0$ koraka, doći će u stanje $p_n$, u reprezentaciji završne konfiguracije $c_{l_0}$.
+	Za svaki $x\in\N$, označimo sa $(c_l)_l$ $P$-izračunavanje s $x$ i indukcijom po $l$ dokažimo da dosad sastavljeni fragment Turingovog stroja dostigne $m$-reprezentaciju od $c_l$. Baza je primjena lema~\ref{lm:faza1} i~\ref{lm:faza2}, kako je ilustrirano u~\eqref{eq:+afaze}. Korak (ako $c_l$ nije završna) je primjena propozicije~\ref{prop:gadgets}. Dakle, ako $P$-izračunavanje stane u $l_0$ koraka, postići će $m$-reprezentaciju završne konfiguracije $c_{l_0}$, došavši u stanje $p_n$.
 
-No vrijedi i obrat: u simulaciji jednog RAM-prijelaza $c\leadsto d$, naš fragment posjećuje samo stanja $p_i$, $s_i$ i $t_i$ za $i=c(\textsc{pc})$ ili za $i=d(\textsc{pc})$. Dakle, jedini način da dođe u stanje $p_n$ je da doista neka RAM-konfiguracija u izračunavanju preslika \textsc{pc} u $n$, a to znači da $P$-izračunavanje s $x$ stane.
+No vrijedi i obrat: pri simulaciji jednog RAM-prijelaza $c\leadsto d$, naš fragment posjećuje samo stanja $p_i$, $s_i$ i $t_i$ za $i=c(\textsc{pc})$ ili za $i=d(\textsc{pc})$. Dakle, jedini način da dođe u stanje $p_n$ je da doista neka RAM-konfiguracija u izračunavanju preslika \textsc{pc} u $n$, što znači da $P$-izračunavanje s $x$ stane.
 \end{proof}
 
 %Općenito, ovaj dio je na neki način najkompliciraniji (zbog broja stanja --- za tipični RAM-program ovaj fragment će biti višestruko veći od čitavog ostatka stroja $\mathcal T_0$; a i zbog činjenice da ne mora stati, odnosno doći u stanje $p_n$). S druge strane, možemo reći i da je najjednostavniji, jer ima vrlo uniformnu strukturu: fragmentići (u simulacijama obično se zovu \emph{gadgets}) za pojedine instrukcije su jednostavni i lijepo se slažu. Pogledajmo jednostavni primjer.
 
+\begin{korolar}[{name=[prve tri faze transpiliranog stroja]}]\label{kor:faza3}
+	Dosad izgrađeni Turingov stroj (sastavljen od prva tri fragmenta) dostigne stanje $p_n$ ako i samo ako je pokrenut s ulazom $w\in\dom{\varphi_0}$, i u tom trenutku na traci nakon $\t\#$ u tragu $0$ piše $\raisebox{-1pt}{\t\textbullet}^y\raisebox{-1pt}{\t\textopenbullet}\dotsm$, gdje je $y=\N\varphi_0(\kr w)=\kr{\varphi_0(w)}$.
+\end{korolar}
+\begin{proof}
+    Primijenimo propoziciju~\ref{pp:faza3} na RAM-program $P_0$ ($f=\N\varphi_0$) i $x:=\kr w$. % i $k:=\dulj{w}$. %Štoviše, jer se $f$ računa na $x$ koji jest kod, dovoljno je zahtijevati $f\approx\N\varphi_0$.
+\end{proof}
+
 \begin{primjer}[{name=[treći fragment transpiliranog stroja]}]\label{pr:+a2}
 U primjeru~\ref{pr:+a} smo vidjeli RAM-program $P_{\t a}$~\eqref{eq:+aprog} duljine $4$ i širine $2$, koji računa prateću funkciju dopisivanja \t a na kraj riječi, $\N\varphi_{\t a}(x):=2x+1$.
-
-$P_{\t a}$-izračunavanje s $\kr{\t{ab}}=4$ je ($c$ skraćeno zapisujemo kao $c(\reg0)c(\reg1)c(\textsc{pc})$)
-\begin{multline}
-        040\leadsto
-	141\leadsto
-	132\leadsto
-	233\leadsto
-	230\leadsto
-	331\leadsto
-        322\leadsto
-	423\leadsto
-	420\leadsto
-	521\leadsto
-	512\leadsto{}\\{}\leadsto
-	613\leadsto
-        610\leadsto
-	711\leadsto
-	702\leadsto
-	803\leadsto
-	800\leadsto
-	901\leadsto
-        904\lcirclearrowleft
-%\begin{array}{r|cccccccccccccccccccc}
-%i&0&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&\dotsm\\\hline
-%c_i(\reg0)&
-%0&0&1&2&2&2&3&4&4&4&5&6&6&6&7&8&8&8&9&9\\
-%c_i(\reg1)&
-%4&3&3&3&3&2&2&2&2&1&1&1&1&0&0&0&0&0&0&0\\
-%c_i(\textsc{pc})&
-%0&1&2&3&0&1&2&3&0&1&2&3&0&1&2&3&0&4&5&5
-%\end{array}
-\end{multline}
-	s izlaznim podatkom $9=2\cdot\mspace{1mu}4+1$, i odgovara mu (po preslikavanju $Turing_{224}$) šetnja %kroz Turing-konfiguracije %(ne pišemo, svima zajednički, početak \t{\renewcommand{\arraystretch}{0.1}\$\boo\boo\#})
-    %$P_{\t a}$-izračunavanju s $\kr{\t{ab}}=4$, s izlaznim podatkom $9=2\cdot4+1$, po preslikavanju $Turing_{224}$ odgovara šetnja kroz Turing-konfiguracije
-\begin{multline}\label{eq:+a2}
-\renewcommand{\arraystretch}{0.1}
-\T{\$\boo\boo\#}{\mund{p_{\!0}}}{\boi}{\boi\boi\boi}\leadsto^*
-\T{\$\boo\boo}{\mund{p_{\!1}}}{\vphantom\boo\#}{\bii\boi\boi\boi}\leadsto^*
-\T{\$\boo\boo\#\bii\boi}{\mund{p_{\!2}}}{\boi}{}\leadsto^*
-\T{\$\boo\boo\#}{\mund{p_{\!3}}}{\bii}{\bii\boi}\leadsto^*
-\T{\$\boo\boo}{\mund{p_{\!0}}}{\vphantom\boo\#}{\bii\bii\boi}\leadsto^*
-\T{\$\boo\boo\#\bii}{\mund{p_{\!1}}}{\bii}{\bii}\leadsto^*
-{}\\{}\leadsto^*
-\renewcommand{\arraystretch}{0.1}
-\T{\$\boo\boo\#\bii}{\mund{p_{\!2}}}{\bii}{\bio}\leadsto^*
-\T{\$\boo\boo\#\bii\bii}{\mund{p_{\!3}}}{\bio}{\bio}\leadsto^*
-\T{\$\boo\boo}{\mund{p_{\!0}}}{\vphantom\boo\#}{\bii\bii\bio\bio}\leadsto^*
-\T{\$\boo\boo\#\bii\bii\bio}{\mund{p_{\!1}}}{\bio}{\bio}\leadsto^*
-\T{\$\boo\boo\#}{\mund{p_{\!2}}}{\bii}{\bio\bio\bio\bio}\leadsto^*
-{}\\{}\leadsto^*
-\renewcommand{\arraystretch}{0.1}
-\T{\$\boo\boo\#\bii\bio\bio\bio}{\mund{p_{\!3}}}{\bio}{\bio}\leadsto^*
-\T{\$\boo\boo}{\mund{p_{\!0}}}{\vphantom\boo\#}{\bii\bio\bio\bio\bio\bio}\leadsto^*
-\T{\$\boo\boo\#\bii\bio\bio\bio\bio}{\mund{p_{\!1}}}{\bio}{\bio}\leadsto^*
-\T{\$\boo\boo}{\mund{p_{\!2}}}{\vphantom\boo\#}{\bio\bio\bio\bio\bio\bio\bio}\leadsto^*
-{}\\{}\leadsto^*
-\renewcommand{\arraystretch}{0.1}
-\T{\$\boo\boo\#\bio\bio\bio\bio\bio\bio}{\mund{p_{\!3}}}{\bio}{\bio}\leadsto^*
-\T{\$\boo\boo}{\mund{p_{\!0}}}{\vphantom\boo\#}{\bio\bio\bio\bio\bio\bio\bio\bio}\leadsto^*
-\T{\$\boo\boo\#\bio\bio\bio\bio\bio\bio\bio}{\mund{p_{\!1}}}{\bio}{\bio}\leadsto^*
-\T{\$\boo\boo\#}{\mund{p_{\!4}}}{\bio}{\bio\bio\bio\bio\bio\bio\bio\bio}
-\,\text,
-\end{multline}
-koja se direktno nastavlja na onu započetu u~\eqref{eq:+afaze}.
 
 Treći fragment Turingovog stroja koji odgovara $P_{\t a}$ prikazan je dijagramom
 \begin{equation}
@@ -1224,17 +1177,73 @@ Treći fragment Turingovog stroja koji odgovara $P_{\t a}$ prikazan je dijagramo
 (t1) edge node[right] {\t\#} (p4)
 ;
 \end{tikzpicture}\text{\hspace{-2.7cm}%
-.\,\qedhere%
+%.\,\qedhere%
 }
 \end{equation}
+$P_{\t a}$-izračunavanje s $\kr{\t{ab}}=4$ je ($c$ skraćeno zapisujemo kao $c(\reg0)c(\reg1)c(\textsc{pc})$)
+\begin{multline}
+        040\leadsto
+	141\leadsto
+	132\leadsto
+	233\leadsto
+	230\leadsto
+	331\leadsto
+        322\leadsto
+	423\leadsto
+	420\leadsto
+	521\leadsto
+	512\leadsto{}\\{}\leadsto
+	613\leadsto
+        610\leadsto
+	711\leadsto
+	702\leadsto
+	803\leadsto
+	800\leadsto
+	901\leadsto
+        904\lcirclearrowleft
+%\begin{array}{r|cccccccccccccccccccc}
+%i&0&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&\dotsm\\\hline
+%c_i(\reg0)&
+%0&0&1&2&2&2&3&4&4&4&5&6&6&6&7&8&8&8&9&9\\
+%c_i(\reg1)&
+%4&3&3&3&3&2&2&2&2&1&1&1&1&0&0&0&0&0&0&0\\
+%c_i(\textsc{pc})&
+%0&1&2&3&0&1&2&3&0&1&2&3&0&1&2&3&0&4&5&5
+%\end{array}
+\end{multline}
+	s izlaznim podatkom $9=2\cdot\mspace{1mu}4+1$, i odgovara mu šetnja kroz $2$-reprezentacije %Turing-konfiguracije %(ne pišemo, svima zajednički, početak \t{\renewcommand{\arraystretch}{0.1}\$\boo\boo\#})
+    %$P_{\t a}$-izračunavanju s $\kr{\t{ab}}=4$, s izlaznim podatkom $9=2\cdot4+1$, po preslikavanju $Turing_{224}$ odgovara šetnja kroz Turing-konfiguracije
+\begin{multline}\label{eq:+a2}
+\renewcommand{\arraystretch}{0.1}
+\T{\$\boo\boo\#}{\mund{p_{\!0}}}{\boi}{\boi\boi\boi}\leadsto^*
+\T{\$\boo\boo}{\mund{p_{\!1}}}{\vphantom\boo\#}{\bii\boi\boi\boi}\leadsto^*
+\T{\$\boo\boo\#\bii\boi}{\mund{p_{\!2}}}{\boi}{}\leadsto^*
+\T{\$\boo\boo\#}{\mund{p_{\!3}}}{\bii}{\bii\boi}\leadsto^*
+\T{\$\boo\boo}{\mund{p_{\!0}}}{\vphantom\boo\#}{\bii\bii\boi}\leadsto^*
+\T{\$\boo\boo\#\bii}{\mund{p_{\!1}}}{\bii}{\bii}\leadsto^*
+{}\\{}\leadsto^*
+\renewcommand{\arraystretch}{0.1}
+\T{\$\boo\boo\#\bii}{\mund{p_{\!2}}}{\bii}{\bio}\leadsto^*
+\T{\$\boo\boo\#\bii\bii}{\mund{p_{\!3}}}{\bio}{\bio}\leadsto^*
+\T{\$\boo\boo}{\mund{p_{\!0}}}{\vphantom\boo\#}{\bii\bii\bio\bio}\leadsto^*
+\T{\$\boo\boo\#\bii\bii\bio}{\mund{p_{\!1}}}{\bio}{\bio}\leadsto^*
+\T{\$\boo\boo\#}{\mund{p_{\!2}}}{\bii}{\bio\bio\bio\bio}\leadsto^*
+{}\\{}\leadsto^*
+\renewcommand{\arraystretch}{0.1}
+\T{\$\boo\boo\#\bii\bio\bio\bio}{\mund{p_{\!3}}}{\bio}{\bio}\leadsto^*
+\T{\$\boo\boo}{\mund{p_{\!0}}}{\vphantom\boo\#}{\bii\bio\bio\bio\bio\bio}\leadsto^*
+\T{\$\boo\boo\#\bii\bio\bio\bio\bio}{\mund{p_{\!1}}}{\bio}{\bio}\leadsto^*
+\T{\$\boo\boo}{\mund{p_{\!2}}}{\vphantom\boo\#}{\bio\bio\bio\bio\bio\bio\bio}\leadsto^*
+{}\\{}\leadsto^*
+\renewcommand{\arraystretch}{0.1}
+\T{\$\boo\boo\#\bio\bio\bio\bio\bio\bio}{\mund{p_{\!3}}}{\bio}{\bio}\leadsto^*
+\T{\$\boo\boo}{\mund{p_{\!0}}}{\vphantom\boo\#}{\bio\bio\bio\bio\bio\bio\bio\bio}\leadsto^*
+\T{\$\boo\boo\#\bio\bio\bio\bio\bio\bio\bio}{\mund{p_{\!1}}}{\bio}{\bio}\leadsto^*
+\T{\$\boo\boo\#}{\mund{p_{\!4}}}{\bio}{\bio\bio\bio\bio\bio\bio\bio\bio}
+\,\text,
+\end{multline}
+koja predstavlja prirodni nastavak one u~\eqref{eq:+afaze}.
 \end{primjer}
-
-\begin{korolar}[{name=[prve tri faze transpiliranog stroja]}]\label{kor:faza3}
-	Dosad izgrađeni Turingov stroj (sastavljen od prva tri fragmenta) dostigne stanje $p_n$ ako i samo ako je pokrenut s ulazom $w\in\dom{\varphi_0}$, i u tom trenutku na traci nakon $\t\#$ u tragu $0$ piše $\raisebox{-1pt}{\t\textbullet}^y\raisebox{-1pt}{\t\textopenbullet}\dotsm$, gdje je $y=\N\varphi_0(\kr w)=\kr{\varphi_0(w)}$.
-\end{korolar}
-\begin{proof}
-    Samo treba primijeniti propoziciju~\ref{pp:faza3} na RAM-program $P_0$ (dakle $f=\N\varphi_0$), na $x:=\kr w$ i $k:=\dulj{w}$. %Štoviše, jer se $f$ računa na $x$ koji jest kod, dovoljno je zahtijevati $f\approx\N\varphi_0$.
-\end{proof}
 
 \begin{napomena}[{name=[zaustavljanje transpiliranog stroja ovisi samo o trećoj fazi]}]\label{nap:snstane}
 Ostatak Turingovog stroja koji konstruiramo vezat će se s dosad izgrađenim dijelom isključivo kroz stanje $p_n$, a njegov rad će uvijek stati, pa ćemo na kraju moći zaključiti da čitav Turingov stroj stane ako i samo ako dođe u stanje $p_n$, odnosno ako i samo ako je ulazna riječ u domeni od $\varphi_0$.
@@ -1413,6 +1422,8 @@ Doista, neka je $w\in\Sigma_0^*$ proizvoljna riječ i označimo s $k:=\dulj{w}$ 
 	Ako pak $w\notin\dom{\varphi_0}$, tada će se prve dvije faze izvršiti jednako, ali iz $x\notin\dom{\N\varphi_0}$ po definiciji~\ref{def:compute} slijedi da $P_0$-izračunavanje s $x$ nikad neće stati, pa po korolaru~\ref{kor:faza3} niti $\mathcal T_0$-izračunavanje neće doći do $p_n$. Prema napomeni~\ref{nap:snstane}, to znači da ono nikad neće stati (doći do $l_{\t\$}$), jer jedini put od $n_{\t\$}$ do $l_{\t\$}$ vodi kroz stanje $p_n$.
 \end{proof}
 
+Uočimo sličnost upravo provedenog dokaza s dokazom propozicije~\ref{prop:semfmacro} (semantika funkcijskog makroa). Kao što smo tamo omogućili makro-stroju da u izoliranoj okolini izvrši neki konkretni RAM-program, tako smo to ovdje omogućili Turingovom stroju. Kao i u makro-programu iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (namještanje početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa) te, ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije te "zatvaranje okvira" (pospremanje nereda koji smo napravili).
+
 Prikažimo postupak Turing-iz\-ra\-ču\-na\-va\-nja kroz faze (sa $z$ je označen najveći broj u ikojem relevantnom registru od $\mathcal S_0$ u završnoj konfiguraciji $P_0$-izračunavanja s $\kr w$):
 \begin{equation}
 \begin{array}{l|ccl}
@@ -1431,20 +1442,18 @@ Prikažimo postupak Turing-iz\-ra\-ču\-na\-va\-nja kroz faze (sa $z$ je označe
 \end{array}
 \end{equation}
 
-Uočimo sličnost upravo provedenog dokaza s dokazom propozicije~\ref{prop:semfmacro} (semantika funkcijskog makroa). Kao što smo tamo omogućili makro-stroju da u izoliranoj okolini izvrši neki konkretni RAM-program, tako smo to ovdje omogućili Turingovom stroju. Kao i u makro-programu iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (namještanje početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa) te, ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije te "zatvaranje okvira" (pospremanje nereda koji smo napravili).
-
 \begin{primjer}[{name=[transpilirani stroj dodaje znak na kraj riječi]}]\label{pr:+a3}
 Primjer~\ref{pr:+a} sad možemo pratiti kroz sve faze:
 \begin{align}
 	\text{početna konfiguracija}&&&\T{}{n_{\t\$}}{a}{b}\\[-1mm]
 	\text{uokvirivanje ulaza}&&{}\leadsto^*{}&\T{\$a}{q_0}{b}{\#}\\[-1mm]
-\kr{\t{ab}}=(12)_2=4&&\leadsto^*{}&
+	\text{kodiranje ulaza: }\kr{\t{ab}}=(12)_2=4&&\leadsto^*{}&
 \renewcommand{\arraystretch}{0.1}
 	\T{\$\bl\bl\#}{\mund{p_0}}{\boi}{\boi\boi\boi}\\[-1mm]
-    2\cdot4+1=9\text{; raspisano u~\eqref{eq:+a2}}&&{}\leadsto^*{}&
+	\text{računanje }2\cdot4+1=9\text{; raspisano u~\eqref{eq:+a2}}&&{}\leadsto^*{}&
 \renewcommand{\arraystretch}{0.1}
-	\T{\$\bl\bl\#}{\mund{s_4}}{\bio}{\bio\bio\bio\bio\bio\bio\bio\bio}\\[-1mm]
-9=(121)_2=\kr{\t{aba}}&&{}\leadsto^*{}&
+	\T{\$\bl\bl\#}{\mund{p_4}}{\bio}{\bio\bio\bio\bio\bio\bio\bio\bio}\\[-1mm]
+	\text{dekodiranje izlaza: }9=(121)_2=\kr{\t{aba}}&&{}\leadsto^*{}&
 \renewcommand{\arraystretch}{0.1}
 	\T{\$\bl\bl}{q_3}{\#}{\bl\bl\bl\bl\bl\bl aba\$}\\[-1mm]
 %\text{uokvirivanje izlaza}&&{}\leadsto^*{}&
