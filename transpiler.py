@@ -1,19 +1,20 @@
 import itertools, collections, sys, pdb, typing
 INC, DEC, GOTO = range(3)
 
-test = 3
+test = 5
 if test == 1:
     eSigma = 'abcde'
     P = [
-        (0, DEC, 1, 7),
-        (1, DEC, 1, 7),
-        (2, DEC, 1, 7),
-        (3, DEC, 1, 7),
-        (4, DEC, 1, 7),
-        (5, INC, 0),
-        (6, GOTO, 0),
+        (0, DEC, 1, 1),
+        (1, DEC, 1, 8),
+        (2, DEC, 1, 8),
+        (3, DEC, 1, 8),
+        (4, DEC, 1, 8),
+        (5, DEC, 1, 8),
+        (6, INC, 0),
+        (7, GOTO, 1),
     ]
-    word = 'e'
+    word = 'deda'
 elif test == 2:
     eSigma = 'abcde'
     P = [
@@ -44,7 +45,7 @@ elif test == 3:
         (11, GOTO, 9),
         (12, GOTO, 4),
     ]
-    word = '61'
+    word = '21'
 elif test == 4:
     eSigma = '*'
     P = []
@@ -53,14 +54,10 @@ elif test == 5:
     eSigma = 'xy'
     P = [
         (0, INC, 0),
-        (1, INC, 2),
-        (2, INC, 2),
-        (3, INC, 2),
-        (4, INC, 0),
-        (5, GOTO, 6),
-        (6, INC, 2),
+        (1, DEC, 1, 3),
+        (2, GOTO, 0),
     ]
-    word = 'xxyxy'
+    word = 'xyxyy'
 
 class TuringMachine(typing.NamedTuple):
     states: set
@@ -160,12 +157,12 @@ for α, β in itertools.product(['$', *Sigma], {*Sigma, space}):
 rule('n' + space, space, 'q0', '#', -1)  # (δ1b)
 
 for t in range(2, bc + 1): rule('q0', alfa[t], 'q1', alfa[t-1])  # (δ2a)
+for γ in {'$', space}: rule('q0', γ, 'q2')  # (δ2f)
+rule('q2', alfa[bc], 'q1', space)  # (δ2g)
 for α in Sigma | {'#', r1}: rule('q1', α)  # (δ2b)
 rule('q1', space, 'q0', r1, -1)  # (δ2c)
 for γ in {r1, '#'}: rule('q0', γ, d=-1)  # (δ2d)
 rule('q0', alfa[1], 'q0', alfa[bc], -1)  # (δ2e)
-for γ in {'$', space}: rule('q0', γ, 'q2')  # (δ2f)
-rule('q2', alfa[bc], 'q1', space)  # (δ2g)
 rule('q2', '#', 'p0')  # (δ2h)
 
 for instruction in P:
@@ -189,33 +186,27 @@ for instruction in P:
         l, = iargs
         for γ in Bm: rule(si, γ, 'p' + str(l), γ, -1)  # (δ3i)
     else: assert False
+
 pn = 'p' + str(n)
-sn = 's' + str(n)
-assert pn in Q
-for γ in Bm: rule(pn, γ, d=-1)  # (δ3a')
-rule(pn, '#', sn)  # (δ3b')
+for γ in {'#'} | Bm - {space}: rule(pn, γ)  # (δ4a)
+rule(pn, space, 'q3', '$', -1)  # (δ4b)
+for γ in Bm: rule('q3', γ, d=-1)  # (δ4c)
+rule('q3', '#', 'q3', space, -1)  # (δ4d)
+rule('q3', '$', 'q4')  # (δ4e)
+mrule('q4', '○', 0)  # (δ4f)
+mrule('q4', '●', 0, 'q5', '○', -1)  # (δ4g)
+for γ in Bm: rule('q5', γ, d=-1)  # (δ4h)
+rule('q5', alfa[bc], 'q5', alfa[1], -1)  # (δ4i)
+for t in range(1, bc): rule('q5', alfa[t], 'q4', alfa[t + 1])  # (δ4j)
+rule('q5', '$', 'q6')  # (δ4k)
+rule('q6', alfa[1])  # (δ4l)
+for γ in Bm: rule('q6', γ, 'q4', alfa[1])  # (δ4m)
+rule('q4', alfa[1])  # (δ4m')
+rule('q4', '$', 'l' + space, space, -1)  # (δ4n)
+for γ in Bm: rule('l' + space, γ, 'l' + space, space, -1)  # (δ4n')
 
-for γ in Bm - {space}: rule(sn, γ)  # (δ4a)
-rule(sn, space, 'q3', '$', -1)  # (δ4b)
-mrule('q3', '○', 0, d=-1)  # (δ4c)
-mrule('q3', '●', 0, 'q4', '○')  # (δ4d)
-for α in Sigma | Bm: rule('q4', α)  # (δ4e)
-rule('q4', '$', 'q5', d=-1)  # (δ4f)
-rule('q5', alfa[bc], 'q5', alfa[1], -1)  # (δ4g)
-for t in range(1, bc): rule('q5', alfa[t], 'q3', alfa[t + 1], -1)  # (δ4h)
-for γ in Bm: rule('q5', γ, 'q3', alfa[1], -1)  # (δ4i)
-for α in Sigma: rule('q3', α, d=-1)  # (δ4j)
-
-rule('q3', '#', 'q6', space)  # (δ5a)
-for γ in Bm: rule('q6', γ, a2=space)  # (δ5a')
-for α in {*Sigma, '$'}:
-    rule('q6', α, 'm' + α, space, -1)  # (δ5b)
-    rule('m' + α, space, d=-1)  # (δ5b')
-    for β in Sigma: rule('m' + α, β, 'l' + α)  # (δ5c)
-for α in Sigma:
-    rule('m' + α, '$', 'q6', α)  # (δ5d)
-    rule('l' + α, space, 'q6', α)  # (δ5d')
-rule('m$', '$', 'l$', space, -1)  # (δ5e)
+for α, β in itertools.product([space, *Sigma], {*Sigma, '$'}):
+    rule('l' + α, β, 'l' + β, α, -1)  # (δ5a)
 
 M = TuringMachine(Q, Sigma, Gamma, space, delta, 'n$', 'l$')
-M.simulate(word, debug=False)
+M.simulate(word, debug=True)
