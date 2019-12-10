@@ -39,7 +39,7 @@ Zato ćemo promatrati algoritme proizvoljnih mjesnosti $k\in\N_+$, i smatrati da
 
 Direktna posljedica toga je da u našem modelu ne postoje algoritmi s "varijabilnim brojem" ulaznih podataka, što je u računarstvu poznato pod nazivom \emph{varargs}. Na nekoliko mjesta gdje nam budu potrebni, modelirat ćemo ih pomoću familije algoritama svih mogućih mjesnosti --- recimo zbrajanje kao $\f{add}^k,k\in\N_+$. Mjesnost algoritma ili funkcije ćemo obično pisati u superskriptu ako je želimo naglasiti --- neće dolaziti do zabune s eksponentima jer ni algoritme ni funkcije nećemo potencirati, niti s oznakom $f^{-1}$ za inverznu funkciju jer mjesnost ne može biti negativna.
 
-Iako mjesnost smatramo neodvojivim dijelom funkcije odnosno algoritma, u slučaju nespecificirane mjesnosti $k$ nespretno je pisati $x_1,x_2,\dotsc,x_k$ svugdje gdje trebamo napisati argumente odnosno ulazne podatke. Zato ćemo često tih $k$ prirodnih brojeva skraćeno pisati $\vec x$, ili $\vec x^k$ ako želimo naglasiti koliko ih ima --- no najčešće će se to moći zaključiti iz konteksta: recimo, u $f^7(\vec x,y,z)$, vidimo da je duljina od $\vec x$ jednaka $5$.
+Iako mjesnost smatramo neodvojivim dijelom funkcije odnosno algoritma, u slučaju nespecificirane mjesnosti $k$ nespretno je pisati $x_1,x_2,\dotsc,x_k$ kad god trebamo napisati argumente odnosno ulazne podatke. Zato ćemo često tih $k$ prirodnih brojeva skraćeno pisati $\vec x$, ili $\vec x^k$ ako želimo naglasiti koliko ih ima --- no najčešće će se to moći zaključiti iz konteksta: recimo, u $f^7(\vec x,y,z)$, vidimo da je duljina od $\vec x$ jednaka $5$.
 
 \begin{napomena}[{name=[svi argumenti moraju biti eksplicitno navedeni]}]\label{nap:blokovi}
 S obzirom na to da promatramo samo determinističke algoritme, naglasimo da nema "implicitnih argumenata": sve vrijednosti o kojima ovisi izlaz funkcije (ako se doista mijenjaju od poziva do poziva) moraju biti prenesene u nju kao argumenti. Često ćemo pisati opće funkcijske pozive kao $f(\vec x,y,z)$, gdje su $y$ i $z$ "pravi" argumenti s kojima doista nešto radimo u konkretnom algoritmu, a $\vec x$ predstavlja samo kontekst (\emph{environment}) nekog vanjskog algoritma koji je pozvao $f$ --- koji također moramo prenijeti u $f$ ako želimo da mu ona može pristupiti.
@@ -178,7 +178,7 @@ Jednom kad imamo definirane instrukcije, program i stroj, možemo preciznije def
 Neka je $\mathcal S$ RAM-stroj s programom $P$, registrima $\reg j,j\in\N$ te programskim brojačem \textsc{pc}. \emph{Konfiguracija} RAM-stroja $\mathcal S$ je bilo koje preslikavanje
 \begin{equation}
     c:\{\reg{j}\mid j\in\N\}\dcup\{\textsc{pc}\}\to\N
-\end{equation} takvo da je skoro svuda $0$ (skup $c^{-1}[\N_+]$ je konačan), a $c(\textsc{pc})\le n_P$. Skraćeno je pišemo kao $c=\bigl(c(\reg0),c(\reg1),\dotsc,c(\textsc{pc})\bigr)$. Konfiguracija $c$ je \emph{završna} ako je $c(\textsc{pc})=n_P$. \emph{Početna konfiguracija} s ulazom $\vec x=(x_1,x_2,\dotsc,x_k)\in\N^k$ je $(0,x_1,x_2,\dotsc,x_k,0,0,\dotsc,0)$ (za $j\in[1\dd k]$ u $\reg j$ je $x_j$, svugdje drugdje su nule).
+\end{equation} takvo da je skoro svuda $0$ (skup $c^{-1}[\N_+]$ je konačan), a $c(\textsc{pc})\le n_P$. Skraćeno je pišemo kao $c=\bigl(c(\reg0),c(\reg1),\dotsc,c(\textsc{pc})\bigr)$. Konfiguracija $c$ je \emph{završna} ako je $c(\textsc{pc})=n_P$. \emph{Početna konfiguracija} s ulazom $\vec x=(x_1,x_2,\dotsc,x_k)\in\N^k$ je $(0,x_1,x_2,\dotsc,x_k,0,0,\dotsc,0)$ (u $\reg j$ je $x_j$ za $j\in[1\dd k]$, a svugdje drugdje su nule).
 
     Za konfiguracije $c=(r_0,r_1,\dotsc,pc)$ i $d=(r_0',r_1',\dotsc,pc')$ istog RAM-stroja s programom $P=(I_0,\dotsc,I_{n_P-1})$, kažemo da $c$ \emph{prelazi} u $d$ (\emph{po programu} $P$, ili \emph{po instrukciji} $I_{pc}$), i pišemo $c\leadsto d$, ako vrijedi jedno od sljedećeg:
 \begin{enumerate}
@@ -341,11 +341,11 @@ Formalno, mogli bismo dokazati da svaki prolaz kroz petlju (čitanje instrukcija
     (2,0,0,\dotsc,3)\lcirclearrowleft\text.
 \end{multline}
 
-Ubuduće nećemo biti tako precizni (upravo jer imamo razvijenu intuiciju "programiranja" u imperativnim jezicima), ali ćemo navesti "najvažnije trenutke" u iz\-ra\-ču\-na\-va\-nju kako bi bilo lakše pratiti što se događa.
+Ubuduće nećemo biti tako precizni (upravo jer imamo razvijen osjećaj za programiranje u imperativnim jezicima), ali ćemo navesti "najvažnije trenutke" u iz\-ra\-ču\-na\-va\-nju kako bi bilo lakše pratiti što se događa.
 
-Prethodni dokaz (ili programerska intuicija) daje nam i više: ako "naslažemo" (konkateniramo) više takvih blokova za različite ulazne registre, možemo dobiti RAM-programe za zbrajanje. Konkretno, recimo, funkcija $\f{add}^3$, zadana s $\f{add}(x,y,z):=x+y+z$, je RAM-izračunljiva, jer je računa RAM-algoritam
+Prethodni dokaz (ili programerska intuicija) daje nam i više: ako "naslažemo" (konkateniramo) više takvih blokova za različite ulazne registre, možemo dobiti RAM-programe za zbrajanje. Konkretno, funkcija $\f{add}^3$ zadana s $\f{add}(x,y,z):=x+y+z$ je RAM-izračunljiva, jer je računa RAM-algoritam
 \begin{equation}\label{eq:add3}
-    P_{\f{add}^3}:=\begin{prog}
+	P_{\!\!\f{add}^3}^{\;3}:=\begin{prog}
         0.&\decr13\\
         1.&\incr0\\
         2.&\goto\;0\\
@@ -358,7 +358,7 @@ Prethodni dokaz (ili programerska intuicija) daje nam i više: ako "naslažemo" 
     \end{prog}^3\text.
 \end{equation}
 
-Ovdje vidimo jednu dobru stranu naizgled čudne konvencije da izračunavanje za\-vr\-ša\-va kad programski brojač postane jednak duljini programa: prilikom ovakve konkatenacije ne trebamo mijenjati odredišta već napisanih instrukcija. Odredište $3$ instrukcije rednog broja $0$ jednako je označavalo kraj programa za $\f{I}_1^1$, kao i kraj \emph{tog dijela} programa za $\f{add}^3$. Primijetite sličnost sa standardnom konvencijom o \texttt{end}-iteratoru u biblioteci STL jezika C\texttt{++}.
+Vidimo jednu dobru stranu naizgled čudne konvencije da izračunavanje za\-vr\-ša\-va kad programski brojač postane jednak duljini programa: prilikom ovakve konkatenacije ne trebamo mijenjati odredišta već napisanih instrukcija. Odredište $3$ instrukcije rednog broja $0$ jednako je označavalo kraj programa~\eqref{eq:RAMid} za $\f{I}_1^1$, kao i kraj \emph{tog dijela} programa za $\f{add}^3$. Primijetite sličnost sa standardnom konvencijom o \texttt{end}-iteratoru u biblioteci STL jezika C\texttt{++}.
 
 Vidimo da su mnoge funkcije (prazna, konstante, identiteta, zbrajanje,~\ldots) RAM-izračunljive. Ipak, pisati RAM-programe može biti dosta zamorno (recimo za $\f{add}^8$ --- mnogi dijelovi se ponavljaju uz neznatne izmjene u odredištima ili adresama registara) ili teško (recimo za množenje, ili potenciranje --- povremeno bismo htjeli iskoristiti registar kao brojač za neku petlju, ali istodobno i sačuvati njegovu vrijednost). Prvi problem riješit ćemo makroima, a drugi funkcijskim programiranjem u poglavlju~\ref{ch:rek}.
 
@@ -388,7 +388,7 @@ Definirat ćemo brojne makroe, što će kulminirati \emph{funkcijskim makroom} -
     \item \emph{pomoćni programski brojač} $\textsc{ac}$, čije  moguće vrijednosti $ac$ ovise o makro-instrukciji koja se trenutno izvršava ($I_{pc}$, gdje je $pc$ vrijednost od \textsc{pc}):
     \begin{itemize}
         \item ako je $I_{pc}=P^*$ za RAM-program $P$, tada je $ac\in[0\dd n_P]$;
-        \item inače ($I_{pc}\in\mathscr Ins$, ili $pc=n_Q$), $ac=0$.\qedhere
+        \item inače ($pc=n_Q$, ili $I_{pc}\!\in\mathscr Ins$), $ac=0$.\qedhere
     \end{itemize}
 \end{itemize}
 \end{definicija}
@@ -641,9 +641,9 @@ Evo primjera makroa s malo kompliciranijim uvjetom: neka su $i,j,n\in\N$ takvi d
 \end{equation}
 sa semantikom $(\forall t<n)(r_{j+t}'=r_{i+t}\land r_{i+t}'=0)$ --- koristimo $(\forall t<n)$ kao pokratu za $(\forall t\in[0\dd n\rangle)$. Riječima, \textsc{mmove} prebacuje komad memorije duljine $n$ registara počevši od $\reg{i}$, na drugo mjesto koje počinje od $\reg{j}$, ostavljajući nule na originalnim lokacijama. Svrha korištenja te instrukcije bit će emulacija \emph{stoga} pri funkcijskim pozivima.
 
-Moderna računala rezerviraju poseban dio svoje memorije za stog poziva (\emph{call stack}), koji se dijeli na okvire (\emph{frames}) u kojima se drže podaci o lokalnim varijablama funkcije koja se trenutno izvršava. Pozivom funkcije, vrh stoga se pomiče, otvarajući novi okvir u kojem će se funkcija izvršavati. Povratkom iz funkcije, vrh stoga se vraća na staro mjesto, eliminirajući taj okvir tako da od njega ostane jedino povratna vrijednost.
+Moderna računala rezerviraju poseban dio svoje memorije za stog poziva (\emph{call stack}), koji se dijeli na okvire (\emph{frames}) u kojima se drže podaci o lokalnim varijablama funkcijâ koje se trenutno izvršavaju. Pozivom funkcije, vrh stoga se pomiče, otvarajući novi okvir u kojem će se funkcija izvršavati. Povratkom iz funkcije, vrh stoga se vraća na staro mjesto, eliminirajući taj okvir tako da od njega ostane jedino povratna vrijednost.
 
-Na RAM-arhitekturi nemamo stog poziva kao zasebnu strukturu, ali vidjet ćemo da ga je moguće emulirati pomoću registara. Otvaranje okvira duljine $n$ realizirat ćemo kao pomak prvih $n$ registara za $n$ mjesta udesno (od $\reg{n}$ do uključivo $\reg{2n-1}$), a njegovo zatvaranje kao pomak u suprotnom smjeru. Osigurat ćemo da je $n$ uvijek dovoljno velik da time sačuvamo sve relevantne registre pozivatelja te da osiguramo dovoljno nulâ na početku za sve relevantne registre pozvane funkcije --- "uvjerivši" je da se izvršava na zasebnom RAM-stroju.
+Na RAM-arhitekturi nemamo stog poziva, ali ga možemo emulirati pomoću registara. Otvaranje okvira duljine $b$ realizirat ćemo kao pomak prvih $b$ registara za $b$ mjesta udesno (od $\reg{b}$ do uključivo $\reg{2b-1}$), a njegovo zatvaranje kao pomak u suprotnom smjeru. Osigurat ćemo da je $b$ uvijek dovoljno velik da time sačuvamo sve relevantne registre pozivatelja te da osiguramo dovoljno nulâ na početku za sve relevantne registre pozvane funkcije --- "uvjerivši" je da se izvršava na zasebnom RAM-stroju.
 
 Stvarna računala ne implementiraju stog na taj način jer je takav pristup nevjerojatno rastrošan, u prostoru (broju registara) i u vremenu (broju koraka). No kako nas u teoriji izračunljivosti zanima samo postojanje algoritama, ne i njihova složenost, taj pristup će nam biti dovoljno dobar.
 
