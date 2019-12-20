@@ -58,7 +58,7 @@ Spljoštenja makro-programa iz dokaza propozicije~\ref{prop:initmacro} daju nam 
 
 \section{Kompozicija}
 
-Kompozicija je intuitivno jednostavna operacija (kao i slijedno izvršavanje naredaba u imperativnim programima): izračunamo vrijednost jedne funkcije, i uvrstimo je u definiciju druge funkcije. No definicija je dosta tehnička.%, uglavnom zbog nekih odluka koje smo donijeli na početku, o tome kako shvaćamo algoritme.
+Kompozicija je intuitivno jednostavna operacija (kao i slijedno izvršavanje naredaba u imperativnim programima): izračunamo vrijednost jedne funkcije, i uvrstimo je u definiciju druge funkcije. No definicija je prilično tehnička.%, uglavnom zbog nekih odluka koje smo donijeli na početku, o tome kako shvaćamo algoritme.
 
 Htjeli bismo reći: "kompozicija $\f H\circ\f G$ dviju izračunljivih funkcija, $\f G^k$ i $\f H^l$, je izračunljiva funkcija". Da bi ta kompozicija imala smisla, kodomena od $\f G^k$ bi morala biti $\N^l$. U skladu s napomenom~\ref{nap:brip}, to znači da imamo $l$ izračunljivih koordinatnih funkcija, $\f G_1^k,\dotsc,\f G_l^k$, svaka od kojih daje po jedan ulazni podatak za $\f H^l$. Zato komponiranje $\f H\circ(\f G_1,\dotsc,\f G_l)$ više nije nužno binarna operacija.
 
@@ -115,7 +115,7 @@ U skladu s napomenom~\ref{nap:parcdef}, izraze~\eqref{eq:domkomp} i~\eqref{eq:de
 \end{equation}
 gdje podrazumijevamo da izraz s ugniježđenim funkcijskim pozivima $f(\vec v^{k})$ ima smisla ako (rekurzivno) svaki $v_i$ ima smisla, a $k$-torka njihovih vrijednosti je element $\dom{f}$.
 
-Dakle, kod komponiranja općenitih parcijalnih funkcija moramo voditi računa o domeni, ali dobro je znati da kompozicija sama po sebi ne može narušiti totalnost.
+Dakle, kod komponiranja parcijalnih funkcija moramo voditi računa o domeni --- ali dobro je znati da sâmo komponiranje ne može narušiti totalnost.
 
 \begin{lema}[{name=[domena kompozicije slijeva s totalnom funkcijom]}]\label{lm:comptot}
     Neka su $k,l\in\N_+$ te neka su $G_1^k$, $G_2^k$, \ldots, $G_l^k$ i $H^l$ funkcije.
@@ -155,7 +155,7 @@ $\f C_2^3=\f{Sc}\circ\f{Sc}\circ\f Z\circ\f I_1^3$. Doista,
 Skup RAM-izračunljivih funkcija, $\mathscr Comp$, zatvoren je na kompoziciju.
 \end{lema}
 \begin{proof}
-Pomoću funkcijskog makroa i uz marljivu evaluaciju, algoritam je očit: prvo izračunamo sve $\f G_i$ u istim argumentima $\vec x$, spremimo njihove povratne vrijednosti u $l$ pomoćnih registara nakon ulaznih, a na kraju izračunamo $\f H$ s tako dobivenim argumentima.
+Pomoću funkcijskog makroa i uz marljivu evaluaciju, algoritam je očit: prvo izračunamo sve $\f G_i$ u istim argumentima $\vec x$, spremimo njihove povratne vrijednosti u $l$ pomoćnih registara nakon ulaznih, a zatim izračunamo $\f H$ s tako dobivenim argumentima.
 
 Precizno, neka su $k,l\in\N_+$ proizvoljni te neka su $\f G_1^k$, $\f G_2^k$,~\ldots,~$\f G_l^k$ i $\f H^l$ proizvoljne RAM-izračunljive funkcije. To znači da postoje RAM-algoritmi $P_{\f G_1}^k$, $P_{\f G_2}^k$,~\ldots, $P_{\f G_l}^k$ i $P_{\f H}^l$, koji ih redom računaju. Tvrdimo da makro-program
 \begin{equation}
@@ -346,7 +346,7 @@ for i in range(y): z = z + 1  # H(x,i,z)=Sc(z)
 	\end{minipage}
 \end{equation}
 
-Točkovne definicije znaju biti neprecizne, i na nekim mjestima morat ćemo pribjeći simboličkoj definiciji da bi se znalo što zapravo pokušavamo definirati. No u ogromnom broju slučajeva, posebno za kompliciranije funkcije (i relacije), pisat ćemo točkovne definicije. Važno je imati na umu da se svaka takva točkovna definicija može \emph{pretvoriti} u simboličku --- pokušajte ako ne vjerujete!
+Točkovne definicije znaju biti neprecizne, i na nekim mjestima morat ćemo pribjeći simboličkoj definiciji da bi se znalo što zapravo pokušavamo definirati. No u ogromnom broju slučajeva, posebno za kompliciranije funkcije (i relacije), pisat ćemo točkovne definicije. Važno je imati na umu da se svaka takva točkovna definicija može \emph{pretvoriti} u simboličku --- evo primjera.
 
 \begin{primjer}[{name=[pretvorba točkovne definicije u simboličku]}]
 Točkovna definicija
@@ -647,7 +647,7 @@ Jedan primjer je \emph{grananje}: imamo dva RAM-programa $P_{\mathit{true}}$ i $
 \end{equation}
 ali ne možemo napisati odgovarajuću funkciju $If^3$ takvu da $f(\vec x,y):\simeq If\bigl(y,\f g(\vec x),\f h(\vec x)\bigr)$ ima analognu semantiku: ako je $\f g$ totalna a $\f h$ prazna, bez obzira na $y$ marljiva evaluacija ima za posljedicu da je $f$ također prazna. Za to ćemo trebati razviti druge tehnike, no za početak pokažimo kako su beskonačne petlje odnosno netotalne funkcije \emph{jedini} problem --- jer nas zanima samo postojanje algoritma a ne i performanse, s totalnim izračunljivim funkcijama nešto poput $If$ možemo napraviti relativno lako. 
 %\subsection{Izračunljivost skupovnih\slash logičkih operacija}
- Za početak, za $\textsc{else}$ trebamo dokazati da negiranje uvjeta ne kvari izračunljivost.% moći negirati uvjete i ostati u istoj "klasi" izračunljivosti.
+ Za početak, za implementaciju $\textsc{else}$ trebamo dokazati da negiranje uvjeta ne kvari izračunljivost.% moći negirati uvjete i ostati u istoj "klasi" izračunljivosti.
 
 \begin{propozicija}[{name=[komplement čuva (primitivnu) rekurzivnost]}]\label{prop:kompl}
 Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija.\newline Tada je i relacija $(\f R\kompl)^k$, zadana s $\f R\kompl(\vec x)\Longleftrightarrow\lnot \f R(\vec x)$, također (primitivno) rekurzivna.
@@ -818,7 +818,7 @@ Zahtjev da su svi uvjeti u~parovima disjunktni znači da je za svaki $\vec x\in\
 \end{align}
 koji će biti (primitivno) rekurzivni ako su $R_i$ takvi, po propozicijama~\ref{prop:vezn} i~\ref{prop:skupl}. U tom smislu, podrazumijevajući da u samom provjeravanju uvjeta nema beskonačnih petlji (karakteristične funkcije su totalne), grananje odgovara uobičajenom grananju poput \texttt{if}/\texttt{elif}/\texttt{else}, ili \texttt{switch}/\texttt{case}/\texttt{default} (u jeziku Python odnosno C).
 
-Kao što smo već napomenuli, još ne znamo dokazati da je to izračunljivo ako grane $G_i$ nisu totalne. To ćemo kasnije --- zasad dokažimo da je funkcija dobivena grananjem iz \emph{totalnih} izračunljivih funkcija i uvjeta, izračunljiva u funkcijskom modelu.
+Kao što smo već napomenuli, još ne znamo dokazati da je to izračunljivo ako grane $G_i$ nisu totalne, ali ako jesu, to možemo dokazati već sada.
 
 \begin{teorem}[Teorem o grananju, (primitivno) rekurzivna verzija]\label{tm:grek}
 Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ (primitivno) rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u~parovima disjunktne (primitivno) rekurzivne relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\IF{\f R_1:\f G_1,\f R_2:\f G_2,\dots,\f R_l:\f G_l,\f G_0}$ također (primitivno) rekurzivna.
@@ -833,12 +833,12 @@ $\f R_0:=\bigl(\bigcup\nolimits_{i=1}^{\,l}\f R_i\bigr)\kompl$ je (primitivno) r
 \end{equation}
 dakle dobivena je kompozicijom iz (primitivno) rekurzivnih $\chi_{\f R_i}$, $\f G_i$ te $\f{mul}^2$ i $\f{add}^{l+1}$.
 
-    Doista, neka je $\vec x\in\N^k$ proizvoljan, i promotrimo funkcijsku jednakost~\eqref{eq:grek} u $\vec x$. Ako je $\vec x$ u nekoj $\f R_i$, tada je $\chi_{\f R_i}(\vec x)=1$, pa je $i$-ti pribrojnik u~\eqref{eq:grek} (brojeći od nule) jednak $G_i(\vec x)$. Štoviše, jer su uvjeti u~parovima disjunktni, $\vec x\notin\f R_j$ za sve $j\in[1\dd l]\setminus\{i\}$, dok iz definicije $\f R_0$ slijedi također $\vec x\notin\f R_0$, dakle svi ostali pribrojnici imaju faktor $0$, pa iznose $0$ i ne utječu na zbroj. Dakle ako je $\vec x\in\f R_i$, tada je $\f F(\vec x)=\f G_i(\vec x)$.
+	Doista, neka je $\vec x\in\N^k$ proizvoljan, i promotrimo funkcijsku jednakost~\eqref{eq:grek} u $\vec x$. Ako je $\vec x$ u nekoj $\f R_i$, tada je $\chi_{\f R_i}(\vec x)=1$, pa je $i$-ti (brojeći od nule) pribrojnik u~\eqref{eq:grek} jednak $G_i(\vec x)$. Štoviše, jer su uvjeti u~parovima disjunktni, $\vec x\notin\f R_j$ za sve $j\in[1\dd l]\setminus\{i\}$, dok iz definicije $\f R_0$ slijedi također $\vec x\notin\f R_0$, dakle svi ostali pribrojnici imaju faktor $0$, pa iznose $0$ i ne utječu na zbroj. Dakle ako je $\vec x\in\f R_i$, tada je $\f F(\vec x)=\f G_i(\vec x)$.
 
 S druge strane, ako $\vec x$ nije ni u jednoj $\f R_i$, tada po De Morganovom pravilu nije ni u njihovoj uniji, dakle $\vec x\in\f R_0$, pa je početni pribrojnik u~\eqref{eq:grek} jednak $\f G_0(\vec x)$, a svi ostali pribrojnici, kao i u prethodnom odlomku, jednaki su $0$. Dakle tada je $\f F(\vec x)=\f G_0(\vec x)$, kao što i treba biti.
 \end{proof}
 
-Domena funkcije dobivene grananjem~\eqref{eq:domgran} zapravo je još kompliciranija od domene funkcije dobivene kompozicijom. I ovdje zato pišemo definiciju u stilu napomene~\ref{nap:parcdef},
+Domena funkcije dobivene grananjem~\eqref{eq:domgran} je još kompliciranija od domene funkcije dobivene kompozicijom~\eqref{eq:domkomp}. I ovdje zato pišemo definiciju u stilu napomene~\ref{nap:parcdef},
 \begin{equation}
     F(\vec x):\simeq\begin{cases}
     G_1(\vec x),&R_1(\vec x)\\
@@ -934,9 +934,11 @@ Jedan primjer smo već vidjeli: sa statičke strane, za svaki $n$ imamo primitiv
 Evo malo kompliciranijeg primjera: lema~\ref{lm:addmulk} kaže da je za svaki $k$ funkcija $\f{add}^k$ primitivno rekurzivna; ako joj damo $k$ brojeva, ili je komponiramo s $k$ izračunljivih funkcija, ona će ih zbrojiti (funkcije će zbrojiti na presjeku njihovih domena). Sada ćemo promotriti dinamičku varijantu: operator $\sum$ koji za unaprijed zadanu \emph{totalnu} funkciju $\f G$ prima broj koji kaže koliko prvih njenih vrijednosti treba zbrojiti, i eventualno ostale argumente od $\f G$ ako je ona mjesnosti veće od $1$. Isto ćemo napraviti za množenje.
 
 \begin{napomena}[{name=[izračunljive granice i prazni konteksti]}]\label{nap:igpk}
-	U ostatku ove točke dokazat ćemo šest rezultata o ograničenom programiranju: neke direktno primitivnom rekurzijom, a neke kompozicijom iz već dobivenih rezultata. Svi će oni imati isto sučelje: (primitivno) rekurzivnu $k$-mjesnu funkciju $\f G$ ili relaciju $\f R$, kontekst $\vec x$ i granicu $y$; te će biti definirani iteracijom po svim $i<y$. U primjenama, najčešće će granica biti zadana kao neka funkcija konteksta: $i<\f B(\vec x)$. To samo znači da ćemo primijeniti kompoziciju s $\f B$ na mjestu zadnjeg argumenta $y$, što ostaje (primitivno) rekurzivno ako je $\f B$ takva.
+	U ostatku ove točke dokazat ćemo šest rezultata o ograničenom programiranju: neke direktno primitivnom rekurzijom, a neke kompozicijom iz već dobivenih rezultata. Svi će oni imati isto sučelje: (primitivno) rekurzivnu $k$-mjesnu funkciju $\f G$ ili relaciju $\f R$, kontekst $\vec x$ i granicu $y$; te će biti definirani iteracijom po svim $i<y$.
+	
+	U primjenama, najčešće će granica ovisiti o kontekstu: $i<\f B(\vec x)$. To samo znači da ćemo primijeniti kompoziciju s $\f B$ na mjestu zadnjeg argumenta $y$, što ostaje (primitivno) rekurzivno ako je $\f B$ takva.
 
-	Drugo, granica može biti uključena: $i\le\f B(\vec x)$ je ekvivalentno s $i<\f{Sc}\bigl(\f B(\vec x)\bigr)$, što samo znači da komponiramo sa $\f{Sc}\circ\f B$, koja je (primitivno) rekurzivna ako je $\f B$ takva.
+	Drugo, granica može biti uključena: $i\le\f B(\vec x)$ je ekvivalentno s $i<\f{Sc}\bigl(\f B(\vec x)\bigr)$, što samo znači da je granica $\f{Sc}\circ\f B$, koja je (primitivno) rekurzivna ako je $\f B$ takva.
 
 	I treće, kontekst može biti prazan: u slučaju $k=1$, ulaz za $\f G$ odnosno $\f R$ je samo $i$. Tada je primitivna rekurzija degenerirana, što također ne smeta jer ona čuva primitivnu rekurzivnost po propoziciji~\ref{prop:F1prn}, a rekurzivnost po korolaru~\ref{kor:F1rek}.
 \end{napomena}

@@ -296,7 +296,7 @@ Neka je $k\in\N_+$ te $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi}
     \f T_k(\vec x,e,z)\land
     \f U(z)=y\bigr)\text.
 \end{equation}
-    Doista, ako je $(\vec x,y)\in\graf{\f F}$, tada je $\graf{\f F}\ne\emptyset$, odnosno $\f F\ne\varnothing$, iz čega slijedi $\f{Prog}(e)$ (kontrapozicijom propozicije~\ref{prop:computeind}\eqref{it:nprogind}), pa postoji (jedinstven) RAM-program $P$ takav da je $e=\kprog P$. Po korolaru~\ref{kor:computeind}, $P^k$ računa $\kf e^k=\f F$.
+	Doista, ako je $(\vec x,y)\in\graf{\f F}$, tada je $\graf{\f F}\ne\emptyset$, odnosno $\f F\ne\varnothing$, iz čega slijedi $\f{Prog}(e)$ (kontrapozicijom propozicije~\ref{prop:computeind}\eqref{it:nprogind}), pa postoji (jedinstven) RAM-program $P$ takav da je $e=\kprog P$. Po propoziciji~\ref{prop:computeind}\eqref{it:progind}, $P^k$ računa $\kf e^k=\f F$.
 
 Iz $(\vec x,y)\in\graf{\f F}$ zaključujemo $\vec x\in\dom{\f F}$, pa $P$-izračunavanje s $\vec x$ stane po definiciji~\ref{def:compute}. Označimo sa $z$ kod tog izračunavanja. Tada po propoziciji~\ref{prop:Tkprn} vrijedi $\f T_k(\vec x,e,z)$, a $y=\f U(z)$ jer je to izlazni podatak tog izračunavanja.
 
@@ -313,13 +313,13 @@ je primitivno rekurzivna po propoziciji~\ref{prop:vezn}, kao konjunkcija dvije p
 
 \subsection{Selekcija}
 
-Sljedeći veliki zalogaj je dokazati obrat teorema~\ref{tm:grafprre}. Kod teorema za totalne funkcije koristili smo minimizaciju: po~\eqref{eq:mugraf}, funkcija je jednaka minimizaciji svog grafa. To vrijedi za sve funkcije (čak i za neizračunljive), ali neće nam pomoći ako je graf samo poluodlučiv: skup rekurzivno prebrojivih relacija nije zatvoren na minimizaciju (što bi to uopće značilo?), a i intuitivno, minimizacija poluodlučive relacije ne mora biti izračunljiva.
+Sljedeći veliki zalogaj je dokazati obrat teorema~\ref{tm:grafprre}. Kod teorema za totalne funkcije koristili smo minimizaciju: po lemi~\ref{lm:projmugraf}, funkcija je jednaka minimizaciji svog grafa. To vrijedi za sve funkcije (čak i za neizračunljive), ali neće nam pomoći ako je graf samo poluodlučiv: skup rekurzivno prebrojivih relacija nije zatvoren na minimizaciju (što bi to uopće značilo?), a i intuitivno, minimizacija poluodlučive relacije ne mora biti izračunljiva.
 
 Razmislimo malo detaljnije o tome. Zamislimo da imamo poluodlučivu relaciju $R^2$ i želimo računati vrijednosti funkcije $f:=\mu R$. Za zadani $x$, recimo $x=5$, dakle, tražimo najmanji $y$ takav da vrijedi $R(5,y)$ --- no problem je u tome što za zadani par $(5,y)$ možemo jedino sa sigurnošću ustanoviti da \emph{jest} u $R$, ne i da nije (ako nije, postupak neće nikada stati). Ako takvog $y$ nema, to da algoritam neće nikad stati je sasvim u redu, ali što ako ga ima? Pomoću paralelizacije možemo pokrenuti sva testiranja $R(5,0)$, $R(5,1)$, $R(5,2)$,~\ldots\ dok neko od njih ne stane --- i ako to upravo bude $R(5,0)$, onda imamo sreće: $\f f(5)=0$. No pretpostavimo da smo umjesto toga dobili $R(5,7)$. Iz toga sigurno možemo zaključiti $5\in\exists_*R=\dom{\mu R}=\dom f$, dakle $f(5)$ je neki broj. Štoviše, to je broj koji sigurno nije veći od $7$, ali koji? Imamo $8$ mogućnosti, i dok god testovi $R(5,t),t<7$ ne stanu, ne znamo koja od njih je prava vrijednost $f(5)$. Paradoksalno, ako to \emph{jest} $7$, tada nijedan od tih "manjih testova" neće stati, pa više nećemo dobiti nikakvu novu informaciju. Ako u međuvremenu saznamo da vrijedi i $R(5,11)$, to neće nimalo utjecati na naš problem. Ali zamislimo da smo (nakon još mnogo vremena) dobili da vrijedi $R(5,4)$. Imamo li se razloga radovati? Eliminirali smo brojeve $5$, $6$ i $7$ kao potencijalne vrijednosti $f(5)$, ali i dalje ne znamo koliko je $f(5)$. Ukratko, na ovaj način možemo dobiti $f(x)$ jedino ako je $f(x)=0$ --- što se ne čini pretjerano korisnim.
 
-Ipak, funkcija $\f g$, koju dobijemo ako za svaki $x$ uzmemo prvi $y$ na koji naiđemo paralelnim izvršavanjem svih testova $R(x,y)$ (recimo, u gornjem scenariju je $\f g(5)=7$), je izračunljiva, a nije baš sasvim bez veze s funkcijom $f$. Vidimo da ona \emph{dominira} funkciju $f$: kad god je $f(x)$ definirano, tada je i $\f g(x)$ definirano, i to tako da vrijedi $\f g(x)\ge f(x)$.
+Ipak, funkcija $\f g$, koju dobijemo ako za svaki $x$ uzmemo prvi $y$ na koji naiđemo paralelnim izvršavanjem svih testova $R(x,y)$ (recimo, u gornjem scenariju je $\f g(5)=7$), je izračunljiva, i vidimo da \emph{dominira} funkciju $f$: kad god $f(x)$ ima smisla, ima i $\f g(x)$, i tada je $\f g(x)\ge f(x)$.
 
-Jedini problem je što nama nije zadana funkcija $f$, nego relacija $R$. Možemo li $\f g$ karakterizirati pomoću $R$? Da: prvo svojstvo kaže $\dom{\f g}\supseteq\dom f=\dom{\mu R}=\exists_*R$, a drugo kaže (za $x\in\exists_*R$) $f(x)=\mu yR(x,y)\le\f g(x)$, što možemo osigurati tako da tražimo $R\bigl(x,\f g(x)\bigr)$. Reći da to vrijedi za sve $x$ zapravo znači zahtijevati inkluziju $\graf{\f g}\subseteq R$, a tada po~\eqref{eq:projgraf} slijedi (projekcija je monotona --- dokažite!) $\dom{\f g}=\exists_*\graf{\f g}\subseteq\exists_*R$, što s prvim svojstvom daje $\dom{\f g}=\exists_*R$. Formalizirajmo to svojsvo.
+Jedini problem je što nama nije zadana funkcija $f$, nego relacija $R$. Možemo li $\f g$ karakterizirati pomoću $R$? Da: prvo svojstvo kaže $\dom{\f g}\supseteq\dom f=\dom{\mu R}=\exists_*R$, a drugo kaže (za $x\in\exists_*R$) $f(x)=\mu yR(x,y)\le\f g(x)$, što možemo osigurati tako da tražimo $R\bigl(x,\f g(x)\bigr)$. Reći da to vrijedi za sve $x$ zapravo znači zahtijevati inkluziju $\graf{\f g}\subseteq R$, a tada po lemi~\ref{lm:projmugraf} slijedi (projekcija je monotona --- dokažite!) $\dom{\f g}=\exists_*\graf{\f g}\subseteq\exists_*R$, što s prvim svojstvom daje $\dom{\f g}=\exists_*R$. Formalizirajmo ta svojstva.
 
 \begin{definicija}[{name=[selektor]}]
 Neka je $k\in\N_+$ te $R^{k+1}$ relacija.
@@ -336,7 +336,7 @@ Točkovno, uvjete na selektor možemo zapisati kao
     \exists y\bigl(y=g(\vec x)\bigr)\Longleftrightarrow\exists yR(\vec x,y)\Longleftrightarrow R\bigl(\vec x,g(\vec x)\bigr)\text.
 \end{equation}
 
-Selektor je sasvim općenit pojam koji u skupovnoteorijskom smislu odgovara \emph{izbornoj funkciji}: Ako za svaki $\vec x\in\N^k$ definiramo "prerez" (\emph{section}) $R_{\vec x}^1(y):\Longleftrightarrow R(\vec x,y)$,
+Selektor je sasvim općenit pojam koji u skupovnoteorijskom smislu odgovara \emph{izbornoj funkciji}: Ako za svaki $\vec x\in\N^k$ definiramo "prerez" (\emph{section}) $R_{\vec x}(y):\Longleftrightarrow R(\vec x,y)$,
 tada je $(R_{\vec x})_{\vec x\,\in\,\exists_*\!R}$ indeksirana familija nepraznih skupova (jednomjesnih relacija) i selektor za $R$ je upravo izborna funkcija za tu familiju (pogledajte~\cite[str.\ 92]{skr:VukTS} za detalje).
 
 U teoriji skupova postoji aksiom izbora, koji kaže da svaka takva familija ima izbornu funkciju, odnosno svaka relacija ima selektor. Zapravo, ovdje aksiom izbora nije ni potreban, jer je skup $\N$ dobro uređen, pa uvijek možemo odabrati najmanji $y$ za svaki $\vec x$ za koji takav $y$ postoji. Drugim riječima, trivijalno je $\mu R$ selektor za $R$. Doista, vrijedi $\dom{\mu R}=\exists_*R$ po definiciji, a za $\graf{\mu R}(\vec x,y)$ vrijedi $y=\mu z R(\vec x,z)=\min R_{\vec x}\in R_{\vec x}$, dakle vrijedi $R_{\vec x}(y)$, odnosno $R(\vec x,y)$.
@@ -543,14 +543,14 @@ Kao i u teoremu~\ref{tm:rpeproj}, da \texttt{(3)} povlači \texttt{(2)} je trivi
 Da \texttt{(2)} povlači \texttt{(1)} je malo kompliciranije, ali i dalje sasvim jasno koristeći ono što znamo o projekcijama: $y\in\im{\f F}$ znači $(\exists\vec x\in\dom{\f F})\bigl(y=\f F(\vec x)\bigr)$, odnosno $\exists\vec x\,\graf{\f F}(\vec x,y)$. Htjeli bismo tu egzistencijalnu kvantifikaciju prikazati kao višestruku projekciju, ali za to nam $y$ treba biti na prvom mjestu. Definiramo $P(y,\vec x):=\graf{\f F}(\vec x,y)$ --- tada je $P\preceq\graf{\f F}$, a po teoremu~\ref{tm:grafprre} je $\graf{\f F}$ rekurzivno prebrojiv, pa je po lemi~\ref{lm:re<re} i $P$ rekurzivno prebrojiva. Sada je $\im{\f F}(y)\Longleftrightarrow\exists\vec x\,P(y,\vec x)$, što je rekurzivno prebrojivo po korolaru~\ref{kor:projre}.
 
 Opet je najzanimljiviji dio da \texttt{(1)} povlači \texttt{(3)}. %Krenimo kao u dokazu teorema~\ref{tm:rpeproj}: $R^1$ je rekurzivno prebrojiva, dakle $R=\dom{\f F}$ za neku parcijalno rekurzivnu funkciju $\f F^1$. Također, $\f F$ ima indeks, označimo ga s $e$ (napomena~\ref{nap:>1ind}). Sada znamo
-Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpeproj} --- možemo \emph{iskoristiti} taj teorem da se dočepamo primitivne rekurzivnosti: postoji primitivno rekurzivna relacija $\f P^2$ takva da je $R=\exists_*\f P$. To znači da vrijedi $R(x)\Longleftrightarrow\exists y\f P(x,y)$, i već smo vidjeli u prethodnom odlomku da projekcije možemo zamijeniti dodatnim argumentima. Dakle, htjeli bismo definirati $\f G(x,y):=x$ u slučaju da vrijedi $\f P(x,y)$ --- no što ako ne vrijedi? Ako \emph{nikada} ne vrijedi, to zapravo znači da je $R=\emptyset$ pa nemamo što dokazivati. Ako pak $R\ne\emptyset$, tada postoji neki fiksni (recimo najmanji) element $r\in R$, pa ga možemo iskoristiti kao \emph{joker} u slučajevima kada ne vrijedi $\f P(x,y)$. Sve u svemu, funkcija $\f G$ zadana s
+Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpeproj} --- možemo \emph{iskoristiti} taj teorem da se dočepamo primitivne rekurzivnosti: postoji primitivno rekurzivna relacija $\f P^2$ takva da je $R=\exists_*\f P$. To znači da vrijedi $R(x)\Longleftrightarrow\exists y\f P(x,y)$, i već smo vidjeli u prethodnom odlomku da projekcije možemo zamijeniti dodatnim argumentima. Dakle, htjeli bismo definirati $\f G(x,y):=x$ u slučaju da vrijedi $\f P(x,y)$ --- no što ako ne vrijedi? Ako \emph{nikada} ne vrijedi, to zapravo znači da je $R=\emptyset$ pa nemamo što dokazivati. Ako pak $R\ne\emptyset$, tada postoji neki fiksni (recimo najmanji) element $r\in R$, pa ga možemo iskoristiti kao \emph{joker} u slučajevima kada ne vrijedi $\f P(x,y)$. Sve u svemu, funkcija $\f G:=\IF{\f P:\f I_1^2,\,\f C_r^2}$, točkovno
 \begin{equation}\label{eq:defG}
     \f G(x,y):=\begin{cases}
         x,&\f P(x,y)\\
         r,&\text{inače}
-    \end{cases}
+    \end{cases}\text,
 \end{equation}
-(simbolički $\f G=\IF{\f P:\f I_1^2,\,\f C_r^2}$) je primitivno rekurzivna po teoremu~\ref{tm:grek}, i tvrdimo $R=\im{\f G}$.
+je primitivno rekurzivna po teoremu~\ref{tm:grek}, i tvrdimo $R=\im{\f G}$.
 
 Za ($\subseteq$), neka vrijedi $x_0\in R=\exists_*\f P$. To po definiciji znači da postoji $y_0\in\N$ takav da vrijedi $\f P(x_0,y_0)$. No tada je po~\eqref{eq:defG} $\f G(x_0,y_0)=x_0\in\im{\f G}$.
 
@@ -569,7 +569,7 @@ Simbolički, $\f F=\f G\circ(\f{fst},\f{snd})$, a $\f G=\f F\circ\f{pair}$. Opć
 
 Rekurzivno prebrojive brojevne relacije definirali smo u svrhu formaliziranja ideje poluodlučivosti, u brojevnom modelu. Prirodno je zapitati se kako bi ta formalizacija izgledala u jezičnom modelu. Znamo da tamo relacijama odgovaraju jezici, pa se zapravo pitamo: što znači da je jezik $L$ rekurzivno prebrojiv?
 
-Prvo, na početku točke~\ref{sec:Todl} definirali smo kodiranje jezika $\kr L$, što je jednomjesna relacija, i rekli smo da svojstva izračunljivosti jezika $L$ možemo gledati kroz analogna svojstva brojevne relacije $\kr L$. Dakle, možemo reći da je $L$ rekurzivno prebrojiv ako je $\kr L\subseteq\N$ rekurzivno prebrojiv.
+Prvo, na početku točke~\ref{sec:Todl} definirali smo kodiranje jezika $\kr L$ kao jednomjesnu brojevnu relaciju, i rekli da svojstva izračunljivosti jezika $L$ možemo gledati kroz analogna svojstva te relacije. Dakle, možemo reći da je $L$ rekurzivno prebrojiv ako je $\kr L\subseteq\N$ rekurzivno prebrojiv.
 
 Drugo, možemo prevesti samu definiciju. Kako su rekurzivno prebrojive relacije domene izračunljivih brojevnih funkcija, rekurzivno prebrojivi jezici bili bi domene (Turing-)izračunljivih jezičnih funkcija.
 
