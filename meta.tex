@@ -1,6 +1,6 @@
 \chapter{Metaprogramiranje}
 
-U ovom poglavlju dokazat ćemo nekoliko rezultata, kojima je svima zajednička jedna ideja: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathscr Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathscr Comp$ --- već smo doista konstruirali funkciju $compose:\mathscr Prog^+\mspace{-2mu}\times\mathscr Prog\times\N_+\to\mathscr Prog$ koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije (i mjesnost $k$) te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_k^{l+1}$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to dokazati. Nećemo baš programirati dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
+U ovom poglavlju dokazat ćemo nekoliko rezultata sa zajedničkom idejom: algoritmi mogu preko kodiranja raditi na raznim tipovima podataka, pa tako mogu raditi i na algoritmima. Recimo, u lemi~\ref{lm:compram}, nismo mi samo dokazali da ako su $\f G_1,\f G_2,\dotsc,\f G_l,\f H\in\mathscr Comp$ (odgovarajućih mjesnosti), tada je i $\f H\circ(\f G_1,\dotsc,G_l)\in\mathscr Comp$ --- već smo doista konstruirali funkciju $compose:\mathscr Prog^+\mspace{-2mu}\times\mathscr Prog\times\N_+\to\mathscr Prog$ koja prima RAM-programe $P_{\f G_1}$, $P_{\f G_2}$,~\ldots, $P_{\f G_l}$ i $P_{\f H}$ što računaju odgovarajuće funkcije (i mjesnost $k$) te od njih sastavlja RAM-program $Q_{\f F}^\flat$ što računa njihovu kompoziciju. Funkcija $compose$ (odnosno $compose_k^{l+1}\!$, jer je parametrizirana mjesnostima) je izračunljiva, i ovdje ćemo to dokazati. Nećemo baš programirati dokaz leme~\ref{lm:compram}, jer on ide preko spljoštenja i funkcijskog makroa, što je komplicirano za izvesti formalno --- ići ćemo "zaobilaznim putom", za koji će se poslije ispostaviti da je zapravo prilično koristan.
 
 \section{Specijalizacija}
 
@@ -119,8 +119,7 @@ Još treba vidjeti da $k$-mjesna funkcija s tim indeksom zadovoljava jednadžbu~
 \end{equation}
 pa je izlazni podatak doista $\kf e^{k+1}(\vec x,y)\simeq\f{comp}_{k+1}(\vec x,y,e)$ --- ako $P$-iz\-ra\-ču\-na\-va\-nje s $(\vec x,y)$ uopće stane. Ako ne stane, onda ne stane ni $Q$-izračunavanje s $\vec x$, jer zapne na donjoj razini izvršavajući zadnju makro-instrukciju.
 
-    Još smo ostali dužni riješiti slučaj kad ne postoji program $P$, jer $e\nin\f{Prog}$. Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind} je tada $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je i $spec(y,f)$ prazna --- formula~\eqref{eq:domkomp} kaže da funkcija~\eqref{eq:paramcompose} ima praznu domenu. Za povratnu vrijednost od $\f S_k^2$ nam treba neki indeks od $\varnothing^k$, pa po istoj propoziciji možemo upotrijebiti upravo $e$% --- zbog $e\nin\f{Prog}$, za svaku mjesnost $k$ će biti $\kf e^k=\varnothing^k$, opet prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind}
-. Dakle, %$\f S_k:=\IF{\f{Prog}:\f F,\f C_e^{k+1}}$, primitivno rekurzivna po teoremu~\ref{tm:grek}
+	Još smo ostali dužni riješiti slučaj kad ne postoji program $P$, jer $e\nin\f{Prog}$. Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind} je tada $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je i $spec(y,f)$ prazna --- formula~\eqref{eq:domkomp} kaže da funkcija~\eqref{eq:paramcompose} ima praznu domenu. Za povratnu vrijednost od $\f S_k^2$ nam treba neki indeks od $\varnothing^k$, pa opet po propoziciji~\ref{prop:computeind}\eqref{it:nprogind} možemo upotrijebiti upravo $e$. Dakle,
 \begin{equation}\label{eq:Skprn}
    \f S_k(y,e):=\begin{cases}
        \f F(y,e),&{Prog}(e)\\
@@ -159,7 +158,7 @@ Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$ takva 
 \end{proof}
 
 \begin{primjer}[{name=[specijalizacija zadnja tri od sedam argumenata]}]
-    Supskript funkcije $\f S$ govori koliko argumenata naše funkcije $\kf e$ će "preživjeti" specijalizaciju, a prethodnik mjesnosti od $\f S$ kaže koliko ih želimo fiksirati (i moramo navesti njihove vrijednosti u pozivu $\f S$ prije $e$). Recimo, u slučaju funkcije mjesnosti $7$ i indeksa $e_1$, kojoj želimo fiksirati zadnja tri argumenta redom na brojeve $2$, $8$ i $5$, imali bismo
+	Supskript funkcije $\f S$ govori koliko argumenata naše funkcije $\kf e$ će "preživjeti" specijalizaciju, a prethodnik mjesnosti od $\f S$ kaže koliko ih želimo fiksirati (i moramo navesti njihove vrijednosti prije $e$ u pozivu $\f S$). Recimo, u slučaju da funkciji $\kf{e_1}^7$ želimo fiksirati zadnja tri argumenta redom na brojeve $2$, $8$ i $5$, imali bismo
 $
     e_2:=\f S_4^4(2,8,5,e_1)=\f S_4^2\bigl(2,\f S_5^2\bigl(8,\f S_6^2(5,e_1)\bigr)\bigr)
 $, i za sve $x,y,z,t\in\N$ bi vrijedilo
@@ -170,7 +169,7 @@ $\kf{e_2}(x,y,z,t)\simeq\kf{e_1}(x,y,z,t,2,8,5)$.
 
 Sada možemo i vidjeti da je $\N compose$, barem za fiksne mjesnosti $k$ i $l$, primitivno rekurzivna. Tehnika koju ćemo pritom koristiti može se općenito primijeniti na razne funkcije definirane na funkcijama, koje su kodirane preko njihovih indeksa.
 
-Naglasimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja) niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Zanima nas da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_1^2$ koja prima $g$ i $h$ te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} da se podsjetite na što se tu misli.
+Naglasimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja) niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Zanima nas da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_1^2$ koja prima $g$ i $h$ te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} za detalje.
 
 Ugrubo, \emph{kompilirati} kompoziciju dvije funkcije koje već imamo kompilirane, je daleko "pitomije" nego \emph{izvršiti} (evaluirati) tu kompoziciju. Izvršavanje ne mora stati ako te funkcije nisu totalne --- dok sâmo kompiliranje kompozicije mora stati.
 

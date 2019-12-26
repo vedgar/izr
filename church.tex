@@ -335,7 +335,7 @@ S druge strane, $c_t\leadsto c_{t+1}$ po definiciji~\ref{def:compute}, pa po lem
 \begin{equation}
     \mathfrak N\models_v R_{i+1}\bigl(x_0,\dotsc,x_{j-1},\mathsf s(x_j),x_{j+1},\dotsc,x_{m-1}\bigr)\text,
 \end{equation}
-odnosno u $\mathfrak N$ uz valuaciju $v$ vrijedi i konsekvens formule~\eqref{eq:formINC}, što smo trebali.
+odnosno u $\mathfrak N$ uz valuaciju $v$ vrijedi i konzekvens formule~\eqref{eq:formINC}, što smo trebali.
 
 Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, sličnom metodom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $v(\mathsf o)=\phi(\mathsf o)=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u
 \begin{equation}
@@ -389,7 +389,7 @@ $v'(x_h):=\begin{cases}
 a_{hb}=\phi\bigl(\overline{c_b(\reg h)}\bigr),&h\ne j\\
 \phi\bigl(\overline{c_b(\reg j)-1}\bigr),&h=j
 \end{cases}$.
-Uz tu valuaciju vrijedi antecedens, jer je $v'\bigl(\mathsf s(x_j)\bigr)=a_{jb}$ --- pa onda vrijedi i konsekvens, odnosno formula s istim sadržajem registara, osim što je $c_{b+1}(\reg j)$ za jedan manji, i $c_{b+1}(\textsc{pc})$ za jedan veći, kao što i treba biti.
+Uz tu valuaciju vrijedi antecedens, jer je $v'\bigl(\mathsf s(x_j)\bigr)=a_{jb}$ --- pa onda vrijedi i konzekvens, odnosno formula s istim sadržajem registara, osim što je $c_{b+1}(\reg j)$ za jedan manji, i $c_{b+1}(\textsc{pc})$ za jedan veći, kao što i treba biti.
 \end{proof}
 
 \begin{propozicija}[{name=[zaustavljanje povlači zaključivanje]}]\label{pp:stop>models}
@@ -619,7 +619,7 @@ Na jeziku logike prvog reda:
     \t{($\forall$x$\forall$x'$\forall$x'{}'(R'(x,f(x'),x'{}')\textrightarrow R'{}'(x,x',x'{}'))\textrightarrow}\\
     \t{$\lnot\forall$x$\forall$x'$\forall$x'{}'$\lnot$R'{}'(x,x',x'{}'))))))}\text,
 \end{multline}
-čiji kod je broj s nekoliko stotina znamenaka --- ali dio koji ovisi o $\vec u$ je samo ovaj prvi red; sve ostalo je konstanta za fiksni RAM-algoritam $P^k$.
+čiji kod ima nekoliko stotina znamenaka --- ali dio koji ovisi o $\vec u$ je samo ovaj prvi red; sve ostalo je konstanta za fiksni RAM-algoritam $P^k$.
 \end{primjer}
 
 \begin{lema}[{name=[primitivna rekurzivnost svođenja $K$ na $Valid$]}]
@@ -671,15 +671,15 @@ Kada bi $Valid$ bio odlučiv, po teoremu~\ref{tm:oikr} bi jednomjesna relacija $
 
 Argumentima koji su potrebni za dokaz Churchovog teorema već smo se poprilično približili dokazu G\"odelovog prvog teorema, izrečenog u obliku: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za pravi dokaz trebalo bi ispeglati još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
 
-U prethodnoj točki uveli smo, za svaki prirodni broj $u$, formulu (štoviše, rečenicu) $\varphi_u$ koja je valjana ako i samo ako je $u$ element Kleenejevog skupa. Također smo uveli strukturu $\mathfrak N=(\N,0,\f{Sc},\dotsc)$, čiji konstantsko-funkcijski fragment se podudara sa standardnim modelom od PA (prirodni brojevi, nula i sljedbenik).
+U prethodnoj točki uveli smo, za svaki prirodni broj $u$, rečenicu $\varphi_u$ koja je valjana ako i samo ako je $u$ element Kleenejevog skupa. Također smo uveli strukturu $\mathfrak N=(\N,0,\f{Sc},\dotsc)$, čiji konstantsko-funkcijski fragment se podudara sa standardnim modelom od PA (prirodni brojevi, nula i sljedbenik).
 
 \begin{definicija}[{name=[G\"odelov skup]}]
-\emph{G\"odelov skup} je skup formula
+\emph{G\"odelov skup} je skup rečenicâ
 %\begin{equation}
     $\mathscr G\ddot o:=\{\lnot\varphi_u\mid u\in K\kompl\}$.
 %\end{equation}
 \end{definicija}
-Kako je negacija rečenice ponovo rečenica, G\"odelov skup je skup rečenica.
+%Kako je negacija rečenice ponovo rečenica, G\"odelov skup je skup rečenica.
 
 \begin{propozicija}[{name=[istinitost G\"odelovog skupa rečenica u $\mathfrak N$]}]
 Vrijedi $\mathfrak N\models\mathscr G\ddot o$.
@@ -727,7 +727,7 @@ Odnosno, $\alpha$ je dobivena modus ponensom iz $\beta$ i $\gamma$ ako i samo ak
 
     Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, i još provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana. Za elegantan pristup koji zaobilazi supstituciju u slučaju PA\@, pogledajte~\cite{smullyan}.
 
-Pogledajmo sada sljedeći \emph{paralelni} algoritam:
+Promotrimo sljedeći \emph{paralelni} algoritam:
 \begin{quote}
     Za ulaz $u\in\N$, prvo zapišemo $\neg\varphi_u$ tako da, osim nule i sljedbenika, koristi samo zbrajanje i množenje (nazovimo taj zapis $\neg\varphi_u'$). Nakon toga pokrenemo dvije dretve.
 
@@ -740,14 +740,14 @@ Ako je $u\in K$, prva dretva će stati, pa će i cijeli algoritam stati i vratit
 
 S druge strane, ako $u\notin K$, prva dretva po definiciji neće stati, no hoće li druga? Ako bi PA bila i \emph{potpuna} teorija, odnosno dokazivala sve što je istina u strukturi $\N$, tada bi s vremenom na red došao i dokaz za $\neg\varphi_u'$. To bi značilo da za sve $u\notin K$, naš algoritam također stane i vraća $0$.
 
-No to bi značilo da smo upravo napisali (vrlo neformalni) algoritam za računanje funkcije $\chi_{K}$, što je po Church--\!Turingovoj tezi u kontradikciji s teoremom~\ref{tm:DRnrek}.
+Sve u svemu, vidimo da neformalni algoritam koji smo napisali računa $\chi_{K}$, što je po Church--\!Turingovoj tezi u kontradikciji s teoremom~\ref{tm:DRnrek}.
 
 Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathscr G\ddot o$ koja nije dokaziva u PA\@.
 \end{proof}
 
 \subsection{Problemi u skici dokaza G\"odelovog teorema}
 
-U prethodnoj točki je mnogo toga napravljeno neformalno. Želja autora bila je prikazati da smo idejno jako blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako se "krpaju".
+U prethodnoj točki je mnogo toga napravljeno neformalno. Želja autora bila je prikazati da smo idejno jako blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako ih možemo "zakrpati".
 
 \begin{itemize}
     \item Možemo li doista relacije $R_n$ izraziti pomoću nule, sljedbenika, zbrajanja i mno\-že\-nja? Koristeći funkciju $\f{Reg}$ svaku od njih možemo izraziti kao projekciju primitivno rekurzivne relacije, ali kodiranje potrebno za $\f{Reg}$ bitno koristi potenciranje. Pokazuje se~\cite{smullyan} da je G\"odelov teorem mnogo lakše dokazati ako u strukturi $\N$ shvatimo i potenciranje kao osnovnu operaciju. Zapisati potenciranje \emph{logički} pomoću zbrajanja i množenja (ne koristeći primitivnu rekurziju, jer ona ide preko teorije skupova, Dedekindovim teoremom rekurzije), ili alternativno, razviti kodiranje konačnih nizova koje umjesto množenja i potenciranja koristi zbrajanje i množenje, vrlo je teško. G\"odelov originalni pristup ($\beta$-funkcija i kineski teorem o ostacima) je zapetljan, ali do danas nismo otkrili ništa bolje.
