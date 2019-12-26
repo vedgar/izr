@@ -101,13 +101,13 @@ I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$ imat ćemo funkciju 
 \begin{equation}\label{eq:stop'def}
     \f{stop}'(x):=\mu n\bigl(\f{State}(x,n)\in\{1,2\}\bigr)\text,
 \end{equation}
-    za koju ćemo moći zaključiti da je rekurzivna. Naime, parcijalno je rekurzivna po propoziciji~\ref{prop:vezn}, jer je skup $\{1,2\}$ primitivno rekurzivan (po korolaru~\ref{kor:konprn}) pa je dobivena minimizacijom primitivno rekurzivne relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti znak \enquote*{:=}) po definiciji odlučitelja: ako je $x=\kr w$, tada mora biti $\f{State}(x,n)\in\{1,2\}$ za neki $n$, jer $\mathcal T$-izračunavanje s $w$ mora stati --- i $\f{stop}'(x)=\f{stop}'(\kr w)$ je upravo broj koraka nakon kojeg ono stane.
+	za koju ćemo moći zaključiti da je rekurzivna. Naime, parcijalno je rekurzivna kao minimizacija rekurzivne (lema~\ref{lm:StateHeadTapeprn} i korolar~\ref{kor:konprn}) relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti \enquote*{:=}) po definiciji odlučitelja: ako je $x=\kr w$, tada mora za neki $n$ biti $\f{State}(x,n)\in\{1,2\}$, jer $\mathcal T$-izračunavanje s $w$ mora stati --- i $\f{stop}'(x)=\f{stop}'(\kr w)$ je upravo broj koraka nakon kojeg ono stane.
 
 Tvrdimo da je
 \begin{equation}
-    x\in\kr L\Longleftrightarrow\f{State}\bigl(x,\f{stop}'(x)\bigr)=1\text,
+	x\in\kr L\Longleftrightarrow\f{State}\mspace{2mu}\bigl(x,\f{stop}'(x)\bigr)=1\text,
 \end{equation}
-iz čega odmah slijedi rekurzivnost od $\kr L$ po lemi~\ref{lm:comprek} i korolaru~\ref{kor:prnrek}.
+iz čega slijedi rekurzivnost od $\kr L$ po lemi~\ref{lm:comprek} i korolaru~\ref{kor:prnrek}.
 
 Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$-izračunavanje s $w$ mora stati u stanju $q_a$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju) pa $\f{State}(x,n)\notin\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
 
@@ -270,7 +270,7 @@ Sada iz te dvije jednakosti slijedi
 odnosno čitav "\!vanjski okvir" komutira.
 \end{proof}
 
-Upravo dokazana jednakost je korisna, jer pruža način da se u potpunosti izbjegnu jezične funkcije: vrhovi vanjskog pravokutnika su sasvim brojevni, a njegove se stranice mogu opisati kao brojevne funkcije. Gornju i donju stranicu već imamo, još je preostalo precizirati lijevu i desnu.
+Upravo dokazana jednakost je korisna, jer pruža način da se u potpunosti izbjegnu jezične funkcije: vrhovi vanjskog pravokutnika su brojevni pa se njegove stranice mogu opisati brojevnim funkcijama. Gornju i donju stranicu već imamo, još je preostalo precizirati lijevu i desnu.
 
 \subsection{Funkcije \texorpdfstring{$\f{bin}^k$}{bin} --- binarno kodiranje}
 
@@ -433,10 +433,10 @@ iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$
 
 Prvi razlog tiče se napomene~\ref{nap:brip}. Zbog $\dom{\f{bin}^k}=\N^k$, traženi desni inverz ima $k$ izlaznih podataka, pa ga reprezentiramo s $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. Te funkcije su neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih ne moramo označavati s dva broja, poput $\f I_n^k$.
 
-Drugo, implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatu strukturu, za čije raščlanjivanje trebamo svojevrsni \texttt{<string.h>}. Napravit ćemo minimum potreban za implementaciju $\f{arg}_i$.
+Drugo, implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatu strukturu, za čije raščlanjivanje trebamo kompliciranije funkcije, svojevrsnu biblioteku \texttt{<string.h>} za rad s riječima nad binarnom abecedom. U sljedećoj točki napravit ćemo minimum potreban za implementaciju funkcija $\f{arg}_i$.
 
 Treće, funkcija $\f{bin}^k$ nije surjekcija, pa \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "krive mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana;
-Recimo u slučaju kad $a$ ima $7$ znamenaka $2$ u pomaknutoj bazi $2$, vrijednost $\N\beta\f{mul}^3(a)$ nije definirana, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
+Recimo u slučaju kad $a$ ima $7$ znamenaka $2$ u pomaknutoj bazi $2$, izraz $\N\beta\f{mul}^3(a)$ nema smisla, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
 
 \subsection{Standardna biblioteka za \texorpdfstring{$\Sigma_\beta^*$}{binarne stringove}}\label{sec:stdstring}
 

@@ -65,7 +65,7 @@ Neka je $\mathcal T=(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_z)$ Turingov stroj. \emph{
 \,\bl,&\text{inače}
 \end{cases}$.
 
-Za konfiguracije $c=(q,n,t)$ i $d=(q',n',t')$ istog Turingovog stroja $\mathcal T$ kažemo da $c$ \emph{prelazi} u $d$, pišući $c\leadsto d$, ako je $c$ završna i $c=d$, ili uz oznake $\delta(q,t_n)=:(p,\beta,d)$ vrijedi $q'=p$, $n'=\max\,\{n+d,0\}$, $t'_n=\beta$ te $t'_i=t_i$ za sve $i\in\N\setminus\{n\}$.
+	Za konfiguracije $c=(q,n,t)$ i $d=(q',n',t')$ Turingovog stroja $\mathcal T$ kažemo da $c$ \emph{prelazi} u $d$, pišući $c\leadsto d$, ako je $c$ završna i $c=d$ (pišemo $c\!\lcirclearrowleft$), ili uz oznake $\delta(q,t_n)=:(p,\beta,d)$ vrijedi $q'=p$, $n'=\max\,\{n+d,0\}$, $t'_n=\beta$ te $t'_i=t_i$ za sve $i\in\N\setminus\{n\}$.
 \end{definicija}
 
 Traku možemo zamisliti kao s jedne strane ograničen, a s druge strane neograničen, niz ćelija, u kojem su od nekog mjesta nadalje samo prazne ćelije (one u kojima piše praznina). Ulaz za Turingov stroj je riječ nad $\Sigma$, koja se na početku izračunavanja zapiše na lijevi kraj trake redom (ostatak trake je prazan). U svakom koraku, funkcija prijelaza trenutno stanje i sadržaj trenutne ćelije preslikava u novo stanje, novi znak trenutne ćelije te pomak ulijevo ili udesno na susjednu ćeliju, koja time postaje trenutna u idućem koraku (pomak ulijevo od početne ćelije rezultira ostajanjem na mjestu). To se događa dok konfiguracija ne postane završna, i tada, ako je traka oblika $v\bl\ldots$ za neku riječ $v\in\Sigma^*$, kažemo da je $v$ izlaz Turingovog stroja s ulazom $w$.
@@ -182,7 +182,7 @@ Kao što je već najavljeno, cilj je pokazati ekvivalentnost Turing-modela s RAM
 
 Prvo moramo precizirati što to uopće znači. Neka je $\Sigma$ abeceda i $\varphi$ jezična funkcija nad njom. Očito $\varphi$ ne možemo dobiti kompozicijom, primitivnom rekurzijom i minimizacijom iz inicijalnih (brojevnih) funkcija. I da smislimo neke "inicijalne jezične funkcije", kompozicija je jasna (čak jednostavnija nego u brojevnom slučaju, jer su sve funkcije jednomjesne), ali kako definirati primitivnu rekurziju kad riječ nema jedinstvenog sljedbenika? Kako definirati minimizaciju kad kanonski leksikografski uređaj na $\Sigma^*$ nije dobar uređaj? Kako uopće definirati izračunljive jezike ("relacije") kad karakteristična funkcija jezika nije ni brojevna ni jezična funkcija?
 
-Sve su to problemi o kojima smo već govorili, ponajviše u uvodu. No sada znamo dovoljno o kodiranju da nas to ne treba previše obeshrabriti. Kodirat ćemo $\Sigma^*$ nekom funkcijom $\sigma:=\N\Sigma^*$ (po uzoru na kodiranje $\N^*$ označavamo $\kr w:=\sigma(w)$) te ćemo pomoću tog kodiranja definirati prateću funkciju $\N\varphi=\sigma\circ\varphi\circ\sigma^{\,-1}$, za koju je dobro definirano što znači da je parcijalno rekurzivna.
+Sve su to problemi o kojima smo već govorili, ponajviše u uvodu. No sada znamo dovoljno o kodiranju da nas to ne treba previše obeshrabriti. Kodirat ćemo $\Sigma^*$ nekom funkcijom $\sigma:=\N\Sigma^*$ (po uzoru na kodiranje $\N^*$ označavamo $\kr w:=\sigma(w)$) te ćemo pomoću tog kodiranja definirati prateću funkciju $\N\varphi=\sigma\circ\varphi\circ\sigma^{\,-1}$, za koju znamo što znači da je parcijalno rekurzivna.
 Štoviše, pazit ćemo da $\sigma$ bude \emph{bijekcija} između $\Sigma^*$ i $\N$, tako da će prateće funkcije totalnih funkcija biti opet totalne funkcije. Onda će i \emph{rekurzivne} jezične funkcije biti dobro definirane, kao totalne izračunljive jezične funkcije, odnosno one čije su prateće funkcije rekurzivne.
 
 \subsection{Kodiranje znakova i riječi}\label{sec:kSigma}
@@ -207,7 +207,7 @@ Zapravo, unarni zapis sasvim odgovara uobičajenom brojevnom zapisu u bazi $b'$ 
 \begin{definicija}[{name=[zapis broja u pomaknutoj bazi]}]
 Neka je $b\in\N_+$, $n\in\N$ te $z_0,z_1,\dotsc,z_{n-1}\in[1\dd b]$. Zapis u \emph{pomaknutoj bazi} $b$ je zapis
 \begin{equation}\label{eq:pomakbaza}
-    x=\sum_{i<n}z_i\cdot b^i=:(z_{n-1}\dotsm z_0)_b\text,
+    x=\sum\nolimits_{i<n}z_i\cdot b^i=:(z_{n-1}\dotsm z_0)_b\text,
 \end{equation}
 dakle isti kao obični zapis u bazi $b$, samo sa znamenkama iz $[1\dd b]$ umjesto iz $[0\dd b\rangle$.
 \end{definicija}
@@ -216,7 +216,8 @@ dakle isti kao obični zapis u bazi $b$, samo sa znamenkama iz $[1\dd b]$ umjest
 Za svaki $b\in\N_+$, svaki $x\in\N$ ima jedinstven zapis u pomaknutoj bazi $b$.
 \end{lema}
 \begin{proof}
-Dokaz egzistencije je isti kao i dokaz da svaki broj ima zapis u običnoj bazi $b$: znamenke konstruiramo tako da uzastopno dijelimo $x$ s $b$ dok ne dobijemo nulu pa ostatke tih dijeljenja zapišemo obrnutim redom. Jedina razlika je što ovdje ostatci moraju biti između $1$ i $b$: ako $x$ nije djeljiv s $b$ ništa se ne mijenja, a ako jest smanjimo količnik za $1$. Recimo, $18$ podijeljeno s $3$ je $5$ i pomaknuti ostatak $3$. Pomaknuti ostatak je primitivno rekurzivna operacija, po primitivno rekurzivnoj verziji teorema o grananju.
+Dokaz egzistencije je isti kao i za običnu bazu $b$: uzastopno dijelimo $x$ s $b$ dok ne dobijemo nulu pa ostatke tih dijeljenja zapišemo obrnutim redom. Jedina razlika je što ovdje ostatci moraju biti između $1$ i $b$: ako $x$ nije djeljiv s $b$ ništa se ne mijenja, a ako jest smanjimo količnik za $1$. Recimo, $18$ podijeljeno s $3$ je $5$ i pomaknuti ostatak $3$. Pomaknuti ostatak je primitivno rekurzivna operacija, po primitivno rekurzivnoj verziji teorema o grananju.
+	\vspace{-1em}
 \begin{equation}
     \f{mod}'(x,b):=\begin{cases}
         b,&b\mid x\\
@@ -259,7 +260,7 @@ Neka je $\Sigma$ abeceda te $\N\Sigma$ njeno kodiranje.
 
 	Definiramo kodiranje skupa $\Sigma^*$ svih riječi nad $\Sigma$, s
 \begin{equation}\label{eq:kodNSz}
-	\N\Sigma^*(w):=\kr{\alpha_{n-1}\dotsm\alpha_0}:=\bigl(\N\Sigma(\alpha_{n-1}\mspace{-1mu})\dotsm\mspace{1mu}\N\Sigma(\alpha_0)\bigr)_{b'}=\sum_{i<n}\N\Sigma(\alpha_i)\cdot(b')^i\text,
+	\N\Sigma^*(w):=\kr{\alpha_{n-1}\dotsm\alpha_0}:=\bigl(\N\Sigma(\alpha_{n-1}\mspace{-1mu})\dotsm\mspace{1mu}\N\Sigma(\alpha_0)\bigr)_{b'}=\sum\nolimits_{i<n}\N\Sigma(\alpha_i)\cdot(b')^i\text,
 \end{equation}
 za svaku riječ $w=\alpha_{n-1}\dotsm\alpha_0\in\Sigma^*$ (uz oznake $n:=\dulj{w}$ i $b':=\card\Sigma$).
 \end{definicija}
@@ -267,9 +268,10 @@ za svaku riječ $w=\alpha_{n-1}\dotsm\alpha_0\in\Sigma^*$ (uz oznake $n:=\dulj{w
 \begin{primjer}[{name=[prateća funkcija jezične funkcije]}]
 U primjeru~\ref{pr:pola} uveli smo abecedu $\Sigma=\{\t a,\t b\}$ i riječ $w_0=\t{aababa}$ nad njom. Za tu abecedu je $b'=2$; fiksirajmo kodiranje $\N\Sigma(\t a):=1$, $\N\Sigma(\t b):=2$. Tada je $\kr{w_0}=(112121)_2=73$.
 Također je $w_0\in\dom{\varphi_h}$, pa je $73\in\dom{\N\varphi_h}$; a iz $\varphi_h(w_0)=\t{aab}$ vidimo $\N\varphi_h(73)=\kr{\t{aab}}=(112)_2=8$.
+	\vspace{-0.9em}
 
 Za broj $153$ pretvaranje u pomaknutu bazu $2$ daje
-$\begin{array}{rrrrrrr}
+	$\begin{array}[b]{rrrrrrr}
 153 & 76 & 37 & 18 & 8 & 3 & 1\\\hline
 1 & 2 & 1 & 2 & 2 & 1 & 1
 \end{array}$, dakle $153=(1122121)_2=\kr{\t{aabbaba}}$. Kako je $\dulj{\t{aabbaba}}=7$ neparan broj, zaključujemo $\t{aabbaba}\notin\dom{\varphi_h}$, pa $153\notin\dom{\N\varphi_h}$.
@@ -517,7 +519,7 @@ Sada $\f H_1$ jednostavno treba vratiti $\f{newstate}(q,g)$. $\f H_2$ treba vrat
     \f H_3(x,n,q,p,t)&:=t\dotminus g\cdot b^p+\f{newsymbol}(q,g)\cdot b^p\text,\\
     \label{eq:exznamb}\text{uz pokratu }g&:=t\div b^p\bmod b\text,
 \end{align}
-zadovoljavaju parcijalnu specifikaciju koju smo napisali. Sada su $\f{State}$, $\f{Position}$ i $\f{Tape}$ definirane simultanom primitivnom rekurzijom iz $\f G_1$, $\f G_2$, $\f G_3$, $\f H_1$, $\f H_2$ i $\f H_3$, pa su primitivno rekurzivne po propoziciji~\ref{prop:simultrek}. Tvrdnju leme sada dokazujemo matematičkom indukcijom po $n$, sasvim analogno kao u RAM-modelu.
+zadovoljavaju specifikaciju s početka odlomka. Sada su $\f{State}$, $\f{Position}$ i $\f{Tape}$ definirane simultanom primitivnom rekurzijom iz $\f G_1$, $\f G_2$, $\f G_3$, $\f H_1$, $\f H_2$ i $\f H_3$, pa su primitivno rekurzivne po propoziciji~\ref{prop:simultrek}. Tvrdnju leme sada dokazujemo matematičkom indukcijom po $n$, sasvim analogno kao u RAM-modelu.
 
 Za $n=0$, početno stanje je $q_0$, pa je $\f{State}(x,0)=\f G_1(x)=\f Z(x)=0=\N Q_0(q_0)$ doista njegov kod. Početna pozicija je $0=\f Z(x)=\f G_2(x)=\f{Position}(x,0)$. Početna traka je $w\bl\ldots$, čiji kod $\knk{w\bl\ldots}$ je prema~\eqref{eq:recodein} jednak $\f{Recode}(\kr w,b',b)=G_3(\kr w)=\f{Tape}(\kr w,0)$.
 
