@@ -6,7 +6,8 @@ Vidjeli smo već nekoliko puta da domena izračunljive funkcije ne mora biti izr
 
 Pokušajmo ustanoviti što bi bio pandan parcijalnim funkcijama za relacije. Tražiti "parcijalnu karakterističnu funkciju" kao funkciju iz $\N$ u $bool$ je vjerojatno preslabo: korisnost parcijalno rekurzivnih funkcija je u tome što iako nisu definirane svuda, tamo gdje jesu definirane mogu poprimiti proizvoljne vrijednosti. Kad bismo čak i u slučaju da je funkcija definirana mogli dobiti samo jedan bit informacije, imali bismo tri moguća ishoda ($\mathit{true}$, $\mathit{false}$ i "ne znam") koji bi odgovarali četirima mogućim situacijama (u slučaju izostanka izlaza, ulaz i dalje može biti ili ne biti u skupu). Odnosno, parcijalna karakteristična funkcija nije jednoznačno određena skupom.
 
-Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan: iz leme o restrikciji slijedit će da može biti propisan bilo kojom izračunljivom funkcijom. Ono što jest bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Upravo napisanu ideju možemo formalizirati koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi} te dijagram~\eqref{dia:alg}.
+Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan%: iz leme o restrikciji slijedit će da može biti propisan bilo kojom izračunljivom funkcijom.
+; bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Tu ideju formaliziramo koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi} te dijagram~\eqref{dia:alg}.
 
 \begin{definicija}[{name=[rekurzivna prebrojivost]}]\label{def:re}
 Neka je $k\in\N_+$. Za brojevnu relaciju $R^k$ kažemo da je \emph{rekurzivno prebrojiva} ako postoji $\f F\in\mathscr Comp_k$ takva da je $R=\dom{\f F}$.
@@ -23,7 +24,7 @@ Svaka rekurzivna relacija je rekurzivno prebrojiva.
 \end{propozicija}
 Ako imamo rekurzivnu karakterističnu funkciju, trebamo "zaboraviti" vrijednosti~$0$ (ukloniti tu prasliku iz domene) i ostaviti samo vrijednosti $1$ --- drugim riječima, restringirati $\chi_{\f R}$ na $\f R$.
 \begin{proof}
-Neka je $k\in\N$ te $\f R^k$ rekurzivna relacija. Tada je $\chi_{\f R}|_{\f R}$ parcijalno rekurzivna prema korolaru~\ref{kor:restrprek}, a $\dom{\chi_{\f R}|_{\f R}}=\dom{\chi_{\f R}}\cap\f R=\N^k\cap\f R=\f R$.
+Neka je $k\in\N$ te $\f R^k$ rekurzivna relacija. Tada je prema korolaru~\ref{kor:restrprek} restrikcija $\chi_{\f R}|_{\f R}$ parcijalno rekurzivna, s domenom $\dom{\chi_{\f R}|_{\f R}}=\dom{\chi_{\f R}}\cap\f R=\N^k\cap\f R=\f R$.
 \end{proof}
 
 %No kad već pričamo o restrikciji, funkcija koju restringiramo je nebitna: s bilo kojom rekurzivnom funkcijom dobit ćemo istu domenu. Ponekad je zgodno fiksirati njene vrijednosti na $0$ --- usporedite s napomenom~\ref{nap:re0}.
@@ -44,7 +45,7 @@ Neka su $k,l\in\N_+$ te $R^k$ i $P^l$ relacije takve da je $R\preceq P$.
 	Ako je $P$ rekurzivno prebrojiva, tada je i $R$ takva.
 \end{lema}
 \begin{proof}
-    Po definiciji~\ref{def:re} $P=\dom{\f H}$ za neku parcijalno rekurzivnu funkciju $\f H^l$, a po definiciji~\ref{def:svod} postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_l^k$ takve da je $\chi_R=\chi_P\circ(\f G_1,\dotsc,\f G_l)$. Sada označimo $\f F:=\f H\circ(\f G_1,\dotsc,\f G_l)$ --- to je parcijalno rekurzivna funkcija kao kompozicija parcijalno rekurzivnih. No kako su sve $\f G_i$ rekurzivne, dakle totalne, formula~\eqref{eq:domkomp} daje
+    Po definiciji~\ref{def:re} je $P=\dom{\f H}$ za neku parcijalno rekurzivnu funkciju $\f H^l$, a po definiciji~\ref{def:svod} postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_l^k$ takve da je $\chi_R=\chi_P\circ(\f G_1,\dotsc,\f G_l)$. Označimo $\f F:=\f H\circ(\f G_1,\dotsc,\f G_l)$ --- to je parcijalno rekurzivna funkcija kao kompozicija takvih. No kako su sve $\f G_i$ rekurzivne, i zato totalne, formula~\eqref{eq:domkomp} daje
 \begin{multline}
     \vec x\in\dom{\f F}\Longleftrightarrow
     \vec x\in\bigcap\nolimits_{i=1}^l\dom{\f G_i}\land
@@ -63,7 +64,7 @@ Dakle, skup rekurzivnih relacija je pravi podskup skupa rekurzivno prebrojivih r
 
 %Koristeći kompoziciju s bilo kojom totalnom "\!vanjskom" funkcijom po lemi~\ref{lm:comptot} možemo dobiti zatvorenost na presjeke. %Svejedno je koju funkciju upotrijebimo kao vanjsku (može biti i inicijalna $\f I_1^l$), ali simetrije radi uzmimo $\f{add}^l$.
 
-Poopćimo sada napomenu~\ref{nap:restrprek} na rekurzivno prebrojive relacije.
+Poopćimo sada napomenu~\ref{nap:restrprek} odnosno korolar~\ref{kor:restrprek} na rekurzivno prebrojive relacije.
 
 \begin{lema}[Lema o restrikciji]\label{lm:restre}
 Neka je $k\in\N_+$, $\f G^k$ parcijalno rekurzivna funkcija te $R^k$ rekurzivno prebrojiva relacija. Tada je restrikcija $\f G|_R$ također parcijalno rekurzivna.
@@ -100,7 +101,7 @@ Tehnički, zahtjev da su relacije iste mjesnosti zapravo nije bitan: ako nisu, p
 
 Dokazali smo zatvorenost skupa svih rekurzivno prebrojivih relacija (iste mjesnosti) na presjeke (dviju relacija, ali lako bi se indukcijom dokazalo i za proizvoljno konačno mnogo relacija). Što je sa zatvorenošću na unije? Tu marljiva evaluacija nije pogodna. Ipak, pokazat ćemo da rekurzivno prebrojive relacije možemo gledati i na malo drugačiji "dualni" način, u kojem će unije biti vrlo prirodne.
 
-U još jednom kontekstu smo susreli poluodlučivost: projekcija izračunljive relacije $\exists_*\f R$ ne mora biti izračunljiva, ali ako je $\vec x\in\exists_*\f R$, tada to možemo ustanoviti isprobavanjem, za sve $y\in\N$ redom, vrijedi li $\f R(\vec x,y)$. Te dvije formalizacije poluodlučivosti (zapravo \emph{tri} formalizacije, jer izračunljivost projicirane relacije možemo formalizirati kao primitivnu rekurzivnost ili kao rekurzivnost) su ekvivalentne.
+U još jednom kontekstu smo susreli poluodlučivost: projekcija izračunljive relacije $\exists_*\f R$ ne mora biti izračunljiva, ali ako je $\vec x\in\exists_*\f R$, tada to možemo ustanoviti ispitivanjem, za sve $y\in\N$ redom, vrijedi li $\f R(\vec x,y)$. Te dvije formalizacije poluodlučivosti (zapravo \emph{tri} formalizacije, jer izračunljivost projicirane relacije možemo formalizirati kao primitivnu rekurzivnost ili kao rekurzivnost) su ekvivalentne.
 
 \begin{teorem}[{name=[projekcijska karakterizacija rekurzivno prebrojivih relacija]}]\label{tm:rpeproj}
 Neka je $R$ brojevna relacija. Tada su sljedeće tvrdnje ekvivalentne:
@@ -113,19 +114,19 @@ Neka je $R$ brojevna relacija. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{proof}
 Da \texttt{(3)} povlači \texttt{(2)} je trivijalno, jer je svaka primitivno rekurzivna relacija rekurzivna (primijenimo korolar~\ref{kor:prnrek} na njenu karakterističnu funkciju).
 
-    Za $\texttt{(2)}\Rightarrow\texttt{(1)}$, $R=\exists_*\f P=\dom{\mu\f P}$ je domena funkcije $\mu\f P$~\eqref{eq:dommu} koja je parcijalno rekurzivna jer je dobivena minimizacijom rekurzivne relacije.
+    Za $\texttt{(2)}\Rightarrow\texttt{(1)}$, $R=\exists_*\f P=\dom{\mu\f P}$ je domena funkcije $\mu\f P$~\eqref{eq:dommu}, koja je parcijalno rekurzivna jer je dobivena minimizacijom rekurzivne relacije.
 
 Najzanimljiviji je dokaz da \texttt{(1)} povlači \texttt{(3)}. Po definiciji rekurzivne prebrojivosti, postoji parcijalno rekurzivna funkcija $\f F$ takva da je $R=\dom{\f F}$. Po korolaru~\ref{kor:pii}, $\f F$ ima indeks, označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind}). Označimo s $k$ mjesnost od $R$ odnosno $\f F$. Tada $R(\vec x)$ možemo zapisati kao $\vec x\in\dom{\f F}=\dom{\kf e^k}$, odnosno ($e$ mora biti kod nekog RAM-programa čije izračunavanje s $\vec x$ stane u nekom broju $n$ koraka) $\exists n\,\f{Final}(\kr{\vec x},e,n)$. Dakle, dobili smo projekciju, sad samo treba ovo pod kvantifikatorom zapisati u odgovarajućem obliku: relacija zadana s
 \begin{equation}
     \f P(\vec x,n):\Longleftrightarrow\f{Final}(\kr{\vec x},e,n)
 \end{equation}
-je primitivno rekurzivna jer joj je karakteristična funkcija dobivena kompozicijom primitivno rekurzivnih funkcija $\chi_{\f{Final}}$, $\f{Code}^k$, $\f C_e^{k+1}$ i koordinatnih projekcija (zapravo $\f P\preceq\f{Final}$, uz dodatni uvjet da su "\!vezne funkcije" primitivno rekurzivne).
+	je primitivno rekurzivna jer joj je karakteristična funkcija dobivena kompozicijom primitivno rekurzivnih funkcija $\chi_{\f{Final}}$, $\f{Code}^k$, $\f C_e^{k+1}$ i koordinatnih projekcija (zapravo $\f P\preceq\f{Final}$, uz dodatni uvjet kao u napomeni~\ref{nap:kontrprn}).
 \end{proof}
 
 Pomoću projekcijske karakterizacije možemo dokazati zatvorenost na konačne unije, jer se projekcija i unija (disjunkcija) obje mogu zapisati pomoću egzistencijalne kvantifikacije, a dva egzistencijalna kvantifikatora komutiraju.
 
 \begin{propozicija}[{name=[rekurzivna prebrojivost unije rekurzivno prebrojivih relacija]}]\label{pp:unlre}
-Neka su $k,l\in\N_+$ te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je i $\bigcup_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
+Neka su $k,l\in\N_+$ te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je njihova unija $\bigcup_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
 Po teoremu~\ref{tm:rpeproj}, za svaki $i\in[1\dd l]$ postoji rekurzivna relacija $\f P^k_i$ takva da je $R_i=\exists_*\f P_i$. Sada je
@@ -153,7 +154,7 @@ $\f{Final}(\kr{\vec x},\kprog P,2)$,~\ldots\ u niz tako da svaki dođe na red (s
 
 Što bi se dogodilo da umjesto $\N\times bool$ uzmemo $\N\times\N\cong\N^2$? Umjesto jedne ograničene i jedne neograničene kvantifikacije, kao što smo imali u~\eqref{eq:urere}, sada bismo imali dvije neograničene --- i komutiranje nam više nije dovoljno. Možemo li te dvije neograničene kvantifikacije zamijeniti jednom?
 
-Na prvi pogled, treba nam izračunljiva bijekcija između $\N^2$ i $\N$, s izračunljivim inverzom (tzv.\ \emph{pairing function}), ali pokazat će se da je injekcija dovoljna. Drugim riječima, samo nam treba neko kodiranje $\N^2$. Napravili smo dva: $\f{Code}^2$ i $\f{bin}^2$. Zaista je svejedno koje od njih (ili neko treće) koristimo, pa možemo to uobličiti kao sučelje (\emph{interface}) za neki apstraktni tip podataka (\texttt{std::pair<unsigned,unsigned>}).
+Na prvi pogled, treba nam izračunljiva bijekcija između $\N^2$ i $\N$, s izračunljivim inverzom (tzv.\ \emph{funkcija sparivanja}), ali pokazat će se da je injekcija dovoljna. Drugim riječima, samo nam treba neko kodiranje $\N^2$. Napravili smo dva: $\f{Code}^2$ i $\f{bin}^2$. Zaista je svejedno koje od njih (ili neko treće) koristimo, pa možemo to uobličiti kao sučelje (\emph{interface}) za neki apstraktni tip podataka (\texttt{std::pair<unsigned,unsigned>}).
 
 \begin{lema}[{name=[primitivna rekurzivnost kodiranja i dekodiranja parova brojeva]}]\label{lm:pairfstsndprn}
 Postoje primitivno rekurzivne funkcije $\f{pair}^2$, $\f{fst}^1$ i $\f{snd}^1$,\\ takve da je $\f{fst}\circ\f{pair}=\f I_1^2$ i $\f{snd}\circ\f{pair}=\f I_2^2$.
@@ -167,7 +168,7 @@ Točkovno, za sve $x,y\in\N$ vrijedi $\f{fst}\bigl(\f{pair}(x,y)\bigr)=x\land\f{
 i analogno $\f{snd}\circ\f{pair}=\f I_2^2$, po propoziciji~\ref{prop:lhpartprn}\eqref{stav:part<k}.
 \end{proof}
 
-\begin{proof}[Druga implementacija] $\f{pair}:=\f{bin}^2$, $\f{fst}:=\f{arg}_1$, $\f{snd}:=\f{arg}_2$. Tada je prva funkcija primitivno rekurzivna po propoziciji~\ref{pp:binkprn}, a preostale dvije po propoziciji~\ref{pp:argnprn}, iz koje slijedi i prikaz koordinatnih projekcija kao kompozicija $\f{fst}\circ\f{pair}$ i $\f{snd}\circ\f{pair}$.
+\begin{proof}[Druga implementacija] $\f{pair}:=\f{bin}^2$, $\f{fst}:=\f{arg}_1$, $\f{snd}:=\f{arg}_2$. Tada je prva funkcija primitivno rekurzivna po propoziciji~\ref{pp:binkprn}, a preostale dvije po propoziciji~\ref{pp:argnprn}, iz koje slijedi i prikaz koordinatnih projekcija kao kompozicijâ $\f{fst}\circ\f{pair}$ i $\f{snd}\circ\f{pair}$.
 \end{proof}
 
 \begin{proof}[Treća implementacija] $\f{pair}(i,j):=i+\sum_{t\le i+j}t$. Ovo je standardna enumeracija "po sporednim dijagonalama", primitivno rekurzivna po napomeni~\ref{nap:igpk}, lemi~\ref{lm:sumprodrek} i primjeru~\ref{pr:addmulpow}. Njenih je prvih devet vrijednosti prikazano u tablici \begin{equation}
@@ -179,7 +180,7 @@ i analogno $\f{snd}\circ\f{pair}=\f I_2^2$, po propoziciji~\ref{prop:lhpartprn}\
 \vdots\,&\vdots&\vdots\\
 \end{array}\text.
 \end{equation}
-Ona je prikazana samo da se vidi kako izgleda bijektivno kodiranje --- ali ponovimo, za naše potrebe bijektivnost nije nužna. U ovoj implementaciji, funkcije $\f{fst}$ i $\f{snd}$ možemo implementirati grubom silom, kao u~\eqref{eq:lconj} i~\eqref{eq:rconj}:
+Ova implementacija je prikazana da se vidi primjer bijektivnog kodiranja --- ali ponovimo, za naše potrebe bijektivnost nije nužna. U ovoj implementaciji, funkcije $\f{fst}$ i $\f{snd}$ možemo implementirati grubom silom, kao u~\eqref{eq:lconj} i~\eqref{eq:rconj}:
 \begin{align}
 %\SwapAboveDisplaySkip
     \f{fst}(p)&:=(\mu\,i\le p)(\exists\,j\le p)\bigl(p=\f{pair}(i,j)\bigr)\text,\\
@@ -201,8 +202,7 @@ Pretpostavimo da su $a,b,c,d\in\N$ takvi da vrijedi $\f{pair}(a,b)=\f{pair}(c,d)
 \end{equation}
 i analogno $b=d$, pa je $(a,b)=(c,d)$, odnosno $\f{pair}$ je injekcija.
 
-Za primitivnu rekurzivnost slike, koristimo istu tehniku kao u dokazu korolara~\ref{kor:Seqprn}: $p\in\im{\f{pair}}\Longleftrightarrow\bigl(\exists\,(x,y)\in\N^2\bigr)\bigl(p=\f{pair}(x,y)\bigr)$, a jedini kandidat za $x$ odnosno $y$ je $\f{fst}(p)$ odnosno $\f{snd}(p)$. Dakle, vrijedi
-    $p\in\im{\f{pair}}\Longleftrightarrow p=\f{pair}\bigl(\f{fst}(p),\f{snd}(p)\bigr)$,
+	Za primitivnu rekurzivnost slike, koristimo istu tehniku kao u dokazu korolara~\ref{kor:Seqprn}: $p\in\im{\f{pair}}\Longleftrightarrow\bigl(\exists\,(x,y)\in\N^2\bigr)\bigl(p=\f{pair}(x,y)\bigr)$, a jedini kandidati za $x$ i $y$ su redom $\f{fst}(p)$ i $\f{snd}(p)$. Dakle, vrijedi $p\in\im{\f{pair}}\Longleftrightarrow\mspace{1mu}p=\f{pair}\bigl(\f{fst}(p),\f{snd}(p)\bigr)$,
 što je primitivno rekurzivno jer su $\f{pair}$, $\f{fst}$, $\f{snd}$ i $\chi_=$ takve.
 \end{proof}
 
@@ -233,7 +233,7 @@ A to pak vrijedi jer je po definiciji $\hat P$,
 budući da je po lemi~\ref{lm:pairfstsndprn} $\f{fst}\bigl(\f{pair}(y,z)\bigr)=y$ i analogno $\f{snd}\bigl(\f{pair}(y,z)\bigr)=z$.
 \end{proof}
 
-\begin{napomena}[{name=[kontrahiranje čuva i primitivnu rekurzivnost]}]
+\begin{napomena}[{name=[kontrahiranje čuva i primitivnu rekurzivnost]}]\label{nap:kontrprn}
 Štoviše, jer su "vezne funkcije" primitivno rekurzivne, vrijedi da je $P$ primitivno rekurzivna ako i samo ako je $\hat P$ primitivno rekurzivna. Ali to nam neće bitno trebati.
 \end{napomena}
 

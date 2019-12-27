@@ -119,10 +119,10 @@ Još treba vidjeti da $k$-mjesna funkcija s tim indeksom zadovoljava jednadžbu~
 \end{equation}
 pa je izlazni podatak doista $\kf e^{k+1}(\vec x,y)\simeq\f{comp}_{k+1}(\vec x,y,e)$ --- ako $P$-iz\-ra\-ču\-na\-va\-nje s $(\vec x,y)$ uopće stane. Ako ne stane, onda ne stane ni $Q$-izračunavanje s $\vec x$, jer zapne na donjoj razini izvršavajući zadnju makro-instrukciju.
 
-	Još smo ostali dužni riješiti slučaj kad ne postoji program $P$, jer $e\nin\f{Prog}$. Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind} je tada $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je i $spec(y,f)$ prazna --- formula~\eqref{eq:domkomp} kaže da funkcija~\eqref{eq:paramcompose} ima praznu domenu. Za povratnu vrijednost od $\f S_k^2$ nam treba neki indeks od $\varnothing^k$, pa opet po propoziciji~\ref{prop:computeind}\eqref{it:nprogind} možemo upotrijebiti upravo $e$. Dakle,
+	Još smo ostali dužni riješiti slučaj kad ne postoji program $P$, jer $e\nin\f{Prog}$. Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind} je tada $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je i $spec(y,f)$ prazna --- formula~\eqref{eq:domkomp} kaže da funkcija~\eqref{eq:paramcompose} ima praznu domenu. Za povratnu vrijednost $\f S_k^2$ nam treba neki indeks od $\varnothing^k$, pa opet po propoziciji~\ref{prop:computeind}\eqref{it:nprogind} možemo upotrijebiti upravo $e$. Dakle,
 \begin{equation}\label{eq:Skprn}
    \f S_k(y,e):=\begin{cases}
-       \f F(y,e),&{Prog}(e)\\
+       \f F(y,e),&\f{Prog}(e)\\
         e,&\text{inače}
     \end{cases}\text,
 \end{equation}
@@ -142,7 +142,7 @@ Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$ takva 
 \begin{proof}
     Fiksirajmo $k$, i dokažimo (za taj $k$) tvrdnju indukcijom po $l$. Kako je $l\in\N_+$, baza je $l=1$, i $\f S_k^{1+1}=\f S_k^2$ je primitivno rekurzivna po propoziciji~\ref{pp:tmpar}.
 
-    Pretpostavimo sad da za neki $l$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$ sa svojstvom~\eqref{eq:Sklspec}. Kako bismo definirali $\f S_k^{l+2}$? Uzmimo proizvoljnu $(l+1)$-torku $(\vec y,z)\in\N^{l+1}$, i računamo zdesna:
+	Pretpostavimo sad da za neki $l$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$ sa svojstvom~\eqref{eq:Sklspec}. Kako definirati $\f S_k^{l+2}\mspace{1mu}$? Uzmimo proizvoljni $(\vec y,z)\in\N^{l+1}$ i računamo:
 \begin{equation}
     \f{comp}_{k+l+1}(\vec x,\vec y,z,e)\simeq
     \f{comp}_{k+l}\bigl(\vec x,\vec y,\f S_{k+l}(z,e)\bigr)\simeq
@@ -395,7 +395,7 @@ Matematički, "pokazivač na funkciju" nije ništa drugo nego njen indeks, što 
 
 Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će prvenstveno biti bitna prateća funkcija $\f D=\N d$, koja je ionako definirana na indeksima.
 
-U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad radimo s pokazivačem na funkciju, funkcijski poziv. Standard jezika C čak zabranjuje ikakvu aritmetiku na funkcijskim pokazivačima, ali neki kompajleri to ipak dozvoljavaju. Slično, ovdje bismo mogli $h$ iskoristiti ne samo kao zadnji argument funkcije $\f{comp}_k$, nego raditi razne čudne stvari poput gledanja počinje li "strojni kod" funkcije $\f H$ instrukcijom \inc\ ($\f{InsINC}(h[0])$), i sličnog --- ali najčešće to ne činimo, a dok god $h$ koristimo samo za pozivanje funkcije $\f H$, svejedno je koji njen indeks smo uzeli.
+U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad radimo s pokazivačem na funkciju, funkcijski poziv. Standard jezika C ne dopušta nikakvu aritmetiku s funkcijskim pokazivačima, ali je neki kompajleri ipak podržavaju. Slično, ovdje bismo mogli $h$ iskoristiti ne samo kao zadnji argument funkcije $\f{comp}_k$, nego raditi razne čudne stvari poput gledanja počinje li "strojni kod" funkcije $\f H$ instrukcijom \inc\ ($\f{InsINC}(h[0])$), i sličnog --- ali najčešće to ne činimo, a dok god $h$ koristimo samo za pozivanje funkcije $\f H$, svejedno je koji njen indeks smo uzeli.
 
 \begin{lema}[{name=[primitivna rekurzivnost dijagonalne funkcije]}]
     Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$, koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $d\f H=spec(h,H)$.
@@ -527,7 +527,7 @@ $\f A^3$ je totalna funkcija.
 Neka je $(x,y,z)\in\N^3$ proizvoljna. Kako je $\f A_z$ primitivno rekurzivna po propoziciji~\ref{pp:Anprn}, ona je totalna, pa je $\dom{\f A_z}=\N^2$. Specijalno je $(x,y)\in\dom{\f A_z}$, pa izraz $\f A_z(x,y)$ ima smisla --- označimo njegovu vrijednost s $t$. No tada je i $\f A(x,y,z)=t$, dakle izraz $\f A(x,y,z)$ također ima smisla, pa je $(x,y,z)\in\dom{\f A^3}$.
 \end{proof}
 
-Kako je svaka $\f A_n$ izračunljiva, i funkcija $\f A$ bi trebala biti izračunljiva u intuitivnom smislu: ako nam netko dade $(x,y,z)$ i traži od nas da izračunamo $\f A(x,y,z)$, zapravo traži da izračunamo $\f A_z(x,y)$, a to sigurno (za konkretni $z$) znamo učiniti. Po Church--\!Turingovoj tezi $\f A$ bi trebala biti parcijalno rekurzivna, dakle rekurzivna, ali možemo li to dokazati bez primjene Church--\!Turingove teze? Svakako --- korištenjem teorema rekurzije.
+Kako je svaka $\f A_n^2$ izračunljiva, i funkcija $\f A^3$ je intuitivno izračunljiva: ako nam netko dade $(x,y,z)$ i traži od nas da izračunamo $\f A(x,y,z)$, zapravo traži da izračunamo $\f A_z(x,y)$, a to sigurno (za konkretni $z$) znamo učiniti. Po Church--\!Turingovoj tezi $\f A^3$ bi trebala biti parcijalno rekurzivna, dakle rekurzivna po korolaru~\ref{kor:A3tot}, ali možemo li to dokazati bez primjene Church--\!Turingove teze? Da --- korištenjem teorema rekurzije.
 
 \begin{napomena}[{name=[dvomjesna Ackermannova funkcija]}]
 Često se u literaturi navodi pojednostavljena, dvomjesna funkcija $\f A^2$, zadana s
@@ -550,7 +550,7 @@ iz čega slijedi da kad bi $\f A^3$ bila primitivno rekurzivna, takva bi bila i 
     $\f A^3$ je rekurzivna funkcija.
 \end{propozicija}
 \begin{proof}
-Prvo skupimo sve jednadžbe kojima je $\f A^3$ definirana na jedno mjesto. Osnovna jednadžba je~\eqref{eq:A2SSdef}, sada u obliku~\eqref{eq:A3SSdef}, koja kazuje što činiti kad su i drugi i treći argument pozitivni. Ako je treći argument $0$, imamo definiciju $\f A_0$ preko sljedbenika drugog argumenta~\eqref{eq:A3y0def}, a u preostalim slučajevima imamo početni uvjet~\eqref{eq:A30Sdef}, koji je jednak prvom argumentu za zbrajanje, nuli za množenje, a u svim ostalim slučajevima jednak je $1$.
+Prvo skupimo na jedno mjesto sve jednadžbe kojima je $\f A^3$ definirana. Osnovna jednadžba je~\eqref{eq:A2SSdef}, sada u obliku~\eqref{eq:A3SSdef}, koja kazuje što činiti kad su i drugi i treći argument pozitivni. Ako je treći argument $0$, imamo definiciju $\f A_0$ preko sljedbenika drugog argumenta~\eqref{eq:A3y0def}, a u preostalim slučajevima imamo početni uvjet~\eqref{eq:A30Sdef}, koji je jednak prvom argumentu za zbrajanje, nuli za množenje, a u svim ostalim slučajevima jednak je $1$.
 \begin{align}
 \label{eq:A3SSdef}
     \f A(x,y+1,z+1)&=\f A\bigl(x,\f A(x,y,z+1),z\bigr)\\
@@ -719,14 +719,13 @@ Kao što rekosmo na početku, indeks $e$ iz teorema rekurzije možemo shvatiti k
 
 Prvo, sasvim je jasno da ne možemo tražiti $e=\f F(e)$ --- recimo, $\f{Sc}$ je čak inicijalna funkcija, ali ne postoji $e$ takav da je $e=\f{Sc}(e)$ (to smo koristili kod Russellove funkcije). Ali pokazat će se da možemo tražiti $e\approx_k\f F(e)$ za bilo koji unaprijed fiksirani $k\in\N_+$ (takav $e$ će ovisiti o $k$).
 
-Drugo, $\f F$ ne mora biti primitivno rekurzivna --- vidjet ćemo da je dovoljno da bude rekurzivna. Tada teorem vrijedi i za primitivno rekurzivne funkcije, zbog korolara~\ref{kor:prnrek}. Napomenimo da ne možemo još oslabiti pretpostavku zahtijevajući da je $\f F$ parcijalno rekurzivna: $\varnothing^1=\mu\,\emptyset^2$ je parcijalno rekurzivna, a ne može postojati $e\in\N$ takav da su $e$ i $\varnothing(e)$ $k$-ekvivalentni, jer izraz $\varnothing(e)$ nema smisla ni za koji $e$.
+Drugo, $\f F$ ne mora biti primitivno rekurzivna --- vidjet ćemo da je dovoljno da bude rekurzivna. Tada teorem vrijedi i za primitivno rekurzivne funkcije, zbog korolara~\ref{kor:prnrek}. Napomenimo da ne možemo još oslabiti pretpostavku zahtijevajući da je $\f F$ parcijalno rekurzivna: $\varnothing^1=\mu\,\emptyset^2$ je parcijalno rekurzivna prema primjeru~\ref{pr:varnothingprek}, a ne može postojati $e\in\N$ takav da su $e$ i $\varnothing(e)$ $k$-ekvivalentni, jer izraz $\varnothing(e)$ nema smisla ni za koji $e$.
 
 Treće, $\f F$ mora biti jednomjesna: broj $k$ je mjesnost funkcije $\kf e^k$, koja je jednaka funkciji $\kf{\f F(e)}^k$. Mjesnost od $\f F$ mora biti $1$ jer želimo u nju uvrstiti $e\in\N^1$.
 
-I četvrto, $\f F$ mora biti izračunljiva: nije dovoljno zahtijevati samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $Emp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{Emp}(e)$, tada bi $e\in Emp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{Emp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija.
-($\kf0(0)$ nema smisla po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\nsimeq\kf1(0)$, dakle $\kf0^1\ne\kf1^1$.) No $e\notin Emp$ je također kontradikcija, jer bi to značilo $e\approx_1\chi_{Emp}(e)=0$, dakle $e\in[0]_{\approx_1}=Emp$. Dakle, $\chi_{Emp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
+I četvrto, $\f F$ mora biti izračunljiva: nije dovoljno zahtijevati samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $E\mspace{-1mu}mp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{E\mspace{-1mu}mp}(e)$, tada bi $e\in E\mspace{-1mu}mp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija. (Izraz $\kf0(0)$ nema smisla po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\nsimeq\kf1(0)$, dakle $\kf0^1\!\ne\kf1^1$.) No $e\notin E\mspace{-1mu}mp$ je također kontradikcija, jer bi to značilo $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=0$, dakle $e\in[0]_{\approx_1}\!=E\mspace{-1mu}mp$. Zaključujemo da $\chi_{E\mspace{-1mu}mp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
 
-Primijetite sličnost upravo provedenog razmišljanja s Russellovim paradoksom. Iz toga će slijediti, jednom kad dokažemo teorem o fiksnoj točki, da skup $Emp$ nije rekurzivan. No zapravo će to biti samo jedna posljedica Riceovog teorema, koji ćemo dokazati kasnije.
+Primijetite sličnost upravo provedenog razmišljanja s Russellovim paradoksom. Iz toga će slijediti, jednom kad dokažemo teorem o fiksnoj točki, da skup $E\mspace{-1mu}mp$ nije rekurzivan. No zapravo će to biti samo jedna posljedica Riceovog teorema, koji ćemo dokazati kasnije.
 
 \begin{lema}[Teorem o fiksnoj točki]\label{lm:tmfix}
 Neka je $k\in\N_+$ te $\f F^1$ rekurzivna funkcija.
@@ -745,9 +744,9 @@ Pa to je opća rekurzija! Na desnoj strani je $\f G^{k+1}$ zadana s $\f G(\vec x
 
 % \subsection{Skupovi indeksa}
 
-Vidjeli smo u prethodnoj točki da iz teorema o fiksnoj točki zapravo možemo zaključiti da klasa ekvivalencije $Emp=[0]_{\approx_1}$ nije rekurzivna: njena karakteristična funkcija ne može imati fiksnu točku, jer to vodi na paradoks vrlo sličan Russellovom. Međutim, taj rezultat je "kap u moru" općenitog rezultata koji kaže da \emph{nijedna} klasa ekvivalencije nijedne relacije $\approx_k$ nije rekurzivna --- štoviše, nijedna \emph{unija} takvih klas\^a ekvivalencije nije rekurzivna, osim  trivijalnih unija $\bigcup\emptyset=\emptyset$ (unija nijedne klase) i $\bigcup(\N/_{\!\approx_k\!})=\N$ (unija svih klasa).
+Vidjeli smo u prethodnoj točki da iz teorema o fiksnoj točki zapravo možemo zaključiti da klasa ekvivalencije $E\mspace{-1mu}mp=[0]_{\approx_1}$ nije rekurzivna: njena karakteristična funkcija ne može imati fiksnu točku, jer to vodi na paradoks vrlo sličan Russellovom. Međutim, taj rezultat je "kap u moru" općenitog rezultata koji kaže da \emph{nijedna} klasa ekvivalencije nijedne relacije $\approx_k$ nije rekurzivna --- štoviše, nijedna \emph{unija} takvih klas\^a ekvivalencije nije rekurzivna, osim trivijalnih unijâ $\bigcup\emptyset=\emptyset$ (unija nijedne klase) i $\bigcup(\N/_{\!\approx_k\!})=\N$ (unija svih klasa).
 
-O čemu se tu zapravo radi? Reći da je neki broj $e$ element klase $Emp$, zapravo znači reći da je $e\approx_10$, odnosno $\kf e^1=\kf0^1=\varnothing^1$. Drugim riječima, $Emp$ je upravo skup svih indeksa prazne jednomjesne funkcije. Ako uzmemo neku drugu izračunljivu funkciju, dobit ćemo neku drugu klasu (kojoj pripada njen indeks), i obrnuto, neka druga klasa $[e]_{\approx_k}$ će biti skup svih indeksa funkcije $\kf e^k$.
+O čemu se tu zapravo radi? Reći da je neki broj $e$ element klase $E\mspace{-1mu}mp$, zapravo znači reći da je $e\approx_10$, odnosno $\kf e^1=\kf0^1=\varnothing^1$. Drugim riječima, $E\mspace{-1mu}mp$ je upravo skup svih indeksa prazne jednomjesne funkcije. Ako uzmemo neku drugu izračunljivu funkciju, dobit ćemo neku drugu klasu (kojoj pripada njen indeks), i obrnuto, neka druga klasa $[e]_{\approx_k}$ će biti skup svih indeksa funkcije $\kf e^k$.
 
 Neka unija klasa $S:=\bigcup_{e\in A}[e]_{\approx_k}$ tada će odgovarati nekom \emph{skupu} izračunljivih $k$-mjesnih funkcija $\mathcal F:=\{\kf e^k\mid e\in A\}\subseteq\mathscr Comp_k$, i to tako da će praznom skupu $S$ odgovarati prazan skup $\mathcal F$, a skupu $S=\N$ odgovarat će $\mathcal F=\mathscr Comp_k$. Kako je to preslikavanje injekcija, ostalim skupovima brojeva ($\emptyset\subset S\subset\N$) odgovarat će ostali skupovi funkcija ($\emptyset\subset\mathcal F\subset\mathscr Comp_k$). Vrijeme je da to formaliziramo.
 
@@ -766,19 +765,19 @@ Za svaki $k\in\N_+$, preslikavanje $\kins{\cdots}:\mathcal P(\mathscr Comp_k)\to
 \end{lema}
 Štoviše, iz dokaza će slijediti da $\kins{\cdots}$ strogo raste: $\mathcal F\subset\mathcal G$ povlači $\kins{\mathcal F}\subset\kins{\mathcal G}$.
 \begin{proof}
-Neka su $\mathcal F,\mathcal G\subseteq\mathscr Comp_k$ različiti. Tada postoji funkcija $\f F$ takva da (bez smanjenja općenitosti) je $\f F\in\mathcal G$, ali $\f F\notin\mathcal F$. Tada $\f F\in\mathcal G\subseteq\mathscr Comp_k$ znači da je $\f F$ RAM-izračunljiva, pa postoji RAM-program $P$ koji je računa. Tada je $e:=\kprog P$ indeks funkcije $\f F$, odnosno $\kf e^k\in\mathcal G$, pa je $e\in\kins{\mathcal G}$.
+Neka su $\mathcal F,\mathcal G\subseteq\mathscr Comp_k$ različiti. Tada postoji funkcija $\f F$ takva da je (bez smanjenja općenitosti) $\f F\in\mathcal G$, ali $\f F\notin\mathcal F$. Tada $\f F\in\mathcal G\subseteq\mathscr Comp_k$ znači da je $\f F$ RAM-izračunljiva, pa postoji RAM-program $P$ koji je računa. Tada je po propoziciji~\ref{prop:computeind}\eqref{it:progind} $e:=\kprog P$ indeks funkcije $\f F$, odnosno $\kf e^k\in\mathcal G$, pa je $e\in\kins{\mathcal G}$.
 
 No kad bi bilo i $e\in\kins{\mathcal F}$, to bi značilo $\kf e^k\in\mathcal F$, što je nemoguće jer $\f F\notin\mathcal F$. Drugim riječima, $e\in\kins{\mathcal G}\setminus\kins{\mathcal F}$, odnosno $\kins{\mathcal F}\ne\kins{\mathcal G}$.
 \end{proof}
 
-Na neki način, do na nezgodnu činjenicu da je $\mathcal P(\mathscr Comp_k)$ neprebrojiv, čini se kao da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\kins{\mathcal F}}$ ima to svojstvo. Ili, neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\kins{\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceovog teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
+Na neki način, do na neprebrojivost skupa $\mathcal P(\mathscr Comp_k)$, čini se da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\kins{\mathcal F}}$ ima to svojstvo. Čak možemo reći, neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\kins{\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceovog teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
 
 % \subsection{Invarijantnost}
 
 Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo recimo %skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi oblika $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
 %
 %Dobro, uzmimo onda neki manji skup,
-recimo jednočlan skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili $1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
+recimo jednočlan skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili broj~$1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
 
 Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju biti \emph{invarijantni} na neku relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma.
 
@@ -810,7 +809,7 @@ Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju biti \emph
         \f{sort}\bigl(\f{dn}\bigl(\f{tail}(s),s[0]\bigr)\bigr)*\kr{s[0]}*\f{sort}\bigl(\f{up}\bigl(\f{tail}(s),s[0]\bigr)\bigr),&\f{Seq}'(s)
     \end{cases}
 \end{align}
---- što će nakon kompiliranja (i korištenja teorema rekurzije na nekoliko mjesta) rezultirati jako različitim RAM-programima, odnosno indeksima funkcije $\f{sort}$. Ako sa $ss$ označimo indeks za \emph{selection sort}, a s $qs$ označimo indeks za \emph{quicksort}, tada vrijedi $ss\approx_1qs$, jer što se specifikacije tiče, i jedan i drugi računaju istu funkciju: sortiraju konačan niz.
+--- što će nakon kompiliranja (i korištenja teorema rekurzije na nekoliko mjesta) rezultirati jako različitim RAM-programima, odnosno indeksima funkcije $\f{sort}$. Ako sa $ss$ označimo indeks za \emph{selection sort}, a s $qs$ označimo indeks za \emph{quicksort}, tada vrijedi $ss\approx_1\!qs$, jer što se specifikacije tiče, i jedan i drugi računaju istu funkciju: sortiraju konačan niz.
 
 Možete se zabaviti pišući razne druge algoritme za sortiranje u jeziku parcijalno rekurzivnih funkcija~\ldots\ dobit ćete raznorazne implementacije, odnosno indekse, za jednu te istu matematičku funkciju, i svi su oni u istoj klasi ekvivalencije $\kins{\{\f{sort}\}}$. Ako bismo prije navedeni \emph{unit test} htjeli napisati u obliku jednadžbe po indeksu,
 \begin{equation}\label{eq:unittest}
@@ -847,7 +846,7 @@ Još je jedna stvar tu na prvi pogled čudna: zašto svojstvo~\eqref{eq:unittest
 Neka je $k\in\N_+$, i $S\subseteq\N$ rekurzivan $k$-invarijantan skup. Tada je $S=\emptyset$ ili $S=\N$.
 \end{teorem}
 
-Ideja dokaza je vrlo slična onom što smo napravili za $Emp$ --- samo, dok nam je tamo Russellov paradoks bio "serviran"\!, ovdje ćemo morati namjestiti scenu za njega.
+Ideja dokaza je vrlo slična onom što smo napravili za $E\mspace{-1mu}mp$ --- samo, dok nam je tamo Russellov paradoks bio "serviran"\!, ovdje ćemo morati namjestiti scenu za njega.
 
 \begin{proof}
 Pretpostavimo da je $S$ rekurzivan, i da $S$ nije ni $\emptyset$ ni $\N$. $S\ne\emptyset$ znači da postoji broj $s\in S$, a $S\ne\N$ znači da postoji $n\in S\kompl=\N\setminus S$. Tada je funkcija $F^1$, zadana s
@@ -859,9 +858,7 @@ Pretpostavimo da je $S$ rekurzivan, i da $S$ nije ni $\emptyset$ ni $\N$. $S\ne\
 \end{equation}
     rekurzivna po teoremu~\ref{tm:grek} (rekurzivna verzija) --- simbolički, $F=\IF{S:\f C_n^1,\f C_s^1}$.
 
-Jer je $F$ rekurzivna, ima fiksnu točku: postoji broj $e\in\N$ takav da je $e\approx_k F(e)$. No to je nemoguće: ako je $e\in S$, tada je po $k$-invarijantnosti i $F(e)\in S$ --- što je u kontradikciji s činjenicom da je $F(e)=n$ za $e\in S$.
-
-Ako pak $e\notin S$, tada je $F(e)=s\in S$, a zbog simetričnosti relacije $\approx_k$ imamo i $F(e)\approx_k e$. No to bi značilo da $S$ nije $k$-invarijantan, jer smo našli $s\in S$ takav da je $s\approx_k e$, ali $e$ nije u $S$.
+Jer je $F$ rekurzivna, ima fiksnu točku: postoji broj $e\in\N$ takav da je $e\approx_k F(e)$. No to je nemoguće: ako je $e\in S$, tada je po $k$-invarijantnosti i $F(e)\in S$ --- što je u kontradikciji s činjenicom da je $F(e)=n$ za $e\in S$. Ako pak $e\notin S$, tada je $F(e)=s\in S$, a zbog simetričnosti relacije $\approx_k$ imamo i $F(e)\approx_k e$. No to bi značilo da $S$ nije $k$-invarijantan, jer smo našli $s\in S$ takav da je $s\approx_k e$, ali $e$ nije u $S$.
 
 U oba slučaja došli smo do kontradikcije, pa pod pretpostavkom da je $S$ rekurzivan, jedino je moguće da je $S=\emptyset$ ili $S=\N$.
 \end{proof}
