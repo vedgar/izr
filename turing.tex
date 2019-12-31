@@ -1106,7 +1106,7 @@ Tipove fragmenata iz dokaza možemo prikazati dijagramima:
 %\subsection{Prepoznavanje završne konfiguracije}
 \begin{propozicija}[{name=[treći fragment transpiliranog stroja]}]\label{pp:faza3}
 	%Neka RAM-algoritam $P^1$ širine $m$ računa funkciju $\f f^1$. Tada 
-	Postoji fragment Turingovog stroja koji za sve $x\in\N$, počevši od bilo koje $m$-reprezentacije početne $\mathcal S_0$-konfiguracije s ulazom $x$, dostigne neku $m$-reprezentaciju završne $\mathcal S_0$-konfiguracije ako je $x\in\dom{\N\phi_0}$, a inače nikada ne stigne u stanje $p_n$.
+	Postoji fragment Turingovog stroja koji za sve $x\in\N$, počevši od bilo koje $m$-reprezentacije početne $\mathcal S_0$-konfiguracije s ulazom $x$, dostigne neku $m$-reprezentaciju završne $\mathcal S_0$-konfiguracije $P_0$-izračunavanja s $x$ ako je $x\in\dom{\N\varphi_0}$, a inače nikada ne stigne u stanje $p_n$.
 \end{propozicija}
 \begin{proof}
 	Za svaki $x\in\N$, označimo sa $(c_l)_l$ $P_0$-izračunavanje s $x$ i indukcijom po $l$ dokažimo da dosad sastavljeni fragment Turingovog stroja dostigne $m$-reprezentaciju od $c_l$. Baza je očita, jer je $c_0$ upravo početna konfiguracija. %Baza je primjena lema~\ref{lm:faza1} i~\ref{lm:faza2}, kako je ilustrirano u~\eqref{eq:+afaze}. 
@@ -1303,7 +1303,7 @@ Postoji fragment Turingovog stroja koji prevodi bilo koju $m$-reprezentaciju zav
 
 \begin{proof}
 %Kao što rekosmo, dokaz je sličan dokazu leme~\ref{lm:faza2}, samo u suprotnom smjeru. 
-Prvo odemo do kraja upotrijebljenog dijela trake~\eqref{d:4a} i tamo zapišemo krajnji graničnik~\eqref{d:4b}. Zatim odemo do početka trake~\eqref{d:4c}, brišući pritom separator~\eqref{d:4d}. Tada se okrenemo~\eqref{d:4e} i idemo desno kroz znakove s \t\textopenbullet\ u tragu $0$~\eqref{d:4f} --- dok ne dođemo do prvog \t\textbullet, koji obrišemo~\eqref{d:4g} i prenesemo lijevo~\eqref{d:4h} do prvog znaka iz $\Sigma_0$. Ako je taj znak "najveći", zamjenjujemo ga "najmanjim"~\eqref{d:4i} i nastavljamo ići lijevo, sve dok ne dođemo do nekog znaka koji možemo "inkrementirati"~\eqref{d:4j}, ili do početnog graničnika~\eqref{d:4k}. U ovom posljednjem slučaju, odemo na kraj riječi koja se mora sastojati samo od znakova $\alpha_1$~\eqref{d:4l}, i dopišemo još jedan na kraj~\eqref{d:4m}. To ponavljamo dok ne potrošimo sve \t\textbullet\ iz traga $0$, kada odlazimo lijevo brišući sve ostatke izračunavanja s trake~\eqref{d:4n}, dok ne udarimo u zadnji znak od $v$ (ili početni graničnik ako je $v=\varepsilon$).
+Prvo odemo do kraja upotrijebljenog dijela trake~\eqref{d:4a} i tamo zapišemo krajnji graničnik~\eqref{d:4b}. Zatim odemo do početka trake~\eqref{d:4c}, brišući pritom separator~\eqref{d:4d}. Tada se okrenemo~\eqref{d:4e} i idemo desno kroz znakove s \t\textopenbullet\ u tragu $0$~\eqref{d:4f} --- dok ne dođemo do prvog \t\textbullet, koji obrišemo~\eqref{d:4g} i prenesemo lijevo~\eqref{d:4h} do prvog znaka iz $\Sigma_0$. Ako je taj znak "najveći", zamjenjujemo ga "najmanjim"~\eqref{d:4i} i nastavljamo ići lijevo, sve dok ne dođemo do nekog znaka koji možemo "inkrementirati"~\eqref{d:4j}, ili do početnog graničnika~\eqref{d:4k}. U ovom posljednjem slučaju, odemo na kraj riječi koja se mora sastojati samo od znakova $\alpha_1$~\eqref{d:4l} i dopišemo još jedan na kraj~\eqref{d:4m}. Odemo po novi~\t\textbullet\ iz traga $0$\dots\ kada ih sve potrošimo odlazimo lijevo brišući krajnji graničnik i sve ostatke izračunavanja s trake~\eqref{d:4n}, dok ne udarimo u zadnji znak od $v$ (ili početni graničnik ako je $v=\varepsilon$).
 
 %Zatim se krećemo ulijevo kroz znakove \t\textopenbullet\ u tragu $0$~\eqref{
 %Prvo odemo do kraja upotrijebljenog (nepraznog) dijela trake~\eqref{d:71} i tamo zapišemo krajnji graničnik~\eqref{d:72}. Zatim se krećemo ulijevo kroz znakove \t\textopenbullet\ u tragu $0$~\eqref{d:73} dok ne dođemo do \t\textbullet, koji maknemo~\eqref{d:74} i prenosimo ga desno kroz "znamenke" i "stupce bitova"~\eqref{d:75}, dok ne dođemo do krajnjeg graničnika~\eqref{d:76}. Tada se opet krećemo ulijevo inkrementirajući riječ: zamjenjujući "devetke jedinicama"~\eqref{d:77} te inkrementirajući prvu "ne-devetku"~\eqref{d:78}, ili ako takve nema, dodajući "jedinicu" slijeva~\eqref{d:79}. Zatim prođemo kroz ostale znamenke do "praznog prostora"~\eqref{d:70} i opet izvršavamo cijeli postupak dok ne dođemo do separatora \t\#.
@@ -1313,27 +1313,28 @@ Argument zašto to funkcionira je praktički isti kao u dokazu leme~\ref{lm:faza
 \begin{primjer}[{name=[četvrti fragment transpiliranog stroja]}]
 Za $\Sigma_0:=\{\t a,\t b,\t c,\t d\}$, četvrti fragment možemo prikazati dijagramom
 \begin{equation}
-\begin{tikzpicture}[baseline=(sn)]\label{dia:T4}
+\begin{tikzpicture}[baseline=(q6)]\label{dia:T4}
 %\clip (-1,-2.53) rectangle (8.5,2.16);
-\node[state] (sn) {$p_n$};
-\node[state,right of=sn] (q5) {$q_3$};
-\node[state,right of=q5] (q7) {$q_5$};
-\node[state,above=1 of q7] (q6) {$q_4$};
+\node[state] (pn) {$p_n$};
+\node[state,right of=pn] (q3) {$q_3$};
+\node[state,right of=q3] (q4) {$q_4$};
+\node[state,below of=q4] (q5) {$q_5$};
+\node[state,right of=q5] (q6) {$q_6$};
+\node[state,right of=q4] (lb) {$l_\bl$};
 \draw
-(sn) edge[loop above] node[above,align=center] {\t\#
-\\[-1mm]
-$B^m_+$} (sn)
-(sn) edge[dashed] node[above] {\bl:\t\$} (q5)
-(q5) edge[loop above,dashed] node[above,xshift=-9,align=right] {\t\textopenbullet\,\texttt@$0$
-\\[-1mm]
-$\Sigma_0$} (q5)
-(q5) edge node[above,xshift=-9,yshift=1] {\t\textbullet:\t\textopenbullet\,\texttt@$0$} (q6)
-(q6) edge[loop right] node[right,align=left] {$B^m$
-\\[-1mm]
-$\Sigma_0$} (q6)
-(q6) edge[dashed] node[right] {\t\$} (q7)
-(q7) edge[dashed,loop right] node[right] {\t d:\t a} (q7)
-(q7) edge[dashed] node[above,xshift=3] {\t a:\t b, \t b:\t c} node[below] {\t c:\t d, $B^m$:\t a} (q5)
+(pn) edge[loop above] node[right,xshift=7,yshift=-6] {$\t\#,{B^m}_+$} (pn)
+(q3) edge[dashed,loop above] node[right,xshift=7,yshift=-6] {\t\#:\bl$\,,B^m$} (q3)
+(q4) edge[loop above,dashed] node[right,xshift=7,yshift=-6] {$\t\textopenbullet\,\texttt@0,\t a$} (q4)
+(lb) edge[loop above,dashed] node[right,xshift=7,yshift=-6] {$B^m$:\bl} (lb)
+(pn) edge[dashed] node[below] {\bl:\t\$} (q3)
+(q4) edge[dashed,left,bend right=35] node[left,xshift=-2,yshift=1] {\t\textbullet:\t\textopenbullet\,\texttt@$0$} (q5)
+(q6) edge[loop right] node[right,align=left] {\t a} (q6)
+(q5) edge node[above] {\t\$} (q6)
+(q5) edge[dashed,loop left] node[left,align=right] {\t d:\t a$,B^m$} (q5)
+(q5) edge node[right,align=left,yshift=-3] {\t a:\t b\\ \t b:\t c\\ \t c:\t d} (q4)
+(q6) edge node[right,xshift=3] {$B^m$:\t a} (q4)
+(q3) edge node[below] {\t\$} (q4)
+(q4) edge[dashed] node[below] {\t\$:\bl} (lb)
 ;
 \end{tikzpicture}\text{\;.\qedhere}
 \end{equation}
@@ -1501,4 +1502,4 @@ Neka je $\Sigma$ abeceda te $\varphi$ jezična funkcija nad njom.
 Neka su $\N\Sigma$ i $\N'\Sigma$ dva kodiranja $\Sigma$. Ako je $\N\varphi_0$ parcijalno rekurzivna, tada je po teoremu~\ref{tm:pir} RAM-izračunljiva. Tada je po teoremu~\ref{tm:krit} (primijenjenom na kodiranje $\N\Sigma$) $\varphi$ Turing-izračunljiva, a onda je po teoremu~\ref{tm:tikp} (primijenjenom na kodiranje $\N'\Sigma$) $\N'\varphi$ parcijalno rekurzivna. Zamjenom $\N\Sigma$ i $\N'\Sigma$ se dokaže i drugi smjer, dakle $\N\varphi$ je parcijalno rekurzivna ako i samo ako je $\N'\varphi$ parcijalno rekurzivna.
 \end{proof}
 
-%\input{tbroj.tex}
+\input{tbroj.tex}
