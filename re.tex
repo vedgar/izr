@@ -433,10 +433,10 @@ Po definiciji je $P\mathbin\triangle\f R:=(P\setminus\f R)\cup(\f R\setminus P)$
 Neka je $k\in\N_+$, $\f F^k$ parcijalno rekurzivna te $\f G^k$ takva da je skup $\graf{\f F}\mathbin\triangle\graf{\f G}$ konačan. Tada je i $\f G$ parcijalno rekurzivna.
 \end{propozicija}
 \begin{proof}
-Po teoremu o grafu, $\graf{\f F}$ je rekurzivno prebrojiv skup (mjesnosti $k$). Ako označimo zadani konačni "\emph{\!diff}" grafova s $\f E:=\graf{\f F}\mathbin\triangle\graf{\f G}$, iz teorije skupova znamo --- $\bigl(\mathcal P(\N^k),\mathbin\triangle\bigr)$ je grupa u kojoj je svaki element sam sebi inverz --- da iz toga slijedi $\graf{\f G}=\graf{\f F}\mathbin\triangle\f E$, što je rekurzivno prebrojiv skup po lemi~\ref{lm:retrkon}. Opet po teoremu o grafu, iz toga slijedi da je $\f G$ parcijalno rekurzivna funkcija.
+Po teoremu o grafu, $\graf{\f F}$ je rekurzivno prebrojiv skup (mjesnosti $k+1$). Ako označimo zadani konačni "\emph{\!diff}" grafova s $\f E^{k+1}:=\graf{\f F}\mathbin\triangle\graf{\f G}$, iz teorije skupova znamo --- $\bigl(\mathcal P(\N^{k+1}),\mathbin\triangle\bigr)$ je grupa u kojoj je svaki element sam sebi inverz --- da iz toga slijedi $\graf{\f G}=\graf{\f F}\mathbin\triangle\f E$, što je rekurzivno prebrojiv skup po lemi~\ref{lm:retrkon}. Opet po teoremu o grafu, iz toga slijedi da je $\f G$ parcijalno rekurzivna funkcija.
 \end{proof}
 
-Upravo napisani dokaz primjer je vrlo općenite tehnike kojom možemo dokazati da svakakve operacije na funkcijama čuvaju parcijalnu rekurzivnost: prebacimo se na grafove, dokažemo da odgovarajuća operacija na grafovima čuva rekurzivnu prebrojivost, i vratimo se natrag na funkcije. Evo još jednog primjera.
+Napisani dokaz primjer je tehnike kojom možemo dokazati da razne operacije na funkcijama čuvaju parcijalnu rekurzivnost: prebacimo se na grafove, dokažemo da odgovarajuća operacija na grafovima čuva rekurzivnu prebrojivost, i vratimo se na funkcije. Evo još jednog primjera.
 
 % \subsection{Rekurzivno prebrojivo grananje}
 
@@ -446,7 +446,7 @@ U tom kontekstu, paralelizacija kaže da možemo čekati na više (čak beskona�
 
 Da bismo sačuvali determinizam, moramo "izvana" osigurati da se ne može dogoditi više stvari, odnosno imati nekoliko u parovima disjunktnih poluodlučivih relacija. Ako na svakoj od njih definiramo neku izračunljivu funkciju, možemo čekati dok se ne dogodi neki od zadanih događaja, i onda izračunati odgovarajuću funkciju.
 
-Time smo opisali već poznatu konstrukciju grananja, ali ovaj put s \emph{poluodlučivim} uvjetima. Drugim riječima, da bi funkcija dobivena grananjem bila izračunljiva, ne moramo nužno moći za svaki uvjet ustanoviti u konačno mnogo koraka vrijedi li ili ne (odlučivost koju smo dosad uvijek pretpostavljali, u teoremima~\ref{tm:grek} i~\ref{tm:gprek}) --- možemo i \emph{čekati} dok neki uvjet ne postane istinit, i tada izračunati odgovarajuću granu. Pri tome treba paziti da po definiciji poluodlučivosti \textbf{ne možemo imati granu "inače"} --- koliko god dugo čekali, ne možemo biti sigurni da se nijedan od navedenih uvjeta nikada neće ispuniti.
+Time smo opisali već poznatu konstrukciju grananja, ali ovaj put s \emph{poluodlučivim} uvjetima. Drugim riječima, da bi funkcija dobivena grananjem bila izračunljiva, ne moramo nužno moći za svaki uvjet ustanoviti u konačno mnogo koraka vrijedi li ili ne (odlučivost koju smo dosad uvijek pretpostavljali, u teoremima~\ref{tm:grek} i~\ref{tm:gprek}) --- možemo \emph{čekati} dok se neki uvjet ne ispuni i tada izračunati odgovarajuću granu. Pri tome treba paziti da po definiciji poluodlučivosti \textbf{ne možemo imati granu "inače"} --- koliko god dugo čekali, ne možemo biti sigurni da se nijedan navedeni uvjet nikada neće ispuniti.
 
 Na operacijskom sustavu UNIX (i mnogim srodnim sustavima) postoji sistemski poziv \texttt{select} koji, do na implementacijske detalje, radi upravo to: prima listu uvjeta oblika "postoji li vrsta aktivnosti $x$ (čitanje, pisanje, greška,~\ldots) na deskriptoru $y$", i vraća se čim neki od tih uvjeta bude ispunjen. Iz praktičnih razloga, taj poziv ima i granu "inače", u obliku isteka vremena (\emph{timeout}) određenog pri pozivu. Kako nemamo sistemski sat (iako ga možemo emulirati brojenjem koraka izračunavanja --- pokušajte!), nama će taj dio biti beskonačna petlja, što je u skladu s konvencijom da ako u grananju ne navedemo granu $\f G_0$, podrazumijeva se prazna funkcija.
 
@@ -469,7 +469,7 @@ Sada primijenimo opisanu tehniku: po teoremu~\ref{tm:grafprre}, svaki $\graf{\f 
 
 \section{Postov teorem}\label{sec:Post}
 
-Korolar~\ref{kor:gprek} posebni je slučaj teorema~\ref{tm:gre} (baš kao i teorema~\ref{tm:gprek}), zbog propozicije~\ref{pp:rekire}. No teorem~\ref{tm:gprek} \emph{nije} posebni slučaj teorema~\ref{tm:gre}, jer ima "inače" granu $\f G_0$, za koju smo objasnili --- barem intuitivno --- zašto je ne možemo imati u rekurzivno prebrojivoj verziji.
+Korolar~\ref{kor:gprek} posebni je slučaj teorema~\ref{tm:gre} (kao i teorema~\ref{tm:gprek}), zbog propozicije~\ref{pp:rekire}. No teorem~\ref{tm:gprek} \emph{nije} posebni slučaj teorema~\ref{tm:gre}, jer ima "podrazumijevanu" granu $\f G_0$, za koju smo objasnili --- barem intuitivno --- zašto je ne možemo imati u rekurzivno prebrojivoj verziji.
 
 Pokušajmo malo formalizirati to objašnjenje. U teoremima~\ref{tm:gprek} i~\ref{tm:grek}, "inače" se realizira kroz relaciju $\f R_0$, koja je komplement unije svih ostalih $\f R_i$. Ako su sve $R_i$ rekurzivno prebrojive, njihova unija je rekurzivno prebrojiva po propoziciji~\ref{pp:unlre}, pa zaključujemo da je jedini mogući problem u operaciji komplementa. Doista, pokazuje se da skup rekurzivno prebrojivih relacija nije zatvoren na komplement. Među rekurzivno prebrojivim relacijama svakako ima onih čiji su komplementi također rekurzivno prebrojivi --- recimo, \emph{rekurzivne} su takve; ali zapravo su to jedine takve relacije.
 
@@ -500,7 +500,7 @@ Postov teorem opravdava naziv "poluodlučivost" za intuiciju rekurzivne prebroji
 
 Pomoću Postovog teorema možemo dokazati da razni skupovi nisu rekurzivno prebrojivi. Zapravo, kad god imamo skup koji nije rekurzivan --- a imamo ih hrpu po Riceovom teoremu, na primjer --- znamo da on ili njegov komplement (ili nijedan od njih) nije rekurzivno prebrojiv.
 Ipak, za samu egzistenciju skupova koji nisu rekurzivno prebrojivi ne treba nam Postov teorem; to možemo i kardinalnim argumentom.
-Postov teorem često koristimo kad \emph{znamo} da je jedan od ta dva skupa rekurzivno prebrojiv, pa onda zaključujemo da drugi nije.
+Postov teorem često koristimo kad znamo da jedan od ta dva skupa jest rekurzivno prebrojiv, pa onda zaključujemo da drugi nije.
 
 \begin{korolar}[{name=[kriterij za negaciju rekurzivne prebrojivosti]}]\label{kor:nrekpreb}
 Neka je $R$ rekurzivno prebrojiva relacija koja nije rekurzivna.
