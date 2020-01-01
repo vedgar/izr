@@ -24,13 +24,15 @@ Za surjektivnost, uzmimo proizvoljnu $\f F^1\in\mathscr Comp_1$ i tražimo $\var
 \end{proof}
 Precizno, za $\sigma:=\N\Sigma^*$, imamo vezu
 %\begin{equation}
-	$\f F=\N\varphi=\sigma\circ\varphi\circ\sigma^{\,-1}\Leftrightarrow
+	$\f F=\N\varphi=\sigma\circ\varphi\circ\sigma^{\,-1}\Longleftrightarrow
 	\varphi=\N^{-1}\f F=\sigma^{\,-1}\circ\f F\circ\sigma$
 %\end{equation}
 te vrijedi $\N\,\N^{-1}\f F=\f F$ i $\N^{-1}\N\varphi=\varphi$.
 
 \begin{korolar}[{name=[jednomjesne brojevne funkcije u različitim modelima]}]\label{kor:pent}
-Neka je $\Sigma$ abeceda s kodiranjem $\N\Sigma$ te $F^1$ brojevna funkcija.\newline Tada je $F$ parcijalno rekurzivna ako i samo ako je $\N^{-1}F$ Turing-izračunljiva.
+Neka je $\Sigma$ abeceda s kodiranjem $\N\Sigma$ te $F^1$ brojevna funkcija.
+
+Tada je $F$ parcijalno rekurzivna ako i samo ako je $\N^{-1}F$ Turing-izračunljiva.
 \end{korolar}
 \begin{proof}
 Ako je $F=\N\,\N^{-1}F$ parcijalno rekurzivna, tada je po teoremu~\ref{tm:pir} RAM-izračunljiva, pa je po teoremu~\ref{tm:krit} $\N^{-1}F$ Turing-izračunljiva. S druge strane, ako je $\N^{-1}F$ Turing-izračunljiva, onda je po teoremu~\ref{tm:tikp} $\N\,\N^{-1}F=F$ parcijalno rekurzivna.
@@ -123,36 +125,36 @@ Pretpostavka zapravo znači da je $\chi_{\kr L}$ rekurzivna funkcija. Dakle $\ch
 
 Svakako: dokaz propozicije~\ref{pp:trackbij} kaže da je $\varphi:=\N^{-1}\chi_{\kr L}=\sigma^{\,-\!1}\circ\chi_{\kr L}\circ\sigma$, uz oznaku $\sigma:=\N\Sigma^*$. Funkcija $\varphi$ je totalna kao kompozicija tri totalne, a Turing-izračunljiva je prema korolaru~\ref{kor:pent} (ako uzmemo isto kodiranje pomoću kojeg smo izračunali $\kr L$). Pogledajmo detaljnije kako ona djeluje.
 
-Ako joj damo riječ $w\in\Sigma^*\setminus L$, tada (kodiranje riječi je injekcija) vrijedi $\kr w\notin\kr L$, pa je $\chi_{\kr L}(\kr w)=0$. Po definiciji od $\varphi$ je tada
+Ako joj damo riječ $w\in\Sigma^*\setminus L$, tada ($\mspace{-1mu}\sigma$ je injekcija) vrijedi $\kr w\notin\kr L$, pa je $\chi_{\kr L}(\kr w)=0$. Po definiciji od $\varphi$ je tada
 \begin{equation}
     \varphi(w)=\sigma^{\,-\!1}\bigl(\,\chi_{\kr L}\bigl(\sigma(w)\bigr)\bigr)=\sigma^{\,-\!1}\bigl(\,\chi_{\kr L}(\kr w)\bigr)=\sigma^{\,-\!1}(0)=\varepsilon\text.
 \end{equation}
-Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Kako je kodiranje injekcija, riječi unutar $L$ ne smije preslikavati u praznu riječ, a jer je $\varphi$ totalna, mora ih preslikavati nekamo. Dakle, $\varphi(w)$ je neprazna za svaku $w\in L$.
+Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Riječi \emph{unutar} $L$ onda ne smije preslikavati u $\varepsilon$ zbog injektivnosti $\sigma^{\,-\!1}$, a jer je totalna, mora ih preslikavati nekamo. Dakle, $\varphi(w)$ je neprazna za svaku $w\in L$.
 Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju $bool$ u $\Sigma^*$: prazna riječ je lažna, neprazne su istinite. Mnogi programski jezici koji definiraju istinitost stringova, definiraju je upravo na taj način.
 
 %Kako izvršavanje RAM-programa o kojem govorimo stane za svaki $\kr w$, po korolaru~\ref{kor:faza3} i napomeni~\ref{nap:snstane} slijedi da će Turingov stroj koji konstruiramo stati za svaki $w$ --- samo trebamo malo promijeniti način na koji stane, da ne komunicira izlaz putem trake nego putem završnog stanja.
 
-    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. U opisu pete (posljednje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\t\$}$ s
+    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. Srećom, u završnoj konfiguraciji pozicija je $0$, pa je vrlo lako vidjeti je li izlazna riječ prazna: znak koji čitamo tada je ili praznina ili element ulazne abecede. Proglasimo $l_{\t\$}$ običnim stanjem, i dodajmo prijelaze %U opisu pete (posljednje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\t\$}$ s
 \begin{gather}
-    \SwapAboveDisplaySkip
-\label{eq:d88j}
-    \delta(m_{\t\$},\alpha):=(q_a,\alpha,1)\text{, za sve }\alpha\in\Sigma\text,\\
-\label{eq:d89j}
-    \delta(m_{\t\$},\t\$):=(q_r,\bl,-1)\text.
+    %\SwapAboveDisplaySkip
+\label{eq:d88j}\tag{$\delta$5b}
+    \delta(l_{\t\$},\alpha):=(q_a,\bl,-1)\text{, za sve }\alpha\in\Sigma\text,\\
+\label{eq:d89j}\tag{$\delta$5c}
+    \delta(l_{\t\$},\bl):=(q_r,\bl,-1)\text.
 \end{gather}
-Po teoremu~\ref{tm:krit}, $\mathcal T$ će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj u trećem koraku pete faze, krećući se lijevo, doći do znaka $\alpha\in\Sigma$ i ući u stanje $q_a$. Za $w\notin L$ rezultat će biti $\varepsilon$ pa će stroj doći do graničnika, obrisati ga i ući u stanje $q_r$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
+Po teoremu~\ref{tm:krit}, dobiveni stroj će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj na kraju izračunavanja čitati znak iz $\Sigma$ i ući u stanje $q_a$. Za $w\notin L$ rezultat će biti $\varepsilon$ pa će stroj pročitati prazninu i ući u stanje $q_r$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
 \end{proof}
 \vspace{-4mm}
 
-Dijagramatski, gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
+Dijagramatski, na kraj Turingovog stroja dodali smo %gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
 \begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
-    \node[state] (q9) {$m_{\t\$}$};
+    \node[state] (q9) {$l_{\t\$}$};
 \node[state,accepting,right of=q9] (qt) {$q_a$};
 \node[state,accepting,below right=0.5 and 1.6 of q9] (qf) {$q_r$};
 \draw
 %(q9) edge[dashed,loop left] node[left] {\t/:\bl} (q9)
-(q9) edge node[above] {$\Sigma$} (qt)
-(q9) edge[dashed] node[below] {\t\$:\bl} (qf)
+(q9) edge[dashed] node[above] {$\Sigma$:\bl} (qt)
+(q9) edge[dashed] node[below] {\bl} (qf)
 ;
 \end{tikzpicture}\;.
 \vspace{-8mm}

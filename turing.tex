@@ -1247,15 +1247,14 @@ Treći fragment Turingovog stroja koji odgovara $P_{\t a}$ prikazan je dijagramo
 %Ostatak Turingovog stroja koji konstruiramo vezat će se s dosad izgrađenim dijelom isključivo kroz stanje $p_n$, a njegov rad će uvijek stati, pa ćemo na kraju moći zaključiti da čitav Turingov stroj stane ako i samo ako dođe u stanje $p_n$, odnosno ako i samo ako je ulazna riječ u domeni od $\varphi_0$.
 %\end{napomena}
 
-%Time smo riješili pitanje domene, i potrebno je još samo natrag dekodirati $y$ (ako postoji) u riječ $v:=\varphi_0(w)$ i postaviti je na početak trake.
-
-\subsection{Dekodiranje izlazne vrijednosti}
-
-Ovaj će postupak biti sličan onome u drugoj fazi, samo u obrnutom smjeru. Imamo broj $y$ zapisan unarno (pomaknuta baza $1$) u tragu $0$, a trebamo ga zapisati u pomaknutoj bazi $b$ --- skidajući po jedan \t\textbullet\ iz traga $0$ i inkrementirajući riječ iz $\Sigma_0^*$ svaki put. Ipak, nekoliko tehničkih detalja čine ovaj postupak kompliciranijim.
+%Time smo riješili pitanje domene, i 
+Još je potrebno dekodirati $y$ (ako postoji) u riječ $v:=\varphi_0(w)$ i postaviti je na početak trake.
+%\subsection{Dekodiranje izlazne vrijednosti}
+Postupak je sličan onome u drugoj fazi, samo u obrnutom smjeru. Imamo broj $y$ zapisan unarno (pomaknuta baza~$1$) u tragu $0$, a trebamo ga zapisati u pomaknutoj bazi $b$ --- skidajući po jedan \t\textbullet\ iz traga $0$ i inkrementirajući riječ iz $\Sigma_0^*$ svaki put. Ipak, nekoliko tehničkih detalja čine ovaj postupak kompliciranijim.
 
 Prvo, umjesto pisanja konstantnog znaka $r_1\in B^m$, morat ćemo čitati bilo koji znak koji u tragu $0$ ima \t\textbullet. Srećom, to nam upravo omogućuje definicija~\ref{def:trag}.
 
-Drugo i važnije, kod dekrementiranja smo znali da riječ neće postati dulja, pa smo prazninama skraćivali zapis broja koliko je već potrebno, dok ga nismo dekrementirali sasvim do nule. Kod inkrementiranja nemamo unaprijed određenu gornju granicu za duljinu izlazne riječi $v:=\varphi_0(w)$, pa ćemo morati obrisati separator \t\# i uportijebiti čitavu traku za njenu konstrukciju. Ipak, već upotrijebljeni dio trake će biti dovoljan, jer sadrži barem barem $y=\kr{\varphi_0(w)}$ znakova \t\textbullet\ u tragu $0$.
+Drugo i važnije, kod dekrementiranja smo znali da riječ neće postati dulja, pa smo prazninama skraćivali zapis broja koliko je već potrebno, dok ga nismo dekrementirali sasvim do nule. Kod inkrementiranja nemamo unaprijed određenu gornju granicu za duljinu izlazne riječi $v:=\varphi_0(w)$, pa ćemo morati obrisati separator \t\# i upotrijebiti čitavu traku za njenu konstrukciju. Ipak, već upotrijebljeni dio trake će biti dovoljan, jer sadrži barem barem $y=\kr{\varphi_0(w)}$ znakova \t\textbullet\ u tragu $0$.
 
 \begin{lema}[{name=[duljina riječi nije veća od koda riječi]}]\label{lm:dulj<=kr}
 Za svaku riječ $u$ vrijedi $\dulj u\le\kr u$.
@@ -1268,6 +1267,8 @@ Za $b=1$ vrijedi jednakost (jer je jedina moguća znamenka $1$).
 \end{proof}
 
 Štoviše, lema~\ref{lm:dulj<=kr} pokazuje da riječ možemo dekodirati korak po korak: u svakom trenutku će nam u tragu $0$ ostati $y'$ znakova \t\textbullet, a desno od početnog graničnika će biti napisana riječ $u'$ čiji je kod $\kr{u'}=y-y'$, pa će sigurno stati u prostor od $k+y-y'\ge y-y'$ ćelija oslobođen skidanjem $y-y'$ znakova \t\textbullet.
+
+\subsection{Konstrukcija izlazne riječi}
 
 \begin{lema}[{name=[četvrti fragment transpiliranog stroja]}]\label{lm:faza4}
 Postoji fragment Turingovog stroja koji prevodi bilo koju $m$-reprezentaciju završne konfiguracije $(p_n,k,\t\$\bl^{\dulj w}\t\#t\bl\ldots)$, gdje je $k>\dulj w$ i $t$ u tragu $0$ ima oblik $\t\textbullet^y\t\textopenbullet^{\dulj t-y}$, u konfiguraciju $(l_\bl,\dulj v,\t\$v\bl\ldots)$, gdje je $\kr v=y$.% te $u\in(B^m)^*$.
@@ -1413,7 +1414,7 @@ Samo treba pomaknuti čitavu izlaznu riječ za jednu ćeliju ulijevo, brišući 
 
 %Stigli smo do završnog stanja $l_{\t\$}$. Time smo napokon završili konstrukciju Turingovog stroja $\mathcal T_0$ i sve je spremno za dokaz "obrata" teorema~\ref{tm:tikp}.
 
-\subsection{Objedinjavanje}
+%\subsection{Objedinjavanje}
 
 \begin{teorem}[{name=[Turing-izračunljivost parcijalno rekurzivnih jezičnih funkcija]}]\label{tm:krit}
 Neka je $\Sigma_0$ abeceda, $\N\Sigma_0$ njeno kodiranje te $\varphi_0$ funkcija nad njom.
@@ -1427,7 +1428,7 @@ Po pretpostavci postoji RAM-program $P_0$ koji računa $\N\varphi_0$.
 \begin{align}
     &\qquad\mathcal T_0:=(Q,\Sigma_0,\Gamma,\bl,\delta,n_{\t\$},l_{\t\$})\text,
 \shortintertext{s komponentama}
-    Q&:=\bdcup_{i\le6}\{q_i\}\dcup\bdcup_{i\le n}\{p_i,s_i,t_i\}\dcup\bdcup_{\mathclap{\alpha\in\Sigma_0\dcup\{\t\$,\bl\}}}\,\{n_\alpha,l_\alpha\}\dcup\{q_x\}\text,\\
+    Q&:=\bdcup_{i\le6}\{q_i\}\dcup\bdcup_{i\le n}\{p_i,s_i,t_i\}\dcup\bdcup_{\mathclap{\alpha\in\Sigma_0\dcup\{\t\$,\mspace{1mu}\bl\}}}\,\{n_\alpha,l_\alpha\}\dcup\{q_x\}\text,\\
     \Gamma&:=\Sigma_0\dcup\{\t\$,\t\#\}\dcup B^m\text{, gdje je }B^m:=\prod\nolimits_{i<m}\{\t\textopenbullet,\t\textbullet\}\text,\\
     \bl&:=(\t\textopenbullet,\t\textopenbullet,\dotsc,\t\textopenbullet)^\intercal\in B^m\text{ (zapisana kao stupac),}
 \end{align}
@@ -1438,31 +1439,11 @@ Doista, neka je $w\in\Sigma_0^*$ proizvoljna riječ i označimo s $k:=\dulj{w}$ 
 	
 	Promotrimo prvo slučaj kada je $w\in\dom{\varphi_0}$.
 
-    Tada će početnu konfiguraciju $(n_{\t\$},0,w\bl\ldots)$ prvi fragment od $\mathcal T_0$ (lema~\ref{lm:faza1}) prebaciti u $(q_0,k,\t\$w\t\#\bl\ldots)$, a nju će pak drugi fragment prebaciti u $(p_0,k+2,\t\$\bl^k\,\t\#r_1^{\kr w}\bl\ldots)$, gdje je $r_1=(\t\textopenbullet,\t\textbullet,\t\textopenbullet,\dotsc,\t\textopenbullet)^\intercal$ (lema~\ref{lm:faza2}). Kako je $w\in\dom{\varphi_0}$, vrijedi $x:=\kr w\in\dom{\N\varphi_0}$, pa $P_0$-izračunavanje s $x$ stane, s izlaznim podatkom $y:=\N\varphi_0(x)=\kr{\varphi_0(w)}$. Prema propoziciji~\ref{pp:faza3}, $\mathcal T_0$-izračunavanje s $w$ (treća faza) će doći u konfiguraciju $(p_n,k',\t\$\bl^k\,\t\#t\bl\ldots)$, gdje je $k'>k$ i $t$ u tragu $0$ ima oblik $\t\textbullet^y\t\textopenbullet^{\dulj t-y}$. Tu će pak konfiguraciju četvrti fragment (lema~\ref{lm:faza4}) prebaciti u $(q_3,k+1,\t\$\bl^k\,\t\#uv\t\$\bl\ldots)$, gdje je $v=\varphi_0(w)$ izlazni podatak te $u\in(B^m)^{\dulj t-\dulj{v}}$. Peti će fragment (korolar~\ref{kor:faza5}) napokon prebaciti tu konfiguraciju u završnu konfiguraciju $(l_{\t\$},\dulj{v},v\bl\ldots)$, s izlaznim podatkom na traci.
+    Tada će početnu konfiguraciju $(n_{\t\$},0,w\bl\ldots)$ prvi fragment od $\mathcal T_0$ (lema~\ref{lm:faza1}) prebaciti u $(q_0,k,\t\$w\t\#\bl\ldots)$, a nju će pak drugi fragment prebaciti u $(p_0,k+2,\t\$\bl^k\,\t\#r_1^{\kr w}\bl\ldots)$, gdje je $r_1=(\t\textopenbullet,\t\textbullet,\t\textopenbullet,\dotsc,\t\textopenbullet)^\intercal$ (lema~\ref{lm:faza2}). Kako je $w\in\dom{\varphi_0}$, vrijedi $x:=\kr w\in\dom{\N\varphi_0}$, pa $P_0$-izračunavanje s $x$ stane, s izlaznim podatkom $y:=\N\varphi_0(x)=\kr{\varphi_0(w)}$. Prema propoziciji~\ref{pp:faza3}, $\mathcal T_0$-izračunavanje s $w$ (treća faza) će doći u konfiguraciju $(p_n,k',\t\$\bl^k\,\t\#t\bl\ldots)$, gdje je $k'>k$ i $t$ u tragu $0$ ima oblik $\t\textbullet^y\t\textopenbullet^{\dulj t-y}$. Tu će pak konfiguraciju četvrti fragment (lema~\ref{lm:faza4}) prebaciti u $(l_\bl,\dulj v,\t\$v\bl\ldots)$, gdje je $v:=\varphi_0(w)$. Peti će fragment (korolar~\ref{kor:faza5}) napokon tu konfiguraciju prevesti u završnu konfiguraciju $(l_{\t\$},0,v\bl\ldots)$, s izlaznom rječju $\varphi_0(w)$ na traci.
 
 	Ako pak $w\notin\dom{\varphi_0}$, tada će se prve dvije faze izvršiti jednako, ali iz $x\notin\dom{\N\varphi_0}$ po definiciji~\ref{def:compute} slijedi da $P_0$-izračunavanje s $x$ nikad neće stati, pa po propoziciji~\ref{pp:faza3} niti $\mathcal T_0$-izračunavanje neće doći do $p_n$. %Prema napomeni~\ref{nap:snstane}, 
 	To znači da ono nikad neće stati (doći do $l_{\t\$}$), jer svaki put od $n_{\t\$}$ do $l_{\t\$}$ vodi kroz stanje $p_n$.
 \end{proof}
-
-Uočimo sličnost upravo provedenog dokaza s dokazom propozicije~\ref{prop:semfmacro} (semantika funkcijskog makroa). Kao što smo tamo omogućili makro-stroju da u izoliranoj okolini izvrši neki konkretni RAM-program, tako smo to ovdje omogućili Turingovom stroju. Kao i u makro-programu iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (namještanje početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa) te, ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije te "zatvaranje okvira" (pospremanje nereda koji smo napravili).
-
-Prikažimo postupak Turing-iz\-ra\-ču\-na\-va\-nja kroz faze (sa $z$ je označen najveći broj u ikojem relevantnom registru od $\mathcal S_0$ u završnoj konfiguraciji $P_0$-izračunavanja s $\kr w$):
-\begin{equation}
-\begin{array}{l|ccl}
-                             &\text{stanje}&\text{pozicija}&\text{traka}\\\hline
-    \text{početna konfiguracija} & n_{\t\$} & 0         & w\bl\ldots \\
-\text{nakon prve faze}       & q_0 & \dulj w   & \t\$w\t\#\bl\ldots \\
-\text{nakon druge faze}      & p_0 & \dulj w+2 & \t\$\bl^{\dulj w}\t\#r_1^{\kr w}\bl\ldots \\
-\text{nakon treće faze}      & p_n & \dulj w+2 & \renewcommand{\arraystretch}{0.1}
-    \t\$\bl^{\dulj w}\t\#\begin{array}{@{}c@{}}\t\textbullet\\?\end{array}^{\kr{v}}?^{z-\kr{v}}\bl\ldots\\
-\text{nakon četvrte faze}    & q_3 & \dulj w+1 &
-\renewcommand{\arraystretch}{0.1}
-\t\$\bl^{\dulj w}\t\#\begin{array}{@{}c@{}}\t\textopenbullet\\?\end{array}^{z-\dulj v}v\t\$\bl\ldots\\
-\text{prvi korak pete faze} & q_6 & \dulj w+2+z-\dulj v       & \t\$\bl^{\dulj w+1+z-\dulj v}v\t\$\bl\ldots\\
-\text{drugi korak pete faze}& q_6 & \dulj w+2+z & v\bl^{\dulj w+2+z-\dulj v}\t\$\bl\ldots\\
-    \text{završna konfiguracija} & l_{\t\$} & \dulj v   & v\bl\ldots
-\end{array}
-\end{equation}
 
 \begin{primjer}[{name=[transpilirani stroj dodaje znak na kraj riječi]}]\label{pr:+a3}
 Primjer~\ref{pr:+a} sad možemo pratiti kroz sve faze:
@@ -1475,21 +1456,47 @@ Primjer~\ref{pr:+a} sad možemo pratiti kroz sve faze:
 	\text{računanje }2\cdot4+1=9\text{; raspisano u~\eqref{eq:+a2}}&&{}\leadsto^*{}&
 \renewcommand{\arraystretch}{0.1}
 	\T{\$\bl\bl\#}{\mund{p_4}}{\bio}{\bio\bio\bio\bio\bio\bio\bio\bio}\\[-1mm]
+	\text{uokvirivanje izlaza}&&{}\leadsto^*{}&
+\renewcommand{\arraystretch}{0.1}
+	\T{\$}{q_4}{\bl}{\bl\bl\bio\bio\bio\bio\bio\bio\bio\bio\bio\t\$}\\[-1mm]
 	\text{dekodiranje izlaza: }9=(121)_2=\kr{\t{aba}}&&{}\leadsto^*{}&
 \renewcommand{\arraystretch}{0.1}
-	\T{\$\bl\bl}{q_3}{\#}{\bl\bl\bl\bl\bl\bl aba\$}\\[-1mm]
+	\T{\$aba}{q_4}{\bl}{\bl\bl\bl\bl\bl\bl\bl\bl\$}\\[-1mm]
 %\text{uokvirivanje izlaza}&&{}\leadsto^*{}&
 %\renewcommand{\arraystretch}{0.1}
 	%\T{\$\bl\bl\bl\bl\bl\bl\bl\bl\bl}{q_6}{a}{ba\$}\\[-1mm]
-\text{premještanje izlaza}&&{}\leadsto^*{}&
-\renewcommand{\arraystretch}{0.1}
-	\T{aba\bl\bl\bl\bl\bl\bl\bl\bl\bl\bl}{q_6}{\$}{}\\[-1mm]
+%\text{premještanje izlaza}&&{}\leadsto^*{}&
+%\renewcommand{\arraystretch}{0.1}
+%	\T{aba\bl\bl\bl\bl\bl\bl\bl\bl\bl\bl}{q_6}{\$}{}\\[-1mm]
 \text{završna konfiguracija}&&{}\leadsto^*{}&
-    \T{aba}{l_{\t\$}}{\bl}{}\lcirclearrowleft\text.
+    \T{}{l_{\t\$}}{a}{ba}\lcirclearrowleft\text.
 \end{align}
 
 Dodati \t a na kraj riječi Turingov stroj očito može daleko jednostavnije --- ali ovaj primjer zapravo pokazuje kako može računati bilo koju funkciju koju RAM-stroj može računati. Pravo računanje odvija se u primjeru~\ref{pr:+a2} --- ovo je samo hrpa "papirologije" prije i poslije, koju treba riješiti da bi taj primjer bio koristan.
 \end{primjer}
+
+Uočimo sličnost provedenog postupka s dokazom propozicije~\ref{prop:semfmacro}. Tamo smo makro-stroju omogućili da u izoliranoj okolini izvrši neki konkretni RAM-program, a ovdje smo to omogućili Turingovom stroju. Kao i u makro-programu iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (namještanje početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa) te, ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije te "zatvaranje okvira" pomicanjem ulijevo.
+
+Prikažimo postupak Turing-iz\-ra\-ču\-na\-va\-nja kroz faze: % (sa $z$ je označen najveći broj u ikojem relevantnom registru od $\mathcal S_0$ u završnoj konfiguraciji $P_0$-izračunavanja s $\kr w$):
+\begin{equation}
+\begin{array}{l|ccl}
+                             &\text{stanje}&\text{pozicija}&\text{traka}\\\hline
+    \text{početna konfiguracija} & n_{\t\$} & 0         & w\bl\ldots \\
+\text{nakon prve faze}       & q_0 & \dulj w   & \t\$w\t\#\bl\ldots \\
+\text{nakon druge faze}      & p_0 & \dulj w+2 & \t\$\bl^{\dulj w}\t\#r_1^{\kr w}\bl\ldots \\
+\text{nakon treće faze}      & p_n & {}>\dulj w & \renewcommand{\arraystretch}{0.1}
+    \t\$\bl^{\dulj w}\t\#\begin{array}{@{}c@{}}\t\textbullet\\?\end{array}^{\kr{v}}\begin{array}{@{}c@{}}\t\textopenbullet\\?\end{array}%^{z-\kr{v}}\bl
+    \ldots\\
+\text{međukorak četvrte faze} & q_4 & 1 & \renewcommand{\arraystretch}{0.1}\t\$\bl^{\dulj w+1}\begin{array}{@{}c@{}}\t\textbullet\\?\end{array}^{\kr v}\begin{array}{@{}c@{}}\t\textopenbullet\\?\end{array}\ldots\t\$\bl\ldots\\
+\text{nakon četvrte faze}    %& q_3 & \dulj w+1 &
+& l_\bl & \dulj v & \t\$v\bl\ldots\\
+%\renewcommand{\arraystretch}{0.1}
+%\t\$\bl^{\dulj w}\t\#\begin{array}{@{}c@{}}\t\textopenbullet\\?\end{array}^{z-\dulj v}v\t\$\bl\ldots\\
+%\text{prvi korak pete faze} & q_6 & \dulj w+2+z-\dulj v       & \t\$\bl^{\dulj w+1+z-\dulj v}v\t\$\bl\ldots\\
+%\text{drugi korak pete faze}& q_6 & \dulj w+2+z & v\bl^{\dulj w+2+z-\dulj v}\t\$\bl\ldots\\
+    \text{završna konfiguracija} & l_{\t\$} & 0 & v\bl\ldots
+\end{array}
+\end{equation}
 
 Ukratko, dokazali smo da je za \emph{jezične} funkcije izračunljivost u jezičnom modelu jednako snažna kao izračunljivost njihovih pratećih funkcija u brojevnom modelu. Time smo napokon opravdali neovisnost o korištenom \emph{encodingu} i riješili "filozofski problem" s početka točke~\ref{sec:kSigma}.
 
