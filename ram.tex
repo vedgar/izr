@@ -42,10 +42,10 @@ Direktna posljedica toga je da u našem modelu ne postoje algoritmi s "varijabil
 Iako mjesnost smatramo neodvojivim dijelom funkcije odnosno algoritma, u slučaju nespecificirane mjesnosti $k$ nespretno je pisati $x_1,x_2,\dotsc,x_k$ kad god trebamo napisati argumente odnosno ulazne podatke. Zato ćemo često tih $k$ prirodnih brojeva skraćeno pisati $\vec x$, ili $\vec x^k$ ako želimo naglasiti koliko ih ima --- no najčešće će se to moći zaključiti iz konteksta: recimo, u $f^7(\vec x,y,z)$, vidimo da je duljina od $\vec x$ jednaka $5$.
 
 \begin{napomena}[{name=[svi argumenti moraju biti eksplicitno navedeni]}]\label{nap:blokovi}
-S obzirom na to da promatramo samo determinističke algoritme, naglasimo da nema "implicitnih argumenata": sve vrijednosti o kojima ovisi izlaz funkcije (ako se doista mijenjaju od poziva do poziva) moraju biti prenesene u nju kao argumenti. Često ćemo pisati opće funkcijske pozive kao $f(\vec x,y,z)$, gdje su $y$ i $z$ "pravi" argumenti s kojima doista nešto radimo u konkretnom algoritmu, a $\vec x$ predstavlja samo kontekst (\emph{environment}) nekog vanjskog algoritma koji je pozvao $f$ --- koji također moramo prenijeti u $f$ ako želimo da mu ona može pristupiti.
+S obzirom na to da promatramo samo determinističke algoritme, naglasimo da nema "implicitnih argumenata": sve vrijednosti o kojima ovisi izlaz funkcije (ako se doista mijenjaju od poziva do poziva) moraju biti prenesene u nju kao argumenti. Često ćemo pisati opće funkcijske pozive kao $f(\vec x,y,z)$, gdje su $y$ i $z$ "pravi" argumenti s kojima doista nešto radimo u konkretnom algoritmu, a $\vec x$ predstavlja samo kontekst (\hspace{-1pt}\emph{environment}) nekog vanjskog algoritma koji je pozvao $f$ --- koji također moramo prenijeti u $f$ ako želimo da mu ona može pristupiti.
 \end{napomena}
 
-Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivna, odnosno ne promatramo algoritme s $0$ ulaznih podataka. Ovo nije bitna restrikcija (možete se zabaviti pokušavajući otkriti koje sve tehničke detalje u knjizi treba promijeniti da bismo uključili i takve algoritme u razmatranje), ali komplicira izlaganje, a takvi algoritmi nam nisu zanimljivi iz perspektive izračunljivosti: iz napomene~\ref{nap:blokovi} slijedi da nul-mjesni algoritmi mogu računati jedino konstante, a ne treba nam jako napredni formalizam da bismo zaključili da konstante \emph{jesu} izračunljive.
+Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivna, odnosno ne promatramo algoritme s $0$ ulaznih podataka. Ovo nije bitna restrikcija (možete se zabaviti pokušavajući otkriti koje sve tehničke detalje u knjizi treba promijeniti da bismo uključili i takve algoritme u razmatranje), ali pojednostavljuje izlaganje, a takvi algoritmi nam nisu zanimljivi iz perspektive izračunljivosti: iz napomene~\ref{nap:blokovi} slijedi da nul-mjesni algoritmi mogu računati jedino konstante, a ne treba nam jako napredni formalizam da bismo zaključili da konstante \emph{jesu} izračunljive.
 
 \subsection{Parcijalnost}
 
@@ -168,7 +168,7 @@ Skup $\mathscr Ins$ svih RAM-instrukcija je prebrojiv.
 Skup $\mathscr Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikavanje $f_1:\N\to\mathscr Ins_\inc$ zadano s $f_1(j):=(\incr{j})$ je bijekcija. Analogno, koristeći odredište (iako je broj odredišta ograničen za fiksni program $P$, svaka instrukcija $\goto\;l$ se može pojaviti u \emph{nekom} programu), skup $\mathscr Ins_{\goto}$ je prebrojiv, a skup $\mathscr Ins_\dec$ je ek\-vi\-po\-ten\-tan s $\N\times\N$, pa je i on prebrojiv. Sada je $\mathscr Ins$ prebrojiv kao (disjunktna) unija tih triju prebrojivih skupova.
 \end{proof}
 
-\begin{korolar}[{name=[prebrojivost skupa $\mathscr Pr\mspace{-1mu}oi\mspace{-2mu}g$]}]\label{kor:alef0prog}
+\begin{korolar}[{name=[prebrojivost skupa $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$]}]\label{kor:alef0prog}
 	Skup $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ svih RAM-programa je prebrojiv.
 \end{korolar}
 \begin{proof}
@@ -494,12 +494,12 @@ Kao i u RAM-slučaju, uz malo više tehnikalija mogu se dokazati rezultati o det
 
 \subsection{Spljoštenje}
 
-Dakle, cilj nam je opisati postupak za pretvorbu makro-strojeva u RAM-strojeve koji za iste ulaze prolaze kroz "iste" konfiguracije. One ne mogu biti doslovno iste jer makro-stroj ima dva programska brojača a RAM-stroj samo jedan, ali to je zapravo jedini detalj koji je različit. Sadržaj registara makro-stroja i RAM-stroja bit će isti kako se krećemo kroz izračunavanje, i izvršavat ćemo iste instrukcije (istog tipa nad istim registrima) istim redom, samo će one biti u različitim programima, s različitim rednim brojevima, pa će njihova odredišta trebati biti drugačija kako bi se odnosila na odgovarajuće instrukcije u drugom programu.
+Dakle, cilj nam je opisati postupak za pretvorbu makro-strojeva u RAM-strojeve koji za iste ulaze prolaze kroz "iste" konfiguracije. One ne mogu biti doslovno iste jer makro-stroj ima dva programska brojača a RAM-stroj samo jedan, ali to je zapravo jedini detalj koji je različit. Sadržaj registara makro-stroja i RAM-stroja bit će isti kako se krećemo kroz izračunavanje, i izvršavat će se iste instrukcije (istog tipa nad istim registrima) istim redom, samo će one biti u različitim programima, s različitim rednim brojevima, pa će njihova odredišta trebati biti drugačija kako bi se odnosila na odgovarajuće instrukcije u drugom programu.
 
 Ideja konstrukcije: "spljoštimo" gornju razinu (na kojoj su makroi $P^*$) i donju razinu (na kojoj su pojedinačne instrukcije programa $P$) u jednu razinu. U računarstvu se ta tehnika zove \emph{inlining}: umjesto makro-instrukcije $P^*$\!, na isto "mjesto" (relativnu poziciju u programu u odnosu na ostale instrukcije) stavimo sve instrukcije od $P$ redom. Time su neki redni brojevi instrukcija prestali biti sinkronizirani s odredištima: prvo, svi redni brojevi instrukcija u $P$ (osim ako je makro $P^*$ bio baš na početku makro-programa), a drugo, svi redni brojevi nakon onog koji je imao makro $P^*$ (osim ako $P$ ima točno jednu instrukciju). Sve ih treba popraviti, a jednako tako i odredišta koja se na njih odnose. Precizirajmo taj postupak.
 
 \begin{definicija}[{name=[spljoštenje]}]\label{def:flat}
-Neka je $Q$ makro-program. \emph{Spljoštenje} od $Q$ definiramo kao RAM-program $Q^\flat$, dobiven iz $Q$ sljedećim postupkom:
+Neka je $Q$ makro-program. \emph{Spljoštenje} od $Q$ je RAM-program $Q^\flat$, dobiven iz $Q$ sljedećim postupkom:
 \begin{quotation}
 Dok god postoji barem jedan makro u $Q$:
 \begin{enumerate}
@@ -673,13 +673,13 @@ ima semantiku $r_j'=r_i\land r_k'=0$ (nismo napisali $r_i'$, što u skladu s na�
         & & r_i & r_j & r_k\\\hline
         0.&\textsc{zero}\;\reg{j} & r_i & 0 & r_k\\
         1.&\textsc{zero}\;\reg{k} & r_i & 0 & 0  \\
-        2.\text{--}5.& \text{(petlja)} &    0   & r_i & r_i \\
+        2.\text{--}\mspace{1mu}5.& \text{(petlja)} &    0   & r_i & r_i \\
         6.&\textsc{remove $\reg{k}$ to $\reg{i}$}& r_i & r_i & 0
     \end{array}
 \end{equation}
 Naglasimo da smo za tu operaciju morali "žrtvovati" (resetirati) jedan registar sa strane. Zbog $i\ne k$, uvjet na parametre makroa \textsc{remove} je zadovoljen.
 
-\begin{napomena}[{name=[{terminologija makroa za kopiranje, premještanje i brisanje}]}]
+\begin{napomena}[{name=[{terminologija makroa za kopiranje\slash premještanje registara}]}]
 %Terminološki detalj: ako ste navikli na rad s modernim sustavima datoteka,
     Vjerojatno smatrate čudnim naziv \textsc{move} za ono što biste intuitivno zvali \textsc{copy} (dok se ono što biste zvali \textsc{move} ovdje zove \textsc{remove}, a ono što biste zvali \textsc{remove} ovdje se zove \textsc{zero}). Niste jedini: pogledajte recimo~\cite{url:movecopy}. Razlozi su izgubljeni u dubinama povijesti, ali moderne računalne arhitekture uglavnom terminološki prate arhitekturu \texttt{x86}, koja instrukciju za kopiranje podataka između registara (i drugih lokacija) zove \texttt{mov}. Tu terminologiju i mi slijedimo ovdje.
 \end{napomena}

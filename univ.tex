@@ -668,7 +668,7 @@ Ako je $I$ tipa $\goto$, recimo $I=(\goto\;l)$, tada ne vrijedi ni $Up$ ni $Down
 	Ako je pak $I$ tipa $\dec$, recimo $I=(\decr jl)$, tada je opet $pj=p_j$ te $Up$ ne vrijedi, a $Down\Leftrightarrow p_j\mid r=c[\reg{}]\Leftrightarrow c(\reg j)>0$. Ako to vrijedi, $p'=p+1$ i $r'=r\div p_j$, a inače, $p'=\f{dest}(\kins{\decr jl})=l$ i $r'=r$, što i treba biti po semantici instrukcije tipa $\dec$.
 \end{proof}
 
-\subsection{Kodiranje RAM-izračunavanja}
+\subsection{Kodiranje RAM-izračunavanja po koracima}
 
 Sada raspolažemo svime potrebnim da bismo kodirali postupak iz\-ra\-ču\-na\-va\-nja kao niz konfiguracija. Konkretno, neka je $P^k$ RAM-algoritam te $\vec x\in\N^k$ ulaz za njega. Htjeli bismo konstruirati izračunljivu funkciju koja prima $k\in\N_+$, $\vec x\in\N^k$ i $P\in\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ te vraća niz $(c_n)_{n\in\N}$ koji predstavlja $P$-izračunavanje s $\vec x$.
 
@@ -899,8 +899,9 @@ Za smjer ($\Leftarrow$): kako je $\f f$ totalna, $\vec x^k\in\dom f=\N^k$ uvijek
 
 Istaknimo da u teoremu~\ref{tm:graftot} ne možemo staviti riječ "primitivno" u zagrade, kao što smo činili u mnogim rezultatima do sada: postoje rekurzivne funkcije čiji grafovi su primitivno rekurzivni, ali one same nisu primitivno rekurzivne. \emph{Ackermannova} funkcija, opisana u~\cite[dodatak]{skr:Vuk}, primjer je takve funkcije.
 
-\subsection{Relacije \texorpdfstring{$\f{Step}$ i $\f T_k$}{Step i Tk}}
+%\subsection{Relacije \texorpdfstring{$\f{Step}$ i $\f T_k$}{Step i Tk}}
 %\subsection{Univerzalne funkcije \texorpdfstring{$\f{comp}_k$}{comp}}
+\subsection{Kodiranje RAM-izračunavanja jednim brojem}
 
 Kako $\f{step}$ nije totalna, ne možemo direktno primijeniti teorem~\ref{tm:graftot}, ali možemo neke druge rezultate. Konkretno, prema lemi~\ref{lm:projmugraf} je $\f{step}=\mu\,\f{Step}$, no $\f{step}$ je već definirana minimizacijom primitivno rekurzivne relacije $\f{Final}$. Relacije $\f{Step}$ i $\f{Final}$ nisu jednake jer jedna ima funkcijsko svojstvo a druga nema (čim vrijedi $\f{Final}(x,e,n_0)$, vrijedi i $\f{Final}(x,e,n)$ za sve $n>n_0$), ali možemo li dobiti jednu pomoću druge? $\f{Final}(x,e,n)\Leftrightarrow(\exists m\le n)\f{Step}(x,e,m)$ znači da je $\f{Final}$ dobivena ograničenom egzistencijalnom kvantifikacijom iz $\f{Step}$, ali nama treba drugi smjer.
 
@@ -971,7 +972,7 @@ Za proizvoljne $\vec x$ i $e$, postoji najviše jedan RAM-program $P$ s kodom $e
 
 Skupovi $Halt_k,k\in\N_+$ čine familiju neizračunljivih relacija, svaka od kojih je fiksne mjesnosti i predstavlja određenu "krišku" univerzalne neizračunljive relacije $HALT$.
 
-\subsection{Funkcije \texorpdfstring{$\f U$ i $\f{comp}_k$}{U i comp}}
+%\subsection{Funkcije \texorpdfstring{$\f U$ i $\f{comp}_k$}{U i comp}}
 
 Korolar~\ref{kor:funHaltTk} prema napomeni~\ref{nap:graf=funsv} kaže da je za svaki pozitivni $k$, relacija $\f T_k$ graf neke funkcije. Štoviše, po lemi~\ref{lm:projmugraf}, ta funkcija je upravo $\mu\f T_k$, njena domena je $Halt_k$, i ona preslikava svaki $(\vec x^k,\kprog{P})\in Halt_k$ (svaki element od $Halt_k$ mora biti tog oblika, po napomeni~\ref{nap:HaltProg}) u kod $P$-izračunavanja s $\vec x$. Sada, da bismo dobili \emph{rezultat} tog izračunavanja, samo treba dokomponirati slijeva funkciju zadanu s
 \begin{equation}\label{eq:Udef}
@@ -1019,7 +1020,7 @@ Za svaki $k\in\N_+$, za sve $(\vec x,e)\in\N^{k+1}$ vrijedi:
 Ovo je zapravo lema~\ref{lm:univspec}, iskazana koristeći parcijalnu jednakost~\eqref{eq:comp=univ}, i pojednostavljena jer je uvijek $\langle\vec x^k\rangle\in\f{Seq}'$ za $k\in\N_+$, pa to ne treba pisati u uvjete.
 \end{proof}
 
-% \subsection{Indeksi izračunljivih funkcija}
+\subsection{Indeksi izračunljivih funkcija}
 
 Sve bitno što smo dosad napravili u ovoj točki može se iskazati u jednom teoremu.
 
@@ -1051,7 +1052,7 @@ Vidimo da su $\f U$, $\f T_k$, $\f I_n^k$ i $\f C_e^k$ primitivno rekurzivne, da
 
 %Štoviše, za fiksni $k$, postoje brojevi $z_k$, $r_k$ i $i_{nk}$, $n\in[1\dd k]$, takvi da svaka $k$-mjesna parcijalno rekurzivna funkcija ima simboličku definiciju u kojoj se $\f Z$ pojavljuje točno $z_k$ puta, $\f I_n^k$ točno $i_{nk}$ puta te primitivna rekurzija točno $r_k$ puta. Jedino što se mijenja je broj pojava funkcije $\f{Sc}$ i operatora kompozicije, zbog $\f C_e^k=\f{Sc}\circ\f{Sc}\circ\dotsb\circ\f{Sc}\circ\f Z\circ\f I_1^k$.
 
-\subsection{Indeksi izračunljivih funkcija}
+%\subsection{Indeksi izračunljivih funkcija}
 
 Kad fiksiramo $\f U$ i sve $\f T_k$ te pomoću njih definiramo funkcije $\f{comp}_k$ (kao što smo učinili), Kleenejev teorem o normalnoj formi možemo izreći jednostavnije.
 
@@ -1093,7 +1094,11 @@ Neka je $k\in\N_+$ te $\f f^k$ parcijalno rekurzivna funkcija. Prema teoremu~\re
 Alternativno, možemo smatrati da smo uzeli \emph{najmanji} indeks za $f$, koji sigurno postoji ako $f$ ima indeks, i jednoznačno je određen zbog dobre uređenosti od $\N$, ali to ima jedan bitan nedostatak: često iz specifikacije neke funkcije $f$ možemo \emph{izračunati} neki indeks za $f$, ali ne možemo izračunati najmanji indeks za nju. Ugrubo, možemo provjeravati brojeve $e$ redom, ali uvjet zaustavljanja $\kf e=f$ je jednakost funkcija, koja nije izračunljiva. Čak i da su funkcije totalne (što ne moraju biti), morali bismo provjeriti jednakost za sve $\vec x$ iz $\N^k$, kojih je beskonačno mnogo.
 \end{napomena}
 
-Drugim, riječima, tromjesna relacija $index$ (zadana s $\kf e^k=\f f$) između $\N$, $\N_+$ i $\mathscr Comp$ nema funkcijsko svojstvo po prvoj varijabli --- ali ima po trećoj. %Za svaki broj $e$ možemo karakterizirati funkciju $\kf e^k$.
+Drugim, riječima, tromjesna relacija %$index$ (zadana s $\kf e^k=\f f$)
+\begin{equation}
+index(e,k,\f f):\Longleftrightarrow \kf e^k=\f f
+\end{equation}
+između $\N$, $\N_+$ i $\mathscr Comp$ nema funkcijsko svojstvo po prvoj varijabli --- ali ima po trećoj. Za svaki broj $e$ i mjesnost $k$ možemo precizno opisati funkciju $\kf e^k$. O tome govori sljedeća propozicija.
 
 \begin{propozicija}[{name=[specifikacija funkcije zadane indeksom]}]\label{prop:computeind}
 Za sve $k\in\N_+$ i $e\in\N$ vrijedi:
@@ -1105,7 +1110,7 @@ Za sve $k\in\N_+$ i $e\in\N$ vrijedi:
 \begin{proof}
 Ako je $e\in\f{Prog}$, tada postoji $P\in\mathscr Prog$ takav da je $\kprog P=e$, i jedinstven je jer je $\kprog{\cdots}$ injekcija. Po korolaru~\ref{kor:ram1fun}, postoji jedinstvena funkcija $\f f^k$ koju $P^k$ računa. Po definiciji~\ref{def:compute}, za tu funkciju vrijedi: za sve $\vec x\in\dom{\f f}$, $P$-izračunavanje s $\vec x$ stane, pa je po korolaru~\ref{kor:compspec}\eqref{tv:comp}, $\f f(\vec x)=\f{comp}_k(\vec x,e)=\kf e^k(\vec x)$. Za sve pak $\vec x\notin\dom{\f f}$, $P$-izračunavanje s $\vec x$ ne stane, pa po korolaru~\ref{kor:compspec}\eqref{tv:ncomp} izraz $\f{comp}_k(\vec x,e)\simeq\kf e^k(\vec x)$ nema smisla, baš kao ni $\f f(\vec x)$. Dakle uvijek je $\f f(\vec x)\simeq\kf e(\vec x)$, odnosno $\f f=\kf e$.
 
-S druge strane, ako $e\notin\f{Prog}$, tada opet po korolaru~\ref{kor:compspec}\eqref{tv:ncomp} izraz $\f{comp}(\vec x,e)\simeq\kf e(\vec x)$ nema smisla, ali ovaj put neovisno o $\vec x\in\N^k$. Drugim riječima $\dom{\kf e^k}=\emptyset^k$, odnosno jedino je moguće $\kf e^k=\varnothing^k$.
+S druge strane, ako $e\notin\f{Prog}$, tada opet po korolaru~\ref{kor:compspec}\eqref{tv:ncomp} izraz $\f{comp}(\vec x,e)\simeq\kf e(\vec x)$ nema smisla, ali ovaj put neovisno o $\vec x\in\N^k$. Drugim riječima, tada je $\dom{\kf e^k}\!=\emptyset^k$, odnosno jedino je moguće $\kf e^k=\varnothing^k$.
 \end{proof}
 
 %\begin{korolar}[{name=[kod programa koji računa funkciju je indeks funkcije]}]\label{kor:computeind}
@@ -1127,7 +1132,7 @@ Riječima, ako $F$ preslikava $\f f^2$ u $\f g^3$, tada $\N F$ mora preslikavati
 Takve funkcije možemo i komponirati: ako imamo $G:\mathscr Comp_3\rightharpoonup\mathscr Comp_1$ sa sličnom specifikacijom, koja preslikava $\f g^3$ u $\f h^1$, tada iako ne znamo koji će nam indeks od $\f g$ funkcija $\N F$ dati, funkcija $\N G$ mora ispravno raditi za \emph{sve} indekse od $\f g$, pa će na kraju $\N G\circ\N F$ dati neki indeks za $\f h$, ako joj damo (bilo koji) indeks za $\f f$.
 \end{primjer}
 
-To možemo kombinirati s "pravim" kodiranjima: recimo, funkcija $apply_k:\N^k\times\mathscr Comp_k\rightharpoonup\N$, koja prima $\vec x^k$ i $\f f^k$, i vraća $\f f(\vec x)$ ako je $\vec x\in\dom{\f f}$, ima svoju prateću funkciju koja prima $\langle\vec x\rangle$ i bilo koji indeks za $\f f$, i vraća $\f f(\vec x)$ ako postoji.
+To možemo kombinirati s "pravim" kodiranjima: recimo, za svaki $k\in\N_+$, funkcija $apply_k:\N^k\times\mathscr Comp_k\rightharpoonup\N$, koja prima $\vec x^k$ i $\f f^k$, i vraća $\f f(\vec x)$ ako je $\vec x\in\dom{\f f}$, ima svoju prateću funkciju koja prima $\langle\vec x\rangle$ i bilo koji indeks za $\f f$, i vraća $\f f(\vec x)$ ako postoji.
 \begin{equation}
     \N apply_k(x,e):\simeq\f{univ}(x,e)\text{, za }\f{lh}(x)\eq k
 \end{equation}
