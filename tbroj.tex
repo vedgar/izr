@@ -76,7 +76,7 @@ Izračunljivost $L$ u brojevnom modelu gledamo preko kodova: definiramo jednomje
 \end{equation}
 i prirodno je reći da $L$ ima neko svojstvo izračunljivosti (npr.\ da je primitivno rekurzivan) ako relacija $\kr L$, odnosno njena karakteristična funkcija $\chi_{\kr L}$, ima to svojstvo.
 
-Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}=\chi_{\mspace{1mu}\emptyset}=\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}\!=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
+Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}\!=\chi_{\mspace{1mu}\emptyset}\!=\!\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}\!=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
 
 U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_a$ i $q_r$, kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
@@ -121,7 +121,7 @@ U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propo
 Neka je $L$ jezik (nad nekom abecedom $\Sigma$).\newline Ako je relacija $\kr L$ rekurzivna, tada postoji Turingov odlučitelj za $L$.
 \end{teorem}
 \begin{proof}
-Pretpostavka zapravo znači da je $\chi_{\kr L}$ rekurzivna funkcija. Dakle $\chi_{\kr L}$ je parcijalno rekurzivna, pa po teoremu~\ref{tm:pir} postoji RAM-program koji je računa; i totalna je, pa taj RAM-program stane za svaki ulaz. Na taj RAM-program htjeli bismo primijeniti postupak iz točke~\ref{sec:RAM>Turing}. Da bismo to mogli, moramo $\chi_{\kr L}$ prikazati kao $\N\varphi$ za neku jezičnu funkciju $\varphi$ nad $\Sigma$. Možemo li to?
+Pretpostavka zapravo znači da je $\chi_{\kr L}$ rekurzivna funkcija. Dakle $\chi_{\kr L}$ je parcijalno rekurzivna, pa po teoremu~\ref{tm:pir} postoji RAM-program $P$ koji je računa; i totalna je, pa $P$-izračunavanje stane sa svakim ulazom. Na $P$ bismo htjeli primijeniti postupak iz točke~\ref{sec:RAM>Turing} --- dakle moramo $\chi_{\kr L}$ prikazati kao $\N\varphi$ za neku jezičnu funkciju $\varphi$ nad $\Sigma$. Možemo li to?
 
 Svakako: dokaz propozicije~\ref{pp:trackbij} kaže da je $\varphi:=\N^{-1}\chi_{\kr L}=\sigma^{\,-\!1}\circ\chi_{\kr L}\circ\sigma$, uz oznaku $\sigma:=\N\Sigma^*$. Funkcija $\varphi$ je totalna kao kompozicija tri totalne, a Turing-izračunljiva je prema korolaru~\ref{kor:pent} (ako uzmemo isto kodiranje pomoću kojeg smo izračunali $\kr L$). Pogledajmo detaljnije kako ona djeluje.
 
@@ -134,7 +134,7 @@ Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju $bool$ u $\Sigma^*$:
 
 %Kako izvršavanje RAM-programa o kojem govorimo stane za svaki $\kr w$, po korolaru~\ref{kor:faza3} i napomeni~\ref{nap:snstane} slijedi da će Turingov stroj koji konstruiramo stati za svaki $w$ --- samo trebamo malo promijeniti način na koji stane, da ne komunicira izlaz putem trake nego putem završnog stanja.
 
-    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa koji računa $\chi_{\kr L}$. Srećom, u završnoj konfiguraciji pozicija je $0$, pa je vrlo lako vidjeti je li izlazna riječ prazna: znak koji čitamo tada je ili praznina ili element ulazne abecede. Proglasimo $l_{\t\$}$ običnim stanjem, i dodajmo prijelaze %U opisu pete (posljednje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\t\$}$ s
+    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa $P$ koji računa $\chi_{\kr L}$. Srećom, u završnoj konfiguraciji pozicija mu je $0$, pa je vrlo lako vidjeti je li izlazna riječ prazna: znak koji čitamo tada je ili praznina ili element ulazne abecede. Proglasimo $l_{\t\$}$ običnim stanjem, i dodajmo prijelaze %U opisu pete (posljednje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\t\$}$ s
 \begin{gather}
     %\SwapAboveDisplaySkip
 \label{eq:d88j}\tag{$\delta$5b}
@@ -146,7 +146,7 @@ Po teoremu~\ref{tm:krit}, dobiveni stroj će "računati" (pod navodnicima jer od
 \end{proof}
 \vspace{-4mm}
 
-Dijagramatski, na kraj Turingovog stroja dodali smo %gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
+Dijagramatski, na kraj Turingovog stroja dodali smo\; %gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
 \begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
     \node[state] (q9) {$l_{\t\$}$};
 \node[state,accepting,right of=q9] (qt) {$q_a$};
@@ -185,7 +185,7 @@ Najlakše je konstruirati inverznu funkciju i pokazati da je to doista inverz. D
 
 Tvrdimo da je tako konstruirano preslikavanje desni inverz od $\beta$: odnosno, ako tako dobijemo niz $\vec x$, tada je $\beta(\vec x)=u$. Doista, te dvije riječi imaju isti broj separatora ($k-1$) i isti broj kružića ($\sum\vec x$) te se podudaraju na pozicijama svih separatora (malo pomaknute parcijalne sume od $\vec x$) --- što je dovoljno za zaključak da su jednake.
 
-To je također i lijevi inverz: odnosno, ako primijenimo taj postupak na riječ $\beta(\vec x)$, dobit ćemo upravo $\vec x$: imat će točnu duljinu $k$, i točan svaki član, jer između $i$-tog i $(i+1)$-vog separatora u~\eqref{eq:betadef} ima točno $x_i$ kružića.
+	To je također i lijevi inverz: odnosno, ako primijenimo taj postupak na riječ $\beta(\vec x)$, dobit ćemo upravo $\vec x$: imat će točnu duljinu $k$, i točan svaki član, jer između $i$-tog i $(i+1\mspace{-1mu})$-vog separatora u~\eqref{eq:betadef} ima točno $x_i$ kružića.
 \end{proof}
 
 Za same funkcije, koristit ćemo istu ideju kao u~\eqref{eq:kodfidef}: reprezentaciju ulaza preslikamo u reprezentaciju izlaza (ako je izlaz definiran), dok ne-reprezentacije ne preslikamo nikamo. Ovdje treba biti oprezan zbog propozicije~\ref{prop:betabij}, ali brojevne funkcije imaju fiksnu mjesnost. Zato ćemo ne-reprezentacijama za funkciju $f^k$ proglasiti sve one riječi koje nisu reprezentacije $k$-torki (odnosno one koje su reprezentacije $l$-torki za $l\ne k$). Na isti način, na izlazu ćemo dati reprezentaciju samog broja ($k=1$), dakle riječ bez separatora $\t\textbullet^y=\beta(y)\in\beta[\N]=\im{\beta^{\!1}}=\t\textbullet^*$.
@@ -358,7 +358,7 @@ Primitivna rekurzivnost slijedi iz leme~\ref{lm:ldcpprn}. Za asocijativnost,
 	\text{[korolar~\ref{kor:lhkonk=lh+lh}]}{}=x\cdot b^{\f{slh}(y\,\conc{{\scriptscriptstyle b}}\,z\,,\,b)}+\left(y\conc b z\right)=x\conc b\left(y\conc b z\right)\text{\qedhere\;.}
 \end{multline}
 \end{proof}
-Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Uočimo da je za asocijativnost ključno da se radi o \textbf{pomaknutoj} bazi: u običnoj bazi 10 je $(5\conc{10}'0)\conc{10}'2=50\conc{10}'2=502\ne5\conc{10}'(0\conc{10}'2)=5\conc{10}'2=52$ pa ne vrijedi asocijativnost.
+Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez zagrada. Uočimo da je za asocijativnost ključno da se radi o \textbf{pomaknutoj} bazi: u običnoj bazi $10$ je $(5\conc{\!1\!0\!}\!'0)\conc{\!1\!0\!}\!'2=50\conc{\!1\!0\!}\!'2=502\ne5\conc{\!1\!0\!}\!'(0\conc{\!1\!0\!}\!'2)=5\conc{\!1\!0\!}\!'2=52$ pa ne vrijedi asocijativnost.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost višemjesnog binarnog kodiranja]}]\label{pp:binkprn}
 Za svaki $k\in\N_+$, funkcija $\f{bin}^k$ je primitivno rekurzivna.

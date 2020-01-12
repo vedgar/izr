@@ -1,5 +1,4 @@
 \section{Neizračunljive funkcije}
-%Valid kernirati kako treba
 
 Intuitivni pojam izračunljivog kao "onog za što postoji algoritam", zajedno s Church--\!Turingovom tezom, napokon daju mogućnost da dokažemo da za neke probleme ne postoje algoritmi. To ćemo učiniti dokazom da neka funkcija $g$ nije parcijalno rekurzivna --- tada po teoremu ekvivalencije $\beta g$ nije Turing-izračunljiva, po definiciji~\ref{def:izr} $g$ nije izračunljiva, pa možemo reći da za nju ne postoji algoritam.
 
@@ -113,7 +112,7 @@ $R\preceq P$ znači da ako imamo algoritam za rješavanje problema $P$, pomoću 
 Relacija svediva na rekurzivnu relaciju je i sama rekurzivna.
 \end{propozicija}
 \begin{proof}
-Neka su $k,l\in\N_+$ te $R^k$ relacija i $\f P^l$ rekurzivna relacija takve da je $R\preceq\f P$. To znači $\chi_R=\chi_{\f P}\circ(\f G_1,\dotsc,\f G_l)$, a rekurzivnost od $\f P$ znači da je $\chi_{\f P}$ rekurzivna, pa je po lemi~\ref{lm:comprek} i $\chi_R$ rekurzivna, odnosno $R$ je rekurzivna.
+Neka su $k,l\in\N_+$ te $\f R^k$ relacija i $\f P^l$ rekurzivna relacija takve da je $\f R\preceq\f P$. To znači $\chi_R=\chi_{\f P}\circ(\f G_1,\dotsc,\f G_l)$, pa je $\f R$ rekurzivna po lemi~\ref{lm:comprek}.
 \end{proof}
 
 \begin{korolar}[{name=[inverz svedivosti čuva neodlučivost]}]\label{kor:nrek<nrek}
@@ -133,7 +132,7 @@ Problemi $Halt_1$ i $HALT$ nisu odlučivi.
 \begin{proof}
 Tvrdimo da vrijedi $K(n)\Leftrightarrow Halt_1(n,n)$. Doista,
 \begin{multline}
-    K=\dom{\f{Russell}}=\dom{\f{Sc}\,\circ\,\f{comp_1}\circ\,(\f I_1^1,\f I_1^1)}=\dom{\f{comp}_1\circ\,(\f I_1^1,\f I_1^1)}=\\
+    K=\dom{\f{Russell}}=\dom{\f{Sc}\,\circ\,\f{comp}_1\circ\,(\f I_1^1,\f I_1^1)}=\dom{\f{comp}_1\circ\,(\f I_1^1,\f I_1^1)}=\\
     =\left\{n\;\middle\vert\;\bigl(\f I_1^1(n),\f I_1^1(n)\bigr)\in\dom{\f{comp}_1}\right\}
     =\{n\mid(n,n)\in Halt_1\}\text,
 \end{multline}
@@ -190,9 +189,9 @@ Za logiku prvog reda također vrijede teoremi adekvatnosti i potpunosti (dakle, 
 \begin{definicija}[{name=[problem valjanosti i problem zaključivanja]}]
     Označimo s $F1$ skup svih formula logike prvog reda,\newline
 	\hspace*{6.1em}
-	a s $Valid\subset F1$ skup svih valjanih formula među njima.
+	a s $\Valid\subset F1$ skup svih valjanih formula među njima.
 
-	\emph{Problem valjanosti} pita: za zadanu formulu $\phi\in F1$, je li $\phi\in Valid\mspace{2mu}$?
+	\emph{Problem valjanosti} pita: za zadanu formulu $\phi\in F1$, je li $\phi\in\Valid\mspace{2mu}$?
 
 \emph{Problem zaključivanja} pita: za zadane $\phi_1,\phi_2,\dotsc,\phi_k,\phi\in F1$,\newline
 	\hspace*{14.1em}je li $\phi$ logička posljedica skupa $\{\phi_1,\dotsc,\phi_k\}$?
@@ -229,7 +228,7 @@ Logičko zaključivanje je, u osnovi, traženje "puta" od premisa do zaključka,
 
 U tom smislu, u $\Gamma$ bi se trebala nalaziti neka formula $\pi_{\vec u}$ koja opisuje početnu konfiguraciju s ulazom $\vec u$, a $\zeta$ bi trebala biti formula koja opisuje završnu konfiguraciju --- ne zanima nas rezultat izračunavanja, nego samo zaustavljanje, pa $\zeta$ može biti egzistencijalno kvantificirana po stanju registara, i samo fiksirati vrijednost programskog brojača, a onda ne mora ovisiti o $\vec u$.
 
-U tom smislu, instrukcije programa $P$ mogli bismo shvatiti kao pravila zaključivanja --- recimo, $3.\;\incr1$ kaže da iz formule koja predstavlja konfiguraciju $(x,y,\vec z,0,\dotsc,3)$ možemo izvesti formulu koja predstavlja konfiguraciju $(x,y+1,\vec z,0,\dotsc,4)$, za sve $x$, $y$ i $\vec z$ --- ali s time postoji jedan bitan problem: logika prvog reda ne dopušta nam imati vlastita (nelogička) pravila zaključivanja, možemo imati samo \emph{modus ponens} i generalizaciju. Srećom, \emph{modus ponens} je vrlo općenito pravilo, koje može simulirati ostala pravila pomoću odgovarajućih nelogičkih aksioma --- primjerice, ako bismo htjeli imati pravilo kojim iz $\phi$ i $\eta$ izvodimo $\theta$, dovoljno je u nelogičke aksiome dodati formulu $\bigl(\phi\to(\eta\to\theta)\bigr)$. Tada možemo iz tog aksioma i $\phi$ izvesti $(\eta\to\theta)$, pa onda iz te formule i $\eta$ izvesti $\theta$, koristeći samo \emph{modus ponens}.
+U tom smislu, instrukcije programa $P$ mogli bismo shvatiti kao pravila zaključivanja --- recimo, $3.\;\incr1$ kaže da iz formule koja predstavlja konfiguraciju $(x,y,\vec z,0,\dotsc,3)$ možemo izvesti formulu koja predstavlja konfiguraciju $(x,y\!+\!1,\vec z,0,\dotsc,4)$, za sve $x$, $y$ i $\vec z$ --- ali s time postoji jedan bitan problem: standardni račun logike prvog reda ne dopušta nam imati vlastita (nelogička) pravila zaključivanja, možemo imati samo \emph{modus ponens} i generalizaciju. Srećom, \emph{modus ponens} je vrlo općenito pravilo, koje može simulirati ostala pravila pomoću odgovarajućih nelogičkih aksioma --- primjerice, ako bismo htjeli imati pravilo kojim iz $\phi$ i $\eta$ izvodimo $\theta$, dovoljno je u nelogičke aksiome dodati formulu $\bigl(\phi\to(\eta\to\theta)\bigr)$. Tada možemo iz tog aksioma i $\phi$ izvesti $(\eta\to\theta)$, pa onda iz te formule i $\eta$ izvesti $\theta$, koristeći samo \emph{modus ponens}.
 
 Taj pristup ćemo koristiti ovdje, odnosno u $\Gamma$ ćemo imati po jednu formulu $\iota_i$ za svaku instrukciju programa $P$ (s rednim brojem $i$). Još je preostalo objasniti što ćemo s ovim trotočkama u konfiguracijama (odnosno kako reprezentirati konačni nosač), i što s aritmetičkim operacijama ($+$ za \inc, $-$ za \dec).
 
@@ -436,7 +435,7 @@ Dakle, pod pretpostavkom da $\mathcal A$ ispravno odlučuje koje su formule prvo
 
 Time je dokazan Churchov teorem, ali na neformalnoj razini --- "dokazali" smo da ne postoji neformalni algoritam, tako što smo se pozvali na Church--\!Turingovu tezu. Možemo li bez toga?
 
-Rekli smo da probleme obično shvaćamo kao jezike: odlučivost problema je tu rekurzivnost (karakteristične funkcije kodiranja) jezika čiji elementi su riječi koje predstavljaju instance problema na koje je odgovor potvrdan. U ovom slučaju, promotrili bismo jezik $Valid$ nad nekom abecedom $\Sigma_{\log}$ koja je dovoljno bogata da može izraziti svaku formulu logike prvog reda, i u njemu bi se nalazile samo valjane formule. Ako uspijemo dokazati da $Valid$ nije rekurzivan, "odgurat" ćemo primjenu Church--\!Turingove teze na sam kraj dokaza, i pseudokod u dokazu teorema~\ref{tm:Church} moći ćemo zamijeniti pravom rekurzivnom funkcijom koja svodi $K$ na $Valid$ (preciznije $\kr{Valid}$).
+Rekli smo da probleme obično shvaćamo kao jezike: odlučivost problema je tu rekurzivnost (karakteristične funkcije kodiranja) jezika čiji elementi su riječi koje predstavljaju instance problema na koje je odgovor potvrdan. U ovom slučaju, promotrili bismo jezik $\Valid$ nad nekom abecedom $\Sigma_{\log}$ koja je dovoljno bogata da može izraziti svaku formulu logike prvog reda, i u njemu bi se nalazile samo valjane formule. Ako uspijemo dokazati da $\Valid$ nije rekurzivan, "odgurat" ćemo primjenu Church--\!Turingove teze na sam kraj dokaza, i pseudokod u dokazu teorema~\ref{tm:Church} moći ćemo zamijeniti pravom rekurzivnom funkcijom koja svodi $K$ na $\Valid$ (preciznije $\kr{\Valid}$).
 
 Hoćemo li time dobiti išta vrednije nego u prethodnoj točki? Da, jer imamo garanciju da smo barem svođenje napisali egzaktno --- a ako prihvatimo definiciju~\ref{def:izr}, argument postaje sasvim matematički bez pozivanja na intuiciju pojma algoritma.
 
@@ -489,9 +488,9 @@ Time formula u osnovnom jeziku postaje \t{R(f(f(c),f(c)),f(f(c)))}, a njen kod j
 %\begin{definicija}[{name=[jezici svih i valjanih formula prvog reda]}]
 %Nad logičkom abecedom promotrimo sljedeće jezike:
 %\begin{quote}
-%\begin{labeling}{$Valid$}
+%\begin{labeling}{$\Valid$}
 %\item[$F1$] Skup svih formula prvog reda.
-%\item[$Valid$] Skup svih valjanih formula prvog reda.\qedhere
+%\item[$\Valid$] Skup svih valjanih formula prvog reda.\qedhere
 %\end{labeling}
 %\end{quote}
 %\end{definicija}
@@ -529,7 +528,7 @@ Ako je riječ $v$ prava podriječ od $w$, tada je $\kr v<\kr w$.
 \end{proof}
 
 \begin{lema}[{name=[primitivna rekurzivnost leksičke strukture formula prvog reda]}]\label{lm:lexF1}
-Postoje primitivno rekurzivne funkcije $\f{Var}$, $\f{Const}$, $\f{Func}$ i $\f{Rel}$ koje preslikavaju $i\in\N$ redom u $\kr{x_i}$, $\kr{c_i}$, $\kr{f_i}$ i $\kr{R_i}$.
+Funkcije $\f{Var}$, $\f{Const}$, $\f{Func}$ i $\f{Rel}$, koje preslikavaju $i\in\N$ redom u $\kr{x_i}$, $\kr{c_i}$, $\kr{f_i}$ i $\kr{R_i}$, primitivno su rekurzivne.
 \end{lema}
 \begin{proof}
 Zapravo je jedini zanimljivi dio vidjeti da je "potenciranje" (uzastopna konkatenacija) znaka odnosno riječi, $Repeat(w,n):=w^n$, primitivno rekurzivno. Prateća funkcija se može napisati primitivnom rekurzijom i konkatenacijom:
@@ -581,7 +580,7 @@ Zapravo, kako u našem slučaju (reprezentacija problema zaustavljanja RAM-stroj
 
 Pogledajmo kako u osnovnom jeziku izgleda formula $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\eqref{step:varphi_u}. To ovisi o instrukcijama programa $P_0$ koji računa Russellovu funkciju, ali dio koji nam je jedini bitan za svođenje je prilično malen i odnosi se samo na formulu $\pi_u$.
 
-Preciznije, neka je $P_0=\begin{prog}t.&I_t\end{prog}_{t<n}$. Za svaki $t<n$ imamo u $\Gamma_u$ jednu formulu $\iota_t$, čija se univerzalna zatvorenja obrnutim redom prebacuju s desne strane~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je tada na desnoj stani označimo s $\psi$), koju ne trebamo univerzalno zatvarati jer je rečenica. Formula $\psi$, iako ogromna, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će biti (jako velika) konstanta.
+Preciznije, neka je $P_0=\begin{prog}t.&I_t\end{prog}_{t<n}$. U $\Gamma_u$ imamo formule $\iota_t,t<n$, čija se univerzalna zatvorenja obrnutim redom prebacuju na desnu stranu~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je tada na desnoj stani označimo s $\psi$), koju ne trebamo univerzalno zatvarati jer je rečenica. Formula $\psi$, iako ogromna, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će biti (jako velika) konstanta.
 
     Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsb(\overline{\iota_{n-1}}\to\zeta)\dotsm)\bigr)\bigr)$\text.
 Uz standardne reprezentacije ($\mathsf o$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, a $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), možemo svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Jedino što je još potrebno su kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. U praksi je lakše koristiti ovaj drugi pristup.
@@ -622,7 +621,7 @@ Na jeziku logike prvog reda:
 čiji kod ima nekoliko stotina znamenaka --- ali dio koji ovisi o $\vec u$ je samo ovaj prvi red; sve ostalo je konstanta za fiksni RAM-algoritam $P^k$.
 \end{primjer}
 
-\begin{lema}[{name=[primitivna rekurzivnost svođenja $K$ na $Valid$]}]
+\begin{lema}[{name=[primitivna rekurzivnost svođenja $K$ na $\Valid$]}]
 Funkcija $\f{Phi}$, koja svakom prirodnom broju $u$ pridružuje kod formule $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\,\eqref{step:varphi_u}, primitivno je rekurzivna.
 \end{lema}
 \begin{proof}
@@ -640,7 +639,7 @@ Drugo, označimo s $\f{Pi}$ funkciju koja preslikava $u\mapsto\kr{\pi_u}$. Ta fu
 \end{proof}
 
 \begin{propozicija}[Churchov teorem formalno]
-Jezik $Valid$ nije odlučiv.
+Jezik $\Valid$ nije odlučiv.
 \end{propozicija}
 \begin{proof}
 Lanac ekvivalencija~\eqref{eq:lanaceqv} sada možemo proširiti još trima karikama:
@@ -654,17 +653,17 @@ Lanac ekvivalencija~\eqref{eq:lanaceqv} sada možemo proširiti još trima karik
     (\models\varphi_u)
     \Longleftrightarrow\\
     \Longleftrightarrow
-    \varphi_u\in Valid
+    \varphi_u\in\Valid
     \Longleftrightarrow
-    \kr{\varphi_u}\in\kr{Valid}
+    \kr{\varphi_u}\in\kr{\Valid}
     \Longleftrightarrow
-    \f{Phi}(u)\in\kr{Valid}
+    \f{Phi}(u)\in\kr{\Valid}
     \text.
 \end{multline}
-Predpredzadnja ekvivalencija je definicija skupa $Valid$ (u donjem redu je $\varphi_u$ zapisana u osnovnom jeziku). Predzadnja ekvivalencija je u jednom smjeru definicija~\eqref{eq:kodLdef}, a u drugom injektivnost kodiranja (propozicija~\ref{pp:bijkr}): ako je $\kr{\varphi_u}=\kr{\varphi'}$ za neku $\varphi'\in Valid$, tada je $\varphi_u=\varphi'\in Valid$. Zadnja ekvivalencija je definicija funkcije $\f{Phi}$.
+Predpredzadnja ekvivalencija je definicija skupa $\Valid$ (u donjem redu je $\varphi_u$ zapisana u osnovnom jeziku). Predzadnja ekvivalencija je u jednom smjeru definicija~\eqref{eq:kodLdef}, a u drugom injektivnost kodiranja (propozicija~\ref{pp:bijkr}): ako je $\kr{\varphi_u}=\kr{\varphi'}$ za neku $\varphi'\in\Valid$, tada je $\varphi_u=\varphi'\in\Valid$. Zadnja ekvivalencija je definicija funkcije $\f{Phi}$.
 
-Sada se čitav lanac može sažeti u $\chi_{K}=\chi_{\kr{Valid}}\circ\f{Phi}$, gdje je $\f{Phi}$ (čak primitivno) rekurzivna, pa vrijedi $K\preceq\kr{Valid}$.
-Kada bi $Valid$ bio odlučiv, po teoremu~\ref{tm:oikr} bi jednomjesna relacija $\kr{Valid}$ bila rekurzivna. Prema propoziciji~\ref{pp:rek<rek}, tada bi i Kleenejev skup bio rekurzivan, što je kontradikcija s teoremom~\ref{tm:DRnrek}.
+Sada se čitav lanac može sažeti u $\chi_{K}=\chi_{\kr{\Valid}}\circ\f{Phi}$, gdje je $\f{Phi}$ (čak primitivno) rekurzivna, pa vrijedi $K\preceq\kr{\Valid}$.
+Kada bi $\Valid$ bio odlučiv, po teoremu~\ref{tm:oikr} bi jednomjesna relacija $\kr{\Valid}$ bila rekurzivna. Prema propoziciji~\ref{pp:rek<rek}, tada bi i Kleenejev skup bio rekurzivan, što je kontradikcija s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
 \section{Prema G\"odelovom prvom teoremu nepotpunosti}
