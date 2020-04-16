@@ -743,7 +743,7 @@ Sada slijedi izvršavanje makroa $P_{\f{f}}^*$, odnosno RAM-programa $P_{\f{f}}$
 
 Nakon toga izvršavanje funkcijskog makroa prijeći će na instrukciju \textsc{remove}, koja će tu vrijednost $\f{f}(\vec r)$ zapisati u registar $\reg{b+j_0}$, koji se nalazi u bloku $(\reg{i})_{i\in[b\dd 2b\rangle}$ jer je $j_0<b$. Svi ostali registri iz tog bloka i dalje će sadržavati \emph{backup} početnih vrijednosti prvih $b$ registara. Ne znamo što će biti u prvih $b$ registara (osim što će $\reg0$ biti resetiran) jer to ovisi o konkretnom programu $P_{\f{f}}$, ali zapravo to nije ni bitno.
 
-Naime, zadnja instrukcija \textsc{mmove} će čitav taj blok prepisati \emph{backup}-blokom, vrativši prvih $b$ registara na originalne vrijednosti (konkretno, zanimat će nas da se sačuva prvih $m<b$ registara), osim što će u $\reg{j_0}$ pisati vraćena vrijednost iz $\reg{b+j_0}$, dakle $\f f(\vec r)$. \emph{Backup}-blok (registri od $\reg{b}$ do $\reg{2b-1}$) će time biti resetiran. To sve možemo prikazati tablicom:
+Naime, zadnja instrukcija \textsc{mmove} će čitav taj blok prepisati \emph{backup}-blokom, vrativši prvih $b$ registara na originalne vrijednosti (konkretno, zanimat će nas da se sačuva prvih $m\le b$ registara), osim što će u $\reg{j_0}$ pisati vraćena vrijednost iz $\reg{b+j_0}$, dakle $\f f(\vec r)$. \emph{Backup}-blok (registri od $\reg{b}$ do $\reg{2b-1}$) će time biti resetiran. To sve možemo prikazati tablicom:
 \begin{equation}\label{eq:funmakrotab}
     \begin{array}{r@{\;}l|cr@{,\dotsc,\,}lc|ccc|}
 \SwapAboveDisplaySkip
