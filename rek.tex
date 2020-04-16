@@ -168,17 +168,17 @@ Precizno, neka su $k,l\in\N_+$ proizvoljni te neka su $\f G_1^k$, $\f G_2^k$,~\l
     l.&P_{\f H}(\reg{k+1},\reg{k+2},\dotsc,\reg{k+l})\to\reg0\textsc{ using }\reg{k+l+1}..
     \end{prog}
 \end{equation}
-računa $\f F:=\f H\circ(\f G_1,\f G_2,\dotsc,\f G_l)$. Prema definiciji~\ref{def:compute}, neka je $\vec x\in\N^k$ proizvoljan. Ako je $\vec x\in\dom F$, prema definiciji~\eqref{eq:domkomp} je za sve $i\in[1\dd l]$, $\vec x\in\dom{\f G_i}$, pa izvršavanje svake od prvih $l$ instrukcija programa $Q_{\f F}$ stane, i u $\reg{k+i}$ zapiše vrijednost $\f G_i(\vec x)=:y_i$. Pritom je važno da će, prema propoziciji~\ref{prop:semfmacro}, ulazni podaci ostati u ulaznim registrima, pa računanje kasnijih $y_j$ neće uništiti one ranije izračunate. Uvjet $\vec y^{l}\in\dom{\f H}$, također iz~\eqref{eq:domkomp}, znači da će i izvršavanje zadnje instrukcije u $Q_{\f F}$ stati, i u $\reg0$ zapisati $\f H(\vec y)=F(\vec x)$. Tablično,
+	računa $\f F:=\f H\circ(\f G_1,\f G_2,\dotsc,\f G_l)$. Prema definiciji~\ref{def:compute}, neka je $\vec x\in\N^k$ proizvoljan. Ako je $\vec x\in\dom F$, prema definiciji~\eqref{eq:domkomp} je za sve $i\in[1\dd l]$, $\vec x\in\dom{\f G_i}$, pa izvršavanje svake od prvih $l$ instrukcija programa $Q_{\f F}$ stane, i u $\reg{k+i}$ zapiše vrijednost $\f G_i(\vec x)=:y_i$. Pritom je važno da će, prema propoziciji~\ref{prop:semfmacro}, svi ostali registri do $\reg{k+l}$ ostati sačuvani, odnosno računanje $y_i$ neće uništiti one ranije izračunate, niti ikoji $x_j$ potreban za računanje kasnijih. Uvjet $\vec y^{l}\in\dom{\f H}$, također iz~\eqref{eq:domkomp}, znači da će i izvršavanje zadnje instrukcije u $Q_{\f F}$ stati, i u $\reg0$ zapisati $\f H(\vec y)=F(\vec x)$. Tablično,
 \begin{equation}
     \begin{array}{r@{\;}l|ccccccc}
 %\SwapAboveDisplaySkip
       &               &\reg0       &\reg1&\reg{k}&\reg{k+1}     &\reg{k+2}     &\reg{k+l}     &\reg{k+l+1}..\\
       &               & 0          &x_1  &x_k    &0             &0             &0             &0            \\\hline
-0.    &P_{\f G_1}\dots& 0          &x_1  &x_k    &\f G_1(\vec x)&0             &0             &?            \\
-1.    &P_{\f G_2}\dots& 0          &x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&0             &?            \\
+0.    &P_{\f G_1}\dots& 0          &x_1  &x_k    &\f G_1(\vec x)&0             &0             &0            \\
+1.    &P_{\f G_2}\dots& 0          &x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&0             &0            \\
       &\vdots                                                                                               \\
-(l-1).&P_{\f G_l}\dots& 0          &x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&\f G_l(\vec x)&?            \\
-l.    &P_{\f H}\dots  &\f F(\vec x)&x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&\f G_l(\vec x)&?
+(l-1).&P_{\f G_l}\dots& 0          &x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&\f G_l(\vec x)&0            \\
+l.    &P_{\f H}\dots  &\f F(\vec x)&x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&\f G_l(\vec x)&0
     \end{array}\text.
 \end{equation}
 \smallskip
@@ -281,21 +281,23 @@ Sve u svemu, tvrdimo da makro-program
     \end{prog}
 \end{equation}
 računa $\f F$. U tu svrhu, po definiciji~\ref{def:compute}, neka je $(\vec x,y)\in\N^{k+1}$ proizvoljan. Na početku $Q_{\f F}$-izračunavanja s $(\vec x,y)$ imamo makro-konfiguraciju
-$(0,\vec x,y,0,0,\dotsc,0,0)$, koja iz\-vrša\-va\-njem funkcijskog makroa rednog broja $0$ prelazi u $\bigl(\f G(\vec x),\vec x,y,0,?,\dotsc,1,0\bigr)$ (jer je $\f G$ totalna) --- ne znamo sadržaj registara od $\reg{k+3}$ nadalje, ali nam nije ni bitan. Broj u $\reg0$ je prema~\eqref{eq:defprb} jednak $\f F(\vec x,0)$. Sada ako za sve $i\in[0\dd y]$, s $d_i$ označimo oblik konfiguracije $\bigl(\f F(\vec x,i),\vec x,y-i,i,?,\dotsc,1,0)$, upravo smo došli do konfiguracije oblika $d_0$.
+$(0,\vec x,y,0,0,\dotsc,0,0)$, koja iz\-vr\-ša\-va\-njem funkcijskog makroa rednog broja $0$ prelazi u $\bigl(\f G(\vec x),\vec x,y,0,0,\dotsc,1,0\bigr)$ (jer je $\f G$ totalna). % --- ne znamo sadržaj registara od $\reg{k+3}$ nadalje, ali nam nije ni bitan.
+	Broj u $\reg0$ je prema~\eqref{eq:defprb} jednak $\f F(\vec x,0)$. Sada ako za sve $i\in[0\dd y]$ označimo $d_i:=\bigl(\f F(\vec x,i),\vec x,y-i,i,0,\dotsc,1,0\bigr)$, upravo smo došli do konfiguracije $d_0$.
 
-Tvrdimo da svaka konfiguracija oblika $d_i$ za $i<y$, prelazi u konačno mnogo koraka u neku konfiguraciju oblika $d_{i+1}$. Doista, iz $i<y$ slijedi $y-i>0$, pa imamo
+	Tvrdimo da za svaki $i<y$, $d_i\leadsto^*d_{i+1}$. %svaka konfiguracija $d_i$ za $i<y$, prelazi u konačno mnogo koraka u neku konfiguraciju oblika $d_{i+1}$.
+	Doista, iz $i<y$ slijedi $y-i>0$, pa imamo
 \begin{multline}\label{eq:prkonf}
-    d_i=\bigl(\f F(\vec x,i),\vec x,y-i,i,?,\dotsc,1,0\bigr)\leadsto
-    \bigl(\f F(\vec x,i),\vec x,y-i-1,i,?,\dotsc,2,0\bigr)\leadsto^*\\
-	\leadsto^*\bigl(\f H\bigl(\vec x,i,\f F(\vec x,i)\bigr),\vec x,y-i-1,i,?,\dotsc,3,0\bigr)%\leadsto{}\\
-    \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-i-1,i+1,?,\dotsc,4,0\bigr)\leadsto\\
-    \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-(i+1),i+1,?,\dotsc,1,0\bigr)= d_{i+1}\text.
+    d_i=\bigl(\f F(\vec x,i),\vec x,y-i,i,0,\dotsc,1,0\bigr)\leadsto
+    \bigl(\f F(\vec x,i),\vec x,y-i-1,i,0,\dotsc,2,0\bigr)\leadsto^*\\
+	\leadsto^*\bigl(\f H\bigl(\vec x,i,\f F(\vec x,i)\bigr),\vec x,y-i-1,i,0,\dotsc,3,0\bigr)%\leadsto{}\\
+    \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-i-1,i+1,0,\dotsc,4,0\bigr)\leadsto\\
+    \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-(i+1),i+1,0,\dotsc,1,0\bigr)= d_{i+1}\text.
 \end{multline}
-Ovdje je bilo važno da je i $\f H$ totalna, pa računanje vrijednosti $\f H\bigl(\vec x,i,F(\vec x,i)\bigr)$ (koja je prema~\eqref{eq:defprk} jednaka $\f F(\vec x,i+1)$) doista stane nakon konačno mnogo koraka, reprezentiranih s $\leadsto^*$ u~\eqref{eq:prkonf}. Sada odmah indukcijom po $i$ slijedi da za svaki $i\le y$, $Q_{\f F}$-izračunavanje s $(\vec x,y)$ sadrži konfiguraciju oblika $d_i$. Specijalno, u njemu postoji konfiguracija oblika $d_y$, koja prelazi u završnu konfiguraciju
+Ovdje je bilo važno da je i $\f H$ totalna, pa računanje vrijednosti $\f H\bigl(\vec x,i,F(\vec x,i)\bigr)$ (koja je prema~\eqref{eq:defprk} jednaka $\f F(\vec x,i+1)$) doista stane nakon konačno mnogo koraka, reprezentiranih s $\leadsto^*$ u~\eqref{eq:prkonf}. Sada odmah indukcijom po $i$ slijedi da za svaki $i\le y$, $Q_{\f F}$-izračunavanje s $(\vec x,y)$ sadrži konfiguraciju $d_i$. Specijalno, u njemu postoji konfiguracija $d_y$, koja prelazi u završnu konfiguraciju
 \begin{equation}
-    d_y=\bigl(\f F(\vec x,y),\vec x,y-y,y,?,\dotsc,1,0\bigr)\leadsto\bigl(\f F(\vec x,y),\vec x,0,y,?,\dotsc,5,0\bigr)\lcirclearrowleft
+    d_y=\bigl(\f F(\vec x,y),\vec x,y-y,y,0,\dotsc,1,0\bigr)\leadsto\bigl(\f F(\vec x,y),\vec x,0,y,0,\dotsc,5,0\bigr)\lcirclearrowleft
 \end{equation}
-oblika $\bigl(\f F(\vec x,y),\dotsc\bigr)$, što smo i trebali. Sada prema teoremu~\ref{tm:rem}, RAM-algoritam $(Q_{\f F}^\flat)^{k+1}$ također računa $\f F$, pa je $\f F\in\mathscr Comp$.
+	oblika $\bigl(\f F(\vec x,y),\dotsc\mspace{-1mu}\bigr)$, što smo i trebali. Sada prema teoremu~\ref{tm:rem}, RAM-algoritam $(Q_{\f F}^\flat)^{k+1}$ također računa $\f F$, pa je $\f F\in\mathscr Comp$.
 \end{proof}
 
 Primijetimo da smo na ovaj način posredno dobili i RAM-program za $\f{add}^2$, pa time i za $\f{mul}^2$, a onda i $\f{pow}$ (pogledajte primjer~\ref{pr:addmulpow}). Takav RAM-program je ogroman i nikad ga tako ne bismo "ručno" napisali, ali to upravo pokazuje snagu funkcijske paradigme: funkcijski programi se bolje slažu u veće cjeline nego RAM-programi (to svojstvo se u programskim jezicima obično zove \emph{composability}). 
@@ -584,33 +586,33 @@ računa funkciju $\f F^k:=\mu\f R$. U tu svrhu, po definiciji~\ref{def:compute},
 	Ako $\vec x\notin\exists_*R$, dakle ne postoji $y\in\N$ takav da vrijedi $R(\vec x,y)$, to zapravo znači da za svaki $y\in\N$ vrijedi 
 $\chi_{\f R}(\vec x,y)=0$. Ta će vrijednost biti izračunata kad god makro-stroj izvrši instrukciju rednog broja $2$ (s $\textsc{using }\reg{k+2}..$ čuvamo originalne ulazne registre), redom za sve prirodne brojeve $y$, i završit će u $\reg{k+1}$. Nakon toga, instrukcija s rednim brojem $3$ će pokušati dekrementirati $\reg{k+1}$, ustanoviti da je njegov sadržaj $0$, i postaviti $\textsc{pc}$ na $1$. Tada će se inkrementirati $\reg0$, i ponovo testirati uvjet~\ldots\ i tako dalje. Preciznije, imat ćemo sljedeće $Q_{\f F}$-izračunavanje s $\vec x$:
 \begin{multline}
-    (0,\vec x,0,\dotsc,0,0)
+    (0,\vec x,0,0,\dotsc,0,0)
     \leadsto(0,\vec x,0,0,\dotsc,2,0)\leadsto^*
-    (0,\vec x,0,?,\dotsc,3,0)\leadsto
-    (0,\vec x,0,?,\dotsc,1,0)\\
-    \leadsto(1,\vec x,0,?,\dotsc,2,0)\leadsto^*
-    (1,\vec x,0,?,\dotsc,3,0)\leadsto
-    (1,\vec x,0,?,\dotsc,1,0)\leadsto\\
-    \leadsto(2,\vec x,0,?,\dotsc,2,0)\leadsto^*
-    (2,\vec x,0,?,\dotsc,3,0)\leadsto
-    (2,\vec x,0,?,\dotsc,1,0)\leadsto\dotsb
+    (0,\vec x,0,0,\dotsc,3,0)\leadsto
+	(0,\vec x,0,0,\dotsc,1,0)\leadsto{}\\
+	{}\leadsto(1,\vec x,0,0,\dotsc,2,0)\leadsto^*
+    (1,\vec x,0,0,\dotsc,3,0)\leadsto
+    (1,\vec x,0,0,\dotsc,1,0)\leadsto\\
+    \leadsto(2,\vec x,0,0,\dotsc,2,0)\leadsto^*
+    (2,\vec x,0,0,\dotsc,3,0)\leadsto
+    (2,\vec x,0,0,\dotsc,1,0)\leadsto\dotsb
 \end{multline}
 koje nikada ne stane jer nijedna konfiguracija u njemu nije završna.
 
 Ako je pak $\vec x\in\exists_*R$, tada je $\f F(\vec x)\in\N$ --- označimo tu vrijednost s $y_0$. Tada za svaki $y<y_0$ i dalje vrijedi $\chi_{\f R}(\vec x,y)=0$, pa će $Q_{\f F}$-izračunavanje s $\vec x$ izgledati isto sve do trenutka kad se sadržaj registra $\reg0$ približi odozdo $y_0$, kada će izgledati ovako:
 \begin{multline}
-    \dotsb\leadsto(y_0-1,\vec x,0,?,\dotsc,1,0)\leadsto
-    (y_0,\vec x,0,?,\dotsc,2,0)\leadsto^*
-    (y_0,\vec x,1,?,\dotsc,3,0)\leadsto{}\\
-    {}\leadsto(y_0,\vec x,0,?,\dotsc,4,0)\lcirclearrowleft\text,
+    \dotsb\leadsto(y_0-1,\vec x,0,0,\dotsc,1,0)\leadsto
+    (y_0,\vec x,0,0,\dotsc,2,0)\leadsto^*
+    (y_0,\vec x,1,0,\dotsc,3,0)\leadsto{}\\
+    {}\leadsto(y_0,\vec x,0,0,\dotsc,4,0)\lcirclearrowleft\text,
 \end{multline}
-odnosno doći će do završne konfiguracije oblika $(y_0,\dotsc)$ pa će izlazni podatak biti $y_0=\f F(\vec x)$ kao što i treba. Ako je $f(\vec x)=0$, tada nema nikakvog približavanja odozdo, već izračunavanje izgleda ovako:
+	odnosno doći će do završne konfiguracije oblika $(y_0,\dotsc\mspace{-1mu})$ pa će izlazni podatak biti $y_0=\f F(\vec x)$ kao što i treba. Ako je $f(\vec x)=0$, tada nema nikakvog približavanja odozdo, već izračunavanje izgleda ovako:
 \begin{equation*}
     (0,\vec x,0,0,\dotsc,0,0)\leadsto
     (0,\vec x,0,0,\dotsc,2,0)\leadsto^*
-    (0,\vec x,1,?,\dotsc,3,0)\leadsto(0,\vec x,0,?,\dotsc,4,0)\lcirclearrowleft\text,
+    (0,\vec x,1,0,\dotsc,3,0)\leadsto(0,\vec x,0,0,\dotsc,4,0)\lcirclearrowleft\text,
 \end{equation*}
-što znači da u konačno mnogo koraka dođe do završne konfiguracije oblika $(0,\dotsc)$, pa je izlazni podatak $0$, kao što i treba biti.
+	što znači da u konačno mnogo koraka dođe do završne konfiguracije oblika $(0,\dotsc\mspace{-1mu})$, pa je izlazni podatak $0$, kao što i treba biti.
 
     Sada prema teoremu~\ref{tm:rem}, RAM-algoritam $Q_{\f F}^{\flat k}$ računa $\f F$, pa je $\f F\in\mathscr Comp$.
 \end{proof}
