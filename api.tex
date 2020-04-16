@@ -8,7 +8,7 @@
 \textbf{Vrsta}: inicijalna funkcija\\
 \textbf{Ime}: $\f Z$\\
 \textbf{Mjesnost}: $1$\\
-\textbf{Argumenti}: $x$: "dummy"\\
+\textbf{Argumenti}: $x$: irelevantan\\
 \textbf{Vraća}: $0$
 
 \subsection{Sljedbenik}
@@ -44,7 +44,7 @@
 \phantom{\textbf{Parametri}: }$n$: prirodni broj\\
 \textbf{Ime}: $\f C_n$\\
 \textbf{Mjesnost}: $k$\\
-\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: "dummy"\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: irelevantni\\
 \textbf{Vraća}: $n$
 
 \subsection{Primitivna rekurzija}
@@ -127,14 +127,14 @@
 \textbf{Oznaka}: $>$\\
 \textbf{Mjesnost}: $2$\\
 \textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
-\textbf{Vraća}: je li $x>y$
+\textbf{Vraća}: je li $x$ strogo veći od $y$
 
 \subsection{Strogi uređaj}
 \textbf{Vrsta}: primitivno rekurzivna relacija\\
 \textbf{Oznaka}: $<$\\
 \textbf{Mjesnost}: $2$\\
 \textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
-\textbf{Vraća}: je li $x<y$
+\textbf{Vraća}: je li $x$ strogo manji od $y$
 
 \subsection{Projekcija}
 \textbf{Vrsta}: operator koji ne čuva rekurzivnost\\
@@ -160,7 +160,7 @@
 \textbf{Parametri}: $k$: pozitivni prirodni broj\\
 \textbf{Oznaka}: $\emptyset$\\
 \textbf{Mjesnost}: $k$\\
-\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: "dummy"\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: irelevantni\\
 \textbf{Vraća}: laž
 
 \subsection{Prazna funkcija}
@@ -168,15 +168,17 @@
 \textbf{Parametri}: $k$: pozitivni prirodni broj\\
 \textbf{Oznaka}: $\varnothing$\\
 \textbf{Mjesnost}: $k$\\
-\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: "dummy"\\
+\textbf{Argumenti}: $x_1,x_2,\dots,x_k$: irelevantni\\
 \textbf{Domena}: prazan skup
+
+\section{Složenije funkcije i operatori}
 
 \subsection{Komplement}
 \textbf{Vrsta}: operator na relacijama koji čuva (primitivnu) rekurzivnost\\
 \textbf{Parametri}: $k$: pozitivni prirodni broj\\
 \phantom{\textbf{Parametri}: }$R$: brojevna relacija mjesnosti $k$\\
 \textbf{Oznaka}: $R\kompl$\\
-\textbf{Mjesnost}: $k$
+\textbf{Mjesnost}: $k$\\
 \textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
 \textbf{Vraća}: laž ako je $R(\vec x)$, inače istinu
 
@@ -185,13 +187,115 @@
 \textbf{Oznaka}: $\le$\\
 \textbf{Mjesnost}: $2$\\
 \textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
-\textbf{Vraća}: je li $x\le y$
+\textbf{Vraća}: je li $x$ manji ili jednak $y$
 
 \subsection{Obrnuti nestrogi uređaj}
 \textbf{Vrsta}: primitivno rekurzivna relacija\\
 \textbf{Oznaka}: $\ge$\\
 \textbf{Mjesnost}: $2$\\
 \textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
-\textbf{Vraća}: je li $x\ge y$
+\textbf{Vraća}: je li $x$ veći ili jednak $y$
 
+\subsection{Presjek}
+\textbf{Vrsta}: operator na relacijama koji čuva (primitivnu) rekurzivnost\\
+\textbf{Parametri}: $k,l$: pozitivni prirodni brojevi\\
+\phantom{\textbf{Parametri}: }$R_1,R_2,\dots,R_l$: brojevne relacije mjesnosti $k$\\
+\textbf{Oznaka}: $\bigcap_{i=1}^l R_i$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Vraća}: jesu li sve $R_1(\vec x),R_2(\vec x),\dots,R_l(\vec x)$ istina
 
+\subsection{Unija}
+\textbf{Vrsta}: operator na relacijama koji čuva (primitivnu) rekurzivnost\\
+\textbf{Parametri}: $k,l$: pozitivni prirodni brojevi\\
+\phantom{\textbf{Parametri}: }$R_1,R_2,\dots,R_l$: brojevne relacije mjesnosti $k$\\
+\textbf{Oznaka}: $\bigcup_{i=1}^l R_i$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Vraća}: je li barem jedna od $R_1(\vec x),R_2(\vec x),\dots,R_l(\vec x)$ istina
+
+\subsection{Skupovna razlika}
+\textbf{Vrsta}: operator na relacijama koji čuva (primitivnu) rekurzivnost\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$R,P$: brojevne relacije mjesnosti $k$\\
+\textbf{Oznaka}: $R\setminus P$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Vraća}: istinu ako je $R(\vec x)$, ali ne $P(\vec x)$; inače laž
+
+\subsection{Simetrična skupovna razlika}
+\textbf{Vrsta}: operator na relacijama koji čuva (primitivnu) rekurzivnost\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$R,P$: brojevne relacije mjesnosti $k$\\
+\textbf{Oznaka}: $R\mathbin{\triangle}P$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Vraća}: je li točno jedna od $R(\vec x)$ i $P(\vec x)$ istina
+
+\subsection{Jednakost}
+\textbf{Vrsta}: primitivno rekurzivna relacija\\
+\textbf{Oznaka}: $=$\\
+\textbf{Mjesnost}: $2$\\
+\textbf{Argumenti}: $x,y$: prirodni brojevi za usporedbu\\
+\textbf{Vraća}: jesu li $x$ i $y$ jednaki
+
+\subsection{Grananje}
+\textbf{Vrsta}: operator koji čuva (primitivnu) rekurzivnost\\
+\textbf{Parametri}: $k,l$: pozitivni prirodni brojevi\\
+\phantom{\textbf{Parametri}: }$R_1,R_2,\dots,R_l$: disjunktne brojevne relacije mjesnosti $k$\\
+\phantom{\textbf{Parametri}: }$G_0,G_1,G_2,\dots,G_l$: brojevne funkcije mjesnosti $k$\\
+\textbf{Oznaka}: $\IF{R_1:G_1,R_2:G_2,\dots,R_l:G_l,G_0}$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Domena}: $R_i(\vec x)$ i postoji $G_i(\vec x)$ za neki $i\in[1\dd l]$; ili nijedan $R_i(\vec x)$ i postoji $G_0(\vec x)$\\
+\textbf{Vraća}: $G_i(\vec x)$ ako vrijedi $R_i(\vec x)$ za bilo koji $i\in[1\dd l]$; inače $G_0(\vec x)$
+
+\subsection{Strogo grananje}
+\textbf{Vrsta}: operator koji čuva parcijalnu rekurzivnost\\
+\textbf{Parametri}: $k,l$: pozitivni prirodni brojevi\\
+\phantom{\textbf{Parametri}: }$R_1,R_2,\dots,R_l$: disjunktne brojevne relacije mjesnosti $k$\\
+\phantom{\textbf{Parametri}: }$G_1,G_2,\dots,G_l$: brojevne funkcije mjesnosti $k$\\
+\textbf{Oznaka}: $\IF{R_1:G_1,R_2:G_2,\dots,R_l:G_l}$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Domena}: $R_i(\vec x)$ i postoji $G_i(\vec x)$ za neki $i\in[1\dd l]$\\
+\textbf{Vraća}: $G_i(\vec x)$ ako vrijedi $R_i(\vec x)$ za bilo koji $i\in[1\dd l]$
+
+\subsection{Konačna relacija}
+\textbf{Vrsta}: familija primitivno rekurzivnih relacija\\
+\textbf{Parametri}: $k,l$: pozitivni prirodni brojevi\\
+\phantom{\textbf{Parametri}: }$\vec{c_1},\vec{c_2},\dots,\vec{c_l}$: $k$-torke prirodnih brojeva\\
+\textbf{Oznaka}: $\{\vec{c_1},\vec{c_2},\dots,\vec{c_l}\}$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Vraća}: je li $\vec x$ jednak bilo kojoj $\vec{c_i}$, za $i\in[1\dd l]$
+
+\subsection{Editiranje totalne funkcije}
+\textbf{Vrsta}: operator koji čuva (primitivnu) rekurzivnost\\
+\textbf{Parametri}: $k,l$: pozitivni prirodni brojevi\\
+\phantom{\textbf{Parametri}: }$G$: totalna brojevna funkcija mjesnosti $k$\\
+\phantom{\textbf{Parametri}: }$\vec{c_1},\vec{c_2},\dots,\vec{c_l}$: različite $k$-torke prirodnih brojeva\\
+\phantom{\textbf{Parametri}: }$y_1,y_2,\dots,y_l$: $l$ prirodnih brojeva\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Domena}: funkcija je totalna\\
+\textbf{Vraća}: $y_i$ ako je $\vec x=\vec{c_i}$ za neki $i\in[1\dd l]$; inače $G(\vec x)$
+
+\subsection{Proširenje nulom}
+\textbf{Vrsta}: operator koji ne čuva parcijalnu rekurzivnost\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$G$: brojevna funkcija mjesnosti $k$\\
+\textbf{Oznaka}: $\tilde G$\\
+\textbf{Mjesnost}: $k$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: $k$ prirodnih brojeva\\
+\textbf{Domena}: funkcija je totalna\\
+\textbf{Vraća}: $G(\vec x)$ ako postoji; inače $0$
+
+\subsection{Dinamizacija}
+\textbf{Vrsta}: operator koji ne čuva parcijalnu rekurzivnost\\
+\textbf{Parametri}: $k$: pozitivni prirodni broj\\
+\phantom{\textbf{Parametri}: }$G_0,G_1,G_2,\dots$: brojevne funkcije mjesnosti $k$\\
+\textbf{Mjesnost}: $k+1$\\
+\textbf{Argumenti}: $\vec x:=(x_1,x_2,\dots,x_k)$: ulaz za izabranu funkciju\\
+\phantom{\textbf{Argumenti}: }$i$: redni broj izabrane funkcije\\
+\textbf{Vraća}: $G_i(\vec x)$ ako postoji

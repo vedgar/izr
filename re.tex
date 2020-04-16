@@ -129,7 +129,7 @@ Pomoću projekcijske karakterizacije možemo dokazati zatvorenost na konačne un
 Neka su $k,l\in\N_+$ te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je njihova unija $\bigcup_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
-Po teoremu~\ref{tm:rpeproj}, za svaki $i\in[1\dd l]$ postoji rekurzivna relacija $\f P^k_i$ takva da je $R_i=\exists_*\f P_i$. Sada je
+	Po teoremu~\ref{tm:rpeproj}, za svaki $i\in[1\dd l]$ postoji rekurzivna relacija $\f P^{k+1}_i$ takva da je $R_i=\exists_*\f P_i$. Sada je
 \begin{multline}\label{eq:urere}
     \vec x\in\bigcup\nolimits_{i=1}^l\! R_i=\bigcup\nolimits_{i=1}^l\!\exists_*\f P_i\Longleftrightarrow
     (\exists i\in[1\dd l])(x\in\exists_*\f P_i)\Longleftrightarrow{}\\
@@ -161,7 +161,7 @@ Postoje primitivno rekurzivne funkcije $\f{pair}^2$, $\f{fst}^1$ i $\f{snd}^1$,\
 \end{lema}
 Točkovno, za sve $x,y\in\N$ vrijedi $\f{fst}\bigl(\f{pair}(x,y)\bigr)=x\land\f{snd}\bigl(\f{pair}(x,y)\bigr)=y$.
 \begin{proof}[Prva implementacija]
-    $\f{pair}:=\f{Code}^2$, $\f{fst}(p):=p[0]$, $\f{snd}(p):=p[1]$. Tada je $\f{pair}$ primitivno rekurzivna po propoziciji~\ref{prop:Codekprn}, a $\f{fst}$ i $\f{snd}$ po korolaru~\ref{kor:paramprn}, jer su dobivene specijalizacijom primitivno rekurzivne funkcije $\f{part}$: $\f{fst}=spec(0,\f{part})$, $\f{snd}=spec(1,\f{part})$. Također za sve $x,y\in\N$ vrijedi
+    $\f{pair}:=\f{Code}^2$, $\f{fst}(p):=p[0]$, $\f{snd}(p):=p[1]$. Tada je $\f{pair}$ primitivno rekurzivna po propoziciji~\ref{prop:Codekprn}, a $\f{fst}$ i $\f{snd}$ po korolaru~\ref{kor:paramprn}, jer su dobivene specijalizacijom primitivno rekurzivne funkcije $\f{part}$: $\f{fst}=\$(0,\f{part})$, $\f{snd}=\$(1,\f{part})$. Također za sve $x,y\in\N$ vrijedi
 \begin{equation}
     (\f{fst}\circ\f{pair})(x,y)=\f{fst}\bigl(\f{pair}(x,y)\bigr)=\f{part}\bigl(\f{Code}^2(x,y),0\bigr)=\kr{x,y}[0]=x=\f I_1^2(x,y)\text,
 \end{equation}
@@ -433,7 +433,7 @@ Po definiciji je $P\mathbin\triangle\f R:=(P\setminus\f R)\cup(\f R\setminus P)$
 Neka je $k\in\N_+$, $\f F^k$ parcijalno rekurzivna te $\f G^k$ takva da je skup $\graf{\f F}\mathbin\triangle\graf{\f G}$ konačan. Tada je i $\f G$ parcijalno rekurzivna.
 \end{propozicija}
 \begin{proof}
-Po teoremu o grafu, $\graf{\f F}$ je rekurzivno prebrojiv skup (mjesnosti $k+1$). Ako označimo zadani konačni "\emph{\!diff}" grafova s $\f E^{k+1}:=\graf{\f F}\mathbin\triangle\graf{\f G}$, iz teorije skupova znamo --- $\bigl(\mathcal P(\N^{k+1}),\mathbin\triangle\bigr)$ je grupa u kojoj je svaki element sam sebi inverz --- da iz toga slijedi $\graf{\f G}=\graf{\f F}\mathbin\triangle\f E$, što je rekurzivno prebrojiv skup po lemi~\ref{lm:retrkon}. Opet po teoremu o grafu, iz toga slijedi da je $\f G$ parcijalno rekurzivna funkcija.
+	Po teoremu o grafu, $\graf{\f F}$ je rekurzivno prebrojiv skup (mjesnosti $k+1$). Ako označimo zadani konačni "\emph{\!diff}" grafova s $\f E^{k+1}:=\graf{\f F}\mathbin\triangle\graf{\f G}$, iz teorije skupova znamo --- $\bigl(\mathcal P(\N^{k+1}\mspace{-1mu}),\mathbin\triangle\bigr)$ je grupa u kojoj je svaki element sam sebi inverz --- da iz toga slijedi $\graf{\f G}=\graf{\f F}\mathbin\triangle\f E$, što je rekurzivno prebrojiv skup po lemi~\ref{lm:retrkon}. Opet po teoremu o grafu, iz toga slijedi da je $\f G$ parcijalno rekurzivna funkcija.
 \end{proof}
 
 Napisani dokaz primjer je tehnike kojom možemo dokazati da razne operacije na funkcijama čuvaju parcijalnu rekurzivnost: prebacimo se na grafove, dokažemo da odgovarajuća operacija na grafovima čuva rekurzivnu prebrojivost, i vratimo se na funkcije. Evo još jednog primjera.
@@ -556,7 +556,7 @@ Za ($\subseteq$), neka vrijedi $x_0\in R=\exists_*\f P$. To po definiciji znači
 
 Za ($\supseteq$), neka je $z\in\im{\f G}$ proizvoljan. To znači da postoji $(x_0,y_0)\in\N^2$ takav da vrijedi $\f G(x_0,y_0)=z$. Sada imamo dva slučaja: ako vrijedi $\f P(x_0,y_0)$, tada zaključujemo da postoji $y$ (konkretno, $y_0$) takav da vrijedi $(x_0,y)\in\f P$, odnosno $x_0\in\exists_*\f P=R$. No ako vrijedi $\f P(x_0,y_0)$, tada je $z=\f G(x_0,y_0)=x_0\in R$.
 
-Ako pak $\lnot\f P(x_0,y_0)$, tada je trivijalno $z=\f G(x_0,y_0)=r\in R$.
+Ako pak $\lnot\f P(x_0,y_0)$, tada je očito $z=\f G(x_0,y_0)=r\in R$.
 \end{proof}
 
 \begin{napomena}[{name=[enumeracija kao jednomjesna funkcija --- niz]}]
@@ -604,7 +604,7 @@ Ovo je relativno standardni dokaz koji se napravi u teoriji formalnih jezika, ia
 \item[$(\mathcal E)\Rightarrow(\mathcal R)$]
 Efektivno, treba provesti čitav postupak iz točke~\ref{sec:tikp} za enumerator $\mathcal E=(Q,\Sigma,\Gamma,\bl,\delta_2,q_0,q_p)$. Umjesto $q_z$, sada $q_p$ kodiramo s $1$ (vrijedi analogon leme~\ref{lm:bsomp-q0neqz}). Funkcija $\delta_2:Q\times\Gamma^2\to Q\times\Gamma^2\times\{-1,1\}^2$ (jer enumerator ima dvije trake) je malo kompliciranija za kodirati, ali iste ideje kao u dokazu leme~\ref{lm:newssdprn} (proširenje konačnih funkcija nulom, korolar~\ref{kor:kon0}) prolaze.
 
-Dobijemo pet jednomjesnih (primaju samo broj koraka, jer enumerator nema ulaz) funkcija $\f{State}$, $\f{WorkPosition}$, $\f{WorkTape}$, $\f{OutPosition}$ i $\f{OutTape}$, definiranih degeneriranom simultanom primitivnom rekurzijom (vrijedi analogon propozicije~\ref{prop:simultrek} za $k=0$, i dokaže se isto kao propozicija~\ref{prop:F1prn} i korolar~\ref{kor:F1rek} --- uvođenjem irelevantnog argumenta) iz primitivno rekurzivnih funkcija, pa su primitivno rekurzivne. Sada definicija nabrajanja enumeratorom kaže da je $w\in L$ (odnosno $\kr w\in\kr L$) ako i samo ako postoji korak $n$ u kojem je $\f{State}(n)=\N Q(q_p)=1$ i $\f{OutTape}(n)=\knk{w\bl\ldots}=\f{Recode}(\kr w,b',b)$ (s $b'$ i $b$ smo označili broj znakova u $\Sigma$ i $\Gamma$ redom). Drugim riječima, vrijedi
+Dobijemo pet jednomjesnih (primaju samo broj koraka, jer enumerator nema ulaz) funkcijâ $\f{State}$, $\f{WorkPosition}$, $\f{WorkTape}$, $\f{OutPosition}$ i $\f{OutTape}$, definiranih degeneriranom simultanom primitivnom rekurzijom (vrijedi analogon propozicije~\ref{prop:simultrek} za $k=0$, i dokaže se isto kao propozicija~\ref{prop:F1prn} i korolar~\ref{kor:F1rek} --- uvođenjem irelevantnog argumenta) iz primitivno rekurzivnih funkcija, pa su primitivno rekurzivne. Sada definicija nabrajanja enumeratorom kaže da je $w\in L$ (odnosno $\kr w\in\kr L$) ako i samo ako postoji korak $n$ u kojem je $\f{State}(n)=\N Q(q_p)=1$ i $\f{OutTape}(n)=\knk{w\bl\ldots}=\f{Recode}(\kr w,b',b)$ (s $b'$ i $b$ je označen broj znakova u $\Sigma$ i $\Gamma$ redom). Drugim riječima,
 \begin{equation}
     t\in\kr L\Longleftrightarrow\exists n\bigl(\f{State}(n)=1\land\f{OutTape}(n)=\f{Recode}(t,b',b)\bigr)\text,
 \end{equation}

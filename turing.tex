@@ -28,7 +28,7 @@ Iako je unarni zapis eksponencijalno lošiji od binarnog (i svih ostalih pozicij
 
 \subsection{Računanje bez računala}
 
-Drugi aspekt koji smo u potpunosti zanemarili u brojevnom modelu je povijesni. Danas, kad smo na svakom koraku okruženi računalima, a većina nas jedno nosi u džepu, lako je zaboraviti da računala ne postoje oduvijek. Zapravo, u upotrebljivom obliku postoje tek nekoliko desetaka godina. S druge strane, algoritmi postoje već milenijima: Euklidov algoritam nastao je prije modernog brojenja godina, a neki babilonski algoritmi potječu sa samih početaka pisane povijesti. Što znači algoritam ako nema računala na kojem se može izvršavati?
+Drugi aspekt koji smo u potpunosti zanemarili u brojevnom modelu je povijesni. Danas, kad smo na svakom koraku okruženi računalima, a većina nâs jedno nosi u džepu, lako je zaboraviti da računala ne postoje oduvijek. Zapravo, u upotrebljivom obliku postoje tek nekoliko desetaka godina. S druge strane, algoritmi postoje već milenijima: Euklidov algoritam nastao je prije modernog brojenja godina, a neki babilonski algoritmi potječu sa samih početaka pisane povijesti. Što znači algoritam ako nema računala na kojem se može izvršavati?
 
 Odgovor je jednostavan: algoritme su izvršavali ljudi. Iako ljudski mozak po svojoj prirodi nije savršen supstrat za doslovno slijeđenje instrukcija kroz višeznamenkaste brojeve koraka, moderno obrazovanje svjedoči da se može tome na\-u\-či\-ti. Doista, većina zadataka iz školske matematike može se svesti na provođenje nekog algoritma. Mnoge takve zadatke računala rješavaju brže i točnije od ljudi, što se vidi kroz uspjeh aplikacija kao što je \texttt{photomath}. Iako su ljudi bolji u pronalaženju (logičkih, analogijskih ili asocijativnih) veza među pojmovima, potreba za rješavanjem problema iz stvarnog života koji se mogu precizno klasificirati uvjetovala je pronalazak mnogih algoritama daleko prije izuma računala. Motivacija je uvijek bila ista: optimizacija i specijalizacija ljudskog rada. Jedan čovjek može osmisliti algoritam, koji poslije milijuni ljudi mogu provoditi i tako rješavati stvarne probleme, ne razumijevajući nužno zašto algoritam radi. No da bi to uspjelo, koraci algoritma moraju biti takvi da njegovo provođenje ne zahtijeva nikakav angažman pored onog koji je specificiran algoritmom --- niti ikakvo vanjsko znanje osim poznavanja ulaznih podataka, i nekoliko elementarnih vještina za koje smatramo da su svojstvene svim radno sposobnim ljudima, poput čitanja i pisanja fiksnog skupa simbola te odlučivanja na osnovi pročitanog.
 
@@ -40,7 +40,7 @@ Odakle onda u priči Turingovi \emph{strojevi}? Turing je bio svjestan fenomena 
 
 Da bi svoje čitatelje uvjerio kako njegove elementarne operacije doista ne zahtijevaju nikakvo implicitno pretpostavljeno znanje, Turing je paralelno opisao i zamišljeni, idealizirani, \emph{stroj} koji može provoditi te operacije. Taj stroj, odnosno njegovu matematičku formalizaciju (neki detalji su kasnije promijenjeni radi lakšeg razumijevanja) danas nazivamo Turingovim strojem. Ipak, treba razumjeti da "ove operacije su toliko elementarne da bi ih mogao provoditi i mehanički stroj" nije poziv na konstrukciju stvarnog stroja, već apel na intuiciju da smo osnovni opis algoritma lišili svega suvišnog.
 
-U literaturi postoje brojne varijante Turingovog stroja --- mi slijedimo~\cite{sipser}, uz neke male modifikacije kako bismo lakše dokazivali teoreme. Za početak ponovimo definicije.
+U literaturi postoje brojne varijante Turingovog stroja --- mi slijedimo~\cite{sipser}, uz male modifikacije kako bismo lakše dokazivali teoreme. Za početak ponovimo definicije.
 
 Ulazna abeceda, ili samo \emph{abeceda}, je konačan neprazan skup. Obično je označavamo sa $\Sigma$ i smatramo fiksnom. Njene elemente zovemo \emph{znakovima} --- ne\-od\-re\-đe\-ne znakove (znakovne varijable) pišemo malim grčkim slovima s početka alfabeta ($\alpha$, $\beta$, $\gamma$), dok konkretne znakove pišemo u fontu fiksne širine: $\t a$, $\t b$, $\t 0$, $\t 1$. \emph{Riječ} (nad $\Sigma$) je bilo koji konačan niz znakova, najčešće označen slovom $w$. Riječi pišemo konkatenacijom znakova: recimo, riječ $(\t0,\t1,\t1)$ pišemo kao $\t{011}$. Dakle, skup svih riječi je skup $\Sigma^*$ svih konačnih nizova znakova. Duljinu riječi označavamo s $\dulj{w}$. Prazni niz (duljine $0$) zovemo \emph{praznom rječju} i označavamo s $\varepsilon$. \emph{Jezik} (nad $\Sigma$) je bilo koji podskup od $\Sigma^*$. \emph{Jezična funkcija} (nad $\Sigma$) je bilo koja parcijalna funkcija $\varphi:\Sigma^*\rightharpoonup\Sigma^*$.
 
@@ -82,13 +82,13 @@ Neka je $\Sigma$ abeceda, neka je $w\in\Sigma^*$ riječ te neka je $\mathcal T$ 
 
 Neka je $\varphi$ jezična funkcija nad $\Sigma$. Kažemo da $\mathcal T$ \emph{računa} $\varphi$ ako za sve $w\in\Sigma^*$ vrijedi:
 \begin{itemize}
-    \item Ako je $w\in\dom\varphi$, tada $\mathcal T$-izračunavanje s $w$ stane i završna konfiguracija mu je oblika $\bigl(q_z,n,\varphi(w)\bl\ldots\bigr)$ za neki $n\in\N$ (pozicija nije bitna).
-    \item Ako $w\notin\dom\varphi$, tada $\mathcal T$-izračunavanje s $w$ ne stane.
+    \item Ako je $w\in\dom\varphi$, tada $\mathcal T$\!-izračunavanje s $w$ stane i završna konfiguracija mu je oblika $\bigl(q_z,n,\varphi(w)\bl\ldots\bigr)$ za neki $n\in\N$ (pozicija nije bitna).
+    \item Ako $w\notin\dom\varphi$, tada $\mathcal T$\!-izračunavanje s $w$ ne stane.
 \end{itemize}
 Za jezičnu funkciju $\varphi$ kažemo da je \emph{Turing-izračunljiva} ako postoji Turingov stroj koji je računa.
 \end{definicija}
 
-Kao i za RAM-model, mogli bismo dokazati da za svaki Turingov stroj $\mathcal T$ i njegov ulaz $w$ postoji jedinstveno $\mathcal T$-izračunavanje s $w$, ali ne i da svaki Turingov stroj računa neku jezičnu funkciju. Traka u završnoj konfiguraciji ne mora biti oblika $v\bl\ldots$ za $v\in\Sigma^*$: može sadržavati znakove iz $\Gamma_+\!\setminus\Sigma$, ili sadržavati neki znak iz $\Sigma$ nakon prve praznine. Za takve Turingove strojeve nećemo reći da računaju ikakvu funkciju --- zapravo ih nećemo uopće promatrati, ali dobro ih je imati na umu ako iskazujemo teoreme univerzalno po svim Turingovim strojevima.
+Kao i za RAM-model, mogli bismo dokazati da za svaki Turingov stroj $\mathcal T$ i njegov ulaz $w$ postoji jedinstveno $\mathcal T$\!-izračunavanje s $w$, ali ne i da svaki Turingov stroj računa neku jezičnu funkciju. Traka u završnoj konfiguraciji ne mora biti oblika $v\bl\ldots$ za $v\in\Sigma^*$: može sadržavati znakove iz $\Gamma_+\!\setminus\Sigma$, ili sadržavati neki znak iz $\Sigma$ nakon prve praznine. Za takve Turingove strojeve nećemo reći da računaju ikakvu funkciju --- zapravo ih nećemo uopće promatrati, ali dobro ih je imati na umu ako iskazujemo teoreme univerzalno po svim Turingovim strojevima.
 
 \subsection{Primjer Turing-izračunavanja}
 
@@ -357,7 +357,7 @@ Dakle, sad samo trebamo konstruirati Turingov stroj s različitim početnim i za
 %\shortintertext{gdje je}
     \delta'(0,\alpha)&:=(1,\alpha,1)\text{ za sve $\alpha\in\Sigma\cup\{\bl\}$.}
 \end{align}
-Tada za svaku $w\in\Sigma^*$, $\mathcal T'$-izračunavanje s $w$ je $(0,0,w\bl\ldots)\leadsto(1,1,w\bl\ldots)\lcirclearrowleft$, odakle je izlazni podatak opet $w$, odnosno $\mathcal T'$ računa identitetu.
+Tada za svaku $w\in\Sigma^*$, $\mathcal T'$\!-izračunavanje s $w$ je $(0,0,w\bl\ldots)\leadsto(1,1,w\bl\ldots)\lcirclearrowleft$, odakle je izlazni podatak opet $w$, odnosno $\mathcal T'$ računa identitetu.
 \end{proof}
 
 Slično možemo kodirati i $\Gamma_0$ --- ali kako već imamo kodiranje skupa $\Sigma_0\subset\Gamma_0$, želimo da znakovi ulazne abecede imaju iste kodove. Stoga označimo $b:=\card\Gamma_0$ i proširimo bijekciju $\N\Sigma_0:\Sigma_0\leftrightarrow[1\dd b']$ do bijekcije $\N\Gamma_0:\Gamma_0\leftrightarrow[0\dd b\rangle$, tako da $\bl$ preslikamo u $0$, a ostale elemente iz $\Gamma_0\!\setminus\Sigma_0$ bijektivno u skup $\langle b'\dd b\rangle$.

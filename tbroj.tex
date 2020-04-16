@@ -83,8 +83,8 @@ U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\
 Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što konfiguracija sa stanjem $q_r$ (kao i ona s $q_a$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja) i zovemo ih \emph{odlučiteljima} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
     %\SwapAboveDisplaySkip
-    L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_a$}\}
-    \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$-izračunavanje s $w$ stane u stanju $q_r$}\}\text,
+    L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$\!-izračunavanje s $w$ stane u stanju $q_a$}\}
+    \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$\!-izračunavanje s $w$ stane u stanju $q_r$}\}\text,
 \end{align} i kažemo da \emph{prepoznaje} $L(\mathcal T)$.
 
 Nije preteško vidjeti da su te dvije karakterizacije, brojevna i jezična, povezane --- pogotovo jer već imamo napravljen najveći dio posla.
@@ -103,7 +103,7 @@ I treće, umjesto parcijalno rekurzivne funkcije $\f{stop}$ imat ćemo funkciju 
 \begin{equation}\label{eq:stop'def}
     \f{stop}'(x):=\mu n\bigl(\f{State}(x,n)\in\{1,2\}\bigr)\text,
 \end{equation}
-	za koju ćemo moći zaključiti da je rekurzivna. Naime, parcijalno je rekurzivna kao minimizacija rekurzivne (lema~\ref{lm:StateHeadTapeprn} i korolar~\ref{kor:konprn}) relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti \enquote*{:=}) po definiciji odlučitelja: ako je $x=\kr w$, tada mora za neki $n$ biti $\f{State}(x,n)\in\{1,2\}$, jer $\mathcal T$-izračunavanje s $w$ mora stati --- i $\f{stop}'(x)=\f{stop}'(\kr w)$ je upravo broj koraka nakon kojeg ono stane.
+	za koju ćemo moći zaključiti da je rekurzivna. Naime, parcijalno je rekurzivna kao minimizacija rekurzivne (lema~\ref{lm:StateHeadTapeprn} i korolar~\ref{kor:konprn}) relacije. Totalna je (pa smo u~\eqref{eq:stop'def} mogli koristiti \enquote*{:=}) po definiciji odlučitelja: ako je $x=\kr w$, tada mora za neki $n$ biti $\f{State}(x,n)\in\{1,2\}$, jer $\mathcal T$\!-izračunavanje s $w$ mora stati --- i $\f{stop}'(x)=\f{stop}'(\kr w)$ je upravo broj koraka nakon kojeg ono stane.
 
 Tvrdimo da je
 \begin{equation}
@@ -111,9 +111,9 @@ Tvrdimo da je
 \end{equation}
 iz čega slijedi rekurzivnost od $\kr L$ po lemi~\ref{lm:comprek} i korolaru~\ref{kor:prnrek}.
 
-Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$-izračunavanje s $w$ mora stati u stanju $q_a$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju) pa $\f{State}(x,n)\notin\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
+Doista, ako je $x\in\kr L=\N\Sigma^*[L]$, to znači da postoji $w\in L$ takva da je $x=\kr w$. Tada $\mathcal T$\!-izračunavanje s $w$ mora stati u stanju $q_a$ --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je $\f{State}(x,n_0)=1\in\{1,2\}$, dok za sve $n<n_0$ konfiguracija nakon $n$ koraka nije završna (sasvim analogno propoziciji~\ref{prop:ram1zav} --- jer završne konfiguracije prelaze isključivo u same sebe, postoji najviše jedna završna konfiguracija u izračunavanju) pa $\f{State}(x,n)\notin\{1,2\}$. Dakle $n_0=\f{stop}'(x)$, pa je $\f{State}\bigl(x,\f{stop}'(x)\bigr)=\f{State}(x,n_0)=1$.
 
-U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučitelj, pa $\mathcal T$-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\notin\{1,2\}$ za $n<n_0$, a $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_a$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
+U drugom smjeru, pretpostavimo $\f{State}\bigl(x,\f{stop}'(x)\bigr)=1$. Po propoziciji~\ref{pp:bijkr}, postoji jedinstvena riječ $w\in\Sigma^*$ takva da je $x=\kr w$. $\mathcal T$ je odlučitelj, pa $\mathcal T$\!-izračunavanje s $w$ mora stati --- označimo s $n_0$ broj koraka nakon kojeg se to dogodi. Tada je (kao i prije) $\f{State}(x,n)\notin\{1,2\}$ za $n<n_0$, a $\f{State}(x,n_0)=1\in\{1,2\}$, pa je $\f{stop}'(x)=n_0$. Sada pretpostavka glasi $\f{State}(x,n_0)=1$, odnosno završno stanje je $q_a$, pa $\mathcal T$ prihvaća $w$. To znači da je $w\in L$, odnosno $x=\kr w\in\kr L$.
 \end{proof}
 %\newpage
 
@@ -129,8 +129,7 @@ Ako joj damo riječ $w\in\Sigma^*\setminus L$, tada ($\mspace{-1mu}\sigma$ je in
 \begin{equation}
     \varphi(w)=\sigma^{\,-\!1}\bigl(\,\chi_{\kr L}\bigl(\sigma(w)\bigr)\bigr)=\sigma^{\,-\!1}\bigl(\,\chi_{\kr L}(\kr w)\bigr)=\sigma^{\,-\!1}(0)=\varepsilon\text.
 \end{equation}
-Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Riječi \emph{unutar} $L$ onda ne smije preslikavati u $\varepsilon$ zbog injektivnosti $\sigma^{\,-\!1}$, a jer je totalna, mora ih preslikavati nekamo. Dakle, $\varphi(w)$ je neprazna za svaku $w\in L$.
-Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju $bool$ u $\Sigma^*$: prazna riječ je lažna, neprazne su istinite. Mnogi programski jezici koji definiraju istinitost stringova, definiraju je upravo na taj način.
+Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Riječi \emph{unutar} $L$ onda ne smije preslikavati u $\varepsilon$ zbog injektivnosti $\sigma^{\,-\!1}$, a jer je totalna, mora ih preslikavati nekamo. Dakle, $\varphi(w)$ je neprazna riječ za svaku $w\in L$. Vidimo da, baš kao i u $\N$, imamo prirodnu reprezentaciju $bool$ u $\Sigma^*$: prazna riječ je lažna, neprazne su istinite. Mnogi programski jezici koji definiraju istinitost stringova, definiraju je upravo na taj način.
 
 %Kako izvršavanje RAM-programa o kojem govorimo stane za svaki $\kr w$, po korolaru~\ref{kor:faza3} i napomeni~\ref{nap:snstane} slijedi da će Turingov stroj koji konstruiramo stati za svaki $w$ --- samo trebamo malo promijeniti način na koji stane, da ne komunicira izlaz putem trake nego putem završnog stanja.
 

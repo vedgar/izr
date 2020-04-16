@@ -328,7 +328,7 @@ Očekivano, imat ćemo slučajeve ovisno o tipu $i$-te instrukcije programa $P$.
 
 Ako je to \inc, dakle $i.\;\incr j$ za neki $j$, tada mora biti $j<m_P\le m$, i trebamo vidjeti da u $\mathfrak N$ vrijedi formula~\eqref{eq:formINC}. Ta formula je kondicional, pa uzmimo proizvoljnu valuaciju $v$ i pretpostavimo da u $\mathfrak N$ uz valuaciju $v$ vrijedi njen antecedens: $\mathfrak N\models_v R_i(x_0,\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$, no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadINC} prelazi u
 \begin{equation}\label{eq:nextINC}
-    \bigl(v(x_0),\dotsc,v(x_{j-1}),v(x_j)+1,v(x_{j+1}),\dotsc,v_{m-1},0,\dotsc,i+1\bigr)\text.
+	\bigl(v(x_0),\dotsc,v(x_{j-1}),v(x_j)+1,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i+1\bigr)\text.
 \end{equation}
 S druge strane, $c_t\leadsto c_{t+1}$ po definiciji~\ref{def:compute}, pa po lemi~\ref{lema:ramdet} imamo da je~\eqref{eq:nextINC} upravo $c_{t+1}$ (to ćemo koristiti i kasnije). Drugim riječima, stroj može postići konfiguraciju~\eqref{eq:nextINC}, iz čega slijedi (jer je $v(x_j)+1=\f{Sc}\bigl(v(x_j)\bigr)=\phi(\mathsf s)\bigl(v(x_j)\bigr)=v\bigl(\mathsf s(x_j)\bigr)$)
 \begin{equation}
@@ -364,7 +364,7 @@ Sada nam je cilj dokazati obrat propozicije~\ref{pp:models>stop}. Bitna razlika 
 
 Pa neka je $\mathfrak M=(M,\phi)\cong(M,\Theta,g,S_0,S_1,\dotsc,S_n)$ proizvoljna $\sigma$-struktura (redom imamo $\phi(\mathsf o)=:\Theta\in M$, $\phi(\mathsf s)=:g:M\to M$, a za svaki $i\in[0\dd n]$, $\phi(R_i)=:S_i\subseteq M^m$), i neka vrijedi $\mathfrak M\models\Gamma_{\vec u}$.
 
-Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo $a_{jt}:=\phi\bigl(\overline{c_t(\reg j)}\bigr)=g\bigl(g(\dotsb g(\Theta)\dotsb)\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
+Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo $a_{jt}:=\phi\bigl(\overline{c_t(\reg j)}\bigr)=g\bigl(g(\dotsb g(\Theta)\dotsb\mspace{-1mu})\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
 
 \begin{lema}[{name=[izračunavanje čuva istinitost formula pojedinih konfiguracija]}]\label{lm:formcomputesteps}
 Za svaki $t\in\N$ vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$,\newline odnosno $(a_{0t},a_{1t},\dotsc,a_{(m-1)t})\in S_{c_t(\textsc{pc})}$.
@@ -606,7 +606,7 @@ Na jeziku logike prvog reda:
     \iota_1^0&=\bigl(R_1(x_0,\mathsf o,x_2)\to R_1(x_0,\mathsf o,x_2)\bigr)\\
     \iota_1^+&=\bigl(R_1\bigl(x_0,\mathsf s(x_1),x_2\bigr)\to R_2(x_0,x_1,x_2)\bigr)\\
     \psi&=\bigl(\iota_0^0\to\bigl(\iota_0^+\to(\iota_1^0\to(\iota_1^+\to\zeta))\bigl)\bigl)\\
-    \pi_{(1,2)}&=R_0\bigl(\mathsf o,\mathsf s(\mathsf o),\mathsf s\bigl(\mathsf s(0)\bigr)\bigr)\\
+    \pi_{(1,2)}&=R_0\bigl(\mathsf o,\mathsf s(\mathsf o),\mathsf s\bigl(\mathsf s(\mathsf o)\bigr)\bigr)\\
     \varphi_{(1,2)}&=(\pi_{(1,2)}\to\psi)
 \end{align}
     odnosno znamo da nije valjana formula (zapisana u osnovnom jeziku)
@@ -621,7 +621,7 @@ Na jeziku logike prvog reda:
 čiji kod ima nekoliko stotina znamenaka --- ali dio koji ovisi o $\vec u$ je samo ovaj prvi red; sve ostalo je konstanta za fiksni RAM-algoritam $P^k$.
 \end{primjer}
 
-\begin{lema}[{name=[primitivna rekurzivnost svođenja $K$ na $\Valid$]}]
+\begin{lema}[{name=[primitivna rekurzivnost svođenja $K$ na $\Valid$]}]\label{lm:K<Valid}
 Funkcija $\f{Phi}$, koja svakom prirodnom broju $u$ pridružuje kod formule $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\,\eqref{step:varphi_u}, primitivno je rekurzivna.
 \end{lema}
 \begin{proof}
@@ -629,7 +629,7 @@ Funkcija $\f{Phi}$, koja svakom prirodnom broju $u$ pridružuje kod formule $\va
 
 Drugo, označimo s $\f{Pi}$ funkciju koja preslikava $u\mapsto\kr{\pi_u}$. Ta funkcija je primitivno rekurzivna, jer je funkcija $\f{Numeral}$, koja preslikava $u\mapsto\kr{\overline u}$, primitivno rekurzivna.
 \begin{align}
-    \f{Numeral}(u)&:=\kr{\t{f(f(}\dotsb\t{f(c)}\dotsm\t{))}}=\f{Repeat}(43,u)\conc{}2\conc{}\f{Repeat}(8,u)\\
+	\f{Numeral}(u)&:=\kr{\t{f(f(}\dotsb\mspace{1mu}\t{f(c)}\dotsm\t{))}}=\f{Repeat}(43,u)\conc{}2\conc{}\f{Repeat}(8,u)\\
     \f{Pi}(u)&:=\kr{\pi_u}=\kr{R_0(\mathsf o,\overline u,\mathsf o,\dotsc,\mathsf o)}=
     \kr{\,\t{R(c,}}\conc{}\kr{\overline u}\conc{}\kr{(\t{,c})^{m-2}}\conc{}\kr{\t)}=\notag\\
     &=7949\conc{}\f{Numeral}(u)\conc{}\f{Repeat}(62,m-2)\conc{}8\\
@@ -643,7 +643,7 @@ Jezik $\Valid$ nije odlučiv.
 \end{propozicija}
 \begin{proof}
 Lanac ekvivalencija~\eqref{eq:lanaceqv} sada možemo proširiti još trima karikama:
-\begin{multline}
+\begin{multline}\label{eq:K<Valid}
     u\in K
     \Longleftrightarrow
     \text{$P_0$-izračunavanje s $u$ stane}
@@ -662,33 +662,33 @@ Lanac ekvivalencija~\eqref{eq:lanaceqv} sada možemo proširiti još trima karik
 \end{multline}
 Predpredzadnja ekvivalencija je definicija skupa $\Valid$ (u donjem redu je $\varphi_u$ zapisana u osnovnom jeziku). Predzadnja ekvivalencija je u jednom smjeru definicija~\eqref{eq:kodLdef}, a u drugom injektivnost kodiranja (propozicija~\ref{pp:bijkr}): ako je $\kr{\varphi_u}=\kr{\varphi'}$ za neku $\varphi'\in\Valid$, tada je $\varphi_u=\varphi'\in\Valid$. Zadnja ekvivalencija je definicija funkcije $\f{Phi}$.
 
-Sada se čitav lanac može sažeti u $\chi_{K}=\chi_{\kr{\Valid}}\circ\f{Phi}$, gdje je $\f{Phi}$ (čak primitivno) rekurzivna, pa vrijedi $K\preceq\kr{\Valid}$.
+	Čitav se lanac~\eqref{eq:K<Valid} može sažeti u $\chi_{K}=\chi_{\kr{\Valid}}\circ\f{Phi}$, gdje je $\f{Phi}$ (čak primitivno, po lemi~\ref{lm:K<Valid}) rekurzivna, pa vrijedi $K\preceq\kr{\Valid}$.
 Kada bi $\Valid$ bio odlučiv, po teoremu~\ref{tm:oikr} bi jednomjesna relacija $\kr{\Valid}$ bila rekurzivna. Prema propoziciji~\ref{pp:rek<rek}, tada bi i Kleenejev skup bio rekurzivan, što je kontradikcija s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
-\section{Prema G\"odelovom prvom teoremu nepotpunosti}
+\section{Prema Gödelovom prvom teoremu nepotpunosti}
 
-Argumentima koji su potrebni za dokaz Churchovog teorema već smo se poprilično približili dokazu G\"odelovog prvog teorema, izrečenog u obliku: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za pravi dokaz trebalo bi ispeglati još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
+Argumentima koji su potrebni za dokaz Churchovog teorema već smo se poprilično približili dokazu Gödelovog prvog teorema, izrečenog u obliku Tarskog: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za potpuni dokaz trebalo bi razraditi još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
 
 U prethodnoj točki uveli smo, za svaki prirodni broj $u$, rečenicu $\varphi_u$ koja je valjana ako i samo ako je $u$ element Kleenejevog skupa. Također smo uveli strukturu $\mathfrak N=(\N,0,\f{Sc},\dotsc)$, čiji konstantsko-funkcijski fragment se podudara sa standardnim modelom od PA (prirodni brojevi, nula i sljedbenik).
 
-\begin{definicija}[{name=[G\"odelov skup]}]
-\emph{G\"odelov skup} je skup rečenicâ
+\begin{definicija}[{name=[Gödelov skup]}]
+\emph{Gödelov skup} je skup rečenicâ
 %\begin{equation}
     $\mathscr G\ddot o:=\{\lnot\varphi_u\mid u\in K\kompl\}$.
 %\end{equation}
 \end{definicija}
-%Kako je negacija rečenice ponovo rečenica, G\"odelov skup je skup rečenica.
+%Kako je negacija rečenice ponovo rečenica, Gödelov skup je skup rečenica.
 
-\begin{propozicija}[{name=[istinitost G\"odelovog skupa rečenica u $\mathfrak N$]}]
+\begin{propozicija}[{name=[istinitost Gödelovog skupa rečenica u $\mathfrak N$]}]
 Vrijedi $\mathfrak N\models\mathscr G\ddot o$.
 \end{propozicija}
 \begin{proof}
 Po kontrapoziciji propozicije~\ref{pp:models>stop}, za svaki $u\in K\kompl$ formula $\varphi_u$ nije valjana, a iz dokaza te propozicije slijedi da ne vrijedi upravo na strukturi $\mathfrak N$ (jer tamo vrijedi $\pi_u$ i sve $\iota_i$, ali ne vrijedi $\zeta$). Iz logike znamo da $\mathfrak N\nvDash\varphi_u$ povlači $\mathfrak N\models\lnot\varphi_u$, jer je $\varphi_u$ rečenica. Drugim riječima, za svaki $u\in K\kompl$ vrijedi $\mathfrak N\models\lnot\varphi_u$, što smo trebali dokazati.
 \end{proof}
 
-\begin{teorem}[{name=[G\"odelov prvi teorem nepotpunosti]}]
-Postoji rečenica $\gamma\in\mathscr G\ddot o$ (\emph{G\"odelova rečenica}) koja nije dokaziva u PA\@.
+\begin{teorem}[{name=[Gödelov prvi teorem nepotpunosti]}]
+Postoji rečenica $\gamma\in\mathscr G\ddot o$ (\emph{Gödelova rečenica}) koja nije dokaziva u PA\@.
 \end{teorem}
 \begin{proof}[Skica dokaza]
 Ključno je vidjeti da je jezik nad $\Sigma_{\log}$,
@@ -709,7 +709,7 @@ odlučiv. To sigurno nećemo napraviti u potpunosti, ali sve osnovne ideje već 
     {}\land f=\langle\t(\,\rangle\conc{}a\conc{}\langle\t{\,\textrightarrow(\,}\rangle\conc{}b\conc{}\langle\,\t\textrightarrow\,\rangle\conc{}a\conc{}\langle\t{\,))}\rangle\bigr)
 \end{multline}
 
-Za sheme (A4) i (A5) moramo još voditi računa o reprezentaciji terma, i uvjetima za supstituciju, što uvodi određene tehničke poteškoće, ali ništa što naši alati primitivno rekurzivnih funkcija ne bi mogli riješiti. Za alternativnu aksiomatizaciju logike prvog reda koja izbjegava brojne tehničke poteškoće, možete pogledati~\cite{smullyan}.
+Za sheme (A4) i (A5) moramo još voditi računa o reprezentaciji terma, i uvjetima za supstituciju, što uvodi određene tehničke poteškoće, ali ništa što naši alati primitivno rekurzivnih funkcija ne bi mogli riješiti. Za alternativnu aksiomatizaciju logike prvog reda koja izbjegava brojne tehničke poteškoće pogledajte~\cite{smullyan}.
 
 Modus ponens i generalizaciju je jednostavno zapisati.
 \begin{align}
@@ -724,7 +724,7 @@ Modus ponens i generalizaciju je jednostavno zapisati.
 
 Odnosno, $\alpha$ je dobivena modus ponensom iz $\beta$ i $\gamma$ ako i samo ako je $\beta=(\gamma\to\alpha)$. Također, $\alpha$ je dobivena generalizacijom iz $\beta$ ako postoji $k$ takav da je $\alpha=\forall x_k\beta$. Pri tome je $k<k+1=\dulj{x_k}<\dulj{\forall x_k}<\dulj{\alpha}\le\kr\alpha=a$ po lemi~\ref{lm:dulj<=kr}, pa možemo ograničiti kvantifikaciju po $k$.
 
-    Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, i još provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana. Za elegantan pristup koji zaobilazi supstituciju u slučaju PA\@, pogledajte~\cite{smullyan}.
+    Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, i još provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana, i to je jedna od onih tehničkih poteškoća koje su elegantno izbjegnute u~\cite{smullyan}.
 
 Promotrimo sljedeći \emph{paralelni} algoritam:
 \begin{quote}
@@ -744,15 +744,15 @@ Sve u svemu, vidimo da neformalni algoritam koji smo napisali računa $\chi_{K}$
 Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathscr G\ddot o$ koja nije dokaziva u PA\@.
 \end{proof}
 
-\subsection{Problemi u skici dokaza G\"odelovog teorema}
+\subsection{Problemi u skici dokaza Gödelovog teorema}
 
 U prethodnoj točki je mnogo toga napravljeno neformalno. Želja autora bila je prikazati da smo idejno jako blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako ih možemo "zakrpati".
 
 \begin{itemize}
-    \item Možemo li doista relacije $R_n$ izraziti pomoću nule, sljedbenika, zbrajanja i mno\-že\-nja? Koristeći funkciju $\f{Reg}$ svaku od njih možemo izraziti kao projekciju primitivno rekurzivne relacije, ali kodiranje potrebno za $\f{Reg}$ bitno koristi potenciranje. Pokazuje se~\cite{smullyan} da je G\"odelov teorem mnogo lakše dokazati ako u strukturi $\N$ shvatimo i potenciranje kao osnovnu operaciju. Zapisati potenciranje \emph{logički} pomoću zbrajanja i množenja (ne koristeći primitivnu rekurziju, jer ona ide preko teorije skupova, Dedekindovim teoremom rekurzije), ili alternativno, razviti kodiranje konačnih nizova koje umjesto množenja i potenciranja koristi zbrajanje i množenje, vrlo je teško. G\"odelov originalni pristup ($\beta$-funkcija i kineski teorem o ostacima) je zapetljan, ali do danas nismo otkrili ništa bolje.
+    \item Možemo li doista relacije $R_n$ izraziti pomoću nule, sljedbenika, zbrajanja i mno\-že\-nja? Koristeći funkciju $\f{Reg}$ svaku od njih možemo izraziti kao projekciju primitivno rekurzivne relacije, ali kodiranje potrebno za $\f{Reg}$ bitno koristi potenciranje. Pokazuje se~\cite{smullyan} da je Gödelov teorem mnogo lakše dokazati ako u strukturi $\N$ shvatimo i potenciranje kao osnovnu operaciju. Zapisati potenciranje \emph{logički} pomoću zbrajanja i množenja (ne koristeći primitivnu rekurziju, jer ona ide preko teorije skupova, Dedekindovim teoremom rekurzije), ili alternativno, razviti kodiranje konačnih nizova koje umjesto množenja i potenciranja koristi zbrajanje i množenje, vrlo je teško. Gödelov originalni pristup (funkcija $\beta$ i kineski teorem o ostacima) je zapetljan, ali do danas nismo otkrili ništa bolje.
     \item Kako iz činjenice da je skup $\kr{Proof_{\text{PA}}}$ rekurzivan možemo dobiti njegovu iz\-ra\-čun\-lji\-vu enumeraciju? Ovo možete riješiti za vježbu. Dakle, zadatak je dokazati: ako je $\f S$ beskonačan rekurzivan skup, tada je enumeracija od $\f S$ (funkcija koja broju $i$ pridružuje $i$-ti po veličini element od $\f S$) rekurzivna. Potrebnu ideju vidjeli ste kod enumeracije skupa $\mathbb P$~\eqref{eq:primerek}. $Proof_{\text{PA}}$ je očito beskonačan skup.
     \item Pokriva li Church--\!Turingova teza i paralelne algoritme? Svakako, iako će proći još neko vrijeme do trenutka kad ćemo to dokazati u poglavlju~\ref{ch:re}. Usprkos nemogućnosti dokaza same teze, dokazat ćemo da se paralelni algoritmi mogu izvršavati na RAM-stroju (odnosno opisati parcijalno rekurzivnim funkcijama) te se imaju jednako pravo zvati algoritmima kao i oni slijedni (neparalelni). Konkretno, tvrdnja koja nam ovdje treba formalizirana je kao Postov teorem, koji je dokazan u točki~\ref{sec:Post}.
     \item Možemo li potpuno izbjeći Church--\!Turingovu tezu? Kako teorem govori o dokazivanju a ne o algoritmima, čini se da možemo --- ili je barem možemo zamijeniti "Hilbertovom tezom" da je intuitivni pojam dokazivanja u nekoj teoriji upravo onaj koji je opisan preciznom definicijom formalnog dokaza. Taj pristup je naravno potpuno izvan opsega ove knjige, kojoj su centralna tema algoritmi.
-    \item Nekonstruktivnost dokaza svakako upada u oči. Dokazali smo da G\"odelova rečenica postoji tako što smo zapravo dokazali da pretpostavka da su u nekom beskonačnom skupu sve rečenice dokazive vodi na kontradikciju. Tada nedokaziva rečenica u tom skupu postoji u klasično-logičkom smislu, ali svejedno o njoj ne znamo skoro ništa. Možemo li \emph{konstruirati} G\"odelovu rečenicu? Odgovor je potvrdan, iako to uopće nije jednostavno. Ključna je ideja \textbf{samoreferiranja}: moguće je u Peanovoj aritmetici konstruirati formulu koja na određeni način govori o samoj sebi --- konkretno, kaže da ona sama nije dokaziva. Iako nećemo pričati baš o tome, napravit ćemo sličnu stvar za algoritme, u teoremu rekurzije: algoritmi u svojoj definiciji mogu koristiti (najčešće \emph{pozivati} pomoću funkcije $\f{comp}_k$, gdje je $k$ mjesnost algoritma --- ali mogući su i drugi oblici korištenja) same sebe. Osnovna ideja --- specijalizacija\slash supstitucija i dijagonalna funkcija --- je ista kao i za samoreferirajuće formule. To je tema sljedećeg poglavlja.
+    \item Nekonstruktivnost dokaza svakako upada u oči. Dokazali smo da Gödelova rečenica postoji tako što smo zapravo dokazali da pretpostavka da su u nekom beskonačnom skupu sve rečenice dokazive vodi na kontradikciju. Tada nedokaziva rečenica u tom skupu postoji u klasično-logičkom smislu, ali svejedno o njoj ne znamo skoro ništa. Možemo li \emph{konstruirati} Gödelovu rečenicu? Odgovor je potvrdan, iako to uopće nije jednostavno. Ključna je ideja \textbf{samoreferiranja}: moguće je u Peanovoj aritmetici konstruirati formulu koja na određeni način govori o samoj sebi --- konkretno, kaže da ona sama nije dokaziva. Iako nećemo pričati baš o tome, napravit ćemo sličnu stvar za algoritme, u teoremu rekurzije: algoritmi u svojoj definiciji mogu koristiti (najčešće \emph{pozivati} pomoću funkcije $\f{comp}_k$, gdje je $k$ mjesnost algoritma --- ali mogući su i drugi oblici korištenja) same sebe. Osnovna ideja --- specijalizacija\slash supstitucija i dijagonalna funkcija --- je ista kao i za samoreferirajuće formule. To je tema sljedećeg poglavlja.
 \end{itemize}
 % priča o PRA: F1 je prejaka, mnogo toga se može napraviti primitivno rekurzivno!
