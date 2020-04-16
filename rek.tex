@@ -141,7 +141,7 @@ Svaka kompozicija totalnih funkcija je totalna.
 \end{proof}
 
 \begin{primjer}[{name=[prikaz konstante kao kompozicije inicijalnih funkcija]}]\label{pr:C23}
-$\f C_2^3=\f{Sc}\circ\f{Sc}\circ\f Z\circ\f I_1^3$. Doista,
+	$\f C_2^3=\f{Sc}\circ\f{Sc}\circ\f Z\circ\f I_1^3$. Doista, za sve $(x,y,z)\in\N^3$ je
 \begin{multline}
 (\f{Sc}\circ\f{Sc}\circ\f Z\circ\f I_1^3)(x,y,z)=(\f{Sc}\circ\f{Sc}\circ\f Z)\bigl(\f I_1^3(x,y,z)\bigr)=(\f{Sc}\circ\f{Sc}\circ\f Z)(x)=\\
 =(\f{Sc}\circ\f{Sc})\bigl(\f Z(x)\bigr)=(\f{Sc}\circ\f{Sc})(0)=\f{Sc}\bigl(\f{Sc}(0)\bigr)=\f{Sc}(1)=2=\f C_2^3(x,y,z).\text\qedhere
@@ -317,9 +317,9 @@ Neka je $F$ brojevna funkcija. Tada je $F$ primitivno rekurzivna ako i samo ako 
 \begin{proof}
 Označimo sa $\mathcal S$ skup funkcija koje se mogu dobiti iz inicijalnih pomoću ko\-nač\-no mnogo primjena kompozicije i primitivne rekurzije. Ako je $F$ inicijalna funkcija, pripada skupu $\mathcal S$ jer ju je moguće dobiti iz inicijalnih pomoću $0$ primjena kompozicije i primitivne rekurzije.
 
-Ako su $k,l\in\N_+$ te $G_1^k,\dotsc,G_l^k,H^l\in\mathcal S$, tada se svaka $G_i$ može dobiti iz inicijalnih pomoću, recimo, $c_i$ primjena kompozicije i $r_i$ primjena primitivne rekurzije. Također se $H$ može dobiti iz inicijalnih, recimo pomoću $c$ primjena kompozicije i $r$ primjena primitivne rekurzije. Tada se $H\circ(G_1,\dotsc,G_l)$ može dobiti iz inicijalnih funkcija pomoću najviše $1+c+\sum_{i=1}^lc_i$ primjena kompozicije, i najviše $r+\sum_{i=1}^lr_i$ primjena primitivne rekurzije, što je konačno mnogo, pa je $H\circ(G_1,\dotsc,G_l)\in\mathcal S$.
+Ako su $k,l\in\N_+$ te $G_1^k,\dotsc,G_l^k,H^l\in\mathcal S$, tada se svaka $G_i$ može dobiti iz inicijalnih pomoću, recimo, $c_i$ primjena kompozicije i $r_i$ primjena primitivne rekurzije. Također se $H$ može dobiti iz inicijalnih, recimo pomoću $c$ primjena kompozicije i $r$ primjena primitivne rekurzije. Tada se $H\circ(G_1,\dotsc,G_l)$ može dobiti iz inicijalnih funkcija pomoću najviše $1+c+\sum_{i=1}^lc_i$ primjena kompozicije, i najviše $r+\sum_{i=1}^lr_i$ primjena primitivne rekurzije --- što je konačno mnogo, pa je $H\circ(G_1,\dotsc,G_l)\in\mathcal S$.
 
-Ako je $k\in\N_+$ te $G^k,H^{k+2}\in\mathcal S$ totalne funkcije, tada se one mogu dobiti iz inicijalnih pomoću recimo $c_G$ odnosno $c_H$ primjena kompozicije, uz $r_G$ odnosno $r_H$ primjena primitivne rekurzije. Tada se $G\pr H$ može dobiti iz inicijalnih funkcija pomoću najviše $c_G+c_H$ primjena kompozicije, i najviše $r_G+r_H+1$ primjena primitivne rekurzije, što je konačno mnogo, pa je $G\pr H\in\mathcal S$.
+Ako je $k\in\N_+$ te $G^k,H^{k+2}\in\mathcal S$ totalne funkcije, tada se one mogu dobiti iz inicijalnih pomoću recimo $c_G$ odnosno $c_H$ primjena kompozicije, uz $r_G$ odnosno $r_H$ primjena primitivne rekurzije. Tada se $G\pr H$ može dobiti iz inicijalnih funkcija pomoću najviše $c_G+c_H$ primjena kompozicije, i najviše $r_G+r_H+1$ primjena primitivne rekurzije --- što je konačno mnogo, pa je $G\pr H\in\mathcal S$.
 
 Prethodna tri odlomka pokazuju da skup $\mathcal S$ sadrži sve inicijalne funkcije te da je zatvoren na kompoziciju i na primitivnu rekurziju. Kako je skup primitivno rekurzivnih funkcija najmanji takav skup, slijedi da je podskup od $\mathcal S$, odnosno svaka primitivno rekurzivna funkcija je u $\mathcal S$.
 
@@ -542,9 +542,7 @@ Svaka primitivno rekurzivna funkcija je rekurzivna.
 \end{proof}
 
 \begin{korolar}[{name=[degenerirana primitivna rekurzija iz rekurzivne funkcije]}]\label{kor:F1rek}
-Neka je $a\in\N$ i $\f H^2$ rekurzivna funkcija.
-	
-	Tada je funkcija $a\pr\f H$ također rekurzivna.
+Neka je $a\in\N$ i $\f H^2$ rekurzivna funkcija. Tada je i funkcija $a\pr\f H$ rekurzivna.
 \end{korolar}
 \begin{proof}
 %Iz dokaza propozicije~\ref{prop:F1prn} vidimo
@@ -581,8 +579,10 @@ Neka je $k\in\N_+$ te $\f R^{k+1}$ RAM-izračunljiva. To znači da postoji RAM-p
     3.&\decr{k+1}{1}
     \end{prog}
 \end{equation}
-računa funkciju $\f F^k:=\mu\f R$. U tu svrhu, po definiciji~\ref{def:compute}, neka je $\vec x\in\N^k$ proizvoljan. Ako $\vec x\notin\exists_*R$, dakle ne postoji $y\in\N$ takav da vrijedi $R(\vec x,y)$, to zapravo znači da za svaki $y\in\N$ vrijedi 
-$\chi_{\f R}(\vec x,y)=0$. Ta će vrijednost upravo biti izračunata kad god makro-stroj izvrši instrukciju rednog broja $2$ (s $\textsc{using }\reg{k+2}..$ čuvamo originalne ulazne registre), redom za sve prirodne brojeve $y$, i završit će u $\reg{k+1}$. Nakon toga, instrukcija s rednim brojem $3$ će pokušati dekrementirati $\reg{k+1}$, ustanoviti da je njegov sadržaj $0$, i postaviti $\textsc{pc}$ na $1$. Tada će se inkrementirati $\reg0$, i ponovo testirati uvjet~\ldots\ i tako dalje. Preciznije, imat ćemo sljedeće $Q_{\f F}$-izračunavanje s $\vec x$:
+računa funkciju $\f F^k:=\mu\f R$. U tu svrhu, po definiciji~\ref{def:compute}, neka je $\vec x\in\N^k$ proizvoljan.
+
+	Ako $\vec x\notin\exists_*R$, dakle ne postoji $y\in\N$ takav da vrijedi $R(\vec x,y)$, to zapravo znači da za svaki $y\in\N$ vrijedi 
+$\chi_{\f R}(\vec x,y)=0$. Ta će vrijednost biti izračunata kad god makro-stroj izvrši instrukciju rednog broja $2$ (s $\textsc{using }\reg{k+2}..$ čuvamo originalne ulazne registre), redom za sve prirodne brojeve $y$, i završit će u $\reg{k+1}$. Nakon toga, instrukcija s rednim brojem $3$ će pokušati dekrementirati $\reg{k+1}$, ustanoviti da je njegov sadržaj $0$, i postaviti $\textsc{pc}$ na $1$. Tada će se inkrementirati $\reg0$, i ponovo testirati uvjet~\ldots\ i tako dalje. Preciznije, imat ćemo sljedeće $Q_{\f F}$-izračunavanje s $\vec x$:
 \begin{multline}
     (0,\vec x,0,\dotsc,0,0)
     \leadsto(0,\vec x,0,0,\dotsc,2,0)\leadsto^*
@@ -632,7 +632,7 @@ Za obrat teorema~\ref{tm:pir} morat ćemo se više potruditi. To je tema poglavl
 
 \section{Tehnike za rad s (primitivno) rekurzivnim funkcijama}\label{sec:tech}
 
-gorištenje marljive evaluacije olakšalo nam je dokaz RAM-izračunljivosti simbolički definiranih funkcija --- jer marljiva kompozicija upravo odgovara slijednom izvršavanju instrukcija u programu --- ali će otežati dokaz suprotnog smjera, jer neke, u RAM-modelu jednostavne, programske tehnike zasad ne znamo ostvariti u funkcijskom modelu s marljivom evaluacijom.
+Korištenje marljive evaluacije olakšalo nam je dokaz RAM-izračunljivosti simbolički definiranih funkcija --- jer marljiva kompozicija upravo odgovara slijednom izvršavanju instrukcija u programu --- ali će otežati dokaz suprotnog smjera, jer neke, u RAM-modelu jednostavne, programske tehnike zasad ne znamo ostvariti u funkcijskom modelu s marljivom evaluacijom.
 
 Jedan primjer je \emph{grananje}: imamo dva RAM-programa $P_{\mathit{true}}$ i $P_{\mathit{false}}$. Želimo izvršiti jedan od ta dva programa ovisno o tome je li $r_j$ pozitivan ili nije, ali tako da ako je npr.\ $P_{\mathit{true}}$ prazan program, $P_{\mathit{false}}$ beskonačna petlja, a $r_j=1$, čitavo izračunavanje stane. Možemo napisati makro
 \vspace{-2mm}
@@ -645,7 +645,7 @@ Jedan primjer je \emph{grananje}: imamo dva RAM-programa $P_{\mathit{true}}$ i $
     4.&P_{\mathit{false}}^*
     \end{prog}^{\flat*}\text,
 \end{equation}
-ali ne možemo napisati odgovarajuću funkciju $If^3$ takvu da $f(\vec x,y):\simeq If\bigl(y,\f g(\vec x),\f h(\vec x)\bigr)$ ima analognu semantiku: ako je $\f g$ totalna a $\f h$ prazna, bez obzira na $y$ marljiva evaluacija ima za posljedicu da je $f$ također prazna. Za to ćemo trebati razviti druge tehnike, no za početak pokažimo kako su beskonačne petlje odnosno netotalne funkcije \emph{jedini} problem --- jer nas zanima samo postojanje algoritma a ne i performanse, s totalnim izračunljivim funkcijama nešto poput $If$ možemo napraviti relativno lako. 
+ali ne možemo napisati odgovarajuću funkciju $If^3$ takvu da $f(\vec x,y):\simeq If\bigl(y,\f g(\vec x),\f h(\vec x)\bigr)$ ima analognu semantiku: ako je $\f g$ totalna a $\f h$ prazna, bez obzira na $y$ marljiva evaluacija ima za posljedicu da je $f$ također prazna. Za to ćemo trebati razviti druge tehnike, no za početak pokažimo kako je nezaustavljanje \emph{jedini} problem --- jer nas zanima samo postojanje algoritma a ne i performanse, s totalnim izračunljivim funkcijama nešto poput $If$ možemo napraviti relativno lako. 
 %\subsection{Izračunljivost skupovnih\slash logičkih operacija}
  Za početak, za implementaciju $\textsc{else}$ trebamo dokazati da negiranje uvjeta ne kvari izračunljivost.% moći negirati uvjete i ostati u istoj "klasi" izračunljivosti.
 
@@ -1024,7 +1024,7 @@ Razlog zašto se takav obrazac promatra posebno je mogućnost prijevremenog izla
 
 Drugim riječima, za nas se ograničena kvantifikacija svodi na brojenje. Prebrojivši elemente do $y$ koji imaju traženo svojstvo, takvi postoje ako ih ima pozitivan broj, a svi su takvi ako ih ima upravo $y$.
 
-\begin{propozicija}[{name=[ograničena kvantifikacija čuva primitivnu rekurzivnost]}]\label{prop:okvantrek}
+\begin{propozicija}[{name=[ograničena kvantifikacija čuva (primitivnu) rekurzivnost]}]\label{prop:okvantrek}
 Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija.
 	
 	Tada su takve i relacije $\f P^k$ i $\f Q^k$, zadane s
@@ -1061,7 +1061,7 @@ kažemo da je dobivena \emph{ograničenom minimizacijom} relacije $R$.
 \end{definicija}
 
 \begin{napomena}[{name=[ograničena minimizacija čuva rekurzivnost]}]\label{nap:mintot}
-U~\eqref{eq:defomin} smo napisali znak $:=$ umjesto $:\simeq$, jer izraz u sredini uvijek ima smisla: kondicional će sigurno nekada postati istinit, najkasnije za $i=y$, jer će tada antecedens $i<y$ postati lažan. Drugim riječima, $F(\vec x,y)$ će biti najmanji broj $i<y$ koji zadovoljava $R(\vec x,i)$ ako takav postoji, a inače će biti $F(\vec x,y)=y$.
+U~\eqref{eq:defomin} smo napisali $:=$ umjesto $:\simeq$, jer izraz u sredini uvijek ima smisla: kondicional će sigurno nekada postati istinit, najkasnije za $i=y$, jer će tada antecedens $i<y$ postati lažan. Drugim riječima, $F(\vec x,y)$ će biti najmanji broj $i<y$ koji zadovoljava $R(\vec x,i)$ ako takav postoji, a inače će biti $F(\vec x,y)=y$.
 
 	Dakle, $F$ je uvijek totalna funkcija. Štoviše, ako je $\f R$ rekurzivna, $\f F$ će biti parcijalno rekurzivna --- jer je dobivena (neograničenom) minimizacijom relacije $\f P$ zadane s $\f P(\vec x,y,i):\Leftrightarrow i<y\to\f R(\vec x,i)$, rekurzivne zbog primjera~\ref{pr:m-v} i propozicije~\ref{prop:vezn}. Ukratko, ograničenom minimizacijom rekurzivne relacije dobivamo rekurzivnu funkciju.
 \end{napomena}
@@ -1089,7 +1089,7 @@ Drugim riječima, ograničena minimizacija čuva rekurzivnost. Važno je da čuv
 Neka je $k\in\N_+$ te $\f R^k$ primitivno rekurzivna relacija. Tada je i funkcija $\f F^k$\!, dobivena ograničenom minimizacijom relacije $\f R$, također primitivno rekurzivna.
 \end{propozicija}
 \begin{proof}
-	Za $y=0$, vrijednost funkcije $\f F$ je očito $0$, jer je antecedens kondicionala odmah na početku lažan: $0\not<0$, pa je kondicional istinit. Za korak, pretpostavimo da imamo već izračunatu vrijednost $z:=\f F(\vec x,y)$ (znamo da je $z\le y$ po napomeni~\ref{nap:mintot}), i pitamo se koliko je $\f F(\vec x,y+1)$. Imamo tri slučaja.
+	Za $y=0$, vrijednost funkcije $\f F$ je očito $0$, jer je antecedens kondicionala odmah na početku lažan ($0\not<0$) pa je kondicional istinit. Za korak, pretpostavimo da imamo već izračunatu vrijednost $z:=\f F(\vec x,y)$ (znamo da je $z\le y$ po napomeni~\ref{nap:mintot}), i pitamo se koliko je $\f F(\vec x,y+1)$. Imamo tri slučaja.
 
 	Ako je $z<y$, to znači da postoji "dobar" $i<y<y+1$ takav da vrijedi $\f R(\vec x,i)$, i $z$ je najmanji takav, pa je očito $\f F(\vec x,y+1)$ također jednako $z$.
 
@@ -1103,7 +1103,7 @@ Neka je $k\in\N_+$ te $\f R^k$ primitivno rekurzivna relacija. Tada je i funkcij
 		y+1,&\text{inače}
 	\end{cases}\text,
 \end{equation}
-	primitivno rekurzivna po teoremu~\ref{tm:grek}, primjeru~\ref{pr:m-v} i propoziciji~\ref{prop:vezn}, pa je i $\f F$ takva.
+	primitivno rekurzivna po teoremu~\ref{tm:grek}, primjeru~\ref{pr:m-v} i propoziciji~\ref{prop:vezn} --- pa je i $\f F$ takva.
 	%Tvrdimo da je za svaki $\vec x\in\N^k$, vrijednost $\f F(\vec x)$ jednaka
 	%\begin{equation}\label{eq:muHprn}
 	%\bigl(\mu y<\f H(\vec x)\bigr)\f R(\vec x,y) =

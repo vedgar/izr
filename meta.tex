@@ -7,15 +7,15 @@ U ovom poglavlju dokazat ćemo nekoliko rezultata sa zajedničkom idejom: algori
 Kao što smo već nagovijestili, počet ćemo sa \emph{specijalizacijom}: načinom da u od\-re\-đe\-nom algoritmu fiksiramo određeni (zadnji) ulazni podatak na neki konkretni broj. Dosad smo vidjeli mnoge primjere specijalizacije:
 
 \begin{itemize}
-    \item Funkcija $\f{blh}$ iz leme~\ref{lm:blh} dobivena je specijalizacijom funkcije $\f{slh}$, fiksirajući njen zadnji (drugi) argument na $2$.\\ Skraćeno kažemo da je $\f{blh}$ $2$-specijalizacija $\f{slh}$, i pišemo $\f{blh}=spec(2,\f{slh})$.
+    \item Funkcija $\f{blh}$ iz leme~\ref{lm:blh} dobivena je specijalizacijom funkcije $\f{slh}$, fiksirajući njen zadnji (drugi) argument na $2$.\\ Skraćeno kažemo da je $\f{blh}$ $2$-specijalizacija $\f{slh}$, i pišemo $\f{blh}=\$(2,\f{slh})$.
     \item Operacija $\conc{}$ je $12$-specijalizacija funkcije $\f{sconcat}$ (propozicija~\ref{pp:concprn}).
-    %\item Općenito u primitivnoj rekurziji~\eqref{eq:defprb}, baza je zapravo $0$-specijalizacija definirane funkcije: $G=spec(0,G\pr H)$.
-    \item Bazu primitivne rekurzije~\eqref{eq:defprb} možemo zapisati kao $spec(0,G\pr H)=G$.
-    \item Prema~\eqref{eq:resultdef}, $\f{result}=spec(0,\f{ex})$.
+    %\item Općenito u primitivnoj rekurziji~\eqref{eq:defprb}, baza je zapravo $0$-specijalizacija definirane funkcije: $G=\$(0,G\pr H)$.
+    \item Bazu primitivne rekurzije~\eqref{eq:defprb} možemo zapisati kao $\$(0,G\pr H)=G$.
+    \item Prema~\eqref{eq:resultdef}, $\f{result}=\$(0,\f{ex})$.
     \item Za svaki konkretni $e\in\N$ i $k\in\N_+$, funkcija $\kf e^k$ je $e$-specijalizacija funkcije $\f{comp}_k$.
     \item Baza $\f G_3$ za funkciju $\f{Tape}$ (lema~\ref{lm:StateHeadTapeprn} --- $0$-specijalizacija $\f{Tape}$) je dobivena specijalizacijom funkcije $\f{Recode}$, fiksirajući njena dva zadnja argumenta na $b'$ i $b$ redom. Vidimo da možemo specijalizirati i s obzirom na više argumenata, što je samo višestruka primjena specijalizacije jednog argumenta.
 \begin{equation}\label{eq:multpar}
-    \f G_3=spec(0,\f{Tape})=spec(b',b,\f{Recode})=spec\bigl(b',spec(b,\f{Recode})\bigr)
+    \f G_3=\$(0,\f{Tape})=\$(b',b,\f{Recode})=\$\bigl(b',\$(b,\f{Recode})\bigr)
 \end{equation}
 \end{itemize}
 
@@ -27,7 +27,7 @@ Ono što je sasvim nesporno (i već smo to dokazali u svim specijalnim slučajev
 
 \begin{propozicija}[{name=[specijalizacija čuva parcijalnu rekurzivnost]}]
     Neka su $k\in\N_+$, $y\in\N$ te $\f f^{k+1}$ parcijalno rekurzivna funkcija.\newline
-    Tada je i funkcija $\f g^k=spec(y,\f f)$, zadana s
+    Tada je i funkcija $\f g^k=\$(y,\f f)$, zadana s
 %\begin{equation}
     $\f g(\vec x)\simeq\f f(\vec x,y)$,
 %\end{equation}
@@ -38,11 +38,11 @@ Definiciju od $\f g$ možemo zapisati u simboličkom obliku
 \begin{equation}\label{eq:paramcompose}
     \f g=\f f\circ(\f I_1^k,\f I_2^k,\dotsc,\f I_k^k,\f C_y^k)\text,
 \end{equation}
-što vrijedi jer imamo $\dom{\f g}=\{\vec x\in\N^k\mid(\vec x,y)\in\dom{\f f}\}$, što je upravo domena desne strane jer su sve koordinatne projekcije, kao i konstanta $\f C_y^k$, totalne. Sada tvrdnja slijedi iz zatvorenosti skupa svih parcijalno rekurzivnih funkcija na kompoziciju.
+što vrijedi jer imamo $\dom{\f g}=\{\vec x\in\N^k\mid(\vec x,y)\in\dom{\f f}\}$ --- a to je upravo domena desne strane jer su sve koordinatne projekcije, kao i konstanta $\f C_y^k$, totalne. Sada tvrdnja slijedi iz zatvorenosti skupa svih parcijalno rekurzivnih funkcija na kompoziciju.
 \end{proof}
 
 \begin{korolar}[{name=[specijalizacija čuva (primitivnu) rekurzivnost]}]\label{kor:paramprn}
-    Ako je $k\in\N_+$, $y\in\N$ te funkcija $\f f^{k+1}$ (primitivno) rekurzivna,\newline tada je i $\f g^k=spec(y,\f f)$ (primitivno) rekurzivna.
+    Ako je $k\in\N_+$, $y\in\N$ te funkcija $\f f^{k+1}$ (primitivno) rekurzivna,\newline tada je i $\f g^k=\$(y,\f f)$ (primitivno) rekurzivna.
 \end{korolar}
 \begin{proof}
 Isti kao gore --- zapravo lakši, jer ne moramo određivati domenu.
@@ -51,18 +51,18 @@ Isti kao gore --- zapravo lakši, jer ne moramo određivati domenu.
 Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne eksplicitno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Mogli bismo izračunati (neke) indekse od $\f I_i^k,i\in[1\dd k]$ i $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, kao posebni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
 , a onda $\f{compose}$ pomoću te funkcije.
 
-Na neki način, $\f S=\N spec$, gdje funkcije kodiramo njihovim indeksima na način koji je detaljno objašnjen u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$ te vraća \emph{neki} indeks za $spec(y,\f f)$.
+Na neki način, $\f S=\N \$$, gdje funkcije kodiramo njihovim indeksima na način koji je detaljno objašnjen u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$ te vraća \emph{neki} indeks za $\$(y,\f f)$.
 
 Bilo bi super kad bismo mogli dobiti $\f S$ kao jednu funkciju, neovisnu o mjesnosti $k$ funkcije $\f f$ --- no to, barem ovako kako smo zamislili indekse, nije moguće. Ta funkcija bi trebala primati $y$ i kod RAM-programa $e$, i vraćati kod novog RAM-programa $e'$ takvog da bude $\kf e(\vec x,y)\simeq\kf{e'}(\vec x)$ za sve $\vec x\in\N^k$. No to znači da \emph{registar} ($\reg{k+1}$) u kojem će pisati ulazni podatak $y$ u odgovarajućem RAM-stroju ovisi o $k$, a $k$ ne možemo zaključiti iz samog RAM-programa odnosno njegovog koda $e$.
 
 \begin{napomena}[{name=[uniformna verzija teorema o parametru]}]
-Zapravo bismo mogli dokazati i "uniformnu" verziju, kad bismo fiksirali argumente s početka a ne s kraja. Tada bi $y$ uvijek išao u $\reg1$, a sve ostale registre (koji se stvarno spominju u programu, što \emph{možemo} zaključiti iz $e$) bismo pomicali za jedno mjesto udesno. To može poslužiti kao osnova za malo ozbiljniji studentski rad, ali je kompliciranije, a nama će ova verzija biti dovoljna.
+Zapravo bismo mogli dokazati i "uniformnu" verziju, kad bismo fiksirali argumente s početka a ne s kraja. Tada bi $y$ uvijek išao u $\reg1$, a sve ostale registre (koji se stvarno spominju u programu, što \emph{možemo} zaključiti iz $e$) bismo pomicali za jedno mjesto udesno. To može poslužiti kao osnova za malo ozbiljniji studentski rad, ali je kompliciranije --- a nama će ova verzija biti dovoljna.
 \end{napomena}
 
 \subsection{Teorem o parametru}
 
 \begin{propozicija}[Teorem o parametru]\label{pp:tmpar}
-Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^2$ takva da za sve $y,e\in\N$ vrijedi $\kf{\f S_k(y,e)}^k=spec(y,\kf e^{k+1})$.
+Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^2$ takva da za sve $y,e\in\N$ vrijedi $\kf{\f S_k(y,e)}^k=\$(y,\kf e^{k+1})$.
 \end{propozicija}
 Funkcijska jednakost o kojoj govori teorem može se zapisati i kao
 \begin{equation}\label{eq:Sfunceq}
@@ -119,7 +119,7 @@ Još treba vidjeti da $k$-mjesna funkcija s tim indeksom zadovoljava jednadžbu~
 \end{equation}
 pa je izlazni podatak doista $\kf e^{k+1}(\vec x,y)\simeq\f{comp}_{k+1}(\vec x,y,e)$ --- ako $P$-iz\-ra\-ču\-na\-va\-nje s $(\vec x,y)$ uopće stane. Ako ne stane, onda ne stane ni $Q$-izračunavanje s $\vec x$, jer zapne na donjoj razini izvršavajući zadnju makro-instrukciju.
 
-	Još smo ostali dužni riješiti slučaj kad ne postoji program $P$, jer $e\nin\f{Prog}$. Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind} je tada $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je i $spec(y,f)$ prazna --- formula~\eqref{eq:domkomp} kaže da funkcija~\eqref{eq:paramcompose} ima praznu domenu. Za povratnu vrijednost $\f S_k^2$ nam treba neki indeks od $\varnothing^k$, pa opet po propoziciji~\ref{prop:computeind}\eqref{it:nprogind} možemo upotrijebiti upravo $e$. Dakle,
+	Još smo ostali dužni riješiti slučaj kad ne postoji program $P$, jer $e\nin\f{Prog}$. Prema propoziciji~\ref{prop:computeind}\eqref{it:nprogind} je tada $f:=\kf e^{k+1}=\varnothing^{k+1}$, pa je i $\$(y,f)$ prazna --- formula~\eqref{eq:domkomp} kaže da funkcija~\eqref{eq:paramcompose} ima praznu domenu. Za povratnu vrijednost $\f S_k^2$ nam treba neki indeks od $\varnothing^k$, pa opet po propoziciji~\ref{prop:computeind}\eqref{it:nprogind} možemo upotrijebiti upravo $e$. Dakle,
 \begin{equation}\label{eq:Skprn}
    \f S_k(y,e):=\begin{cases}
        \f F(y,e),&\f{Prog}(e)\\
@@ -162,7 +162,7 @@ Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$ takva 
 $
     e_2:=\f S_4^4(2,8,5,e_1)=\f S_4^2\bigl(2,\f S_5^2\bigl(8,\f S_6^2(5,e_1)\bigr)\bigr)
 $, i za sve $x,y,z,t\in\N$ bi vrijedilo
-$\kf{e_2}(x,y,z,t)\simeq\kf{e_1}(x,y,z,t,2,8,5)$.
+	$\kf{e_2}(x,y,z,t)\simeq\kf{e_1}(x,y,z,t,2,8,5)$ --- odnosno $\kf{e_2}^4=\$(2,8,5,\kf{e_1}^7)$.
 \end{primjer}
 
 % \subsection{Primjena na elementarne operacije s funkcijama}
@@ -198,7 +198,7 @@ Funkcija $\f F$ je definirana kompozicijom iz parcijalno rekurzivnih funkcija $\
     \f{compose}_k^{l+1}(\vec g,h):=\f S_k^{l+2}(\vec g,h,e)\text.
 \end{equation}
 
-    Dakle, $\f{compose}_k^{l+1}=spec(e,\f S_k^{l+2})$, pa je primitivno rekurzivna po korolaru~\ref{kor:paramprn}. Sada za sve $\vec x\in\N^k$, za sve $\vec g\in\N^l$ i za sve $h\in\N$ vrijedi
+    Dakle, $\f{compose}_k^{l+1}=\$(e,\f S_k^{l+2})$, pa je primitivno rekurzivna po korolaru~\ref{kor:paramprn}. Sada za sve $\vec x\in\N^k$, za sve $\vec g\in\N^l$ i za sve $h\in\N$ vrijedi
 \begin{multline}
     \kf{\f{compose}_k^{l+1}(\vec g,h)}(\vec x)\simeq
     \f{comp}_k\bigl(\vec x,\f{compose}_k(\vec g,h)\bigr)\simeq
@@ -245,7 +245,7 @@ kao niti izračunati njegov kod
     a:=\kr{\kr{1,1,3},\kr{0,0},\kr{2,0},\kr{1,2,6},\kr{0,0},\kr{2,3}}=2^{22\,501}\cdot3^7\cdot5^{25}\cdot7^{8\,437\,501}\cdot11^7\cdot13^{649}\text.
 \end{equation*}
     %broj koji jest oveći (ima $7\,138\,041$ znamenku), ali je ipak sasvim točno određen.
-    Sada je $\f{plus}_k(e,f):=\f{compose}_k(e,f,a)$, odnosno $\f{plus}_k^2=spec(a,\f{compose}_k^3)$ je primitivno rekurzivna po korolaru~\ref{kor:paramprn}.
+    Sada je $\f{plus}_k(e,f):=\f{compose}_k(e,f,a)$, odnosno $\f{plus}_k^2=\$(a,\f{compose}_k^3)$ je primitivno rekurzivna po korolaru~\ref{kor:paramprn}.
 \end{proof}
 
 % \subsection{Što s ostalim elementarnim operacijama?}
@@ -351,7 +351,7 @@ Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. \emph{Opća r
 \begin{equation}\label{eq:genrek}
     \f{comp}_k(\vec x,e)\simeq\f G(\vec x,e)\text{, za sve }\vec x\in\N^k\text.
 \end{equation}
-    Ako konkretni broj $e\in\N$ zadovoljava tu jednadžbu, funkciju $\kf e^k=spec(e,\f G)$ zovemo \emph{rješenjem} opće rekurzije.
+    Ako konkretni broj $e\in\N$ zadovoljava tu jednadžbu, funkciju $\kf e^k=\$(e,\f G)$ zovemo \emph{rješenjem} opće rekurzije.
 \end{definicija}
 
 Ponekad i indeks $e$ neformalno zovemo "rješenjem", ali jedinstvenošću uvijek smatramo jedinstvenost \emph{funkcije}, ne indeksa. To je bitno jer inače u uobičajenim situacijama, gdje $\f G$ koristi $e$ samo za pozivanje $\f F$, nikad ne bismo imali jedinstvenost: čim postoji neki $e$, svi ostali indeksi funkcije $\kf e^k$ su također "rješenja", a intuitivno znamo (i~dokazat ćemo u ovom poglavlju) da ih ima beskonačno mnogo.
@@ -364,7 +364,7 @@ Naravno, netrivijalan je samo u formalnom smislu: intuitivno objašnjenje kako i
 
 \subsection{Teorem rekurzije}
 
-Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odnosno pozvana s argumentima $\vec x$, mora se ponašati kao funkcija $\f G$ pozvana s $\vec x$ i još indeksom $e$. Drugim riječima, želimo $\kf e^k=spec(e,G)$.
+Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odnosno pozvana s argumentima $\vec x$, mora se ponašati kao funkcija $\f G$ pozvana s $\vec x$ i još indeksom $e$. Drugim riječima, želimo $\kf e^k=\$(e,G)$.
 
 Recimo, u slučaju funkcije \texttt{factorial}, kompajler se pobrine za to da poziv te funkcije u njenom kodu doista pozove nju samu (sa za $1$ manjim argumentom), ali da kojim slučajem kompajler ne podržava rekurziju, mogli bismo (pokazivač na) funkciju \texttt{factorial} prenijeti u samu sebe kao dodatni parametar.
 
@@ -390,25 +390,25 @@ Matematički, "pokazivač na funkciju" nije ništa drugo nego njen indeks, što 
 \begin{definicija}[{name=[dijagonala parcijalno rekurzivne funkcije]}]
     Neka je $k\in\N_+$ te $\f H^{k+1}$ parcijalno rekurzivna funkcija.
 	
-	\emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $d\f H:=spec(h,\f H)$,\\ gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
+	\emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $\partial\f H:=\$(h,\f H)$,\\ gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
 \end{definicija}
 
-Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će prvenstveno biti bitna prateća funkcija $\f D=\N d$, koja je ionako definirana na indeksima.
+Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će prvenstveno biti bitna prateća funkcija $\f D=\N \partial$, koja je ionako definirana na indeksima.
 
 U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad radimo s pokazivačem na funkciju, funkcijski poziv. Standard jezika C ne dopušta nikakvu aritmetiku s funkcijskim pokazivačima, ali je neki kompajleri ipak podržavaju. Slično, ovdje bismo mogli $h$ iskoristiti ne samo kao zadnji argument funkcije $\f{comp}_k$, nego raditi razne čudne stvari poput gledanja počinje li "strojni kod" funkcije $\f H$ instrukcijom \inc\ ($\f{InsINC}(h[0])$), i sličnog --- ali najčešće to ne činimo, a dok god $h$ koristimo samo za pozivanje funkcije $\f H$, svejedno je koji njen indeks smo uzeli.
 
 \begin{lema}[{name=[primitivna rekurzivnost dijagonalne funkcije]}]
-    Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$, koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $d\f H=spec(h,H)$.
+    Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$, koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $\partial\f H=\$(h,H)$.
 \end{lema}
 \begin{proof}
-    Teorem o parametru kaže da se indeks za $d\f H=spec(h,\kf h^{k+1})$ može dobiti kao $\f S_k(h,h)$. Drugim riječima, možemo definirati $\f D_k:=\f S_k^2\circ(\f I_1^1,\f I_1^1)$, što je primitivno rekurzivna funkcija kao kompozicija primitivno rekurzivnih.
+	Teorem o parametru kaže da se indeks $\f D_k(h)$ za $\partial\f H=\$(h,\kf h^{k+1})$ može dobiti kao $\f S_k(h,h)$. Drugim riječima, možemo definirati $\f D_k:=\f S_k^2\circ(\f I_1^1,\f I_1^1)$, što je primitivno rekurzivna funkcija kao kompozicija primitivno rekurzivnih.
 \end{proof}
 
 % \subsection{Dokaz teorema rekurzije}
 
 Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da bismo doista dobili funkciju koja je rješenje opće rekurzije. U programu~\eqref{eq:wishful} svejedno smo trebali nekako drugačije dobiti \texttt{factorial} koju bismo poslali kao drugi argument funkciji~\texttt{G}. To se čini prilično beskorisnim (jer jednom kad imamo \texttt{factorial}, možemo je direktno pozvati bez petljanja s dijagonalom), ali zapravo je vrlo blizu rješenju.
 
-Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, služe istoj svrsi --- računanju faktorijele zadanog broja. Ako nemamo \texttt{factorial}, možemo li umjesto nje upotrijebiti \texttt{G} kao drugi argument od \texttt{G} (efektivno, dijagonalizirati \texttt G)?
+Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, služe istoj svrsi --- računanju faktorijele zadanog broja. Ako nemamo \texttt{factorial}, možemo li umjesto nje upotrijebiti \texttt{G} kao drugi argument od \texttt{G} (efektivno, računati $\partial\texttt G$)?
 
 Doslovno, to neće ići --- tipovi ne pašu. Drugi argument funkcije \texttt{G} trebao bi biti pokazivač na jednomjesnu funkciju, a \texttt{G} je dvomjesna. C-kompajler će nam samo dati \emph{warning}, jer za njega su svi pokazivači ionako samo "ukrašeni prirodni brojevi" --- baš kao i indeksi u svijetu parcijalno rekurzivnih funkcija --- ali u strože tipiziranom jeziku kompajler bi nam odbio prevesti kod, uz poruku o grešci.
 
@@ -458,7 +458,7 @@ Refaktorirajmo ovu duplikaciju koda za dijagonaliziranje, u definiciji i pozivu 
             5040
 \end{verbatim}
 \end{minipage}\end{equation}
-Dobra strana toga je da više ne moramo ručno proizvoditi funkciju \texttt H iz funkcije \texttt G. Prethodno smo to napravili tako što smo, tamo gdje je \texttt G pozivala \texttt f, u funkciji \texttt H pozvali $d\texttt f$. Sad to možemo formalizirati, tako da definicija od \texttt H pozove \texttt G s $d\texttt f$ automatski.
+Dobra strana toga je da više ne moramo ručno proizvoditi funkciju \texttt H iz funkcije \texttt G. Prethodno smo to napravili tako što smo, tamo gdje je \texttt G pozivala \texttt f, u funkciji \texttt H pozvali $\partial\texttt f$. Sad to možemo formalizirati, tako da definicija od \texttt H pozove \texttt G s $\partial\texttt f$ automatski.
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
             >>> def G(n, f):
@@ -474,17 +474,17 @@ I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćem
 Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. Tada postoji $e\in\N$ takav da za sve $\vec x\in\N^k$ vrijedi $\kf e^k(\vec x)\simeq\f G(\vec x,e)$.
 \end{teorem}
 \begin{proof}
-    Definiramo funkciju $\f H^{k+1}$ pomoću $\f H(\vec x,f):\simeq\f G\bigl(\vec x,\f D_k(f)\bigr)$. Ta funkcija je parcijalno rekurzivna (dobivena je kompozicijom iz $\f G$, $\f D_k$ i koordinatnih projekcija) pa ima indeks: označimo ga s $h$ (sjetite se napomene~\ref{nap:>1ind}).
+	Definiramo funkciju $\f H^{k+1}\mspace{-2mu}$ točkovno s $\f H(\vec x,f):\simeq\f G\bigl(\vec x,\f D_k(f)\bigr)$. Ta funkcija je parcijalno rekurzivna (dobivena je kompozicijom iz $\f G$, $\f D_k$ i koordinatnih projekcija) pa ima indeks: označimo ga s $h$ (sjetite se napomene~\ref{nap:>1ind}).
 
-    Tvrdimo da je $d\f H$ rješenje opće rekurzije, odnosno njen indeks $e:=\f D_k(h)$ je traženi broj. Doista, za sve $\vec x\in\N^k$ imamo
+    Tvrdimo da je $\partial\f H$ rješenje opće rekurzije, odnosno njen indeks $e:=\f D_k(h)$ je traženi broj. Doista, za sve $\vec x\in\N^k$ imamo
 \begin{equation}
     \kf e(\vec x)\simeq
-    d\f H(\vec x)\simeq
+    \partial\f H(\vec x)\simeq
     \f H(\vec x,h)\simeq
     \f G\bigl(\vec x,\f D_k(h)\bigr)\simeq
     \f G(\vec x,e)\text,
 \end{equation}
-    odnosno $\kf e^k=spec(e,G)$, što smo trebali dokazati.
+    odnosno $\kf e^k=\$(e,\f G)$, što smo trebali dokazati.
 \end{proof}
 
 \subsection{Ackermannova funkcija}
@@ -501,7 +501,7 @@ Ackermann je promatrao niz aritmetičkih operacija: sljedbenik, zbrajanje, množ
 \begin{equation}\label{eq:A2SSdef}
     \f A_{n+1}(x,y+1)=\f A_n\bigl(x,\f A_{n+1}(x,y)\bigr)\text{, za sve }x,y,n\in\N\text,
 \end{equation}
-što zapravo znači $\f A_{n+1}=\f G_{n+1}\pr\f A_n\circ(\f I_1^3,\f I_3^3)$; razlikuju se samo početni uvjeti zadani s $\f G_n=spec(0,\f A_n)$. Prvih nekoliko je doista različito: $\f G_0(x)=\f{Sc}(0)=1$, $\f G_1(x)=x+0=x$, $\f G_2(x)=x\cdot 0=0$, $\f G_3(x)=x^0=1$ --- ali svi kasniji se obično fiksiraju na $1$.
+što zapravo znači $\f A_{n+1}=\f G_{n+1}\pr\f A_n\circ(\f I_1^3,\f I_3^3)$; razlikuju se samo početni uvjeti zadani s $\f G_n:=\$(0,\f A_n)$. Prvih nekoliko je doista različito: $\f G_0(x)=\f{Sc}(0)=1$, $\f G_1(x)=x+0=x$, $\f G_2(x)=x\cdot 0=0$, $\f G_3(x)=x^0=1$ --- ali svi kasniji se obično fiksiraju na $1$.
 
 Dakle, za sve $n>1$ vrijedi $\f A_{n+1}:=\f C_1^1\pr\f A_n\circ(\f I_1^3,\f I_3^3)$.
 
@@ -541,7 +541,7 @@ pod imenom "Ackermannova funkcija", iako su je zapravo smislili R\'osza P\'eter 
 \begin{equation}
     \f A(m,n)=\f A(2,n+3,m)\dotminus3\text,
 \end{equation}
-iz čega slijedi da kad bi $\f A^3$ bila primitivno rekurzivna, takva bi bila i $\f A^2$. No $\f A^2$ nije primitivno rekurzivna (dokaz možete vidjeti u~\cite{skr:Vuk}) pa kontrapozicijom slijedi da ni $\f A^3$ nije primitivno rekurzivna.
+	iz čega slijedi da kad bi $\f A^3$ bila primitivno rekurzivna, takva bi bila i $\f A^2$. No $\f A^2$ nije primitivno rekurzivna (dokaz možete vidjeti u~\cite[dodatak]{skr:Vuk}) pa kontrapozicijom slijedi da ni $\f A^3$ nije primitivno rekurzivna.
 \end{napomena}
 
 \subsection{Rekurzivnost Ackermannove funkcije}
@@ -634,7 +634,7 @@ gdje je $i_n:=\kr{\f{codeDEC}(n,3),\f{codeINC}(0),\f{codeGOTO}(0)}$ indeks funkc
 
 % \subsection{Relacije \texorpdfstring{$\approx_k$}{k-ekvivalentnosti}}
 
-Tako je i ovdje: jednakost $\kf e=spec(e,\f G)$ iz teorema rekurzije možemo shvatiti kao $e\approx\f S_k(e,g)$, gdje je $g$ neki indeks za $\f G$. Ta "približna jednakost" ne može doista biti jednakost ni u kojem zanimljivom slučaju, jer za $g\in\f{Prog}$ uvijek vrijedi $\f S_k(e,g)>e$ (zgodna je vježba dokazati to). Što je onda relacija $\approx$?
+Tako je i ovdje: jednakost $\kf e=\$(e,\f G)$ iz teorema rekurzije možemo shvatiti kao $e\approx\f S_k(e,g)$, gdje je $g$ neki indeks za $\f G$. Ta "približna jednakost" ne može doista biti jednakost ni u kojem zanimljivom slučaju, jer za $g\in\f{Prog}$ uvijek vrijedi $\f S_k(e,g)>e$ (zgodna je vježba dokazati to). Što je onda relacija $\approx$?
 
 Ukratko, vrijeme je da malo preciznije formaliziramo ideju ekvivalentnih RAM-programa iz definicije~\ref{def:ekvprog}: ono što bismo htjeli reći nije da su $e$ i $\f S_k(e,g)=:\f F(e)$ isti brojevi, već da su $\kf e^k$ i $\kf{\f F(e)}^k$ iste funkcije. Nažalost, kao i u slučaju specijalizacije, imat ćemo različite relacije $\approx_k,k\in\N_+$ --- nećemo ih moći upotrebljivo objediniti u jednu relaciju, jer u RAM-programu nigdje ne piše intendirana mjesnost.
 
@@ -658,7 +658,7 @@ Prebrojivost kvocijentnog skupa slijedi iz činjenice da postoji prebrojivo mnog
 Prebrojivost svake klase slijedi iz primjera~\ref{pr:alef0ind}: neka je $e\in\N$ proizvoljan. Ako je $e\in\f{Prog}\kompl$, tada je čitav $\f{Prog}\kompl$ u njegovoj klasi. Na primjer, $n\mapsto 2n+3$ je injekcija s $\N$ u $\f{Seq}\kompl\subseteq\f{Prog}\kompl\subseteq[e]_{\approx_k}\subseteq\N$, pa je $[e]_{\approx_k}$ prebrojiva. Ako je pak $e\in\f{Prog}$, tada je $\f F:\N_+\!\to[e]_{\approx_k}$, zadana s $\f F(j):=e*\kr{\f{codeINC}(j)}$, injekcija --- jer $j$ možemo rekonstruirati iz $f:=\f F(j)$ kao $\f{regn}\bigl(\f{rpart}(f,0)\bigr)$.
 \end{proof}
 
-Možda malo više iznenađujuća činjenica vezana uz familiju relacija $\approx_k,k\in\N_+$ je da je ona \emph{padajuća}: vrijedi $(\approx_1)\supset(\approx_2)\supset(\approx_3)\supset\dotsb$. Da bismo to dokazali, prvo trebamo jedno tehničko svojstvo funkcija $\f S_k$.
+Možda malo više iznenađujuća činjenica vezana uz familiju relacija $\approx_k,k\in\N_+$ je da je ona \emph{padajuća}: vrijedi $(\approx_1)\supset(\approx_2)\supset(\approx_3)\supset\dotsb$. Da bismo to dokazali, prvo trebamo jedno tehničko svojstvo funkcijâ $\f S_k$.
 
 \begin{lema}[{name=[nula je lijevi neutralni element za $\f S_k$]}]\label{lm:0nSk}
 Za svaki $e\in\N$ i za svaki $k\in\N_+$ vrijedi $\f S_k(0,e)=e$.
@@ -776,8 +776,8 @@ Na neki način, do na neprebrojivost skupa $\mathcal P(\mathscr Comp_k)$, čini 
 
 Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo recimo %skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi oblika $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
 %
-%Dobro, uzmimo onda neki manji skup,
-recimo jednočlan skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili broj~$1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
+%Dobro, uzmimo onda neki manji skup, recimo
+jednočlan skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili broj~$1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
 
 Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju biti \emph{invarijantni} na neku relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma.
 
