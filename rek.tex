@@ -765,10 +765,10 @@ Matematičkom indukcijom po $k$. Za $k=1$, vidimo da je $\f{add}^1=\f{mul}^1=\f 
 %\SwapAboveDisplaySkip
     x_1+x_2+\dotsb+x_l+x_{l+1}&:=(x_1+x_2+\dotsb+x_l)+x_{l+1}
 \intertext{možemo zapisati kao}
-    \f{add}^{l+1}(x_1,x_2,\dotsc,x_l,x_{l+1})&=\f{add}^2\bigl(\f{add}^k(x_1,x_2,\dotsc,x_l),x_{l+1}\bigr)
+    \f{add}(x_1,x_2,\dotsc,x_l,x_{l+1})&=\f{add}\bigl(\f{add}(x_1,x_2,\dotsc,x_l),x_{l+1}\bigr)
 \intertext{ili simbolički}
 \SwapAboveDisplaySkip
-    \f{add}^{l+1}&=\f{add}^2\circ\bigl(\f{add}^k\circ(\f I_1^{l+1},\f I_2^{l+1},\dotsc,\f I_l^{l+1}),\f I_{l+1}^{l+1}\bigr)\text,
+    \f{add}^{l+1}&=\f{add}^2\circ\bigl(\f{add}^l\circ(\f I_1^{l+1},\f I_2^{l+1},\dotsc,\f I_l^{l+1}),\f I_{l+1}^{l+1}\bigr)\text,
 \end{align}
 pa tvrdnja slijedi iz pretpostavke indukcije i primjera~\ref{pr:addmulpow}. Potpuno analogno, zamjenom $\f{add}$ s $\f{mul}$, slijedi i druga tvrdnja za $l+1$, odnosno po principu matematičke indukcije za svaki $k\in\N_+$.
 \end{proof}
