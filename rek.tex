@@ -652,7 +652,7 @@ ali ne možemo napisati odgovarajuću funkciju $If^3$ takvu da $f(\vec x,y):\sim
  Za početak, za implementaciju $\textsc{else}$ trebamo dokazati da negiranje uvjeta ne kvari izračunljivost.% moći negirati uvjete i ostati u istoj "klasi" izračunljivosti.
 
 \begin{propozicija}[{name=[komplement čuva (primitivnu) rekurzivnost]}]\label{prop:kompl}
-Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija.\newline Tada je i relacija $(\f R\kompl)^k$, zadana s $\f R\kompl(\vec x)\Longleftrightarrow\lnot \f R(\vec x)$, također (primitivno) rekurzivna.
+Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija.\newline Tada je i relacija $(\f R\kompl)^k$, zadana s $\f R\kompl(\vec x):\Longleftrightarrow\lnot \f R(\vec x)$, također (primitivno) rekurzivna.
 \end{propozicija}
 
 Uočimo nekoliko važnih detalja u upravo iskazanoj propoziciji. Prvo, kako smo već rekli u uvodu, na $k$-mjesne relacije gledamo simultano kao na formule s $k$ slobodnih varijabli, i kao na skupove $k$-torki. Zato koristimo oznaku za skupovni komplement, dok u definiciji formulom koristimo logičku negaciju. U sljedećoj propoziciji to ćemo koristiti za dvomjesne logičke veznike odnosno skupovne operacije.
@@ -1093,7 +1093,7 @@ Neka je $k\in\N_+$ te $\f R^k$ primitivno rekurzivna relacija. Tada je i funkcij
 \begin{proof}
 	Za $y=0$, vrijednost funkcije $\f F$ je očito $0$, jer je antecedens kondicionala odmah na početku lažan ($0\not<0$) pa je kondicional istinit. Za korak, pretpostavimo da imamo već izračunatu vrijednost $z:=\f F(\vec x,y)$ (znamo da je $z\le y$ po napomeni~\ref{nap:mintot}), i pitamo se koliko je $\f F(\vec x,y+1)$. Imamo tri slučaja.
 
-	Ako je $z<y$, to znači da postoji "dobar" $i<y<y+1$ takav da vrijedi $\f R(\vec x,i)$, i $z$ je najmanji takav, pa je očito $\f F(\vec x,y+1)$ također jednako $z$.
+	Ako je $z<y$, to znači da postoji "dobar" $i<y<y+1$ takav da vrijedi $\f R(\vec x,i)$, i $z$ je najmanji takav $i$, pa je očito $\f F(\vec x,y+1)$ također jednako $z$.
 
 	Ako je $z=y$, to znači da ne postoji dobar $i<y$, pa se pitamo vrijedi li $\f R(\vec x,y)$. Ako vrijedi, $y$ je najmanji dobar $i<y+1$, pa je $\f F(\vec x,y+1)=y$, što je opet jednako $z$.
 	Inače, nismo našli dobar $i<y+1$, pa je $\f F(\vec x,y+1)=y+1$ u skladu s napomenom~\ref{nap:mintot}.
