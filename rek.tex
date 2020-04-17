@@ -446,7 +446,7 @@ Jednadžbe~\eqref{eq:faktb} i~\eqref{eq:faktk} kažu da je $\f{factorial}^1\!=1\
 \end{primjer}
 
 \begin{primjer}[{name=[primitivna rekurzivnost funkcije prethodnik]}]
-	Funkcija \emph{prethodnik} zadana je s $\f{pd}(n):=\max\,\{x-1,0\}$. Iz toga slijedi $\f{pd}\bigl(\f{Sc}(x)\bigr)=x$ za sve $x\in\N$, dakle $\f{pd}$ je lijevi inverz funkcije $\f{Sc}$. Naravno, $\f{Sc}$ nema desni inverz jer nije surjekcija: ne poprima vrijednost $0$, pa $\f{pd}(0)=0$ moramo posebno definirati. Te dvije jednakosti (napisane desno u obliku koda u Pythonu):
+	Funkcija \emph{prethodnik} zadana je s $\f{pd}(x):=\max\,\{x-1,0\}$. Iz toga slijedi $\f{pd}\bigl(\f{Sc}(x)\bigr)=x$ za sve $x\in\N$, dakle $\f{pd}$ je lijevi inverz funkcije $\f{Sc}$. Naravno, $\f{Sc}$ nema desni inverz jer nije surjekcija: ne poprima vrijednost $0$, pa $\f{pd}(0)=0$ moramo posebno definirati. Te dvije jednakosti (napisane desno u obliku koda u Pythonu):
 \begin{align}
 %\SwapAboveDisplaySkip
 	\f{pd}(0)&=0\text,&&\texttt{p = 0}\\
@@ -502,7 +502,7 @@ $F(\vec x):\simeq\mu yR(\vec x,y)$.
     Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na minimizaciju} ako za svaki $k\in\N_+$, za svaku $(k+1)$-mjesnu relaciju $R$, $\chi_R\in\mathcal F$ povlači $\mu R\in\mathcal F$. 
 \end{definicija}
 
-Domena funkcije $\mu R^{k+1}$ je $k$-mjesna relacija koju označavamo s $\exists_*R$ i zovemo je \emph{projekcija} relacije $R$. Motivaciju za taj naziv možemo vidjeti ako zamislimo tromjesnu relaciju $R^3$ grafički prikazanu kao skup točaka u 3D-prostoru. Tada je grafički prikaz od $\exists_*R^3$ upravo 2D-projekcija (niz os $z$) toga skupa na $x$-$y$ ravninu. Točka $(x,y)$ će biti u $\exists_*R$ ako i samo ako iznad nje postoji neka točka $(x,y,z)\in R$ (može ih biti i više).
+Domena funkcije $\mu R^{k+1}$ je $k$-mjesna relacija koju označavamo s $\exists_*R$ i zovemo je \emph{projekcija} relacije $R$. Motivaciju za taj naziv možemo vidjeti ako zamislimo tromjesnu relaciju $R^3$ grafički prikazanu kao skup točaka u 3D-prostoru. Tada je grafički prikaz od $\exists_*R^3$ upravo 2D-projekcija (niz os $z$) toga skupa na ravninu $x$-$y$. Točka $(x,y)$ će biti u $\exists_*R$ ako i samo ako iznad nje postoji neka točka $(x,y,z)\in R$ (može ih biti i više).
 
 U tom prikazu možemo vizualizirati i funkciju $\mu R$: za svaku točku $(x,y)$ iz projekcije, $\mu\mspace{2mu}z\mspace{2mu}R(x,y,z)$ je visina do koje vidimo prazan prostor, odnosno visina na kojoj vidimo prvu točku u relaciji $R$ iznad $(x,y)$. 
 
@@ -583,7 +583,7 @@ Neka je $k\in\N_+$ te $\f R^{k+1}$ RAM-izračunljiva. To znači da postoji RAM-p
 \end{equation}
 računa funkciju $\f F^k:=\mu\f R$. U tu svrhu, po definiciji~\ref{def:compute}, neka je $\vec x\in\N^k$ proizvoljan.
 
-	Ako $\vec x\notin\exists_*R$, dakle ne postoji $y\in\N$ takav da vrijedi $R(\vec x,y)$, to zapravo znači da za svaki $y\in\N$ vrijedi 
+	Ako $\vec x\notin\exists_*\f R$, dakle ne postoji $y\in\N$ takav da vrijedi $\f R(\vec x,y)$, to zapravo znači da za svaki $y\in\N$ vrijedi 
 $\chi_{\f R}(\vec x,y)=0$. Ta će vrijednost biti izračunata kad god makro-stroj izvrši instrukciju rednog broja $2$ (s $\textsc{using }\reg{k+2}..$ čuvamo originalne ulazne registre), redom za sve prirodne brojeve $y$, i završit će u $\reg{k+1}$. Nakon toga, instrukcija s rednim brojem $3$ će pokušati dekrementirati $\reg{k+1}$, ustanoviti da je njegov sadržaj $0$, i postaviti $\textsc{pc}$ na $1$. Tada će se inkrementirati $\reg0$, i ponovo testirati uvjet~\ldots\ i tako dalje. Preciznije, imat ćemo sljedeće $Q_{\f F}$-izračunavanje s $\vec x$:
 \begin{multline}
     (0,\vec x,0,0,\dotsc,0,0)
@@ -599,14 +599,14 @@ $\chi_{\f R}(\vec x,y)=0$. Ta će vrijednost biti izračunata kad god makro-stro
 \end{multline}
 koje nikada ne stane jer nijedna konfiguracija u njemu nije završna.
 
-Ako je pak $\vec x\in\exists_*R$, tada je $\f F(\vec x)\in\N$ --- označimo tu vrijednost s $y_0$. Tada za svaki $y<y_0$ i dalje vrijedi $\chi_{\f R}(\vec x,y)=0$, pa će $Q_{\f F}$-izračunavanje s $\vec x$ izgledati isto sve do trenutka kad se sadržaj registra $\reg0$ približi odozdo $y_0$, kada će izgledati ovako:
+Ako je pak $\vec x\in\exists_*\f R$, tada je $\f F(\vec x)\in\N$ --- označimo tu vrijednost s $y_0$. Tada za svaki $y<y_0$ i dalje vrijedi $\chi_{\f R}(\vec x,y)=0$, pa će $Q_{\f F}$-izračunavanje s $\vec x$ izgledati isto sve do trenutka kad se sadržaj registra $\reg0$ približi odozdo $y_0$, kada će izgledati ovako:
 \begin{multline}
     \dotsb\leadsto(y_0-1,\vec x,0,0,\dotsc,1,0)\leadsto
     (y_0,\vec x,0,0,\dotsc,2,0)\leadsto^*
     (y_0,\vec x,1,0,\dotsc,3,0)\leadsto{}\\
     {}\leadsto(y_0,\vec x,0,0,\dotsc,4,0)\lcirclearrowleft\text,
 \end{multline}
-	odnosno doći će do završne konfiguracije oblika $(y_0,\dotsc\mspace{-1mu})$ pa će izlazni podatak biti $y_0=\f F(\vec x)$ kao što i treba. Ako je $f(\vec x)=0$, tada nema nikakvog približavanja odozdo, već izračunavanje izgleda ovako:
+	odnosno doći će do završne konfiguracije oblika $(y_0,\dotsc\mspace{-1mu})$ pa će izlazni podatak biti $y_0=\f F(\vec x)$ kao što i treba. Ako je $\f F(\vec x)=0$, tada nema nikakvog približavanja odozdo, već izračunavanje izgleda ovako:
 \begin{equation*}
     (0,\vec x,0,0,\dotsc,0,0)\leadsto
     (0,\vec x,0,0,\dotsc,2,0)\leadsto^*
@@ -786,7 +786,7 @@ Za uniju, možemo opet iskoristiti De Morganovo pravilo i propoziciju~\ref{prop:
     $l$-struka unija odgovara funkciji $\chi_{\N_+}\!\circ\f{add}^l$:
 \begin{equation}
 \label{eq:unk}
-    \chi_{\bigcup_{i=1}^l\!\f R_i}=\chi_{\N_+}\!\circ\f{add}^l\circ(\chi_{\f R_1},\chi_{\f R_2},\dotsc,\chi_{\f R_l})\text,
+	\chi_{\bigcup_{i=1}^{\;l}\!\f R_i}=\chi_{\N_+}\!\circ\f{add}^l\circ(\chi_{\f R_1},\chi_{\f R_2},\dotsc,\chi_{\f R_l})\text,
 \end{equation}
 što je (primitivno) rekurzivno ako su sve $\chi_{\f R_i}$ (primitivno) rekurzivne.
 \end{proof}
