@@ -835,7 +835,7 @@ $\f R_0:=\bigl(\bigcup\nolimits_{i=1}^{\,l}\f R_i\bigr)\kompl$ je (primitivno) r
 \end{equation}
 dakle dobivena je kompozicijom iz (primitivno) rekurzivnih $\chi_{\f R_i}$, $\f G_i$ te $\f{mul}^2$ i $\f{add}^{l+1}$.
 
-	Doista, neka je $\vec x\in\N^k$ proizvoljan, i promotrimo funkcijsku jednakost~\eqref{eq:grek} u $\vec x$. Ako je $\vec x$ u nekoj $\f R_i$, tada je $\chi_{\f R_i}(\vec x)=1$, pa je $i$-ti (brojeći od nule) pribrojnik u~\eqref{eq:grek} jednak $G_i(\vec x)$. Štoviše, jer su uvjeti u~parovima disjunktni, $\vec x\notin\f R_j$ za sve $j\in[1\dd l]\setminus\{i\}$, dok iz definicije $\f R_0$ slijedi također $\vec x\notin\f R_0$, dakle svi ostali pribrojnici imaju faktor $0$, pa iznose $0$ i ne utječu na zbroj. Dakle ako je $\vec x\in\f R_i$, tada je $\f F(\vec x)=\f G_i(\vec x)$.
+	Doista, neka je $\vec x\in\N^k$ proizvoljan, i promotrimo funkcijsku jednakost~\eqref{eq:grek} u $\vec x$. Ako je $\vec x$ u nekoj $\f R_i$, tada je $\chi_{\f R_i}(\vec x)=1$, pa je $i$-ti (brojeći od nule) pribrojnik u~\eqref{eq:grek} jednak $\f G_i(\vec x)$. Štoviše, jer su uvjeti u~parovima disjunktni, $\vec x\notin\f R_j$ za sve $j\in[1\dd l]\setminus\{i\}$, dok iz definicije $\f R_0$ slijedi također $\vec x\notin\f R_0$, dakle svi ostali pribrojnici imaju faktor $0$, pa iznose $0$ i ne utječu na zbroj. Dakle ako je $\vec x\in\f R_i$, tada je $\f F(\vec x)=\f G_i(\vec x)$.
 
 S druge strane, ako $\vec x$ nije ni u jednoj $\f R_i$, tada po De Morganovom pravilu nije ni u njihovoj uniji, dakle $\vec x\in\f R_0$, pa je početni pribrojnik u~\eqref{eq:grek} jednak $\f G_0(\vec x)$, a svi ostali pribrojnici, kao i u prethodnom odlomku, jednaki su $0$. Dakle tada je $\f F(\vec x)=\f G_0(\vec x)$, kao što i treba biti.
 \end{proof}
@@ -852,7 +852,7 @@ Domena funkcije dobivene grananjem~\eqref{eq:domgran} je još kompliciranija od 
 \end{equation}
 uz dogovor da izraz na desnoj strani ima smisla samo za one $\vec x$ za koje izraz u $i$-tom retku ima smisla, ako uvjet u tom retku vrijedi, a za one $\vec x$ za koje izraz u zadnjem retku ima smisla, ako nijedan od prethodnih uvjeta ne vrijedi. Dakle, ne zahtijevamo (kao prije) da \emph{svaki} podizraz izraza na desnoj strani ima smisla, već samo oni koji se nalaze u "relevantnom retku" definicije.
 
-No kao što smo već rekli, komplikacije s domenom bit će nam bitne kasnije. Zasad radimo s (primitivno) rekurzivnim funkcijama i relacijama, koje su totalne --- a pod tim uvjetima i funkcija dobivena grananjem je totalna, štoviše također (primitivno) rekurzivna, dok god navedemo i funkciju $G_0$ za "podrazumijevani slučaj" (\emph{default}).
+No kao što smo već rekli, komplikacije s domenom bit će nam bitne kasnije. Zasad radimo s (primitivno) rekurzivnim funkcijama i relacijama, koje su totalne --- a pod tim uvjetima i funkcija dobivena grananjem je totalna, štoviše također (primitivno) rekurzivna, dok god navedemo i funkciju $G_0$ za "podrazumijevani slučaj" ($\mspace{-2mu}$\emph{default}).
 
 % \subsection{Editiranje totalnih funkcija}
 
@@ -1006,7 +1006,7 @@ također (primitivno) rekurzivna. Skraćeno pišemo $\f F(\vec x,y):=(\num i<y)\
 \end{lema}
 \begin{proof}
     Prema pretpostavci, karakteristična funkcija $\chi_{\f R}^k$ je (primitivno) rekurzivna. Sada tvrdnja slijedi iz leme~\ref{lm:sumprodrek}, jer tvrdimo da vrijedi
-    \begin{equation}
+	\begin{equation}\label{eq:countsum}
         (\num i<y)\,\f R(\vec x,i)=\sum_{i<y}\chi_{\f R}(\vec x,i)\text.
     \end{equation}
     Doista, za svaki $\vec x\in\N^k$, ako skup $S:=[0\dd y\rangle$ rastavimo na dva dijela,
@@ -1041,7 +1041,7 @@ Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija.
 \label{eq:oeqrek}\quad\f P(\vec x,y)\Longleftrightarrow S_{\f R}\ne\emptyset\Longleftrightarrow\card S_{\f R}>0\Longleftrightarrow(\num i<y)\,\f R(\vec x,i)\in\N_+\text{ te\quad}\\
 \f Q(\vec x,y)\Longleftrightarrow S_{\f R}=S\Longleftrightarrow\card S_{\f R}=\card S\Longleftrightarrow(\num i<y)\,\f R(\vec x,i)\eq y
 \end{gather}
-	(za smjer $\card S_{\f R}=\card S\Rightarrow S_{\f R}=S$ koristimo rezultat iz teorije skupova da konačan skup ne može biti ekvipotentan svom pravom podskupu), pa tvrdnja propozicije slijedi iz leme~\ref{lm:brojrek}, primjera~\ref{pr:N+prn} (za $\f P$) i korolara~\ref{kor:jednakost} (za $\f Q$). Uočimo da je~\eqref{eq:oeqrek} dinamizirani~\eqref{eq:unk}.
+	(za smjer $\card S_{\f R}=\card S\Rightarrow S_{\f R}=S$ koristimo rezultat iz teorije skupova da konačan skup ne može biti ekvipotentan svom pravom podskupu), pa tvrdnja propozicije slijedi iz leme~\ref{lm:brojrek}, primjera~\ref{pr:N+prn} (za $\f P$) i korolara~\ref{kor:jednakost} (za $\f Q$). Uočimo da je~\eqref{eq:oeqrek} dinamizirani~\eqref{eq:unk}, zbog veze~\eqref{eq:countsum} između brojenja i sumiranja.
 \end{proof}
 
 %\begin{napomena}[{name=[granice mogu biti i uključene]}]\label{nap:kvantSc}
