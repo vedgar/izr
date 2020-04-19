@@ -2,7 +2,7 @@
 
 \section{Kodiranje}
 
-Sada već možemo i prilično komplicirane funkcije dokazati primitivno rekurzivnima. Sljedeći veliki zalogaj koji ćemo uzeti je kodiranje konačnih nizova prirodnih brojeva (kodiranje $\N^*$).
+Sada već možemo i prilično komplicirane funkcije dokazati primitivno rekurzivnima. Sljedeći veliki zalogaj koji ćemo uzeti je kodiranje konačnih nizova prirodnih brojeva (kodiranje skupa $\N^*\mspace{-2mu}$).
 
 Zašto baš to kodiranje? Dva su razloga. Prvo, trebat će nam za opis rada RAM-stroja, tako da možemo raditi s konfiguracijama i izračunavanjima kao s ulaznim podacima. Recimo, implementirat ćemo funkciju $\f U$ koja prima izračunavanje koje je stalo i vraća njegov izlazni podatak. Ubuduće ćemo često tako neformalno govoriti: "funkcija prima izračunavanje", ili "funkcija vraća RAM-program", misleći  pritom na kanonsko kodiranje izračunavanja odnosno RAM-programa. Znamo da su RAM-programi konačni nizovi instrukcija, a izračunavanja koja stanu se također mogu pamtiti samo do završne konfiguracije kao konačni nizovi konfiguracija. Same pak konfiguracije također se mogu pamtiti kao konačni nizovi --- vrijednost programskog brojača i sadržaj samo relevantnih registara. Vidjet ćemo da se mnogi objekti koje ćemo željeti kodirati mogu prikazati kao konačni nizovi drugih objekata, tako da ako već imamo kodiranje tih jednostavnijih objekata, kodiranje $\N^*$ dat će nam odmah mogućnost kodiranja složenih objekata.
 
@@ -58,7 +58,7 @@ Simbolička definicija je napisana kako bi bilo sasvim jasno da nigdje nismo tre
 Preslikavanje $\langle\cdots\rangle:\N^*\to\N$ je injekcija.
 \end{propozicija}
 \begin{proof}
-    Pretpostavimo da su $\vec x^k,\vec y^{l}\in\N^*$ takvi da je $\langle\vec x\rangle=\langle\vec y\rangle$. Ako je $k>l$, tada je $k-1\in\N$, pa je $\langle\vec x\rangle$ djeljiv s $p_{k-1}$, što $\langle\vec y\rangle$ nije ($p_{k-1}\notin\{p_0,p_1,\dotsc,p_{l-1}\}$, pa ne dijeli njihov produkt), kontradikcija. Analogno ne može biti $k<l$ --- dakle $k=l$. Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. Kada bi bilo, kôd bi bio djeljiv s $p_{i-1}^{y_i}$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da ne može biti $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
+    Pretpostavimo da su $\vec x^k,\vec y^{l}\in\N^*$ takvi da je $\langle\vec x\rangle=\langle\vec y\rangle$. Ako je $k>l$, tada je $k-1\in\N$, pa je $\langle\vec x\rangle$ djeljiv s $p_{k-1}$, što $\langle\vec y\rangle$ nije ($p_{k-1}\notin\{p_0,p_1,\dotsc,p_{l-1}\}$, pa ne dijeli njihov produkt), kontradikcija. Analogno ne može biti $k<l$ --- dakle je $k=l$. Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. Kada bi bilo, kôd bi bio djeljiv s $p_{i-1}^{y_i}$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da ne može biti $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
 \end{proof}
 
 Sljedeće bismo trebali pokazati da je $\im{\langle\cdots\rangle}=:\f{Seq}$ rekurzivan skup te da na tom skupu imamo izračunljivu funkciju koja nam na neki način daje originalni $\vec x$ iz kojeg je pojedini kod dobiven. Za taj dokaz potrebno nam je ponešto teorije brojeva, no prije toga precizirajmo u kakvom obliku tražimo naš inverz.
@@ -76,9 +76,9 @@ Srećom, ideja dinamizacije i ovdje pomaže: zapravo ćemo imati \emph{dvomjesnu
     Ako za fiksni $k\in\N_+$ promatramo funkciju $\f{Code}^k$ u jednom smjeru i funkcije $\f{part}_1,\dotsc,\f{part}_k$ u drugom, zapravo modeliramo ono što jezik C zove struktura (\texttt{struct}) s $k$ članova. Razlog zašto C ima i polja i strukture kao zasebne tipove podataka leži u tome da strukture mogu sadržavati podatke različitih tipova. Kako mi sve kodiramo prirodnim brojevima, to nam neće bitno trebati. %Ipak, jedna prednost struktura je u tome da umjesto indeksa možemo imati lijepa \emph{imena} za članove, što će nam biti korisno u jednom trenutku kasnije, pa ćemo se na ovu ideju vratiti.
 \end{napomena}
 
-Kad smo već kod programskog jezika C, vjerojatno znate da se polja u njemu najčešće prenose tako da se u jednom argumentu prenese pokazivač (što u našem slučaju odgovara kodu), a u drugom, zasebnom argumentu njegova duljina. Tada bismo mogli kodirati i bez sljedbenika u eksponentu, jer bi duljina do koje gledamo "memoriju" bila posebno zadana. Ipak, većina modernijih programskih jezika drži duljinu zajedno s pojedinim elementima spremnika (na primjer, Python ima ugrađenu funkciju \texttt{len}) pa je zato i mi kodiramo tako da ju je moguće odrediti iz koda. Nama će ideja kodiranja bez sljedbenika biti bitna u jednom drugačijem slučaju, kada je duljina nespecificirana --- ali o tome kasnije.
+Kad smo već kod programskog jezika C, vjerojatno znate da se polja u njemu najčešće prenose tako da se u jednom argumentu prenese pokazivač (što u našem slučaju odgovara kodu), a u drugom, zasebnom argumentu njegova duljina. Tada bismo mogli kodirati i bez sljedbenika u eksponentu, jer bi duljina do koje gledamo "memoriju" bila posebno zadana. Ipak, većina modernijih programskih jezika drži duljinu zajedno sa sadržajem spremnika (na primjer, Python ima ugrađenu funkciju \texttt{len}) pa je zato i mi kodiramo tako da ju je moguće odrediti iz koda. Nama će ideja kodiranja bez sljedbenika biti bitna u jednom drugačijem slučaju, kada je duljina nespecificirana --- ali o tome kasnije.
 
-Funkcije $\f{Code}^k$ su prikladne ako imamo fiksnu mjesnost i možemo argumente zadati posebno. Što dobijemo ako primijenimo ideju dinamizacije na tu familiju funkcija? Argumenti su tada zadani nekom funkcijom $G$ te posebni argument kaže koliko ih ima (usporedite s točkom~\ref{sec:ogrprog}). Operator koji dinamički kodira zadani broj vrijednosti neke funkcije zovemo operatorom \emph{povijesti}, jer često argument koji kaže koliko vrijednosti treba kodirati zapravo predstavlja neku vrstu vremena, odnosno broji korake u nekom postupku (konkretno, $P$-izračunavanju s $\vec x$).
+Funkcije $\f{Code}^k$ su prikladne ako imamo fiksnu mjesnost i možemo argumente zadati posebno. Što dobijemo ako primijenimo ideju dinamizacije na tu familiju funkcija? Argumenti su tada zadani nekom funkcijom $G$ te posebni argument kaže koliko ih ima (usporedite s točkom~\ref{sec:ogrprog}). Operator koji dinamički kodira zadani broj vrijednosti neke funkcije zovemo operatorom \emph{povijesti}, jer često argument koji kaže koliko vrijednosti treba kodirati zapravo predstavlja neku vrstu vremena, odnosno broji korake u nekom postupku (konkretno, trebat će nam za brojenje koraka u $P$-izračunavanju s $\vec x$).
 
 \begin{definicija}[{name=[povijest totalne brojevne funkcije]}]
 Neka je $k\in\N_+$ i $G^k$ totalna funkcija. Za funkciju $F^k$ zadanu s
@@ -94,7 +94,7 @@ $\overline{\f{Code}}(0,2)=\kr{\kr{0,0},\kr{0,1}}=\kr{6,18}=2^7\cdot3^{19}=148\,7
     \overline{\f{mul}}(2,1,3)=\langle\f{mul}(2,1,0),\f{mul}(2,1,1),\f{mul}(2,1,2)\rangle=\langle2\cdot1\cdot0,2\cdot1\cdot1,2\cdot1\cdot2\rangle=\\
     =\langle0,2,4\rangle=2^{0+1}\cdot3^{2+1}\cdot5^{4+1}=2\cdot27\cdot3125=168\,750.
 \end{multline}
-Može biti i $k=1$; jedan važan slučaj je $\f G:=\f Z$. Recimo,
+Može biti i $k=1$; jedan važni slučaj je $\f G:=\f Z$. Recimo,
 \begin{equation}
     \overline{\f Z}(5)=\langle\f Z(0),\f Z(1),\f Z(2),\f Z(3),\f Z(4)\rangle=\langle0,0,0,0,0\rangle=2\cdot3\cdot5\cdot7\cdot11=2\,310.
 \end{equation}
@@ -116,7 +116,7 @@ Prije dokaza napomenimo da je nula problematična u operaciji $\div$, ali ne i u
 \begin{proof}
 Cjelobrojno dijeljenje zapravo je ponovljeno oduzimanje, onoliko puta koliko se može. Dakle, za zadane $x$ i $y$, tražimo najveći $t$ takav da je $t\cdot y\le x$. Relacija $t\cdot y\le x$ jest primitivno rekurzivna, ali nemamo operator maksimizacije. S razlogom ga općenito nemamo: ako malo razmislimo, vidjet ćemo da ne postoji općeniti algoritam kojim bismo odredili najveći broj s nekim svojstvom, čak ni ako znamo da taj broj postoji, jer nikad ne znamo jesmo li tražili dovoljno dugo --- u svakom trenutku iznad najvećeg broja koji smo ispitali postoji još beskonačno mnogo kandidata, svaki od kojih može biti traženi broj.
 
-Srećom, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y$ postane veće od $x$, ostat će veće od $x$ za sve veće $t$. Kod takvih relacija, "prva laž" i "posljednja istina" su susjedne, dakle možemo naći prethodnik najmanjeg $t$ za kojeg vrijedi suprotno.
+Srećom, naša relacija je \emph{padajuća} po $t$: jednom kad $t\cdot y\le x$ postane laž, ostat će laž za sve veće $t$. Kod takvih relacija, "prva laž" i "posljednja istina" su susjedne, dakle možemo naći prethodnik najmanjeg $t$ za kojeg vrijedi suprotno.
 
 Ipak, to je neograničena minimizacija, koja neće dati primitivno rekurzivnu funkciju --- možemo li je nekako ograničiti? Svakako: $y\bump\ge 1$ znači $t\cdot y\bump\ge t$ za svaki $t$, posebno $(x+1)\cdot y\bump\ge x+1>x$. Dakle, dovoljno je tražiti $t$ do $x+1$ --- odnosno do $x$ uključivo, jer znamo da će ograničena minimizacija tada dati $x+1$ ako ne pronađe nijedan broj s traženim svojstvom u zadanom rasponu. Sve u svemu, tvrdimo da vrijedi
 \begin{equation}\label{eq:sslash}
@@ -143,7 +143,7 @@ Svatko tko je ikad provjeravao djeljivost u programiranju zna kako se to radi:
 \end{equation}
 Zaista, za $y>0$, postojanje broja $z$ takvog da je $z\cdot y=x$ (definicija djeljivosti) zapravo znači da je $z=x\div y$, pa je $x\bmod y=x\dotminus z\cdot y=x\dotminus x=0$. U drugom smjeru, ako je $x\dotminus x\div y\cdot y=0$, iz toga slijedi (kao i prije, vrijedi $x\div y\cdot y\le x$) $x=x\div y\cdot y$, pa postoji $z:=x\div y$ takav da vrijedi $x=z\cdot y$, odnosno $y\mid x$.
 
-Za $y=0$, na desnoj strani stoji $x\bmod 0=x=0$, a to stoji i na lijevoj strani jer je jedino $0$ djeljiva nulom --- "postoji $z$ takav da je $0\cdot z=x$" zapravo znači da je $x=0$.
+Za $y=0$, na desnoj strani stoji $x\bmod 0=x=0$, a to stoji i na lijevoj strani jer je jedino $0$ djeljiva nulom --- "postoji $z$ takav da je $0\cdot z=x$" upravo znači da je $x=0$.
 \end{proof}
 
 \begin{korolar}[{name=[primitivna rekurzivnost skupa svih prim-brojeva]}]
@@ -173,7 +173,7 @@ Upravo napisani izraz zapravo kaže da je $\f{nextprime}^1$ \emph{rekurzivna} fu
 
     Za primitivnu rekurzivnost, moramo nekako ograničiti minimizaciju, odnosno moramo "isprogramirati" dokaz da je $\mathbb P$ beskonačan. Uzmimo Euklidov dokaz: ako imamo $p_0,p_1,\dotsc,p_n\in\mathbb P$, novi prim-broj možemo dobiti tako da potražimo prim-djelitelj broja $m:=p_0\cdot p_1\mathbin{\dotsm}p_n+1>1$. Aha! Znamo da je djelitelje pozitivnog broja dovoljno tražiti do samog tog broja, dakle samo trebamo primitivno rekurzivno izračunati $m$ iz $n$ i $p_n$. Tu bismo mogli upotrijebiti primorijel iz primjera~\ref{pr:primorijel} --- konkretno, $m=\f{Sc}\bigl(\overline{\f Z}\bigl(\f{Sc}(n)\bigr)\bigr)$ --- ali nažalost još ne znamo da je funkcija $\overline{\f Z}$ primitivno rekurzivna, jer nismo dokazali da povijest čuva primitivnu rekurzivnost. I to s razlogom: pokazat će se da za tu lemu treba rezultat koji upravo dokazujemo.
 
-    Kako se izvući? Spas leži u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. To znači da umjesto primorijela možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a vrijedi $p_n!\ge p_0\cdot p_1\mathbin{\dotsm}p_n$ jer je $p_n!$ umnožak svih brojeva na desnoj strani i eventualno još nekih koji su barem $1$).
+    Kako se izvući? Spas leži u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. To znači da umjesto primorijela možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a vrijedi $p_n!\ge p_0\cdot p_1\mathbin{\dotsm}p_n$ jer je $p_n!$ umnožak svih brojeva na desnoj strani i eventualno još nekih koji su barem $1$.
 \begin{equation}
     \f{nextprime}(p)=(\mu q\le p!+1)(q\in\mathbb P\land q>p)%\text,
 \end{equation}
@@ -314,9 +314,9 @@ Zanimljivo je da smo koristili samo javno sučelje kodiranja konačnih nizova --
 
 \subsection{Primitivna rekurzija kroz prostor i vrijeme}
 
-Primitivna rekurzija nam omogućuje pisanje ograničenih petlji koje prate jedan podatak. Što ako ih želimo pratiti više, recimo $l$ njih? Rekli smo da ćemo više izlaznih podataka reprezentirati kroz više nezavisnih algoritama, i ponekad se to doista može rastaviti: recimo ako tražimo kumulativni zbroj i umnožak nekog niza, možemo prvo naći zbroj pa onda umnožak, zasebnim primitivnim rekurzijama. No kod kompliciranijih rekurzija, algoritmi više nisu odvojivi, jer je zamislivo da sljedeće vrijednosti svih $l$ podataka ovise o prethodnim vrijednostima svih njih.
+Primitivna rekurzija nam omogućuje pisanje ograničenih petlji koje prate jedan podatak. Što ako ih želimo pratiti više, recimo $l$ njih? U napomeni~\ref{nap:brip} rekli smo da ćemo više izlaznih podataka reprezentirati kroz više nezavisnih algoritama, i ponekad se to doista može rastaviti: recimo ako tražimo kumulativni zbroj i umnožak nekog niza, možemo prvo naći zbroj pa onda umnožak, zasebnim primitivnim rekurzijama. No kod kompliciranijih rekurzija algoritmi više nisu odvojivi, jer je zamislivo da sljedeće vrijednosti svih $l$ podataka ovise o prethodnim vrijednostima svih njih.
 
-Važno mjesto gdje se to pojavljuje je simulacija kompliciranih (npr.\ univerzalnih) modela izračunljivosti, primitivnom rekurzijom kroz vrijeme. Recimo, u RAM-stroju moramo pratiti registre i programski brojač. Stanje registara u koraku $n+1$ ovisi o stanju registara u koraku $n$, ali ovisi i o tome koja se instrukcija izvršava, što (za fiksni program) ovisi o vrijednosti programskog brojača. Vrijednost pak programskog brojača u koraku $n+1$ definirana je po slučajevima: najčešće je sljedbenik te vrijednosti u koraku $n$, ali pri izvršavanju instrukcije tipa $\dec$ ovisi i o stanju registra na koji ta instrukcija djeluje, u koraku $n$.
+Važna situacija u kojoj se taj fenomen pojavljuje je simulacija kompliciranih (npr.\ univerzalnih) modela izračunljivosti, primitivnom rekurzijom kroz vrijeme. Recimo, u RAM-stroju moramo pratiti registre i programski brojač. Stanje registara u koraku $n+1$ ovisi o stanju registara u koraku $n$, ali ovisi i o tome koja se instrukcija izvršava, što (za fiksni program) ovisi o vrijednosti programskog brojača. Vrijednost pak programskog brojača u koraku $n+1$ definirana je po slučajevima: najčešće je sljedbenik te vrijednosti u koraku $n$, ali pri izvršavanju instrukcije tipa $\dec$ ovisi i o stanju registra na koji ta instrukcija djeluje, u koraku $n$.
 
 Takva ovisnost zove se \emph{simultana} primitivna rekurzija, jer moramo simultano ra\-ču\-na\-ti svih $l$ vrijednosti --- ali kodiranje $\N^*$ (zapravo samo $\N^l$) omogućuje nam da je implementiramo pomoću obične primitivne rekurzije: umjesto $l$ vrijednosti $\vec a^l$ pratimo jednu vrijednost $\langle\vec a\rangle$. Slikovito, pratimo jedan \texttt{struct} s $l$ članova.
 
@@ -331,7 +331,7 @@ Takva ovisnost zove se \emph{simultana} primitivna rekurzija, jer moramo simulta
 za sve $i\in[1\dd l]$, također (primitivno) rekurzivne.
 \end{propozicija}
 \begin{proof}
-Kao što smo već rekli, cilj nam je primitivnom rekurzijom prvo dobiti funkciju $\f F:=\f{Code}^l\circ(\f F_1,\f F_2,\dotsc,\f F_l)$, iz koje ćemo onda dobiti svaki $\f F_i$ kompozicijom s funkcijom $\f{part}$. Inicijalizacija: iz~\eqref{eq:simultG} imamo
+Kao što smo već rekli, cilj nam je primitivnom rekurzijom prvo dobiti funkciju $\f F:=\f{Code}^l\circ(\f F_1,\f F_2,\dotsc,\f F_l)$, iz koje ćemo onda dobiti svaku $\f F_i$ kompozicijom s funkcijom $\f{part}$. Inicijalizacija: iz~\eqref{eq:simultG} imamo
 \begin{equation}\label{eq:simultGd}
     \f F(\vec x,0)=\langle \f F_1(\vec x,0),\dotsc,\f F_l(\vec x,0)\rangle=\langle \f G_1(\vec x),\dotsc,\f G_l(\vec x)\rangle=:\f G(\vec x)\text,
 \end{equation}
@@ -359,14 +359,14 @@ A onda je za svaki $i\in[1\dd l]$, funkcija $\f F_i$ zadana s $\f F_i(\vec x, y)
 \end{proof}
 
 \begin{napomena}[{name=[pokrate u točkovnim definicijama]}]
-Gdje se u točkovnoj definiciji pojavljuje sintaksno isti izraz više puta, uvodit ćemo pokrate koje će nam omogućiti da kompliciranije izraze zapišemo lakše i preglednije. Recimo,~\eqref{eq:simultHd} bismo mogli zapisati kao
+Gdje se u točkovnoj definiciji pojavljuje sintaksno isti izraz više puta, uvodit ćemo pokrate koje će nam omogućiti da kompliciranije izraze zapišemo lakše i preglednije. Recimo, mogli bismo zapisati~\eqref{eq:simultHd} u obliku
 \begin{align*}
     \f H(\vec x,y,z)&:=\langle \f H_1(\vec a),\f H_2(\vec a),\dotsc,\f H_l(\vec a)\rangle\text,\\
     \text{uz pokratu } \vec a&:=\bigl(\vec x,y,z[0],z[1],\dotsc,z[l-1]\bigr)\text.
 \end{align*}
-Treba napomenuti da je to samo kraći \emph{zapis} za~\eqref{eq:simultHd}, ne uvođenje pomoćnih funkcija --- jer tada bi $\vec a$ kao funkcija trebala imati više izlaznih podataka te primati $\vec x$, $y$ i $z$ kao argumente, što bi uništilo dobar dio kratkoće zapisa.
+Treba napomenuti da je to samo kraći \emph{zapis} za~\eqref{eq:simultHd}, ne uvođenje pomoćnih funkcija --- jer tada bi $\vec a$ kao funkcija trebala imati više izlaznih podataka te primati kontekst $\vec x$, $y$ i $z$ kao argumente, što bi uništilo dobar dio kratkoće zapisa.
 
-Analogija u programskom jeziku C je korištenje preprocesora (\verb+#define+). Na neki način, uvodimo "makroe" u funkcijski jezik, ali ih nećemo formalizirati jer nam neće biti potrebni tako često, nećemo uopće koristiti makroe s parametrima (koje C preprocesor podržava), a "grafičko" uvrštavanje izraza na određena mjesta u većem izrazu nije pretjerano zahtjevna operacija --- samo smanjuje preglednost, koja je zapravo jedina motivacija za uvođenje pokrata.
+Analogija u programskom jeziku C je korištenje preprocesora (\verb+#define+). Na neki način, uvodimo "makroe" u funkcijski jezik, ali ih nećemo formalizirati jer nam neće biti potrebni tako često, nećemo uopće koristiti makroe s parametrima (koje C-ov preprocesor podržava), a "grafičko" uvrštavanje izraza na određena mjesta u većem izrazu nije pretjerano zahtjevna operacija --- samo smanjuje preglednost, koja je zapravo jedina motivacija za uvođenje pokrata.
 \end{napomena}
 
 Dokazali smo da je moguće u primitivnoj rekurziji simultano graditi $l$ funkcija, tako da svaka sljedeća vrijednost ovisi "prostorno" o prethodnim vrijednostima različitih funkcija. Što dobijemo ako pokušamo dinamizirati taj $l$? Dobit ćemo funkciju koja ovisi o \emph{povijesti} neke druge funkcije, no najzanimljiviji je slučaj kad ovisi "vremenski" o povijesti same sebe --- kad je definirana \emph{rekurzijom s poviješću}, koja može koristiti ne samo neposredno prethodnu vrijednost, nego sve ranije.
@@ -543,7 +543,7 @@ U dokazu teorema~\ref{tm:alef0izr} napisali smo RAM-pro\-gra\-me $P_n$~\eqref{eq
     \kprog{P_n}=\langle6,6,\dotsc,6\rangle\text{ ($n$ šestica)}=\langle \f C_6(0),\f C_6(1),\dotsc,\f C_6(n-1)\rangle=\overline{\f C_6}(n)\text.
 \end{equation}
 $\overline{\f C_6^1}$ je primitivno rekurzivna po propoziciji~\ref{prop:konst} i lemi~\ref{lm:povijestrek}.
-    Isto možemo dobiti dinamizacijom ove šestice kao u primjeru~\ref{pr:IdinC}, ili potenciranjem primorijela: $\kprog{P_n}=\overline{\f I_1^2}(6,n)=\bigl(\overline{\f Z}(n)\bigr)^7$ --- vidite li zašto?
+    Isto možemo dobiti dinamizacijom ove šestice kao u primjeru~\ref{pr:IdinC}, ili čak potenciranjem primorijela: $\kprog{P_n}=\overline{\f I_1^2}(6,n)=\bigl(\overline{\f Z}(n)\bigr)^7$ --- vidite li zašto?
 \end{primjer}
 
 \begin{primjer}[{name=[kod spljoštenja programa $Q$]}]\label{pr:Qflatkod}
