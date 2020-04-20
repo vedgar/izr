@@ -58,7 +58,9 @@ Simbolička definicija je napisana kako bi bilo sasvim jasno da nigdje nismo tre
 Preslikavanje $\langle\cdots\rangle:\N^*\to\N$ je injekcija.
 \end{propozicija}
 \begin{proof}
-    Pretpostavimo da su $\vec x^k,\vec y^{l}\in\N^*$ takvi da je $\langle\vec x\rangle=\langle\vec y\rangle$. Ako je $k>l$, tada je $k-1\in\N$, pa je $\langle\vec x\rangle$ djeljiv s $p_{k-1}$, što $\langle\vec y\rangle$ nije ($p_{k-1}\notin\{p_0,p_1,\dotsc,p_{l-1}\}$, pa ne dijeli njihov produkt), kontradikcija. Analogno ne može biti $k<l$ --- dakle je $k=l$. Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. Kada bi bilo, kôd bi bio djeljiv s $p_{i-1}^{y_i}$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da ne može biti $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
+    Pretpostavimo da su $\vec x^k,\vec y^{l}\in\N^*$ takvi da je $\langle\vec x\rangle=\langle\vec y\rangle$. Ako je $k>l$, tada je $k-1\in\N$, pa je $\langle\vec x\rangle$ djeljiv s $p_{k-1}$, što $\langle\vec y\rangle$ nije ($p_{k-1}\notin\{p_0,p_1,\dotsc,p_{l-1}\}$, pa ne dijeli njihov umnožak), kontradikcija. Analogno ne može biti $k<l$ --- dakle je $k=l$.
+	
+	Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. U suprotnom, kôd bi bio djeljiv s $p_{i-1}^{y_i}$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da nije ni $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
 \end{proof}
 
 Sljedeće bismo trebali pokazati da je $\im{\langle\cdots\rangle}=:\f{Seq}$ rekurzivan skup te da na tom skupu imamo izračunljivu funkciju koja nam na neki način daje originalni $\vec x$ iz kojeg je pojedini kod dobiven. Za taj dokaz potrebno nam je ponešto teorije brojeva, no prije toga precizirajmo u kakvom obliku tražimo naš inverz.
@@ -184,7 +186,7 @@ Upravo napisani izraz zapravo kaže da je $\f{nextprime}^1$ \emph{rekurzivna} fu
 \begin{lema}[{name=[primitivna rekurzivnost rastava na prim-faktore]}]\label{lm:exprn}
 Za $(n,i)\in\N^2$, označimo s $\f{ex}(n,i)$ eksponent prim-broja $p_i$ u rastavu broja $n\bump$ na prim-faktore. Funkcija $\f{ex}^2$ je primitivno rekurzivna.
 \end{lema}
-Nula nema rastav na prim-faktore, pa je moramo zamijeniti jedinicom --- koja \emph{ima} jedinstven rastav na prim-faktore: prazan produkt, gdje su svi eksponenti jednaki $0$.
+Nula nema rastav na prim-faktore, pa je moramo zamijeniti jedinicom --- koja \emph{ima} jedinstveni rastav na prim-faktore: prazni produkt, gdje su svi eksponenti jednaki $0$.
 \begin{proof}
 Opet, tražimo najveći broj $t$ takav da ${p_i}^t\mid n\bump$. Kao i u dokazu propozicije~\ref{prop:divmodprn}, ta relacija je padajuća po $t$: jednom kad prestane biti istina, ne može ponovo postati istina ni za koji veći $t$. Dakle, isti trik (prethodnik najmanjeg elementa komplementa) prolazi. Također, kako je $\f{prime}$ rastuća funkcija, imamo $n\bump\ge{p_i}^t\ge{p_0}^t=2^t>t$ (Cantorov osnovni teorem za konačne skupove), pa je $t$ dovoljno tražiti do $n\bump$ isključivo, ili do $n$ jer su za $n=0$ ionako svi eksponenti $0$. Sve u svemu, vrijedi
 \begin{equation}
@@ -335,7 +337,9 @@ Kao što smo već rekli, cilj nam je primitivnom rekurzijom prvo dobiti funkciju
 \begin{equation}\label{eq:simultGd}
     \f F(\vec x,0)=\langle \f F_1(\vec x,0),\dotsc,\f F_l(\vec x,0)\rangle=\langle \f G_1(\vec x),\dotsc,\f G_l(\vec x)\rangle=:\f G(\vec x)\text,
 \end{equation}
-te je $\f G=\f{Code}^l\circ(\f G_1,\dotsc,\f G_l)$ (primitivno) rekurzivna kao kompozicija takvih. Korak: iz~\eqref{eq:simultH} je
+te je $\f G=\f{Code}^l\circ(\f G_1,\dotsc,\f G_l)$ (primitivno) rekurzivna kao kompozicija takvih.
+	
+\noindent Korak: iz~\eqref{eq:simultH} je
 \begin{multline}\label{eq:simultHd}
 \f F(\vec x,y+1)=\langle\f F_1(\vec x,y+1),\dotsc,\f F_l(\vec x,y+1)\rangle=\\
 	=\bigl\langle\mspace{1mu}\f H_1\bigl(\vec x,y,\f F_1(\vec x,y),\dotsc,\f F_l(\vec x,y)\bigr),\dotsc,\f H_l\bigl(\vec x,y,\f F_1(\vec x,y),\dotsc,\f F_l(\vec x,y)\bigr)\bigr\rangle=\\
