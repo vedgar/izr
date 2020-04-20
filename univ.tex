@@ -692,7 +692,7 @@ za svaki RAM-program $P$, za svaki neprazni konačni niz $\vec x$, za svaki prir
 \end{lema}
 Preciznije, ako je $P$-izračunavanje s $\vec x$ niz $(c_n)_{n\in\N}$, tada je $\f{Reg}(\langle\vec x\rangle, \kprog{P},n)=c_n[\reg{}]$, a $\f{Count}(\langle\vec x\rangle,\kprog{P},n)=c_n(\textsc{pc})$.
 \begin{proof}
-    To što smo razdvojili reprezentaciju izračunavanja na dvije funkcije ne znači da ih možemo računati odvojenim algoritmima. Prema lemi~\ref{lema:ramdet} sljedeća konfiguracija ovisi samo o neposredno prethodnoj (izračunavanje je \emph{memoryless} --- kao Markovljev lanac, samo što je determinističko), ali o oba njena dijela --- i o registrima i o brojaču. To znači da je prirodni način definiranja tih funkcija \emph{simultana rekurzija}.
+    To što smo razdvojili reprezentaciju izračunavanja na dvije funkcije ne znači da ih možemo računati odvojenim algoritmima. Prema lemi~\ref{lema:ramdet} sljedeća konfiguracija ovisi samo o neposredno prethodnoj (izračunavanje je \emph{memoryless} --- kao Markovljev lanac, samo što je determinističko), ali o oba njena dijela --- i o registrima i o brojaču. To znači da je prirodni način definiranja tih funkcija simultana rekurzija.
 
 Za nju nam prvo trebaju inicijalizacije, odnosno vrijednosti traženih funkcija u $n=0$. Nakon $0$ koraka stanje registara je početna konfiguracija s ulazom $\vec x$, čiji se kod može dobiti iz koda $\langle\vec x\rangle$ funkcijom $\f{start}$ iz leme~\ref{lm:startprn}:
 \begin{equation}
@@ -982,7 +982,7 @@ Korolar~\ref{kor:funHaltTk} prema napomeni~\ref{nap:graf=funsv} kaže da je za s
 \begin{equation}\label{eq:Udef}
     \f U(y):=\f{result}\bigl(\f{rpart}(y,0)\bigr)=\f{ex}(y[\f{pd}(\f{lh}(y))],0)\text,
 \end{equation}
-doslovno "sadržaj izlaznog registra posljednje konfiguracije kodirane s $y$" te ćemo dobiti
+doslovno "sadržaj registra $\reg0$ u posljednjoj konfiguraciji kodiranoj s $y$", čime dobijemo
 \begin{equation}
     \f{comp}_k(\vec x,e):\simeq \f U\bigl(\mu y\,\f T_k(\vec x,e,y)\bigr)\text.
 \end{equation}
