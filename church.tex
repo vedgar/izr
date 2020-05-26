@@ -1,6 +1,6 @@
 \section{Neizračunljive funkcije}
 
-Intuitivni pojam izračunljivog kao "onog za što postoji algoritam", zajedno s Church--\!Turingovom tezom, napokon daju mogućnost da dokažemo da za neke probleme ne postoje algoritmi. To ćemo učiniti dokazom da neka funkcija $g$ nije parcijalno rekurzivna --- tada po teoremu ekvivalencije $\beta g$ nije Turing-izračunljiva, po definiciji~\ref{def:izr} $g$ nije izračunljiva, pa možemo reći da za nju ne postoji algoritam.
+Intuitivni pojam izračunljivog kao onog za što postoji algoritam, zajedno s Church--\!Turingovom tezom, napokon daju mogućnost da dokažemo da za neke probleme ne postoje algoritmi. To ćemo učiniti dokazom da neka funkcija $g$ nije parcijalno rekurzivna --- tada po teoremu ekvivalencije $\beta g$ nije Turing-izračunljiva, po definiciji~\ref{def:izr} $g$ nije izračunljiva, pa možemo reći da za nju ne postoji algoritam.
 
 Najčešće će $g$ biti karakteristična funkcija, jer obično se postojanje algoritma ispituje za \emph{probleme odluke}: za dani skup $A$ i njegov podskup $D$, postoji li algoritam koji odlučuje, za proizvoljni $x\in A$, je li $x\in D$? Jednom kada imamo kodiranje $\N A$ skupa $A$, to gledamo kao pitanje izračunljivosti skupa (jednomjesne relacije) $\N A[D]\subseteq\N$, odnosno funkcije $\chi_{\N A[D]}$. Sve te ideje smo već vidjeli, za $A:=\Sigma^*$, kad smo promatrali odlučive jezike u točki~\ref{sec:Todl}.
 
@@ -9,7 +9,7 @@ Za brojevni problem $D$ kažemo da je \emph{odlučiv} ako je njegova karakterist
 \end{definicija}
 
 "Brojevni problemi" nisu ništa drugo nego relacije, ali postavljeni u obliku pitanja, odnosno ispitivanja nekog svojstva. Recimo, $Halt_2=\dom{\f{comp}_2}^3$ možemo promatrati kao problem "za zadane $x,y,e\in\N$, (postoji li i) stane li program koda $e$ s ulazom $(x,y)$?", odnosno "ima li izraz $\kf{e}(x,y)$ smisla?". Već smo nagovijestili da taj problem nije odlučiv.
-Kako bismo to dokazali? Uzmimo za početak nešto lakše. U uvodu smo već spomenuli paradoks sličan Russellovom, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_n$, i onda za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeksa možemo to doslovno napraviti.
+Kako bismo to dokazali? Uzmimo za početak nešto lakše. U uvodu smo već spomenuli paradoks sličan Russellovom, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_{n\in\N}$, i onda za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeksa možemo to doslovno napraviti.
 
 \begin{definicija}[{name=[Russellova funkcija i Kleenejev skup]}]
 \emph{Russellova funkcija} je jednomjesna funkcija $\f{Russell}^1$ zadana s
@@ -176,7 +176,7 @@ Ako je $\t\textbullet\;\raisebox{1.1pt}{$\in$}\;\Sigma$, možemo primijeniti lem
 
 Ako pak $\t\textbullet\notin\Sigma$, uzmimo neki konkretni znak $\alpha\in\Sigma$ (po definiciji abecede je $\Sigma\ne\emptyset$, pa $\alpha$ postoji), i \emph{zamijenimo} ga s \t\textbullet: gledamo Turingov stroj $\mathcal T_0'$ koji je kao $\mathcal T_0$ iz prethodnog odlomka, osim što umjesto \t\textbullet\ ima $\alpha$ --- kako u $\Sigma$, tako i u $\Gamma$ i u svim prijelazima od $\delta$. S obzirom na to da znakovi radne abecede nemaju nikakvu imanentnu semantiku (osim praznine, ali za to pogledajte sljedeći odlomak), $\mathcal T_0'$-izračunavanje s $\alpha^u$ stane ako i samo ako $\mathcal T_0$-izračunavanje s $\t\textbullet^u$ stane --- pa kad bi neki algoritam za svaku $w\in\Sigma^*$ točno određivao stane li $\mathcal T_0'$-izračunavanje s $w$, tada bi to posebno vrijedilo i za sve riječi oblika $\alpha^u,u\in\N$, pa bismo opet imali kontradikciju s neodlučivošću od $K$ kao u prethodnom odlomku.
 
-Postoji još samo jedan slučaj koji nismo uzeli u obzir: što ako je praznina stroja $\mathcal T_0$ upravo \t\textbullet? Tada ona po definiciji nije u $\Sigma$, ali je ne možemo samo zamijeniti s $\alpha$ jer $\alpha$ jest u $\Sigma$. U tom slučaju odaberemo neki novi znak $\beta\notin\Gamma$, proglasimo ga prazninom, i \t\textbullet\ zamijenimo s $\beta$ u $\Gamma$ i $\delta$. Nakon toga primijenimo postupak iz prethodnog odlomka.
+Postoji još samo jedan slučaj koji nismo uzeli u obzir: što ako je praznina stroja $\mathcal T_0$ upravo~\t\textbullet? Tada ona po definiciji nije u $\Sigma$, ali je ne možemo samo zamijeniti s $\alpha$ jer $\alpha$ jest u $\Sigma$. U tom slučaju odaberemo neki novi znak $\beta\notin\Gamma$, proglasimo ga prazninom, i \t\textbullet\ zamijenimo s $\beta$ u $\Gamma$ i $\delta$. Nakon toga primijenimo postupak iz prethodnog odlomka.
 \end{proof}
 
 \section{Neodlučivost logike prvog reda}
@@ -395,7 +395,7 @@ Uz tu valuaciju vrijedi antecedens, jer je $v'\bigl(\mathsf s(x_j)\bigr)=a_{jb}$
 Ako $P$-izračunavanje s $\vec u$ stane, tada $\Gamma_{\vec u}\models\zeta$.
 \end{propozicija}
 \begin{proof}
-Pretpostavimo da izračunavanje $(c_t)_t$ stane, odnosno postoji $t_0$ takav da je $c_{t_0}(\textsc{pc})=n$. Da bismo dokazali $\Gamma_{\vec u}\models\zeta$, uzmimo proizvoljnu $\sigma$-strukturu $\mathfrak M$ u kojoj vrijedi $\Gamma_{\vec u}$. Za tu strukturu vrijedi lema~\ref{lm:formcomputesteps}, pa posebno za $t=t_0$ vrijedi $(a_{0t_0},\dotsc,a_{(m-1)t_0})\in S_n$. To znači da za svaku valuaciju $v$ možemo naći $v'$ koja se podudara na $v$ u svim varijablama $x_j$ za $j\ge m$, a $v'(x_j)=a_{jt_0}$ za $j<m$, takvu da vrijedi $\mathfrak M\models_{v'}R_n(x_0,\dotsc,x_{m-1})$. No to upravo znači $\mathfrak M\models\zeta$.
+	Pretpostavimo da izračunavanje $(c_t)_{t\in\N}$ stane, odnosno postoji $t_0$ takav da je $c_{t_0}(\textsc{pc})=n$. Da bismo dokazali $\Gamma_{\vec u}\models\zeta$, uzmimo proizvoljnu $\sigma$-strukturu $\mathfrak M$ u kojoj vrijedi $\Gamma_{\vec u}$. Za tu strukturu vrijedi lema~\ref{lm:formcomputesteps}, pa posebno za $t=t_0$ vrijedi $(a_{0t_0},\dotsc,a_{(m-1)t_0})\in S_n$. To znači da za svaku valuaciju $v$ možemo naći $v'$ koja se podudara na $v$ u svim varijablama $x_j$ za $j\ge m$, a $v'(x_j)=a_{jt_0}$ za $j<m$, takvu da vrijedi $\mathfrak M\models_{v'}R_n(x_0,\dotsc,x_{m-1})$. No to upravo znači $\mathfrak M\models\zeta$.
 \end{proof}
 
 %\subsection{Neformalna izreka Churchovog teorema}

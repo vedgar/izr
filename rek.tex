@@ -293,7 +293,7 @@ $(0,\vec x,y,0,0,\dotsc,0,0)$, koja iz\-vr\-ša\-va\-njem funkcijskog makroa red
     \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-i-1,i+1,0,\dotsc,4,0\bigr)\leadsto\\
     \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-(i+1),i+1,0,\dotsc,1,0\bigr)= d_{i+1}\text.
 \end{multline}
-Ovdje je bilo važno da je i $\f H$ totalna, pa računanje vrijednosti $\f H\bigl(\vec x,i,F(\vec x,i)\bigr)$ (koja je prema~\eqref{eq:defprk} jednaka $\f F(\vec x,i+1)$) doista stane nakon konačno mnogo koraka, reprezentiranih s $\leadsto^*$ u~\eqref{eq:prkonf}. Sada odmah indukcijom po $i$ slijedi da za svaki $i\le y$, $Q_{\f F}$-izračunavanje s $(\vec x,y)$ sadrži konfiguraciju $d_i$. Specijalno, u njemu postoji konfiguracija $d_y$, koja prelazi u završnu konfiguraciju
+Ovdje je bilo važno da je i $\f H$ totalna, pa računanje vrijednosti $\f H\bigl(\vec x,i,F(\vec x,i)\bigr)$ (koja je prema~\eqref{eq:defprk} jednaka $\f F(\vec x,i+1)$) doista stane nakon konačno mnogo koraka, reprezentiranih strelicom $\leadsto^*$ u~\eqref{eq:prkonf}. Sada odmah indukcijom po $i$ slijedi da za svaki $i\le y$, $Q_{\f F}$-izračunavanje s $(\vec x,y)$ sadrži konfiguraciju $d_i$. Specijalno, u njemu postoji konfiguracija $d_y$, koja prelazi u završnu konfiguraciju
 \begin{equation}
     d_y=\bigl(\f F(\vec x,y),\vec x,y-y,y,0,\dotsc,1,0\bigr)\leadsto\bigl(\f F(\vec x,y),\vec x,0,y,0,\dotsc,5,0\bigr)\lcirclearrowleft
 \end{equation}
@@ -470,7 +470,7 @@ Za $x,y\in\N$, označimo $x\dotminus y:=\max\,\{x-y,0\}$. Iz jednakosti\slash ko
 vidimo da je \emph{ograničeno oduzimanje} dobiveno primitivnom rekurzijom iz funkcija $\f I_1^1$ i $\f{pd}\circ\f I_3^3$, pa je ono primitivno rekurzivna operacija. "Operacija" nam znači dvomjesnu totalnu brojevnu funkciju koja se piše infiksno između operanada. Kao funkciju, ograničeno oduzimanje zovemo $\f{sub}$. Dakle, $\f{sub}^2=\f I_1^1\pr\f{pd}\circ\f I_3^3$. Još jedan način dolaska do te simboličke definicije je da uzmemo simboličku definiciju za $\f{add}^2$ (primjer~\ref{pr:addmulpow}) i zamijenimo u njoj $\f{Sc}$ s $\f{pd}$.
 \end{primjer}
 
-Pored računskih operacija (dijeljenje s ostatkom definirat ćemo kasnije, kad uvedemo još neke tehnike), brojeve možemo i \emph{uspoređivati}, raznim dvomjesnim relacijama  kao što su $<$, $\ge$ ili $\eq$. Rekli smo da izračunljivost relacija promatramo kroz izračunljivost njihovih karakterističnih funkcija.
+Pored računskih operacija (dijeljenje s ostatkom definirat ćemo kasnije, kad uvedemo još neke tehnike), brojeve možemo i \emph{uspoređivati}, raznim dvomjesnim relacijama  kao što su $<$, $\ge$ ili~$\eq$. Rekli smo da izračunljivost relacija promatramo kroz izračunljivost njihovih karakterističnih funkcija.
 
 \begin{primjer}[{name=[primitivna rekurzivnost pozitivnosti]}]\label{pr:N+prn}
 Za početak pogledajmo pozitivnost --- formalno, jednomjesnu relaciju $\N_+$. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum}. Definicija te funkcije direktno vodi na degeneriranu primitivnu rekurziju $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna. Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
@@ -683,7 +683,7 @@ Tvrdnje slijede iz primjera~\ref{pr:m-v}, propozicije~\ref{prop:kompl} te očiti
 \end{proof}
 
 \begin{propozicija}[{name=[logički veznici čuvaju (primitivnu) rekurzivnost]}]\label{prop:vezn}
-Neka je $k\in\N_+$ te $\f R^k$ i $\f P^k$ (primitivno) rekurzivne relacije iste mjesnosti. Tada su (primitivno) rekurzivne i relacije zadane logički\slash skupovno s
+Neka je $k\in\N_+$ te $\f R^k$ i $\f P^k$ (primitivno) rekurzivne relacije iste mjesnosti.\\ Tada su (primitivno) rekurzivne i relacije zadane logički\slash skupovno s
 \begin{align}
 %\SwapAboveDisplaySkip
     \f Q_1(\vec x)&:\Longleftrightarrow\f R(\vec x)\land\f P(\vec x)
@@ -712,7 +712,7 @@ Za $\f Q_4$, logička definicija kaže da je $\chi_{\f R}(\vec x)=\chi_{\f P}(\v
 
 Za primitivnu rekurzivnost tih relacija, kao u dokazu propozicije~\ref{prop:kompl}, trebamo naći dvomjesne primitivno rekurzivne funkcije $\f f_i$ koje će preslikavati $\chi_{\f R}(\vec x)$ i $\chi_{\f P}(\vec x)$ u $\chi_{\f Q_i}(\vec x)$, dakle koje će na skupu $\{0,1\}$ djelovati onako kako propisuju tablice istinitosti za pojedine logičke veznike.
 
-Za konjunkciju odnosno presjek, to je upravo $\f f_1=\f{mul}^2$ --- u starijoj literaturi konjunkcija se još zna nazivati "logičko množenje", a u programskom jeziku Pascal isti simbol \texttt{*} služio je za množenje brojeva i za presjek skupova.
+Za konjunkciju odnosno presjek, to je upravo $\f f_1=\f{mul}^2$ --- u starijoj literaturi za konjunkciju se još rabi izraz "logičko množenje", a u programskom jeziku Pascal isti simbol \texttt{*} služio je za množenje brojeva i za presjek skupova.
 
 Svi se ostali logički veznici mogu ekvivalentno zapisati pomoću negacije i konjunkcije:
 \begin{align}
@@ -747,7 +747,8 @@ Direktno iz korolara~\ref{kor:mj-vj}, propozicije~\ref{prop:vezn} i očite ekviv
 simbolički $(\eq)=(\le)\cap(\ge)$.%, odnosno $\chi_\eq=\chi_\le\cdot\chi_\ge=\f{mul}^2\circ(\chi_\le^2,\chi_\ge^2)$.
 \end{proof}
 
-\subsection{Višestruke operacije}
+%\subsection{Višestruke operacije}
+\subsection{Teorem o grananju za totalne funkcije}
 
 Sada ćemo nešto reći o višestrukim zbrojevima, umnošcima, unijama i presjecima. U većini programskih jezika npr.\ zbrajanje je sintaksno realizirano kao infiksni operator, najčešće lijevo asociran, a jedina operacija koja je doista implementirana u procesoru je dvomjesno zbrajanje --- tako da se npr.\ $a+b+c+d$ shvaća kao $\bigl((a+b)+c\bigr)+d$, odnosno kompilira se kao slijed tri instrukcije zbrajanja. Mi ćemo učiniti isto, samo ćemo u skladu s funkcijskom paradigmom slijed implementirati kao kompoziciju.
 
@@ -791,7 +792,7 @@ Za uniju, možemo opet iskoristiti De Morganovo pravilo i propoziciju~\ref{prop:
 što je (primitivno) rekurzivno ako su sve $\chi_{\f R_i}$ (primitivno) rekurzivne.
 \end{proof}
 
-\subsection{Teorem o grananju za totalne funkcije}
+%\subsection{Teorem o grananju za totalne funkcije}
 
 Napokon možemo dokazati teorem o grananju za totalne funkcije, samo prethodno moramo precizno definirati pojmove.
 
@@ -925,6 +926,7 @@ Na taj način, $y$ je kao "dinamički $l$": izgubili smo mogućnost rada s parci
 \begin{primjer}[{name=[koordinantna projekcija kao dinamizacija konstantnih funkcija]}]\label{pr:IdinC}
 Jedan primjer smo već vidjeli: sa statičke strane, za svaki $n$ imamo primitivno rekurzivnu funkciju $\f C_n^k$ takvu da je $\f C_n^k(\vec x)=n$, ali za različite $n$ to su različite funkcije. S dinamičke strane imamo primitivno rekurzivnu funkciju $\f I_{k+1}^{k+1}$ takvu da je za sve $n\in\N$, $\f I_{k+1}^{k+1}(\vec x,n)=n$. Iako je $\f I_{k+1}^{k+1}$ inicijalna funkcija, najčešće će takve dinamičke funkcije biti definirane primitivnom rekurzijom (dok je $\f C_n^k$ definirana kompozicijom). I ovdje možemo "definirati"
 \begin{align}
+\SwapAboveDisplaySkip
     \f I_{k+1}^{k+1}(\vec x,0)&=\f C_0^k(\vec x)\text,&
     \f I_{k+1}^{k+1}(\vec x,y+1)&=\f{Sc}\bigl(\f I_{k+1}^{k+1}(\vec x,y)\bigr)\text,
 \end{align}
@@ -998,7 +1000,7 @@ Evo malo kompliciranijeg primjera: lema~\ref{lm:addmulk} kaže da je za svaki $k
 U uvodnom učenju programiranja, obično se prije sumiranja nauči \emph{brojiti} elemente koji zadovoljavaju neko svojstvo: inicijaliziramo brojač na $0$, prolazimo kroz sve elemente koji dolaze u obzir, i za svaki koji zadovoljava svojstvo, inkrementiramo brojač. Ali kako smatramo $bool$ podskupom od $\N$, uz $\mathit{false}=0$ i $\mathit{true}=1$, brojenje je upravo \emph{sumiranje istinitosnih vrijednosti}. Naredbu \texttt{if uvjet:\ brojač += 1} možemo zapisati kao \texttt{brojač += uvjet}, čime algoritam za brojenje postaje obični algoritam za sumiranje. Formalizirajmo to.
 
 \begin{lema}[{name=[ograničeno brojenje čuva (primitivnu) rekurzivnost]}]\label{lm:brojrek}
-Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija. Tada je funkcija $\f F^k$, zadana s
+\!Neka je $k\in\N_+$ te $\f R^k$ (primitivno) rekurzivna relacija. Tada je funkcija $\f F^k$ zadana s
 \begin{equation}
     \f F(\vec x,y):=\card\,\{i\in\N\mid i<y\land\f R(\vec x,i)\}\text,
 \end{equation}

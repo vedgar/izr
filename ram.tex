@@ -21,7 +21,7 @@ Ipak, neintuitivnost kodiranja nadomjestit će jednostavnost algoritama: dok je,
 
 Smatramo li nulu prirodnim brojem? Treba li brojenje početi od $0$ ili od $1$, dilema je stara koliko i samo računarstvo~\cite{note:EWD831}. Kao i drugdje u matematici, postoje dobri razlozi za obje opcije. Zato ćemo koristiti oba skupa, no kako će nam češće trebati nula među prirodnim brojevima (pogledajte na primjer definiciju od $\{0,1\}^*$), skup s nulom imat će kraću oznaku.
 \begin{align}
-    \SwapAboveDisplaySkip
+    %\SwapAboveDisplaySkip
 	\N&:=\{\mspace{2mu}0,1,2,3,\dotsc\}\nomenclature{$\N$}{skup prirodnih brojeva s nulom}\\
 	\N_+&:=\{\mspace{2mu}1,2,3,4,\dotsc\}\nomenclature{$\N_+$}{skup pozitivnih prirodnih brojeva (bez nule)}
 \end{align}
@@ -53,14 +53,16 @@ Gdje god je dosad bilo govora o općenitim izračunljivim funkcijama, namjerno j
 
 Dopuštajući algoritmima da računaju parcijalne funkcije, zapravo im omogućavamo da je za neke ulazne podatke njihov rad sasvim dobro definiran (dakle, ovdje ne mislimo na izuzetke, \emph{exceptions}, kao što je dijeljenje nulom), ali da ipak ne postoji završna konfiguracija iz koje bismo mogli pročitati izlazni podatak. Nakon malo razmišljanja dolazimo do zaključka da je to jedino moguće tako da algoritam za neke ulaze beskonačno radi, odnosno nikada ne stane.
 
-Nije li to u kontradikciji s naivnom definicijom algoritma, koja kaže da se radi o \emph{konačnom} postupku? Jest, ali to samo pokazuje da naivne definicije nisu dovoljne, i da nam treba formalizacija. Naivna definicija algoritma, baš kao i naivna definicija skupa, dovodi do paradoksa (Russell). \emph{Moramo} u obzir uzeti i parcijalne funkcije, odnosno algoritme koji ne stanu uvijek, ako želimo konzistentnu teoriju. Evo kratke skice argumenta --- precizno ćemo ga provesti kad precizno definiramo pojmove.
+\begin{napomena}[{name=[Russellov paradoks s totalnim algoritmima]}]\label{nap:diagtot}
+	Nije li to u kontradikciji s naivnom definicijom algoritma, koja kaže da se radi o \emph{konačnom} postupku? Jest, ali to samo pokazuje da naivne definicije nisu dovoljne, i da nam treba formalizacija. Naivna definicija algoritma, baš kao i naivna definicija skupa, dovodi do paradoksa (Russell). \emph{Moramo} u obzir uzeti i parcijalne funkcije, odnosno algoritme koji ne stanu uvijek, ako želimo konzistentnu teoriju. Evo kratke skice argumenta --- precizno ćemo ga provesti u poglavlju~\ref{ch:ne}, kad precizno definiramo pojmove. Napomenimo samo da je argument specijalni slučaj općeg načina zaključivanja "ne postoji objekt koji sam sebe nadvladava", koji se često koristi u raznim granama matematike~\cite{url:tao}.
 
-Budući da želimo algoritme moći reprezentirati u računalu, moramo ih moći prikazati kao konačne nizove nula i jedinica. Ta reprezentacija mora biti injekcija ako želimo razlikovati algoritme, a iz teorije skupova znamo da je $\{0,1\}^*$ prebrojiv, dakle \textbf{svih algoritama ima prebrojivo mnogo}. Specijalno, svih jednomjesnih algoritama ima prebrojivo mnogo (očito ih ima beskonačno mnogo). Poredajmo sve jednomjesne algoritme u niz. Pogledajmo sada ovaj jednomjesni algoritam:
+Budući da želimo algoritme moći reprezentirati u računalu, moramo ih moći prikazati kao konačne nizove nula i jedinica. Ta reprezentacija mora biti injekcija ako želimo razlikovati algoritme, a iz teorije skupova znamo da je $\{0,1\}^*$ prebrojiv, dakle \textbf{svih algoritama ima prebrojivo mnogo}. Specijalno, svih jednomjesnih algoritama ima prebrojivo mnogo (očito ih ima beskonačno mnogo). Poredajmo ih sve u niz, i pogledajmo ovaj jednomjesni algoritam:
 \begin{quote}
 	Za ulaz $x\in\N$, nađi $x$-ti algoritam u nizu, i primijeni ga na $x$.\\
 	Izlaz tog algoritma (s ulazom $x$) označi s $y$. Vrati $y+1$.
 \end{quote}
-\emph{Taj} algoritam ne može biti na popisu ako algoritmi nužno računaju totalne funkcije (ako je $r$-ti po redu, s ulazom $r$ mora davati i $y$ i $y+1$), ali s parcijalnim funkcijama nema kontradikcije: $r$-ti algoritam s ulazom $r$ ne mora stati.
+	Ako nacrtamo tablicu kojoj su retci jednomjesni algoritmi, a stupci ulazi za njih (prirodni brojevi), upravo opisani algoritam je klasična "promijenjena dijagonala" te tablice, koja se razlikuje od svakog njenog retka. Drugim riječima, \emph{taj algoritam ne može biti na popisu} ako algoritmi nužno računaju totalne funkcije --- ako je $r$-ti po redu, s ulazom $r$ morao bi davati i $y$ i $y+1$ --- ali s parcijalnim funkcijama nema kontradikcije, jer $r$-ti algoritam s ulazom $r$ ne mora stati.
+\end{napomena}
 
 Ipak, bitno je lakše raditi s algoritmima koji računaju totalne funkcije. Parcijalne funkcije moramo dozvoliti u krajnjoj općenitosti, ali mnoge funkcije koje ćemo koristiti u izgradnji teorije bit će ne samo totalne, nego i \emph{sintaksno} totalne unutar teorije koju gradimo: već iz oblika njihovih definicija bit će jasno da algoritmi koji ih računaju uvijek stanu. Takve funkcije zvat ćemo \emph{primitivno rekurzivnima}.
 
@@ -127,16 +129,16 @@ Razlog zašto radimo s ograničenijim modelom je što von Neumannova arhitektura
 \end{itemize}
 \end{definicija}
 
-RAM-program najčešće pišemo kao \begin{equation}
-P:=\begin{prog}
+RAM-program najčešće pišemo kao %\begin{equation}
+$P:=\begin{prog}
     0.&I_0\\
     1.&I_1\\
     &\vdots\\
     (n-1).&I_{n-1}
-    \end{prog}\text{, ili skraćeno } P:=\begin{prog}
+    \end{prog}$, ili skraćeno $P:=\begin{prog}
     t.&I_t
-    \end{prog}_{t<n}\text.
-\end{equation}
+    \end{prog}_{t<n}$.\\
+%\end{equation}
 Broj instrukcija programa $P$ zovemo još \emph{duljinom} programa $P$, i označavamo ga s $n_P$.
 
 Sadržaj registara se može mijenjati za vrijeme izvršavanja programa, u skladu s instrukcijama. Početni sadržaj određen je ulaznim podacima. Irelevantni registri (koji se ne spominju u instrukcijama niti služe za ulaz) formalno sadrže vrijednost $0$, iako (po definiciji irelevantnosti) zapravo nije bitno koju vrijednost sadrže.
@@ -234,7 +236,7 @@ Drugim riječima, $P$-izračunavanje s $\vec x$ stane točno onda kada je $\vec 
 Navodimo tri lagane posljedice determinizma.
 
 \begin{propozicija}[{name=[jedinstvenost izračunavanja]}]\label{prop:ramdet}
-Za svaki RAM-algoritam $P^k$, za svaki $\vec x\in\N^k$, postoji jedinstveno $P$-izračunavanje s $\vec x$.
+Za svaki RAM-algoritam $P^k$, za svaki ulaz $\vec x\in\N^k$,\\ postoji jedinstveno $P$-izračunavanje s $\vec x$.
 \end{propozicija}
 \begin{proof}
 Za postojanje, induktivno definiramo
@@ -320,13 +322,14 @@ Opet, fiksirajmo mjesnost $k\in\N_+$. Skup svih $k$-mjesnih brojevnih funkcija $
     Iz toga i teorema~\ref{tm:alef0izr} slijedi $\mathscr Func_k\nsubseteq\mathscr Comp_k$, pa je $\mathscr Func_k\!\setminus\mathscr Comp_k\ne\emptyset$.
 \end{proof}
 
-% \subsection{Primjeri RAM-programa}
+%\subsection{Primjeri RAM-programa}
 
 RAM-programe za konstantne funkcije vidjeli smo već u dokazu teorema~\ref{tm:alef0izr}. Specijalno, za $n=0$, \emph{prazan program} $[\,]$ računa \emph{nulfunkciju} $\f{C}_0^k$ za svaki $k\in\N_+$. Dakle, prazan program nažalost ne računa praznu funkciju --- što bi bilo lako zapamtiti --- ali računa \emph{praznu relaciju} $\emptyset^k$, odnosno njenu karakterističnu funkciju. Također, za $n=1$, program $\begin{prog}0.&\incr0\end{prog}$ računa univerzalnu relaciju $\N^k$.
 
-Napišimo RAM-program koji računa praznu funkciju $\varnothing^k$. Iz definicije zaključujemo da je to program čije izračunavanje s $\vec x$ ne stane ni za koji $\vec x$ (bez obzira na mjesnost). Dakle, moramo spriječiti $\textsc{pc}$ da dođe do $n$, odnosno treba nam instrukcija s odredištem, koja će vratiti $\textsc{pc}$ na staru vrijednost tako da se ne poveća za $1$ (\emph{petlja}), i to ona koja se izvrši uvijek (\emph{beskonačna} petlja). Takav program je $\begin{prog}0.&\goto\;0\end{prog}$.
+Napišimo RAM-program koji računa praznu funkciju $\varnothing^k$. Po definiciji, to je program čije izračunavanje ne stane ni s kojim ulazom. %Iz definicije zaključujemo da je to program čije izračunavanje s $\vec x$ ne stane ni za koji $\vec x$ (bez obzira na mjesnost).
+Dakle, moramo spriječiti $\textsc{pc}$ da dođe do $n$, odnosno treba nam instrukcija s odredištem, koja će vratiti $\textsc{pc}$ na staru vrijednost tako da se ne poveća za $1$ (\emph{petlja}), i to ona koja se izvrši uvijek (\emph{beskonačna} petlja). Takav program je $\begin{prog}0.&\goto\;0\end{prog}$.
 
-Dosadašnji programi nisu uopće koristili svoje ulaze. Najjednostavnija funkcija koja koristi svoj argument je identiteta (označena s $\f I_1^1$). Da bismo je izračunali, moramo prebaciti vrijednost iz $\reg{1}$ (ulazni registar za jednomjesne algoritme) u $\reg{0}$ (izlazni registar). Koristeći naše razumijevanje izvršavanja imperativnih programa, vidimo da to čini RAM-algoritam
+Dosadašnji programi nisu uopće koristili svoje ulaze. Najjednostavnija funkcija koja koristi svoj argument je identiteta (označena s $\f I_1^1$). Da bismo je izračunali, moramo prebaciti vrijednost iz ulaznog registra $\reg{1}$ u izlazni registar $\reg{0}$. Koristeći naše razumijevanje izvršavanja imperativnih programa, vidimo da to čini RAM-algoritam
 \begin{equation}\label{eq:RAMid}
     P_{\f I_1}^1:=\begin{prog}
         0.&\decr13\\
@@ -365,7 +368,7 @@ Prethodni dokaz (ili programerska intuicija) daje nam i više: ako "naslažemo" 
 
 Vidimo jednu dobru stranu naizgled čudne konvencije da izračunavanje za\-vr\-ša\-va kad programski brojač postane jednak duljini programa: prilikom ovakve konkatenacije ne trebamo mijenjati odredišta već napisanih instrukcija. Odredište $3$ instrukcije rednog broja $0$ jednako je označavalo kraj programa~\eqref{eq:RAMid} za $\f{I}_1^1$, kao i kraj \emph{tog dijela} programa za $\f{add}^3$. Primijetite sličnost sa standardnom konvencijom o \texttt{end}-iteratoru u biblioteci STL jezika C\texttt{++}.
 
-Vidimo da su mnoge funkcije (prazna, konstante, identiteta, zbrajanje,~\ldots) RAM-izračunljive. Ipak, pisati RAM-programe može biti dosta zamorno (recimo za $\f{add}^8$ --- mnogi dijelovi se ponavljaju uz neznatne izmjene u odredištima ili adresama registara) ili teško (recimo za množenje, ili potenciranje --- povremeno bismo htjeli iskoristiti registar kao brojač za neku petlju, ali istodobno i sačuvati njegovu vrijednost). Prvi problem riješit ćemo makroima, a drugi funkcijskim programiranjem u poglavlju~\ref{ch:rek}.
+Vidjeli smo da su mnoge funkcije (prazna, konstante, identiteta, zbrajanje,~\ldots) RAM-izračunljive. Ipak, pisati RAM-programe može biti dosta zamorno (recimo za $\f{add}^8$ --- mnogi dijelovi se ponavljaju uz neznatne izmjene u odredištima ili adresama registara) ili komplicirano (recimo za množenje, ili potenciranje --- povremeno bismo htjeli iskoristiti registar kao brojač za neku petlju, ali istodobno i sačuvati njegovu vrijednost). Prvi problem riješit ćemo makroima, a drugi funkcijskim programiranjem u poglavlju~\ref{ch:rek}.
 
 \section{Makro-izračunljivost}
 
@@ -478,7 +481,7 @@ Također, polazeći od "čistog" makro-stroja sa svim registrima resetiranim, im
     u kojem nijedna konfiguracija nije završna.
 \end{primjer}
 
-Sada se, jednako kao za RAM-model, može definirati \emph{makro-algoritam}, \emph{makro-izračunavanje}, izreka "makro-algoritam \emph{računa} funkciju" te pojam \emph{makro-izračunljive} funkcije. Na primjer, niz~\eqref{eq:Q!stane} pokazuje da $Q$-izračunavanje s $(0)$ ne stane, dok niz~\eqref{ml:Qstane} pokazuje da $Q$-izračunavanje s $(2,4)$ stane s izlaznim podatkom $3$. Također, makro-algoritam $Q^4$ računa funkciju $\f{f}:\N\times\N_+\!\times\N\times\N\to\N$, zadanu s $\f{f}(x,y,z,t):=y+z-1$.
+Sada se, jednako kao za RAM-model, može definirati \emph{makro-algoritam}, \emph{makro-iz\-ra\-ču\-na\-va\-nje}, izreka "makro-algoritam \emph{računa} funkciju" te pojam \emph{makro-izračunljive} funkcije. Na primjer, niz~\eqref{eq:Q!stane} pokazuje da $Q$-izračunavanje s $(0)$ ne stane, dok niz~\eqref{ml:Qstane} pokazuje da $Q$-izračunavanje s $(2,4)$ stane s izlaznim podatkom $3$. Također, makro-algoritam $Q^4$ računa funkciju $\f{f}:\N\times\N_+\!\times\N\times\N\to\N$, zadanu s $\f{f}(x,y,z,t):=y+z-1$.
 
 Kao i u RAM-slučaju, uz malo više tehnikalija mogu se dokazati rezultati o determinističnosti, prebrojivosti skupa makro-izračunljivih funkcija te postojanju brojevnih funkcija koje nisu takve. Iako to predstavlja dobru vježbu, nećemo ići na taj način --- naš cilj je dobiti sve te rezultate s druge strane, tako da dokažemo da se svaki makro-stroj može \emph{simulirati} RAM-strojem, pa je skup makro-izračunljivih funkcija \emph{jednak} skupu $\mathscr Comp$ RAM-izračunljivih funkcija.
 
@@ -505,7 +508,7 @@ Dok god postoji barem jedan makro u $Q$:
 \begin{enumerate}
     \item\label{korak:makni} makni prvi makro iz $Q$: neka je to $i.\;P^*$;
     \item\label{korak:renumeriraj} u programu $Q$, svaki redni broj veći od $i$, i svako odredište veće od $i$, povećaj za $n_P-1$ (tj.\ smanji za $1$ ako je $P$ prazan program);
-    \item\label{korak:dodaj} za svaku instrukciju programa $P$, dodaj u program $Q$ instrukciju istog tipa nad istim registrom, kojoj su redni broj i odredište (ako ga ima) povećani za $i$.\qedhere
+    \item\label{korak:dodaj} za svaku instrukciju programa $P$, dodaj u program $Q$ instrukciju istog tipa nad istim registrom (ako ga ima), kojoj su redni broj i odredište (ako ga ima) povećani za $i$.\qedhere
 \end{enumerate}
 \end{quotation}
 \end{definicija}
@@ -649,9 +652,9 @@ sa semantikom $(\forall t<n)(r_{j+t}'=r_{i+t}\land r_{i+t}'=0)$ --- koristimo $(
 
 Moderna računala rezerviraju poseban dio svoje memorije za stog poziva (\emph{call stack}), koji se dijeli na okvire (\emph{frames}) u kojima se drže podaci o lokalnim varijablama funkcijâ koje se trenutno izvršavaju. Pozivom funkcije, vrh stoga se pomiče, otvarajući novi okvir u kojem će se funkcija izvršavati. Povratkom iz funkcije, vrh stoga se vraća na staro mjesto, eliminirajući taj okvir tako da od njega ostane jedino povratna vrijednost.
 
-Na RAM-arhitekturi nemamo stog poziva, ali ga možemo emulirati pomoću registara. Otvaranje okvira duljine $b$ realizirat ćemo kao pomak prvih $b$ registara za $b$ mjesta udesno (od $\reg{b}$ do uključivo $\reg{2b-1}$), a njegovo zatvaranje kao pomak u suprotnom smjeru. Osigurat ćemo da je $b$ uvijek dovoljno velik da time sačuvamo sve relevantne registre pozivatelja te da osiguramo dovoljno nulâ na početku za sve relevantne registre pozvane funkcije --- "uvjerivši" je da se izvršava na zasebnom RAM-stroju.
+Na RAM-arhitekturi nemamo stog poziva, ali ga možemo emulirati pomoću registara. Otvaranje okvira duljine $b$ realizirat ćemo kao pomak prvih $b$ registara za $b$ mjesta udesno (od $\reg{b}$ do uključivo $\reg{2b-1}$), a njegovo zatvaranje kao pomak u suprotnom smjeru. Osigurat ćemo da je $b$ uvijek dovoljno velik da time sačuvamo sve relevantne registre pozivatelja te da osiguramo dovoljno nulâ na početku za sve relevantne registre pozvane funkcije --- "uvjerivši" njen program da se izvršava na zasebnom RAM-stroju.
 
-Stvarna računala ne implementiraju stog na taj način jer je takav pristup nevjerojatno rastrošan, u prostoru (broju registara) i u vremenu (broju koraka). No kako nas u teoriji izračunljivosti zanima samo postojanje algoritama, ne i njihova složenost, taj pristup će nam biti dovoljno dobar.
+Stvarna računala ne implementiraju stog na taj način jer je takav pristup nevjerojatno rastrošan, u prostoru (broju registara) i u vremenu (broju koraka). No kako nas pri proučavanju izračunljivosti zanima samo postojanje algoritama, ne i njihova složenost, taj pristup će nam biti dovoljno dobar.
 
 %\subsection{Kopiranja}
 
@@ -670,7 +673,7 @@ Upravo konstruirani makroi resetiraju registre koje prenose --- što ako ih žel
 ima semantiku $r_j'=r_i\land r_k'=0$ (nismo napisali $r_i'$, što u skladu s našom konvencijom znači da je $r_i'=r_i$). To se dokaže po koracima, praćenjem stanja relevantnih registara kroz instrukcije:
 \begin{equation}
     \begin{array}{r@{\;}l|ccc}
-\SwapAboveDisplaySkip
+%\SwapAboveDisplaySkip
         & & r_i & r_j & r_k\\\hline
         0.&\textsc{zero}\;\reg{j} & r_i & 0 & r_k\\
         1.&\textsc{zero}\;\reg{k} & r_i & 0 & 0  \\
@@ -746,7 +749,7 @@ Nakon toga izvršavanje funkcijskog makroa prijeći će na instrukciju \textsc{r
 Naime, zadnja instrukcija \textsc{mmove} će čitav taj blok prepisati \emph{backup}-blokom, vrativši prvih $b$ registara na originalne vrijednosti (konkretno, zanimat će nas da se sačuva prvih $m\le b$ registara), osim što će u $\reg{j_0}$ pisati vraćena vrijednost iz $\reg{b+j_0}$, dakle $\f f(\vec r)$. \emph{Backup}-blok (registri od $\reg{b}$ do $\reg{2b-1}$) će time biti resetiran. To sve možemo prikazati tablicom:
 \begin{equation}\label{eq:funmakrotab}
     \begin{array}{r@{\;}l|cr@{,\dotsc,\,}lc|ccc|}
-\SwapAboveDisplaySkip
+%\SwapAboveDisplaySkip
       &                                                             & r_0          & r_1     & r_k     & r_{j_0}      & r_b & r_{b+j_0}    & r_{2b-1}\\\hline
 0.&\textsc{mmove}\;b\;\textsc{from}\;\reg0..\;\textsc{to}\;\reg{b}..& 0            & 0       & 0       & 0            & r_0 & r_{j_0}      & r_{b-1} \\
 1.&\textsc{args}\;\reg{b+j_1},\reg{b+j_2},\dotsc,\reg{b+j_k}        & 0            & r_{j_1} & r_{j_k} & 0            & r_0 & r_{j_0}      & r_{b-1} \\

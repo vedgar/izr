@@ -149,7 +149,7 @@ odgovara paralelnom pokretanju dva RAM-programa $P$ i $Q$ s istim ulaznim podaci
 
 \subsection{Kontrakcija}
 
-Još jedan način gledanja na~\eqref{eq:parallel} je da smo poredali sve testove $\f{Final}(\kr{\vec x},\kprog P,0)$, $\f{Final}(\kr{\vec x},\kprog Q,0)$, $\f{Final}(\kr{\vec x},\kprog P,1)$, $\f{Final}(\kr{\vec x},\kprog Q,1)$,
+Još jedan način gledanja na~\eqref{eq:parallel} je: poredali smo sve testove $\f{Final}(\kr{\vec x},\kprog P,0)$, $\f{Final}(\kr{\vec x},\kprog Q,0)$, $\f{Final}(\kr{\vec x},\kprog P,1)$, $\f{Final}(\kr{\vec x},\kprog Q,1)$,
 $\f{Final}(\kr{\vec x},\kprog P,2)$,~\ldots\ u niz tako da svaki dođe na red (svi početni komadi su konačni). Drugim riječima, imamo izračunljivu bijekciju između $\N+\N=\N\times\{0,1\}\cong\N\times bool$ i $\N$.
 
 Što bi se dogodilo da umjesto $\N\times bool$ uzmemo $\N\times\N\cong\N^2$? Umjesto jedne ograničene i jedne neograničene kvantifikacije, kao što smo imali u~\eqref{eq:urere}, sada bismo imali dvije neograničene --- i komutiranje nam više nije dovoljno. Možemo li te dvije neograničene kvantifikacije zamijeniti jednom?
@@ -602,7 +602,7 @@ Neka je $L=\dom\varphi$ te $\mathcal T$ Turingov stroj koji računa $\varphi$. P
 Ovo je relativno standardni dokaz koji se napravi u teoriji formalnih jezika, iako je teško raspisati sve detalje. Osnovna ideja je simulacija paralelizacije na Turingovom stroju. Skicu dokaza možete vidjeti u~\cite[\emph{theorem}~3.21]{sipser}.
 
 \item[$(\mathcal E)\Rightarrow(\mathcal R)$]
-Efektivno, treba provesti čitav postupak iz točke~\ref{sec:tikp} za enumerator $\mathcal E=(Q,\Sigma,\Gamma,\bl,\delta_2,q_0,q_p)$. Umjesto $q_z$, sada $q_p$ kodiramo s $1$ (vrijedi analogon leme~\ref{lm:bsomp-q0neqz}). Funkcija $\delta_2:Q\times\Gamma^2\to Q\times\Gamma^2\times\{-1,1\}^2$ (jer enumerator ima dvije trake) je malo kompliciranija za kodirati, ali iste ideje kao u dokazu leme~\ref{lm:newssdprn} (proširenje konačnih funkcija nulom, korolar~\ref{kor:kon0}) prolaze.
+Treba provesti čitav postupak iz točke~\ref{sec:tikp} za enumerator $\mathcal E=(Q,\Sigma,\Gamma,\bl,\delta_2,q_0,q_p)$. Umjesto $q_z$, sada $q_p$ kodiramo s $1$ (vrijedi analogon leme~\ref{lm:bsomp-q0neqz}). Funkcija $\delta_2:Q\times\Gamma^2\to Q\times\Gamma^2\times\{-1,1\}^2$ (jer enumerator ima dvije trake) je malo kompliciranija za kodirati, ali iste ideje kao u dokazu leme~\ref{lm:newssdprn} (proširenje konačnih funkcija nulom, korolar~\ref{kor:kon0}) prolaze.
 
 Dobijemo pet jednomjesnih (primaju samo broj koraka, jer enumerator nema ulaz) funkcijâ $\f{State}$, $\f{WorkPosition}$, $\f{WorkTape}$, $\f{OutPosition}$ i $\f{OutTape}$, definiranih degeneriranom simultanom primitivnom rekurzijom (vrijedi analogon propozicije~\ref{prop:simultrek} za $k=0$, i dokaže se isto kao propozicija~\ref{prop:F1prn} i korolar~\ref{kor:F1rek} --- uvođenjem irelevantnog argumenta) iz primitivno rekurzivnih funkcija, pa su primitivno rekurzivne. Sada definicija nabrajanja enumeratorom kaže da je $w\in L$ (odnosno $\kr w\in\kr L$) ako i samo ako postoji korak $n$ u kojem je $\f{State}(n)=\N Q(q_p)=1$ i $\f{OutTape}(n)=\knk{w\bl\ldots}=\f{Recode}(\kr w,b',b)$ (s $b'$ i $b$ je označen broj znakova u $\Sigma$ i $\Gamma$ redom). Drugim riječima,
 \begin{equation}

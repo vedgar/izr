@@ -530,18 +530,18 @@ Neka je $(x,y,z)\in\N^3$ proizvoljna. Kako je $\f A_z$ primitivno rekurzivna po 
 Kako je svaka $\f A_n^2$ izračunljiva, i funkcija $\f A^3$ je intuitivno izračunljiva: ako nam netko dade $(x,y,z)$ i traži od nas da izračunamo $\f A(x,y,z)$, zapravo traži da izračunamo $\f A_z(x,y)$, a to sigurno (za konkretni $z$) znamo učiniti. Po Church--\!Turingovoj tezi $\f A^3$ bi trebala biti parcijalno rekurzivna, dakle rekurzivna po korolaru~\ref{kor:A3tot}, ali možemo li to dokazati bez primjene Church--\!Turingove teze? Da --- korištenjem teorema rekurzije.
 
 \begin{napomena}[{name=[dvomjesna Ackermannova funkcija]}]
-Često se u literaturi navodi pojednostavljena, dvomjesna funkcija $\f A^2$, zadana s
+Često se pojednostavljena, dvomjesna funkcija $\f A^2$, zadana s
 \begin{align}
-\SwapAboveDisplaySkip
+%\SwapAboveDisplaySkip
     \f A(0,n)&:=n+1\text,\\
     \f A(m+1,0)&:=\f A(m,1)\text,\\
     \f A(m+1,n+1)&:=\f A\bigl(m,\f A(m+1,n)\bigr)\text,
 \end{align}
-pod imenom "Ackermannova funkcija", iako su je zapravo smislili R\'osza P\'eter i Raphael Mitchel Robinson. Iako s manje specijalnih slučajeva i zato lakša za proučavanje, ta funkcija je daleko manje motivirana i teško je objasniti zašto joj definicija izgleda baš tako. Može se, iako nije baš jednostavno, dokazati da za sve $m,n\in\N$ vrijedi
+u literaturi navodi pod imenom "Ackermannova funkcija", iako su je zapravo smislili R\'osza P\'eter i Raphael Mitchel Robinson. Iako s manje specijalnih slučajeva i zato lakša za proučavanje, ta funkcija je daleko manje motivirana i teško je objasniti zašto joj definicija izgleda baš tako. Može se, iako nije baš jednostavno, dokazati da za sve $m,n\in\N$ vrijedi
 \begin{equation}
     \f A(m,n)=\f A(2,n+3,m)\dotminus3\text,
 \end{equation}
-	iz čega slijedi da kad bi $\f A^3$ bila primitivno rekurzivna, takva bi bila i $\f A^2$. No $\f A^2$ nije primitivno rekurzivna (dokaz možete vidjeti u~\cite[dodatak]{skr:Vuk}) pa kontrapozicijom slijedi da ni $\f A^3$ nije primitivno rekurzivna.
+	iz čega slijedi da kad bi $\f A^3$ bila primitivno rekurzivna, takva bi bila i $\f A^2$. No $\f A^2$ nije primitivno rekurzivna (dokaz možete vidjeti u~\cite[dodatak]{skr:Vuk} --- ukratko, svaka primitivno rekurzivna funkcija je dominirana jednim retkom tablice Ackermannove funkcije) pa kontrapozicijom slijedi da ni $\f A^3$ nije primitivno rekurzivna.
 \end{napomena}
 
 \subsection{Rekurzivnost Ackermannove funkcije}

@@ -1,12 +1,16 @@
-\documentclass[ twoside=semi, open=any, fontsize=12pt, DIV=12, BCOR=0pt,
-     headings=twolinechapter, numbers=endperiod ]{scrbook}
-%\includeonly{api} %dolje isključiti list of theorems
+\documentclass[ twoside=semi, open=any, fontsize=12pt, DIV=16, BCOR=0pt,
+     headings=onelinechapter, headings=small, numbers=endperiod,
+     paper=A4, listof=nochaptergap, headinclude=false, footinclude=false,
+     ]{scrbook}
+%\includeonly{neizr,meta,re} %dolje isključiti list of theorems
 % TODO za iduću godinu:
 % - preciznije eksplicirati vezu između Russell i pričice iz uvoda
 % * po instrukciji vs po programu prijelaz eksplicirati
 % * \emphove razdvojiti na engl, defn (-> indeks jednog dana) i nagl
 % * == umjesto = za algoritamsku jednakost; rješava i probleme s parcijalnošću
 % * if, spec u smallcaps
+% !! popraviti odnos gornje i donje margine (footer)
+     %\usepackage{showframe}
 \raggedbottom
 %\pdfmapline{+dummy-space <dummy-space.pfb}
 \pdfinterwordspaceon \input glyphtounicode \pdfgentounicode=1
@@ -17,23 +21,47 @@
     colorlinks, linkcolor={red!50!black},
     citecolor={blue!50!black}, urlcolor={blue!80!black} }
 \usepackage[nodollardollar,all,error]{onlyamsmath}
-\usepackage{amsthm,thmtools} \usepackage{mathtools}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{thmtools}
 \usepackage{stmaryrd}
 \usepackage[euler-digits]{eulervm} \usepackage{beton} \usepackage{MnSymbol}
 \usepackage[mathscr]{eucal} \usepackage[artemisia]{textgreek}
-\renewcommand{\bfdefault}{sbc} \usepackage{microtype} \usepackage{bookmark}
+\usepackage{microtype} \usepackage{bookmark}
 \usepackage{menukeys} \renewmenumacro{\keys}[+]{roundedkeys}
+\usepackage{bold-extra}
 \usepackage[draft=false]{scrlayer-scrpage}
+\clearpairofpagestyles \ifoot{\textcolor{gray}{\headmark}} \ofoot*{\pagemark}
 \usepackage[croatian,refpage]{nomencl}
 \makenomenclature
 
-\declaretheorem[                   style=definition,qed=$\lhd$,parent=chapter]{definicija}
-\declaretheorem[sibling=definicija,style=definition,qed=$\lhd$]{primjer}
-\declaretheorem[sibling=definicija,style=definition,qed=$\lhd$]{napomena}
-\declaretheorem[sibling=definicija,style=definition]{propozicija}
-\declaretheorem[sibling=definicija,style=definition]{korolar}
-\declaretheorem[sibling=definicija,style=definition]{lema}
-\declaretheorem[sibling=definicija,style=definition]{teorem}
+\declaretheoremstyle[
+  spaceabove=\topsep, spacebelow=0pt, postheadspace=0.5em,
+  headfont=\normalfont\bfseries, bodyfont=\normalfont,
+  notefont=\mdseries, notebraces={(}{)}, headpunct={:},
+  mdframed={ backgroundcolor=gray!1, 
+            linecolor=blue!50, 
+	    linewidth=1pt,
+            innertopmargin=0pt,
+            innerbottommargin=0pt, 
+	    innerleftmargin=1em,
+	    innerrightmargin=1em,
+            skipabove=1pt,
+            skipbelow=0pt,
+	    innermargin=-1em,
+	    outermargin=-1em,
+	    topline=false,
+	    bottomline=false,
+	    rightline=false
+	    }
+]{kni}
+\declaretheorem[             style=kni,parent=chapter]{lema}
+\declaretheorem[sibling=lema,style=kni,qed=$\lhd$]{definicija}
+\declaretheorem[sibling=lema,style=kni,qed=$\lhd$]{primjer}
+\declaretheorem[sibling=lema,style=kni,qed=$\lhd$]{napomena}
+\declaretheorem[sibling=lema,style=kni]{propozicija}
+\declaretheorem[sibling=lema,style=kni]{korolar}
+\declaretheorem[sibling=lema,style=kni]{teorem}
 \declaretheorem[numbered=no,name={Church--\!Turingova teza}]{ctteza}
 \renewcommand{\listtheoremname}{Popis definicija, propozicija, teorema, primjera, lema, napomena i korolara}
 
@@ -88,6 +116,7 @@
 \newenvironment{prog}{\left[\begin{array}{r@{\;}l}}{\end{array}\right]}
 \DeclareMathOperator{\card}{card}
 \DeclareTextFontCommand{\t}{\ttfamily\upshape\color{brown}}
+\DeclareFontSeriesDefault[rm]{bf}{sbc}
 \newcommand{\f}[1]{\textcolor{dark-blue}{\mathsf{#1}}}
 \DeclarePairedDelimiter{\knk}{\langlebar}{\ranglebar}
 \DeclarePairedDelimiter{\kins}{\ulcorner}{\urcorner}
@@ -97,6 +126,10 @@
 \DeclarePairedDelimiter{\dulj}{|}{|}
 \definecolor{title-color}{HTML}{123456} \definecolor{dark-blue}{HTML}{000055}
 \definecolor{dark-red}{HTML}{550000} \definecolor{brown}{HTML}{6F5A21}
+\makeatletter
+\renewcommand{\@pnumwidth}{1.7em} 
+\renewcommand{\@tocrmarg}{1.8em}
+\makeatother
 
 \begin{document}
 %\tracingall
@@ -141,9 +174,9 @@
 \mainmatter
 \include{ram} \addtocontents{toc}{\protect\newpage}
 \include{rek} \include{univ} \addtocontents{toc}{\protect\newpage}
-\addtocontents{loe}{\protect\newpage} \include{turing}%\include{tbroj}
-\addtocontents{loe}{\protect\newpage} \include{neizr}%\include{church}
-\addtocontents{loe}{\protect\newpage} \include{meta} \include{re}
+\include{turing}%\include{tbroj}
+\include{neizr}%\include{church}
+\include{meta} \include{re}
 \backmatter \pagenumbering{Roman}
 %OVO JE U ZBIRCI: %\appendix \include{api}
 \listoftheorems[ignore=ctteza] \printnomenclature \printbibliography

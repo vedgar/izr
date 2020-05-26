@@ -1,4 +1,5 @@
-\section{Turing-izračunljivost brojevnih funkcija}
+%\section{Turing-izračunljivost brojevnih funkcija}
+\section{Izračunljivost jezikâ}\label{sec:Todl}
 
 % Ivanov prijedlog: koristiti zareze umjesto / za separator.
 % Nisam siguran kako to sklopiti s nulama u nizu ali možda nije strašno.
@@ -41,12 +42,13 @@ Ako je $F=\N\,\N^{-1}F$ parcijalno rekurzivna, tada je po teoremu~\ref{tm:pir} R
 Vidimo da korolar~\ref{kor:pent} vrijedi bez obzira na abecedu i kodiranje. Važan posebni slučaj dobijemo za jednočlanu abecedu, za koju je kodiranje jedinstveno i podudara se s duljinom (lema~\ref{lm:dulj<=kr}).
 
 \begin{definicija}[{name=[unarna abeceda i unarna reprezentacija brojevne funkcije]}]
-\emph{Unarna abeceda} je $\Sigma_{\t\textbullet}:=\{\t\textbullet\}$. Kad nema opasnosti od zabune, umjesto $\Sigma_{\t\textbullet}$ pišemo samo \t\textbullet. Kodiranje unarne abecede je jedino moguće: $\N\Sigma_{\t\textbullet}(\t\textbullet):=1$.
+\emph{Unarna abeceda} je $\Sigma_{\t\textbullet}:=\{\t\textbullet\}$, s kodiranjem %. Kad nema opasnosti od zabune, umjesto $\Sigma_{\t\textbullet}$ pišemo samo \t\textbullet. Kodiranje unarne abecede je jedino moguće: 
+	$\N\Sigma_{\t\textbullet}(\t\textbullet):=1$.
 
-Za jednomjesnu brojevnu funkciju $F^1$, jezičnu funkciju $\N^{-1}F$ nad $\t\textbullet$ zovemo \emph{unarnom reprezentacijom} od $F$ i označavamo je $\t\textbullet F$.
+	Za jednomjesnu brojevnu funkciju $F^1$, jezičnu funkciju $\N^{-1}F$ nad $\Sigma_{\t\textbullet}$ zovemo \emph{unarnom reprezentacijom} od $F$ i označavamo je $\t\textbullet F$.
 \end{definicija}
 
-Svaka riječ $u$ nad unarnom abecedom ($u\in\t\textbullet^*$) je oblika $u=\t\textbullet^n$, gdje je $n=\dulj u=\kr u$. Sada definicija preslikavanja $\N^{-1}$ kaže da je $\t\textbullet F(\t\textbullet^n)=\t\textbullet^{F(n)}$ ako je $n\in\dom F$, a $\t\textbullet^n\notin\dom{\t\textbullet F}$ inače. Po napomeni~\ref{nap:parcdef}, pišemo
+Svaka riječ $u$ nad unarnom abecedom ($u\in\Sigma_{\t\textbullet}^*$) je oblika $u=\t\textbullet^n$, gdje je $n=\dulj u=\kr u$. Sada definicija preslikavanja $\N^{-1}$ kaže da je $\t\textbullet F(\t\textbullet^n)=\t\textbullet^{F(n)}$ ako je $n\in\dom F$, a $\t\textbullet^n\notin\dom{\t\textbullet F}$ inače. Po napomeni~\ref{nap:parcdef}, pišemo
 $\t\textbullet F(\t\textbullet^n)\simeq\t\textbullet^{F(n)}$.
 
 \begin{primjer}[{name=[unarna reprezentacija]}]
@@ -56,17 +58,19 @@ $\t\textbullet\f{factorial}\bigl(
 \bigr)=\t\textbullet\f{factorial}(
 \t{\textbullet\textbullet\textbullet})
 =\t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}$, jer je $p_1!=3\,!=6$.\newline
-    Za inicijalne funkcije, $\t\textbullet\f I_1^1=id_{\t\textbullet^*}$, $\t\textbullet\f{Sc}(w)=w\t\textbullet$, a $\t\textbullet\f Z(w)=\varepsilon$ za sve $w\in\t\textbullet^*$. %Za parcijalne funkcije, $\varepsilon\notin\dom{\t\textbullet\f{Russell}}$, jer $0\notin K$.
+	Za inicijalne funkcije, $\t\textbullet\f I_1^1(w)=w$, $\t\textbullet\f{Sc}(w)=w\t\textbullet$, a $\t\textbullet\f Z(w)=\varepsilon$ za sve $w\in\Sigma_{\t\textbullet}^*$. %Za parcijalne funkcije, $\varepsilon\notin\dom{\t\textbullet\f{Russell}}$, jer $0\notin K$.
 \end{primjer}
 
 \begin{korolar}[{name=[unarno reprezentirane brojevne funkcije u različitim modelima]}]\label{kor:peuf}
-Neka je $F^1$ brojevna funkcija.\newline Tada je $F$ parcijalno rekurzivna ako i samo ako je $\t\textbullet F$ Turing-izračunljiva.
+Neka je $F^1$ brojevna funkcija.
+	
+	Tada je $F$ parcijalno rekurzivna ako i samo ako je $\t\textbullet F$ Turing-izračunljiva.
 \end{korolar}
 \begin{proof}
 Već rekosmo, ovo je posebni slučaj korolara~\ref{kor:pent}, za unarnu abecedu.
 \end{proof}
 
-\subsection{Izračunljivost jezika}\label{sec:Todl}
+%\subsection{Izračunljivost jezika}\label{sec:Todl}
 
 Neka je $\Sigma$ proizvoljna abeceda, s $b'$ znakova, $\N\Sigma$ njeno kodiranje te $L\subseteq\Sigma^*$ jezik nad njom. Što bi značilo da je $L$ izračunljiv?
 
@@ -82,7 +86,7 @@ U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\
 
 Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što konfiguracija sa stanjem $q_r$ (kao i ona s $q_a$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja) i zovemo ih \emph{odlučiteljima} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
-    %\SwapAboveDisplaySkip
+    \SwapAboveDisplaySkip
     L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$\!-izračunavanje s $w$ stane u stanju $q_a$}\}
     \text{ i}\\ \bigl(L(\mathcal T)\big)\kompl=\{w\in\Sigma^*&\mid\text{$\mathcal T$\!-izračunavanje s $w$ stane u stanju $q_r$}\}\text,
 \end{align} i kažemo da \emph{prepoznaje} $L(\mathcal T)$.
@@ -158,7 +162,7 @@ Dijagramatski, na kraj Turingovog stroja dodali smo\; %gornji desni kut~\eqref{d
 \end{tikzpicture}\;.
 \vspace{-8mm}
 
-\subsection{Turing-izračunljivost višemjesnih funkcija}
+\section{Turing-izračunljivost višemjesnih funkcija}
 
 Dosadašnji rezultati pokazuju da je za jezične funkcije, i za \emph{jednomjesne} brojevne funkcije, svejedno računamo li ih na Turingovom stroju ili na nekom brojevnom modelu izračunavanja (npr.\ RAM-stroju). Da bismo isto dokazali i za \emph{višemjesne} brojevne funkcije, trebamo precizirati reprezentaciju njihovih ulaza.
 
@@ -187,7 +191,7 @@ Tvrdimo da je tako konstruirano preslikavanje desni inverz od $\beta$: odnosno, 
 	To je također i lijevi inverz: odnosno, ako primijenimo taj postupak na riječ $\beta(\vec x)$, dobit ćemo upravo $\vec x$: imat će točnu duljinu $k$, i točan svaki član, jer između $i$-tog i $(i+1\mspace{-1mu})$-vog separatora u~\eqref{eq:betadef} ima točno $x_i$ kružića.
 \end{proof}
 
-Za same funkcije, koristit ćemo istu ideju kao u~\eqref{eq:kodfidef}: reprezentaciju ulaza preslikamo u reprezentaciju izlaza (ako je izlaz definiran), dok ne-reprezentacije ne preslikamo nikamo. Ovdje treba biti oprezan zbog propozicije~\ref{prop:betabij}, ali brojevne funkcije imaju fiksnu mjesnost. Zato ćemo ne-reprezentacijama za funkciju $f^k$ proglasiti sve one riječi koje nisu reprezentacije $k$-torki (odnosno one koje su reprezentacije $l$-torki za $l\ne k$). Na isti način, na izlazu ćemo dati reprezentaciju samog broja ($k=1$), dakle riječ bez separatora $\t\textbullet^y=\beta(y)\in\beta[\N]=\im{\beta^{\!1}}=\t\textbullet^*$.
+Za same funkcije, koristit ćemo istu ideju kao u~\eqref{eq:kodfidef}: reprezentaciju ulaza preslikamo u reprezentaciju izlaza (ako je izlaz definiran), dok ne-reprezentacije ne preslikamo nikamo. Ovdje treba biti oprezan zbog propozicije~\ref{prop:betabij}, ali brojevne funkcije imaju fiksnu mjesnost. Zato ćemo ne-reprezentacijama za funkciju $f^k$ proglasiti sve one riječi koje nisu reprezentacije $k$-torki (odnosno one koje su reprezentacije $l$-torki za $l\ne k$). Na isti način, na izlazu ćemo dati reprezentaciju samog broja ($k=1$), dakle riječ bez separatora $\t\textbullet^y=\beta(y)\in\beta[\N]=\im{\beta^{\!1}}=\Sigma_{\t\textbullet}^*$.
 
 \begin{definicija}[{name=[binarna reprezentacija brojevne funkcije]}]
 Neka je $k\in\N_+$ te $f^k$ brojevna funkcija. Jezičnu funkciju $\beta f$ nad $\Sigma_\beta$, zadanu s
@@ -200,7 +204,7 @@ zovemo \emph{binarnom reprezentacijom} funkcije $f$.
 %$\beta\f{mul}^2(\t{\textbullet\textbullet/\textbullet\textbullet\textbullet\textbullet\textbullet})=\t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}$, jer je $2\cdot5=10$, dok $\t\textbullet$ i $\t{//}$ nisu u $\dom{\beta\f{mul}^2}$, jer $(1)$ i $(0,0,0)$ nisu ulazi ispravne mjesnosti za $\f{mul}^2$.
 %\end{primjer}
 
-Vjerojatno ste nekad napisali Turingov stroj za $\beta\f{add}^2$, koristeći $\beta\f{add}^2(u\t/v)=uv$, ako su $u,v\in\t\textbullet^*$. Ipak, već tada ste zasigurno vidjeli koliko je teško napisati $\beta\f{mul}^2$, a pogotovo $\beta\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\beta\f{part}$?!) da i ne spominjemo.
+Vjerojatno ste nekad napisali Turingov stroj za $\beta\f{add}^2$, koristeći $\beta\f{add}^2(u\t/v)=uv$, ako su $u,v\in\Sigma_{\t\textbullet}^*$. Ipak, već tada ste zasigurno vidjeli koliko je teško napisati $\beta\f{mul}^2$, a pogotovo $\beta\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\beta\f{part}$?!) da i ne spominjemo.
 
 Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\beta\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Prvo ćemo dokazati obrat: one brojevne funkcije čije binarne reprezentacije su Turing-izračunljive, parcijalno su rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a osnovnu ideju dokaza moći ćemo upotrijebiti i u dokazu obrata.
 
@@ -223,7 +227,7 @@ U traženju tih funkcija može pomoći dijagram.
 \Sigma_\beta^*
 \arrow[harpoon]{r}{\beta f}
 \arrow{d}{\N\Sigma_\beta^*}
-& \t\textbullet^*\!\!\subset\!\Sigma_\beta^*
+	& \Sigma_{\t\textbullet}^*\!\!\subset\!\Sigma_\beta^*
 \arrow{d}{\N\Sigma_\beta^*}
 \\
 \N
@@ -332,7 +336,7 @@ pri čemu je $\f{slh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ jer j
 Za sve $x,y\in\N$, za sve $b\in\N_+$, vrijedi $\f{slh}(x\conc b y,b)=\f{slh}(x,b)+\f{slh}(y,b)$.
 \end{korolar}
 \begin{proof}
-Neka su $x,y,b$ proizvoljni ($b$ pozitivan). Uzmimo neku $b$-članu abecedu: recimo $[1\dd b]$.
+Neka su $x,y,b$ proizvoljni ($b$ pozitivan). Uzmimo neku $b$-članu abecedu, recimo $[1\dd b]$.
     Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in[1\dd b]^*$ takve da je $x=\kr u$ i $y=\kr v$. Po definiciji $\f{slh}$, vrijedi $\f{slh}(\kr w,b)=\dulj w$ za sve $w\in[1\dd b]^*$, pa imamo
 \begin{multline}
     \f{slh}(x,b)+\f{slh}(y,b)=
@@ -367,7 +371,7 @@ Matematičkom indukcijom po $k$. Za $k=1$ (baza), to je upravo lema~\ref{lm:bin1
 \begin{multline}
     \f{bin}^{l+1}(\vec x,y)=
     \kr{\beta(\vec x,y)}=
-    \kr{\text\textbullet^{x_1}\!\t/\dotsm\t/\text\textbullet^{x_l}\!\t/\text\textbullet^y}=
+	\kr{\t\textbullet^{x_1}\!\t/\dotsm\t{/\textbullet}^{x_l}\!\t{/\textbullet}^y}=
     \kr{\beta(\vec x)\t/\beta(y)}={}\\
     \text{[propozicija~\ref{pp:krkonkkr}]}{}=\kr{\beta(\vec x)}\conc 2\kr{\t/}\conc 2\kr{\beta(y)}=
     \f{bin}^k(\vec x)\conc22\conc2\f{bin}^1(y)\text,
@@ -538,18 +542,18 @@ Dakle,
 --- iz čega slijedi, po korolaru~\ref{kor:restrprek}, da je $\N\beta\f f$ parcijalno rekurzivna. Ona je RAM-izračunljiva po teoremu~\ref{tm:pir},  pa je $\beta\f f$ Turing-iz\-rač\-un\-lji\-va po teoremu~\ref{tm:krit}.
 \end{proof}
 
-Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne primitivno rekurzivne funkcije
-\begin{align}
-\SwapAboveDisplaySkip
-\f{argc}&:=\f{Sc}\circ\f{count2}\text,\\
-\f{arg}(a,i)&:=\f{streak1}(2\conc2a\conc22,i)\text.
-\end{align}
-
-\begin{primjer}[{name=[implementacija \emph{varargs} pomoću binarnog kodiranja]}]
-Recimo, $\f{add}^{\cdots}$, koja zbraja sve svoje argumente (koliko god da ih ima), je primitivno rekurzivna, jer je funkcija zadana s
-\begin{equation}
-\N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i\,<\,\f{argc}(a)}}\f{arg}(a,i)
-\end{equation}
-primitivno rekurzivna po lemi~\ref{lm:sumprodrek} i prethodnim rezultatima.
-\end{primjer}
-To nam neće bitno trebati u nastavku, ali zgodno je znati da imamo i tu mogućnost.
+%Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne primitivno rekurzivne funkcije
+%\begin{align}
+%\SwapAboveDisplaySkip
+%\f{argc}&:=\f{Sc}\circ\f{count2}\text,\\
+%\f{arg}(a,i)&:=\f{streak1}(2\conc2a\conc22,i)\text.
+%\end{align}
+%
+%\begin{primjer}[{name=[implementacija \emph{varargs} pomoću binarnog kodiranja]}]
+%Recimo, $\f{add}^{\cdots}$, koja zbraja sve svoje argumente (koliko god da ih ima), je primitivno rekurzivna, jer je funkcija zadana s
+%\begin{equation}
+%\N\beta\f{add}^{\cdots}(a)=\quad\sum_{\mathclap{i\,<\,\f{argc}(a)}}\f{arg}(a,i)
+%\end{equation}
+%primitivno rekurzivna po lemi~\ref{lm:sumprodrek} i prethodnim rezultatima.
+%\end{primjer}
+%To nam neće bitno trebati u nastavku, ali zgodno je znati da imamo i tu mogućnost.

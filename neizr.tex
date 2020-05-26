@@ -2,14 +2,14 @@
 
 %\section{Teoremi ekvivalencije}
 
-Dokazali smo brojne teoreme koji pokazuju ekvivalentnost različitih modela iz\-ra\-čun\-ljiv\-os\-ti. Za početak ih sve objedinimo na jednom mjestu. Nama je najvažniji onaj koji govori o brojevnim funkcijama, karakterizirajući skup $\mathscr Comp$.
+Dokazali smo brojne teoreme koji pokazuju ekvivalentnost različitih modela iz\-ra\-čun\-ljiv\-os\-ti. Za početak ih sve objedinimo na jednom mjestu. Najvažniji nam je onaj koji govori o brojevnim funkcijama, karakterizirajući skup $\mathscr Comp$.
 
 \begin{teorem}[Teorem ekvivalencije za brojevne funkcije]
 Neka je $k\in\N_+$ te $\f f:\N^k\rightharpoonup\N$ brojevna funkcija mjesnosti $k$. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
     \item[\texttt{\textup{(r)}}] $\f f$ je RAM-izračunljiva ($f\in\mathscr Comp_k$);
     \item[\texttt{\textup{(m)}}] $\f f$ je makro-izračunljiva (postoji makro-algoritam koji računa $\f f$);
-    \item[\texttt{\textup{(p)}}] $\f f$ je parcijalno rekurzivna ($\f f$ je dobivena iz inicijalnih pomoću konačno mnogo primjena kompozicije, primitivne rekurzije i minimizacije);
+    \item[\texttt{\textup{(p)}}] $\f f$ je parcijalno rekurzivna ($\f f$ je dobivena iz inicijalnih funkcija pomoću konačno mnogo primjena kompozicije, primitivne rekurzije i minimizacije);
     \item[\texttt{\textup{(i)}}] $\f f$ ima indeks (postoji $e\in\N$ takav da je $\f f=\kf e^k$);
     \item[\texttt{\textup{(t)}}] $\beta\f f$ je Turing-izračunljiva (postoji Turingov stroj koji računa $\beta\f f$).
 \end{itemize}
@@ -26,7 +26,7 @@ Sve bitno u ovom teoremu već smo dokazali. Ponovimo samo glavne ideje.
     \item[\texttt{(t$\Rightarrow$p)}] Funkciju $\f f$ možemo dobiti kompozicijom iz parcijalno rekurzivnih funkcija $\f{blh}$, $\N\beta\f f$ i $\f{bin}^k$ --- teorem~\ref{tm:btip}.
     \item[\texttt{(p$\Rightarrow$t)}] Funkciju $\N\beta\f f$ možemo dobiti restrikcijom na $\im{\f{bin}^k}$ kompozicije funkcija $\f{bin}^1$, $\f f$ i $\f{arg}_1$,~\ldots, $\f{arg}_k$ --- teorem~\ref{tm:pibt}.
 \end{labeling}
-Dijagramatski, usmjeren graf
+Dijagramatski, usmjereni graf\quad
 \begin{tikzcd}
 \t r
 \arrow[leftrightarrow]{d}
@@ -47,7 +47,7 @@ Dijagramatski, usmjeren graf
 
 Za jednomjesne funkcije imamo korolar~\ref{kor:peuf}, koji je zgodniji zbog jednočlane abecede i bijektivnosti kodiranja. Za dokaz ekvivalencije parcijalne rekurzivnosti i Turing-izračunljivosti koristili smo ekvivalenciju brojevnog i jezičnog modela za jezične funkcije.
 
-\begin{teorem}[Teorem ekvivalencije za jezične funkcije]
+\begin{teorem}[Teorem ekvivalencije za jezične funkcije]\label{tm:eqjf}
 Neka je $\Sigma\ne\emptyset$ abeceda\newline te $\varphi:\Sigma^*\rightharpoonup\Sigma^*$ jezična funkcija nad njom. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
     \item[\texttt{\textup{(T)}}] $\varphi$ je Turing-izračunljiva;
@@ -68,18 +68,18 @@ Opet, sve bitno je već dokazano; slijedi rekapitulacija glavnih ideja.
 
 \noindent Karakteristična funkcija je totalna, dakle za izračunljive jezike mora biti rekurzivna.
 
-\begin{teorem}[Teorem ekvivalencije za jezike]
+\begin{teorem}[Teorem ekvivalencije za jezike]\label{tm:eqj}
 Neka je $\Sigma\ne\emptyset$ abeceda te $L\subseteq\Sigma^*$ jezik nad njom. Tada su sljedeće tvrdnje ekvivalentne:
 \begin{itemize}
-    \item[\texttt{\textup{(\textsc r)}}] relacija $\kr L:=\{\kr w\mid w\in L\}$ je rekurzivna;
-    \item[\texttt{\textup{(\textsc o)}}] postoji Turingov odlučitelj $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_a,q_r)$ koji prepoznaje $L$.
+	\item[\texttt{\textup{($\rho$)}}] relacija $\kr L:=\{\kr w\mid w\in L\}$ je rekurzivna;
+    \item[\texttt{\textup{($\omega$)}}] postoji Turingov odlučitelj $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_a,q_r)$ koji prepoznaje $L$.
 \end{itemize}
 \end{teorem}
 \begin{proof}
-Kao i u prethodnom teoremu, stavka \texttt{(\textsc r)} je zapravo $(\card\Sigma)!$ tvrdnji. One su ekvivalentne po tranzitivnosti, jer je svaka od njih ekvivalentna sa stavkom \texttt{(\textsc o)}.
-\begin{labeling}{\texttt{(\textsc a$\Rightarrow$\textsc b)}}
-\item[\texttt{(\textsc r$\Rightarrow$\textsc o)}] Malom modifikacijom kraja konstrukcije transpiliranog Turingovog stro\-ja koji računa $\N^{-1}\chi_{\kr L}$ dobijemo odlučitelj --- teorem~\ref{tm:krio}.
-\item[\texttt{(\textsc o$\Rightarrow$\textsc r)}] Malom modifikacijom kodiranja stanja, funkcije prijelaza i Turing-iz\-ra\-ču\-na\-va\-nja odlučitelja dobijemo rekurzivnost od $\kr L$ --- teorem~\ref{tm:oikr}.\qedhere
+	Kao i u teoremu~\ref{tm:eqjf}, stavka \texttt{($\rho$)} je zapravo $(\card\Sigma)!$ tvrdnji. One su ekvivalentne po tranzitivnosti, jer je svaka od njih ekvivalentna sa stavkom \texttt{($\omega$)}.
+\begin{labeling}{\texttt{($\rho\Rightarrow\omega$)}}
+\item[\texttt{($\rho\Rightarrow\omega$)}] Malom modifikacijom kraja konstrukcije transpiliranog Turingovog stro\-ja koji računa $\N^{-1}\chi_{\kr L}$ dobijemo odlučitelj --- teorem~\ref{tm:krio}.
+\item[\texttt{($\omega\Rightarrow\rho$)}] Malom modifikacijom kodiranja stanja, funkcije prijelaza i Turing-iz\-ra\-ču\-na\-va\-nja odlučitelja dobijemo rekurzivnost od $\kr L$ --- teorem~\ref{tm:oikr}.\qedhere
 \end{labeling}
 \end{proof}
 
@@ -112,9 +112,9 @@ Iteriranjem funkcije $nextconf$ na vrijednosti funkcije $start$ dobivamo izraču
     c_0&:=start(x)\text,\\
     c_{n+1}&:=nextconf(c_n)\text,
 \end{align}
-i time smo dobili niz $(c_n)_n:\N\to C$ koji zovemo $\mathcal A$-izračunavanje s $x$.
+i tako smo dobili niz $(c_n)_{n\in\N}:\N\to C$ koji zovemo $\mathcal A$-izračunavanje s $x$.
 
-Ako postoji $n_0$ takav da je $c_{n_0}\in E$, izračunavanje $(c_n)_n$ stane, i $y:=result(c_{n_0})$ je njegov rezultat (to ne ovisi o izboru $n_0$, jer je $nextconf|_E=id_E$, pa je završna konfiguracija jedinstvena). Ako s $D\subseteq A$ označimo skup svih ulaznih podataka s kojima $\mathcal A$-izračunavanje stane, time smo dobili funkciju $f:D\to B$ koju $\mathcal A$ računa.
+Ako postoji $n_0$ takav da je $c_{n_0}\in E$, izračunavanje $(c_n)_{n\in\N}$ stane, i $y:=result(c_{n_0})$ je njegov rezultat (to ne ovisi o izboru $n_0$, jer je $nextconf|_E=id_E$, pa je završna konfiguracija jedinstvena --- kao u propoziciji~\ref{prop:ram1zav}). Ako s $D\subseteq A$ označimo skup svih ulaznih podataka s kojima $\mathcal A$-izračunavanje stane, time smo dobili funkciju $f:D\to B$ koju $\mathcal A$ računa.
 \vspace{-5mm}
 
 \begin{equation}\label{dia:alg}
@@ -188,7 +188,7 @@ Osim s obzirom na apstraktnost, možemo gledati i kompromise s obzirom na druge 
     \end{tabular}
 \end{equation}
 
-Tablica~\eqref{eq:vrste-alg} je vrlo pojednostavljena --- em postoji mnogo više dimenzija po kojima možemo uspoređivati algoritamske formalizme (strukturalnost, primjenjivost na stvarne probleme, entropija, količina pretpostavljenog znanja,~\ldots), em prikazane dimenzije nisu binarne. Pored jezičnog i brojevnog modela postoje razni drugi, recimo geometrijski (Wangove domine) ili algebarski (diofantski skupovi), pa čak i topološki (homotopska teorija tipova); dok je konkretno--apstraktno "podjela" zapravo spektar duž kojeg se mogu smjestiti razni koncepti. Recimo, makro-stroj je mrvicu apstraktniji od RAM-stroja, dok je logika prvog reda malo konkretnija od $\lambda$-računa. Čak ni sustavi koje smo obradili nisu ekstremi na tom spektru: postoje i sustavi poput G\"odel--Herbrandovih jednadžbi, koji su još apstraktniji od parcijalne rekurzivnosti, kao i Minskijevi brojači (\emph{counter machines}) koji su još konkretniji od RAM-strojeva. Već smo spomenuli ASM u napomeni~\ref{nap:ASM} --- taj model se proteže duž cijelog spektra konkretno--apstraktno, jer je njegova osnovna odlika da hvata algoritme na njihovoj \textbf{prirodnoj razini apstrakcije}, koja god ona bila.
+Tablica~\eqref{eq:vrste-alg} je vrlo pojednostavljena --- em postoji mnogo više dimenzija po kojima možemo uspoređivati algoritamske formalizme (strukturalnost, primjenjivost na stvarne probleme, entropija, količina pretpostavljenog znanja,~\ldots), em prikazane dimenzije nisu binarne. Pored jezičnog i brojevnog modela postoje razni drugi, recimo geometrijski (Wangove domine) ili algebarski (diofantski skupovi), pa čak i topološki (homotopska teorija tipova); dok je "podjela" konkretno--apstraktno zapravo spektar duž kojeg se mogu smjestiti razni koncepti. Recimo, makro-stroj je mrvicu apstraktniji od RAM-stroja, dok je logika prvog reda malo konkretnija od $\lambda$-računa. Čak ni sustavi koje smo obradili nisu ekstremi na tom spektru: postoje i sustavi poput G\"odel--Herbrandovih jednadžbi, koji su još apstraktniji od parcijalne rekurzivnosti, kao i Minskijevi brojači (\emph{counter machines}) koji su još konkretniji od RAM-strojeva. Već smo spomenuli ASM u napomeni~\ref{nap:ASM} --- taj model se proteže duž cijelog spektra konkretno--apstraktno, jer je njegova osnovna odlika da hvata algoritme na njihovoj \textbf{prirodnoj razini apstrakcije}, koja god ona bila.
 
 Ono što je sada bitno je da između ćelija takve tablice možemo slobodno "putovati" kako nam je drago, dok imamo odgovarajuće teoreme ekvivalencije. Za pojedini redak (vrstu ulaznih odnosno izlaznih podataka) to se može sasvim formalizirati, u smislu da su izračunljive funkcije doslovno iste bez obzira na to koji stupac odaberemo. Za različite retke moramo precizirati kodiranje, no to je najčešće jednostavno i neovisno o tehničkim detaljima (recimo, zapis broja u bazi je vrlo prirodna veza brojevnog i jezičnog modela, i pritom za samu izračunljivost čak nije bitno --- iako za složenost jest --- odaberemo li unarni zapis ili zapis u bazi $b\ge2$).
 
