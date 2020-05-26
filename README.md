@@ -4,7 +4,7 @@ Knjiga o izračunljivosti, specijalno namijenjena računarcima.
 
 ## Kako ga proizvesti?
 
-Instalirajte distribuciju TeX live (https://www.tug.org/texlive/acquire-netinstall.html).
+Instalirajte distribuciju TeX live 2020 (https://www.tug.org/texlive/acquire-netinstall.html).
 
     git clone https://github.com/vedgar/izr.git
     cd izr
@@ -15,7 +15,7 @@ Instalirajte distribuciju TeX live (https://www.tug.org/texlive/acquire-netinsta
     pdflatex Komputonomikon
     pdflatex Komputonomikon
 
-Ako dobijete nekakav `Font Warning`, vjerojatno trebate instalirati paket `texlive-cbfonts`.
+Ako dobijete nekakav `Font Warning`, vjerojatno trebate instalirati paket `texlive-cbfonts` i/ili `texlive-bold-extra`.
 
 Ako samo trebate ažurirati izdanje koje ste već napravili, u većini slučajeva je dovoljno
 
