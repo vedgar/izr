@@ -709,11 +709,11 @@ Za makro-program $Q$, možemo prirodno definirati $m_Q:=m_{Q^\flat}$ --- iako na
 \begin{definicija}[{name=[funkcijski makro]}]\label{def:funmakro}
 Neka je $k\in\N_+$, $\f{f}^k\in\mathscr Comp_k$ te $P_{\f{f}}^k$ RAM-algoritam koji računa $\f{f}^k$. Neka su $m,j_0,j_1,\dotsc,j_k\in\N$. Definiramo
     %\begin{equation}
-	    $b:=1+\max\,\{m_{P_{\f f}}\!-\!1,m\mspace{-1mu}-\!1,k,j_0,j_1,\dotsc,j_k\}$
+	    $b:=1+\max\,\{m_{P_{\f f}}-1,m-1,k,j_0,j_1,\dotsc,j_k\}$
     %\end{equation}
 te pomoću tog broja definiramo \emph{funkcijski makro}
     \vspace{-5mm}
-\begin{equation*}%\label{mprog:funmakro}
+\begin{equation}\label{mprog:funmakro}
     \bigl(P_{\f{f}}(\reg{j_1},%\reg{j_2},
     \dotsc,\reg{j_k})\to\reg{j_0}\textsc{\,using }\reg{m}..\bigr):=\begin{prog}
     0.&\textsc{mmove}\;b\;\textsc{from}\;\reg0..\;\textsc{to}\;\reg{b}..\\
@@ -722,11 +722,11 @@ te pomoću tog broja definiramo \emph{funkcijski makro}
     3.&\remove{0}{b+j_0}\\
     4.&\textsc{mmove}\;b\;\textsc{from}\;\reg{b}..\;\textsc{to}\;\reg0..
     \end{prog}^{\flat*}\text{\!\!\!\!.\!\!\!\!\qedhere}
-\end{equation*}
+\end{equation}
 \end{definicija}
 
 \begin{propozicija}[{name=[semantika funkcijskog makroa]}]\label{prop:semfmacro}
-Semantika funkcijskog makroa, uz oznake iz definicije~\ref{def:funmakro} te pokratu $\vec r:=(r_{j_1},r_{j_2},\dotsc,r_{j_k})$, jest:
+Semantika funkcijskog makroa, uz oznake iz definicije~\ref{def:funmakro}\\ te pokratu $\vec r:=(r_{j_1},r_{j_2},\dotsc,r_{j_k})$, opisana je sljedećim tvrdnjama:
 \begin{enumerate}
     \item\label{case:in} Ako je $\vec r\in\dom{\f{f}}$, tada je $r_{j_0}'\!=\f{f}(\vec r)\land(\forall t\in[b\dd 2b\rangle)(r_t'=0)$.\\
     (Specijalno, zbog $b\ge m$, za sve $i\in[0\dd m\rangle\setminus\{j_0\}$ vrijedi $r_i'=r_i$.)

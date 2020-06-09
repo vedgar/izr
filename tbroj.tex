@@ -84,7 +84,7 @@ Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\empt
 
 U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_a$ i $q_r$, kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
-Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što konfiguracija sa stanjem $q_r$ (kao i ona s $q_a$) prelazi u samu sebe, a ne po funkciji $\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja) i zovemo ih \emph{odlučiteljima} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ dijeli $\Sigma^*$ na dva dijela,
+Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u našim Turingovim strojevima, samo što konfiguracija sa stanjem $q_r$ (kao i ona s $q_a$) prelazi u samu sebe, a ne po funkciji~$\delta$. Ali postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja) i zovemo ih \emph{odlučiteljima} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
     \SwapAboveDisplaySkip
     L(\mathcal T):=\{w\in\Sigma^*&\mid\text{$\mathcal T$\!-izračunavanje s $w$ stane u stanju $q_a$}\}
@@ -129,7 +129,7 @@ Pretpostavka zapravo znači da je $\chi_{\kr L}$ rekurzivna funkcija. Dakle $\ch
 
 Svakako: dokaz propozicije~\ref{pp:trackbij} kaže da je $\varphi:=\N^{-1}\chi_{\kr L}=\sigma^{\,-\!1}\circ\chi_{\kr L}\circ\sigma$, uz oznaku $\sigma:=\N\Sigma^*$. Funkcija $\varphi$ je totalna kao kompozicija tri totalne, a Turing-izračunljiva je prema korolaru~\ref{kor:pent} (ako uzmemo isto kodiranje pomoću kojeg smo izračunali $\kr L$). Pogledajmo detaljnije kako ona djeluje.
 
-Ako joj damo riječ $w\in\Sigma^*\setminus L$, tada ($\mspace{-1mu}\sigma$ je injekcija) vrijedi $\kr w\notin\kr L$, pa je $\chi_{\kr L}(\kr w)=0$. Po definiciji od $\varphi$ je tada
+Ako joj damo riječ $w\in\Sigma^*\setminus L$, tada ($\mspace{-1mu}\sigma$ je injekcija) vrijedi $\kr w\notin\kr L$, pa je $\chi_{\kr L}(\kr w)=0$. Tada je
 \begin{equation}
     \varphi(w)=\sigma^{\,-\!1}\bigl(\,\chi_{\kr L}\bigl(\sigma(w)\bigr)\bigr)=\sigma^{\,-\!1}\bigl(\,\chi_{\kr L}(\kr w)\bigr)=\sigma^{\,-\!1}(0)=\varepsilon\text.
 \end{equation}
@@ -147,9 +147,9 @@ Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Riječi \emph{unutar} $
 \end{gather}
 Po teoremu~\ref{tm:krit}, dobiveni stroj će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj na kraju izračunavanja čitati znak iz $\Sigma$ i ući u stanje $q_a$. Za $w\notin L$ rezultat će biti $\varepsilon$ pa će stroj pročitati prazninu i ući u stanje $q_r$. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
 \end{proof}
-\vspace{-4mm}
+\vspace{-3mm}
 
-Dijagramatski, na kraj Turingovog stroja dodali smo\; %gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
+Dijagramatski, na kraj Turingovog stroja dodali smo fragment\; %gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
 \begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
     \node[state] (q9) {$l_{\t\$}$};
 \node[state,accepting,right of=q9] (qt) {$q_a$};

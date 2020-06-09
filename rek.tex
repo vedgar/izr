@@ -317,7 +317,7 @@ Definicija~\ref{def:prn} je elegantna i matematički pogodna za dokazivanje, ali
 Neka je $F$ brojevna funkcija. Tada je $F$ primitivno rekurzivna ako i samo ako se $F$ može dobiti iz inicijalnih funkcija pomoću konačno mnogo primjena kompozicije i primitivne rekurzije.
 \end{propozicija}
 \begin{proof}
-Označimo sa $\mathcal S$ skup funkcija koje se mogu dobiti iz inicijalnih pomoću ko\-nač\-no mnogo primjena kompozicije i primitivne rekurzije. Ako je $F$ inicijalna funkcija, pripada skupu $\mathcal S$ jer ju je moguće dobiti iz inicijalnih pomoću $0$ primjena kompozicije i primitivne rekurzije.
+Označimo sa $\mathcal S$ skup funkcija koje se mogu dobiti iz inicijalnih pomoću ko\-nač\-no mnogo primjena kompozicije i primitivne rekurzije. Ako je $F$ inicijalna funkcija, tada ona svakako pripada skupu $\mathcal S$ jer ju je moguće dobiti iz inicijalnih pomoću $0$ primjena kompozicije i primitivne rekurzije.
 
 Ako su $k,l\in\N_+$ te $G_1^k,\dotsc,G_l^k,H^l\in\mathcal S$, tada se svaka $G_i$ može dobiti iz inicijalnih pomoću, recimo, $c_i$ primjena kompozicije i $r_i$ primjena primitivne rekurzije. Također se $H$ može dobiti iz inicijalnih, recimo pomoću $c$ primjena kompozicije i $r$ primjena primitivne rekurzije. Tada se $H\circ(G_1,\dotsc,G_l)$ može dobiti iz inicijalnih funkcija pomoću najviše $1+c+\sum_{i=1}^lc_i$ primjena kompozicije, i najviše $r+\sum_{i=1}^lr_i$ primjena primitivne rekurzije --- što je konačno mnogo, pa je $H\circ(G_1,\dotsc,G_l)\in\mathcal S$.
 
@@ -434,7 +434,7 @@ pa tvrdnja vrijedi po principu matematičke indukcije. To znači da je $\f F^1=\
 \end{proof}
 
 \begin{definicija}[{name=[degenerirana primitivna rekurzija]}]\label{def:F1prn}
-Za takve funkcije ubuduće pišemo "simboličku definiciju" $\f F^1:=a\pr\f H^2$, imajući na umu da je to samo pokrata za $\f F^1:=\bigl(\f C_a^1\pr\f H^2\circ(\f I_2^3,\f I_3^3)\bigr)\circ(\f Z,\f I_1^1)$.
+Za takve funkcije ubuduće pišemo "simboličku definiciju" $\f F^1:=a\pr\f H^2$,\\ imajući na umu da je to samo pokrata za $\f F^1:=\bigl(\f C_a^1\pr\f H^2\circ(\f I_2^3,\f I_3^3)\bigr)\circ(\f Z,\f I_1^1)$.
 
 Takvo zadavanje funkcije zvat ćemo \emph{degeneriranom primitivnom rekurzijom}.
 \end{definicija}
@@ -473,7 +473,9 @@ vidimo da je \emph{ograničeno oduzimanje} dobiveno primitivnom rekurzijom iz fu
 Pored računskih operacija (dijeljenje s ostatkom definirat ćemo kasnije, kad uvedemo još neke tehnike), brojeve možemo i \emph{uspoređivati}, raznim dvomjesnim relacijama  kao što su $<$, $\ge$ ili~$\eq$. Rekli smo da izračunljivost relacija promatramo kroz izračunljivost njihovih karakterističnih funkcija.
 
 \begin{primjer}[{name=[primitivna rekurzivnost pozitivnosti]}]\label{pr:N+prn}
-Za početak pogledajmo pozitivnost --- formalno, jednomjesnu relaciju $\N_+$. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum}. Definicija te funkcije direktno vodi na degeneriranu primitivnu rekurziju $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna. Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
+Za početak pogledajmo pozitivnost --- formalno, jednomjesnu relaciju $\N_+$. Njena karakteristična funkcija je $0$ u nuli, a $1$ u svim ostalim prirodnim brojevima, pa se u literaturi još zove funkcija predznaka ili \emph{signum}. Definicija te funkcije direktno vodi na degeneriranu primitivnu rekurziju $\chi_{\N_+}\!=0\pr\f C_1^2$, iz čega zaključujemo da je primitivno rekurzivna.
+
+	Drugim riječima, pozitivnost je primitivno rekurzivno svojstvo, odnosno skup $\N_+$ je primitivno rekurzivan.
 \end{primjer}
 
 Kada imamo pozitivnost i ograničeno oduzimanje, možemo odmah vidjeti primitivnu rekurzivnost strogog uređaja. %Ostale uređajne relacije dokazat ćemo primitivno rekurzivnima kasnije, kad ustanovimo kako se radi s logičkim veznicima.
@@ -539,7 +541,6 @@ Svaka primitivno rekurzivna funkcija je rekurzivna.
 \end{korolar}
 \begin{proof}
     Po definiciji~\ref{def:prn}: sve inicijalne funkcije su totalne po napomeni~\ref{nap:inittot}, a parcijalno su rekurzivne po definiciji, dakle rekurzivne su.
-	
 	Sada samo treba primijeniti leme~\ref{lm:comprek} i~\ref{lm:prrek}.
 \end{proof}
 
@@ -836,7 +837,7 @@ $\f R_0:=\bigl(\bigcup\nolimits_{i=1}^{\,l}\f R_i\bigr)\kompl$ je (primitivno) r
 \end{equation}
 dakle dobivena je kompozicijom iz (primitivno) rekurzivnih $\chi_{\f R_i}$, $\f G_i$ te $\f{mul}^2$ i $\f{add}^{l+1}$.
 
-	Doista, neka je $\vec x\in\N^k$ proizvoljan, i promotrimo funkcijsku jednakost~\eqref{eq:grek} u $\vec x$. Ako je $\vec x$ u nekoj $\f R_i$, tada je $\chi_{\f R_i}(\vec x)=1$, pa je $i$-ti (brojeći od nule) pribrojnik u~\eqref{eq:grek} jednak $\f G_i(\vec x)$. Štoviše, jer su uvjeti u~parovima disjunktni, $\vec x\notin\f R_j$ za sve $j\in[1\dd l]\setminus\{i\}$, dok iz definicije $\f R_0$ slijedi također $\vec x\notin\f R_0$, dakle svi ostali pribrojnici imaju faktor $0$, pa iznose $0$ i ne utječu na zbroj. Dakle ako je $\vec x\in\f R_i$, tada je $\f F(\vec x)=\f G_i(\vec x)$.
+	Doista, neka je $\vec x\in\N^k$ proizvoljan, i promotrimo funkcijsku jednakost~\eqref{eq:grek} u $\vec x$. Ako je $\vec x$ u nekoj $\f R_i$, tada je $\chi_{\f R_i}(\vec x)=1$, pa je $i$-ti (brojeći od nule) pribrojnik u~\eqref{eq:grek} jednak $\f G_i(\vec x)$. Štoviše, jer su uvjeti u~parovima disjunktni, $\vec x\notin\f R_j$ za sve $j\in[1\dd l]\setminus\{i\}$, dok iz definicije $\f R_0$ slijedi također $\vec x\notin\f R_0$ --- što znači da svi ostali pribrojnici imaju faktor $0$, pa iznose $0$ i ne utječu na zbroj. Dakle ako je $\vec x\in\f R_i$, tada je $\f F(\vec x)=\f G_i(\vec x)$.
 
 S druge strane, ako $\vec x$ nije ni u jednoj $\f R_i$, tada po De Morganovom pravilu nije ni u njihovoj uniji, dakle $\vec x\in\f R_0$, pa je početni pribrojnik u~\eqref{eq:grek} jednak $\f G_0(\vec x)$, a svi ostali pribrojnici, kao i u prethodnom odlomku, jednaki su $0$. Dakle tada je $\f F(\vec x)=\f G_0(\vec x)$, kao što i treba biti.
 \end{proof}

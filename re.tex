@@ -141,10 +141,9 @@ te je $\f P:=\bigcup_{i=1}^l\!\f P_i$ rekurzivna po propoziciji~\ref{prop:skupl}
 \end{proof}
 
 Projekcijska karakterizacija kaže da je ulaz $\vec x$ u domeni funkcije koju (RAM-\!)algoritam računa ako i samo ako postoji $n$ takav da nakon $n$ koraka taj algoritam dođe u završnu konfiguraciju. U tom smislu, upravo dokazana propozicija daje implementaciju paralelnog računanja u $l$ dretvi. Recimo, za $l=2$,
-\begin{multline}\label{eq:parallel}
-    \exists n\,\f{Final}(\kr{\vec x},\kprog P,n)\lor\exists n\,\f{Final}(\kr{\vec x},\kprog Q,n)\Longleftrightarrow{}\\
-    {}\Longleftrightarrow\exists n\,\bigl(\f{Final}(\kr{\vec x},\kprog P,n)\lor\f{Final}(\kr{\vec x},\kprog Q,n)\bigr)
-\end{multline}
+\begin{equation}\label{eq:parallel}
+    \exists n\,\f{Final}(\kr{\vec x},\kprog P,n)\lor\exists n\,\f{Final}(\kr{\vec x},\kprog Q,n)\Longleftrightarrow\exists n\,\bigl(\f{Final}(\kr{\vec x},\kprog P,n)\lor\f{Final}(\kr{\vec x},\kprog Q,n)\bigr)
+\end{equation}
 odgovara paralelnom pokretanju dva RAM-programa $P$ i $Q$ s istim ulaznim podacima $\vec x$ te čekanju dok jedan od njih ne stane. Efektivno, prvo pitamo za $n=0$ vrijedi li desna strana u~\eqref{eq:parallel}, odnosno je li ikoje od ta dva izračunavanja već na početku u završnoj konfiguraciji. Ako nije, pitamo istu stvar za $n=1$: je li ikoje od tih izračunavanja nakon jednog koraka u završnoj konfiguraciji. Ako nije, pustimo ih još jedan korak ($n=2$) i tako dalje. Jedini način da taj algoritam radi beskonačno dugo s $\vec x$, je da ni $P$-izračunavanje s $\vec x$ ni $Q$-izračunavanje s $\vec x$ ne stanu. Pritom je ključno da se radi o RAM-programima, gdje svaki korak mora završiti u konačnom vremenu.
 
 \subsection{Kontrakcija}

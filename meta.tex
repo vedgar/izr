@@ -104,7 +104,8 @@ Koristeći komponente $\f{dest}$ i $\f{regn}$ te tipove instrukcija (leme~\ref{l
 \begin{equation}
     \f F(y,e):=\kprog{Q^\flat}=\overline{\f G}(y)*\overline{\f H}\bigl(y,e,\f{lh}(e)\bigr)\text.
 \end{equation}
-Još treba vidjeti da $k$-mjesna funkcija s tim indeksom zadovoljava jednadžbu~\eqref{eq:Sfunceq}, što možemo praćenjem po koracima: gornja razina makro programa~\eqref{eq:makroprogS} je sasvim sekvencijalna. Dakle, za svaki $\vec x\in\N^k$ imamo
+Još treba vidjeti da $k$-mjesna funkcija s tim indeksom zadovoljava jednadžbu~\eqref{eq:Sfunceq}, što možemo praćenjem po koracima: gornja razina makro programa~\eqref{eq:makroprogS} je sasvim sekvencijalna. Dakle, za sve $\vec x\in\N^k$ imamo
+	\vspace{-1em}
 \begin{equation}
     \begin{array}{r@{\;}l|cr@{,\dotsc,\,}lcc|cc}
 %\SwapAboveDisplaySkip
@@ -309,6 +310,7 @@ Još jedan detalj treba razmotriti: u~\eqref{eq:factorialrek} smo koristili znak
 \end{verbatim}
 \end{minipage}\end{equation}
 --- ovakva $\f h$ je definirana samo na parnim  brojevima, i svaki preslikava u njegovu polovinu (usporedite s jezičnom funkcijom $\varphi_h$ iz primjera~\ref{pr:pola}). Ovdje smo za $n=1$ koristili kompoziciju sa sljedbenikom da forsiramo parcijalnost (kao kod Russellove funkcije), ali i da nismo napisali taj \texttt{+1} u slučaju $n=1$, C bi svejedno računao istu parcijalnu funkciju. Ipak, odgovarajuća točkovna funkcijska jednadžba
+\vspace{-1em}
 \begin{equation}\label{eq:halfmany}
     \f h(n)\simeq\begin{cases}
         0,&n=0\\
@@ -318,20 +320,22 @@ Još jedan detalj treba razmotriti: u~\eqref{eq:factorialrek} smo koristili znak
 \end{equation}
 bi pored tog rješenja (nazovimo ga $\f h_0$) imala i razna druga, čak totalna rješenja. Jedno od njih je
 $
-    \f h_1(n):=\begin{cases}
+    \f h_1(n):=\begin{smallcases}
         \f h_0(n),&2\mid n\\
         42+\f h_0(n-1),&\text{inače}
-    \end{cases}
+    \end{smallcases}
 $ --- provjerite!
 
 To samo znači ono što već znamo, da trebamo biti mnogo oprezniji s parcijalnim funkcijama nego s totalnima, pa će nam od posebnog značaja biti one opće rekurzije koje definiraju (isključivo) totalne funkcije.
 
 Dakle, neformalno, \emph{opća rekurzija} je funkcijska jednadžba $F=\mathcal M(\vec G,F)$, kojoj s desne strane stoji neka simbolička definicija koja pored nekih već poznatih funkcija $G_1$, $G_2$,~\ldots\ koristi i funkciju $F$. Kao i obično, konkretnu funkciju $F$ koja zadovoljava tu funkcijsku jednadžbu zovemo \emph{rješenjem} te jednadžbe. Za konkretnu opću rekurziju, zanimat će nas tri pitanja:
+\begin{quote}
 \begin{labeling}{(Jedinstvenost)}
     \item[(Egzistencija)] Ima li uopće rješenje?
     \item[(Jedinstvenost)] Ako ima, je li jedinstveno?
     \item[(Totalnost)] Ako jest, je li totalno?
 \end{labeling}
+\end{quote}
 Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači mnogo ako ono nije jedinstveno. Recimo, vidjeli smo jednadžbu~\eqref{eq:halfmany} koja ima totalno rješenje $\f h_1$, ali svejedno nijedan programski jezik ne bi pronašao to rješenje, već bi računao netotalnu funkciju $\f h_0$.
 
 % \subsection{Opće rekurzije s izračunljivim funkcijama}

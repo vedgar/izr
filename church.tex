@@ -9,7 +9,7 @@ Za brojevni problem $D$ kažemo da je \emph{odlučiv} ako je njegova karakterist
 \end{definicija}
 
 "Brojevni problemi" nisu ništa drugo nego relacije, ali postavljeni u obliku pitanja, odnosno ispitivanja nekog svojstva. Recimo, $Halt_2=\dom{\f{comp}_2}^3$ možemo promatrati kao problem "za zadane $x,y,e\in\N$, (postoji li i) stane li program koda $e$ s ulazom $(x,y)$?", odnosno "ima li izraz $\kf{e}(x,y)$ smisla?". Već smo nagovijestili da taj problem nije odlučiv.
-Kako bismo to dokazali? Uzmimo za početak nešto lakše. U uvodu smo već spomenuli paradoks sličan Russellovom, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_{n\in\N}$, i onda za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeksa možemo to doslovno napraviti.
+Kako bismo to dokazali? Uzmimo za početak nešto lakše. U napomeni~\ref{nap:diagtot} smo već spomenuli paradoks sličan Russellovom, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_{n\in\N}$, i onda za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeksa možemo to doslovno napraviti (zovu se indeksi upravo jer je niz $\kf e^1,e\in\N$ popis svih jednomjesnih parcijalno rekurzivnih funkcija, i "indeks funkcije $\f f$" je upravo njen indeks u tom nizu).
 
 \begin{definicija}[{name=[Russellova funkcija i Kleenejev skup]}]
 \emph{Russellova funkcija} je jednomjesna funkcija $\f{Russell}^1$ zadana s
@@ -131,11 +131,11 @@ Problemi $Halt_1$ i $HALT$ nisu odlučivi.
 \end{propozicija}
 \begin{proof}
 Tvrdimo da vrijedi $K(n)\Leftrightarrow Halt_1(n,n)$. Doista,
-\begin{multline}
-    K=\dom{\f{Russell}}=\dom{\f{Sc}\,\circ\,\f{comp}_1\circ\,(\f I_1^1,\f I_1^1)}=\dom{\f{comp}_1\circ\,(\f I_1^1,\f I_1^1)}=\\
+\begin{equation*}
+    K=\dom{\f{Russell}}\!=\dom{\f{Sc}\,\circ\,\f{comp}_1\circ\,(\f I_1^1,\f I_1^1)}\!=\dom{\f{comp}_1\circ\,(\f I_1^1,\f I_1^1)}\!
     =\left\{n\;\middle\vert\;\bigl(\f I_1^1(n),\f I_1^1(n)\bigr)\in\dom{\f{comp}_1}\right\}
     =\{n\mid(n,n)\in Halt_1\}\text,
-\end{multline}
+\end{equation*}
 gdje smo koristili korolar~\ref{kor:comptot} da se riješimo sljedbenika.\newline Iz toga slijedi $K\preceq Halt_1$, pa je $Halt_1$ neodlučiv po korolaru~\ref{kor:nrek<nrek} i teoremu~\ref{tm:DRnrek}.
 
 Slično, po definiciji iz korolara~\ref{kor:funHaltTk}, vrijedi $Halt_1(x,e)\Leftrightarrow HALT(\kr x,e)$, a funkcija $\f{Code}^1$ je (primitivno) rekurzivna, pa je $Halt_1\!\preceq HALT$, iz čega je i $HALT$ neodlučiv.
@@ -226,9 +226,9 @@ Dakle, neka su $k\in\N_+$, $P\in\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ te $\ve
 
 Logičko zaključivanje je, u osnovi, traženje "puta" od premisa do zaključka, i osnovni razlog zašto je to težak problem je što znamo da put (\hspace{-1pt}\emph{izvod}) postoji kad ga nađemo, ali dok ga nismo našli, ne znamo je li to zato što ne postoji, ili samo nismo tražili dovoljno dugo. To vrlo podsjeća na traženje "puta" od početne do završne konfiguracije pri rješavanju problema zaustavljanja --- možemo li nekako formalizirati tu vezu?
 
-U tom smislu, u $\Gamma$ bi se trebala nalaziti neka formula $\pi_{\vec u}$ koja opisuje početnu konfiguraciju s ulazom $\vec u$, a $\zeta$ bi trebala biti formula koja opisuje završnu konfiguraciju --- ne zanima nas rezultat izračunavanja, nego samo zaustavljanje, pa $\zeta$ može biti egzistencijalno kvantificirana po stanju registara, i samo fiksirati vrijednost programskog brojača, a onda ne mora ovisiti o $\vec u$.
+U $\Gamma$ bi se trebala nalaziti neka formula $\pi_{\vec u}$ koja opisuje početnu konfiguraciju s ulazom $\vec u$, a $\zeta$ bi trebala biti formula koja opisuje završnu konfiguraciju --- ne zanima nas rezultat izračunavanja, nego samo zaustavljanje, pa $\zeta$ može biti egzistencijalno kvantificirana po stanju registara, i samo fiksirati vrijednost programskog brojača, a onda ne mora ovisiti o $\vec u$.
 
-U tom smislu, instrukcije programa $P$ mogli bismo shvatiti kao pravila zaključivanja --- recimo, $3.\;\incr1$ kaže da iz formule koja predstavlja konfiguraciju $(x,y,\vec z,0,\dotsc,3)$ možemo izvesti formulu koja predstavlja konfiguraciju $(x,y\!+\!1,\vec z,0,\dotsc,4)$, za sve $x$, $y$ i $\vec z$ --- ali s time postoji jedan bitan problem: standardni račun logike prvog reda ne dopušta nam imati vlastita (nelogička) pravila zaključivanja, možemo imati samo \emph{modus ponens} i generalizaciju. Srećom, \emph{modus ponens} je vrlo općenito pravilo, koje može simulirati ostala pravila pomoću odgovarajućih nelogičkih aksioma --- primjerice, ako bismo htjeli imati pravilo kojim iz $\phi$ i $\eta$ izvodimo $\theta$, dovoljno je u nelogičke aksiome dodati formulu $\bigl(\phi\to(\eta\to\theta)\bigr)$. Tada možemo iz tog aksioma i $\phi$ izvesti $(\eta\to\theta)$, pa onda iz te formule i $\eta$ izvesti $\theta$, koristeći samo \emph{modus ponens}.
+Instrukcije programa $P$ mogli bismo shvatiti kao pravila zaključivanja --- recimo, $3.\;\incr1$ kaže da iz formule koja predstavlja konfiguraciju $(x,y,\vec z,0,\dotsc,3)$ možemo izvesti formulu koja predstavlja konfiguraciju $(x,y\!+\!1,\vec z,0,\dotsc,4)$, za sve $x$, $y$ i $\vec z$ --- ali s time postoji jedan bitan problem: standardni račun logike prvog reda ne dopušta nam imati vlastita (nelogička) pravila zaključivanja, možemo imati samo \emph{modus ponens} i generalizaciju. Srećom, \emph{modus ponens} je vrlo općenito pravilo, koje može simulirati ostala pravila pomoću odgovarajućih nelogičkih aksioma --- primjerice, ako bismo htjeli imati pravilo kojim iz $\phi$ i $\eta$ izvodimo $\theta$, dovoljno je u nelogičke aksiome dodati formulu $\bigl(\phi\to(\eta\to\theta)\bigr)$. Tada možemo iz tog aksioma i $\phi$ izvesti $(\eta\to\theta)$, pa onda iz te formule i $\eta$ izvesti $\theta$, koristeći samo \emph{modus ponens}.
 
 Taj pristup ćemo koristiti ovdje, odnosno u $\Gamma$ ćemo imati po jednu formulu $\iota_i$ za svaku instrukciju programa $P$ (s rednim brojem $i$). Još je preostalo objasniti što ćemo s ovim trotočkama u konfiguracijama (odnosno kako reprezentirati konačni nosač), i što s aritmetičkim operacijama ($+$ za \inc, $-$ za \dec).
 
@@ -239,7 +239,7 @@ varijantom Peanove aritmetike, ali zapravo možemo i lakše: budući da je sve �
 
 Naglasimo da \emph{ne} promatramo logiku prvog reda s jednakošću --- nećemo imati potrebu promatrati jednakost kao relacijski simbol s nekim posebnim svojstvima. Usporedba s nulom za instrukcije tipa \dec\ bit će sintaksna.
 
-Vrijeme je da počnemo pričati formalnije: krenimo od RAM-algoritma $P^k$, duljine $n:=n_P$ i širine $m:=m_{P^k}$. Signatura $\sigma$, nad kojom ćemo graditi formule za naš problem zaključivanja, imat će:
+Vrijeme je da počnemo pričati formalnije: krenimo od RAM-algoritma $P^k$, duljine $n:=n_P$ i širine $m:=m_{P^k}$. Signatura $\sigma$, nad kojom ćemo graditi naše formule, imat će:
 \begin{itemize}
     \item jedan konstantski simbol $\mathsf o$;
     \item jedan jednomjesni funkcijski simbol $\mathsf s$;
@@ -279,11 +279,11 @@ $\rhd$ Ako je to $i.\;\goto\;l$, definiramo
         \iota_i:=\bigl(R_i(x_0,\dotsc,x_{m-1})\to R_l(x_0,\dotsc,x_{m-1})\bigr)\text.
     \end{equation}
 
-\noindent Definiramo skup
+\noindent Definiramo skup i formulu
 \begin{align}
 \SwapAboveDisplaySkip
-    \Gamma_{\vec u}&:=\{\pi_{\vec u}\}\cup\{\iota_i\mid i\in[0\dd n\rangle\}
-\shortintertext{i formulu}
+    \Gamma_{\vec u}&:=\{\pi_{\vec u}\}\cup\{\iota_i\mid i\in[0\dd n\rangle\}\text,\\
+%\shortintertext{i formulu}
 \label{eq:defzeta}
     \zeta&:=\exists\,x_0\,\dotsm\,\exists\, x_{m-1}R_n(x_0,\dotsc,x_{m-1})\text.
 \end{align}
@@ -314,10 +314,10 @@ Indukcijom po $r$ se dokaže $\phi(\overline r)=r$ za sve $r\in\N$, pa $\mathfra
 Vrijedi $\mathfrak N\models\pi_{\vec u}$.
 \end{lema}
 \begin{proof}
-Gledajući~\eqref{eq:defpiu}, samo treba vidjeti da postoji $t\in\N$ takav da je $c_t(\textsc{pc})=0$ i $c_t(\reg j)=\begin{cases}
+Gledajući~\eqref{eq:defpiu}, tražimo $t\in\N$ takav da je $c_t(\textsc{pc})=0$ i $c_t(\reg j)=\begin{smallcases}
 u_j,&j\in[1\dd k]\\
 0,&\text{inače}
-\end{cases}$; drugim riječima, $c_t$ je početna konfiguracija s ulazom $\vec u$, a ona se sigurno postiže za $t=0$ (možda i za neke druge $t$, ali jedan nam je dovoljan).
+\end{smallcases}\!$; drugim riječima, $c_t$ je početna konfiguracija s ulazom $\vec u$, a ona se sigurno postiže za $t=0$. % (možda i za neke druge $t$, ali jedan nam je dovoljan).
 \end{proof}
 
 \begin{lema}[{name=[istinitost instrukcijskih formula u $\mathfrak N$]}]\label{lm:Niotai}
@@ -364,38 +364,38 @@ Sada nam je cilj dokazati obrat propozicije~\ref{pp:models>stop}. Bitna razlika 
 
 Pa neka je $\mathfrak M=(M,\phi)\cong(M,\Theta,g,S_0,S_1,\dotsc,S_n)$ proizvoljna $\sigma$-struktura (redom imamo $\phi(\mathsf o)=:\Theta\in M$, $\phi(\mathsf s)=:g:M\to M$, a za svaki $i\in[0\dd n]$, $\phi(R_i)=:S_i\subseteq M^m$), i neka vrijedi $\mathfrak M\models\Gamma_{\vec u}$.
 
-Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo $a_{jt}:=\phi\bigl(\overline{c_t(\reg j)}\bigr)=g\bigl(g(\dotsb g(\Theta)\dotsb\mspace{-1mu})\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
+Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo\\ $a_j^t:=\phi\bigl(\overline{c_t(\reg j)}\bigr)=g\bigl(g(\dotsb g(\Theta)\dotsb\mspace{-1mu})\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
 
 \begin{lema}[{name=[izračunavanje čuva istinitost formula pojedinih konfiguracija]}]\label{lm:formcomputesteps}
-Za svaki $t\in\N$ vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$,\newline odnosno $(a_{0t},a_{1t},\dotsc,a_{(m-1)t})\in S_{c_t(\textsc{pc})}$.
+Za svaki $t\in\N$ vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$,\newline odnosno $(a_0^t,a_1^t,\dotsc,a_{m-1}^t)\in S_{c_t(\textsc{pc})}$.
 \end{lema}
 \begin{proof}
 Indukcijom po $t$. Za $t=0$, tražena formula je upravo $\pi_{\vec u}$, koja je u $\Gamma_{\vec u}$ pa po pretpostavci vrijedi u $\mathfrak M$. Pretpostavimo da tvrdnja vrijedi za $t=b$, i pogledajmo tvrdnju za $t=b+1$. Ako je $c_b$ završna konfiguracija, tada je $c_{b+1}=c_b$ jer završne konfiguracije prelaze (jedino) u same sebe, pa je formula za $c_{b+1}$ ista kao formula za $c_b$, i vrijedi u $\mathfrak M$ po pretpostavci indukcije. Inače, $i:=c_b(\textsc{pc})<n$, pa postoji instrukcija programa $P$ s rednim brojem $i$, i također je $\iota_i\in\Gamma_{\vec u}$, dakle $\mathfrak M\models\iota_i$.
 
-Ako je ta instrukcija tipa \inc, recimo $i.\;\incr j$ za neki $j<m$, tada u $\mathfrak M$ vrijedi~\eqref{eq:formINC}, odnosno uz valuaciju $v(x_j):=a_{jb}$, vrijedi
+Ako je ta instrukcija tipa \inc, recimo $i.\;\incr j$ za neki $j<m$, tada u $\mathfrak M$ vrijedi~\eqref{eq:formINC}, odnosno uz valuaciju $v(x_j):=a_j^b$, vrijedi
 \begin{equation}
 \label{eq:korakINC}
-    \bigl(a_{0b},\dotsc,a_{(j-1)b},g(a_{jb}),a_{(j+1)b},\dotsc,a_{(m-1)b}\bigr)\in S_{i+1}\text,
-\end{equation} uz pretpostavku $(a_{0b},\dotsc,a_{(m-1)b})\in S_i=S_{c_b(\textsc{pc})}$. No ta pretpostavka je upravo pretpostavka indukcije, pa onda vrijedi i~\eqref{eq:korakINC}. A formula~\eqref{eq:korakINC} je upravo formula koja odgovara konfiguraciji $c_{b+1}$, jer je $i+1=c_b(\textsc{pc})+1=c_{b+1}(\textsc{pc})$, i
-\begin{multline}
-a_{j(b+1)}=\phi\bigl(\overline{c_{b+1}(\reg j)}\bigr)=\phi\bigl(\overline{1+c_b(\reg j)}\bigr)=\phi\bigl(\mathsf s\bigl(\overline{c_b(\reg j)}\bigr)\bigr)=\\
-=\phi(\mathsf s)\bigl(\phi\bigl(\overline{c_b(\reg j)}\bigr)\bigr)=g(a_{jb})\text.
-\end{multline}
-Ako je ta instrukcija tipa \goto, s odredištem $l\le n$, uz istu valuaciju imamo da $\vec a\in S_i$ povlači $\vec a\in S_l$. Ova prva tvrdnja je pretpostavka indukcije, a druga je upravo ona koja nam treba za korak (stanje registara ostaje isto, odnosno $a_{jb}=a_{j(b+1)}$ za svaki $j\in[0\dd m\rangle$).
+	\bigl(a_0^b,\dotsc,a_{j-1}^b,g(a_j^b),a_{j+1}^b,\dotsc,a_{m-1}^b\bigr)\in S_{i+1}\text,
+\end{equation} uz pretpostavku $(a_0^b,\dotsc,a_{m-1}^b)\in S_i=S_{c_b(\textsc{pc})}$. No ta pretpostavka je upravo pretpostavka indukcije, pa onda vrijedi i~\eqref{eq:korakINC}. A formula~\eqref{eq:korakINC} je upravo formula koja odgovara konfiguraciji $c_{b+1}$, jer je $i+1=c_b(\textsc{pc})+1=c_{b+1}(\textsc{pc})$, i
+\begin{equation}
+	a_j^{b+1}=\phi\bigl(\overline{c_{b+1}(\reg j)}\bigr)=\phi\bigl(\overline{1+c_b(\reg j)}\bigr)=\phi\bigl(\mathsf s\bigl(\overline{c_b(\reg j)}\bigr)\bigr)
+=\phi(\mathsf s)\bigl(\phi\bigl(\overline{c_b(\reg j)}\bigr)\bigr)=g(a_j^b)\text.
+\end{equation}
+	Ako je ta instrukcija tipa \goto, s odredištem $l\le n$, uz istu valuaciju imamo da $\vec a\in S_i$ povlači $\vec a\in S_l$. Ova prva tvrdnja je pretpostavka indukcije, a druga je upravo ona koja nam treba za korak (stanje registara ostaje isto, odnosno $a_j^b=a_j^{b+1}$ za svaki $j\in[0\dd m\rangle$).
 
-Ako je ta instrukcija tipa \dec, recimo $\decr jl$, promotrimo slučajeve s obzirom na to je li $c_b(\reg j)=0$ (krivo je reći "s obzirom na to je li $a_{jb}=\Theta$", jer nitko ne brani da bude npr.\ $g(\Theta)=\Theta$, odnosno $\phi(\overline1)=\phi(\overline0)$). Ako jest, imamo istu argumentaciju kao u prethodnom odlomku, jer se stanje registara tada ne mijenja: $\vec a\in S_i$ povlači $\vec a\in S_l$ po prvom konjuktu u~\eqref{eq:formDEC}. Ako nije, tada je sigurno $c_b(\reg j)\ge1$, pa promotrimo~\eqref{eq:formDEC} (odnosno njen drugi konjunkt) uz valuaciju
-$v'(x_h):=\begin{cases}
-a_{hb}=\phi\bigl(\overline{c_b(\reg h)}\bigr),&h\ne j\\
-\phi\bigl(\overline{c_b(\reg j)-1}\bigr),&h=j
-\end{cases}$.
-Uz tu valuaciju vrijedi antecedens, jer je $v'\bigl(\mathsf s(x_j)\bigr)=a_{jb}$ --- pa onda vrijedi i konzekvens, odnosno formula s istim sadržajem registara, osim što je $c_{b+1}(\reg j)$ za jedan manji, i $c_{b+1}(\textsc{pc})$ za jedan veći, kao što i treba biti.
+Ako je ta instrukcija tipa \dec, recimo $\decr jl$, promotrimo slučajeve s obzirom na to je li $c_b(\reg j)=0$ (krivo je reći "s obzirom na to je li $a_j^b=\Theta$", jer nitko ne brani da bude npr.\ $g(\Theta)=\Theta$, odnosno $\phi(\overline1)=\phi(\overline0)$). Ako jest, imamo istu argumentaciju kao u prethodnom odlomku, jer se stanje registara tada ne mijenja: $\vec a\in S_i$ povlači $\vec a\in S_l$ po prvom konjuktu u~\eqref{eq:formDEC}. Ako nije, tada je sigurno $c_b(\reg j)\ge1$, pa promotrimo~\eqref{eq:formDEC} (odnosno njen drugi konjunkt) uz valuaciju
+$v'(x_h):=\begin{smallcases}
+a_h^b=\phi\left(\overline{c_b(\reg h)}\right),&h\ne j\\
+\phi\left(\overline{c_b(\reg j)-1}\right),&h=j
+\end{smallcases}$.
+Uz tu valuaciju vrijedi antecedens, jer je $v'\bigl(\mathsf s(x_j)\bigr)=a_j^b$ --- pa onda vrijedi i konzekvens, odnosno formula s istim sadržajem registara, osim što je $c_{b+1}(\reg j)$ za jedan manji, i $c_{b+1}(\textsc{pc})$ za jedan veći, kao što i treba biti.
 \end{proof}
 
 \begin{propozicija}[{name=[zaustavljanje povlači zaključivanje]}]\label{pp:stop>models}
 Ako $P$-izračunavanje s $\vec u$ stane, tada $\Gamma_{\vec u}\models\zeta$.
 \end{propozicija}
 \begin{proof}
-	Pretpostavimo da izračunavanje $(c_t)_{t\in\N}$ stane, odnosno postoji $t_0$ takav da je $c_{t_0}(\textsc{pc})=n$. Da bismo dokazali $\Gamma_{\vec u}\models\zeta$, uzmimo proizvoljnu $\sigma$-strukturu $\mathfrak M$ u kojoj vrijedi $\Gamma_{\vec u}$. Za tu strukturu vrijedi lema~\ref{lm:formcomputesteps}, pa posebno za $t=t_0$ vrijedi $(a_{0t_0},\dotsc,a_{(m-1)t_0})\in S_n$. To znači da za svaku valuaciju $v$ možemo naći $v'$ koja se podudara na $v$ u svim varijablama $x_j$ za $j\ge m$, a $v'(x_j)=a_{jt_0}$ za $j<m$, takvu da vrijedi $\mathfrak M\models_{v'}R_n(x_0,\dotsc,x_{m-1})$. No to upravo znači $\mathfrak M\models\zeta$.
+	Pretpostavimo da izračunavanje $(c_t)_{t\in\N}$ stane, odnosno postoji $t_0$ takav da je $c_{t_0}(\textsc{pc})=n$. Da bismo dokazali $\Gamma_{\vec u}\models\zeta$, uzmimo proizvoljnu $\sigma$-strukturu $\mathfrak M$ u kojoj vrijedi $\Gamma_{\vec u}$. Za tu strukturu vrijedi lema~\ref{lm:formcomputesteps}, pa posebno za $t=t_0$ vrijedi $(a_0^{t_0},\dotsc,a_{m-1}^{t_0})\in S_n$. To znači da za svaku valuaciju $v$ možemo naći $v'$ koja se podudara na $v$ u svim varijablama $x_j$ za $j\ge m$, a $v'(x_j)=a_j^{t_0}$ za $j<m$, takvu da vrijedi $\mathfrak M\models_{v'}R_n(x_0,\dotsc,x_{m-1})$. No to upravo znači $\mathfrak M\models\zeta$.
 \end{proof}
 
 %\subsection{Neformalna izreka Churchovog teorema}
@@ -433,7 +433,7 @@ Prva ekvivalencija je definicija~\ref{def:compute}, jer je $K=\dom{\f{Russell}}$
 Dakle, pod pretpostavkom da $\mathcal A$ ispravno odlučuje koje su formule prvog reda valjane a koje nisu, upravo opisani neformalni algoritam ispravno odlučuje koji su brojevi elementi Kleenejevog skupa a koji nisu. Po Church--\!Turingovoj tezi, to bi značilo da je relacija $K$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
-Time je dokazan Churchov teorem, ali na neformalnoj razini --- "dokazali" smo da ne postoji neformalni algoritam, tako što smo se pozvali na Church--\!Turingovu tezu. Možemo li bez toga?
+Time je dokazan Churchov teorem, ali na neformalnoj razini --- "dokazali" smo da ne postoji neformalni algoritam, pozivanjem na Church--\!Turingovu tezu. Možemo li bez toga?
 
 Rekli smo da probleme obično shvaćamo kao jezike: odlučivost problema je tu rekurzivnost (karakteristične funkcije kodiranja) jezika čiji elementi su riječi koje predstavljaju instance problema na koje je odgovor potvrdan. U ovom slučaju, promotrili bismo jezik $\Valid$ nad nekom abecedom $\Sigma_{\log}$ koja je dovoljno bogata da može izraziti svaku formulu logike prvog reda, i u njemu bi se nalazile samo valjane formule. Ako uspijemo dokazati da $\Valid$ nije rekurzivan, "odgurat" ćemo primjenu Church--\!Turingove teze na sam kraj dokaza, i pseudokod u dokazu teorema~\ref{tm:Church} moći ćemo zamijeniti pravom rekurzivnom funkcijom koja svodi $K$ na $\Valid$ (preciznije $\kr{\Valid}$).
 
@@ -510,6 +510,7 @@ Jedna beskontekstna gramatika za jezik $F1$ zadana je pravilima
 \end{align}
 uz tipove tokena
     \begin{align}
+	    \SwapAboveDisplaySkip
     Var&\to\t x\mid Var\t'\\
     Const&\to\t c\mid Const\t'\\
     Func&\to\t f\mid Func\t'\\
@@ -518,7 +519,7 @@ uz tipove tokena
 ($Var$, $Const$, $Func$ i $Rel$ su leksičke varijable, dok su $Form$, $Term$ i $Terms$ sintaksne varijable; $Form$ je početna varijabla). Objašnjenje pojmova i dokaze tvrdnji koje smo naveli zainteresirani čitatelj može pronaći u~\cite{sipser}.
 \end{proof}
 
-Iz prethodne propozicije slijedi (po teoremu~\ref{tm:oikr}) da je $\kr{F1}$ rekurzivan skup. Drugim riječima, ako restringiramo $\N\Sigma_{\log}^*$ na formule prvog reda zapisane u osnovnom jeziku, imamo kodiranje formula. Za konstruktore tog skupa moramo prvo napraviti leksičke konstruktore za pojedine tokene. U nastavku često koristimo konkatenaciju u pomaknutoj bazi $12$ koju zovemo jednostavno \emph{konkatenacijom} i u skladu s tim umjesto $\conc{12}$ pišemo samo $\conc{}$. Još nam treba jedan jednostavni rezultat.
+Iz prethodne propozicije slijedi (po teoremu~\ref{tm:oikr}) da je $\kr{F1}$ rekurzivan skup. Drugim riječima, ako restringiramo $\N\Sigma_{\log}^*$ na formule prvog reda zapisane u osnovnom jeziku, imamo kodiranje formula. Za konstruktore tog skupa moramo prvo napraviti leksičke konstruktore za pojedine tokene. U nastavku često koristimo konkatenaciju u pomaknutoj bazi $12$ koju zovemo jednostavno \emph{konkatenacijom} i u skladu s tim umjesto $\conc{1\!2}$ pišemo samo $\conc{}$. Još nam treba jedan jednostavni rezultat.
 
 \begin{korolar}[{name=[(prava) podriječ ima (strogo) manji kod]}]\label{kor:krvw}
 Ako je riječ $v$ prava podriječ od $w$, tada je $\kr v<\kr w$.
@@ -536,7 +537,7 @@ Zapravo je jedini zanimljivi dio vidjeti da je "potenciranje" (uzastopna konkate
     \f{Repeat}(x,0)&=\kr{\varepsilon}=0\text,\\
     \f{Repeat}(x,n+1)&=\f{Repeat}(x,n)\conc{}x\text.
 \end{align}
-    Sada je, uz pokratu $t:=\f{Repeat}(6,i)=\kr{\t{'{}'{}'}\dotsm\t'}$, $\f{Var}(i):=\kr{\t{\,x{}'{}'}\dotsm\t'}=1\conc{}t$ i analogno $\f{Const}(i):=2\conc{}t$, $\f{Func}(i):=3\conc{}t$ te $\f{Rel}(i):=4\conc{}t$.
+    Sada, uz pokratu $t:=\f{Repeat}(6,i)=\kr{\t{'{}'{}'}\dotsm\t'}$, imamo $\f{Var}(i):=\kr{\t{\,x{}'{}'}\dotsm\t'}=1\conc{}t$ --- i analogno $\f{Const}(i):=2\conc{}t$, $\f{Func}(i):=3\conc{}t$ te $\f{Rel}(i):=4\conc{}t$.
 \end{proof}
 
 Introdukciju logičkih veznika mogli bismo obavljati na sličan način, samo ih treba izraziti u osnovnom jeziku. Recimo, primitivno rekurzivna funkcija
@@ -697,17 +698,15 @@ Ključno je vidjeti da je jezik nad $\Sigma_{\log}$,
     Proof:=\{\,\psi_0\t\#\,\psi_1\t\#\,\dotsb\,\t\#\,\psi_n\mid (\psi_0,\psi_1,\dots,\psi_n)\text{ je dokaz u logici prvog reda}\,\}\text,
 \end{equation}
 odlučiv. To sigurno nećemo napraviti u potpunosti, ali sve osnovne ideje već imamo. Prvo, slično kao u točki~\ref{sec:stdstring}, možemo napraviti funkcije $\f{arg}'_i$, koje iz kodiranog \t\#-separiranog niza formula ekstrahiraju pojedinu formulu (zapravo njen kod). Dinamizacijom možemo napraviti i $(\f{arg}')^2$, pomoću koje onda možemo pričati o svim formulama u dokazu (i osigurati da su dijelovi između separatora doista formule). Sad je jasno da, kako bi takav niz bio u $Proof$, svaka formula u njemu mora biti ili instanca sheme aksioma (A1), (A2), (A3), (A4) ili (A5) (iz Hilbertovog računa predikata), ili pak mora biti dobivena modus ponensom ili generalizacijom iz neke prethodne formule.
-\begin{multline}
+\begin{multline*}
     p\in\langle Proof\rangle\Longleftrightarrow\Bigl(\forall i<2+\bigl(\num j<\f{slh}(p,12)\bigr)\bigl(\f{sdigit}(p,j,12)=12\bigr)\Bigr)\Bigl(\f{arg}'(p,i)\in\kr{F1}\land{}\\
     \bigl(\f{IsA1}\bigl(\f{arg'}(p,i)\bigr)\lor\f{IsA2}\bigl(\f{arg'}(p,i)\bigr)\lor\f{IsA3}\bigl(\f{arg'}(p,i)\bigr)\lor\f{IsA4}\bigl(\f{arg'}(p,i)\bigr)\lor\f{IsA5}\bigl(\f{arg'}(p,i)\bigr)\\
-    {}\lor(\exists j<i)(\exists k<i)\f{ModPon}\bigl(\f{arg}'(p,i),\f{arg}'(p,j),\f{arg}'(p,k)\bigr)\lor{}\\
-    {}\lor(\exists j<i)\f{Gen}\bigl(\f{arg}'(p,i),\f{arg}'(p,j)\bigr)\bigr)\Bigr)
-\end{multline}
+    {}\lor(\exists j<i)(\exists k<i)\f{ModPon}\bigl(\f{arg}'(p,i),\f{arg}'(p,j),\f{arg}'(p,k)\bigr)\lor(\exists j<i)\f{Gen}\bigl(\f{arg}'(p,i),\f{arg}'(p,j)\bigr)\bigr)\Bigr)
+\end{multline*}
     Sheme (A1), (A2) i (A3) možemo opisati konkatenacijom, uz ograničavanje kvantifikacije pomoću korolara~\ref{kor:krvw}. Opisat ćemo (A1) --- ostale su dulje ali ne bitno kompliciranije.
-\begin{multline}
-    \f{IsA1}(f):\Longleftrightarrow(\exists a<f)\,(\exists b<f)\,\bigl(a\in\kr{F1}\land b\in\kr{F1}\land{}\\
-    {}\land f=\langle\t(\,\rangle\conc{}a\conc{}\langle\t{\,\textrightarrow(\,}\rangle\conc{}b\conc{}\langle\,\t\textrightarrow\,\rangle\conc{}a\conc{}\langle\t{\,))}\rangle\bigr)
-\end{multline}
+\begin{equation*}
+    \f{IsA1}(f):\Longleftrightarrow(\exists a<f)\,(\exists b<f)\,\bigl(a\in\kr{F1}\land b\in\kr{F1}\land f=\langle\t(\,\rangle\conc{}a\conc{}\langle\t{\,\textrightarrow(\,}\rangle\conc{}b\conc{}\langle\,\t\textrightarrow\,\rangle\conc{}a\conc{}\langle\t{\,))}\rangle\bigr)
+\end{equation*}
 
 Za sheme (A4) i (A5) moramo još voditi računa o reprezentaciji terma, i uvjetima za supstituciju, što uvodi određene tehničke poteškoće, ali ništa što naši alati primitivno rekurzivnih funkcija ne bi mogli riješiti. Za alternativnu aksiomatizaciju logike prvog reda koja izbjegava brojne tehničke poteškoće pogledajte~\cite{smullyan}.
 
