@@ -19,17 +19,17 @@ Kao što smo već nagovijestili, počet ćemo sa \emph{specijalizacijom}: način
 \end{equation}
 \end{itemize}
 
-Ideja specijalizacije je time na neki način suprotna ideji dinamizacije, koja iz familije $f^k_i(\vec x),i\in\N$ konstruira $f^{k+1}(\vec x,i)$ --- ovdje iz $f^{k+1}(\vec x,i)$ i konkretnog broja $i_0$ dobijemo funkciju $f^k_{i_0}$, koja preslikava $\vec x$ u $f(\vec x,i_0)$. Iako dinamizacija općenito nije izračunljivo preslikavanje na funkcijama, specijalizacija jest, i to nam je cilj ovdje dokazati.
+Ideja specijalizacije je time na neki način suprotna ideji dinamizacije, koja iz familije $f^k_i(\vec x),i\in\N$ konstruira $f^{k+1}(\vec x,i)$ --- ovdje iz $f^{k+1}(\vec x,i)$ i konkretnog broja $i_0$ dobijemo funkciju $f^k_{i_0}$, koja preslikava $\vec x$ u $f(\vec x,i_0)$. Iako dinamizacija općenito nije izračunljivo preslikavanje na funkcijama, specijalizacija jest --- i to nam je cilj ovdje dokazati.
 
-U literaturi se za specijalizaciju još koristi naziv \emph{parcijalna evaluacija}, posebno kod algoritamske optimizacije --- jer ako imamo fiksnu vrijednost nekog argumenta, određeni dio izraza možemo izračunati unaprijed i tako pojednostaviti izraz. Sličnu ideju imamo u konkretnoj matematici, povezanu s pojmom \emph{zatvorenog oblika}: npr.\ iako je teško izračunati općenite vrijednosti funkcije $f(n,k):=\sum_{j=1}^n j^k$, za $k=2$ dobivamo formulu $f(n,2)=\frac{n(n+1)(2n+1)}{6}$. U logičkom kontekstu toj ideji odgovara \emph{supstitucija}, kojom iz formule s $k+1$ slobodnih varijabli dobijemo formulu s $k$ slobodnih varijabli, uvrštavajući za neku varijablu neki zatvoreni term (koji u standardnom modelu od PA odgovara upravo nekom fiksnom prirodnom broju). Vidimo da se slična ideja pojavljuje pod raznim imenima na mnogim mjestima, što upućuje na njenu korisnost.
+U literaturi se za specijalizaciju još koristi naziv \emph{parcijalna evaluacija}, posebno kod algoritamske optimizacije --- jer ako imamo fiksnu vrijednost nekog argumenta, određeni dio izraza možemo izračunati unaprijed i tako pojednostaviti izraz. Sličnu ideju imamo u konkretnoj matematici, povezanu s pojmom \emph{zatvorenog oblika}: npr.\ iako je teško izračunati općenite vrijednosti funkcije $f(n,k):=\sum_{j=1}^n j^k$, za $k=2$ dobivamo formulu $f(n,2)=\frac{n(n+1)(2n+1)}{6}$. U logičkom kontekstu toj ideji odgovara \emph{supstitucija}, kojom iz formule s $k+1$ slobodnih varijabli dobijemo formulu s $k$ slobodnih varijabli, uvrštavajući za neku varijablu neki zatvoreni term (koji u standardnom modelu od PA odgovara upravo nekom fiksnom prirodnom broju). Vidimo da se slična ideja pojavljuje na mnogim mjestima, što upućuje na njenu korisnost.
 
-Ono što je sasvim nesporno (i već smo to dokazali u svim specijalnim slučajevima navedenima na početku ove točke) je da specijalizacija čuva izračunljivost. Zbog teorema ekvivalencije, svejedno je u kom obliku konkretiziramo tu izračunljivost, a dokaz je najlakši za parcijalnu rekurzivnost.
+Sasvim je nesporno (i već smo to dokazali u svim specijalnim slučajevima navedenima na početku ove točke) da specijalizacija čuva izračunljivost. Zbog teorema ekvivalencije, svejedno je kako konkretiziramo tu izračunljivost, a dokaz je najlakši za parcijalnu rekurzivnost.
 
 \begin{propozicija}[{name=[specijalizacija čuva parcijalnu rekurzivnost]}]
     Neka su $k\in\N_+$, $y\in\N$ te $\f f^{k+1}$ parcijalno rekurzivna funkcija.\newline
-    Tada je i funkcija $\f g^k=\$(y,\f f)$, zadana s
+    Tada je i funkcija $\f g^k:=\$(y,\f f)$, zadana s
 %\begin{equation}
-    $\f g(\vec x)\simeq\f f(\vec x,y)$,
+    $\f g(\vec x):\simeq\f f(\vec x,y)$,
 %\end{equation}
 parcijalno rekurzivna.
 \end{propozicija}
@@ -42,24 +42,24 @@ Definiciju od $\f g$ možemo zapisati u simboličkom obliku
 \end{proof}
 
 \begin{korolar}[{name=[specijalizacija čuva (primitivnu) rekurzivnost]}]\label{kor:paramprn}
-    Ako je $k\in\N_+$, $y\in\N$ te funkcija $\f f^{k+1}$ (primitivno) rekurzivna,\newline tada je i $\f g^k=\$(y,\f f)$ (primitivno) rekurzivna.
+    Ako je $k\in\N_+$, $y\in\N$ te funkcija $\f f^{k+1}$ (primitivno) rekurzivna,\newline tada je i $\f g^k:=\$(y,\f f)$ (primitivno) rekurzivna.
 \end{korolar}
 \begin{proof}
-Isti kao gore --- zapravo lakši, jer ne moramo određivati domenu.
+Isti kao prethodni --- zapravo lakši, jer ne moramo određivati domenu.
 \end{proof}
 
 Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne eksplicitno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Mogli bismo izračunati (neke) indekse od $\f I_i^k,i\in[1\dd k]$ i $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, kao posebni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
 , a onda $\f{compose}$ pomoću te funkcije.
 
-Na neki način, $\f S=\N \$$, gdje funkcije kodiramo njihovim indeksima na način koji je detaljno objašnjen u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$ te vraća \emph{neki} indeks za $\$(y,\f f)$.
+Na neki način, $\f S=\N \$$, gdje funkcije kodiramo njihovim indeksima kako je detaljno objašnjeno u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$ te vraća \emph{neki} indeks za $\$(y,\f f)$.
 
-Bilo bi super kad bismo mogli dobiti $\f S$ kao jednu funkciju, neovisnu o mjesnosti $k$ funkcije $\f f$ --- no to, barem ovako kako smo zamislili indekse, nije moguće. Ta funkcija bi trebala primati $y$ i kod RAM-programa $e$, i vraćati kod novog RAM-programa $e'$ takvog da bude $\kf e(\vec x,y)\simeq\kf{e'}(\vec x)$ za sve $\vec x\in\N^k$. No to znači da \emph{registar} ($\reg{k+1}$) u kojem će pisati ulazni podatak $y$ u odgovarajućem RAM-stroju ovisi o $k$, a $k$ ne možemo zaključiti iz samog RAM-programa odnosno njegovog koda $e$.
+Bilo bi sjajno kada bismo mogli dobiti $\f S$ kao jednu funkciju, neovisnu o mjesnosti $k$ funkcije $\f f$ --- no to, barem ovako kako smo zamislili indekse, nije moguće. Ta funkcija bi trebala primati $y$ i kod RAM-programa $e$, i vraćati kod novog RAM-programa $e'$ takvog da bude $\kf e(\vec x,y)\simeq\kf{e'}(\vec x)$ za sve $\vec x\in\N^k$. No to znači da \emph{registar} ($\reg{k+1}$) u kojem će pisati ulazni podatak $y$ u odgovarajućem RAM-stroju ovisi o $k$, a $k$ ne možemo zaključiti iz samog RAM-programa odnosno njegovog koda $e$.
 
 \begin{napomena}[{name=[uniformna verzija teorema o parametru]}]
 Zapravo bismo mogli dokazati i "uniformnu" verziju, kad bismo fiksirali argumente s početka a ne s kraja. Tada bi $y$ uvijek išao u $\reg1$, a sve ostale registre (koji se stvarno spominju u programu, što \emph{možemo} zaključiti iz $e$) bismo pomicali za jedno mjesto udesno. To može poslužiti kao osnova za malo ozbiljniji studentski rad, ali je kompliciranije --- a nama će ova verzija biti dovoljna.
 \end{napomena}
 
-\subsection{Teorem o parametru}
+% \subsection{Teorem o parametru}
 
 \begin{propozicija}[Teorem o parametru]\label{pp:tmpar}
 Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^2$ takva da za sve $y,e\in\N$ vrijedi $\kf{\f S_k(y,e)}^k=\$(y,\kf e^{k+1})$.
@@ -281,10 +281,8 @@ Vidjeli smo da se u metaprogramiranju, a ponekad i u običnom programiranju, poj
 \begin{equation}
     \begin{minipage}{0.8\textwidth}
 \begin{verbatim}
-                unsigned factorial(unsigned n){
-                    if(n) return n*factorial(n-1);
-                    else return 1;
-                }
+                unsigned factorial(unsigned n)
+                    { return n ? n*factorial(n-1) : 1; }
 \end{verbatim}
 \end{minipage}
 \end{equation}
@@ -320,9 +318,9 @@ Još jedan detalj treba razmotriti: u~\eqref{eq:factorialrek} smo koristili znak
 \end{equation}
 bi pored tog rješenja (nazovimo ga $\f h_0$) imala i razna druga, čak totalna rješenja. Jedno od njih je
 $
-    \f h_1(n):=\begin{smallcases}
-        \f h_0(n),&2\mid n\\
-        42+\f h_0(n-1),&\text{inače}
+    \f h_{42}(n):=\begin{smallcases}
+        \f h_0(n),&2\,\mid\,n\\
+        42\,+\,\f h_0(n-1),&\text{inače}
     \end{smallcases}
 $ --- provjerite!
 
@@ -336,7 +334,7 @@ Dakle, neformalno, \emph{opća rekurzija} je funkcijska jednadžba $F=\mathcal M
     \item[(Totalnost)] Ako jest, je li totalno?
 \end{labeling}
 \end{quote}
-Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači mnogo ako ono nije jedinstveno. Recimo, vidjeli smo jednadžbu~\eqref{eq:halfmany} koja ima totalno rješenje $\f h_1$, ali svejedno nijedan programski jezik ne bi pronašao to rješenje, već bi računao netotalnu funkciju $\f h_0$.
+Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači mnogo ako ono nije jedinstveno. Recimo, vidjeli smo jednadžbu~\eqref{eq:halfmany} koja ima totalno rješenje $\f h_{42}$, ali svejedno nijedan programski jezik ne bi pronašao to rješenje, već bi računao netotalnu funkciju $\f h_0$.
 
 % \subsection{Opće rekurzije s izračunljivim funkcijama}
 
@@ -355,16 +353,16 @@ Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. \emph{Opća r
 \begin{equation}\label{eq:genrek}
     \f{comp}_k(\vec x,e)\simeq\f G(\vec x,e)\text{, za sve }\vec x\in\N^k\text.
 \end{equation}
-    Ako konkretni broj $e\in\N$ zadovoljava tu jednadžbu, funkciju $\kf e^k=\$(e,\f G)$ zovemo \emph{rješenjem} opće rekurzije.
+	Ako konkretni broj $e_0\in\N$ zadovoljava tu jednadžbu, funkciju $\kf{e_0}^k=\$(e_0,\f G)$ zovemo \emph{rješenjem} opće rekurzije.
 \end{definicija}
 
-Ponekad i indeks $e$ neformalno zovemo "rješenjem", ali jedinstvenošću uvijek smatramo jedinstvenost \emph{funkcije}, ne indeksa. To je bitno jer inače u uobičajenim situacijama, gdje $\f G$ koristi $e$ samo za pozivanje $\f F$, nikad ne bismo imali jedinstvenost: čim postoji neki $e$, svi ostali indeksi funkcije $\kf e^k$ su također "rješenja", a intuitivno znamo (i~dokazat ćemo u ovom poglavlju) da ih ima beskonačno mnogo.
+Ponekad i indeks $e_0$ neformalno zovemo "rješenjem", ali jedinstvenošću uvijek smatramo jedinstvenost \emph{funkcije}, ne indeksa. To je bitno jer inače u uobičajenim situacijama (kad $\f G$ koristi argument $e$ samo za pozivanje funkcije $\f F$) \emph{nikad} ne bismo imali jedinstvenost: čim postoji neki $e_0$, svi ostali indeksi funkcije $\kf{e_0}^k$ su također "rješenja", a intuitivno znamo (i~dokazat ćemo u ovom poglavlju) da ih ima beskonačno mnogo.
 
-Pitanje totalnosti tada postaje pitanje \emph{rekurzivnosti} --- jer $\f F$ ima indeks $e$, po teoremu ekvivalencije je parcijalno rekurzivna, a takve totalne funkcije zovemo rekurzivnima.
+Pitanje totalnosti tada postaje pitanje \emph{rekurzivnosti} --- jer $\f F$ ima indeks $e_0$, po teoremu ekvivalencije je parcijalno rekurzivna, a takve totalne funkcije zovemo rekurzivnima.
 
-U prethodna dva odlomka, čini se, zanemarili smo pitanje egzistencije, odnosno ponašali smo se kao da indeks $e$ koji zadovoljava~\eqref{eq:genrek} uvijek postoji. Važan i netrivijalan \emph{teorem rekurzije} kaže da to doista vrijedi.
+U prethodna dva odlomka, čini se, zanemarili smo pitanje egzistencije, odnosno ponašali smo se kao da indeks $e_0$ koji zadovoljava~\eqref{eq:genrek} uvijek postoji. Važan i netrivijalan \emph{teorem rekurzije} kaže da to doista vrijedi.
 
-Naravno, netrivijalan je samo u formalnom smislu: intuitivno objašnjenje kako izvršavati opću rekurzivnu funkciju (za zadanu funkciju $\f G$) po Church--\!Turingovoj tezi računa parcijalno rekurzivnu funkciju. Ipak, takva intuicija nas može navesti na krivi trag (sjetite se funkcije $\f h_1$\!), a i tvrdnje o jedinstvenosti i rekurzivnosti lakše je dokazivati (najčešće matematičkom indukcijom) jednom kad imamo indeks, nego kad imamo neformalni postupak. Zato je dobro izbjeći Church--\!Turingovu tezu, i doista konstruirati indeks $e$ s traženim svojstvom.
+Naravno, netrivijalan je samo u formalnom smislu: intuitivno objašnjenje kako izvršavati opću rekurzivnu funkciju (za zadanu funkciju $\f G$) po Church--\!Turingovoj tezi računa parcijalno rekurzivnu funkciju. Ipak, takva intuicija nas može navesti na krivi trag (prisjetite se funkcije~$\f h_{42}$), a i tvrdnje o jedinstvenosti i rekurzivnosti lakše je dokazivati (najčešće matematičkom indukcijom) jednom kad imamo indeks, nego kad imamo neformalni postupak. Zato je dobro izbjeći Church--\!Turingovu tezu, i doista konstruirati indeks $e_0$ s traženim svojstvom.
 
 \subsection{Teorem rekurzije}
 
@@ -378,31 +376,27 @@ Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} 
 \begin{verbatim}
             typedef unsigned funkcija(unsigned n);
             unsigned G(unsigned n, funkcija f){
-                if(n) return n*f(n-1);
-                else return 1;
-            }
+                { return n ? n*f(n-1) : 1; }
             /* ... nekako definiramo factorial */
-            int main(void){
-                return G(5, factorial);
-            } /* vrati 120 */
+            int main(void)
+                { return G(5, factorial); } /* ovo vrati 120 */
 \end{verbatim}
     \end{minipage}
 \end{equation}
 
-Matematički, "pokazivač na funkciju" nije ništa drugo nego njen indeks, što motivira sljedeću definiciju.
+Matematički, "pokazivač na funkciju" je njen indeks, što motivira sljedeću definiciju.
 
 \begin{definicija}[{name=[dijagonala parcijalno rekurzivne funkcije]}]
     Neka je $k\in\N_+$ te $\f H^{k+1}$ parcijalno rekurzivna funkcija.
-	
-	\emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $\partial\f H:=\$(h,\f H)$,\\ gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
+	\emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $\partial\f H:=\$(h,\f H)$, gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
 \end{definicija}
 
-Kako funkcija može imati više indeksa, može imati i više dijagonala --- odnosno formalno, dijagonala bi se trebala definirati za \emph{indeks}, ne za funkciju. No nama će prvenstveno biti bitna prateća funkcija $\f D=\N \partial$, koja je ionako definirana na indeksima.
+Kako funkcija može imati više indeksa, može imati i više dijagonalâ --- odnosno, formalno bismo dijagonalu trebali definirati za \emph{indeks}, a ne za funkciju. No nama će prvenstveno biti bitna prateća funkcija $\f D=\N \partial$, koja je ionako definirana na indeksima.
 
 U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad radimo s pokazivačem na funkciju, funkcijski poziv. Standard jezika C ne dopušta nikakvu aritmetiku s funkcijskim pokazivačima, ali je neki kompajleri ipak podržavaju. Slično, ovdje bismo mogli $h$ iskoristiti ne samo kao zadnji argument funkcije $\f{comp}_k$, nego raditi razne čudne stvari poput gledanja počinje li "strojni kod" funkcije $\f H$ instrukcijom \inc\ ($\f{InsINC}(h[0])$), i sličnog --- ali najčešće to ne činimo, a dok god $h$ koristimo samo za pozivanje funkcije $\f H$, svejedno je koji njen indeks smo uzeli.
 
 \begin{lema}[{name=[primitivna rekurzivnost dijagonalne funkcije]}]
-    Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$, koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $\partial\f H=\$(h,H)$.
+    Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$,\\ koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $\partial\f H=\$(h,H)$.
 \end{lema}
 \begin{proof}
 	Teorem o parametru kaže da se indeks $\f D_k(h)$ za $\partial\f H=\$(h,\kf h^{k+1})$ može dobiti kao $\f S_k(h,h)$. Drugim riječima, možemo definirati $\f D_k:=\f S_k^2\circ(\f I_1^1,\f I_1^1)$, što je primitivno rekurzivna funkcija kao kompozicija primitivno rekurzivnih.
@@ -426,22 +420,17 @@ Možemo li to iskoristiti da bismo eksplicitno napisali taj poziv u kodu, i izbj
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
        typedef unsigned funkcija(/* prima bilo što */);
-       unsigned G(unsigned n, funkcija f){
-           if(n) return n * f(n-1, f);
-           else return 1;
-       }
-       int main(void){
-           return G(5, G);
-       } /* vrati 120 bez warninga */
+       unsigned G(unsigned n, funkcija f)
+           { return n ? n * f(n-1, f) : 1; }
+       int main(void)
+           { return G(5, G); } /* vrati 120 bez warninga */
 \end{verbatim}
 \end{minipage}\end{equation}
 
 Ali ako već želimo tako zaobilaziti statičke tipove, jednostavnije je prebaciti se na dinamički tipizirani jezik. U Pythonu, stvari rade točno kako smo zamislili.
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
-            >>> def H(n, f):
-            ...     if n: return n * f(n-1, f)
-            ...     else: return 1
+            >>> def H(n, f): return n * f(n-1, f) if n else 1
             >>> H(7, H)
             5040
 \end{verbatim}
@@ -451,31 +440,26 @@ Refaktorirajmo ovu duplikaciju koda za dijagonaliziranje, u definiciji i pozivu 
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
             >>> def d(H):
-            ...     def dH(x):
-            ...         return H(x, H)
+            ...     def dH(x): return H(x, H)
             ...     return dH
-            >>> def H(n, f):
-            ...     if n: return n * d(f)(n-1)
-            ...     else: return 1
+            >>> def H(n, f): return n * d(f)(n-1) if n else 1
             >>> factorial = d(H)
             >>> factorial(7)
             5040
 \end{verbatim}
 \end{minipage}\end{equation}
-Dobra strana toga je da više ne moramo ručno proizvoditi funkciju \texttt H iz funkcije \texttt G. Prethodno smo to napravili tako što smo, tamo gdje je \texttt G pozivala \texttt f, u funkciji \texttt H pozvali $\partial\texttt f$. Sad to možemo formalizirati, tako da definicija od \texttt H pozove \texttt G s $\partial\texttt f$ automatski.
-\begin{equation}\begin{minipage}{0.8\textwidth}
+Dobra strana toga je da više ne moramo ručno proizvoditi funkciju \texttt H iz funkcije \texttt G. Prethodno smo to napravili tako što smo, tamo gdje je \texttt G pozivala \texttt f, u funkciji \texttt H pozvali $\partial\texttt f$. Sada to možemo formalizirati, tako da definicija od \texttt H pozove \texttt G s $\partial\texttt f$ automatski.
+\begin{equation}\label{eq:norec}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
-            >>> def G(n, f):
-            ...     if n: return n * f(n-1)
-            ...     else: return 1
+            >>> def G(n, f): return n * f(n-1) if n else 1
             >>> def H(x, f): return G(x, d(f))
 \end{verbatim}
 \end{minipage}\end{equation}
 
-I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćemo da nigdje nismo koristili rekurzivne pozive. Sad samo sve to treba napisati matematički.
+I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćemo da~\eqref{eq:norec} nigdje ne koristi rekurzivne pozive. Sad samo sve to treba napisati matematički.
 
 \begin{teorem}[Teorem rekurzije]\label{tm:rek}
-Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. Tada postoji $e\in\N$ takav da za sve $\vec x\in\N^k$ vrijedi $\kf e^k(\vec x)\simeq\f G(\vec x,e)$.
+Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. \\ Tada postoji $e\in\N$ takav da za sve $\vec x\in\N^k$ vrijedi $\kf e^k(\vec x)\simeq\f G(\vec x,e)$.
 \end{teorem}
 \begin{proof}
 	Definiramo funkciju $\f H^{k+1}\mspace{-2mu}$ točkovno s $\f H(\vec x,f):\simeq\f G\bigl(\vec x,\f D_k(f)\bigr)$. Ta funkcija je parcijalno rekurzivna (dobivena je kompozicijom iz $\f G$, $\f D_k$ i koordinatnih projekcija) pa ima indeks: označimo ga s $h$ (sjetite se napomene~\ref{nap:>1ind}).
@@ -493,15 +477,15 @@ Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. Tada postoji 
 
 \subsection{Ackermannova funkcija}
 
-Sada bismo htjeli vidjeti kako pomoću teorema rekurzije možemo definirati rekurzivne funkcije. Okvirno, metoda je uvijek ista: funkcijsku jednadžbu koju želimo riješiti (po $F^k$) zapišemo u obliku opće rekurzije (nađemo funkciju $\f G^{k+1}$) te nam teorem rekurzije dade parcijalno rekurzivno rješenje --- štoviše, dade nam njegov indeks $e_0$. Sada je potrebno dokazati dvije stvari (ako vrijede): prvo, da je $\f F_0:=\kf{e_0}^k$ jedinstveno rješenje, i drugo, da je $\f F_0$ totalna funkcija.
+Sada ćemo vidjeti kako pomoću teorema rekurzije možemo definirati rekurzivne funkcije. Metoda je uvijek ista: funkcijsku jednadžbu koju želimo riješiti (po $F^k$) zapišemo u obliku opće rekurzije (nađemo funkciju $\f G^{k+1}$) te nam teorem rekurzije dade parcijalno rekurzivno rješenje --- štoviše, dade nam njegov indeks $e_0$. Sada je potrebno dokazati dvije stvari (ako vrijede): prvo, da je $\f F_0:=\kf{e_0}^k$ jedinstveno rješenje, i drugo, da je $\f F_0$ totalna funkcija.
 
-I jedno i drugo su univerzalne tvrdnje na prirodnim brojevima --- recimo, jedinstvenost kaže da, kad god je $e_1$ "rješenje", za sve $\vec x\in\N^k$ vrijedi $\f{comp}(\vec x,e_1\!)\simeq\f F_0(\vec x)$; totalnost kaže da za sve $\vec x\in\N^k$ vrijedi $\vec x\in\dom{\f F_0}$ --- te ih je uobičajeno dokazivati indukcijom. Didaktički problem je u tome što ako je ta indukcija dovoljno jednostavna, najčešće je programabilna, pa recimo totalnost ne znači samo rekurzivnost već znači primitivnu rekurzivnost. A tada nam ne treba teorem rekurzije: primitivna rekurzija je dovoljna (kao što je uostalom slučaj i s funkcijom $\f{factorial}$).
+I jedno i drugo su univerzalne tvrdnje na prirodnim brojevima --- jedinstvenost kaže da, kad god je $e_1$ "rješenje", za sve $\vec x\in\N^k$ vrijedi $\f{comp}(\vec x,e_1\!)\simeq\f F_0(\vec x)$; totalnost kaže da za sve $\vec x\in\N^k$ vrijedi $\vec x\in\dom{\f F_0}$ --- te ih je uobičajeno dokazivati indukcijom. Didaktički problem je u tome što ako je ta indukcija dovoljno jednostavna, najčešće je programabilna, pa recimo totalnost ne znači samo rekurzivnost već znači primitivnu rekurzivnost. A tada nam ne treba teorem rekurzije: primitivna rekurzija je dovoljna (kao što je uostalom slučaj i s funkcijom $\f{factorial}$).
 
 Recimo, ako se totalnost od $\f F_0^1$ može dokazati običnom matematičkom indukcijom, to znači da imamo neku ogradu za broj koraka računanja $\f F_0(0)$ te neki izračunljiv način da iz ograde za broj koraka u računanju $\f F_0(n)$ dobijemo takvu ogradu za $\f F_0(n+1)$ --- a to zapravo znači da $\f F_0$ možemo dobiti (degeneriranom) primitivnom rekurzijom, samo trebamo u funkciji $\f{step}$ ograničiti minimizaciju tom nađenom ogradom. Ako umjesto obične indukcije moramo upotrijebiti jaku indukciju, to na isti način znači da se $\f F_0$ može dobiti rekurzijom s poviješću. U slučaju simultane indukcije, imamo simultanu rekurziju, i tako dalje.
 
 Vjerojatno najjednostavniji obrazac indukcije koji nije moguće "uloviti" u teoriji primitivno rekurzivnih funkcija je \emph{ugniježđena} indukcija po dvije varijable, gdje iz pretpostavke da tvrdnja vrijedi za neki $m$ i za \emph{sve} $n$, slijedi da vrijedi za $m+1$ i za sve $n$. Jedan od prvih primjera takve funkcije (čija totalnost zahtijeva takav indukcijski obrazac koji nije formalizabilan primitivnom rekurzijom) dao je Hilbertov asistent Wilhelm Friedrich Ackermann 1928.\ godine.
 
-Ackermann je promatrao niz aritmetičkih operacija: sljedbenik, zbrajanje, množenje, potenciranje,~\ldots\ nekako je jasno da ga možemo i nastaviti na sličan način; sljedeći član --- tetracija --- je čak korisna operacija u nekim kombinatornim situacijama. Mala nepravilnost je što je sljedbenik jednomjesna funkcija, a sve ostale su dvomjesne: zato stavimo $\f A_0^2:=\f{Sc}\circ \f I_2^2$. Ostale funkcije označimo na očit način: $\f A_1^2:=\f{add}^2$, $\f A_2^2:=\f{mul}^2$, $\f A_3^2:=\f{pow}$, i tako dalje. Osnovna ideja --- svaka osim prve funkcije u tom nizu dobivena je iteracijom prethodne --- se može iskazati kao
+Ackermann je promatrao niz aritmetičkih operacija: sljedbenik, zbrajanje, množenje, potenciranje,~\ldots\ nekako je jasno da ga možemo i nastaviti na sličan način; sljedeći član --- tetracija --- je čak korisna operacija u nekim kombinatornim situacijama. Mala nepravilnost: sljedbenik je jednomjesna funkcija, a sve ostale su dvomjesne; zato stavimo $\f A_0^2:=\f{Sc}\circ \f I_2^2$. Ostale funkcije označimo na očit način: $\f A_1^2:=\f{add}^2$, $\f A_2^2:=\f{mul}^2$, $\f A_3^2:=\f{pow}$, i tako dalje. Osnovna ideja --- svaka osim prve funkcije u tom nizu dobivena je iteracijom prethodne --- se može iskazati kao
 \begin{equation}\label{eq:A2SSdef}
     \f A_{n+1}(x,y+1)=\f A_n\bigl(x,\f A_{n+1}(x,y)\bigr)\text{, za sve }x,y,n\in\N\text,
 \end{equation}
@@ -640,7 +624,7 @@ gdje je $i_n:=\kr{\f{codeDEC}(n,3),\f{codeINC}(0),\f{codeGOTO}(0)}$ indeks funkc
 
 Tako je i ovdje: jednakost $\kf e=\$(e,\f G)$ iz teorema rekurzije možemo shvatiti kao $e\approx\f S_k(e,g)$, gdje je $g$ neki indeks za $\f G$. Ta "približna jednakost" ne može doista biti jednakost ni u kojem zanimljivom slučaju, jer za $g\in\f{Prog}$ uvijek vrijedi $\f S_k(e,g)>e$ (zgodna je vježba dokazati to). Što je onda relacija $\approx$?
 
-Ukratko, vrijeme je da malo preciznije formaliziramo ideju ekvivalentnih RAM-programa iz definicije~\ref{def:ekvprog}: ono što bismo htjeli reći nije da su $e$ i $\f S_k(e,g)=:\f F(e)$ isti brojevi, već da su $\kf e^k$ i $\kf{\f F(e)}^k$ iste funkcije. Nažalost, kao i u slučaju specijalizacije, imat ćemo različite relacije $\approx_k,k\in\N_+$ --- nećemo ih moći upotrebljivo objediniti u jednu relaciju, jer u RAM-programu nigdje ne piše intendirana mjesnost.
+Ukratko, vrijeme je da malo preciznije formaliziramo ideju ekvivalentnih RAM-programa iz definicije~\ref{def:ekvprog}: ono što bismo htjeli reći nije da su $e$ i $\f S_k(e,g)=:\f F(e)$ jednaki \emph{brojevi}, već da su $\kf e^k$ i $\kf{\f F(e)}^k$ jednake \emph{funkcije}. Nažalost, kao i u slučaju specijalizacije, imat ćemo različite relacije $\approx_k,k\in\N_+$ --- nećemo ih moći upotrebljivo objediniti u jednu relaciju, jer u RAM-programu nigdje ne piše intendirana mjesnost.
 
 \begin{definicija}[{name=[$k$-ekvivalentnost]}]
 Neka je $k\in\N_+$ te $e,f\in\N$. Kažemo da su $e$ i $f$ \emph{$k$-ekvivalentni}, i pišemo $e\approx_kf$, ako vrijedi $\kf e^k=\kf f^k$.
@@ -652,7 +636,7 @@ Također, za svaki $e\in\f{Prog}$, za sve $j,k\in\N_+$, vrijedi $e*\kr{\f{codeIN
 \end{primjer}
 
 \begin{propozicija}[{name=[struktura kvocijentnog skupa relacije $k$-ekvivalentnosti]}]
-    Za svaki $k\in\N_+$, $\approx_k$ je relacija ekvivalencije, s prebrojivo mnogo klasa ekvivalencije koje su sve prebrojive.
+    Za svaki $k\in\N_+$, $\approx_k$ je relacija ekvivalencije, \\ s prebrojivo mnogo klasa ekvivalencije koje su sve prebrojive.
 \end{propozicija}
 \begin{proof}
 Refleksivnost, simetričnost i tranzitivnost su trivijalne: recimo, $e\approx_kf\approx_kg$ znači $\kf e^k=\kf f^k=\kf g^k$, pa je $\kf e^k=\kf g^k$, iz čega $e\approx_kg$. Inače, u refleksivnosti se, kroz samu oznaku $\kf e^k$, krije korolar~\ref{kor:ram1fun} koji kaže da za fiksni $k$, svaki RAM-program računa jedinstvenu $k$-mjesnu funkciju.
@@ -894,7 +878,7 @@ Budući da je $\wp$ netrivijalno svojstvo, postoji neka $k$-mjesna funkcija koja
 Po Church--\!Turingovoj tezi, to znači da bi taj algoritam računao $\chi_{\kins{\!\mathcal F}}$, što je u kontradikciji s korolarom~\ref{kor:Rice!odl}.
 \end{proof}
 
-\subsection{Sintaksna i semantička svojstva RAM-programa}
+%\subsection{Sintaksna i semantička svojstva RAM-programa}
 
 Za zadani RAM-program možemo postaviti mnoga pitanja: ima li više od milijun instrukcija, stane li s ulazom $(2,5)$, je li mu registar $\reg{15}$ relevantan, sadrži li instrukciju tipa $\goto$, računa li totalnu funkciju, dekrementira li ikad u toku izračunavanja registar $\reg7$, je li dobiven kompiliranjem simboličke definicije neke primitivno rekurzivne funkcije, zapiše li Turingov stroj dobiven njegovim transpiliranjem ikad prazninu na traku, može li se dobiti spljoštenjem makro-programa koji sadrži barem jedan funkcijski makro, napravi li paran broj koraka prije zaustavljanja s ulazom $27$, i tako dalje.
 
@@ -919,7 +903,7 @@ Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupo
     %\item
     Skup svih indeksa svih funkcija iz $\mathcal F$ označimo s $T:=\kins{\mathcal F}$.
     \item\label{korak:elemT} Nađemo neki element od $T$ (najčešće tako da nađemo neku jednostavnu funkciju $\f F\in\mathcal F$, napišemo RAM-program koji je računa, i nađemo njegov kod).
-    \item Analogno, nađemo neki element od $T\kompl$. Skupa s korakom~\ref{korak:elemT} imamo $\emptyset\subset T\subset\N$.
+    \item Analogno, nađemo neki element od $T\kompl$. Skupa s korakom~\ref{korak:elemT} sada imamo $\emptyset\subset T\subset\N$.
     \item Dokažemo da je $T$ $k$-invarijantan, gdje je $k$ mjesnost koju smo fiksirali u koraku~\ref{korak:skupfun}.
     \item Formalno svedemo $T\!\preceq S$, pišući $\chi_T$ kao kompoziciju $\chi_S$ s nekim rekurzivnim funkcijama.
     \item Zaključimo da kad bi $S$ bio rekurzivan, bio bi takav i $T$, što je kontradikcija s Riceovim teoremom.

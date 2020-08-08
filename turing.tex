@@ -1022,7 +1022,7 @@ U dijagramima, na strelici od $q$ prema $q'$ pišemo $\beta\t:\beta'\texttt@j$, 
 \subsection{Simulacija RAM-izračunavanja}
 
 \begin{lema}[{name=[{izvršavanje RAM-instrukcija na Turingovom stroju}]}]\label{lm:gadgets}
-    Neka je $P_0=:\begin{prog}i.&I_i\end{prog}_{i<n}$ (širine $m$). Tada za svaki $i<n$ postoji fragment Turingovog stroja, koji prevodi svaku $m$-reprezentaciju $\mathcal S_0$-konfiguracije $c$ kojoj je $c(\textsc{pc})=i$, u neku $m$-reprezentaciju od $d$, gdje $c\leadsto d$ po programu $P_0$.
+    Neka je $P_0=:\begin{prog}i.&I_t\end{prog}_{t<n}$ (širine $m$). Tada za svaki $i<n$ postoji fragment Turingovog stroja, koji prevodi svaku $m$-reprezentaciju svake $\mathcal S_0$-konfiguracije $c$ kojoj je $c(\textsc{pc})=i$, u neku $m$-reprezentaciju $\mathcal S_0$-konfiguracije $d$, gdje $c\leadsto d$ po programu $P_0$.
 \end{lema}
 \begin{proof}
 Traženi fragment počinje s radom u stanju $p_i$ na poziciji većoj ili jednakoj poziciji separatora $k$, a treba završiti u stanju $p_{i'}$ za $i':=d(\textsc{pc})$ na poziciji s istim svojstvom. Za početak, dok god čitamo znak iz $B^m$, pomičemo se lijevo~\eqref{d:31}. Kad pročitamo \t\#, pomaknemo se desno~\eqref{d:32}. 
@@ -1069,7 +1069,7 @@ Ako je $I_i$ tipa $\dec$, recimo $i.\;\decr jl$, trebamo kao i za $\inc$ doći d
 
 Tipove fragmenata iz dokaza možemo prikazati dijagramima:
 \begin{itemize}
-    \item[$\rhd$] $i.\;\incr j$\;:
+    \item[$\rhd$]\quad $i.\;\incr j$\;:\quad
 \begin{tikzpicture}[baseline=(si)]
 \node[state] (pi) {$p_i$};
 \node[state, right of=pi] (si) {$s_i$};
@@ -1082,7 +1082,7 @@ Tipove fragmenata iz dokaza možemo prikazati dijagramima:
 ;
 \end{tikzpicture}
 \vspace{-1.5cm}
-    \item[$\rhd$] $i.\;\decr jl$\;:
+    \item[$\rhd$]\quad $i.\;\decr jl$\;:\quad
 \begin{tikzpicture}[baseline=(si)]
 \node[state] (pi) {$p_i$};
 \node[state, right of=pi] (si) {$s_i$};
@@ -1099,7 +1099,7 @@ Tipove fragmenata iz dokaza možemo prikazati dijagramima:
 ;
 \end{tikzpicture}
 \vspace{-0.8cm}
-    \item[$\rhd$] $i.\;\goto\;l$\;:\qquad
+    \item[$\rhd$]\quad $i.\;\goto\;l$\;:\qquad\quad
 \begin{tikzpicture}[baseline=(si)]
 \node[state] (pi) {$p_i$};
 \node[state, right of=pi] (si) {$s_i$};

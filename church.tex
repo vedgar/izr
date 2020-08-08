@@ -83,15 +83,17 @@ Neka su $k,l\in\N_+$ te $R^k$ i $P^l$ relacije. Kažemo da je $R$ \emph{svediva}
 
 Jednakost iz definicije se može točkovno zapisati kao $R(\vec x)\Leftrightarrow P\bigl(\f G_1(\vec x),\dotsc,\f G_l(\vec x)\bigr)$. To je zapravo obična kompozicija $\chi_R=\chi_P\circ G$, samo uzevši u obzir da je kodomena od $G$ jednaka $\N^l$, pa je prikazujemo kroz $l$ koordinatnih funkcija u skladu s napomenom~\ref{nap:brip}.
 
-Također naglasimo da nismo ništa dokomponirali na $\chi_P$ slijeva: nije dozvoljen \emph{post-processing} povratne vrijednosti od $\chi_P$, samo \emph{pre-processing} njenih ulaznih podataka. Kako se radi o karakterističnim funkcijama čije su povratne vrijednosti iz $bool=\{0,1\}$, jedini netrivijalni \emph{post-processing} bi moglo biti negiranje (komplementiranje), ali kako smo upravo vidjeli da komplementiranje općenito nije tako jednostavna operacija na problemima (npr.\ na domenama izračunljivih funkcija, odnosno problemima zaustavljanja), s razlogom ga nećemo htjeti ovdje.
+Također naglasimo da nismo ništa dokomponirali na $\chi_P$ slijeva: ne dozvoljavamo \emph{post-processing} povratne vrijednosti od $\chi_P$, već samo \emph{pre-processing} njenih ulaznih podataka. Kako se radi o karakterističnim funkcijama kodomene $bool=\{0,1\}$, jedini netrivijalni \emph{post-processing} je negiranje, ali upravo smo vidjeli da komplement nije baš jednostavna operacija na problemima (npr.\ na %domenama izračunljivih funkcija, odnosno 
+problemima zaustavljanja), pa ga s razlogom ne želimo u ovom kontekstu.
 
 \begin{propozicija}[{name=[refleksivnost i tranzitivnost svedivosti]}]\label{pp:preceqrt}
-Relacija $\preceq$ (na skupu $\bigcup_{k\in\N_+}\!\mathcal P(\N^k)$ svih brojevnih relacija) je refleksivna i tranzitivna.
+Relacija $\preceq$ (na skupu %$\bigcup_{k\in\N_+}\!\mathcal P(\N^k)$
+	svih brojevnih relacija) je refleksivna i tranzitivna.
 \end{propozicija}
 \begin{proof}
-Za refleksivnost, stavimo $\f G_1:=\f I_1^l$, $\f G_2:=\f I_2^l$,~\ldots, $\f G_l:=\f I_l^l$ (koordinatne funkcije identitete $id_{\N^l}$). Očito je $\chi_P\circ(\f I_1^l,\dotsc,\f I_l^l)=\chi_P$, pa je $P\preceq P$.
+	Za refleksivnost, stavimo $\f G_1:=\f I_1^l$, $\f G_2:=\f I_2^l$,~\ldots, $\f G_l:=\f I_l^l$ (koordinatne funkcije identitete $id_{\N^l}$). Očito je $\chi_P\circ(\f I_1^l,\dotsc,\f I_l^l)=\chi_P\circ id_{\N^l}=\chi_P$, pa je $P\preceq P$.
 
-	Tranzitivnost je kompliciranija, ali samo zbor napomene~\ref{nap:brip}. Neka su $k,l,m\in\N_+$ te neka su $R^k$, $Q^m$ i $P^l$ relacije takve da je $R\preceq Q\preceq P$. Dakle, postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_m^k$ takve da je $\chi_R=\chi_Q\circ(\f G_1,\dotsc,\f G_m)$, i rekurzivne funkcije $\f H_1^m$,~\ldots, $\f H_l^m$ takve da je $\chi_Q=\chi_P\circ(\f H_1,\dotsc,\f H_l)$. Sada je (možemo svuda pisati jednakosti jer su sve funkcije ili karakteristične ili rekurzivne, dakle totalne, a kompozicija totalnih je totalna po propoziciji~\ref{prop:comptot})
+	Tranzitivnost je kompliciranija, ali samo zbog napomene~\ref{nap:brip}. Neka su $k,l,m\in\N_+$ te neka su $R^k$, $Q^m$ i $P^l$ relacije takve da je $R\preceq Q\preceq P$. Dakle, postoje rekurzivne funkcije $\f G_1^k$,~\ldots, $\f G_m^k$ takve da je $\chi_R=\chi_Q\circ(\f G_1,\dotsc,\f G_m)$, i rekurzivne funkcije $\f H_1^m$,~\ldots, $\f H_l^m$ takve da je $\chi_Q=\chi_P\circ(\f H_1,\dotsc,\f H_l)$. Sada je (možemo svuda pisati jednakosti jer su sve funkcije ili karakteristične ili rekurzivne, dakle totalne, a kompozicija totalnih je totalna po propoziciji~\ref{prop:comptot})
 \begin{multline}\label{eq:tranzpreceq}
     \chi_R(\vec x)=\chi_Q\bigl(\f G_1(\vec x),\dotsc,\f G_m(\vec x)\bigr)=\bigl(\chi_P\circ(\f H_1,\dotsc,\f H_l)\bigr)\bigl(\f G_1(\vec x),\dotsc,\f G_m(\vec x)\bigr)=\\
     =\chi_P\bigl(
@@ -400,8 +402,6 @@ Ako $P$-izračunavanje s $\vec u$ stane, tada $\Gamma_{\vec u}\models\zeta$.
 
 %\subsection{Neformalna izreka Churchovog teorema}
 
-\subsection{Formule prvog reda kao formalni jezik}
-
 \begin{teorem}[Churchov teorem o neodlučivosti logike prvog reda]\label{tm:Church}
 Ne postoji algoritam koji za proizvoljnu formulu logike prvog reda odlučuje je li valjana.
 \end{teorem}
@@ -435,6 +435,8 @@ Dakle, pod pretpostavkom da $\mathcal A$ ispravno odlučuje koje su formule prvo
 
 Time je dokazan Churchov teorem, ali na neformalnoj razini --- "dokazali" smo da ne postoji neformalni algoritam, pozivanjem na Church--\!Turingovu tezu. Možemo li bez toga?
 
+\subsection{Formule prvog reda kao formalni jezik}
+
 Rekli smo da probleme obično shvaćamo kao jezike: odlučivost problema je tu rekurzivnost (karakteristične funkcije kodiranja) jezika čiji elementi su riječi koje predstavljaju instance problema na koje je odgovor potvrdan. U ovom slučaju, promotrili bismo jezik $\Valid$ nad nekom abecedom $\Sigma_{\log}$ koja je dovoljno bogata da može izraziti svaku formulu logike prvog reda, i u njemu bi se nalazile samo valjane formule. Ako uspijemo dokazati da $\Valid$ nije rekurzivan, "odgurat" ćemo primjenu Church--\!Turingove teze na sam kraj dokaza, i pseudokod u dokazu teorema~\ref{tm:Church} moći ćemo zamijeniti pravom rekurzivnom funkcijom koja svodi $K$ na $\Valid$ (preciznije $\kr{\Valid}$).
 
 Hoćemo li time dobiti išta vrednije nego u prethodnoj točki? Da, jer imamo garanciju da smo barem svođenje napisali egzaktno --- a ako prihvatimo definiciju~\ref{def:izr}, argument postaje sasvim matematički bez pozivanja na intuiciju pojma algoritma.
@@ -453,7 +455,7 @@ Ostatak alfabeta logike prvog reda je konačan i možemo ga ubaciti u našu abec
 
 U abecedu ćemo dodati i separator \t\#, koji ćemo koristiti u radu s konačnim nizovima formula --- najvažniji primjer bit će \emph{dokazi}, odnosno izvodi iz nekog konačnog (ili barem odlučivog) skupa aksioma.
 
-\subsection{Kodiranje formula prvog reda}
+%\subsection{Kodiranje formula prvog reda}
 
 \begin{definicija}[{name=[logička abeceda i njeno kodiranje]}]
 \emph{Logička abeceda} je zadana prvim retkom tablice
@@ -528,8 +530,10 @@ Ako je riječ $v$ prava podriječ od $w$, tada je $\kr v<\kr w$.
     Nejednakost~\eqref{eq:injNSz} kaže da manji broj ne može imati dulji zapis u pomaknutoj bazi. Dakle, kraća riječ mora imati manji kod, a očito je $\dulj v<\dulj w$.
 \end{proof}
 
+\subsection{Formalna izreka Churchovog teorema}
+
 \begin{lema}[{name=[primitivna rekurzivnost leksičke strukture formula prvog reda]}]\label{lm:lexF1}
-Funkcije $\f{Var}$, $\f{Const}$, $\f{Func}$ i $\f{Rel}$, koje preslikavaju $i\in\N$ redom u $\kr{x_i}$, $\kr{c_i}$, $\kr{f_i}$ i $\kr{R_i}$, primitivno su rekurzivne.
+Funkcije $\f{Var}$, $\f{Const}$, $\f{Func}$ i $\f{Rel}$, koje preslikavaju $i\in\N$\\ redom u $\kr{x_i}$, $\kr{c_i}$, $\kr{f_i}$ i $\kr{R_i}$, primitivno su rekurzivne.
 \end{lema}
 \begin{proof}
 Zapravo je jedini zanimljivi dio vidjeti da je "potenciranje" (uzastopna konkatenacija) znaka odnosno riječi, $Repeat(w,n):=w^n$, primitivno rekurzivno. Prateća funkcija se može napisati primitivnom rekurzijom i konkatenacijom:
@@ -554,7 +558,7 @@ Introdukciju logičkih veznika mogli bismo obavljati na sličan način, samo ih 
     y\conc{}
     8
 \end{equation}
-ima svojstvo da je $\f{Conjunction}(\kr{\varphi},\kr{\psi})=\kr{\varphi\land\psi}$ (preciznije $\kr{\t{$\lnot$(}\varphi\,\t{\textrightarrow\,$\lnot$}\psi\t)}$ u osnovnom jeziku) za sve formule $\varphi$ i $\psi$, pa se može shvatiti kao introdukcija konjunkcije na kodovima. Za eliminaciju možemo iskoristiti \emph{brute force} pristup:
+ima svojstvo da je $\f{Conjunction}(\kr{\varphi},\kr{\psi})=\kr{\varphi\land\psi}$ (preciznije $\kr{\t{$\lnot$(}\varphi\,\t{\textrightarrow\,$\lnot$}\psi\t)}$ u osnovnom jeziku) za sve formule $\varphi$ i $\psi$, pa se može shvatiti kao introdukcija konjunkcije na kodovima. Za eliminaciju možemo iskoristiti pristup \emph{brute force}:
 \begin{align}
     \f{IsConjunction}(x,y,z)&:\Longleftrightarrow y\in\kr{F1}\land z\in\kr{F1}\land x=\f{Conjunction}(y,z)\text,
 \\\label{eq:lconj}
@@ -577,14 +581,12 @@ Sada je funkcija $\f{UnivQuant}$ primitivno rekurzivna po lemi~\ref{lm:lexF1} i 
 
 Zapravo, kako u našem slučaju (reprezentacija problema zaustavljanja RAM-stroja preko valjanosti formula prvog reda) koristimo samo prvih $m$ varijabli ($m$ je konstanta), dovoljna će nam biti funkcija $c\mapsto\f{UnivQuants}(m)\conc{}c$.
 
-\subsection{Formalna izreka Churchovog teorema}
-
 Pogledajmo kako u osnovnom jeziku izgleda formula $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\eqref{step:varphi_u}. To ovisi o instrukcijama programa $P_0$ koji računa Russellovu funkciju, ali dio koji nam je jedini bitan za svođenje je prilično malen i odnosi se samo na formulu $\pi_u$.
 
 Preciznije, neka je $P_0=\begin{prog}t.&I_t\end{prog}_{t<n}$. U $\Gamma_u$ imamo formule $\iota_t,t<n$, čija se univerzalna zatvorenja obrnutim redom prebacuju na desnu stranu~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je tada na desnoj stani označimo s $\psi$), koju ne trebamo univerzalno zatvarati jer je rečenica. Formula $\psi$, iako ogromna, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će biti (jako velika) konstanta.
 
     Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsb(\overline{\iota_{n-1}}\to\zeta)\dotsm)\bigr)\bigr)$\text.
-Uz standardne reprezentacije ($\mathsf o$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, a $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), možemo svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Jedino što je još potrebno su kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. U praksi je lakše koristiti ovaj drugi pristup.
+Uz standardne reprezentacije ($\mathsf o$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, a $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), možemo svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Od veznika su nam potrebni kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. Obično je lakše koristiti ovaj drugi pristup.
 
 \begin{primjer}[{name=[zaustavljanje RAM-izračunavanja kao valjanost jedne formule]}]
 Promotrimo problem zaustavljanja $P$-izračunavanja s $\vec u$, gdje je
@@ -598,17 +600,17 @@ Promotrimo problem zaustavljanja $P$-izračunavanja s $\vec u$, gdje je
 \begin{equation}
     (0,1,2,0,\dotsc,0)\leadsto(0,0,2,0,\dotsc,1)\leadsto(0,0,2,0,\dotsc,1)\leadsto\dotsb\text.
 \end{equation}
-Na jeziku logike prvog reda:
+Jezikom logike prvog reda:
 \begin{align}
-\SwapAboveDisplaySkip
-    \zeta&=\exists x_0\exists x_1\exists x_2 R_2(x_0,x_1,x_2)\\
-    \iota_0^0&=\bigl(R_0(x_0,\mathsf o,x_2)\to R_1(x_0,\mathsf o,x_2)\bigr)\\
+%\SwapAboveDisplaySkip
+	\iota_0^0&=\bigl(R_0(x_0,\mathsf o,x_2)\to R_1(x_0,\mathsf o,x_2)\bigr)&
     \iota_0^+&=\bigl(R_0\bigl(x_0,\mathsf s(x_1),x_2\bigr)\to R_1(x_0,x_1,x_2)\bigr)\\
-    \iota_1^0&=\bigl(R_1(x_0,\mathsf o,x_2)\to R_1(x_0,\mathsf o,x_2)\bigr)\\
+	\iota_1^0&=\bigl(R_1(x_0,\mathsf o,x_2)\to R_1(x_0,\mathsf o,x_2)\bigr)&
     \iota_1^+&=\bigl(R_1\bigl(x_0,\mathsf s(x_1),x_2\bigr)\to R_2(x_0,x_1,x_2)\bigr)\\
+	\zeta&=\exists x_0\exists x_1\exists x_2 R_2(x_0,x_1,x_2)&
     \psi&=\bigl(\iota_0^0\to\bigl(\iota_0^+\to(\iota_1^0\to(\iota_1^+\to\zeta))\bigl)\bigl)\\
-    \pi_{(1,2)}&=R_0\bigl(\mathsf o,\mathsf s(\mathsf o),\mathsf s\bigl(\mathsf s(\mathsf o)\bigr)\bigr)\\
-    \varphi_{(1,2)}&=(\pi_{(1,2)}\to\psi)
+	&\pi_{(1,2)}=R_0\bigl(\mathsf o,\mathsf s(\mathsf o),\mathsf s\bigl(\mathsf s(\mathsf o)\bigr)\bigr)&
+	&\varphi_{(1,2)}=(\pi_{(1,2)}\to\psi)
 \end{align}
     odnosno znamo da nije valjana formula (zapisana u osnovnom jeziku)
 \begin{multline}
@@ -619,7 +621,7 @@ Na jeziku logike prvog reda:
     \t{($\forall$x$\forall$x'$\forall$x'{}'(R'(x,f(x'),x'{}')\textrightarrow R'{}'(x,x',x'{}'))\textrightarrow}\\
     \t{$\lnot\forall$x$\forall$x'$\forall$x'{}'$\lnot$R'{}'(x,x',x'{}'))))))}\text,
 \end{multline}
-čiji kod ima nekoliko stotina znamenaka --- ali dio koji ovisi o $\vec u$ je samo ovaj prvi red; sve ostalo je konstanta za fiksni RAM-algoritam $P^k$.
+čiji kod ima nekoliko stotina znamenaka --- ali dio koji ovisi o $\vec u$ je samo ovaj prvi red;\\ sve ostalo je konstanta za fiksni RAM-algoritam $P^k$.
 \end{primjer}
 
 \begin{lema}[{name=[primitivna rekurzivnost svođenja $K$ na $\Valid$]}]\label{lm:K<Valid}
@@ -688,7 +690,7 @@ Vrijedi $\mathfrak N\models\mathscr G\ddot o$.
 Po kontrapoziciji propozicije~\ref{pp:models>stop}, za svaki $u\in K\kompl$ formula $\varphi_u$ nije valjana, a iz dokaza te propozicije slijedi da ne vrijedi upravo na strukturi $\mathfrak N$ (jer tamo vrijedi $\pi_u$ i sve $\iota_i$, ali ne vrijedi $\zeta$). Iz logike znamo da $\mathfrak N\nvDash\varphi_u$ povlači $\mathfrak N\models\lnot\varphi_u$, jer je $\varphi_u$ rečenica. Drugim riječima, za svaki $u\in K\kompl$ vrijedi $\mathfrak N\models\lnot\varphi_u$, što smo trebali dokazati.
 \end{proof}
 
-\begin{teorem}[{name=[Gödelov prvi teorem nepotpunosti]}]
+\begin{teorem}[{name=[Gödelov prvi teorem nepotpunosti]}]\label{tm:goedel}
 Postoji rečenica $\gamma\in\mathscr G\ddot o$ (\emph{Gödelova rečenica}) koja nije dokaziva u PA\@.
 \end{teorem}
 \begin{proof}[Skica dokaza]
@@ -727,7 +729,7 @@ Odnosno, $\alpha$ je dobivena modus ponensom iz $\beta$ i $\gamma$ ako i samo ak
 
 Promotrimo sljedeći \emph{paralelni} algoritam:
 \begin{quote}
-    Za ulaz $u\in\N$, prvo zapišemo $\neg\varphi_u$ tako da, osim nule i sljedbenika, koristi samo zbrajanje i množenje (nazovimo taj zapis $\neg\varphi_u'$). Nakon toga pokrenemo dvije dretve.
+    Za ulaz $u\in\N$, prvo zapišemo $\neg\varphi_u$ tako da, osim nule i sljedbenika, koristi samo zbrajanje i množenje (nazovimo taj zapis $\neg\varphi_u'$). Zatim pokrenemo dvije dretve.
 
     U prvoj simuliramo $P_0$-izračunavanje s $u$, odnosno računanje funkcije $\f{Russell}$ u točki $u$. Ako ova dretva stane, prekidamo program i vraćamo $\mathit{true}$ ($1$).
 
@@ -743,9 +745,9 @@ Sve u svemu, vidimo da neformalni algoritam koji smo napisali računa $\chi_{K}$
 Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathscr G\ddot o$ koja nije dokaziva u PA\@.
 \end{proof}
 
-\subsection{Problemi u skici dokaza Gödelovog teorema}
+%\subsection{Problemi u skici dokaza Gödelovog teorema}
 
-U prethodnoj točki je mnogo toga napravljeno neformalno. Želja autora bila je prikazati da smo idejno jako blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako ih možemo "zakrpati".
+U dokazu teorema~\ref{tm:goedel} je mnogo toga napravljeno neformalno. Želja autora bila je prikazati da smo idejno jako blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako ih možemo "zakrpati".
 
 \begin{itemize}
     \item Možemo li doista relacije $R_n$ izraziti pomoću nule, sljedbenika, zbrajanja i mno\-že\-nja? Koristeći funkciju $\f{Reg}$ svaku od njih možemo izraziti kao projekciju primitivno rekurzivne relacije, ali kodiranje potrebno za $\f{Reg}$ bitno koristi potenciranje. Pokazuje se~\cite{smullyan} da je Gödelov teorem mnogo lakše dokazati ako u strukturi $\N$ shvatimo i potenciranje kao osnovnu operaciju. Zapisati potenciranje \emph{logički} pomoću zbrajanja i množenja (ne koristeći primitivnu rekurziju, jer ona ide preko teorije skupova, Dedekindovim teoremom rekurzije), ili alternativno, razviti kodiranje konačnih nizova koje umjesto množenja i potenciranja koristi zbrajanje i množenje, vrlo je teško. Gödelov originalni pristup (funkcija $\beta$ i kineski teorem o ostacima) je zapetljan, ali do danas nismo otkrili ništa bolje.
