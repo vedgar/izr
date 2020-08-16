@@ -1,15 +1,15 @@
 \documentclass[ twoside=semi, open=any, fontsize=12pt, DIV=16, BCOR=0pt,
      headings=onelinechapter, headings=small, numbers=endperiod,
      paper=A4, listof=nochaptergap, headinclude=false, footinclude=false,
+     headings=optiontotoc,
      ]{scrbook}
 %\includeonly{neizr,meta,re} %dolje isključiti list of theorems
 % TODO za iduću godinu:
-% - preciznije eksplicirati vezu između Russell i pričice iz uvoda
 % * po instrukciji vs po programu prijelaz eksplicirati
 % * \emphove razdvojiti na engl, defn (-> indeks jednog dana) i nagl
 % * == umjesto = za algoritamsku jednakost; rješava i probleme s parcijalnošću
-% * if, spec u smallcaps
-% !! popraviti odnos gornje i donje margine (footer)
+% * if u smallcaps - ili argumente u uglate zagrade, da izgleda specijalno
+% * srpati nekoliko subsectiona iz 5.3 u 5.4
      %\usepackage{showframe}
 \raggedbottom
 %\pdfmapline{+dummy-space <dummy-space.pfb}
@@ -173,6 +173,7 @@
 \date{\today} \maketitle \tableofcontents
 {\renewcommand\thesection{\alph{section}} \include{uvod}}
 \mainmatter
+%\addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
 \include{ram} %\addtocontents{toc}{\protect\newpage}
 \include{rek} \include{univ} %\addtocontents{toc}{\protect\newpage}
 \include{turing}%\include{tbroj}
