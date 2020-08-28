@@ -37,7 +37,7 @@ Svaka inicijalna funkcija je makro-izračunljiva.
 0.&\remove10\\
 1.&\incr0
 \end{prog}^1$ računa $\f{Sc}$:
-\vspace{-1em}
+\vspace{-0.3em}
 \begin{equation}
     \begin{array}{r@{\;}l|cc}
 \SwapAboveDisplaySkip
@@ -60,9 +60,9 @@ Spljoštenja makro-programa iz dokaza propozicije~\ref{prop:initmacro} daju nam 
 
 Kompozicija je intuitivno jednostavna operacija (kao i slijedno izvršavanje naredaba u imperativnim programima): izračunamo vrijednost jedne funkcije, i uvrstimo je u definiciju druge funkcije. No definicija je prilično tehnička.%, uglavnom zbog nekih odluka koje smo donijeli na početku, o tome kako shvaćamo algoritme.
 
-Htjeli bismo reći: "kompozicija $\f H\circ\f G$ dviju izračunljivih funkcija, $\f G^k$ i $\f H^l$, je izračunljiva funkcija". Da bi ta kompozicija imala smisla, kodomena od $\f G^k$ bi morala biti $\N^l$. U skladu s napomenom~\ref{nap:brip}, to znači da imamo $l$ izračunljivih koordinatnih funkcija, $\f G_1^k,\dotsc,\f G_l^k$, svaka od kojih daje po jedan ulazni podatak za $\f H^l$. Zato komponiranje $\f H\circ(\f G_1,\dotsc,\f G_l)$ više nije nužno binarna operacija.
+Htjeli bismo reći: "kompozicija $\f H\circ\f G$ dviju izračunljivih funkcija, $\f G^k$ i $\f H^l$, je izračunljiva funkcija". Da bi ta kompozicija imala smisla, kodomena od $\f G^k$ bi morala biti $\N^l$. U skladu s napomenom~\ref{nap:brip}, to znači da imamo $l$ izračunljivih koordinatnih funkcija, $\f G_1^k,\dotsc,\f G_l^k$, svaka od kojih daje po jedan ulazni podatak za $\f H^l$. Zato komponiranje više nije nužno binarna operacija: pišemo $\f H\circ(\f G_1,\dotsc,\f G_l)$.
 
-Drugi tehnički detalj tiče se domene kompozicije. Promotrimo kompoziciju $\f F^1:=\f I_1^2\circ(\f Z^1,\varnothing^1)$. Ta funkcija je svakako izračunljiva, ali \emph{što} je ona? Konkretno, koliko je $\f F(5)$? Na prvi pogled, $\f F(5)=\f I_1(\f Z(5),\varnothing(5))=\f Z(5)=0$ --- i tako za svaki ulaz, dakle $\f F =\f Z$. Na drugi pogled, da bismo izračunali $\f F(5)$, moramo izračunati $\f Z(5)=:y_1$, zatim "izračunati" $\varnothing(5)=:y_2$, i na kraju izračunati $\f I_1(y_1,y_2)=y_1$. Tako algoritam za računanje $\f F$ ne stane s ulazom $5$ (niti s ikojim drugim ulazom), jer njegov drugi korak ne stane --- dakle $\f F=\varnothing$. Što je od toga?
+Drugi tehnički detalj tiče se domene kompozicije. Promotrimo kompoziciju $\f F^1:=\f I_1^2\circ(\f Z^1,\varnothing^1)$. Ta funkcija je svakako izračunljiva, ali \emph{što} je ona? Konkretno, koliko je $\f F(5)$? Na prvi pogled, $\f F(5)=\f I_1\bigl(\f Z(5),\varnothing(5)\bigr)=\f Z(5)=0$ --- i tako za svaki ulaz, dakle $\f F =\f Z$. Na drugi pogled, da bismo izračunali $\f F(5)$, moramo izračunati $\f Z(5)=:y_1$, zatim "izračunati" $\varnothing(5)=:y_2$, i na kraju izračunati $\f I_1(y_1,y_2)=y_1$. Tako algoritam za računanje $\f F$ ne stane s ulazom $5$ (niti s ikojim drugim ulazom), jer njegov drugi korak ne stane --- dakle $\f F=\varnothing$. Što je od toga?
 
 %\subsection{Lijena i marljiva evaluacija}
 
@@ -123,7 +123,7 @@ Dakle, kod komponiranja parcijalnih funkcija moramo voditi računa o domeni --- 
     Ako je $H$ totalna, tada je $\dom{H\circ(G_1,\dotsc,G_l)}=\bigcap_{i=1}^l\dom{G_i}$.
 \end{lema}
 \begin{proof}
-    Direktno iz~\eqref{eq:domkomp}, jer je uvjet $\bigl(G_1(\vec x),\dotsc,G_l(\vec x)\bigr)\in\dom H=\N^l$ uvijek ispunjen za $\vec x\in\bigcap_{i=1}^l\dom{G_i}$.
+    Tvrdnja slijedi direktno iz~\eqref{eq:domkomp}, jer je uvjet $\bigl(G_1(\vec x),\dotsc,G_l(\vec x)\bigr)\in\dom H=\N^l$ uvijek ispunjen za $\vec x\in\bigcap_{i=1}^l\dom{G_i}$.
 \end{proof}
 
 \begin{korolar}[{name=[kompozicija s totalnom funkcijom slijeva ne mijenja domenu]}]\label{kor:comptot}
