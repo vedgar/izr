@@ -266,10 +266,10 @@ kontradikcija.
 Svaki RAM-algoritam računa jedinstvenu brojevnu funkciju.
 \end{korolar}
 \begin{proof}
-Neka je $P$ proizvoljni RAM-program te $k\in\N_+$. Definirajmo skup
+	Neka je $(P,k)$ proizvoljni RAM-algoritam: $P$ je RAM-program te $k\in\N_+$. Definirajmo% skup
 \begin{align}
 S&:=\{\vec x\in\N^k\mid\text{$P$-izračunavanje s $\vec x$ stane}\}
-\intertext{i na njemu funkciju}
+\intertext{i na tom skupu funkciju}
 f(\vec x)&:=c(\reg{0})\text{, gdje je $c$ završna konfiguracija $P$-izračunavanja s $\vec x$.}
 \end{align}
 Iz te definicije slijedi da je $f:S\to\N$ ($k$-mjesna) brojevna funkcija, a $P^k$ računa $f$.

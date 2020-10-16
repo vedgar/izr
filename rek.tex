@@ -293,7 +293,7 @@ $(0,\vec x,y,0,0,\dotsc,0,0)$, koja iz\-vr\-ša\-va\-njem funkcijskog makroa red
     \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-i-1,i+1,0,\dotsc,4,0\bigr)\leadsto\\
     \leadsto\bigl(\f F(\vec x,i+1),\vec x,y-(i+1),i+1,0,\dotsc,1,0\bigr)= d_{i+1}\text.
 \end{multline}
-Ovdje je bilo važno da je i $\f H$ totalna, pa računanje vrijednosti $\f H\bigl(\vec x,i,F(\vec x,i)\bigr)$ (koja je prema~\eqref{eq:defprk} jednaka $\f F(\vec x,i+1)$) doista stane nakon konačno mnogo koraka, reprezentiranih strelicom $\leadsto^*$ u~\eqref{eq:prkonf}. Sada odmah indukcijom po $i$ slijedi da za svaki $i\le y$, $Q_{\f F}$-izračunavanje s $(\vec x,y)$ sadrži konfiguraciju $d_i$. Specijalno, u njemu postoji konfiguracija $d_y$, koja prelazi u završnu konfiguraciju
+Ovdje je bilo važno da je i $\f H$ totalna, pa računanje vrijednosti $\f H\bigl(\vec x,i,\f F(\vec x,i)\bigr)$ (koja je prema~\eqref{eq:defprk} jednaka $\f F(\vec x,i+1)$) doista stane nakon konačno mnogo koraka, reprezentiranih strelicom $\leadsto^*$ u~\eqref{eq:prkonf}. Sada odmah indukcijom po $i$ slijedi da za svaki $i\le y$, $Q_{\f F}$-izračunavanje s $(\vec x,y)$ sadrži konfiguraciju $d_i$. Specijalno, u njemu postoji konfiguracija $d_y$, koja prelazi u završnu konfiguraciju
 \begin{equation}
     d_y=\bigl(\f F(\vec x,y),\vec x,y-y,y,0,\dotsc,1,0\bigr)\leadsto\bigl(\f F(\vec x,y),\vec x,0,y,0,\dotsc,5,0\bigr)\lcirclearrowleft
 \end{equation}
@@ -825,7 +825,9 @@ koji će biti (primitivno) rekurzivni ako su $R_i$ takvi, po propozicijama~\ref{
 Kao što smo već napomenuli, još ne znamo dokazati da je to izračunljivo ako grane $G_i$ nisu totalne, ali ako jesu, to možemo dokazati već sada.
 
 \begin{teorem}[Teorem o grananju, (primitivno) rekurzivna verzija]\label{tm:grek}
-Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ (primitivno) rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u~parovima disjunktne (primitivno) rekurzivne relacije, sve iste mjesnosti. Tada je i funkcija $\f F:=\IF{\f R_1:\f G_1,\f R_2:\f G_2,\dots,\f R_l:\f G_l,\f G_0}$ također (primitivno) rekurzivna.
+Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ (primitivno) rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u~parovima disjunktne (primitivno) rekurzivne relacije, sve iste mjesnosti.
+
+	Tada je i funkcija $\f F:=\IF{\f R_1:\f G_1,\f R_2:\f G_2,\dots,\f R_l:\f G_l,\f G_0}$ također (primitivno) rekurzivna.
 \end{teorem}
 
 Ovdje ne smijemo ispustiti $\f G_0$, jer $\varnothing^k$ nije (primitivno) rekurzivna!

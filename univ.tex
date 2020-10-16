@@ -60,7 +60,7 @@ Preslikavanje $\langle\cdots\rangle:\N^*\to\N$ je injekcija.
 \begin{proof}
     Pretpostavimo da su $\vec x^k,\vec y^{l}\in\N^*$ takvi da je $\langle\vec x\rangle=\langle\vec y\rangle$. Ako je $k>l$, tada je $k-1\in\N$, pa je $\langle\vec x\rangle$ djeljiv s $p_{k-1}$, što $\langle\vec y\rangle$ nije ($p_{k-1}\notin\{p_0,p_1,\dotsc,p_{l-1}\}$, pa ne dijeli njihov umnožak), kontradikcija. Analogno ne može biti $k<l$ --- dakle je $k=l$.
 	
-	Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. U suprotnom, kôd bi bio djeljiv s $p_{i-1}^{y_i}$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da nije ni $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
+	Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. U suprotnom, kôd bi bio djeljiv s $p_{i-1}^{y_i+1}\!$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da nije ni $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
 \end{proof}
 
 Sljedeće bismo trebali pokazati da je $\im{\langle\cdots\rangle}=:\f{Seq}$ rekurzivan skup te da na tom skupu imamo izračunljivu funkciju koja nam na neki način daje originalni $\vec x$ iz kojeg je pojedini kod dobiven. Za taj dokaz potrebno nam je ponešto teorije brojeva, no prije toga precizirajmo u kakvom obliku tražimo naš inverz.
@@ -78,7 +78,7 @@ Srećom, ideja dinamizacije i ovdje pomaže: zapravo ćemo imati \emph{dvomjesnu
     Ako za fiksni $k\in\N_+$ promatramo funkciju $\f{Code}^k$ u jednom smjeru i funkcije $\f{part}_1,\dotsc,\f{part}_k$ u drugom, zapravo modeliramo ono što jezik C zove struktura (\texttt{struct}) s $k$ članova. Razlog zašto C ima i polja i strukture kao zasebne tipove podataka leži u tome da strukture mogu sadržavati podatke različitih tipova. Kako mi sve kodiramo prirodnim brojevima, to nam neće bitno trebati. %Ipak, jedna prednost struktura je u tome da umjesto indeksa možemo imati lijepa \emph{imena} za članove, što će nam biti korisno u jednom trenutku kasnije, pa ćemo se na ovu ideju vratiti.
 \end{napomena}
 
-Kad smo već kod programskog jezika C, vjerojatno znate da se polja u njemu najčešće prenose tako da se u jednom argumentu prenese pokazivač (što u našem slučaju odgovara kodu), a u drugom, zasebnom argumentu njegova duljina. Tada bismo mogli kodirati i bez sljedbenika u eksponentu, jer bi duljina do koje gledamo "memoriju" bila posebno zadana. Ipak, većina modernijih programskih jezika drži duljinu zajedno sa sadržajem spremnika (na primjer, Python ima ugrađenu funkciju \texttt{len}) pa je zato i mi kodiramo tako da ju je moguće odrediti iz koda. %Nama će ideja kodiranja bez sljedbenika biti bitna u jednom drugačijem slučaju, kada je duljina nespecificirana --- ali o tome kasnije.
+Kad smo već kod programskog jezika C, vjerojatno znate da se polja u njemu najčešće prenose tako da se u jednom argumentu prenese pokazivač (što u našem slučaju odgovara kodu), a u drugom, zasebnom argumentu duljina polja. Tada bismo mogli kodirati i bez sljedbenika u eksponentu, jer bi duljina do koje gledamo "memoriju" bila posebno zadana. Ipak, većina modernijih programskih jezika drži duljinu zajedno sa sadržajem spremnika (na primjer, Python ima ugrađenu funkciju \texttt{len}) pa je zato i mi kodiramo tako da ju je moguće odrediti iz koda. %Nama će ideja kodiranja bez sljedbenika biti bitna u jednom drugačijem slučaju, kada je duljina nespecificirana --- ali o tome kasnije.
 
 Funkcije $\f{Code}^k$ su prikladne ako imamo fiksnu mjesnost i možemo argumente zadati posebno. Što dobijemo ako primijenimo ideju dinamizacije na tu familiju funkcija? Argumenti su tada zadani nekom funkcijom $G$ te posebni argument $y$ kaže koliko ih ima (usporedite s točkom~\ref{sec:ogrprog}). Operator koji dinamički kodira zadani broj vrijednosti neke funkcije zovemo operatorom \emph{povijesti}, jer često argument $y$ %koji kaže koliko vrijednosti treba kodirati zapravo
 predstavlja vrijeme, odnosno broji korake u nekom postupku (konkretno, trebat će nam za brojenje koraka u $P$-izračunavanju s $\vec x$).
@@ -213,7 +213,7 @@ Tvrdimo da funkcije zadane s
 \f{lh}(c)&:=(\num i<c)\bigl(\f{prime}(i)\mid c\bigr)\text,\\
 c[i]:=\f{part}(c,i)&:=\f{pd}\bigl(\f{ex}(c,i)\bigr)\text,
 \end{align}
-zadovoljavaju sve uvjete. Prije svega, primitivno su rekurzivne: $\f{lh}$ je dobivena og\-ra\-ni\-če\-nim brojenjem primitivno rekurzivne relacije do primitivno rekurzivne granice, a $\f{part}$ je kompozicija $\f{pd}\circ\f{ex}$.
+zadovoljavaju sve uvjete. Prije svega, primitivno su rekurzivne: $\f{lh}$ je dobivena og\-ra\-ni\-če\-nim brojenjem primitivno rekurzivne relacije do primitivno rekurzivne granice, a $\f{part}=\f{pd}\circ\f{ex}$.
 
     Što se tiče tvrdnje~\ref{stav:lh}, prema definiciji $\f{lh}$ broji prim-djelitelje od $c$ (kako je $\f{prime}$ strogo rastuća i $0<p_0$, vrijedi $i<p_i\le c$, pa je dovoljno brojiti do $c$) --- a kako je $c=\langle\vec x\rangle=2^{x_1+1}\cdot3^{x_2+1}\mathbin{\dotsm}p_{k-1}^{x_k+1}$ te su svi napisani eksponenti pozitivni, $c$ ima točno $k$ prim-djelitelja.
 
