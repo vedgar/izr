@@ -941,7 +941,7 @@ Evo malo kompliciranijeg primjera: lema~\ref{lm:addmulk} kaže da je za svaki $k
 \begin{napomena}[{name=[izračunljive granice i prazni konteksti]}]\label{nap:igpk}
 	U ostatku ove točke dokazat ćemo šest rezultata o ograničenom programiranju: neke direktno primitivnom rekurzijom, a neke kompozicijom iz već dobivenih rezultata. Svi će oni imati isto sučelje: (primitivno) rekurzivnu $k$-mjesnu funkciju $\f G$ ili relaciju $\f R$, kontekst $\vec x$ i granicu $y$; te će biti definirani iteracijom po svim $i<y$.
 	
-	U primjenama, najčešće će granica ovisiti o kontekstu: $i<\f B(\vec x)$. To samo znači da ćemo primijeniti kompoziciju s $\f B$ na mjestu zadnjeg argumenta $y$, što ostaje (primitivno) rekurzivno ako je $\f B$ takva.
+	U primjenama, najčešće će granica ovisiti o kontekstu: $i<\f B(\vec x)$ za neku izračunljivu funkciju $\f B$. To samo znači da ćemo primijeniti kompoziciju s $\f B$ na mjestu zadnjeg argumenta $y$, što ostaje (primitivno) rekurzivno ako je $\f B$ takva.
 
 	Drugo, granica može biti uključena: $i\le\f B(\vec x)$ je ekvivalentno s $i<\f{Sc}\bigl(\f B(\vec x)\bigr)$, što samo znači da je granica $\f{Sc}\circ\f B$, koja je (primitivno) rekurzivna ako je $\f B$ takva.
 
@@ -1025,7 +1025,7 @@ također (primitivno) rekurzivna. Skraćeno pišemo $\f F(\vec x,y):=(\num i<y)\
 
 Još jedan čest obrazac (\emph{pattern}) u uvodnim algoritmima je provjera zadovoljava li neki element zadanog konačnog skupa neko zadano svojstvo --- ili dualno, zadovoljavaju li ga svi elementi tog skupa. U nekim modernim programskim jezicima to se ostvaruje kroz funkcije \texttt{any} i \texttt{all}. Na primjer, ustanoviti je li broj $n$ složen možemo ispitujući postoji li $d\in[2\dd n\rangle$ (ili $d\in\bigl[2\dd \lfloor\!\sqrt{n}\rfloor\bigr]$) takav da $d\mathrel|n$. Vidimo da je prirodna matematička formalizacija tog obrasca \emph{ograničena kvantifikacija}, gdje univerzalno ili egzistencijalno kvantificiramo varijable u nekom uvjetu do neke granice.
 
-Razlog zašto se takav obrazac promatra posebno je mogućnost prijevremenog izlaska iz petlje (\emph{shortcircuit evaluation}, u ovom slučaju najčešće realizirana kroz naredbu \texttt{break}), jer ako provjeravamo postoji li element s nekim svojstvom, znamo da postoji onog trena kada ga nađemo --- ne moramo provjeravati ostale elemente. Tako možemo brže pretraživati konačne skupove, a i dobiti odgovor za prebrojive skupove \emph{ako} je taj odgovor pozitivan. O ovom drugom fenomenu reći ćemo više kasnije, kad budemo govorili o \emph{rekurzivno prebrojivim} relacijama --- a prvi fenomen nas ne zanima, jer smo rekli da se nećemo baviti performansama algoritama.
+Razlog zašto se takav obrazac promatra posebno je mogućnost prijevremenog izlaska iz petlje (\emph{shortcircuit evaluation}, u ovom slučaju najčešće realizirana kroz naredbu \texttt{break}), jer ako provjeravamo postoji li element s nekim svojstvom, znamo da postoji onog trena kada ga nađemo --- ne moramo provjeravati ostale elemente. Tako možemo brže pretraživati konačne skupove, a i dobiti odgovor za prebrojive skupove \emph{ako} je taj odgovor pozitivan. O ovom drugom fenomenu reći ćemo više kasnije, kad budemo govorili o \emph{rekurzivno prebrojivim} relacijama --- a prvi fenomen nas ne zanima, jer se ne bavimo performansama algoritama.
 
 Drugim riječima, za nas se ograničena kvantifikacija svodi na brojenje. Prebrojivši elemente do $y$ koji imaju traženo svojstvo, takvi postoje ako ih ima pozitivan broj, a svi su takvi ako ih ima upravo $y$.
 
@@ -1066,12 +1066,12 @@ kažemo da je dobivena \emph{ograničenom minimizacijom} relacije $R$.
 \end{definicija}
 
 \begin{napomena}[{name=[ograničena minimizacija čuva rekurzivnost]}]\label{nap:mintot}
-U~\eqref{eq:defomin} smo napisali $:=$ umjesto $:\simeq$, jer izraz u sredini uvijek ima smisla: kondicional će sigurno nekada postati istinit, najkasnije za $i=y$, jer će tada antecedens $i<y$ postati lažan. Drugim riječima, $F(\vec x,y)$ će biti najmanji broj $i<y$ koji zadovoljava $R(\vec x,i)$ ako takav postoji, a inače će biti $F(\vec x,y)=y$.
+U~\eqref{eq:defomin} smo napisali $:=$ umjesto $:\simeq$, jer izraz u sredini uvijek ima smisla: kondicional će sigurno nekada postati istinit, najkasnije za $i=y$, jer će tada antecedens $i<y$ postati lažan. Zato će $F(\vec x,y)$ biti najmanji broj $i<y$ koji zadovoljava $R(\vec x,i)$ ako takav postoji, a inače će biti $F(\vec x,y)=y$.
 
 	Dakle, $F$ je uvijek totalna funkcija. Štoviše, ako je $\f R$ rekurzivna, $\f F$ će biti parcijalno rekurzivna --- jer je dobivena (neograničenom) minimizacijom relacije $\f P$ zadane s $\f P(\vec x,y,i):\Leftrightarrow i<y\to\f R(\vec x,i)$, rekurzivne zbog primjera~\ref{pr:m-v} i propozicije~\ref{prop:vezn}. Ukratko, ograničenom minimizacijom rekurzivne relacije dobivamo rekurzivnu funkciju.
 \end{napomena}
 
-Drugim riječima, ograničena minimizacija čuva rekurzivnost. Važno je da čuva i \emph{primitivnu} rekurzivnost, što ćemo sada dokazati. U tom dokazu, naravno, ne možemo koristiti minimizaciju, već ćemo traženu funkciju definirati primitivnom rekurzijom.
+Dokazali smo da ograničena minimizacija čuva rekurzivnost. Važno je da čuva i \emph{primitivnu} rekurzivnost, što ćemo sada dokazati. U tom dokazu, naravno, ne možemo koristiti minimizaciju, već ćemo traženu funkciju definirati primitivnom rekurzijom.
 
 %OVO JE KRIVO; NAVESTI PAMETNIJI PRIMJER Ograničenu minimizaciju možemo koristiti svaki put kad znamo da je postojanje elementa koji zadovoljava zadani uvjet ekvivalentno s postojanjem takvog elementa ispod neke granice koju možemo izračunati. Recimo, broj $x$ je složen ako je djeljiv s nekim brojem $d$ različitim od $1$ i $x$, ali znamo da ako postoji takav $d$, tada postoji i takav $d\le x$; štoviše, postoji i takav $d\le\sqrt x$, ali (jer nas ne zanimaju performanse) bitno nam je samo postojanje granice, ne i njezina veličina.
 

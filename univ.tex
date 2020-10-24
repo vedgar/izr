@@ -19,7 +19,7 @@ Pokušajmo još malo preciznije odrediti što mislimo pod izračunljivošću fun
 Slično možemo činiti za funkcije iz $\mathcal K$ u $\N$ (samo ih komponiramo s $\NKmj$ zdesna), za funkcije iz $\N$ u $\mathcal K$ (samo ih komponiramo s ${\N\mathcal K}$ slijeva --- primijetite da su karakteristične funkcije posebni slučaj pratećih funkcija, za $\N bool(\mathit{false}):=0,\,\N bool(\mathit{true}):=1$), pa čak i za razne "višemjesne" funkcije iz skupova poput $\mathcal K^2\times \mathcal L\times\N$ (gdje je $\mathcal L$ neki drugi skup čije kodiranje $\N\mathcal L$ već imamo): ulaze dekodiramo (ulaze koji već jesu prirodni brojevi ostavimo nepromijenjenima), primijenimo funkciju te kodiramo rezultat ako je definiran. Puna implementacija tog principa odvela bi nas u \emph{objektno programiranje}, gdje je $\mathcal K$ \emph{klasa}, čije razne \emph{metode} kodiramo na opisani način. Često među tim metodama postoji jedna istaknuta surjekcija na $\mathcal K$ (ili više njih čije slike čine particiju od $\mathcal K$) koju onda zovemo \emph{konstruktor}, a koordinatne funkcije njenog inverza (\emph{getters} ili \emph{komponente}) služe kao podloga za sve ostale metode.
 
 \begin{napomena}[{name=[ne možemo kodirati neprebrojive skupove]}]
-U još jednoj stvari budimo precizni: \textbf{neprebrojive skupove ne možemo kodirati}! Doista, ako postoji kodiranje kao injekcija s $\mathcal K$ u $\N$, tada mora biti $\card\mathcal K\le\card\N=\aleph_0$. Ovo je izuzetno važno, jer pruža opravdanje za intuiciju da samo konačni i prebrojivi skupovi imaju \emph{totalnu reprezentaciju}: sve njihove elemente možemo reprezentirati u (po volji velikom) računalu.
+U još jednoj stvari budimo precizni: \textbf{neprebrojive skupove ne možemo kodirati}! Doista, ako postoji kodiranje kao injekcija s $\mathcal K$ u $\N$, tada mora biti $\card\mathcal K\le\card\N=\aleph_0$. Ovo je izuzetno važno, jer opravdava intuiciju da samo konačni i prebrojivi skupovi imaju \emph{totalnu reprezentaciju}: sve njihove elemente možemo reprezentirati u (po volji velikom) računalu.
 
 Neegzaktnosti tipa \texttt{float}, i raznih drugih tipova koji bi trebali reprezentirati realne brojeve, nisu samo tehnički nedostaci pojedinog standarda (kao što je IEEE\;754): one su fundamentalna posljedica činjenice da $\mathbb R$ kao neprebrojiv skup nema totalnu reprezentaciju. Kako god pokušali~\cite{url:calc}, ne možemo u računalu reprezentirati proizvoljan realan broj --- i to nema veze s ograničenom veličinom naših računala.
 \end{napomena}
@@ -115,7 +115,7 @@ Sjetimo se napomene~\ref{nap:crtica}: često brojevnoteorijske funkcije nisu def
 \begin{propozicija}[{name=[primitivna rekurzivnost dijeljenja s ostatkom]}]\label{prop:divmodprn}
     Cjelobrojno dijeljenje, zadano s $x\div y:=\bigl\lfloor\frac{x}{y\bump\!}\bigr\rfloor$, kao i ostatak cjelobrojnog dijeljenja ($x\bmod y$), primitivno su rekurzivne operacije.
 \end{propozicija}
-Prije dokaza napomenimo da je nula problematična u operaciji $\div$, ali ne i u operaciji $\bmod$: definicija $x\bmod 0:=x$ uobičajena je u modernoj teoriji brojeva.
+Prije dokaza napomenimo da je nula problematična u operaciji $\div\!$, ali ne i u operaciji $\bmod$: definicija $x\bmod 0:=x$ uobičajena je u modernoj teoriji brojeva.
 \begin{proof}
 Cjelobrojno dijeljenje zapravo je ponovljeno oduzimanje, onoliko puta koliko se može. Dakle, za zadane $x$ i $y$, tražimo najveći $t$ takav da je $t\cdot y\le x$. Relacija $t\cdot y\le x$ jest primitivno rekurzivna, ali nemamo operator maksimizacije. S razlogom ga općenito nemamo: ako malo razmislimo, vidjet ćemo da ne postoji općeniti algoritam kojim bismo odredili najveći broj s nekim svojstvom, čak ni ako znamo da taj broj postoji, jer nikad ne znamo jesmo li tražili dovoljno dugo --- u svakom trenutku iznad najvećeg broja koji smo ispitali postoji još beskonačno mnogo kandidata, svaki od kojih može biti traženi broj.
 
@@ -210,12 +210,14 @@ Postoje primitivno rekurzivne funkcije $\f{lh}^1$ i $\f{part}^2$, takve da \\za 
 \begin{proof}
 Tvrdimo da funkcije zadane s
 \begin{align}
-\f{lh}(c)&:=(\num i<c)\bigl(\f{prime}(i)\mid c\bigr)\text,\\
+%\f{lh}(c)&:=(\num i<c)\bigl(\f{prime}(i)\mid c\bigr)\text,\\
+	\f{lh}(c)&:=(\num d\le c)(d\in\mathbb P\land d\mid c)\text,\\
 c[i]:=\f{part}(c,i)&:=\f{pd}\bigl(\f{ex}(c,i)\bigr)\text,
 \end{align}
 zadovoljavaju sve uvjete. Prije svega, primitivno su rekurzivne: $\f{lh}$ je dobivena og\-ra\-ni\-če\-nim brojenjem primitivno rekurzivne relacije do primitivno rekurzivne granice, a $\f{part}=\f{pd}\circ\f{ex}$.
 
-    Što se tiče tvrdnje~\ref{stav:lh}, prema definiciji $\f{lh}$ broji prim-djelitelje od $c$ (kako je $\f{prime}$ strogo rastuća i $0<p_0$, vrijedi $i<p_i\le c$, pa je dovoljno brojiti do $c$) --- a kako je $c=\langle\vec x\rangle=2^{x_1+1}\cdot3^{x_2+1}\mathbin{\dotsm}p_{k-1}^{x_k+1}$ te su svi napisani eksponenti pozitivni, $c$ ima točno $k$ prim-djelitelja.
+    Što se tiče tvrdnje~\ref{stav:lh}, prema definiciji $\f{lh}$ broji prim-djelitelje od $c$ %(kako je $\f{prime}$ strogo rastuća i $0<p_0$, vrijedi $i<p_i\le c$, pa je dovoljno brojiti do $c$)
+	--- a kako je $c=\langle\vec x\rangle=2^{x_1+1}\cdot3^{x_2+1}\mathbin{\dotsm}p_{k-1}^{x_k+1}$ te su svi napisani eksponenti pozitivni, $c$ ima točno $k$ prim-djelitelja.
 
 Za tvrdnju~\ref{stav:part<k}, neka je $i<k$ proizvoljan. Tada je eksponent od $p_i$ u rastavu $c>0$ na prim-faktore upravo $\f{ex}(c,i)=x_{i+1}+1$, pa je $c[i]=\f{pd}(x_{i+1}+1)=x_{i+1}$.
 
@@ -830,7 +832,8 @@ Sada je $\f{univ}(x,e)=\f{result}(z)=\f{ex}(\knk{c_{n_0}(\reg0),\dotsc},0)=c_{n_
 
 \section{Kleenejev teorem o normalnoj formi}
 
-Funkcija $\f{univ}$ je univerzalna, jer može simulirati bilo koji RAM-stroj, odnosno ra\-ču\-na\-ti bilo koju RAM-izračunljivu funkciju, pa time (po teoremu~\ref{tm:pir}) i svaku parcijalno rekurzivnu funkciju. Na neki način, $\f{univ}$ predstavlja funkcijski \emph{interpreter} za RAM-stroj, nasuprot imperativnom \emph{kompajleru} za simboličke definicije izgrađenom u točki~\ref{sec:pir}. No iz raznih razloga, uglavnom tehničkih i povijesnih, zapravo se univerzalna funkcija uvodi na malo drugačiji način.
+Funkcija $\f{univ}$ je univerzalna, jer može simulirati bilo koji RAM-stroj, odnosno ra\-ču\-na\-ti bilo koju RAM-izračunljivu funkciju, pa time (po teoremu~\ref{tm:pir}) i svaku parcijalno rekurzivnu funkciju. Na neki način, $\f{univ}$ predstavlja funkcijski \emph{interpreter} za RAM-stroj, nasuprot imperativnom \emph{kompajleru} za simboličke definicije izgrađenom u točki~\ref{sec:pir}. %No iz raznih razloga, uglavnom tehničkih i povijesnih, zapravo se univerzalna funkcija uvodi na malo drugačiji način.
+No iz tehničkih i povijesnih razloga, univerzalna funkcija obično se uvodi malo drugačije.
 
 Htjeli bismo napisati što jednostavniju "simboličku definiciju" univerzalne funkcije. Definicija~\eqref{eq:univdef} ima nezgodno svojstvo da dvaput koristi $x$ i $e$, odnosno napisana je kao kompozicija dvije funkcije, svaka od kojih ovisi o ulaznim podacima. No vanjska funkcija ne mora primati $x$ i $e$, ako joj unutarnja funkcija pošalje završnu konfiguraciju, ili nešto iz čega se ona može odrediti. Razlog zašto ih trenutno prima je što joj unutarnja funkcija pošalje samo broj koraka, koji je sam po sebi nedovoljan za određivanje završne konfiguracije. No koristeći kodiranje $\N^*\!$, poslana vrijednost može biti proizvoljno komplicirana.
 
@@ -855,7 +858,7 @@ Propozicija~\ref{prop:ramdet}, restringirana samo na izračunavanja koja stanu (
 \end{equation}
 ima funkcijsko svojstvo. Tada će i $\f{\check T}^3:=\N T\!race$ imati funkcijsko svojstvo. Cilj nam je dokazati da je $T\!race$ izračunljiva, odnosno da je $\f{\check T}$ primitivno rekurzivna.
 
-U skladu s napomenom iz primjera~\ref{pr:concat}, $T\!race$ ćemo shvatiti kao ($k+2$)-mjesnu relaciju, tako da svaki $x_i$ shvatimo kao zasebni argument. To vodi na promatranje familije relacija $\f T_k^{k+2},k\in\N_+$ --- a jednom kad dobijemo primitivnu rekurzivnost od $\f{\check T}$, dobit ćemo i primitivnu rekurzivnost svih $\f T_k$, jer vrijedi
+U skladu s napomenom iz primjera~\ref{pr:concat}, $T\!race$ ćemo shvatiti kao ($k+2$)-mjesnu relaciju, tako da svaki $x_i$ shvatimo kao zasebni argument. To vodi na promatranje familije relacija $\f T_k^{k+2},k\in\N_+$ --- a jednom kad dobijemo primitivnu rekurzivnost od $\f{\check T}$, dobit ćemo i primitivnu rekurzivnost svih $\f T_k$, jer je
 \begin{equation}\label{eq:TkviadotT}
 \f T_k(\vec x,e,y)\Longleftrightarrow\f{\check T}(\langle\vec x\rangle,e,y)\text,
 \end{equation}
@@ -915,7 +918,7 @@ Neka je $k\in\N_+$ te $\f{f}^k$ totalna funkcija. Tada je $\graf{\f f}$ rekurziv
 \begin{proof}
 Za smjer ($\Rightarrow$): po pretpostavci, $\chi_{\graf{\f f}}$ je rekurzivna, dakle parcijalno rekurzivna. Skup parcijalno rekurzivnih funkcija je zatvoren na minimizaciju, pa je $\mu\,\graf f$ također parcijalno rekurzivna --- no ta funkcija je jednaka $\f f$ po lemi~\ref{lm:projmugraf}. Dakle, $\f f$ je parcijalno rekurzivna, a po pretpostavci teorema je totalna, pa je rekurzivna.
 
-Za smjer ($\Leftarrow$): kako je $\f f$ totalna, $\vec x^k\in\dom f=\N^k$ uvijek vrijedi, pa~\eqref{eq:defgraf} postaje $\graf{\f f}(\vec x,y)\Longleftrightarrow y=\f f(\vec x)$, odnosno $\chi_{\graf{\f f}}$ je dobivena kompozicijom iz $\chi_=$, $\f f$ i koordinatnih projekcija. $\chi_=$ i koordinatne projekcije su rekurzivne po korolarima~\ref{kor:jednakost} i~\ref{kor:prnrek}, a $\f f$ je rekurzivna po pretpostavci, pa je $\chi_{\graf{\f f}}$ rekurzivna po lemi~\ref{lm:comprek}.
+Za smjer ($\Leftarrow$): kako je $\f f$ totalna, uvjet $\vec x^k\in\dom f=\N^k$ uvijek vrijedi, pa~\eqref{eq:defgraf} postaje $\graf{\f f}(\vec x,y)\Longleftrightarrow y=\f f(\vec x)$, odnosno $\chi_{\graf{\f f}}$ je dobivena kompozicijom iz $\chi_=$, $\f f$ i koordinatnih projekcija. Jednakost i koordinatne projekcije su rekurzivne po korolarima~\ref{kor:jednakost} i~\ref{kor:prnrek}, a $\f f$ je rekurzivna po pretpostavci, pa je $\chi_{\graf{\f f}}$ rekurzivna po lemi~\ref{lm:comprek}.
 \end{proof}
 
 Istaknimo da u teoremu~\ref{tm:graftot} ne možemo staviti riječ "primitivno" u zagrade, kao što smo činili u mnogim rezultatima do sada: postoje rekurzivne funkcije čiji grafovi su primitivno rekurzivni, ali one same nisu primitivno rekurzivne. \emph{Ackermannova} funkcija, opisana u~\cite[dodatak]{skr:Vuk}, primjer je takve funkcije.
@@ -924,7 +927,7 @@ Istaknimo da u teoremu~\ref{tm:graftot} ne možemo staviti riječ "primitivno" u
 %\subsection{Univerzalne funkcije \texorpdfstring{$\f{comp}_k$}{comp}}
 \subsection{Kodiranje RAM-izračunavanja jednim brojem}
 
-Kako $\f{step}$ nije totalna, ne možemo direktno primijeniti teorem~\ref{tm:graftot}, ali možemo neke druge rezultate. Konkretno, prema lemi~\ref{lm:projmugraf} je $\f{step}=\mu\,\f{Step}$, no $\f{step}$ je već definirana minimizacijom primitivno rekurzivne relacije $\f{Final}$. Relacije $\f{Step}$ i $\f{Final}$ nisu jednake jer jedna ima funkcijsko svojstvo a druga nema (čim vrijedi $\f{Final}(x,e,n_0)$, vrijedi i $\f{Final}(x,e,n)$ za sve $n>n_0$), ali možemo li dobiti jednu pomoću druge? $\f{Final}(x,e,n)\Leftrightarrow(\exists m\le n)\f{Step}(x,e,m)$ znači da je $\f{Final}$ dobivena ograničenom egzistencijalnom kvantifikacijom iz $\f{Step}$, ali nama treba drugi smjer.
+Kako $\f{step}$ nije totalna, ne možemo direktno primijeniti teorem~\ref{tm:graftot}, ali možemo neke druge rezultate. Prema lemi~\ref{lm:projmugraf} je $\f{step}=\mu\,\f{Step}$, no $\f{step}$ je već definirana minimizacijom primitivno rekurzivne relacije $\f{Final}$. Relacije $\f{Step}$ i $\f{Final}$ nisu jednake jer jedna ima funkcijsko svojstvo a druga nema (čim vrijedi $\f{Final}(x,e,n_0)$, vrijedi i $\f{Final}(x,e,n)$ za sve $n>n_0$), ali možemo li dobiti jednu pomoću druge? $\f{Final}(x,e,n)\Leftrightarrow(\exists m\le n)\f{Step}(x,e,m)$ znači da je $\f{Final}$ dobivena ograničenom egzistencijalnom kvantifikacijom iz $\f{Step}$, ali nama treba drugi smjer.
 
 Relacija $\f{Step}(x,e,m)\Leftrightarrow m= \mu n\,\f{Final}(x,e,n)$, koju dobijemo direktnim čitanjem definicije $\f{Step}=\graf{\f{step}}$, čini se kao dobar početak: jedino što joj nedostaje je totalnost ove minimizacije na desnoj strani. Taj problem smo već imali nekoliko puta u točki~\ref{sec:teobroj} i uvijek smo ga uspješno rješavali ograničavanjem minimizacije. Postoji li gornja granica za $n$ do koje je dovoljno provjeravati vrijedi li $\f{Final}(x,e,n)$, da bismo znali je li $m$ najmanji takav $n$? Naravno --- to je upravo $m+1$! Odnosno, dovoljno je provjeravati do uključivo $m$.
 
@@ -1161,6 +1164,8 @@ Riječima, ako $F$ preslikava $\f f^2$ u $\f g^3$, tada $\N F$ mora preslikavati
 Takve funkcije možemo i komponirati: ako imamo $G:\mathscr Comp_3\rightharpoonup\mathscr Comp_1$ sa sličnom specifikacijom, koja preslikava $\f g^3$ u $\f h^1$, tada iako ne znamo koji će nam indeks od $\f g$ funkcija $\N F$ dati, funkcija $\N G$ mora ispravno raditi za \emph{sve} indekse od $\f g$, pa će na kraju $\N G\circ\N F$ dati neki indeks za $\f h$, ako joj damo (bilo koji) indeks za $\f f$.
 \end{primjer}
 
+\subsection{Restrikcije i grananja parcijalnih funkcija}
+
 To možemo kombinirati s "pravim" kodiranjima: recimo, za svaki $k\in\N_+$, funkcija $apply_k:\N^k\times\mathscr Comp_k\rightharpoonup\N$, koja prima $\vec x^k$ i $\f f^k$, i vraća $\f f(\vec x)$ ako je $\vec x\in\dom{\f f}$, ima svoju prateću funkciju koja prima $\langle\vec x\rangle$ i bilo koji indeks za $\f f$, i vraća $\f f(\vec x)$ ako postoji.
 \begin{equation}
     \N apply_k(x,e):\simeq\f{univ}(x,e)\text{, za }\f{lh}(x)\eq k
@@ -1171,10 +1176,10 @@ Nažalost, iz toga još uvijek ne slijedi da je takva funkcija izračunljiva, ia
     \begin{equation}\label{eq:restrprek}
         (\f G|_{\f R})(\vec x)\simeq\f G(\vec x)+\mu y\bigl(\f{Sc}(y)\eq\chi_{\f R}(\vec x)\bigr)
 \end{equation}
---- ali zapravo će to trivijalno slijediti iz rezultata u idućoj točki. %Ipak, ideja prikaza restrikcije kao zbroja s funkcijom koja je na nekom lijepom skupu nula, a izvan njega nedefinirana --- bit će nam od koristi kasnije, u poglavlju~\ref{ch:re}.
+--- ali zapravo će to trivijalno slijediti iz rezultata koji ćemo uskoro dokazati. %u idućoj točki. %Ipak, ideja prikaza restrikcije kao zbroja s funkcijom koja je na nekom lijepom skupu nula, a izvan njega nedefinirana --- bit će nam od koristi kasnije, u poglavlju~\ref{ch:re}.
 \end{napomena}
 
-\subsection{Parcijalno rekurzivna verzija teorema o grananju}
+%\subsection{Parcijalno rekurzivna verzija teorema o grananju}
 
 Na početku točke~\ref{sec:tech} nešto smo rekli o teškoćama koje marljiva evaluacija donosi ako želimo u našem funkcijskom jeziku implementirati grananje s funkcijama koje nisu nužno totalne. Zapravo, jedino što možemo koristiti je kompozicija, jer primitivna rekurzija je definirana samo na totalnim funkcijama, a minimizacija na relacijama čije karakteristične funkcije su također totalne --- ali marljiva evaluacija znači da se u kompoziciji sve "unutarnje" funkcije evaluiraju uvijek, pa parcijalnost bilo koje od njih znači parcijalnost čitave kompozicije.
 
