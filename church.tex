@@ -248,7 +248,7 @@ Vrijeme je da počnemo pričati formalnije: krenimo od RAM-algoritma $P^k$, dulj
     \item $n+1$ $m$-mjesnih relacijskih simbola $R_0^m$,~$R_1^m$,~\ldots,~$R_n^m$.
 \end{itemize}
 
-Za svaki $u\in\N$, $\overline u$ označava zatvoreni term $\mathsf s(\mathsf s(\dotsb(\mathsf s(\mathsf o))\dotsb))$ s $u$ pojava funkcijskog simbola $\mathsf s$: $\overline 0=\mathsf o$, $\overline 1=\mathsf s(\mathsf o)$, $\overline 2=\mathsf s\bigl(\mathsf s(\mathsf o)\bigr)$ i tako dalje. Za sve $\vec u=(u_1,u_2,\dotsc,u_k)\in\N^k$ definiramo formulu
+Za svaki $u\in\N$, $\overline u$ označava zatvoreni term $\mathsf s(\mathsf s(\dotsb(\mathsf s(\mathsf o))\dotsb\mspace{-2mu}))$ s $u$ pojava funkcijskog simbola $\mathsf s$: $\overline 0=\mathsf o$, $\overline 1=\mathsf s(\mathsf o)$, $\overline 2=\mathsf s\bigl(\mathsf s(\mathsf o)\bigr)$ i tako dalje. Za sve $\vec u=(u_1,u_2,\dotsc,u_k)\in\N^k$ definiramo formulu
 \begin{equation}\label{eq:defpiu}
     \pi_{\vec u}:=R_0(\mathsf o,\overline{u_1},\overline{u_2},\dotsc,\overline{u_k},\mathsf o,\mathsf o,\dotsc,\mathsf o)\text,
 \end{equation}
@@ -432,6 +432,8 @@ Prva ekvivalencija je definicija~\ref{def:compute}, jer je $K=\dom{\f{Russell}}$
 
 Dakle, pod pretpostavkom da $\mathcal A$ ispravno odlučuje koje su formule prvog reda valjane a koje nisu, upravo opisani neformalni algoritam ispravno odlučuje koji su brojevi elementi Kleenejevog skupa a koji nisu. Po Church--\!Turingovoj tezi, to bi značilo da je relacija $K$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
 \end{proof}
+
+\subsection{Formule prvog reda kao formalni jezik}
 
 Time je dokazan Churchov teorem, ali na neformalnoj razini --- "dokazali" smo da ne postoji neformalni algoritam, pozivanjem na Church--\!Turingovu tezu. Možemo li bez toga?
 
@@ -671,7 +673,7 @@ Kada bi $\Valid$ bio odlučiv, po teoremu~\ref{tm:oikr} bi jednomjesna relacija 
 
 \section{Prema Gödelovom prvom teoremu nepotpunosti}
 
-Argumentima koji su potrebni za dokaz Churchovog teorema već smo se poprilično približili dokazu Gödelovog prvog teorema, izrečenog u obliku Tarskog: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za potpuni dokaz trebalo bi razraditi još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
+Argumentima koji su potrebni za dokaz Churchovog teorema već smo se poprilično približili dokazu Gödelovog prvog teorema, u formulaciji Tarskog: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za potpuni dokaz trebalo bi razraditi još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
 
 U prethodnoj točki uveli smo, za svaki prirodni broj $u$, rečenicu $\varphi_u$ koja je valjana ako i samo ako je $u$ element Kleenejevog skupa. Također smo uveli strukturu $\mathfrak N=(\N,0,\f{Sc},\dotsc)$, čiji konstantsko-funkcijski fragment se podudara sa standardnim modelom od PA (prirodni brojevi, nula i sljedbenik).
 
