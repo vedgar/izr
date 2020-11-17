@@ -483,14 +483,14 @@ u programskom jeziku C --- time smo dobili injekciju s $\mathscr Ins$ u $\N^*$, 
 \end{alignat*}
 za sve $j,l\in\N$.
 \end{definicija}
-U desnom stupcu napisani su konstruktori kao aritmetički izrazi, iz kojih se vidi kako ih možemo primitivno rekurzivno izračunati iz $j$ i\slash ili $l$. Injektivnost kodiranja $\kins{\cdots}$ slijedi iz definicije~\ref{def:ins} i propozicije~\ref{prop:codeinj}. Da mu je slika $\f{Ins}:=\im{\,\kins{\cdots}}$ primitivno rekurzivna, možemo vidjeti standardnom tehnikom "pokušaja rekodiranja iz komponenti", kao u dokazu korolara~\ref{kor:Seqprn}, ili u primjeru~\ref{pr:lskod}.
+U desnom stupcu napisani su konstruktori kao aritmetički izrazi, iz kojih se vide neka njihova brojevnoteorijska svojstva, i kao primitivno rekurzivne funkcije od $j$ i\slash ili $l$. Injektivnost kodiranja $\kins{\cdots}$ slijedi iz definicije~\ref{def:ins} i propozicije~\ref{prop:codeinj}. Da mu je slika $\f{Ins}:=\im{\,\kins{\cdots}}$ primitivno rekurzivna, možemo vidjeti standardnom tehnikom "pokušaja rekodiranja iz komponenti", kao u dokazu korolara~\ref{kor:Seqprn}, ili u primjeru~\ref{pr:lskod}.
 Komponente $j$ odnosno $l$ te tip definiramo kroz dvije funkcije i tri relacije.
 
 \begin{lema}[{name=[primitivna rekurzivnost slike kodiranja RAM-instrukcija]}]\label{lm:InsTYPEprn}
     Skupovi $\f{InsINC}$, $\f{InsDEC}$ i $\f{InsGOTO}$, kodova instrukcija pojedinog tipa, kao i skup svih kodova instrukcija $\f{Ins}$, primitivno su rekurzivni.
 \end{lema}
 \begin{proof}
-Vidimo
+Tvrdimo da je
 \begin{align}
 \SwapAboveDisplaySkip
     \label{eq:InsINC3}\f{InsINC}(i)&\Longleftrightarrow i\eq\f{codeINC}(i[1])\text,\\
@@ -709,7 +709,9 @@ Ukratko, nizove vraćamo "točkovno" tako da zapravo vraćamo njihove članove, 
 Postoje primitivno rekurzivne funkcije $\f{Reg}^3$ i $\f{Count}^3$, čija parcijalna specifikacija glasi:
 za svaki RAM-program $P$, za svaki neprazni konačni niz $\vec x$, za svaki prirodni broj $n$, $\f{Reg}(\langle \vec x\rangle,\kprog{P},n)$ je kod stanja registara, a $\f{Count}(\langle \vec x\rangle,\kprog{P},n)$ je vrijednost programskog brojača, nakon $n$ koraka $P$-izračunavanja s $\vec x$.
 \end{lema}
+\begin{quote}
 Preciznije, ako je $P$-izračunavanje s $\vec x$ niz RAM-konfiguracijâ $(c_n)_{n\in\N}$,\\ tada je $\f{Reg}(\langle\vec x\rangle, \kprog{P},n)=c_n[\reg{}]$ te $\f{Count}(\langle\vec x\rangle,\kprog{P},n)=c_n(\textsc{pc})$.
+\end{quote}
 \begin{proof}
     To što smo razdvojili reprezentaciju izračunavanja na dvije funkcije ne znači da ih možemo računati odvojenim algoritmima. Prema lemi~\ref{lema:ramdet} sljedeća konfiguracija ovisi samo o neposredno prethodnoj (izračunavanje je \emph{memoryless} --- kao Markovljev lanac, samo što je determinističko), ali o oba njena dijela --- i o registrima i o brojaču. To znači da je prirodni način definiranja tih funkcija simultana rekurzija.
 
@@ -888,10 +890,11 @@ Ipak, za totalne funkcije takav rezultat vrijedi, i možemo ga već sada dokazat
 \begin{definicija}[{name=[graf brojevne funkcije]}]
 Neka je $k\in\N_+$ i $f^k$ funkcija. \emph{Graf} funkcije $f$ je relacija $\graf f^{k+1}$ zadana s
 \begin{equation}
-    \label{eq:defgraf}\graf f(\vec x,y):\Longleftrightarrow\vec x\in\dom f\land y=f(\vec x)\text.
+	\label{eq:defgraf}\graf f(\vec x,y):\Longleftrightarrow\vec x\in\dom f\land y\simeq f(\vec x)\text{.\qedhere}
 \end{equation}
-Zapravo, uvjet $\vec x\in\dom f$ ne treba pisati jer slijedi iz $y=f(\vec x)$, ali je naveden zbog jasnoće (pogledajte problem koji smo maloprije imali sa $\graf{\f{step}}$).
 \end{definicija}
+%Uvjet $\vec x\in\dom f$ služi tome da osigura da je u drugom konjunktu desna strana definirana, pane treba pisati jer slijedi iz $y=f(\vec x)$, ali je naveden zbog jasnoće
+U definiciji općenito ne smijemo napisati $y=f(\vec x)$ umjesto $y\simeq f(\vec x)$ jer bi to impliciralo totalnost od $f$ (pogledajte napomenu~\ref{nap:parc=}), ali ako je $f$ već totalna, onda možemo.
 
 \begin{napomena}[{name=[funkcijsko svojstvo grafova]}]\label{nap:graf=funsv}
     Iz elementarne matematike znamo da je relacija $R$ graf neke funkcije ako i samo ako ima \emph{funkcijsko svojstvo}: $R(\vec x,y_1)\land R(\vec x,y_2)\Rightarrow y_1=y_2$. Riječima, "svaka vertikala siječe graf u najviše jednoj točki".
@@ -1128,7 +1131,7 @@ Drugim, riječima, tromjesna relacija %$index$ (zadana s $\kf e^k=\f f$)
 \begin{equation}
 index(e,k,\f f):\Longleftrightarrow \kf e^k=\f f
 \end{equation}
-između $\N$, $\N_+$ i $\mathscr Comp$ nema funkcijsko svojstvo po prvoj varijabli --- ali ima po trećoj. Za svaki broj $e$ i mjesnost $k$ možemo precizno opisati funkciju $\kf e^k$. O tome govori sljedeća propozicija.
+između $\N$, $\N_+$ i $\mathscr Comp$ nema funkcijsko svojstvo po prvoj varijabli --- ali ima po trećoj: za svaki broj $e$ i mjesnost $k$ možemo precizno opisati funkciju $\kf e^k$. To kaže sljedeća propozicija.
 
 \begin{propozicija}[{name=[specifikacija funkcije zadane indeksom]}]\label{prop:computeind}
 Za sve $k\in\N_+$ i $e\in\N$ vrijedi:
@@ -1183,7 +1186,7 @@ Nažalost, iz toga još uvijek ne slijedi da je takva funkcija izračunljiva, ia
 
 Na početku točke~\ref{sec:tech} nešto smo rekli o teškoćama koje marljiva evaluacija donosi ako želimo u našem funkcijskom jeziku implementirati grananje s funkcijama koje nisu nužno totalne. Zapravo, jedino što možemo koristiti je kompozicija, jer primitivna rekurzija je definirana samo na totalnim funkcijama, a minimizacija na relacijama čije karakteristične funkcije su također totalne --- ali marljiva evaluacija znači da se u kompoziciji sve "unutarnje" funkcije evaluiraju uvijek, pa parcijalnost bilo koje od njih znači parcijalnost čitave kompozicije.
 
-Dakle, način da se izvučemo je da našoj funkciji $If$ ne damo već izračunate \emph{vrijednosti} $\f g(\vec x)$ i $\f h(\vec x)$, već neevaluirane \emph{funkcije} $\f g$ i $\f h$. Tada s obzirom na uvjet odaberemo jednu od njih, i onda je tek izračunamo na $\vec x$: umjesto $\f f(\vec x,y)\simeq \bigl(y\t?\f g(\vec x)\t:\f h(\vec x)\bigr)$ imamo $\f f(\vec x,y)\simeq (y\t?\f g\t:\f h)(\vec x)$. Koristeći indekse, to možemo i doslovno napraviti.
+Dakle, način da se izvučemo je da našoj funkciji $If$ ne damo već izračunate \emph{vrijednosti} $\f g(\vec x)$ i $\f h(\vec x)$, već neevaluirane \emph{funkcije} $\f g$ i $\f h$. Tada s obzirom na uvjet odaberemo jednu od njih, i onda je tek izračunamo na $\vec x$: umjesto $y\t?\f g(\vec x)\t:\f h(\vec x)$ imamo $(y\t?\f g\t:\f h)(\vec x)$. Indeksi (kao "pokazivači na funkcije") nam omogućuju da tu tehniku doista provedemo.
 
 \begin{teorem}[Teorem o grananju, parcijalno rekurzivna verzija]\label{tm:gprek}
 Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne rekurzivne relacije, sve iste mjesnosti.
