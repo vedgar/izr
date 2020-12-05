@@ -240,7 +240,7 @@ Za jedan smjer (zapisati $\overline{\f G}$ primitivno rekurzivno pomoću $\f G$)
 \begin{equation}\label{eq:povijestrek}
     \overline{\f G}(\vec x,y)=\prod_{i<y}\f{pow}\bigl(\f{prime}(i),\f{Sc}\,\bigl(\f{G}(\vec x,i)\bigr)\bigr)\text.
 \end{equation}
-Ako $i$-ti faktor u~\eqref{eq:povijestrek} označimo s $\f H(\vec x,i)$, tada je $\f{pow}\circ(\f{prime}\circ\f I_{k+1}^{k+1},\f{Sc}\circ\f G)$ sim\-bo\-li\-čka definicija od $\f H^{k+1}$ kompozicijom iz funkcija za koje je već dokazano da su primitivno rekurzivne, i funkcije $\f G$ koja je (primitivno) rekurzivna --- pa je $\f H$ (primitivno) rekurzivna. Sada je $\overline{\f G}$ (primitivno) rekurzivna po lemi~\ref{lm:sumprodrek}.
+Ako $i$-ti faktor u~\eqref{eq:povijestrek} označimo s $\f H(\vec x,i)$, tada je $\f{pow}\circ(\f{prime}\circ\f I_k^k,\f{Sc}\circ\f G)$ sim\-bo\-li\-čka definicija od $\f H^k$ kompozicijom iz funkcija za koje je već dokazano da su primitivno rekurzivne, i funkcije $\f G$ koja je (primitivno) rekurzivna --- pa je $\f H$ (primitivno) rekurzivna. Sada je $\overline{\f G}$ (primitivno) rekurzivna po lemi~\ref{lm:sumprodrek}.
 
 Za drugi smjer, zadana nam je $\overline{\f G}$ i želimo iz nje dobiti $\f G$. Pažljivim gledanjem~\eqref{eq:povijest} vidimo da $\overline{\f G}(\vec x,y)$ kodira prvih $y$ vrijednosti oblika $\f G(\vec x,i)$, među kojima \emph{nije} $\f G(\vec x,y)$. (To je čest \emph{bug} u C-programiranju: u polju deklariranom s \texttt{int a[7];} nema elementa \texttt{a[7]}.) Ako želimo dobiti taj broj, moramo zapravo izračunati $\overline{\f G}$ u nekom broju \emph{većem} od $y$ kao zadnjem argumentu. Dovoljno je uzeti $\overline{\f G}(\vec x,y+1)$: tvrdimo
 \begin{equation}\label{eq:unpovijest}
