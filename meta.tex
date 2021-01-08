@@ -580,6 +580,7 @@ Vanjska baza: za $z=0$ vrijedi (za sve $x,y\in\N$)
 \begin{equation}
     \kf a(x,y,0)\simeq\f G(x,y,0,a)=y+1=\f A(x,y,0)\text.
 \end{equation}
+
 Vanjska pretpostavka: pretpostavimo da za $z=t$, za sve $x,y\in\N$, vrijedi
 \begin{equation}
     \kf a(x,y,t)\simeq\f A(x,y,t)\text.
@@ -600,12 +601,13 @@ Unutarnja pretpostavka: pretpostavimo da za $y=s$, za sve $x\in\N$, vrijedi
 
 Unutarnji korak: neka je sad $y=s+1$, i $x\in\N$ proizvoljan. Moramo dokazati $\kf a(x,s+1,t+1)\simeq\f A(x,s+1,t+1)$. Krenimo raspisivati s lijeve strane:
 \begin{multline}
-    \kf a(x,s+1,t+1)\simeq\f G(x,s+1,t+1,a)\simeq{}\\
-    {}\simeq
+    \kf a(x,s+1,t+1)\simeq\f G(x,s+1,t+1,a)\simeq
     \f{comp}_3\bigl(x,\f{comp}_3\bigl(x,\f{pd}(s+1),t+1,a\bigr),\f{pd}(t+1),a\bigr)\simeq{}\\
-    {}\simeq\f{comp}_3\bigl(x,\f{comp}_3(x,s,t+1,a),t,a\bigr)\simeq\f{comp}_3\bigl(x,\kf a(x,s,t+1),t,a\bigr)\simeq{}\\
-    {}\simeq\f{comp}_3\bigl(x,\f A(x,s,t+1),t,a\bigr)\simeq\kf a\bigl(x,\f A(x,s,t+1),t\bigr)\simeq{}\\
-    {}\simeq\f A\bigl(x,\f A(x,s,t+1),t\bigr)\simeq\f A(x,s+1,t+1)\text.
+    \f{comp}_3\bigl(x,\f{comp}_3(x,s,t+1,a),t,a\bigr)\simeq
+	\f{comp}_3\bigl(x,\kf a(x,s,t+1),t,a\bigr)\simeq
+	\f{comp}_3\bigl(x,\f A(x,s,t+1),t,a\bigr)\\
+	{}\simeq\kf a\bigl(x,\f A(x,s,t+1),t\bigr)\simeq
+	\f A\bigl(x,\f A(x,s,t+1),t\bigr)\simeq\f A(x,s+1,t+1)\text.
 \end{multline}
 Time su oba koraka provedena, pa tvrdnja vrijedi. To znači da $\f A$ ima indeks $a$, pa je parcijalno rekurzivna, odnosno zbog korolara~\ref{kor:A3tot} rekurzivna funkcija.
 \end{proof}
@@ -662,10 +664,8 @@ I četvrto, to onda znači da je (za $e\in\f{Prog}$) $\f S_k(0,e)=1*e$, što je 
 \end{proof}
 
 \begin{korolar}[{name=[dodavanje nulâ na kraj ulaza ne mijenja RAM-izračunavanje]}]\label{kor:0nSk}
-Za sve $k,l\in\N_+$, za sve $\vec x\in\N^k$ i za sve $e\in\N$, vrijedi
-\begin{equation}
-	\kf e^{k+l}(\vec x^k,\vec 0^l):\simeq\kf e^{k+l}(\vec x,\vec 0)\simeq\kf e^k(\vec x)\text.
-\end{equation}
+Za sve $k,l\in\N_+$, za sve $\vec x\in\N^k$ i za sve $e\in\N$, vrijedi 
+	$\kf e^{k+l}(\vec x^k,\vec 0^l)\simeq\kf e^k(\vec x)$.
 \end{korolar}
 \begin{proof}
     Prvo indukcijom po $l$, prateći dokaz korolara~\ref{kor:pars} i koristeći lemu~\ref{lm:0nSk} u svakom koraku, dokažemo $\f S_k^{l+1}(\vec 0,e)=e$. Iz toga onda slijedi
@@ -772,9 +772,9 @@ Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju biti \emph
 \begin{primjer}[{name=[sortiranje kao jedna funkcija s raznim implementacijama]}]
     Recimo, mogli bismo zamisliti funkciju $\f{sort}^1\!:\f{Seq}\to\f{Seq}$ koja sortira konačne nizove zadane kodovima. Na primjer (\emph{unit test}), $\f{sort}(\kr{2,9,0,2})=\kr{0,2,2,9}$. Nije preteško pokazati da je $\f{sort}$ parcijalno rekurzivna, ali pritom moramo odabrati koji algoritam za sortiranje ćemo koristiti. \emph{Selection sort} bi izgledao ovako nekako:
 \begin{align}
-    \f{tail}(s)&:\simeq\mu t(\kr{s[0]}*t=s)\\
-    \f{min}(s)&:\simeq\mu n\bigl(\exists i<\f{lh}(s)\bigr)(s[i]=n)\\
-    \f{count}(s,x)&:=\bigl(\num i<\f{lh}(s)\bigr)(s[i]=x)\\
+    \f{tail}(s)&:\simeq\mu t(\kr{s[0]}*t=s)\qquad
+	\f{min}(s):\simeq\mu n\bigl(\exists i<\f{lh}(s)\bigr)(s[i]=n)\\
+    %\f{count}(s,x)&:=\bigl(\num i<\f{lh}(s)\bigr)(s[i]=x)\\
     \f{up}(s,x)&\simeq\begin{cases}
         \kr{},&s=\kr{}\\
         \f{up}\bigl(\f{tail}(s),x\bigr),&\f{Seq'}(s)\land s[0]\le x\\
@@ -782,7 +782,7 @@ Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju biti \emph
     \end{cases}\\
     \f{sort}(s)&\simeq\begin{cases}
         \kr{},&s=\kr{}\\
-        \overline{\f I_1^2}\bigl(\f{min}(s),\f{count}\bigl(s,\f{min}(s)\bigr)\bigr)*\f{sort}\bigl(\f{up}\bigl(s,\f{min}(s)\bigr)\bigr),&\f{Seq}'(s)
+	    \overline{\f I_1^2}\bigl(\f{min}(s),\bigl(\num i<\f{lh}(s)\bigr)\bigl(s[i]=\f{min}(s)\bigr)\bigr)*\f{sort}\bigl(\f{up}\bigl(s,\f{min}(s)\bigr)\bigr),&\f{Seq}'(s)
     \end{cases}
 \end{align}
 (funkcije $\f{up}$ i $\f{sort}$ definirane su općim rekurzijama), dok bi \emph{quicksort} bio nešto poput
@@ -828,7 +828,7 @@ Za inkluziju ($\subseteq$), iz $f\in\kins{\mathcal F}$ slijedi da postoji $\f F^
 
 Još je jedna stvar tu na prvi pogled čudna: zašto svojstvo~\eqref{eq:unittest} nije parcijalno rekurzivno? Čini se da je njegova karakteristična funkcija dobivena kompozicijom iz primitivno rekurzivne funkcije $\chi_=$, parcijalno rekurzivne funkcije $\f{comp}_1$ te konstanti $\f C^1_{\kr{2,9,0,2}}$ i $\f C^1_{\kr{0,2,2,9}}$. Ipak, to nije istina, jer prema marljivoj evaluaciji, ta kompozicija nikako ne može biti totalna (jer $\f{comp}_1$ nije totalna), dok bi karakteristična funkcija morala biti totalna. Isti problem smo već imali prije --- pogledajte napomenu~\ref{nap:parc=}.
 
-\subsection{Riceov teorem}
+% \subsection{Riceov teorem}
 
 \begin{teorem}[Riceov teorem]\label{tm:Rice}
 Neka je $k\in\N_+$, i $S\subseteq\N$ rekurzivan $k$-invarijantan skup. Tada je $S=\emptyset$ ili $S=\N$.
@@ -878,7 +878,7 @@ Budući da je $\wp$ netrivijalno svojstvo, postoji neka $k$-mjesna funkcija koja
 Po Church--\!Turingovoj tezi, to znači da bi taj algoritam računao $\chi_{\kins{\!\mathcal F}}$, što je u kontradikciji s korolarom~\ref{kor:Rice!odl}.
 \end{proof}
 
-%\subsection{Sintaksna i semantička svojstva RAM-programa}
+\subsection{Sintaksna i semantička svojstva RAM-programa}
 
 Za zadani RAM-program možemo postaviti mnoga pitanja: ima li više od milijun instrukcija, stane li s ulazom $(2,5)$, je li mu registar $\reg{15}$ relevantan, sadrži li instrukciju tipa $\goto$, računa li totalnu funkciju, dekrementira li ikad u toku izračunavanja registar $\reg7$, je li dobiven kompiliranjem simboličke definicije neke primitivno rekurzivne funkcije, zapiše li Turingov stroj dobiven njegovim transpiliranjem ikad prazninu na traku, može li se dobiti spljoštenjem makro-programa koji sadrži barem jedan funkcijski makro, napravi li paran broj koraka prije zaustavljanja s ulazom $27$, i tako dalje.
 

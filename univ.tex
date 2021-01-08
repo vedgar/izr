@@ -183,7 +183,7 @@ Upravo napisani izraz zapravo kaže da je $\f{nextprime}^1$ \emph{rekurzivna} fu
 	Dakle $\f{nextprime}^1$ je dobivena ograničenom minimizacijom primitivno rekurzivne relacije do primitivno rekurzivne granice, pa je primitivno rekurzivna po napomeni~\ref{nap:igpk} i propoziciji~\ref{prop:ominprn}. A tada je i $\f{prime}=2\pr\f{nextprime}\circ\f I_2^2$ primitivno rekurzivna po propoziciji~\ref{prop:F1prn}.
 \end{proof}
 
-\section{Lema o povijesti i posljedice}
+%\section{Lema o povijesti i posljedice}
 \begin{lema}[{name=[primitivna rekurzivnost rastava na prim-faktore]}]\label{lm:exprn}
 Za $(n,i)\in\N^2$, označimo s $\f{ex}(n,i)$ eksponent prim-broja $p_i$ u rastavu broja $n\bump$ na prim-faktore. Funkcija $\f{ex}^2$ je primitivno rekurzivna.
 \end{lema}
@@ -226,7 +226,7 @@ Za tvrdnju~\ref{stav:part<k}, neka je $i<k$ proizvoljan. Tada je eksponent od $p
 
 Funkcija $\f{part}$ je parcijalno specificirana samo po $c$: jednom kad znamo da je $c\in\f{Seq}$, sve vrijednosti $c[i]$ su propisane. Još nam nedostaje dokaz da je $\f{Seq}$ primitivno rekurzivna relacija, no to će slijediti uskoro.
 
-%\section{Funkcije definirane kodiranjem konačnih nizova}
+\section{Funkcije definirane kodiranjem konačnih nizova}
 
 \begin{lema}[Lema o povijesti]\label{lm:povijestrek}
 Neka je $k\in\N_+$ i $\f{G}^k$ totalna funkcija.
@@ -255,7 +255,7 @@ Napokon možemo dokazati primitivnu rekurzivnost slike kodiranja.
     Relacija $\f{Seq}^1:=\,\im{\langle\cdots\rangle}$ je primitivno rekurzivna.
 \end{korolar}
 \begin{proof}
-Formalno, definicija slike daje
+	Formalno, definicija slike (totalne funkcije) daje
 \begin{equation}
     \f{Seq}(c)\Longleftrightarrow(\exists\,\vec x\in\N^*)(c=\langle\vec x\rangle)\text,
 \end{equation}
@@ -758,7 +758,7 @@ Ako pak $c_n$ nije završna, tada je $p:=c_n(\textsc{pc})<\f{lh}(e)$ te je $i:=e
 i analogno $\f{Count}(x,e,n+1)=c_{n+1}(\textsc{pc})$, čime je proveden korak indukcije.
 \end{proof}
 
-\subsection{Prepoznavanje završne konfiguracije i čitanje rezultata}
+%\subsection{Prepoznavanje završne konfiguracije i čitanje rezultata}
 
 Pomoću funkcije $\f{Count}$ možemo detektirati završnu konfiguraciju.
 \begin{equation}
@@ -834,7 +834,7 @@ Sada je $\f{univ}(x,e)=\f{result}(z)=\f{ex}(\knk{c_{n_0}(\reg0),\dotsc},0)=c_{n_
 
 \section{Kleenejev teorem o normalnoj formi}
 
-Funkcija $\f{univ}$ je univerzalna, jer može simulirati bilo koji RAM-stroj, odnosno ra\-ču\-na\-ti bilo koju RAM-izračunljivu funkciju, pa time (po teoremu~\ref{tm:pir}) i svaku parcijalno rekurzivnu funkciju. Na neki način, $\f{univ}$ predstavlja funkcijski \emph{interpreter} za RAM-stroj, nasuprot imperativnom \emph{kompajleru} za simboličke definicije izgrađenom u točki~\ref{sec:pir}. %No iz raznih razloga, uglavnom tehničkih i povijesnih, zapravo se univerzalna funkcija uvodi na malo drugačiji način.
+Funkcija $\f{univ}$ je univerzalna, jer može simulirati bilo koji RAM-stroj, odnosno ra\-ču\-na\-ti bilo koju RAM-izračunljivu funkciju, pa time (po teoremu~\ref{tm:pir}) i svaku parcijalno rekurzivnu funkciju. Na neki način, $\f{univ}$ predstavlja funkcijski \emph{interpreter} za RAM-stroj, nasuprot imperativnom \emph{kompajleru} za simboličke definicije izgrađenom u poglavlju~\ref{ch:rek}. %No iz raznih razloga, uglavnom tehničkih i povijesnih, zapravo se univerzalna funkcija uvodi na malo drugačiji način.
 No iz tehničkih i povijesnih razloga, univerzalna funkcija obično se uvodi malo drugačije.
 
 Htjeli bismo napisati što jednostavniju "simboličku definiciju" univerzalne funkcije. Definicija~\eqref{eq:univdef} ima nezgodno svojstvo da dvaput koristi $x$ i $e$, odnosno napisana je kao kompozicija dvije funkcije, svaka od kojih ovisi o ulaznim podacima. No vanjska funkcija ne mora primati $x$ i $e$, ako joj unutarnja funkcija pošalje završnu konfiguraciju, ili nešto iz čega se ona može odrediti. Razlog zašto ih trenutno prima je što joj unutarnja funkcija pošalje samo broj koraka, koji je sam po sebi nedovoljan za određivanje završne konfiguracije. No koristeći kodiranje $\N^*\!$, poslana vrijednost može biti proizvoljno komplicirana.
@@ -921,7 +921,7 @@ Neka je $k\in\N_+$ te $\f{f}^k$ totalna funkcija. Tada je $\graf{\f f}$ rekurziv
 \begin{proof}
 Za smjer ($\Rightarrow$): po pretpostavci, $\chi_{\graf{\f f}}$ je rekurzivna, dakle parcijalno rekurzivna. Skup parcijalno rekurzivnih funkcija je zatvoren na minimizaciju, pa je $\mu\,\graf f$ također parcijalno rekurzivna --- no ta funkcija je jednaka $\f f$ po lemi~\ref{lm:projmugraf}. Dakle, $\f f$ je parcijalno rekurzivna, a po pretpostavci teorema je totalna, pa je rekurzivna.
 
-Za smjer ($\Leftarrow$): kako je $\f f$ totalna, uvjet $\vec x^k\in\dom f=\N^k$ uvijek vrijedi, pa~\eqref{eq:defgraf} postaje $\graf{\f f}(\vec x,y)\Longleftrightarrow y=\f f(\vec x)$, odnosno $\chi_{\graf{\f f}}$ je dobivena kompozicijom iz $\chi_=$, $\f f$ i koordinatnih projekcija. Jednakost i koordinatne projekcije su rekurzivne po korolarima~\ref{kor:jednakost} i~\ref{kor:prnrek}, a $\f f$ je rekurzivna po pretpostavci, pa je $\chi_{\graf{\f f}}$ rekurzivna po lemi~\ref{lm:comprek}.
+	Za smjer ($\Leftarrow$): kako je $\f f$ totalna, uvjet $\vec x^k\in\dom{\f f}=\N^k$ uvijek vrijedi, i $\f f(\vec x)$ uvijek postoji, pa~\eqref{eq:defgraf} postaje $\graf{\f f}(\vec x,y)\Longleftrightarrow y=\f f(\vec x)$, odnosno $\chi_{\graf{\f f}}$ je dobivena kompozicijom iz $\chi_=$, $\f f$ i koordinatnih projekcija. Jednakost i koordinatne projekcije su rekurzivne po korolarima~\ref{kor:jednakost} i~\ref{kor:prnrek}, a $\f f$ je rekurzivna po pretpostavci, pa je $\chi_{\graf{\f f}}$ rekurzivna po lemi~\ref{lm:comprek}.
 \end{proof}
 
 Istaknimo da u teoremu~\ref{tm:graftot} ne možemo staviti riječ "primitivno" u zagrade, kao što smo činili u mnogim rezultatima do sada: postoje rekurzivne funkcije čiji grafovi su primitivno rekurzivni, ali one same nisu primitivno rekurzivne. \emph{Ackermannova} funkcija, opisana u~\cite[dodatak]{skr:Vuk}, primjer je takve funkcije.

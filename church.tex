@@ -140,7 +140,7 @@ Tvrdimo da vrijedi $K(n)\Leftrightarrow Halt_1(n,n)$. Doista,
 \end{equation*}
 gdje smo koristili korolar~\ref{kor:comptot} da se riješimo sljedbenika.\newline Iz toga slijedi $K\preceq Halt_1$, pa je $Halt_1$ neodlučiv po korolaru~\ref{kor:nrek<nrek} i teoremu~\ref{tm:DRnrek}.
 
-Slično, po definiciji iz korolara~\ref{kor:funHaltTk}, vrijedi $Halt_1(x,e)\Leftrightarrow HALT(\kr x,e)$, a funkcija $\f{Code}^1$ je (primitivno) rekurzivna, pa je $Halt_1\!\preceq HALT$, iz čega je i $HALT$ neodlučiv.
+	Slično, po definiciji iz korolara~\ref{kor:funHaltTk}, vrijedi $Halt_1(x,e)\Leftrightarrow HALT(\kr x,e)$, a funkcija $\f{Code}^1$ je primitivno rekurzivna po propoziciji~\ref{prop:Codekprn}, pa je $Halt_1\!\preceq HALT$, iz čega je i $HALT$ neodlučiv.
 \end{proof}
 
 U literaturi se $Halt_1$ odnosno $HALT$ (kako gdje) zove \emph{halting problem} (problem zaustavljanja), jer postavlja pitanje stane li određeno izračunavanje (zadano pomoću RAM-programa i ulaza za njega). Mogli bismo dokazati i neodlučivost problema $Halt_k$ za $k\ge 2$ (pokušajte formalno dokazati svođenje $Halt_1(x,e)\Leftrightarrow Halt_k(x,0,0,\dotsc,0,e)$), ali to će slijediti jednom kad dokažemo teorem o parametru.
@@ -297,20 +297,20 @@ Neka je $P^k$ RAM-algoritam, $\vec u$ ulaz za njega, i pomoću njih konstruirajm
 %Ako vrijedi $\Gamma_{\vec u}\models\zeta$, tada $P$-izračunavanje s $\vec u$ stane.
 %\end{lema}
 %\begin{proof}
-Također, neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Promotrimo $\sigma$-strukturu $\mathfrak N:=(\N,\phi)$, čija je interpretacija zadana s
+Također, neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Promotrimo $\sigma$-strukturu $\mathfrak N$ s nosačem $\N$ i interpretacijom nelogičkih simbola zadanom s:
 \begin{itemize}
-    \item $\phi(\mathsf o):=0$,
-    \item $\phi(\mathsf s):=\f{Sc}$ te
+	\item $\mathsf o^{\mathfrak N}:=0$,
+	\item $\mathsf s^{\mathfrak N}:=\f{Sc}$ te
     \item za svaki $i\in[0\dd n]$,
     $
-        \phi(R_i):=\bigl\{
+		R_i^{\mathfrak N}:=\bigl\{
         \bigl(c_t(\reg0),\dotsc,c_t(\reg{m-1})\bigr)
         \bigm|
         t\in\N\land c_t(\textsc{pc})=i
 		\,\bigr\}
     $.
 \end{itemize}
-Indukcijom po $r$ se dokaže $\phi(\overline r)=r$ za sve $r\in\N$, pa $\mathfrak N\models R_{pc}(\overline{r_0},\overline{r_1},\dotsc,\overline{r_{m-1}})$ --- odnosno $\mathfrak N\models_v R_{pc}(x_0,x_1,\dotsc,x_{m-1})$, gdje je $v$ valuacija takva da je $v(x_j)=r_j$ za sve $j\in[0\dd m\rangle$ --- neformalno znači da RAM-stroj s programom $P$ i ulazom $\vec u$ može doći u konfiguraciju $(r_0,r_1,\dotsc,r_{m-1},0,0,\dotsc,pc)$ (nakon $t$ koraka izračunavanja).
+	Indukcijom po $r$ se dokaže $\overline r^{\mathfrak N}=r$ za sve $r\in\N$, pa $\mathfrak N\models R_{pc}(\overline{r_0},\overline{r_1},\dotsc,\overline{r_{m-1}})$ --- odnosno $\mathfrak N\models_v R_{pc}(x_0,x_1,\dotsc,x_{m-1})$, gdje je $v$ valuacija takva da je $v(x_j)=r_j$ za sve $j\in[0\dd m\rangle$ --- neformalno znači da RAM-stroj s programom $P$ i ulazom $\vec u$ može doći u konfiguraciju $(r_0,r_1,\dotsc,r_{m-1},0,0,\dotsc,pc)$ (nakon $t$ koraka izračunavanja).
 
 \begin{lema}[{name=[istinitost početne formule u $\mathfrak N$]}]\label{lm:Npiu}
 Vrijedi $\mathfrak N\models\pi_{\vec u}$.
@@ -332,13 +332,13 @@ Ako je to \inc, dakle $i.\;\incr j$ za neki $j$, tada mora biti $j<m_P\le m$, i 
 \begin{equation}\label{eq:nextINC}
 	\bigl(v(x_0),\dotsc,v(x_{j-1}),v(x_j)+1,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i+1\bigr)\text.
 \end{equation}
-S druge strane, $c_t\leadsto c_{t+1}$ po definiciji~\ref{def:compute}, pa po lemi~\ref{lema:ramdet} imamo da je~\eqref{eq:nextINC} upravo $c_{t+1}$ (to ćemo koristiti i kasnije). Drugim riječima, stroj može postići konfiguraciju~\eqref{eq:nextINC}, iz čega slijedi (jer je $v(x_j)+1=\f{Sc}\bigl(v(x_j)\bigr)=\phi(\mathsf s)\bigl(v(x_j)\bigr)=v\bigl(\mathsf s(x_j)\bigr)$)
+	S druge strane, $c_t\leadsto c_{t+1}$ po definiciji~\ref{def:compute}, pa po lemi~\ref{lema:ramdet} imamo da je~\eqref{eq:nextINC} upravo $c_{t+1}$ (to ćemo koristiti i kasnije). Drugim riječima, stroj može postići konfiguraciju~\eqref{eq:nextINC}, iz čega slijedi (jer je $v(x_j)+1=\f{Sc}\bigl(v(x_j)\bigr)=\mathsf s^{\mathfrak N}\bigl(v(x_j)\bigr)=v\bigl(\mathsf s(x_j)\bigr)$)
 \begin{equation}
     \mathfrak N\models_v R_{i+1}\bigl(x_0,\dotsc,x_{j-1},\mathsf s(x_j),x_{j+1},\dotsc,x_{m-1}\bigr)\text,
 \end{equation}
 odnosno u $\mathfrak N$ uz valuaciju $v$ vrijedi i konzekvens formule~\eqref{eq:formINC}, što smo trebali.
 
-Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, sličnom metodom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $v(\mathsf o)=\phi(\mathsf o)=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u
+	Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, sličnom metodom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $v(\mathsf o)=\mathsf o^{\mathfrak N}=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u
 \begin{equation}
     c_{t+1}=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,l\bigr)\text,
 \end{equation}
@@ -355,18 +355,18 @@ Za svaki $\vec u\in\N^k$, ako $\Gamma_{\vec u}\models\zeta$, tada $P$-izračunav
 \begin{proof}
 Pretpostavka $\Gamma_{\vec u}\models\zeta$ znači da u svakoj strukturi u kojoj vrijede sve formule iz $\Gamma_{\vec u}$, vrijedi i formula $\zeta$. Leme~\ref{lm:Npiu} i~\ref{lm:Niotai} pokazuju da je $\mathfrak N$ takva struktura, pa vrijedi $\mathfrak N\models\zeta$. Čitajući~\eqref{eq:defzeta}, vidimo da to znači da za svaku valuaciju $v$ (pa posebno, recimo, za onu koja sve varijable preslika u $0$) postoji valuacija $v'$, koja se podudara s $v$ na svim individualnim varijablama $x_i,i\ge m$, takva da vrijedi
 \begin{equation}
-    \bigl(v'(x_0),\dotsc,v'(x_{m-1})\bigr)\in\phi(R_n)\text.
+	\bigl(v'(x_0),\dotsc,v'(x_{m-1})\bigr)\in R_n^{\mathfrak N}\text.
 \end{equation}
-Valuacije nam zapravo ovdje uopće nisu bitne --- jedino što je bitno je da iz toga slijedi $\phi(R_n)\ne\emptyset$, pa postoji $t\in\N$ takav da je $c_t(\textsc{pc})=n$. No to znači da je $c_t$ završna konfiguracija, pa $P$-izračunavanje s $\vec u$ stane nakon $t$ koraka.
+	Valuacije nam zapravo ovdje uopće nisu bitne --- jedino što je bitno je da iz toga slijedi $R_n^{\mathfrak N}\ne\emptyset$, pa postoji $t\in\N$ takav da je $c_t(\textsc{pc})=n$. No to znači da je $c_t$ završna konfiguracija, pa $P$-izračunavanje s $\vec u$ stane nakon $t$ koraka.
 \end{proof}
 
 %\subsection{Zaustavljanje povlači zaključivanje}
 
 Sada nam je cilj dokazati obrat propozicije~\ref{pp:models>stop}. Bitna razlika je što sad moramo \emph{dokazati} da je $\zeta$ logička posljedica od $\Gamma_{\vec u}$, pa više ne možemo koristiti "intendiranu interpretaciju" s prirodnim brojevima, nego moramo provesti argumentaciju za proizvoljnu $\sigma$-strukturu $\mathfrak M$ u kojoj vrijedi $\Gamma_{\vec u}$. Ta struktura ne mora biti izomorfna s $\mathfrak N$, ne mora čak ni zadovoljavati jednostavne aksiome poput injektivnosti sljedbenika (zapravo, ne možemo ih ni \emph{iskazati} jer nemamo jednakost u teoriji), ali svejedno ćemo moći pokazati da u njoj vrijedi $\zeta$.
 
-Pa neka je $\mathfrak M=(M,\phi)\cong(M,\Theta,g,S_0,S_1,\dotsc,S_n)$ proizvoljna $\sigma$-struktura (redom imamo $\phi(\mathsf o)=:\Theta\in M$, $\phi(\mathsf s)=:g:M\to M$, a za svaki $i\in[0\dd n]$, $\phi(R_i)=:S_i\subseteq M^m$), i neka vrijedi $\mathfrak M\models\Gamma_{\vec u}$.
+Pa neka je $\mathfrak M=(M,\Theta,g,S_0,S_1,\dotsc,S_n)$ proizvoljna $\sigma$-struktura (redom imamo $\mathsf o^{\mathfrak M}=:\Theta\in M$, $\mathsf s^{\mathfrak M}=:g:M\to M$, a za svaki $i\in[0\dd n]$, $R_i^{\mathfrak M}=:S_i\subseteq M^m$), i neka vrijedi $\mathfrak M\models\Gamma_{\vec u}$.
 
-Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo\\ $a_j^t:=\phi\bigl(\overline{c_t(\reg j)}\bigr)=g\bigl(g(\dotsb g(\Theta)\dotsb\mspace{-1mu})\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
+Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo\\ $a_j^t:=\overline{c_t(\reg j)}^{\mathfrak M}=g\bigl(g(\dotsb g(\Theta)\dotsb\mspace{-1mu})\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
 
 \begin{lema}[{name=[izračunavanje čuva istinitost formula pojedinih konfiguracija]}]\label{lm:formcomputesteps}
 Za svaki $t\in\N$ vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$,\newline odnosno $(a_0^t,a_1^t,\dotsc,a_{m-1}^t)\in S_{c_t(\textsc{pc})}$.
@@ -380,15 +380,15 @@ Ako je ta instrukcija tipa \inc, recimo $i.\;\incr j$ za neki $j<m$, tada u $\ma
 	\bigl(a_0^b,\dotsc,a_{j-1}^b,g(a_j^b),a_{j+1}^b,\dotsc,a_{m-1}^b\bigr)\in S_{i+1}\text,
 \end{equation} uz pretpostavku $(a_0^b,\dotsc,a_{m-1}^b)\in S_i=S_{c_b(\textsc{pc})}$. No ta pretpostavka je upravo pretpostavka indukcije, pa onda vrijedi i~\eqref{eq:korakINC}. A formula~\eqref{eq:korakINC} je upravo formula koja odgovara konfiguraciji $c_{b+1}$, jer je $i+1=c_b(\textsc{pc})+1=c_{b+1}(\textsc{pc})$, i
 \begin{equation}
-	a_j^{b+1}=\phi\bigl(\overline{c_{b+1}(\reg j)}\bigr)=\phi\bigl(\overline{1+c_b(\reg j)}\bigr)=\phi\bigl(\mathsf s\bigl(\overline{c_b(\reg j)}\bigr)\bigr)
-=\phi(\mathsf s)\bigl(\phi\bigl(\overline{c_b(\reg j)}\bigr)\bigr)=g(a_j^b)\text.
+	a_j^{b+1}=\overline{c_{b+1}(\reg j)}^{\mathfrak M}=\overline{1+c_b(\reg j)}^{\mathfrak M}=\bigl(\mathsf s\bigl(\overline{c_b(\reg j)}\bigr)\bigr)^{\mathfrak M}
+	=\mathsf s^{\mathfrak M}\bigl(\overline{c_b(\reg j)}^{\mathfrak M}\bigr)=g(a_j^b)\text.
 \end{equation}
 	Ako je ta instrukcija tipa \goto, s odredištem $l\le n$, uz istu valuaciju imamo da $\vec a\in S_i$ povlači $\vec a\in S_l$. Ova prva tvrdnja je pretpostavka indukcije, a druga je upravo ona koja nam treba za korak (stanje registara ostaje isto, odnosno $a_j^b=a_j^{b+1}$ za svaki $j\in[0\dd m\rangle$).
 
-Ako je ta instrukcija tipa \dec, recimo $\decr jl$, promotrimo slučajeve s obzirom na to je li $c_b(\reg j)=0$ (krivo je reći "s obzirom na to je li $a_j^b=\Theta$", jer nitko ne brani da bude npr.\ $g(\Theta)=\Theta$, odnosno $\phi(\overline1)=\phi(\overline0)$). Ako jest, imamo istu argumentaciju kao u prethodnom odlomku, jer se stanje registara tada ne mijenja: $\vec a\in S_i$ povlači $\vec a\in S_l$ po prvom konjuktu u~\eqref{eq:formDEC}. Ako nije, tada je sigurno $c_b(\reg j)\ge1$, pa promotrimo~\eqref{eq:formDEC} (odnosno njen drugi konjunkt) uz valuaciju
+	Ako je ta instrukcija tipa \dec, recimo $\decr jl$, promotrimo slučajeve s obzirom na to je li $c_b(\reg j)=0$ (krivo je reći "s obzirom na to je li $a_j^b=\Theta$", jer nitko ne brani da bude npr.\ $g(\Theta)=\Theta$, odnosno $\overline1^{\mathfrak M}=\overline0^{\mathfrak M}$). Ako jest, imamo istu argumentaciju kao u prethodnom odlomku, jer se stanje registara tada ne mijenja: $\vec a\in S_i$ povlači $\vec a\in S_l$ po prvom konjuktu u~\eqref{eq:formDEC}. Ako nije, tada je sigurno $c_b(\reg j)\ge1$, pa promotrimo~\eqref{eq:formDEC} (odnosno njen drugi konjunkt) uz valuaciju
 $v'(x_h):=\begin{smallcases}
-a_h^b=\phi\left(\overline{c_b(\reg h)}\right),&h\ne j\\
-\phi\left(\overline{c_b(\reg j)-1}\right),&h=j
+	a_h^b=\overline{c_b(\reg h)}^{\mathfrak M},&h\ne j\\
+	\overline{c_b(\reg j)-1}^{\mathfrak M},&h=j
 \end{smallcases}$.
 Uz tu valuaciju vrijedi antecedens, jer je $v'\bigl(\mathsf s(x_j)\bigr)=a_j^b$ --- pa onda vrijedi i konzekvens, odnosno formula s istim sadržajem registara, osim što je $c_{b+1}(\reg j)$ za jedan manji, i $c_{b+1}(\textsc{pc})$ za jedan veći, kao što i treba biti.
 \end{proof}
@@ -725,7 +725,7 @@ Modus ponens i generalizaciju je jednostavno zapisati.
     (\exists k<a)(a=\f{UnivQuant}(k)\conc{}b)
 \end{align}
 
-Odnosno, $\alpha$ je dobivena modus ponensom iz $\beta$ i $\gamma$ ako i samo ako je $\beta=(\gamma\to\alpha)$. Također, $\alpha$ je dobivena generalizacijom iz $\beta$ ako postoji $k$ takav da je $\alpha=\forall x_k\beta$. Pri tome je $k<k+1=\dulj{x_k}<\dulj{\forall x_k}<\dulj{\alpha}\le\kr\alpha=a$ po lemi~\ref{lm:dulj<=kr}, pa možemo ograničiti kvantifikaciju po $k$.
+	Odnosno, $\alpha$ je dobivena modus ponensom iz $\beta$ i $\gamma$ ako i samo ako je $\beta=(\gamma\to\alpha)$. Također, $\alpha$ je dobivena generalizacijom iz $\beta$ ako postoji $k$ takav da je $\alpha=\forall x_k\beta$. Pri tome je $k<k+1=\dulj{x_k}<\dulj{\forall x_k}<\dulj{\forall x_k\beta}=\dulj{\alpha}\le\kr\alpha=a$ po lemi~\ref{lm:dulj<=kr}, pa možemo ograničiti kvantifikaciju po $k$.
 
     Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, i još provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana, i to je jedna od onih tehničkih poteškoća koje su elegantno izbjegnute u~\cite{smullyan}.
 
@@ -747,7 +747,7 @@ Sve u svemu, vidimo da neformalni algoritam koji smo napisali računa $\chi_{K}$
 Jedina pretpostavka koja može biti kriva je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathscr G\ddot o$ koja nije dokaziva u PA\@.
 \end{proof}
 
-%\subsection{Problemi u skici dokaza Gödelovog teorema}
+\subsection{Problemi u skici dokaza Gödelovog teorema}
 
 U dokazu teorema~\ref{tm:goedel} je mnogo toga napravljeno neformalno. Želja autora bila je prikazati da smo idejno jako blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako ih možemo "zakrpati".
 

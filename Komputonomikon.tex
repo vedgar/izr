@@ -40,30 +40,30 @@
 \declaretheoremstyle[
   spaceabove=\topsep, spacebelow=0pt, postheadspace=0.5em,
   headfont=\normalfont\bfseries, bodyfont=\normalfont,
-  notefont=\mdseries, notebraces={(}{)}, headpunct={:},
-  mdframed={ backgroundcolor=gray!1, 
-            linecolor=blue!50, 
-	    linewidth=1pt,
-            innertopmargin=0pt,
-            innerbottommargin=0pt, 
-	    innerleftmargin=1em,
-	    innerrightmargin=1em,
-            skipabove=1pt,
-            skipbelow=0pt,
-	    innermargin=-1em,
-	    outermargin=-1em,
-	    topline=false,
-	    bottomline=false,
-	    rightline=false
-	    }
+  notefont=\mdseries, notebraces={(}{)}, headpunct={:}%,
+  %mdframed={ backgroundcolor=gray!1, 
+            %linecolor=blue!50, 
+	    %linewidth=1pt,
+            %innertopmargin=0pt,
+            %innerbottommargin=0pt, 
+	    %innerleftmargin=1em,
+	    %innerrightmargin=1em,
+            %skipabove=1pt,
+            %skipbelow=0pt,
+	    %innermargin=-1em,
+	    %outermargin=-1em,
+	    %topline=false,
+	    %bottomline=false,
+	    %rightline=false
+	    %}
 ]{kni}
-\declaretheorem[             style=kni,parent=chapter]{lema}
-\declaretheorem[sibling=lema,style=kni,qed=$\lhd$]{definicija}
-\declaretheorem[sibling=lema,style=kni,qed=$\lhd$]{primjer}
-\declaretheorem[sibling=lema,style=kni,qed=$\lhd$]{napomena}
-\declaretheorem[sibling=lema,style=kni]{propozicija}
-\declaretheorem[sibling=lema,style=kni]{korolar}
-\declaretheorem[sibling=lema,style=kni]{teorem}
+\declaretheorem[parent=chapter,style=kni]{lema}
+\declaretheorem[  sibling=lema,style=kni,qed=$\lhd$]{definicija}
+\declaretheorem[  sibling=lema,style=kni,qed=$\lhd$]{primjer}
+\declaretheorem[  sibling=lema,style=kni,qed=$\lhd$]{napomena}
+\declaretheorem[  sibling=lema,style=kni]{propozicija}
+\declaretheorem[  sibling=lema,style=kni]{korolar}
+\declaretheorem[  sibling=lema,style=kni]{teorem}
 \declaretheorem[numbered=no,name={Church--\!Turingova teza}]{ctteza}
 \renewcommand{\listtheoremname}{Popis definicija, propozicija, teorema, primjera, lema, napomena i korolara}
 

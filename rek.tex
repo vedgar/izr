@@ -217,7 +217,7 @@ U petljama je uobičajeno da tijelo, pored konteksta $\vec x$ i prethodno izrač
 %Formalizirajmo sada to sve u obliku matematičke definicije.
 
 \begin{definicija}[{name=[primitivna rekurzija]}]\label{def:pr}
-Neka je $k\in\N_+$ te neka su $G^k$ i $H^{k+2}$ totalne funkcije. Za funkciju $F^{k+1}$ definiranu s
+Neka je $k\in\N_+$ te neka su $G^k$ i $H^{k+2}$ totalne funkcije. Za funkciju $F^{k+1}$\\ definiranu s
 \begin{align}
 \SwapAboveDisplaySkip
 \label{eq:defprb}
@@ -554,7 +554,7 @@ Slično kao propoziciju~\ref{prop:symbdef}, mogli bismo dokazati da je funkcija 
 
 %Zapravo, imamo još mnogo toga za reći o primitivno rekurzivnim funkcijama; razlog zašto već sad uvodimo minimizaciju je što će se nekoliko rezultata vezanih uz definiciju po slučajevima moći jednako dokazati za primitivno rekurzivne i za rekurzivne funkcije --- a za rekurzivne funkcije će nam ti rezultati trebati kasnije, tako da ih nećemo morati ponovo dokazivati. Naime, dokazi će transformirati neke \emph{ulazne} funkcije u \emph{izlazne}, komponirajući ih s primitivno rekurzivnim funkcijama. Tada je jasno, s obzirom na to da je skup rekurzivnih funkcija zatvoren na kompoziciju (i primitivnu rekurziju) --- kao presjek dva takva skupa --- da ako ulazne funkcije budu primitivno rekurzivne, i izlazne će biti primitivno rekurzivne, a ako ulazne budu rekurzivne, i izlazne će biti rekurzivne.
 
-\subsection{Kompajler za funkcijski jezik}\label{sec:pir}
+%\subsection{Kompajler za funkcijski jezik}\label{sec:pir}
 
 Pogledajmo sada kako možemo proširiti rezultat iz propozicije~\ref{prop:prnram} na parcijalno rekurzivne funkcije. Vidimo da nam nedostaje još samo opis kako se neograničene petlje izvršavaju na RAM-stroju.
 
@@ -703,11 +703,11 @@ Neka je $k\in\N_+$ te $\f R^k$ i $\f P^k$ (primitivno) rekurzivne relacije iste 
 \end{align}
 \end{propozicija}
 \begin{proof}
-Prvo pokažimo da skupovne i logičke definicije ekvivalentne za upravo definirane relacije. Za $\f Q_1$ i $\f Q_2$ to je upravo definicija presjeka i unije. Za $\f Q_3$ imamo
+	Prvo pokažimo da su skupovne i logičke definicije ekvivalentne za upravo definirane relacije. Za $\f Q_1$ i $\f Q_2$ to je upravo definicija presjeka i unije. Za $\f Q_3(\vec x)$ imamo
     \begin{equation}
     \vec x\in(\f R\setminus\f P)\kompl\Leftrightarrow\lnot(\vec x\in\f R\land\vec x\notin\f P)\Leftrightarrow\vec x\notin\f R\lor\vec x\in\f P\Leftrightarrow\vec x\in \f R\to\vec x\in\f P\text.
 \end{equation}
-Za $\f Q_4$, logička definicija kaže da je $\chi_{\f R}(\vec x)=\chi_{\f P}(\vec x)$. Njena negacija kaže da su ta dva broja različiti, a kako su oba iz skupa $\{0,1\}$, mora jedan od njih biti $0$ a drugi $1$. To upravo znači da se $\vec x$ nalazi u točno jednom od skupova $\f R$ i $\f P$, dakle $\vec x\in\f R\mathbin\triangle\f P$.
+	Za $\f Q_4(\vec x)$, logička definicija kaže da je $\chi_{\f R}(\vec x)=\chi_{\f P}(\vec x)$. Njena negacija kaže da su ta dva broja različiti, a kako su oba iz skupa $\{0,1\}$, mora jedan od njih biti $0$ a drugi $1$. To upravo znači da se $\vec x$ nalazi u točno jednom od skupova $\f R$ i $\f P$, dakle $\vec x\in\f R\mathbin\triangle\f P$.
 
 Za primitivnu rekurzivnost tih relacija, kao u dokazu propozicije~\ref{prop:kompl}, trebamo naći dvomjesne primitivno rekurzivne funkcije $\f f_i$ koje će preslikavati $\chi_{\f R}(\vec x)$ i $\chi_{\f P}(\vec x)$ u $\chi_{\f Q_i}(\vec x)$, dakle koje će na skupu $\{0,1\}$ djelovati onako kako propisuju tablice istinitosti za pojedine logičke veznike.
 
@@ -747,7 +747,7 @@ simbolički $(\eq)=(\le)\cap(\ge)$.%, odnosno $\chi_\eq=\chi_\le\cdot\chi_\ge=\f
 \end{proof}
 
 %\subsection{Višestruke operacije}
-%\subsection{Teorem o grananju za totalne funkcije}
+\subsection{Teorem o grananju za totalne funkcije}
 
 Sada ćemo nešto reći o višestrukim zbrojevima, umnošcima, unijama i presjecima. U većini programskih jezika npr.\ zbrajanje je sintaksno realizirano kao infiksni operator, najčešće lijevo asociran, a jedina operacija koja je doista implementirana u procesoru je dvomjesno zbrajanje --- tako da se npr.\ $a+b+c+d$ shvaća kao $\bigl((a+b)+c\bigr)+d$, odnosno kompilira se kao slijed tri instrukcije zbrajanja. Mi ćemo učiniti isto, samo ćemo u skladu s funkcijskom paradigmom slijed implementirati kao kompoziciju.
 
@@ -791,7 +791,7 @@ Za uniju, možemo opet iskoristiti De Morganovo pravilo i propoziciju~\ref{prop:
 što je (primitivno) rekurzivno ako su sve $\chi_{\f R_i}$ (primitivno) rekurzivne.
 \end{proof}
 
-\subsection{Teorem o grananju za totalne funkcije}
+%\subsection{Teorem o grananju za totalne funkcije}
 
 Napokon možemo dokazati teorem o grananju za totalne funkcije, samo prethodno moramo precizno definirati pojmove.
 

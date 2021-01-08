@@ -132,9 +132,8 @@ Neka su $k,l\in\N_+$ te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive 
 	Po teoremu~\ref{tm:rpeproj}, za svaki $i\in[1\dd l]$ postoji rekurzivna relacija $\f P^{k+1}_i$ takva da je $R_i=\exists_*\f P_i$. Sada je
 \begin{multline}\label{eq:urere}
     \vec x\in\bigcup\nolimits_{i=1}^l\! R_i=\bigcup\nolimits_{i=1}^l\!\exists_*\f P_i\Longleftrightarrow
-    (\exists i\in[1\dd l])(x\in\exists_*\f P_i)\Longleftrightarrow{}\\
-    {}\Longleftrightarrow(\exists i\in[1\dd l])(\exists y\in\N)\f P_i(\vec x,y)\Longleftrightarrow(\exists y\in\N)(\exists i\in[1\dd l])\bigl((\vec x,y)\in\f P_i\bigr)\Longleftrightarrow{}\\
-    {}\Longleftrightarrow
+	(\exists i\in[1\dd l])(x\in\exists_*\f P_i)\Longleftrightarrow(\exists i\in[1\dd l])(\exists y\in\N)\f P_i(\vec x,y)\Longleftrightarrow{}\\
+	(\exists y\in\N)(\exists i\in[1\dd l])\bigl((\vec x,y)\in\f P_i\bigr)\Longleftrightarrow
     (\exists y\in\N)\Bigl((\vec x,y)\in\bigcup\nolimits_{i=1}^l\!\f P_i\Bigr)\Longleftrightarrow\vec x\in\exists_*\Bigl(\,\bigcup\nolimits_{i=1}^l\!\f P_i\Bigr)\text,
 \end{multline}
 te je $\f P:=\bigcup_{i=1}^l\!\f P_i$ rekurzivna po propoziciji~\ref{prop:skupl} --- a onda je $\bigcup_{i=1}^l\! R_i=\exists_*\f P$ rekurzivno prebrojiva po teoremu~\ref{tm:rpeproj}.
@@ -193,14 +192,14 @@ Ubuduće smatramo da smo fiksirali neku implementaciju, ali nećemo od nje ništ
 Funkcija $\f{pair}$ je injekcija, a slika joj je primitivno rekurzivna.
 \end{propozicija}
 \begin{proof}
-Pretpostavimo da su $a,b,c,d\in\N$ takvi da vrijedi $\f{pair}(a,b)=\f{pair}(c,d)$. Tada
+Pretpostavimo da su $a,b,c,d\in\N$ takvi da vrijedi $\f{pair}(a,b)=\f{pair}(c,d)$. Tada je
 \begin{equation}
     a=\f I_1^2(a,b)=\f{fst}\bigl(\f{pair}(a,b)\bigr)=\,
     \f{fst}\bigl(\f{pair}(c,d)\bigr)=\f I_1^2(c,d)=c\text,
 \end{equation}
 i analogno $b=d$, pa je $(a,b)=(c,d)$, odnosno $\f{pair}$ je injekcija.
 
-	Za primitivnu rekurzivnost slike, koristimo istu tehniku kao u dokazu korolara~\ref{kor:Seqprn}: $p\in\im{\f{pair}}\Longleftrightarrow\bigl(\exists\,(x,y)\in\N^2\bigr)\bigl(p=\f{pair}(x,y)\bigr)$, a jedini kandidati za $x$ i $y$ su redom $\f{fst}(p)$ i $\f{snd}(p)$. Dakle, vrijedi $p\in\im{\f{pair}}\Longleftrightarrow\mspace{1mu}p=\f{pair}\bigl(\f{fst}(p),\f{snd}(p)\bigr)$,
+	Za sliku koristimo tehniku iz dokaza korolara~\ref{kor:Seqprn}: $p\in\im{\f{pair}}\Longleftrightarrow\bigl(\exists\,(x,y)\in\N^2\bigr)\bigl(p=\f{pair}(x,y)\bigr)$, a jedini kandidati za $x$ i $y$ su redom $\f{fst}(p)$ i $\f{snd}(p)$. Dakle, vrijedi $p\in\im{\f{pair}}\Longleftrightarrow\mspace{1mu}p=\f{pair}\bigl(\f{fst}(p),\f{snd}(p)\bigr)$,
 što je primitivno rekurzivno jer su $\f{pair}$, $\f{fst}$, $\f{snd}$ i $\chi_=$ takve.
 \end{proof}
 
@@ -290,7 +289,7 @@ Ideja je slična kao u dokazu teorema~\ref{tm:rpeproj}\texttt{(3)}; jedina razli
 
 \begin{proof}
 Neka je $k\in\N_+$ te $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi} $\f F$ ima indeks, označimo ga (napomena~\ref{nap:>1ind}) s $e$. Tada po teoremu~\ref{tm:Kleene} imamo: \begin{equation}\label{eq:Grafproj}
-    \graf{\f F}(\vec x,y)\Longleftrightarrow\vec x\in\dom{\kf e^k}\land\kf e^k(\vec x)=y\Longleftrightarrow\exists z\bigl(
+    \graf{\f F}(\vec x,y)\Longleftrightarrow\vec x\in\dom{\kf e^k}\land\kf e^k(\vec x)\simeq y\Longleftrightarrow\exists z\bigl(
     \f T_k(\vec x,e,z)\land
     \f U(z)=y\bigr)\text.
 \end{equation}
@@ -309,7 +308,7 @@ Sada zaključujemo ovako: za fiksni $e$, relacija zadana s
 je primitivno rekurzivna po propoziciji~\ref{prop:vezn}, kao konjunkcija dvije primitivno rekurzivne relacije. Tada je po~\eqref{eq:Grafproj} $\graf{\f F}=\exists_*\f R$, rekurzivno prebrojiva po teoremu~\ref{tm:rpeproj}.
 \end{proof}
 
-\subsection{Selekcija}
+% \subsection{Selekcija}
 
 Sljedeći veliki zalogaj je dokazati obrat teorema~\ref{tm:grafprre}. Kod teorema za totalne funkcije koristili smo minimizaciju: po lemi~\ref{lm:projmugraf}, funkcija je jednaka minimizaciji svog grafa. To vrijedi za sve funkcije (čak i za neizračunljive), ali neće nam pomoći ako je graf samo poluodlučiv: skup rekurzivno prebrojivih relacija nije zatvoren na minimizaciju (što bi to uopće značilo?), a i intuitivno, minimizacija poluodlučive relacije ne mora biti izračunljiva.
 
@@ -382,14 +381,14 @@ Mi želimo dokazati obrat teorema~\ref{tm:grafprre}, dakle rekurzivno prebrojiva
 Za svaku brojevnu funkciju $F$, jedini selektor grafa $\graf F$ je upravo $F$.
 \end{lema}
 \begin{proof}
-$F$ jest selektor za $\graf F$: uvjet $\dom F=\exists_*\graf F$ smo dokazali odavno (u lemi~\ref{lm:projmugraf}), a trivijalno je $\graf F\subseteq\graf F$.
+$F$ jest selektor za $\graf F$: uvjet $\dom F=\exists_*\graf F$ imamo iz leme~\ref{lm:projmugraf}, a trivijalno je $\graf F\subseteq\graf F$.
 
 Za jedinstvenost, neka je $G$ proizvoljni selektor za $\graf F$. Tada po prvom uvjetu za selektor vrijedi $\dom G=\exists_*\graf F=\dom F$, dakle $F$ i $G$ imaju istu domenu. Za svaki $\vec x$ iz te domene, po drugom uvjetu vrijedi $\bigl(\vec x,G(\vec x)\bigr)\in\graf G\subseteq\graf F$, pa po definiciji grafa vrijedi $F(\vec x)=G(\vec x)$.
 
 Drugim riječima, $G$ i $F$ se podudaraju na zajedničkoj domeni, pa su jednake.
 \end{proof}
 
-Sada još samo treba sve što smo napravili objediniti u jedan teorem.
+%Sada još samo treba sve što smo napravili objediniti u jedan teorem.
 
 \begin{teorem}[Teorem o grafu za parcijalne funkcije]\label{tm:graf}
 Neka je $F$ brojevna funkcija.
@@ -545,7 +544,7 @@ Neka je $R$ jednomjesna brojevna relacija ($R\subseteq\N$).
 \begin{proof}
 Kao i u teoremu~\ref{tm:rpeproj}, da \texttt{(3)} povlači \texttt{(2)} je trivijalno: svaka primitivno rekurzivna funkcija je parcijalno rekurzivna, a $\emptyset^1$ je slika parcijalno rekurzivne funkcije $\varnothing^1$ (primjer~\ref{pr:varnothingprek}).
 
-Da \texttt{(2)} povlači \texttt{(1)} je malo kompliciranije, ali i dalje sasvim jasno koristeći ono što znamo o projekcijama: $y\in\im{\f F}$ znači $(\exists\vec x\in\dom{\f F})\bigl(y=\f F(\vec x)\bigr)$, odnosno $\exists\vec x\,\graf{\f F}(\vec x,y)$. Htjeli bismo tu egzistencijalnu kvantifikaciju prikazati kao višestruku projekciju, ali za to nam $y$ treba biti na prvom mjestu. Definiramo $P(y,\vec x):=\graf{\f F}(\vec x,y)$ --- tada je $P\preceq\graf{\f F}$, a po teoremu~\ref{tm:grafprre} je $\graf{\f F}$ rekurzivno prebrojiv, pa je po lemi~\ref{lm:re<re} i $P$ rekurzivno prebrojiva. Sada je $\im{\f F}(y)\Longleftrightarrow\exists\vec x\,P(y,\vec x)$, što je rekurzivno prebrojivo po korolaru~\ref{kor:projre}.
+Da \texttt{(2)} povlači \texttt{(1)} je malo kompliciranije, ali i dalje sasvim jasno koristeći ono što znamo o projekcijama: $y\in\im{\f F}$ znači $(\exists\vec x\in\dom{\f F})\bigl(y\simeq\f F(\vec x)\bigr)$, odnosno $\exists\vec x\,\graf{\f F}(\vec x,y)$. Htjeli bismo tu egzistencijalnu kvantifikaciju prikazati kao višestruku projekciju, ali za to nam $y$ treba biti na prvom mjestu. Definiramo $P(y,\vec x):=\graf{\f F}(\vec x,y)$ --- tada je $P\preceq\graf{\f F}$, a po teoremu~\ref{tm:grafprre} je $\graf{\f F}$ rekurzivno prebrojiv, pa je po lemi~\ref{lm:re<re} i $P$ rekurzivno prebrojiva. Sada je $\im{\f F}(y)\Longleftrightarrow\exists\vec x\,P(y,\vec x)$, što je rekurzivno prebrojivo po korolaru~\ref{kor:projre}.
 
 Opet je najzanimljiviji dokaz da \texttt{(1)} povlači \texttt{(3)}. %Krenimo kao u dokazu teorema~\ref{tm:rpeproj}: $R^1$ je rekurzivno prebrojiva, dakle $R=\dom{\f F}$ za neku parcijalno rekurzivnu funkciju $\f F^1$. Također, $\f F$ ima indeks, označimo ga s $e$ (napomena~\ref{nap:>1ind}). Sada znamo
 Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpeproj} --- možemo \emph{iskoristiti} taj teorem da se dočepamo primitivne rekurzivnosti: postoji primitivno rekurzivna relacija $\f P^2$ takva da je $R=\exists_*\f P$. To znači da vrijedi $R(x)\Longleftrightarrow\exists y\f P(x,y)$, i već smo vidjeli u prethodnom odlomku da projekcije možemo zamijeniti dodatnim argumentima. Dakle, htjeli bismo definirati $\f G(x,y):=x$ u slučaju da vrijedi $\f P(x,y)$ --- no što ako ne vrijedi? Ako \emph{nikada} ne vrijedi, tada je $R=\emptyset$ pa nemamo što dokazivati. Ako pak $R\ne\emptyset$, tada postoji neki fiksni (recimo najmanji) element $r\in R$, pa ga možemo iskoristiti kao \emph{joker} u slučajevima kada ne vrijedi $\f P(x,y)$. Sve u svemu, funkcija $\f G:=\IF{\f P:\f I_1^2,\,\f C_r^2}$, točkovno
