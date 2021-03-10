@@ -375,7 +375,7 @@ Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} 
     \begin{minipage}{0.8\textwidth}
 \begin{verbatim}
             typedef unsigned funkcija(unsigned n);
-            unsigned G(unsigned n, funkcija f){
+            unsigned G(unsigned n, funkcija f)
                 { return n ? n*f(n-1) : 1; }
             /* ... nekako definiramo factorial */
             int main(void)
