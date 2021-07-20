@@ -34,3 +34,11 @@ Ako je literatura promijenjena (također, trebali biste dobiti upozorenje) treba
     pdflatex Komputonomikon
 
 Alternativno: pošaljite mi email (veky@math.hr) ako samo želite gotovi PDF zadnje verzije. :-)
+
+## Što moram učiniti ako želim koristiti odnosno redistribuirati Komputonomikon?
+
+Ništa. Verzija Komputonomikona u ovom repozitoriju je eksplicitno u javnoj domeni, odnosno ne podliježe zaštiti autorskih prava.
+Ipak, dobro je da mi se javite kako biste bili u toku što se tiče kasnijih verzija,
+jer će one možda biti izdane na tradicionalniji način. Knjiga se redovito ažurira i prilagođava studentima novih generacija,
+a svakako je moja intencija da rani korisnici Komputonomikona zauvijek imaju pristup najnovijoj verziji.
+(Također, lijepo je znati da je plod mog dugogodišnjeg rada još nekome koristan.:)
