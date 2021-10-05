@@ -82,9 +82,9 @@ Funkcijska jednakost o kojoj govori teorem može se zapisati i kao
         y.&P^*
     \end{prog}
 \end{equation}
-od dva dijela (razdvojena crtom) --- dakle k\^od spljoštenja bit će dobiven konkatenacijom dva koda. Za gornji dio smo tehniku već vidjeli u primjeru~\ref{pr:kodkonst} --- samo umjesto konstante $\kins{\incr0\!}=6$ imamo konstantu $\kins{\incr{k+1}\!}=\f{codeINC}(k+1)=2\cdot3^{k+2}$ ($k$ je fiksan). Dakle, prvi kod je $\overline{\f G}(y)$, za $\f G:=\f C_{\f{codeINC}(k+1)}$.
+od dva dijela (razdvojena crtom) --- dakle k\=od spljoštenja bit će dobiven konkatenacijom dva koda. Za gornji dio smo tehniku već vidjeli u primjeru~\ref{pr:kodkonst} --- samo umjesto konstante $\kins{\incr0\!}=6$ imamo konstantu $\kins{\incr{k+1}\!}=\f{codeINC}(k+1)=2\cdot3^{k+2}$ ($k$ je fiksan). Dakle, prvi kod je $\overline{\f G}(y)$, za $\f G:=\f C_{\f{codeINC}(k+1)}$.
 
-Za donji dio, primijenimo algoritam iz definicije~\ref{def:flat}. Kako je jedini makro zadnja instrukcija u $Q$, ne treba provoditi korak~\eqref{korak:renumeriraj}, već samo korake~\eqref{korak:makni} i~\eqref{korak:dodaj}. Drugim riječima, umjesto jedne instrukcije $y.\;P^*$ treba stajati $n_P$ instrukcijâ samog programa $P$ --- s rednim brojevima i odredištima pomaknutima za $y$. Za redne brojeve pobrinut će se konkatenacija jer je $\f{lh}\bigl(\overline{\f G}(y)\bigr)=y$; trebamo još pomaknuti odredišta.
+Za donji dio, primijenimo algoritam iz definicije~\ref{def:flat}. Kako je jedini makro zadnja instrukcija u $Q$, ne treba provoditi korak~\eqref{korak:renumeriraj}, već samo korake~\eqref{korak:makni} i~\eqref{korak:dodaj}. Drugim riječima, umjesto jedne instrukcije $y.\;P^*$ treba stajati $n_P$ instrukcij\=a samog programa $P$ --- s rednim brojevima i odredištima pomaknutima za $y$. Za redne brojeve pobrinut će se konkatenacija jer je $\f{lh}\bigl(\overline{\f G}(y)\bigr)=y$; trebamo još pomaknuti odredišta.
 
 Kod dokazivanja konkatenacije primitivno rekurzivnom (lema~\ref{lm:starprn}), vidjeli smo ideju "točkovne definicije konačnog niza"% --- zato je dovoljno objasniti kako pomaknuti odredište pojedine instrukcije
 : drugi kod će biti $\overline{\f H}\bigl(y,e,\f{lh}(e)\bigr)$, gdje je $\f H(y,e,t):=\f{Shift}(y,e[t])$, i još trebamo definirati funkciju $\f{Shift}$ koja pomiče odredište (ako postoji) instrukcije zadane kodom (drugi argument) za $y$ (prvi argument).
@@ -172,7 +172,7 @@ Sada možemo i vidjeti da je $\N compose$, barem za fiksne mjesnosti $k$ i $l$, 
 
 Naglasimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja) niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Zanima nas da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_1^2$ koja prima $g$ i $h$ te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} za detalje.
 
-Ugrubo, \emph{kompilirati} kompoziciju dvije funkcije koje već imamo kompilirane, je daleko "pitomije" nego \emph{izvršiti} (evaluirati) tu kompoziciju. Izvršavanje ne mora stati ako te funkcije nisu totalne --- dok sâmo kompiliranje kompozicije mora stati.
+Ugrubo, \emph{kompilirati} kompoziciju dvije funkcije koje već imamo kompilirane, je daleko "pitomije" nego \emph{izvršiti} (evaluirati) tu kompoziciju. Izvršavanje ne mora stati ako te funkcije nisu totalne --- dok s\=amo kompiliranje kompozicije mora stati.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost komponiranja]}]\label{pp:composeprn}
     Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f{compose}_k^{l+1}$\!, takva da za sve $g_1,g_2,\dotsc,g_l,h\in\N$ vrijedi
@@ -391,7 +391,7 @@ Matematički, "pokazivač na funkciju" je njen indeks, što motivira sljedeću d
 	\emph{Dijagonala} funkcije $\f H$ je $k$-mjesna funkcija $\partial\f H:=\$(h,\f H)$, gdje je $h$ jedan (fiksni) indeks funkcije $\f H$.
 \end{definicija}
 
-Kako funkcija može imati više indeksa, može imati i više dijagonalâ --- odnosno, formalno bismo dijagonalu trebali definirati za \emph{indeks}, a ne za funkciju. No nama će prvenstveno biti bitna prateća funkcija $\f D=\N \partial$, koja je ionako definirana na indeksima.
+Kako funkcija može imati više indeksa, može imati i više dijagonal\=a --- odnosno, formalno bismo dijagonalu trebali definirati za \emph{indeks}, a ne za funkciju. No nama će prvenstveno biti bitna prateća funkcija $\f D=\N \partial$, koja je ionako definirana na indeksima.
 
 U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad radimo s pokazivačem na funkciju, funkcijski poziv. Standard jezika C ne dopušta nikakvu aritmetiku s funkcijskim pokazivačima, ali je neki kompajleri ipak podržavaju. Slično, ovdje bismo mogli $h$ iskoristiti ne samo kao zadnji argument funkcije $\f{comp}_k$, nego raditi razne čudne stvari poput gledanja počinje li "strojni kod" funkcije $\f H$ instrukcijom \inc\ ($\f{InsINC}(h[0])$), i sličnog --- ali najčešće to ne činimo, a dok god $h$ koristimo samo za pozivanje funkcije $\f H$, svejedno je koji njen indeks smo uzeli.
 
@@ -648,7 +648,7 @@ Prebrojivost kvocijentnog skupa slijedi iz činjenice da postoji prebrojivo mnog
 Prebrojivost svake klase slijedi iz primjera~\ref{pr:alef0ind}: neka je $e\in\N$ proizvoljan. Ako je $e\in\f{Prog}\kompl$, tada je čitav $\f{Prog}\kompl$ u njegovoj klasi. Na primjer, $n\mapsto 2n+3$ je injekcija s $\N$ u $\f{Seq}\kompl\subseteq\f{Prog}\kompl\subseteq[e]_{\approx_k}\subseteq\N$, pa je $[e]_{\approx_k}$ prebrojiva. Ako je pak $e\in\f{Prog}$, tada je $\f F:\N_+\!\to[e]_{\approx_k}$, zadana s $\f F(j):=e*\kr{\f{codeINC}(j)}$, injekcija --- jer $j$ možemo rekonstruirati iz $f:=\f F(j)$ kao $\f{regn}\bigl(\f{rpart}(f,0)\bigr)$.
 \end{proof}
 
-Možda malo više iznenađujuća činjenica vezana uz familiju relacija $\approx_k,k\in\N_+$ je da je ona \emph{padajuća}: vrijedi $(\approx_1)\supset(\approx_2)\supset(\approx_3)\supset\dotsb$. Da bismo to dokazali, prvo trebamo jedno tehničko svojstvo funkcijâ $\f S_k$.
+Možda malo više iznenađujuća činjenica vezana uz familiju relacija $\approx_k,k\in\N_+$ je da je ona \emph{padajuća}: vrijedi $(\approx_1)\supset(\approx_2)\supset(\approx_3)\supset\dotsb$. Da bismo to dokazali, prvo trebamo jedno tehničko svojstvo funkcij\=a $\f S_k$.
 
 \begin{lema}[{name=[nula je lijevi neutralni element za $\f S_k$]}]\label{lm:0nSk}
 Za svaki $e\in\N$ i za svaki $k\in\N_+$ vrijedi $\f S_k(0,e)=e$.
@@ -663,7 +663,7 @@ Treće, sada je $\f H(0,e,t)=\f{Shift}(0,e[t])=e[t]=\f{part}(e,t)$, pa je desni 
 I četvrto, to onda znači da je (za $e\in\f{Prog}$) $\f S_k(0,e)=1*e$, što je jednako $e$ prema~\eqref{eq:starG} i~\eqref{eq:star}, jer vrijedi $\f{lh}(1)=0$ i $\f{Seq}(e)$.
 \end{proof}
 
-\begin{korolar}[{name=[dodavanje nulâ na kraj ulaza ne mijenja RAM-izračunavanje]}]\label{kor:0nSk}
+\begin{korolar}[{name=[dodavanje nul\=a na kraj ulaza ne mijenja RAM-izračunavanje]}]\label{kor:0nSk}
 Za sve $k,l\in\N_+$, za sve $\vec x\in\N^k$ i za sve $e\in\N$, vrijedi 
 	$\kf e^{k+l}(\vec x^k,\vec 0^l)\simeq\kf e^k(\vec x)$.
 \end{korolar}
@@ -674,7 +674,7 @@ Za sve $k,l\in\N_+$, za sve $\vec x\in\N^k$ i za sve $e\in\N$, vrijedi
 \end{equation}
 što smo i trebali dokazati.
 \end{proof}
-Na neformalnoj razini tvrdnja korolara~\ref{kor:0nSk} je očita: za bilo koji RAM-program $P$, $P$-izračunavanje s $\vec x$ je \emph{isto} (isti niz istih konfiguracija) kao i $P$-izračunavanje s $(\vec x,\vec 0)$, za bilo koji broj dodanih nula na kraj ulaza --- jer je izračunavanje determinističko, a početna konfiguracija $c_0=(0,\vec x,0,0,\dotsc)$ je ista. Samo smo rekli da će još $l$ registara nakon $\reg k$ biti postavljeno na nule, no oni bi ionako bili postavljeni na nule u izračunavanju s $\vec x^k$, jer u tom izračunavanju nisu ulazni.
+Na neformalnoj razini tvrdnja korolara~\ref{kor:0nSk} je očita: za bilo koji RAM-program $P$, $P$-izračunavanje s $\vec x$ je \emph{isto} (isti niz istih konfiguracija) kao i $P$-izračunavanje s $(\vec x,\vec 0)$, za bilo koji broj dodanih nula na kraj ulaza --- jer je izračunavanje deterministično, a početna konfiguracija $c_0=(0,\vec x,0,0,\dotsc)$ je ista. Samo smo rekli da će još $l$ registara nakon $\reg k$ biti postavljeno na nule, no oni bi ionako bili postavljeni na nule u izračunavanju s $\vec x^k$, jer u tom izračunavanju nisu ulazni.
 
 \begin{propozicija}[{name=[niz relacija $k$-ekvivalentnosti strogo pada]}]
 Za sve $k,l\in\N_+$ takve da je $k>l$ vrijedi $(\approx_k)\subset(\approx_l)$.
@@ -732,7 +732,7 @@ Pa to je opća rekurzija! Na desnoj strani je $\f G^{k+1}$ zadana s $\f G(\vec x
 
 % \subsection{Skupovi indeksa}
 
-Vidjeli smo u prethodnoj točki da iz teorema o fiksnoj točki zapravo možemo zaključiti da klasa ekvivalencije $E\mspace{-1mu}mp=[0]_{\approx_1}$ nije rekurzivna: njena karakteristična funkcija ne može imati fiksnu točku, jer to vodi na paradoks vrlo sličan Russellovom. Međutim, taj rezultat je "kap u moru" općenitog rezultata koji kaže da \emph{nijedna} klasa ekvivalencije nijedne relacije $\approx_k$ nije rekurzivna --- štoviše, nijedna \emph{unija} takvih klas\^a ekvivalencije nije rekurzivna, osim trivijalnih unijâ $\bigcup\emptyset=\emptyset$ (unija nijedne klase) i $\bigcup(\N/_{\!\approx_k\!})=\N$ (unija svih klasa).
+Vidjeli smo u prethodnoj točki da iz teorema o fiksnoj točki zapravo možemo zaključiti da klasa ekvivalencije $E\mspace{-1mu}mp=[0]_{\approx_1}$ nije rekurzivna: njena karakteristična funkcija ne može imati fiksnu točku, jer to vodi na paradoks vrlo sličan Russellovom. Međutim, taj rezultat je "kap u moru" općenitog rezultata koji kaže da \emph{nijedna} klasa ekvivalencije nijedne relacije $\approx_k$ nije rekurzivna --- štoviše, nijedna \emph{unija} takvih klas\=a ekvivalencije nije rekurzivna, osim trivijalnih unij\=a $\bigcup\emptyset=\emptyset$ (unija nijedne klase) i $\bigcup(\N/_{\!\approx_k\!})=\N$ (unija svih klasa).
 
 O čemu se tu zapravo radi? Reći da je neki broj $e$ element klase $E\mspace{-1mu}mp$, zapravo znači reći da je $e\approx_10$, odnosno $\kf e^1=\kf0^1=\varnothing^1$. Drugim riječima, $E\mspace{-1mu}mp$ je upravo skup svih indeksa prazne jednomjesne funkcije. Ako uzmemo neku drugu izračunljivu funkciju, dobit ćemo neku drugu klasu (kojoj pripada njen indeks), i obrnuto, neka druga klasa $[e]_{\approx_k}$ će biti skup svih indeksa funkcije $\kf e^k$.
 

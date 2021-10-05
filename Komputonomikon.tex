@@ -5,21 +5,38 @@
      ]{scrbook}
 %\includeonly{neizr,meta,re} %dolje isključiti list of theorems
 % TODO za iduću godinu:
-% * po instrukciji vs po programu prijelaz eksplicirati
-% * \emphove razdvojiti na engl, defn (-> indeks jednog dana) i nagl
-% * == umjesto = za algoritamsku jednakost; rješava i probleme s parcijalnošću
-% * if u smallcaps - ili argumente u uglate zagrade, da izgleda specijalno
-% * srpati nekoliko subsectiona iz 5.3 u 5.4
-     %\usepackage{showframe}
+%\usepackage{showframe}
 \raggedbottom
 %\pdfmapline{+dummy-space <dummy-space.pfb}
 \pdfinterwordspaceon \input glyphtounicode \pdfgentounicode=1
 \usepackage[utf8]{inputenc} \usepackage[T1]{fontenc}
 \usepackage[croatian]{babel} \usepackage{csquotes} \MakeOuterQuote{"}
 \usepackage[style=alphabetic]{biblatex} \addbibresource{literatura.bib}
-\usepackage[unicode]{hyperref} \usepackage{xcolor} \hypersetup{
-    colorlinks, linkcolor={red!50!black},
-    citecolor={blue!50!black}, urlcolor={blue!80!black} }
+\usepackage{hyperxmp} \usepackage{hyperref} \usepackage{xcolor} \hypersetup{
+    unicode, colorlinks, linkcolor={red!50!black},
+    citecolor={blue!50!black}, urlcolor={blue!80!black},
+    pdftitle={Komputonomikon},
+    pdfsubtitle={Izračunljivost za računarce},
+    pdfauthor={Vedran Čačić (Veky)},
+    pdfauthortitle={dr.sc.},
+    pdfcaptionwriter={Vedran Čačić},
+    pdfcontactaddress={PMF-MO, Bijenička 30},
+    pdfcontactcity={Zagreb},
+    pdfcontactcountry={HR},
+    pdfcontactemail={veky@math.hr},
+    pdfcontactphone={+385-1/5585-423},
+    pdfcontactpostcode={10000},
+    pdfcontacturl={http://web.math.hr/~veky},
+    pdfcopyright={CC0 Javno dobro},
+    pdflicenseurl={https://creativecommons.org/publicdomain/zero/1.0/deed.hr},
+    pdflang={hr},
+    pdfurl={https://web.math.pmf.unizg.hr/~veky/izr/Komputonomikon.pdf},
+    baseurl={https://web.math.pmf.unizg.hr/~veky/izr/},
+    pdfapart={1},
+    pdfaconformance={B},
+    pdfsubject={izračunljivost},
+    pdfkeywords={RAM-stroj, Turingov stroj, teorija rekurzije, neodlučivost}
+}
 \usepackage[nodollardollar,all,error]{onlyamsmath}
 \usepackage{mathtools}
 \usepackage{amsthm}
@@ -110,10 +127,11 @@
 \newcommand{\num}{\texttt{\textup{\#}}\,}
 \renewcommand{\varnothing}{\mathord{\textcolor{dark-blue}{\otimes}}}
 \renewcommand{\div}{\mathbin{\medslash\mspace{-7mu}\medslash}}
-\newcommand{\IF}[1]{if(#1)}
+\newcommand{\IF}[1]{i\!f\bigl\{#1\bigr\}}
 \newcommand{\NKmj}{\N\mathcal K^{\,-\!1}}
 \newcommand{\sigmamj}{\sigma^{\,-\!1}}
 \newcommand{\Valid}{V\mspace{-1.5mu}alid}
+%\newcommand{\keys}{\fcolorbox{black}{gray!20}}
 
 \newenvironment{prog}{\left[\begin{array}{r@{\;}l}}{\end{array}\right]}
 \newenvironment{smallcases}{\left\{\begin{smallmatrix}}{\end{smallmatrix}\right.}

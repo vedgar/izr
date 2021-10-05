@@ -115,7 +115,7 @@ U skladu s napomenom~\ref{nap:parcdef}, izraze~\eqref{eq:domkomp} i~\eqref{eq:de
 \end{equation}
 gdje podrazumijevamo da izraz s ugniježđenim funkcijskim pozivima $f(\vec v^{k})$ ima smisla ako (rekurzivno) svaki $v_i$ ima smisla, a $k$-torka njihovih vrijednosti je element $\dom{f}$.
 
-Dakle, kod komponiranja parcijalnih funkcija moramo voditi računa o domeni --- ali dobro je znati da sâmo komponiranje ne može narušiti totalnost.
+Dakle, kod komponiranja parcijalnih funkcija moramo voditi računa o domeni --- ali dobro je znati da s\=amo komponiranje ne može narušiti totalnost.
 
 \begin{lema}[{name=[domena kompozicije slijeva s totalnom funkcijom]}]\label{lm:comptot}
     Neka su $k,l\in\N_+$ te neka su $G_1^k$, $G_2^k$, \ldots, $G_l^k$ i $H^l$ funkcije.
@@ -1096,7 +1096,7 @@ Neka je $k\in\N_+$ te $\f R^k$ primitivno rekurzivna relacija. Tada je i funkcij
 \begin{proof}
 	Za $y=0$, vrijednost funkcije $\f F$ je očito $0$, jer je antecedens kondicionala odmah na početku lažan ($0\not<0$) pa je kondicional istinit. Za korak, pretpostavimo da imamo već izračunanu vrijednost $z:=\f F(\vec x,y)$ (znamo da je $z\le y$ po napomeni~\ref{nap:mintot}), i pitamo se koliko je $\f F(\vec x,y+1)$. Imamo tri slučaja.
 
-	Ako je $z<y$, to znači da postoji "dobar" $i<y<y+1$ takav da vrijedi $\f R(\vec x,i)$, i $z$ je najmanji takav $i$, pa je očito $\f F(\vec x,y+1)$ također jednako $z$.
+	Ako je $z<y$, to znači da postoji "dobar" $i<y<y+1$ takav da vrijedi $\f R(\vec x,i)$, i $z$ je najmanji takav $i$, pa je očito $\f F(\vec x,y+1)$ također jednako $z$. Primijetimo da ovdje sigurno vrijedi $\f R(\vec x,z)$.
 
 	Ako je $z=y$, to znači da ne postoji dobar $i<y$, pa se pitamo vrijedi li $\f R(\vec x,y)$. Ako vrijedi, $y$ je najmanji dobar $i<y+1$, pa je $\f F(\vec x,y+1)=y$, što je opet jednako $z$.
 	Inače, nismo našli dobar $i<y+1$, pa je $\f F(\vec x,y+1)=y+1$ u skladu s napomenom~\ref{nap:mintot}.
@@ -1104,11 +1104,12 @@ Neka je $k\in\N_+$ te $\f R^k$ primitivno rekurzivna relacija. Tada je i funkcij
 	Sve u svemu, vidimo da je $\f F=\f C_0^{k-1}\pr\f H$ (ili $0\pr\f H$ za $k=1$), gdje je $\f H$, zadana s
 \begin{equation}
 	\f H(\vec x,y,z)=\begin{cases}
-		z,&z<y\vee\f R(\vec x,y)\\
-		y+1,&\text{inače}
+		z\,,&\f R(\vec x,z)\\
+		\f{Sc}(y),&\text{inače}
 	\end{cases}\text,
 \end{equation}
-	primitivno rekurzivna po teoremu~\ref{tm:grek}, primjeru~\ref{pr:m-v} i propoziciji~\ref{prop:vezn} --- pa je i $\f F$ takva.
+	primitivno rekurzivna po teoremu~\ref{tm:grek} %, primjeru~\ref{pr:m-v} i propoziciji~\ref{prop:vezn}
+	--- pa je i $\f F$ takva.
 	%Tvrdimo da je za svaki $\vec x\in\N^k$, vrijednost $\f F(\vec x)$ jednaka
 	%\begin{equation}\label{eq:muHprn}
 	%\bigl(\mu y<\f H(\vec x)\bigr)\f R(\vec x,y) =

@@ -104,7 +104,7 @@ Algoritam $\mathcal A$ je obično opisan pomoću stroja (diskretnog dinamičkog 
 
 Ako s $A$ označimo skup mogućih ulaznih podataka, a s $B$ skup mogućih izlaznih podataka algoritma $\mathcal A$, imamo injekciju $start:A\to C$, koja svakom ulazu $x\in A$ pridružuje početnu konfiguraciju s ulazom $x$. Imamo još zadan podskup $E\subseteq C$ završnih konfiguracija, i surjekciju $result:E\to B$ (često zadanu na čitavom skupu $C$) koja svakoj završnoj konfiguraciji pridružuje rezultat izračunavanja.
 
-Također imamo dvomjesnu relaciju $\leadsto$ na skupu $C$, koja za determinističke algoritme (kakve jedino promatramo) ima funkcijsko svojstvo --- pa je možemo promatrati i kao funkciju $nextconf:C\to C$, koja svakoj konfiguraciji stroja pridružuje sljedeću konfiguraciju po trenutnom koraku algoritma $\mathcal A$. Završne konfiguracije pritom ostaju nepromijenjene: restrikcija $nextconf$ na skup $E$ mora biti identiteta.
+Također imamo dvomjesnu relaciju $\leadsto$ na skupu $C$, koja za deterministične algoritme (kakve jedino promatramo) ima funkcijsko svojstvo --- pa je možemo promatrati i kao funkciju $nextconf:C\to C$, koja svakoj konfiguraciji stroja pridružuje sljedeću konfiguraciju po trenutnom koraku algoritma $\mathcal A$. Završne konfiguracije pritom ostaju nepromijenjene: restrikcija $nextconf$ na skup $E$ mora biti identiteta.
 
 Iteriranjem funkcije $nextconf$ na vrijednosti funkcije $start$ dobivamo izračunavanje. Precizno, za $x\in A$ definiramo
 \begin{align}

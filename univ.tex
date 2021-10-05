@@ -60,16 +60,16 @@ Preslikavanje $\langle\cdots\rangle:\N^*\to\N$ je injekcija.
 \begin{proof}
     Pretpostavimo da su $\vec x^k,\vec y^{l}\in\N^*$ takvi da je $\langle\vec x\rangle=\langle\vec y\rangle$. Ako je $k>l$, tada je $k-1\in\N$, pa je $\langle\vec x\rangle$ djeljiv s $p_{k-1}$, što $\langle\vec y\rangle$ nije ($p_{k-1}\notin\{p_0,p_1,\dotsc,p_{l-1}\}$, pa ne dijeli njihov umnožak), kontradikcija. Analogno ne može biti $k<l$ --- dakle je $k=l$.
 	
-	Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. U suprotnom, kôd bi bio djeljiv s $p_{i-1}^{y_i+1}\!$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da nije ni $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
+	Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. U suprotnom, k\=od bi bio djeljiv s $p_{i-1}^{y_i+1}\!$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da nije ni $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
 \end{proof}
 
 Sljedeće bismo trebali pokazati da je $\im{\langle\cdots\rangle}=:\f{Seq}$ rekurzivan skup te da na tom skupu imamo izračunljivu funkciju koja nam na neki način daje originalni $\vec x$ iz kojeg je pojedini kod dobiven. Za taj dokaz potrebno nam je ponešto teorije brojeva, no prije toga precizirajmo u kakvom obliku tražimo naš inverz.
 
 Recimo odmah da tražimo primitivno rekurzivne, dakle totalne funkcije. Njihovo djelovanje bit će parcijalno specificirano na skupu $\f{Seq}$, iako će se napisani algoritmi moći izvršiti na svakom prirodnom broju.
 
-Da bismo odredili konačni niz iz kojeg je dobiven k\^od $c$, moramo prvo odrediti njegovu duljinu. Dakle, tražimo totalnu funkciju $lh$ takvu da za svaki $c\in\f{Seq}$, $lh(c)$ bude duljina konačnog niza čiji je $c$ k\^od. Takvih funkcija ima neprebrojivo mnogo jer je $\f{Seq}\kompl$ beskonačan (recimo, sadrži sve neparne brojeve veće od $3$), a na njemu $lh$ može djelovati proizvoljno --- pa sigurno postoje i neizračunljive takve funkcije. Ipak, dokazat ćemo da postoji takva funkcija $\f{lh}$ koja je primitivno rekurzivna.
+Da bismo odredili konačni niz iz kojeg je dobiven k\=od $c$, moramo prvo odrediti njegovu duljinu. Dakle, tražimo totalnu funkciju $lh$ takvu da za svaki $c\in\f{Seq}$, $lh(c)$ bude duljina konačnog niza čiji je $c$ k\=od. Takvih funkcija ima neprebrojivo mnogo jer je $\f{Seq}\kompl$ beskonačan (recimo, sadrži sve neparne brojeve veće od $3$), a na njemu $lh$ može djelovati proizvoljno --- pa sigurno postoje i neizračunljive takve funkcije. Ipak, dokazat ćemo da postoji takva funkcija $\f{lh}$ koja je primitivno rekurzivna.
 
-Kad smo odredili $\f{lh}(c)=:k$, na prvi pogled imamo tipičnu situaciju algoritma s više izlaza: od jednog broja $c$ trebamo dobiti $k$ njih, pa bismo u skladu s napomenom~\ref{nap:brip} to trebali reprezentirati pomoću koordinatnih funkcija $\f{part}_1,\f{part}_2,\dotsc,\f{part}_k$. Ipak, to nema baš smisla jer broj takvih funkcija ovisi o $c$ (po funkciji $\f{lh}$), a osim toga, ponekad će nam trebati i dinamički određeni indeksi. Recimo, kad budemo pisali funkciju $\f U$, koja k\^od izračunavanja koje stane preslikava u njegov rezultat, bit će potrebno odabrati \emph{posljednju} konfiguraciju u konačnom nizu. A čak i da imamo izračunljive funkcije $\f{part}_i$ za sve $i$, iz toga ne slijedi da je preslikavanje $c\mapsto\f{part}_{\f{lh}(c)}(c)$ izračunljivo (pokušajte napisati simboličku definiciju i vidjet ćete u čemu je problem).
+Kad smo odredili $\f{lh}(c)=:k$, na prvi pogled imamo tipičnu situaciju algoritma s više izlaza: od jednog broja $c$ trebamo dobiti $k$ njih, pa bismo u skladu s napomenom~\ref{nap:brip} to trebali reprezentirati pomoću koordinatnih funkcija $\f{part}_1,\f{part}_2,\dotsc,\f{part}_k$. Ipak, to nema baš smisla jer broj takvih funkcija ovisi o $c$ (po funkciji $\f{lh}$), a osim toga, ponekad će nam trebati i dinamički određeni indeksi. Recimo, kad budemo pisali funkciju $\f U$, koja k\=od izračunavanja koje stane preslikava u njegov rezultat, bit će potrebno odabrati \emph{posljednju} konfiguraciju u konačnom nizu. A čak i da imamo izračunljive funkcije $\f{part}_i$ za sve $i$, iz toga ne slijedi da je preslikavanje $c\mapsto\f{part}_{\f{lh}(c)}(c)$ izračunljivo (pokušajte napisati simboličku definiciju i vidjet ćete u čemu je problem).
 
 Srećom, ideja dinamizacije i ovdje pomaže: zapravo ćemo imati \emph{dvomjesnu} funkciju $\f{part}^2$, tako da $\f{part}(c,i)$ (skraćena oznaka $c[i]$) bude ono što smo bili nazvali $\f{part}_{i+1}(c)$ --- pomaknuli smo indekse za $1$ jer je ideja shvatiti konačne nizove kao polja (\emph{arrays}), a u većini modernih programskih jezika indeksiranje polja kreće od nule. Bitno nam je da to vrijedi samo za $c\in\f{Seq}$ i $i\in[0\dd \f{lh}(c)\rangle$ --- za ostale uređene parove mora biti nekako definirana jer je primitivno rekurzivna, ali nije nam bitno kako točno. Zapravo će se ispostaviti da za $c\in\f{Seq}$ i $i\ge\f{lh}(c)$ vrijedi $c[i]=0$, što će biti korisno u jednom trenutku, ali naglasit ćemo to kad nam bude trebalo.
 
@@ -635,7 +635,7 @@ Funkcija $\f{start}$ nije injekcija: recimo, $\f{start}(\langle2,1\rangle)=\f{st
     \f{result}(c):=\f{ex}(c,0)
 \end{equation}
 
-Za sâmo izvršavanje instrukcija na registrima, koristit ćemo množenje odnosno dijeljenje s $p_j$ za inkrement odnosno dekrement registra $\reg j$. Jasno je da time povećavamo odnosno smanjujemo eksponent odgovarajućeg prim-broja za $1$. Konkretno
+Za s\=amo izvršavanje instrukcija na registrima, koristit ćemo množenje odnosno dijeljenje s $p_j$ za inkrement odnosno dekrement registra $\reg j$. Jasno je da time povećavamo odnosno smanjujemo eksponent odgovarajućeg prim-broja za $1$. Konkretno
 \begin{align}
 \label{eq:knkppj}\knk{r_0,r_1,\dotsc,r_{j-1},r_j+1,r_{j+1},r_{j+2},\dotsc,0,0,\dotsc}
 &=
@@ -681,7 +681,7 @@ pj&:=\f{prime}\bigl(\f{regn}(i)\bigr)%\text,
 %\\
 %Down&:\Longleftrightarrow\f{InsDEC}(i)\land pj\mid r%\text.
 \end{align}
-Uvjeti $Up$ i $Down$ su disjunktni jer su već $\f{InsINC}$ i $\f{InsDEC}$ disjunktni ($i[0]$ ne može istovremeno biti $0$ i $1$). Također, uvjeti su primitivno rekurzivni, kao i pojedine grane funkcijâ $\f{NextReg}$ i $\f{NextCount}$, pa su one primitivno rekurzivne po teoremu~\ref{tm:grek}.
+Uvjeti $Up$ i $Down$ su disjunktni jer su već $\f{InsINC}$ i $\f{InsDEC}$ disjunktni ($i[0]$ ne može istovremeno biti $0$ i $1$). Također, uvjeti su primitivno rekurzivni, kao i pojedine grane funkcij\=a $\f{NextReg}$ i $\f{NextCount}$, pa su one primitivno rekurzivne po teoremu~\ref{tm:grek}.
 
 	Za parcijalnu specifikaciju, neka su $I$ i $c$ (odnosno $i$, $r$ i $p$) kao na početku dokaza. Tvrdimo: $\f{NextReg}(i,r)$ i $\f{NextCount}(i,r,p)$ kodiraju konfiguraciju u koju $c$ prelazi po $I$.
 
@@ -696,24 +696,24 @@ Ako je $I$ tipa $\goto$, recimo $I=(\goto\;l)$, tada ne vrijedi ni $Up$ ni $Down
 
 Sada raspolažemo svime potrebnim da bismo kodirali postupak iz\-ra\-ču\-na\-va\-nja kao niz konfiguracija. Konkretno, neka je $P^k$ RAM-algoritam te $\vec x\in\N^k$ ulaz za njega. Htjeli bismo konstruirati izračunljivu funkciju koja prima $k\in\N_+$, $\vec x\in\N^k$ i $P\in\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ te vraća niz $(c_n)_{n\in\N}$ koji predstavlja $P$-izračunavanje s $\vec x$.
 
-Izrazimo taj zadatak preko brojevnih funkcija. Umjesto $\vec x$ i $P$ prenijet ćemo njihove kodove $x:=\langle\vec x\rangle\in\f{Seq}':=\f{Seq}\setminus\{\langle\rangle\}$ i $e:=\kprog{P}\in\f{Prog}$. Tada ne treba prenositi $k$ jer ga uvijek možemo odrediti kao $\f{lh}(x)$. No kako vratiti niz? Nizova konfiguracijâ ima neprebrojivo mnogo, pa moramo malo modificirati sučelje.
+Izrazimo taj zadatak preko brojevnih funkcija. Umjesto $\vec x$ i $P$ prenijet ćemo njihove kodove $x:=\langle\vec x\rangle\in\f{Seq}':=\f{Seq}\setminus\{\langle\rangle\}$ i $e:=\kprog{P}\in\f{Prog}$. Tada ne treba prenositi $k$ jer ga uvijek možemo odrediti kao $\f{lh}(x)$. No kako vratiti niz? Nizova konfiguracij\=a ima neprebrojivo mnogo, pa moramo malo modificirati sučelje.
 %Skup kodova stanja registara je $\im{\knk{\cdots}}=\N_+$, a skup "kodova" vrijednosti programskog brojača je $\N$ (zapravo $[0\dd\f{lh}(e)]$, ali želimo imati jednu kodomenu za sve $e\in\f{Prog}$), dakle skup kodova konfiguracija je $\N_+\!\times\N$, a skup kojem pripadaju izračunavanja je onda skup nizova $(\N_+\!\times\N)^\N$. Preslikavanje koje konstruiramo tada je element skupa
 %\begin{equation}
 %    \bigl((\N_+\!\times\N)^\N\bigr)^{\f{Seq}'\times\f{Prog}}\cong
 %    (\N_+\!\times\N)^{\f D}\cong\N_+^{\f D}\times\N^{\f D}\text,
 %\end{equation}
 %gdje smo označili $\f D:=\f{Seq}'\times\f{Prog}\times\N$ --- dakle zapravo želimo dvije tromjesne funkcije s ulaznim podacima $(x,e,n)\in\f D$, gdje je $n$ broj koraka izračunavanja koje smo napravili.
-Ukratko, nizove vraćamo "točkovno" tako da zapravo vraćamo njihove članove, dodavši indeks u nizu kao još jedan ulazni podatak --- a algoritam s dva izlazna podatka (kôd stanja registara i vrijednost programskog brojača) po napomeni~\ref{nap:brip} shvaćamo kao dva algoritma s istim ulaznim podacima. %Sada je još samo potrebno proširiti te funkcije do totalnih tako da budu primitivno rekurzivne.
+Ukratko, nizove vraćamo "točkovno" tako da zapravo vraćamo njihove članove, dodavši indeks u nizu kao još jedan ulazni podatak --- a algoritam s dva izlazna podatka (k\=od stanja registara i vrijednost programskog brojača) po napomeni~\ref{nap:brip} shvaćamo kao dva algoritma s istim ulaznim podacima. %Sada je još samo potrebno proširiti te funkcije do totalnih tako da budu primitivno rekurzivne.
 
 \begin{lema}[{name=[primitivna rekurzivnost RAM-izračunavanja]}]\label{lm:RegCountprn}
 Postoje primitivno rekurzivne funkcije $\f{Reg}^3$ i $\f{Count}^3$, čija parcijalna specifikacija glasi:
 za svaki RAM-program $P$, za svaki neprazni konačni niz $\vec x$, za svaki prirodni broj $n$, $\f{Reg}(\langle \vec x\rangle,\kprog{P},n)$ je kod stanja registara, a $\f{Count}(\langle \vec x\rangle,\kprog{P},n)$ je vrijednost programskog brojača, nakon $n$ koraka $P$-izračunavanja s $\vec x$.
 \end{lema}
 \begin{quote}
-Preciznije, ako je $P$-izračunavanje s $\vec x$ niz RAM-konfiguracijâ $(c_n)_{n\in\N}$,\\ tada je $\f{Reg}(\langle\vec x\rangle, \kprog{P},n)=c_n[\reg{}]$ te $\f{Count}(\langle\vec x\rangle,\kprog{P},n)=c_n(\textsc{pc})$.
+Preciznije, ako je $P$-izračunavanje s $\vec x$ niz RAM-konfiguracij\=a $(c_n)_{n\in\N}$,\\ tada je $\f{Reg}(\langle\vec x\rangle, \kprog{P},n)=c_n[\reg{}]$ te $\f{Count}(\langle\vec x\rangle,\kprog{P},n)=c_n(\textsc{pc})$.
 \end{quote}
 \begin{proof}
-    To što smo razdvojili reprezentaciju izračunavanja na dvije funkcije ne znači da ih možemo računati odvojenim algoritmima. Prema lemi~\ref{lema:ramdet} sljedeća konfiguracija ovisi samo o neposredno prethodnoj (izračunavanje je \emph{memoryless} --- kao Markovljev lanac, samo što je determinističko), ali o oba njena dijela --- i o registrima i o brojaču. To znači da je prirodni način definiranja tih funkcija simultana rekurzija.
+    To što smo razdvojili reprezentaciju izračunavanja na dvije funkcije ne znači da ih možemo računati odvojenim algoritmima. Prema lemi~\ref{lema:ramdet} sljedeća konfiguracija ovisi samo o neposredno prethodnoj (izračunavanje je \emph{memoryless} --- kao Markovljev lanac, samo deterministično), ali o oba njena dijela --- i o registrima i o brojaču. To znači da je prirodni način definiranja tih funkcija simultana rekurzija.
 
 Za nju nam prvo trebaju inicijalizacije, odnosno vrijednosti traženih funkcija u $n=0$. Nakon $0$ koraka stanje registara je početna konfiguracija s ulazom $\vec x$, čiji se kod može dobiti iz koda $\langle\vec x\rangle$ funkcijom $\f{start}$ iz leme~\ref{lm:startprn}:
 \begin{equation}
@@ -1080,22 +1080,14 @@ Zapišimo~\eqref{eq:kleeneval} simbolički:
 \begin{equation}
     \f f=\f U\circ\mu\f T_k\circ(\f I_1^k,\f I_2^k,\dotsc,\f I_k^k,\f C_e^k)\text.
 \end{equation}
-Vidimo da su $\f U$, $\f T_k$, $\f I_n^k$ i $\f C_e^k$ primitivno rekurzivne, pa se u njihovim simboličkim definicijama ne pojavljuje minimizacija. Dakle, jedina njena pojava je pri dobivanju funkcije $\mu\f T_k$.
+Vidimo da su $\f U$, $\f T_k$, $\f I_n^k$ i $\f C_e^k$ primitivno rekurzivne, pa se u njihovim simboličkim definicijama ne pojavljuje minimizacija. Dakle, jedina njena pojava služi za dobivanje funkcije $\mu\f T_k$.
 \end{proof}
 
 %Štoviše, za fiksni $k$, postoje brojevi $z_k$, $r_k$ i $i_{nk}$, $n\in[1\dd k]$, takvi da svaka $k$-mjesna parcijalno rekurzivna funkcija ima simboličku definiciju u kojoj se $\f Z$ pojavljuje točno $z_k$ puta, $\f I_n^k$ točno $i_{nk}$ puta te primitivna rekurzija točno $r_k$ puta. Jedino što se mijenja je broj pojava funkcije $\f{Sc}$ i operatora kompozicije, zbog $\f C_e^k=\f{Sc}\circ\f{Sc}\circ\dotsb\circ\f{Sc}\circ\f Z\circ\f I_1^k$.
 
 %\subsection{Indeksi izračunljivih funkcija}
 
-Kad fiksiramo $\f U$ i sve $\f T_k$ te pomoću njih definiramo funkcije $\f{comp}_k$ (kao što smo učinili), Kleenejev teorem o normalnoj formi možemo izreći jednostavnije.
-
-\begin{korolar}[{name=[svaka izračunljiva funkcija je specijalizacija univerzalne]}]\label{kor:pimi}
-Za svaku funkciju $\f f\in\mathscr Comp$ postoje $k\in\N_+$ i $e\in\N$\\ takvi da je funkcija $\vec x\mapsto\f{comp}_k(\vec x,e)$ jednaka $\f f$.
-\end{korolar}
-
-\begin{proof}
-Za $k$ stavimo mjesnost funkcije $\f f$, a za $e$ kod nekog RAM-programa koji računa $\f f$ (koji postoji jer je $\f f$ RAM-izračunljiva). Tada po Kleenejevom teoremu o normalnoj formi, funkcije o kojima tvrdnja govori imaju istu domenu i podudaraju se na toj domeni, dakle to su jednake funkcije.
-\end{proof}
+Kad fiksiramo $\f U$ i sve $\f T_k$ te pomoću njih definiramo funkcije $\f{comp}_k$ (kao što smo učinili), Kleenejev teorem o normalnoj formi možemo izreći jednostavnije (i precizirati što je točno broj $e$ o kojem taj teorem govori).
 
 \begin{definicija}[{name=[indeks]}]\label{def:indeks}
 Za fiksne $k\in\N_+$ i $e\in\N$, $k$-mjesnu brojevnu funkciju $\vec x\mapsto\f{comp}_k(\vec x,e)$\\ označavamo s $\kf e^k$, ili samo s $\kf e$ ako joj ne trebamo istaknuti mjesnost.
@@ -1113,25 +1105,6 @@ Za sve $k\in\N_+$, za sve $e\in\N$, funkcija $\kf e^k$ je parcijalno rekurzivna.
 %Samo treba zapisati upravo navedenu definiciju simbolički pomoću kompozicije:
 	$\kf e^k:=\f{comp}_k\circ(\f I_1^k,\f I_2^k,\dotsc\f I_k^k,\f C_e^k)$. Sada tvrdnja slijedi iz propozicije~\ref{prop:compspec}.
 \end{proof}
-
-\begin{korolar}[{name=[svaka parcijalno rekurzivna funkcija ima indeks]}]\label{kor:pii}
-Svaka parcijalno rekurzivna funkcija ima indeks.
-\end{korolar}
-\begin{proof}
-Neka je $k\in\N_+$ te $\f f^k$ parcijalno rekurzivna funkcija. Prema teoremu~\ref{tm:pir}, $\f f\in\mathscr Comp$. Sada prema korolaru~\ref{kor:pimi} postoje $k'$ i $e$ takvi da je $\f f^k=\kf e^{k'}$. Jednake funkcije moraju imati iste mjesnosti, pa je zapravo $k'=k$, odnosno $\f f^k=\kf e^k$.
-\end{proof}
-
-\begin{napomena}[{name=[nejedinstvenost indeksa]}]\label{nap:>1ind}
-Često se govori: "\,\ldots,~dakle funkcija $f$ ima indeks, označimo ga s $e_1$". Strogo govoreći, to je pogrešno, jer $f$, ako već ima indeks, sigurno \textbf{nema jedinstveni indeks}: programerska intuicija nam kaže da za svaki RAM-program postoji beskonačno mnogo RAM-programa koji su mu ekvivalentni (možemo dodavati irelevantne ili nedostupne instrukcije). Ipak, kako kasnije najčešće ne koristimo nikakva svojstva tog broja $e_1$ osim da je indeks od $f$, zapravo taj izričaj možemo shvatiti kao pokratu za "\ldots,~dakle funkcija $f$ ima indeks; odaberimo jedan njen indeks, fiksirajmo ga i nazovimo ga $e_1$".
-
-Alternativno, možemo smatrati da smo uzeli \emph{najmanji} indeks za $f$, koji sigurno postoji ako $f$ ima indeks, i jednoznačno je određen zbog dobre uređenosti od $\N$, ali to ima jedan bitan nedostatak: često iz specifikacije neke funkcije $f$ možemo \emph{izračunati} neki indeks za $f$, ali ne možemo izračunati najmanji indeks za nju. Ugrubo, možemo provjeravati brojeve $e$ redom, ali uvjet zaustavljanja $\kf e=f$ je jednakost funkcija, koja nije izračunljiva. Čak i da su funkcije totalne (što ne moraju biti), morali bismo provjeriti jednakost za sve $\vec x$ iz $\N^k$, kojih je beskonačno mnogo.
-\end{napomena}
-
-Drugim, riječima, tromjesna relacija %$index$ (zadana s $\kf e^k=\f f$)
-\begin{equation}
-index(e,k,\f f):\Longleftrightarrow \kf e^k=\f f
-\end{equation}
-između $\N$, $\N_+$ i $\mathscr Comp$ nema funkcijsko svojstvo po prvoj varijabli --- ali ima po trećoj: za svaki broj $e$ i mjesnost $k$ možemo precizno opisati funkciju $\kf e^k$. To kaže sljedeća propozicija.
 
 \begin{propozicija}[{name=[specifikacija funkcije zadane indeksom]}]\label{prop:computeind}
 Za sve $k\in\N_+$ i $e\in\N$ vrijedi:
@@ -1153,7 +1126,35 @@ S druge strane, ako $e\notin\f{Prog}$, tada opet po korolaru~\ref{kor:compspec}\
 %Ovo je samo jezgrovit zapis propozicije~\ref{prop:computeind}\eqref{it:progind}.
 %\end{proof}
 
-Relacija $index$ na taj način može poslužiti kao neka vrsta kodiranja: kad želimo algoritmu dati izračunljivu funkciju kao ulazni podatak, ili je vratiti kao izlazni podatak, možemo prenijeti njen indeks $e$ ($k$ se obično vidi iz konteksta). To nije doista kodiranje, jer nije jednoznačna funkcija ako kažemo "bilo koji indeks", a nije izračunljiva funkcija ako kažemo "najmanji indeks" --- pogledajte napomenu~\ref{nap:>1ind}. Ipak, ako takav rad s indeksima shvatimo kao parcijalnu specifikaciju, to može funkcionirati.
+\begin{korolar}[{name=[svaka izračunljiva funkcija je specijalizacija univerzalne]}]\label{kor:pimi}
+Svaka funkcija $\f f\in\mathscr Comp$ je oblika $\kf e^k$ za neke $k\in\N_+$ i $e\in\N$.
+\end{korolar}
+
+\begin{proof}
+	Za $k$ stavimo mjesnost funkcije $\f f$, a za $e$ kod nekog RAM-programa koji računa $\f f$ (koji postoji jer je $\f f$ RAM-izračunljiva). Sada $f=\kf e^k$ slijedi iz propozicije~\ref{prop:computeind}\eqref{it:progind} i korolara~\ref{kor:ram1fun}.
+\end{proof}
+
+\begin{korolar}[{name=[svaka parcijalno rekurzivna funkcija ima indeks]}]\label{kor:pii}
+Svaka parcijalno rekurzivna funkcija ima indeks.
+\end{korolar}
+
+\begin{proof}
+Neka je $k\in\N_+$ te $\f f^k$ parcijalno rekurzivna funkcija. Prema teoremu~\ref{tm:pir}, $\f f\in\mathscr Comp$. Sada prema korolaru~\ref{kor:pimi} postoje $k'$ i $e$ takvi da je $\f f^k=\kf e^{k'}$. Jednake funkcije moraju imati iste mjesnosti, pa je zapravo $k'=k$, odnosno $\f f^k=\kf e^k$.
+\end{proof}
+
+\begin{napomena}[{name=[nejedinstvenost indeksa]}]\label{nap:>1ind}
+Često se govori: "\,\ldots,~dakle funkcija $f$ ima indeks, označimo ga s $e_1$". Strogo govoreći, to je pogrešno, jer $f$, ako već ima indeks, sigurno \textbf{nema jedinstveni indeks}: programerska intuicija nam kaže da za svaki RAM-program postoji beskonačno mnogo RAM-programa koji su mu ekvivalentni (možemo dodavati irelevantne ili nedostupne instrukcije). Ipak, kako kasnije najčešće ne koristimo nikakva svojstva tog broja $e_1$ osim da je indeks od $f$, zapravo taj izričaj možemo shvatiti kao pokratu za "\ldots,~dakle funkcija $f$ ima indeks; odaberimo jedan njen indeks, fiksirajmo ga i nazovimo ga $e_1$".
+
+Alternativno, možemo smatrati da smo uzeli \emph{najmanji} indeks za $f$, koji sigurno postoji ako $f$ ima indeks, i jednoznačno je određen zbog dobre uređenosti od $\N$, ali to ima jedan bitan nedostatak: često iz specifikacije neke funkcije $f$ možemo \emph{izračunati} neki indeks za $f$, ali ne možemo izračunati najmanji indeks za nju. Ugrubo, možemo provjeravati brojeve $e$ redom, ali uvjet zaustavljanja $\kf e=f$ je jednakost funkcija, koja nije izračunljiva. Čak i da su funkcije totalne (što ne moraju biti), morali bismo provjeriti jednakost za sve $\vec x$ iz $\N^k$, kojih je beskonačno mnogo.
+\end{napomena}
+
+Drugim, riječima, tromjesna relacija %$index$ (zadana s $\kf e^k=\f f$)
+\begin{equation}
+index(e,k,\f f):\Longleftrightarrow \kf e^k=\f f
+\end{equation}
+između $\N$, $\N_+$ i $\mathscr Comp$ nema funkcijsko svojstvo po prvoj varijabli --- ali ima po trećoj: za svaki broj $e$ i mjesnost $k$, propozicija~\ref{prop:computeind} precizno opisuje funkciju $\kf e^k$.
+
+Tako $index$ može poslužiti kao neka vrsta kodiranja: kad želimo algoritmu dati izračunljivu funkciju kao ulazni podatak, ili je vratiti kao izlazni podatak, možemo prenijeti njen indeks $e$ ($k$ se obično vidi iz konteksta). To nije doista kodiranje, jer nije jednoznačna funkcija ako kažemo "bilo koji indeks", a nije izračunljiva funkcija ako kažemo "najmanji indeks" --- pogledajte napomenu~\ref{nap:>1ind}. Ipak, ako takav rad s indeksima shvatimo kao parcijalnu specifikaciju, to može funkcionirati.
 
 \begin{primjer}[{name=[zadavanje funkcije višeg reda na indeksima]}]\label{pr:parcspecind}
 Recimo da imamo funkciju $F:\mathscr Comp_2\rightharpoonup\mathscr Comp_3$, koja %. Drugim ri\-je\-či\-ma, $F$
