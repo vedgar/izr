@@ -398,10 +398,10 @@ Kako funkcija može imati više indeksa, može imati i više dijagonal\=a --- od
 U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad radimo s pokazivačem na funkciju, funkcijski poziv\!. Standard jezika C ne dopušta nikakvu aritmetiku s funkcijskim pokazivačima, ali je neki kompajleri ipak podržavaju. Slično, ovdje bismo mogli $h$ iskoristiti ne samo kao zadnji argument funkcije $\f{comp}_k$, nego raditi razne čudne stvari poput gledanja počinje li "strojni kod" funkcije $\f H$ instrukcijom \inc\ ($\f{InsINC}(h[0])$), i sličnog --- ali najčešće to ne činimo, a dok god $h$ koristimo samo za pozivanje funkcije $\f H$, svejedno je koji njen indeks smo uzeli.
 
 \begin{lema}[{name=[primitivna rekurzivnost dijagonalne funkcije]}]
-    Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$,\\ koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $\partial\f H=\$(h,H)$.
+	Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f D_k$ s kodomenom $\f{Prog}$,\\ koja preslikava indeks $h$ funkcije $\f H^{k+1}$ u indeks njene dijagonale $\partial\f H=\$(h,H)$.
 \end{lema}
 \begin{proof}
-	Teorem o parametru kaže da se indeks $\f D_k(h)$ za $\partial\f H=\$(h,\kf h^{k+1})$ može dobiti kao $\f S_k(h,h)$. Drugim riječima, možemo definirati $\f D_k:=\f S_k^2\circ(\f I_1^1,\f I_1^1)$, što je primitivno rekurzivna funkcija kao kompozicija primitivno rekurzivnih.
+	Teorem o parametru kaže da se indeks $\f D_k(h)$ za $\partial\f H=\$(h,\kf h^{k+1})$ može dobiti kao $\f S_k(h,h)\in\f{Prog}$. Drugim riječima, možemo definirati $\f D_k:=\f S_k^2\circ(\f I_1^1,\f I_1^1)$, što je primitivno rekurzivna funkcija kao kompozicija primitivno rekurzivnih.
 \end{proof}
 
 % \subsection{Dokaz teorema rekurzije}
@@ -461,12 +461,12 @@ Dobra strana toga je da više ne moramo ručno proizvoditi funkciju \texttt H iz
 I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćemo da~\eqref{eq:norec} nigdje ne koristi rekurzivne pozive. Sad samo sve to treba napisati matematički.
 
 \begin{teorem}[Teorem rekurzije]\label{tm:rek}
-Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. \\ Tada postoji $e\in\N$ takav da za sve $\vec x\in\N^k$ vrijedi $\kf e^k(\vec x)\simeq\f G(\vec x,e)$.
+	Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. \\ Tada postoji $e\in\f{Prog}$ takav da za sve $\vec x\in\N^k$ vrijedi $\kf e^k(\vec x)\simeq\f G(\vec x,e)$.
 \end{teorem}
 \begin{proof}
 	Definiramo funkciju $\f H^{k+1}\mspace{-2mu}$ točkovno s $\f H(\vec x,f):\simeq\f G\bigl(\vec x,\f D_k(f)\bigr)$. Ta funkcija je parcijalno rekurzivna (dobivena je kompozicijom iz $\f G$, $\f D_k$ i koordinatnih projekcija) pa ima indeks: označimo ga s $h$ (sjetite se napomene~\ref{nap:>1ind}).
 
-    Tvrdimo da je $\partial\f H$ rješenje opće rekurzije, odnosno njen indeks $e:=\f D_k(h)$ je traženi broj. Doista, za sve $\vec x\in\N^k$ imamo
+	Tvrdimo da je $\partial\f H$ rješenje opće rekurzije, odnosno njen indeks $e:=\f D_k(h)\in\f{Prog}$ je traženi broj. Doista, za sve $\vec x\in\N^k$ imamo
 \begin{equation}
     \kf e(\vec x)\simeq
     \partial\f H(\vec x)\simeq
@@ -711,23 +711,24 @@ Prvo, sasvim je jasno da ne možemo tražiti $e=\f F(e)$ --- recimo, $\f{Sc}$ je
 
 Drugo, $\f F$ ne mora biti primitivno rekurzivna --- vidjet ćemo da je dovoljno da bude rekurzivna. Tada teorem vrijedi i za primitivno rekurzivne funkcije, zbog korolara~\ref{kor:prnrek}. Napomenimo da ne možemo još oslabiti pretpostavku zahtijevajući da je $\f F$ parcijalno rekurzivna: $\varnothing^1=\mu\,\emptyset^2$ je parcijalno rekurzivna prema primjeru~\ref{pr:varnothingprek}, a ne može postojati $e\in\N$ takav da su $e$ i $\varnothing(e)$ $k$-ekvivalentni, jer izraz $\varnothing(e)$ nema smisla ni za koji $e$.
 
-Treće, $\f F$ mora biti jednomjesna: broj $k$ je mjesnost funkcije $\kf e^k$, koja je jednaka funkciji $\kf{\f F(e)}^k$. Mjesnost od $\f F$ mora biti $1$ jer želimo u nju uvrstiti $e\in\N^1$.
+Treće, smijemo tražiti da $e$ bude u $\f{Prog}$: dobit ćemo ga iz teorema rekurzije, a on daje samo sintaksno ispravne programe (preko dijagonalne funkcije).
 
-I četvrto, $\f F$ mora biti izračunljiva: nije dovoljno zahtijevati samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $E\mspace{-1mu}mp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{E\mspace{-1mu}mp}(e)$, tada bi $e\in E\mspace{-1mu}mp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija. (Izraz $\kf0(0)$ nema smisla po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\nsimeq\kf1(0)$, dakle $\kf0^1\!\ne\kf1^1$.) No $e\notin E\mspace{-1mu}mp$ je također kontradikcija, jer bi to značilo $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=0$, dakle $e\in[0]_{\approx_1}\!=E\mspace{-1mu}mp$. Zaključujemo da $\chi_{E\mspace{-1mu}mp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
+Četvrto, $\f F$ mora biti jednomjesna: broj $k$ je mjesnost funkcije $\kf e^k$, koja je jednaka funkciji $\kf{\f F(e)}^k$. Mjesnost od $\f F$ mora biti $1$ jer želimo u nju uvrstiti $e\in\N^1$.
+
+I peto, $\f F$ mora biti izračunljiva: nije dovoljno zahtijevati samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $E\mspace{-1mu}mp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{E\mspace{-1mu}mp}(e)$, tada bi $e\in E\mspace{-1mu}mp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija. (Izraz $\kf0(0)$ nema smisla po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\nsimeq\kf1(0)$, dakle $\kf0^1\!\ne\kf1^1$.) No $e\notin E\mspace{-1mu}mp$ je također kontradikcija, jer bi to značilo $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=0$, dakle $e\in[0]_{\approx_1}\!=E\mspace{-1mu}mp$. Zaključujemo da $\chi_{E\mspace{-1mu}mp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
 
 Primijetite sličnost upravo provedenog razmišljanja s Russellovim paradoksom. Iz toga će slijediti, jednom kad dokažemo teorem o fiksnoj točki, da skup $E\mspace{-1mu}mp$ nije rekurzivan. No zapravo će to biti samo jedna posljedica Riceovog teorema, koji ćemo dokazati kasnije.
 
 \begin{lema}[Teorem o fiksnoj točki]\label{lm:tmfix}
-Neka je $k\in\N_+$ te $\f F^1$ rekurzivna funkcija.
-
-Tada postoji $e\in\N$ takav da je $e\approx_k\f F(e)$.
+Neka je $k\in\N_+$ te $\f F^1$ rekurzivna funkcija.\\
+	Tada postoji $e\in\f{Prog}$ takav da je $e\approx_k\f F(e)$.
 \end{lema}
 \begin{proof}
 Zapišimo traženi uvjet pomoću univerzalne funkcije:
-\begin{equation}
+	\begin{equation}\label{eq:fpor}
     \f{comp}_k(\vec x,e)\simeq\f{comp}_k\bigl(\vec x,\f F(e)\bigr)\text{, za sve }\vec x\in\N^k\text.
 \end{equation}
-Pa to je opća rekurzija! Na desnoj strani je $\f G^{k+1}$ zadana s $\f G(\vec x,e):\simeq\f{comp}_k\bigl(\vec x,\f F(e)\bigr)$, dakle dobivena kompozicijom iz parcijalno rekurzivne $\f{comp}_k$, rekurzivne $\f F$ i inicijalnih koordinatnih projekcija, pa je parcijalno rekurzivna. Po teoremu~\ref{tm:rek}, postoji $e\in\N$ koji zadovoljava tu funkcijsku jednadžbu. Jer je $\f F$ rekurzivna, dakle totalna, postoji i $f:=\f F(e)\in\N$. Sada se jednadžba može zapisati kao $\kf e(\vec x)\simeq\kf f(\vec x)$ za sve $\vec x\in\N^k$, odnosno $\kf e^k=\kf f^k$, dakle $e\approx_k f=\f F(e)$, što smo i trebali.
+	To je opća rekurzija. Na desnoj strani je $\f G^{k+1}$ zadana s $\f G(\vec x,e):\simeq\f{comp}_k\bigl(\vec x,\f F(e)\bigr)$, dakle dobivena kompozicijom iz parcijalno rekurzivne $\f{comp}_k$, rekurzivne $\f F$ i inicijalnih koordinatnih projekcija, pa je parcijalno rekurzivna. Po teoremu~\ref{tm:rek}, postoji $e\in\f{Prog}$ koji zadovoljava tu funkcijsku jednadžbu. Jer je $\f F$ rekurzivna, dakle totalna, postoji i $f:=\f F(e)\in\N$ ($f$ naravno ne mora biti iz $\f{Prog}$). Sada se~\eqref{eq:fpor} može zapisati kao $\kf e(\vec x)\simeq\kf f(\vec x)$ za sve $\vec x\in\N^k$, odnosno $\kf e^k=\kf f^k$, dakle $e\approx_k f=\f F(e)$, što smo i trebali.
 \end{proof}
 
 \section{Invarijantnost}
@@ -741,7 +742,7 @@ O čemu se tu zapravo radi? Reći da je neki broj $e$ element klase $E\mspace{-1
 Neka unija klasa $S:=\bigcup_{e\in A}[e]_{\approx_k}$ tada će odgovarati nekom \emph{skupu} izračunljivih $k$-mjesnih funkcija $\mathcal F:=\{\kf e^k\mid e\in A\}\subseteq\mathscr Comp_k$, i to tako da će praznom skupu $S$ odgovarati prazni skup $\mathcal F$, a skupu $S=\N$ odgovarat će $\mathcal F=\mathscr Comp_k$. Kako je to preslikavanje injekcija, ostalim skupovima brojeva ($\emptyset\subset S\subset\N$) odgovarat će ostali skupovi funkcija ($\emptyset\subset\mathcal F\subset\mathscr Comp_k$). Vrijeme je da to formaliziramo.
 
 \begin{definicija}[{name=[skup indeksa]}]
-Neka je $k\in\N_+$. Za svaki $\mathcal F\subseteq\mathscr Comp_k$ definiramo \emph{skup indeksa} (ili \emph{skup $k$-indeksa}, ako želimo naglasiti $k$) kao
+Neka je $k\in\N_+$. Za svaki $\mathcal F\subseteq\mathscr Comp_k$ definiramo \emph{skup indeksa}\\ (ili \emph{skup $k$-indeksa}, ako želimo naglasiti $k$) kao
 \begin{equation}
     \kins{\mathcal F}:=\{e\in\N\mid\kf e^k\in\mathcal F\,\}\,\text.
 \end{equation}
