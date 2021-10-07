@@ -34,7 +34,7 @@ Govorili smo o izlaznim podacima u množini, no s obzirom na to da nas samo zani
     Na primjer, u nekim programskim jezicima postoji operacija $\texttt{divmod}$ iz $\mathbb Z^2$ u $\mathbb Z^2$, koja provodi dijeljenje s ostatkom u $\mathbb Z$, vraćajući količnik i ostatak. Nju uvijek možemo, ako je nemamo kao osnovnu, emulirati pomoću dvije operacije, $\div$ i $\bmod$, koje vraćaju količnik i ostatak istog dijeljenja zasebno. Razlog zašto neki jezici imaju $\texttt{divmod}$ kao posebnu funkciju leži u tome da algoritmi za te dvije operacije imaju mnogo zajedničkih koraka --- ako smo odredili količnik, obično možemo iz postupka kojim smo to učinili pročitati i ostatak (sjetite se npr.\ algoritma za dijeljenje višeznamenkastih brojeva). Zato bismo ponovnim provođenjem algoritma ispočetka za ostatak nepotrebno duplicirali korake. No ako nas samo zanima koje su funkcije izračunljive, očito postoji algoritam za $\texttt{divmod}$ ako i samo ako postoje algoritmi za \emph{koordinatne funkcije} $\div$ i $\bmod$, pa nam je dovoljno baviti se pitanjem jesu li $\div$ i $\bmod$ izračunljive --- u ovom slučaju, dakako, jesu.
 \end{napomena}
 
-Kad promatramo broj \emph{ulaznih} podataka (tzv.\ \emph{mjesnost}) algoritma, situacija je bitno drugačija. Jasno je da algoritam za npr.\ potenciranje prirodnih brojeva prima bazu i eksponent kao dva ulazna podatka, i ne može se jednostavno zapisati pomoću algoritama koji primaju po jedan ulazni podatak. %Doduše, korištenjem tehnike \emph{currying}, svaku izračunljivu funkciju možemo računati pomoću algoritama koji primaju po \emph{dva} ulazna podatka, i neki autori doista ograničavaju mjesnost na $2$, ali to stvara dosta tehničkih problema za minimalni dobitak.
+Kad promatramo broj \emph{ulaznih} podataka (tzv\!.\ \emph{mjesnost}) algoritma, situacija je bitno drugačija. Jasno je da algoritam za npr.\ potenciranje prirodnih brojeva prima bazu i eksponent kao dva ulazna podatka, i ne može se jednostavno zapisati pomoću algoritama koji primaju po jedan ulazni podatak. %Doduše, korištenjem tehnike \emph{currying}, svaku izračunljivu funkciju možemo računati pomoću algoritama koji primaju po \emph{dva} ulazna podatka, i neki autori doista ograničavaju mjesnost na $2$, ali to stvara dosta tehničkih problema za minimalni dobitak.
 Zato ćemo promatrati algoritme proizvoljnih mjesnosti $k\in\N_+$, i smatrati da mjesnost čini bitni dio identiteta algoritma. Primjerice, "zbroji 2 broja" i "zbroji 5 brojeva" su različiti algoritmi, štoviše ovaj prvi se pojavljuje kao korak (nekoliko puta) u ovom drugom.
 
 Direktna posljedica toga je da u našem modelu ne postoje algoritmi s "varijabilnim brojem" ulaznih podataka, što je u računarstvu poznato pod nazivom \emph{varargs}. Na nekoliko mjesta gdje nam budu potrebni, modelirat ćemo ih pomoću familije algoritama svih mogućih mjesnosti --- recimo zbrajanje kao $\f{add}^k,k\in\N_+$. Mjesnost\nomenclature{$\f f^k$}{brojevna funkcija mjesnosti $k$} algoritma ili funkcije ćemo obično pisati u superskriptu ako je želimo naglasiti --- neće dolaziti do zabune s eksponentima jer ni algoritme ni funkcije nećemo potencirati, niti s oznakom $f^{-1}$ za inverznu funkciju jer mjesnost ne može biti negativna.
@@ -77,11 +77,11 @@ Iako sva računanja možemo shvatiti kao računanja funkcija, izlaganje je jedno
 
 Iz algoritamske perspektive, nisu. Ako izračunljivu funkciju $\f{f}$ reprezentiramo po\-mo\-ću algoritma koji za dani $\vec x$ računa njenu vrijednost $\f{f}(\vec x)$, izračunljivu relaciju $\f{R}$ prirodno je predstaviti algoritmom koji za dani $\vec x$ računa \emph{istinitosnu} vrijednost ($bool$: $\mathit{true}$ ili $\mathit{false}$), već prema tome je li $\vec x\in\f{R}$ ili nije. Većina programskih jezika nema mogućnost programiranja relacija kao zasebnog tipa algoritma, već ih reprezentiraju funkcijama čiji povratni tip je $bool$.
 
-Na primjer, reći da je dvomjesna relacija uređaja $<$ na prirodnim brojevima iz\-ra\-čun\-lji\-va zapravo znači reći da postoji algoritam koji za sve ulaze $(x,y)\in\N^2$ u konačno mnogo koraka vraća $\mathit{true}$ ako je $x<y$, a $\mathit{false}$ inače. Ili, skup prim-brojeva (jednomjesna relacija $\mathbb P$) je izračunljiv jer možemo napisati algoritam $\f{isPrime}:\N\to bool$, koji za svaki $x$ u konačno mnogo koraka vraća $\mathit{true}$ ako je $x\in\mathbb P$, a $\mathit{false}$ ako $x\notin\mathbb P$. Iz navedenih primjera vidimo da je o relacijama prirodno katkad pričati pomoću formula s relacijskim simbolima ($\f{R}(\vec x)$, ili $x\mathrel{\f R}y$ za dvomjesne relacije), a katkad pomoću skupova ($\vec x\in\f{R}$).
+Na primjer, reći da je dvomjesna relacija uređaja $<$ na prirodnim brojevima iz\-ra\-čun\-lji\-va zapravo znači reći da postoji algoritam koji za sve ulaze $(x,y)\in\N^2$ u konačno mnogo koraka vraća $\mathit{true}$ ako je $x<y$, a $\mathit{false}$ inače. Ili, skup prim-brojeva (jednomjesna relacija $\mathbb P$) je izračunljiv jer možemo napisati algoritam $\f{isPrime}:\N\to bool$, koji za svaki $x$ u konačno mnogo koraka vraća $\mathit{true}$ ako je $x\in\mathbb P$, a $\mathit{false}$ ako $x\notin\mathbb P$. Iz navedenih primjera vidimo da je relacije prirodno katkad zamišljati kao formule s relacijskim simbolima ($\f{R}(\vec x)$, ili $x\mathrel{\f R}y$ za dvomjesne relacije), a katkad kao skupove ($\vec x\in\f{R}$).
 
 U skladu s uobičajenom praksom mnogih programskih jezika, prešutno koristimo standardno ulaganje skupa $bool$ u $\N$, tako da preslikamo $\mathit{false}\mapsto 0$ i $\mathit{true}\mapsto 1$. Drugim riječima, na izračunljivost relacije $R$ gledamo kao na izračunljivost njene \emph{karakteristične funkcije} $\chi_R$, koja je iste mjesnosti kao i $R$. U suprotnom smjeru koristimo (opet standardnu) interpretaciju nule kao $\mathit{false}$, a svih ostalih prirodnih brojeva kao $\mathit{true}$: drugim riječima, koristimo kompoziciju s karakterističnom funkcijom $\chi_{\N_+}$ (za koju ćemo dokazati da je izračunljiva).
 
-Dakle, relacijama ćemo pripisivati svojstva izračunljivosti koja imaju njihove karakteristične funkcije: na primjer, reći ćemo da je $\f{R}$ primitivno rekurzivna ako je $\chi_{\f{R}}$ primitivno rekurzivna. Kod relacija ne moramo razmišljati o parcijalnosti: \textbf{karakteristične funkcije su uvijek totalne}. Relacije imaju drugi način modeliranja parcijalnosti, \emph{rekurzivnu prebrojivost} o kojoj će biti više riječi u poglavlju~\ref{ch:re}.
+Dakle, relacijama ćemo pripisivati svojstva izračunljivosti koja imaju njihove karakteristične funkcije: na primjer, reći ćemo da je $\f{R}$ primitivno rekurzivna ako je $\chi_{\f{R}}$ primitivno rekurzivna. Kod relacija ne moramo razmišljati o parcijalnosti: \textbf{karakteristične funkcije su uvijek totalne}. Relacije imaju drugi način modeliranja djelomične izračunljivosti, \emph{rekurzivnu prebrojivost} o kojoj će biti više riječi u poglavlju~\ref{ch:re}.
 
 \section{Osnovni pojmovi i oznake}
 
@@ -97,9 +97,9 @@ Analogon pojmu relacije u jezičnom slučaju je \emph{jezik}: podskup od $\Sigma
 
 Domenu, sliku i graf funkcije $f$ označavamo redom s $\dom{f}$, $\im{f}$ i $\graf{f}$. To su relacije: za funkciju mjesnosti $k$, domena je mjesnosti $k$, slika je mjesnosti $1$, a graf je mjesnosti $k+1$. Iste oznake koristimo i za domene, slike i grafove funkcija koje nisu brojevne. Restrikciju funkcije $f$ na skup $S$ (zapravo na $S\cap\dom f$) označavamo s $f|_S$. Sliku te restrikcije za $S\subseteq\dom{f}$ označavamo s $f[S]:=\{f(x)\mid x\in S\}$. Prasliku skupa $T$ označavamo s $f^{-1}[T]:=\{x\in\dom{f}\mid f(x)\in T\}$. Ako je $f^k$ brojevna funkcija, oznakom $\tilde f$ označavamo njeno proširenje nulom: totalnu funkciju $\tilde{f}:\N^k\to\N$, koja svaki $\vec x\in\dom f$ preslika u $f(\vec x)$, a preostale $\vec x\in\N^k\setminus\dom f$ preslika u $0$. \emph{Nosač} brojevne funkcije $f$ je $f^{-1}[\N_+]$, dakle podskup domene na kojem $f$ nije $0$.
 
-Za skupove brojeva koristimo standardne oznake $\mathbb P\subset \mathbb N\subset \mathbb Z\subset \mathbb Q\subset \mathbb R$. Često koristimo \emph{diskretne intervale}, koje označavamo $[a\dd b]$ ili $[a\dd b\rangle$, gdje su $a,b\in\N$. Svaki takav interval skup je prirodnih brojeva iz odgovarajućeg realnog intervala: na primjer, $[1\dd 5\rangle=[1\dd 4]=\{1,2,3,4\}$. Oznaka $A\dcup B$ označava uniju disjunktnih skupova (takvih da je $A\cap B=\emptyset$).
+Za skupove brojeva koristimo standardne oznake $\mathbb P\subset \mathbb N\subset \mathbb Z\subset \mathbb Q\subset \mathbb R$. Često koristimo \emph{diskretne intervale}, koje označavamo $[a\dd b]$ ili $[a\dd b\rangle$, gdje su $a,b\in\N$. Svaki takav interval skup je prirodnih brojeva iz odgovarajućeg realnog intervala: na primjer, $[1\mspace{-1mu}\dd 5\rangle=[1\mspace{-2mu}\dd 4]=\{1,2,3,4\}$. Oznaka $A\dcup B$ označava uniju disjunktnih skupova (takvih da je $A\cap B=\emptyset$).
 
-Brojevne izračunljive funkcije i relacije označavamo posebnim fontom: dok nam $g$ označava proizvoljnu funkciju, $\f{g}$ nam označava funkciju za koju imamo neku vrstu algoritma. U tom smislu, $g(x)$ označava uobičajenu funkcijsku vrijednost (drugu komponentu uređenog para u $g$ čija je prva komponenta $x$), dok $\f{g}(x)$ označava izlazni podatak algoritma za $\f{g}$ pokrenutog s ulaznim podatkom $x$. Ipak, to se odnosi samo na funkcijski zapis: inače ćemo koristiti uobičajene matematičke oznake gdje god možemo. Recimo, pisat ćemo $x+y+z$ za zbroj tri broja, $a^b$ za potenciranje, $m\mid n$ za djeljivost, ili pak $p\in\mathbb P$ za prim-brojeve. No treba imati na umu da su to izračunljive funkcije i relacije (što ćemo dokazati) te da u pozadini stoje algoritmi za $\f{add}^3$, $\f{pow}^2$, $\f{Divides}^2$, odnosno $\f{isPrime}^1$.
+Brojevne izračunljive funkcije i relacije označavamo posebnim fontom: dok nam $g$ označava proizvoljnu funkciju, $\f{g}$ nam označava funkciju za koju imamo neku vrstu algoritma. U tom smislu, $g(x)$ označava uobičajenu funkcijsku vrijednost (drugu komponentu onog uređenog para iz skupa $g$ čija je prva komponenta $x$), dok $\f{g}(x)$ označava izlazni podatak algoritma za $\f{g}$ pokrenutog s ulaznim podatkom $x$. Ipak, to se odnosi samo na funkcijski zapis: inače ćemo koristiti uobičajene matematičke oznake gdje god možemo. Recimo, pisat ćemo $x+y+z$ za zbroj tri broja, $a^b$ za potenciranje, $m\mid n$ za djeljivost, ili pak $p\in\mathbb P$ za prim-brojeve. No treba imati na umu da su to izračunljive funkcije i relacije (što ćemo dokazati) te da u pozadini stoje algoritmi za $\f{add}^3$, $\f{pow}^2$, $\f{Divides}^2$, odnosno $\f{isPrime}^1$.
 
 \begin{napomena}[{name=[jednakost i parcijalna jednakost]}]\label{nap:parcdef}
     Algoritmiziranu jednakost (izračunljivu dvomjesnu brojevnu relaciju, u modernim programskim jezicima često označenu \enquote*{\t{==}}) oz\-na\-ča\-va\-mo uobičajenim simbolom \enquote*{$\eq$} koji i inače koristimo za jednakost matematičkih objekata (funkcija, relacija, skupova,~\ldots). Kod definicija skupova, i funkcija s prethodno specificiranom domenom (što uključuje totalne funkcije), koristimo simbol \enquote*{$:=$}. Relacije definiramo formulama koristeći \enquote*{$:\Longleftrightarrow$}. Često imamo potrebu vrijednosti funkcije specificirati izrazom, uz prešutnu pretpostavku "prirodne domene" (sve ulazne vrijednosti za koje izraz ima smisla). Tada pišemo $f(\vec x):\simeq izraz$. Ovisno o obliku izraza, definirat ćemo precizno značenje fraze "imati smisla".
@@ -113,9 +113,9 @@ Prvi model izračunavanja koji ćemo promotriti --- \emph{RAM-stroj} --- dobiven
 
 Ne pretpostavljamo nikakva ograničenja na broj dostupnih registara (pretpostavljamo da ih ima dovoljno za spremanje ulaznih i izlaznih podataka te za odvijanje programa --- svaki konkretni algoritam koristit će konačno mnogo \emph{relevantnih} registara, ali ne postavljamo gornju granicu s obzirom na sve algoritme) niti na veličinu pojedinog registra (u svakom trenutku izvršavanja algoritma, u svakom relevantnom registru može se nalaziti proizvoljni prirodni broj). Obje značajke nužne su već za reprezentaciju ulaza: postoje algoritmi proizvoljno velike mjesnosti, a moguće ih je pozvati s proizvoljno velikim ulaznim podacima.
 
-Pretpostavljamo da je program \emph{fiksan}: ne može se mijenjati (tzv.\ \emph{harvardska} arhitektura). Iako k\=od koji sam sebe mijenja za vrijeme izvršavanja nije baš popularan na modernim računalnim arhitekturama (prvenstveno iz sigurnosnih razloga), osnovna ideja modernog računala je da "dovoljno nisko" imamo jedan procesor koji je sposoban izvršavati razne programe (\emph{von Neumannova} arhitektura). Da bismo počeli koristiti drugi operacijski sustav, dovoljno je instalirati ga i ponovo pokrenuti računalo; ne moramo kupovati novi procesor.
+Pretpostavljamo da je program \emph{fiksan}: ne može se mijenjati (tzv\!.\ \emph{harvardska} arhitektura). Iako k\=od koji sam sebe mijenja za vrijeme izvršavanja nije baš popularan na modernim računalnim arhitekturama (prvenstveno iz sigurnosnih razloga), osnovna ideja modernog računala je da "dovoljno nisko" imamo jedan procesor koji je sposoban izvršavati razne programe (\emph{von Neumannova} arhitektura). Da bismo počeli koristiti drugi operacijski sustav, dovoljno je instalirati ga i ponovo pokrenuti računalo; ne moramo kupovati novi procesor.
 
-Razlog zašto radimo s ograničenijim modelom je što von Neumannova arhitektura \emph{pretpostavlja} univerzalnost, koju mi tek trebamo dokazati. To ćemo svakako učiniti, ali tek u poglavlju~\ref{ch:univ}. Krenimo s osnovnim definicijama.
+Razlog zašto radimo s ograničenijim modelom je što von Neumannova arhitektura \emph{pretpostavlja} univerzalnost, koju mi tek trebamo dokazati. To ćemo i učiniti, ali tek u poglavlju~\ref{ch:univ}. Krenimo s osnovnim definicijama.
 
 %\section{RAM-stroj i RAM-program}\label{sec:RAMizr}
 
@@ -128,6 +128,7 @@ Razlog zašto radimo s ograničenijim modelom je što von Neumannova arhitektura
     \qedhere
 \end{itemize}
 \end{definicija}
+%\vspace{-1em}
 
 RAM-program najčešće pišemo kao %\begin{equation}
 $P:=\begin{prog}
@@ -164,17 +165,17 @@ Dakle, RAM-instrukcija može biti jednog od tri oblika (s navedenim učincima):
 \end{labeling}
 
 \begin{lema}[{name=[prebrojivost skupa $\mathscr Ins$]}]\label{lema:alef0ins}
-Skup $\mathscr Ins$ svih RAM-instrukcija je prebrojiv.
+Skup $\mathscr Ins$ svih RAM-instrukcija je prebrojiv\!.
 \end{lema}
 \begin{proof}
-Skup $\mathscr Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikavanje $f_1:\N\to\mathscr Ins_\inc$ zadano s $f_1(j):=(\incr{j})$ je bijekcija. Analogno, koristeći odredište (iako je broj odredišta ograničen za fiksni program $P$, svaka instrukcija $\goto\;l$ se može pojaviti u \emph{nekom} programu), skup $\mathscr Ins_{\goto}$ je prebrojiv, a skup $\mathscr Ins_\dec$ je ek\-vi\-po\-ten\-tan s $\N\times\N$, pa je i on prebrojiv. Sada je $\mathscr Ins$ prebrojiv kao (disjunktna) unija tih triju prebrojivih skupova.
+Skup $\mathscr Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikavanje $f_1:\N\to\mathscr Ins_\inc$ zadano s $f_1(j):=(\incr{j})$ je bijekcija. Analogno, koristeći odredište (iako je broj odredišta ograničen za fiksni program $P$, svaka instrukcija $\goto\;l$ se može pojaviti u \emph{nekom} programu), skup $\mathscr Ins_{\goto}$ je prebrojiv, a skup $\mathscr Ins_\dec$ je ek\-vi\-po\-ten\-tan s $\N\times\N$, pa je i on prebrojiv\!. Sada je $\mathscr Ins$ prebrojiv kao (disjunktna) unija tih triju prebrojivih skupova.
 \end{proof}
 
 \begin{korolar}[{name=[prebrojivost skupa $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$]}]\label{kor:alef0prog}
-	Skup $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ svih RAM-programa je prebrojiv.
+	Skup $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ svih RAM-programa je prebrojiv\!.
 \end{korolar}
 \begin{proof}
-	Direktno iz činjenice da je $\mathscr Ins_{\inc}^{\quad*}\subseteq\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g\subseteq\mathscr Ins^*$, i leme~\ref{lema:alef0ins}. Iz teorije skupova znamo da je skup $A^*$ prebrojiv ako je $A$ prebrojiv.
+	Direktno iz činjenice da je $\mathscr Ins_{\inc}^{\quad*}\subseteq\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g\subseteq\mathscr Ins^*$, i leme~\ref{lema:alef0ins}. Iz teorije skupova znamo da je skup $A^*$ prebrojiv ako je $A$ prebrojiv\!.
 \end{proof}
 
 %\subsection{Konfiguracije i izračunavanja}
@@ -286,7 +287,7 @@ Neka je $k\in\N_+$ te $f^k$ brojevna funkcija. Kažemo da je $f^k$ \emph{RAM-izr
 Oznaka $\mathscr Comp_k$ namjerno ne spominje RAM-model izračunavanja --- pokazat ćemo da se \emph{isti} skup brojevnih funkcija dobije i u drugim modelima koje ćemo razmatrati.
 
 \begin{teorem}[{name=[prebrojivost skupa $\mathscr Comp$]}]\label{tm:alef0izr}
-Za svaki $k\in\N_+$, skup $\mathscr Comp_k$ je prebrojiv. Skup $\mathscr Comp$ svih RAM-izračunljivih brojevnih funkcija (svih mjesnosti) je također prebrojiv.
+Za svaki $k\in\N_+$, skup $\mathscr Comp_k$ je prebrojiv\!. Skup $\mathscr Comp$ svih RAM-izračunljivih brojevnih funkcija (svih mjesnosti) je također prebrojiv\!.
 \end{teorem}
 \begin{proof}
 Neka je $k$ fiksna mjesnost. Preslikavanje
@@ -322,7 +323,7 @@ Opet, fiksirajmo mjesnost $k\in\N_+$. Skup svih $k$-mjesnih brojevnih funkcija $
     Iz toga i teorema~\ref{tm:alef0izr} slijedi $\mathscr Func_k\nsubseteq\mathscr Comp_k$, pa je $\mathscr Func_k\!\setminus\mathscr Comp_k\ne\emptyset$.
 \end{proof}
 
-%\subsection{Primjeri RAM-programa}
+\subsection{Primjeri RAM-programa}
 
 RAM-programe za konstantne funkcije vidjeli smo već u dokazu teorema~\ref{tm:alef0izr}. Specijalno, za $n=0$, \emph{prazan program} $[\,]$ računa \emph{nulfunkciju} $\f{C}_0^k$ za svaki $k\in\N_+$. Dakle, prazan program nažalost ne računa praznu funkciju --- što bi bilo lako zapamtiti --- ali računa \emph{praznu relaciju} $\emptyset^k$, odnosno njenu karakterističnu funkciju. Također, za $n=1$, program $\begin{prog}0.&\incr0\end{prog}$ računa univerzalnu relaciju $\N^k$.
 
@@ -702,7 +703,7 @@ Neka je $k\in\N_+$ te $j_1,j_2,\dotsc,j_k>k$ prirodni brojevi. %(ne moraju biti 
 
 Napokon možemo, kako je najavljeno, definirati makro koji će nam omogućiti funkcijske pozive za bilo koju RAM-izračunljivu funkciju (za koju imamo RAM-program) na bilo kojim registrima kao argumentima, spremajući rezultat u po volji odabrani registar i čuvajući po volji velik početni komad memorije.
 
-Prvo definiramo jedan korisni pojam. Kako svaka RAM-instrukcija djeluje na najviše jedan registar, čitav RAM-program kao konačan niz instrukcija djeluje na konačno mnogo registara. To znači da za svaki RAM-program $P$ postoji tzv.\ \emph{širina} --- najmanji broj $m_P\in\N$ takav da $P$ ne koristi nijedan registar $\reg{i}$ za $i\ge m_P$. Može biti i $m_P=0$, ako program uopće ne koristi registre (ako je prazan, ili se sastoji samo od instrukcija tipa \goto).
+Prvo definiramo jedan korisni pojam. Kako svaka RAM-instrukcija djeluje na najviše jedan registar, čitav RAM-program kao konačan niz instrukcija djeluje na konačno mnogo registara. To znači da za svaki RAM-program $P$ postoji tzv\!.\ \emph{širina} --- najmanji broj $m_P\in\N$ takav da $P$ ne koristi nijedan registar $\reg{i}$ za $i\ge m_P$. Može biti i $m_P=0$, ako program uopće ne koristi registre (ako je prazan, ili se sastoji samo od instrukcija tipa \goto).
 
 Za makro-program $Q$, možemo prirodno definirati $m_Q:=m_{Q^\flat}$ --- iako nam to zapravo neće trebati. Ali (RAM- i makro-\!) algoritmi $P^k$, pored registara koje koriste u instrukcijama, koriste i registre $\reg{1}$ do $\reg{k}$ za ulazne podatke. Moguće je da bude $m_P\le k$, ako računamo funkciju koja ne ovisi o zadnjih nekoliko argumenata. Ipak, registar $\reg{k}$ jest bitan za postupak izračunavanja te funkcije na RAM-stroju jer, iako ga ne postavlja nijedna instrukcija, postavlja ga sam rad stroja koji u početnoj konfiguraciji u njega spremi argument $x_k$. Zato definiramo širinu algoritma kao $m_{P^k}:=\max\,\{m_P,k+1\}$. Zbog $k\in\N_+$, uvijek je $m_{P^k}\ge 2$.
 

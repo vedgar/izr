@@ -39,11 +39,11 @@ Tada je $F$ parcijalno rekurzivna ako i samo ako je $\N^{-1}F$ Turing-izračunlj
 Ako je $F=\N\,\N^{-1}F$ parcijalno rekurzivna, tada je po teoremu~\ref{tm:pir} RAM-izračunljiva, pa je po teoremu~\ref{tm:krit} $\N^{-1}F$ Turing-izračunljiva. S druge strane, ako je $\N^{-1}F$ Turing-izračunljiva, onda je po teoremu~\ref{tm:tikp} $\N\,\N^{-1}F=F$ parcijalno rekurzivna.
 \end{proof}
 
-Vidimo da korolar~\ref{kor:pent} vrijedi bez obzira na abecedu i kodiranje. Važan posebni slučaj dobijemo za jednočlanu abecedu, za koju je kodiranje jedinstveno i podudara se s duljinom (lema~\ref{lm:dulj<=kr}).
+Vidimo da korolar~\ref{kor:pent} vrijedi bez obzira na abecedu i kodiranje. Važan je posebni slučaj jednočlane abecede, kojoj je kodiranje jedinstveno i podudara se s duljinom (lema~\ref{lm:dulj<=kr}).
 
 \begin{definicija}[{name=[unarna abeceda i unarna reprezentacija brojevne funkcije]}]
 \emph{Unarna abeceda} je $\Sigma_{\t\textbullet}:=\{\t\textbullet\}$, s kodiranjem %. Kad nema opasnosti od zabune, umjesto $\Sigma_{\t\textbullet}$ pišemo samo \t\textbullet. Kodiranje unarne abecede je jedino moguće: 
-	$\N\Sigma_{\t\textbullet}(\t\textbullet):=1$.
+	$\N\Sigma_{\t\textbullet}(\t\textbullet):=1$. (Tada je $\kr{\cdots}=\dulj\cdots$.)
 
 	Za jednomjesnu brojevnu funkciju $F^1$, jezičnu funkciju $\N^{-1}F$ nad $\Sigma_{\t\textbullet}$ zovemo \emph{unarnom reprezentacijom} od $F$ i označavamo je $\t\textbullet F$.
 \end{definicija}
@@ -80,7 +80,7 @@ Izračunljivost $L$ u brojevnom modelu gledamo preko kodova: definiramo jednomje
 \end{equation}
 i prirodno je reći da $L$ ima neko svojstvo izračunljivosti (npr.\ da je primitivno rekurzivan) ako relacija $\kr L$, odnosno njena karakteristična funkcija $\chi_{\kr L}$, ima to svojstvo.
 
-Recimo, prazan jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}\!=\chi_{\mspace{1mu}\emptyset}\!=\!\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}\!=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
+Recimo, prazni jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}\!=\chi_{\mspace{1mu}\emptyset}\!=\!\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}\!=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
 
 U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takvi Turingovi strojevi imaju \emph{dva} završna stanja, $q_a$ i $q_r$, kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
@@ -440,7 +440,7 @@ Prvi razlog tiče se napomene~\ref{nap:brip}. Zbog $\dom{\f{bin}^k}=\N^k$, traž
 
 Drugo, implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatu strukturu, za čije raščlanjivanje trebamo kompliciranije funkcije, svojevrsnu biblioteku \texttt{<string.h>} za rad s riječima nad binarnom abecedom. U sljedećoj točki napravit ćemo minimum potreban za implementaciju funkcija $\f{arg}_i$.
 
-Treće, funkcija $\f{bin}^k$ nije surjekcija, pa \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "krive mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana;
+Treće, funkcija $\f{bin}^k$ nije surjekcija, pa \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "pogrešne mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana;
 Recimo u slučaju kad $a$ ima $7$ znamenaka $2$ u pomaknutoj bazi $2$, izraz $\N\beta\f{mul}^3(a)$ nema smisla, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
 
 \subsection{Standardna biblioteka za \texorpdfstring{$\Sigma_\beta^*$}{binarne stringove}}\label{sec:stdstring}
@@ -542,7 +542,7 @@ Dakle,
 --- iz čega slijedi, po korolaru~\ref{kor:restrprek}, da je $\N\beta\f f$ parcijalno rekurzivna. Ona je RAM-izračunljiva po teoremu~\ref{tm:pir},  pa je $\beta\f f$ Turing-iz\-rač\-un\-lji\-va po teoremu~\ref{tm:krit}.
 \end{proof}
 
-Kao što smo već rekli, dinamizacijom funkcija $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne primitivno rekurzivne funkcije
+Kao što smo već rekli, dinamizacijom funkcij\=a $\f{arg}_i$ možemo simulirati i funkcije koje primaju proizvoljan broj argumenata (\emph{varargs}). Definiramo pomoćne primitivno rekurzivne funkcije
 \begin{align}
 %%\SwapAboveDisplaySkip
 \f{argc}&:=\f{Sc}\circ\f{count2}\text,\\

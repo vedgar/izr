@@ -183,7 +183,7 @@ l.    &P_{\f H}\dots  &\f F(\vec x)&x_1  &x_k    &\f G_1(\vec x)&\f G_2(\vec x)&
 \end{equation}
 \smallskip
 
-Ako $\vec x\notin\dom{\f F}$, prema~\eqref{eq:domkomp} to se može dogoditi na dva načina. Ako $\vec x\notin\bigcap_{i=1}^l\dom{\f G_i}$, postoji neki $i$ takav da $\vec x\notin\dom{\f G_i}$, pa označimo s $i_0$ najmanji takav. Tada će izvršavanje programa $Q_{\f F}$ doći do instrukcije s rednim brojem $i_0-1$, ali izvršavanje te instrukcije neće nikada stati prema propoziciji~\ref{prop:semfmacro}, pa ni $Q_{\f F}$-izračunavanje s $\vec x$ neće stati. Ako pak $l$-torka dobivenih povratnih vrijednosti nije u $\dom{\f H}$, izvršavanje $Q_{\f F}$ će zapeti u beskonačnoj petlji na zadnjoj instrukciji, pa opet $Q_{\f F}$-izračunavanje s $\vec x$ neće stati.
+Ako $\vec x\notin\dom{\f F}$, prema~\eqref{eq:domkomp} to se može dogoditi na dva načina. Ako $\vec x\notin\bigcap_{i=1}^l\dom{\f G_i}$, postoji neki $i$ takav da $\vec x\notin\dom{\f G_i}$, pa označimo s $i_0$ najmanji takav\!. Tada će izvršavanje programa $Q_{\f F}$ doći do instrukcije s rednim brojem $i_0-1$, ali izvršavanje te instrukcije neće nikada stati prema propoziciji~\ref{prop:semfmacro}, pa ni $Q_{\f F}$-izračunavanje s $\vec x$ neće stati. Ako pak $l$-torka dobivenih povratnih vrijednosti nije u $\dom{\f H}$, izvršavanje $Q_{\f F}$ će zapeti u beskonačnoj petlji na zadnjoj instrukciji, pa opet $Q_{\f F}$-izračunavanje s $\vec x$ neće stati.
 Sada prema teoremu~\ref{tm:rem} RAM-algoritam $Q_{\f F}^{\flat k}$ također računa $\f F$, pa je $\f F\in\mathscr Comp$.
 \end{proof}
 
@@ -233,7 +233,7 @@ Za skup funkcija $\mathcal F$ kažemo da je \emph{zatvoren na primitivnu rekurzi
 \end{definicija}
 
 \begin{napomena}[{name=[ulazi i izlaz primitivne rekurzije su totalne funkcije]}]\label{nap:prtot}
-	Iz Dedekindovog teorema rekurzije~\cite{skr:VukTS} slijedi da je jednadžbama~\eqref{eq:defprb} i~\eqref{eq:defprk} zadana jedinstvena totalna funkcija. Također, primitivna rekurzija je \emph{definirana} samo za totalne funkcije, pa ne moramo pričati o domenama od $G$, $H$ i $G\pr H$ (uvijek su jednake redom $\N^k$, $\N^{k+2}$ i $\N^{k+1}$ za neki $k\in\N_+\mspace{-1mu}$).
+	Iz Dedekindovog teorema rekurzije~\cite{skr:VukTS} slijedi da je jednadžbama~\eqref{eq:defprb} i~\eqref{eq:defprk} zadana jedinstvena totalna funkcija. Također, primitivna rekurzija je \emph{definirana} samo za totalne funkcije, pa se ne moramo baviti domenama od $G$, $H$ i $G\pr H$ (uvijek su jednake redom $\N^k$, $\N^{k+2}$ i $\N^{k+1}$ za neki $k\in\N_+\mspace{-1mu}$).
 \end{napomena}
 
 Budući da ne promatramo brojevne funkcije s nula ulaznih podataka, funkcija $G$ koja zadaje početni uvjet mora biti barem jednomjesna, a onda funkcija $F$ dobivena primitivnom rekurzijom mora biti barem dvomjesna. Svakako bismo htjeli definirati i jednomjesne funkcije primitivnom rekurzijom: kanonski primjer je vjerojatno faktorijel,
@@ -506,7 +506,7 @@ Domena funkcije $\mu R^{k+1}$ je $k$-mjesna relacija koju označavamo s $\exists
 
 U tom prikazu možemo vizualizirati i funkciju $\mu R$: za svaku točku $(x,y)$ iz projekcije, $\mu\mspace{2mu}z\mspace{2mu}R(x,y,z)$ je visina do koje vidimo prazan prostor, odnosno visina na kojoj vidimo prvu točku u relaciji $R$ iznad $(x,y)$. 
 
-Samo za $\vec x\in\exists_*R$ izraz $\mu yR(\vec x,y)$ uopće ima smisla --- inače je nedefiniran. Za obrat --- da je za \emph{svaki} $\vec x\in\exists_*R$, izraz $\mu yR(\vec x,y)$ dobro definiran --- zaslužna je dobra uređenost od $\N$: ako postoji neki $y\in\N$ za koji vrijedi $R(\vec x,y)$, tada postoji i najmanji takav.
+Samo za $\vec x\in\exists_*R$ izraz $\mu yR(\vec x,y)$ uopće ima smisla --- inače je nedefiniran. Za obrat --- da je za \emph{svaki} $\vec x\in\exists_*R$, izraz $\mu yR(\vec x,y)$ dobro definiran --- zaslužna je dobra uređenost od $\N$: ako postoji neki $y\in\N$ za koji vrijedi $R(\vec x,y)$, tada postoji i najmanji takav\!.
 
 \begin{primjer}[{name=[prazna funkcija minimizacijom]}]\label{pr:varnothingprek}
 Praznu funkciju možemo dobiti minimizacijom prazne relacije: konkretno, za svaki $k\in\N_+$, $\varnothing^k=\mu\,\emptyset^{k+1}$. Naime, projekcija prazne relacije je opet prazna, a jedina funkcija s praznom domenom je prazna funkcija.

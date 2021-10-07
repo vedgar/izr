@@ -251,7 +251,7 @@ Za dokaz jedinstvenosti treba vidjeti da brojevi različitih duljina zapisa, kao
 %\begin{multline}
 %\end{multline}
 
-To po tranzitivnosti zapravo znači da smo zapise poredali po duljini, a zapise iste duljine leksikografski (tzv.\ \emph{shortlex ordering}).
+To po tranzitivnosti zapravo znači da smo zapise poredali po duljini, a zapise iste duljine leksikografski (tzv\!.\ \emph{shortlex ordering}).
 \end{proof}
 
 \begin{primjer}[{name=[\emph{shortlex ordering} riječi nad dvočlanom abecedom]}]
@@ -371,7 +371,7 @@ Tada za svaku $w\in\Sigma^*$, $\mathcal T'$\!-izračunavanje s $w$ je $(0,0,w\bl
 
 Slično možemo kodirati i $\Gamma_0$ --- ali kako već imamo kodiranje skupa $\Sigma_0\subset\Gamma_0$, želimo da znakovi ulazne abecede imaju iste kodove. Stoga označimo $b:=\card\Gamma_0$ i proširimo bijekciju $\N\Sigma_0:\Sigma_0\leftrightarrow[1\dd b']$ do bijekcije $\N\Gamma_0:\Gamma_0\leftrightarrow[0\dd b\rangle$, tako da $\bl$ preslikamo u $0$, a ostale elemente iz $\Gamma_0\!\setminus\Sigma_0$ bijektivno u skup $\langle b'\dd b\rangle$.
 
-Ovaj put smo upotrijebili nulu, kao $\N\Gamma_0(\bl)$. To opravdava frazu "traka je s konačnim nosačem" (praznine su kodirane nulama, pa ne-nula ima konačno mnogo), a bit će esencijalno i za kodiranje trake. Naime, sada imamo sličan problem kao sa stanjem registara RAM-stroja: da bismo kodirali proizvoljnu traku, moramo nekako skupiti kodove beskonačno mnogo ćelija, ali takve da su svi osim konačno mnogo njih jednaki $0$. Alternativno, želimo "kodiranje" konačnih nizova, ali tako da dodavanje nule na kraj ne promijeni kod.
+Ovaj put smo upotrijebili nulu, kao $\N\Gamma_0(\bl)$. To opravdava frazu "traka je s konačnim nosačem" (praznine su kodirane nulama, pa ne-nul\=a ima konačno mnogo), a bit će esencijalno i za kodiranje trake. Naime, sada imamo sličan problem kao sa stanjem registara RAM-stroja: da bismo kodirali proizvoljnu traku, moramo nekako skupiti kodove beskonačno mnogo ćelija, ali takve da su svi osim konačno mnogo njih jednaki $0$. Alternativno, želimo "kodiranje" konačnih nizova, ali tako da dodavanje nule na kraj ne promijeni kod.
 
 U slučaju RAM-registara to smo riješili rastavom na prim-faktore, odnosno malom modifikacijom kodiranja $\N^*$ --- umjesto od $1$, eksponenti su išli od $0$. Možemo li ovdje naći neku malu modifikaciju kodiranja $\Sigma^*$ (zapis u bazi) da dobijemo analogni rezultat?
 
@@ -421,7 +421,7 @@ Neka je $\Sigma:=\{\t a,\t b,\t c\}\subset\Gamma:=\{\bl,\t a,\t b,\t c,\t A,\t B
 
 %\subsection{Kodiranje funkcije prijelaza}
 
-Na redu je kodiranje funkcije prijelaza $\delta_0$. Mogli bismo se uplašiti, znajući koliko kodiranje funkcija može biti komplicirano (sjetite se indeksa). Ali $\delta_0$ je \emph{konačna} funkcija (\emph{lookup table}), pa zapravo neće biti problema.
+Na redu je kodiranje funkcije prijelaza $\delta_0$. Mogli bismo se zabrinuti, znajući koliko kodiranje funkcija može biti komplicirano (sjetite se indeksa). Ali $\delta_0$ je \emph{konačna} funkcija (\emph{lookup table}), pa zapravo neće biti problema.
 
 Prvo, $\delta_0$ je funkcija s dva ulaza i tri izlaza, tako da je zapravo kodiramo kroz tri dvomjesne koordinatne funkcije (napomena~\ref{nap:brip}). Drugo, već imamo kodiranja za ulaze i prva dva izlaza, $\N Q_0:Q_0\leftrightarrow[0\dd a\rangle$ i $\N\Gamma_0:\Gamma_0\leftrightarrow[0\dd b\rangle$, samo još trebamo kodirati pomake. Kako oni već jesu "numerički" u $\mathbb Z$, najlakše ih je samo povećati za $1$ da upadnu u $\N$, tako da "pomak ulijevo" $-1$ kodiramo brojem $0$, a "pomak udesno" $1$ kodiramo brojem $2$.
 
@@ -1322,7 +1322,7 @@ Prvo odemo do kraja upotrijebljenog dijela trake~\eqref{d:4a} i tamo zapišemo k
 %Zatim se krećemo ulijevo kroz znakove \t\textopenbullet\ u tragu $0$~\eqref{
 %Prvo odemo do kraja upotrijebljenog (nepraznog) dijela trake~\eqref{d:71} i tamo zapišemo krajnji graničnik~\eqref{d:72}. Zatim se krećemo ulijevo kroz znakove \t\textopenbullet\ u tragu $0$~\eqref{d:73} dok ne dođemo do \t\textbullet, koji maknemo~\eqref{d:74} i prenosimo ga desno kroz "znamenke" i "stupce bitova"~\eqref{d:75}, dok ne dođemo do krajnjeg graničnika~\eqref{d:76}. Tada se opet krećemo ulijevo inkrementirajući riječ: zamjenjujući "devetke jedinicama"~\eqref{d:77} te inkrementirajući prvu "ne-devetku"~\eqref{d:78}, ili ako takve nema, dodajući "jedinicu" slijeva~\eqref{d:79}. Zatim prođemo kroz ostale znamenke do "praznog prostora"~\eqref{d:70} i opet izvršavamo cijeli postupak dok ne dođemo do separatora \t\#.
 Argument zašto to funkcionira je praktički isti kao u dokazu leme~\ref{lm:faza2}: nakon svakog "prolaza kroz petlju" imamo traku oblika $\t{\$ut\$}$ pri čemu $t$ ima $\kr v-\kr u$ znakova \t\textbullet\ u tragu $0$. Na početku je $u=\varepsilon$ pa je to istina ($\kr v-\kr\varepsilon=y-0=y$), svakim prolazom ostaje istina jer se $\kr u$ povećava za $1$ dok se broj znakova \t\textbullet\ u tragu $0$ smanjuje za $1$ --- pa na izlasku iz petlje mora biti $\kr v-\kr u=0$, odnosno zbog injektivnosti kodiranja riječi $u=v$. Još je samo preostalo isprazniti i ostale tragove iz $t$ te obrisati zadnji \t\$.
-%Jedina bitna razlika je što je tamo~\eqref{dia:T2} "radni ciklus" imao dva stanja ($q_0$ i $q_1$), a ovdje ih ima tri ($q_3$, $q_4$ i $q_5$). To je posljedica toga da inkrementiramo "s krive strane", odnosno prenosimo kružiće slijeva nadesno, a kod kretanja zdesna nalijevo moramo pamtiti tražimo li tek znamenku koju ćemo inkrementirati (da bismo zamijenili "devetke jedinicama"), ili smo to već učinili (pa ostavljamo "devetke" na miru).
+%Jedina bitna razlika je što je tamo~\eqref{dia:T2} "radni ciklus" imao dva stanja ($q_0$ i $q_1$), a ovdje ih ima tri ($q_3$, $q_4$ i $q_5$). To je posljedica toga da inkrementiramo "s pogrešne strane", odnosno prenosimo kružiće slijeva nadesno, a kod kretanja zdesna nalijevo moramo pamtiti tražimo li tek znamenku koju ćemo inkrementirati (da bismo zamijenili "devetke jedinicama"), ili smo to već učinili (pa ostavljamo "devetke" na miru).
 \end{proof}
 \begin{primjer}[{name=[četvrti fragment transpiliranog stroja]}]
 Za $\Sigma_0:=\{\t a,\t b,\t c,\t d\}$, četvrti fragment možemo prikazati dijagramom
