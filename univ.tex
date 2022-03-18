@@ -25,7 +25,7 @@ Neegzaktnosti tipa \texttt{float}, i raznih drugih tipova koji bi trebali reprez
 \end{napomena}
 
 \section{Kodiranje konačnih nizova}
-Sada se možemo pozabaviti samom implementacijom kodiranja $\N^*$. Kako bismo najlakše kodirali $\vec x=(x_1,x_2,\dotsc,x_k)$ kao jedan prirodni broj, iz kojeg se kasnije mogu "izvući" pojedini brojevi $x_i$? U teoriji skupova, za dokaz da je $\N^2$ prebrojiv, promatramo injekciju $p(x,y):=2^x\cdot3^y$ te koristimo osnovni teorem aritmetike (rastav na prim-faktore) da bismo iz $p(x,y)$ natrag dobili $x$ i $y$. To možemo proširiti na proizvoljnu mjesnost jer prim-brojeva ima beskonačno mnogo: uzmemo ih dovoljno redom po veličini, potenciramo odgovarajućim eksponentima i pomnožimo --- ali to nije kodiranje skupa $\N^*$. Naime, takvo preslikavanje nije injekcija, jer se recimo $(1,2,0,0)$ i $(1,2)$ preslikaju u isti broj $2^1\cdot3^2\cdot5^0\cdot7^0=2^1\cdot3^2=18$.
+Sada se možemo pozabaviti samom implementacijom kodiranja $\N^*$. Kako bismo najlakše kodirali $\vec x=(x_1,x_2,\dotsc,x_k)$ kao jedan prirodni broj, iz kojeg se kasnije mogu "izvući" pojedini brojevi $x_i$? U teoriji skupova, za dokaz da je $\N^2$ prebrojiv\!, promatramo injekciju $p(x,y):=2^x\cdot3^y$ te koristimo osnovni teorem aritmetike (rastav na prim-faktore) da bismo iz $p(x,y)$ natrag dobili $x$ i $y$. To možemo proširiti na proizvoljnu mjesnost jer prim-brojeva ima beskonačno mnogo: uzmemo ih dovoljno redom po veličini, potenciramo odgovarajućim eksponentima i pomnožimo --- ali to nije kodiranje skupa $\N^*$. Naime, takvo preslikavanje nije injekcija, jer se primjerice $(1,2,0,0)$ i $(1,2)$ preslikaju u isti broj $2^1\cdot3^2\cdot5^0\cdot7^0=2^1\cdot3^2=18$.
 
 Ipak, mala modifikacija tog postupka dat će nam kodiranje. Zapravo, jedini problem su nule u konačnom nizu --- opisano preslikavanje \emph{jest} kodiranje skupa ${\N_+\!}^*$ konačnih nizova \emph{pozitivnih} prirodnih brojeva. Sada je još samo preostalo komponirati ga s izračunljivom bijekcijom $\f{Sc}$ između $\N$ i $\N_+$, i dobili smo traženo kodiranje.
 
@@ -60,12 +60,12 @@ Preslikavanje $\langle\cdots\rangle:\N^*\to\N$ je injekcija.
 \begin{proof}
     Pretpostavimo da su $\vec x^k,\vec y^{l}\in\N^*$ takvi da je $\langle\vec x\rangle=\langle\vec y\rangle$. Ako je $k>l$, tada je $k-1\in\N$, pa je $\langle\vec x\rangle$ djeljiv s $p_{k-1}$, što $\langle\vec y\rangle$ nije ($p_{k-1}\notin\{p_0,p_1,\dotsc,p_{l-1}\}$, pa ne dijeli njihov umnožak), kontradikcija. Analogno ne može biti $k<l$ --- dakle je $k=l$.
 	
-	Za svaki $i\in[1\dd k]$, tvrdimo da ne može biti $x_i>y_i$. U suprotnom, k\=od bi bio djeljiv s $p_{i-1}^{y_i+1}\!$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da nije ni $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
+	Za svaki $i\in[1\mspace{-1mu}\dd k]$, tvrdimo da ne može biti $x_i>y_i$. U suprotnom, k\=od bi bio djeljiv s $p_{i-1}^{y_i+1}\!$, pa bi nakon dijeljenja lijeva strana bila djeljiva s $p_{i-1}$, a desna ne~bi. Analogno se vidi da nije ni $x_i<y_i$, dakle mora biti $x_i=y_i$. Time smo dokazali $\vec x=\vec y$.
 \end{proof}
 
 Sljedeće bismo trebali pokazati da je $\im{\langle\cdots\rangle}=:\f{Seq}$ rekurzivan skup te da na tom skupu imamo izračunljivu funkciju koja nam na neki način daje originalni $\vec x$ iz kojeg je pojedini kod dobiven. Za taj dokaz potrebno nam je ponešto teorije brojeva, no prije toga precizirajmo u kakvom obliku tražimo naš inverz.
 
-Recimo odmah da tražimo primitivno rekurzivne, dakle totalne funkcije. Njihovo djelovanje bit će parcijalno specificirano na skupu $\f{Seq}$, iako će se napisani algoritmi moći izvršiti na svakom prirodnom broju.
+Naglasimo odmah da tražimo primitivno rekurzivne, dakle totalne funkcije. Njihovo djelovanje bit će parcijalno specificirano na skupu $\f{Seq}$, iako će se napisani algoritmi moći izvršiti na svakom prirodnom broju.
 
 Da bismo odredili konačni niz iz kojeg je dobiven k\=od $c$, moramo prvo odrediti njegovu duljinu. Dakle, tražimo totalnu funkciju $lh$ takvu da za svaki $c\in\f{Seq}$, $lh(c)$ bude duljina konačnog niza čiji je $c$ k\=od. Takvih funkcija ima neprebrojivo mnogo jer je $\f{Seq}\kompl$ beskonačan (recimo, sadrži sve neparne brojeve veće od $3$), a na njemu $lh$ može djelovati proizvoljno --- pa sigurno postoje i neizračunljive takve funkcije. Ipak, dokazat ćemo da postoji takva funkcija $\f{lh}$ koja je primitivno rekurzivna.
 
@@ -320,7 +320,7 @@ Zanimljivo je da smo koristili samo javno sučelje kodiranja konačnih nizova --
 
 \subsection{Primitivna rekurzija kroz prostor i vrijeme}
 
-Primitivna rekurzija nam omogućuje pisanje ograničenih petlji koje prate jedan podatak. Što ako ih želimo pratiti više, recimo $l$ njih? U napomeni~\ref{nap:brip} rekli smo da ćemo više izlaznih podataka reprezentirati kroz više nezavisnih algoritama, i ponekad se to doista može rastaviti: recimo ako tražimo kumulativni zbroj i umnožak nekog niza, možemo prvo naći zbroj pa onda umnožak, zasebnim primitivnim rekurzijama. No kod kompliciranijih rekurzija algoritmi više nisu odvojivi, jer je zamislivo da sljedeće vrijednosti svih $l$ podataka ovise o prethodnim vrijednostima svih njih.
+Primitivna rekurzija nam omogućuje pisanje ograničenih petlji koje prate jedan podatak. Što ako ih želimo pratiti više, recimo $l$ njih? U napomeni~\ref{nap:brip} rekli smo da ćemo više izlaznih podataka reprezentirati kroz više nezavisnih algoritama, i ponekad se to doista može rastaviti: recimo, ako tražimo kumulativni zbroj i umnožak nekog niza, možemo prvo naći zbroj pa onda umnožak, zasebnim primitivnim rekurzijama. No kod kompliciranijih rekurzija algoritmi više nisu odvojivi, jer je zamislivo da sljedeće vrijednosti svih $l$ podataka ovise o prethodnim vrijednostima svih njih.
 
 Važna situacija u kojoj se taj fenomen pojavljuje je simulacija kompliciranih (npr.\ univerzalnih) modela izračunljivosti, primitivnom rekurzijom kroz vrijeme. Recimo, u RAM-stroju moramo pratiti registre i programski brojač. Stanje registara u koraku $n+1$ ovisi o stanju registara u koraku $n$, ali ovisi i o tome koja se instrukcija izvršava, što (za fiksni program) ovisi o vrijednosti programskog brojača. Vrijednost pak programskog brojača u koraku $n+1$ definirana je po slučajevima: najčešće je sljedbenik te vrijednosti u koraku $n$, ali pri izvršavanju instrukcije tipa $\dec$ ovisi i o stanju registra na koji ta instrukcija djeluje, u koraku $n$.
 
@@ -334,7 +334,7 @@ Takva ovisnost zove se \emph{simultana} primitivna rekurzija, jer moramo simulta
     \label{eq:simultH}
     \f F_i(\vec x,y+1)&:=\f H_i\bigl(\vec x,y,\f F_1(\vec x,y),\f F_2(\vec x,y),\dotsc,\f F_l(\vec x,y)\bigr)\text,
 \end{align}
-za sve $i\in[1\dd l]$, također (primitivno) rekurzivne.
+	za sve $i\in[1\mspace{-1mu}\dd l]$, također (primitivno) rekurzivne.
 \end{propozicija}
 \begin{proof}
 Kao što smo već rekli, cilj nam je primitivnom rekurzijom prvo dobiti funkciju $\f F:=\f{Code}^l\circ(\f F_1,\f F_2,\dotsc,\f F_l)$, iz koje ćemo onda dobiti svaku $\f F_i$ kompozicijom s funkcijom $\f{part}$. Inicijalizacija: iz~\eqref{eq:simultG} imamo
@@ -363,7 +363,7 @@ te je $\f H$ (primitivno) rekurzivna kao kompozicija funkcija $\f{Code}^l$, $\f 
 
 Jednakosti~\eqref{eq:simultGd} i~\eqref{eq:simultHd} kažu nam da je $\f F=\f G\pr\f H$, dakle funkcija $\f F$ je dobivena primitivnom rekurzijom iz (primitivno) rekurzivnih funkcija, pa je i sama (primitivno) rekurzivna.
 
-A onda je za svaki $i\in[1\dd l]$, funkcija $\f F_i$ zadana s $\f F_i(\vec x, y)=\f F(\vec x,y)[i-1]$, simbolički $\f F_i=\f{part}\circ(\f F,\f C_{i-1}^{k+1})$. To znači da su sve $\f F_i$ dobivene kompozicijom iz (primitivno) rekurzivnih funkcija $\f F$, $\f{part}$ i konstanti, pa su (primitivno) rekurzivne.
+	A onda je za svaki $i\in[1\mspace{-1mu}\dd l]$, funkcija $\f F_i$ zadana s $\f F_i(\vec x, y)=\f F(\vec x,y)[i-1]$, simbolički $\f F_i=\f{part}\circ(\f F,\f C_{i-1}^{k+1})$. To znači da su sve $\f F_i$ dobivene kompozicijom iz (primitivno) rekurzivnih funkcija $\f F$, $\f{part}$ i konstanti, pa su (primitivno) rekurzivne.
 \end{proof}
 
 \begin{napomena}[{name=[pokrate u točkovnim definicijama]}]
@@ -442,7 +442,7 @@ i reprezentacija elementa takvog tipa u memoriji računala bila bi vrlo slična 
 
 Može se vidjeti da je to kodiranje injekcija, jer je kompozicija dvije injekcije: prva se dobije tako da "zamijenimo šiljate zagrade oblima", pa dobijemo elemente od $\N^*$, a druga je kodiranje $\N^*$. Ova druga je injekcija prema propoziciji~\ref{prop:codeinj}, ali zašto je prva injekcija? Ako su dvije formule različitih tipova (recimo, jedna je propozicijska varijabla, a druga negacija), preslikavaju se u konačne nizove s različitim prvim elementom. No ako su istog tipa, zapravo trebamo provesti neku indukciju po složenosti formule da bismo dokazali injektivnost. (Pokušajte --- to je dobra vježba.) Uostalom, i sama definicija je rekurzivna po izgradnji formula: recimo, u kodiranju $\lnot\varphi$ pretpostavljamo da već imamo kod od $\varphi$.
 
-Pokušajmo sada dokazati da je slika tog kodiranja (nazovimo je $\f{PF}$) primitivno rekurzivna. Karakterističnu funkciju te slike, $\chi_{\f{PF}}$, definirat ćemo rekurzijom s poviješću. Kao i prije, trebamo naći primitivno rekurzivnu funkciju $\f G$ koja prima povijest $\overline{\chi_{\f{PF}}}(n)$ i vraća je li $n$ kod formule logike sudova. Kako vraća $0$ ili $1$ ($bool$), funkciju $\f G$ možemo shvatiti kao karakterističnu funkciju: $\f G=\chi_{\f R}$, gdje je
+Pokušajmo sada dokazati da je slika tog kodiranja (nazovimo je $\f{PF}$) primitivno rekurzivna. Karakterističnu funkciju te slike, $\chi_{\f{PF}}$, definirat ćemo rekurzijom s poviješću. Kao i prije, trebamo naći primitivno rekurzivnu funkciju $\f G$ koja prima povijest $\overline{\chi_{\f{PF}}}(n)$ i vraća je li $n$ kod formule logike sudova. Kako vraća $0$ ili $1$ ($bool$), $\f G$ možemo shvatiti kao karakterističnu funkciju: $\f G=\chi_{\f R}$, gdje je
 \begin{equation}
     \f R(p)\Longleftrightarrow\text{"$n:=\f{lh}(p)$ je kod neke formule logike sudova".}
 \end{equation}
@@ -452,7 +452,7 @@ Pokušajmo sada dokazati da je slika tog kodiranja (nazovimo je $\f{PF}$) primit
 \end{equation}
 Dakle, ako postoji takav $i$, on je sigurno manji od $n$, pa prvi disjunkt možemo napisati u obliku ograničene kvantifikacije $(\exists i<n)(n\eq\langle0,i\rangle)$, što je primitivno rekurzivno.
 
-    Za drugi disjunkt, opet možemo napisati $\exists u\bigl(n\eq\langle1,u\rangle\,\land\,\f{PF}(u)\bigr)$, i kao i prije možemo ograničiti kvantifikaciju na $(\exists u<n)$, ali što ćemo s rekurzivnim $\f{PF}(u)$? Izvući ćemo ga iz povijesti $p$, u kojoj su zapisane sve vrijednosti karakteristične funkcije $\chi_{\f{PF}}$ na brojevima manjim od $n$. Dakle, drugi disjunkt je
+    Za drugi disjunkt, opet možemo napisati $\exists u\bigl(n\eq\langle1,u\rangle\,\land\,\f{PF}(u)\bigr)$, i kao i prije možemo ograničiti kvantifikaciju na $(\exists u<n)$, ali što ćemo s rekurzivnim pozivom $\f{PF}(u)$? Njegovu istinitost izvući ćemo iz povijesti $p$, u kojoj su zapisane sve vrijednosti karakteristične funkcije $\chi_{\f{PF}}$ na brojevima manjim od $n$. Dakle, drugi disjunkt je
 \begin{equation}
     (\exists u<n)\bigl(n\eq\langle1,u\rangle\land p[u]\eq1\bigr)\text,
 \end{equation}
@@ -579,7 +579,7 @@ e_Q:=\kprog{Q^\flat}=\langle\kins{\decr12},\kins{\goto\;0},\kins{\decr22},\kins{
 %Taj kod ćemo koristiti u kasnijim primjerima.
 \end{primjer}
 
-Injektivnost preslikavanja $\kprog{\cdots}$ slijedi iz injektivnosti od $\kins{\cdots}$ i $\langle\cdots\rangle$: dva različita programa se razlikuju ili po duljini (pa njihovi kodovi imaju različit $\f{lh}$), ili u nekoj instrukciji, recimo onoj na rednom broju $i$ (pa njihovi kodovi imaju različit $\f{part}$ na mjestu $i$, jer je kodiranje instrukcija injektivno).
+Injektivnost preslikavanja $\kprog{\cdots}$ slijedi iz injektivnosti od $\kins{\cdots}$ i $\langle\cdots\rangle$: dva različita programa se razlikuju ili po duljini (pa njihovi kodovi imaju različit $\f{lh}$), ili u nekoj instrukciji, recimo onoj na rednom broju $i$ (pa njihovi kodovi imaju različit $\f{part}$ na mjestu $i$, jer je kodiranje instrukcij\=a injektivno).
 
 \begin{lema}[{name=[primitivna rekurzivnost slike kodiranja RAM-programa]}]
 	Slika kodiranja RAM-programa, $\f{Prog}^1:=\,\im{\N\mathscr P\mspace{-1mu}r\mspace{-2mu}o\mspace{-2mu}g}=\{\kprog P\mid P\in\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g\}$,\\ primitivno je rekurzivna.
@@ -784,7 +784,7 @@ Primjer~\ref{pr:Final'} pokazuje da trebamo biti oprezni s parcijalnim specifika
 \end{equation}
 
 \begin{lema}[{name=[primitivna rekurzivnost završnosti konfiguracije]}]\label{lm:Finalspec}
-Relacija $\f{Final}^3$ je primitivno rekurzivna te je $(x,e,n)\in\f{Final}$ ako i samo ako je $x$ kod nekog nepraznog konačnog niza $\vec x\in\N^+$\!, $e$ je kod nekog RAM-programa $P$, a $P$-izračunavanje s $\vec x$ stane nakon najviše $n$ koraka.
+Relacija $\f{Final}^3$ je primitivno rekurzivna te je $(x,e,n)\in\f{Final}$ ako i samo ako je $x$ kod nekog nepraznog konačnog niza $\vec x\in\N^+$\!, $e$ je kod nekog RAM-programa $P$, a $P$-izračunavanje s~$\vec x$ stane nakon najviše $n$ koraka.
 \end{lema}
 \begin{proof}
     Za primitivnu rekurzivnost: jednočlana relacija $\{\langle\rangle\}=\{1\}$ je primitivno rekurzivna po lemi~\ref{lm:r1prn}. Tada je $\f{Seq'}:=\f{Seq}\setminus\{1\}$ primitivno rekurzivna po propoziciji~\ref{prop:vezn}, a onda i $\f{Final}$ po propoziciji~\ref{prop:skupl}.
@@ -1083,7 +1083,7 @@ Zapišimo~\eqref{eq:kleeneval} simbolički:
 Vidimo da su $\f U$, $\f T_k$, $\f I_n^k$ i $\f C_e^k$ primitivno rekurzivne, pa se u njihovim simboličkim definicijama ne pojavljuje minimizacija. Dakle, jedina njena pojava služi za dobivanje funkcije $\mu\f T_k$.
 \end{proof}
 
-%Štoviše, za fiksni $k$, postoje brojevi $z_k$, $r_k$ i $i_{nk}$, $n\in[1\dd k]$, takvi da svaka $k$-mjesna parcijalno rekurzivna funkcija ima simboličku definiciju u kojoj se $\f Z$ pojavljuje točno $z_k$ puta, $\f I_n^k$ točno $i_{nk}$ puta te primitivna rekurzija točno $r_k$ puta. Jedino što se mijenja je broj pojava funkcije $\f{Sc}$ i operatora kompozicije, zbog $\f C_e^k=\f{Sc}\circ\f{Sc}\circ\dotsb\circ\f{Sc}\circ\f Z\circ\f I_1^k$.
+%Štoviše, za fiksni $k$, postoje brojevi $z_k$, $r_k$ i $i_{nk}$, $n\in[1\mspace{-1mu}\dd k]$, takvi da svaka $k$-mjesna parcijalno rekurzivna funkcija ima simboličku definiciju u kojoj se $\f Z$ pojavljuje točno $z_k$ puta, $\f I_n^k$ točno $i_{nk}$ puta te primitivna rekurzija točno $r_k$ puta. Jedino što se mijenja je broj pojava funkcije $\f{Sc}$ i operatora kompozicije, zbog $\f C_e^k=\f{Sc}\circ\f{Sc}\circ\dotsb\circ\f{Sc}\circ\f Z\circ\f I_1^k$.
 
 %\subsection{Indeksi izračunljivih funkcija}
 
@@ -1145,7 +1145,7 @@ Neka je $k\in\N_+$ te $\f f^k$ parcijalno rekurzivna funkcija. Prema teoremu~\re
 \begin{napomena}[{name=[nejedinstvenost indeksa]}]\label{nap:>1ind}
 Često se govori: "\,\ldots,~dakle funkcija $f$ ima indeks, označimo ga s $e_1$". Strogo govoreći, to je pogrešno, jer $f$, ako već ima indeks, sigurno \textbf{nema jedinstveni indeks}: programerska intuicija nam kaže da za svaki RAM-program postoji beskonačno mnogo RAM-programa koji su mu ekvivalentni (možemo dodavati irelevantne ili nedostupne instrukcije). Ipak, kako kasnije najčešće ne koristimo nikakva svojstva tog broja $e_1$ osim da je indeks od $f$, zapravo taj izričaj možemo shvatiti kao pokratu za "\ldots,~dakle funkcija $f$ ima indeks; odaberimo jedan njen indeks, fiksirajmo ga i nazovimo ga $e_1$".
 
-Alternativno, možemo smatrati da smo uzeli \emph{najmanji} indeks za $f$, koji sigurno postoji ako $f$ ima indeks, i jednoznačno je određen zbog dobre uređenosti od $\N$, ali to ima jedan bitan nedostatak: često iz specifikacije neke funkcije $f$ možemo \emph{izračunati} neki indeks za $f$, ali ne možemo izračunati najmanji indeks za nju. Ugrubo, možemo provjeravati brojeve $e$ redom, ali uvjet zaustavljanja $\kf e=f$ je jednakost funkcija, koja nije izračunljiva. Čak i da su funkcije totalne (što ne moraju biti), morali bismo provjeriti jednakost za sve $\vec x$ iz $\N^k$, kojih je beskonačno mnogo.
+Alternativno, možemo smatrati da smo uzeli \emph{najmanji} indeks za $f$, koji sigurno postoji ako $f$ ima indeks, i jednoznačno je određen zbog dobre uređenosti od $\N$, ali takav pristup ima jedan bitni nedostatak: često iz specifikacije neke funkcije $f$ možemo \emph{izračunati} neki indeks za $f$, ali ne možemo izračunati najmanji indeks za nju. Ugrubo, možemo provjeravati brojeve $e$ redom, ali uvjet zaustavljanja $\kf e=f$ je jednakost funkcij\=a, koja nije izračunljiva. Čak i da su funkcije totalne (što ne moraju biti), morali bismo provjeriti jednakost za sve $\vec x$ iz $\N^k$, kojih je beskonačno mnogo.
 \end{napomena}
 
 Drugim, riječima, tromjesna relacija %$index$ (zadana s $\kf e^k=\f f$)
@@ -1157,7 +1157,7 @@ između $\N$, $\N_+$ i $\mathscr Comp$ nema funkcijsko svojstvo po prvoj varijab
 Tako $index$ može poslužiti kao neka vrsta kodiranja: kad želimo algoritmu dati izračunljivu funkciju kao ulazni podatak, ili je vratiti kao izlazni podatak, možemo prenijeti njen indeks $e$ ($k$ se obično vidi iz konteksta). To nije doista kodiranje, jer nije jednoznačna funkcija ako kažemo "bilo koji indeks", a nije izračunljiva funkcija ako kažemo "najmanji indeks" --- pogledajte napomenu~\ref{nap:>1ind}. Ipak, ako takav rad s indeksima shvatimo kao parcijalnu specifikaciju, to može funkcionirati.
 
 \begin{primjer}[{name=[zadavanje funkcije višeg reda na indeksima]}]\label{pr:parcspecind}
-Recimo da imamo funkciju $F:\mathscr Comp_2\rightharpoonup\mathscr Comp_3$, koja %. Drugim ri\-je\-či\-ma, $F$
+Zamislimo da imamo funkciju $F:\mathscr Comp_2\rightharpoonup\mathscr Comp_3$, koja %. Drugim ri\-je\-či\-ma, $F$
 	preslikava dvomjesne RAM-izračunljive funkcije u tromjesne RAM-izračunljive funkcije. Kao i prije, htjeli bismo izračunljivost funkcije $F$ opisati pomoću izračunljivosti prateće funkcije $\N F$, koja prima indeks funkcije $\f f$ i vraća indeks funkcije $F(\f f)$. Zbog napomene~\ref{nap:>1ind} to nije potpuni opis funkcije $\N F$, ali važno svojstvo koje želimo sačuvati % ne možemo time potpuno opisati, ali možemo reći što od nje tražimo: to 
 	je da \emph{za svaki} $e\in\N$ bude
 \begin{equation}\label{eq:parcspecind}
@@ -1171,12 +1171,12 @@ Takve funkcije možemo i komponirati: ako imamo $G:\mathscr Comp_3\rightharpoonu
 \subsection{Restrikcije i grananja parcijalnih funkcija}
 
 To možemo kombinirati s "pravim" kodiranjima: recimo, za svaki $k\in\N_+$, funkcija $apply_k:\N^k\times\mathscr Comp_k\rightharpoonup\N$, koja prima $\vec x^k$ i $\f f^k$, i vraća $\f f(\vec x)$ ako je $\vec x\in\dom{\f f}$, ima svoju prateću funkciju koja prima $\langle\vec x\rangle$ i bilo koji indeks za $\f f$, i vraća $\f f(\vec x)$ ako postoji.
-\begin{equation}
+\begin{equation}\label{eq:Napply}
     \N apply_k(x,e):\simeq\f{univ}(x,e)\text{, za }\f{lh}(x)\eq k
 \end{equation}
 
 \begin{napomena}[{name=[restrikcija na izračunljiv skup čuva izračunljivost]}]\label{nap:restrprek}
-Nažalost, iz toga još uvijek ne slijedi da je takva funkcija izračunljiva, iako su $\f{univ}$, $\f{lh}$ i $=$ izračunljive --- jer trebamo neki rezultat koji kaže da je restrikcija parcijalno rekurzivne funkcije na (primitivno) rekurzivan skup ponovo parcijalno rekurzivna. To sigurno možemo "na prste" --- recimo, probajte pokazati da je
+	Nažalost, iz~\eqref{eq:Napply} još uvijek ne slijedi da je $\N apply$ izračunljiva, iako su $\f{univ}$, $\f{lh}$ i $=$ izračunljive --- jer trebamo neki rezultat koji kaže da je restrikcija parcijalno rekurzivne funkcije na (primitivno) rekurzivan skup ponovo parcijalno rekurzivna. To sigurno možemo "na prste" --- recimo, probajte pokazati da je
     \begin{equation}\label{eq:restrprek}
         (\f G|_{\f R})(\vec x)\simeq\f G(\vec x)+\mu y\bigl(\f{Sc}(y)\eq\chi_{\f R}(\vec x)\bigr)
 \end{equation}
@@ -1185,7 +1185,7 @@ Nažalost, iz toga još uvijek ne slijedi da je takva funkcija izračunljiva, ia
 
 %\subsection{Parcijalno rekurzivna verzija teorema o grananju}
 
-Na početku točke~\ref{sec:tech} nešto smo rekli o teškoćama koje marljiva evaluacija donosi ako želimo u našem funkcijskom jeziku implementirati grananje s funkcijama koje nisu nužno totalne. Zapravo, jedino što možemo koristiti je kompozicija, jer primitivna rekurzija je definirana samo na totalnim funkcijama, a minimizacija na relacijama čije karakteristične funkcije su također totalne --- ali marljiva evaluacija znači da se u kompoziciji sve "unutarnje" funkcije evaluiraju uvijek, pa parcijalnost bilo koje od njih znači parcijalnost čitave kompozicije.
+Na početku točke~\ref{sec:tech} bilo je riječi o teškoćama koje marljiva evaluacija donosi ako želimo u našem funkcijskom jeziku implementirati grananje s funkcijama koje nisu nužno totalne. Zapravo, jedino što možemo koristiti je kompozicija, jer primitivna rekurzija je definirana samo na totalnim funkcijama, a minimizacija na relacijama čije karakteristične funkcije su također totalne --- ali marljiva evaluacija znači da se u kompoziciji sve "unutarnje" funkcije evaluiraju uvijek, pa parcijalnost bilo koje od njih znači parcijalnost čitave kompozicije.
 
 Dakle, način da se izvučemo je da našoj funkciji $If$ ne damo već izračunane \emph{vrijednosti} $\f g(\vec x)$ i $\f h(\vec x)$, već neevaluirane \emph{funkcije} $\f g$ i $\f h$. Tada s obzirom na uvjet odaberemo jednu od njih, i onda je tek izračunamo na $\vec x$: umjesto $y\t?\f g(\vec x)\t:\f h(\vec x)$ imamo $(y\t?\f g\t:\f h)(\vec x)$. Indeksi (kao "pokazivači na funkcije") nam omogućuju da tu tehniku doista provedemo.
 
@@ -1203,7 +1203,7 @@ je rekurzivna (konstante su primitivno rekurzivne pa su rekurzivne, a uvjeti su 
 \begin{equation}\label{eq:gprekdef}
     \f F(\vec x)\simeq\f{comp}_k\bigl(\vec x,\f H(\vec x)\bigr)\text.
 \end{equation}
-Doista, neka je $\vec x\in\N^k$ proizvoljan. Ako vrijedi $\f R_i(\vec x)$ za neki (zbog disjunktnosti jedinstveni) $i\in[1\dd l]$, tada je po teoremu~\ref{tm:grek}, $\f H(\vec x)=\f C_{e_i}(\vec x)=e_i$, pa je
+	Doista, neka je $\vec x\in\N^k$ proizvoljan. Ako vrijedi $\f R_i(\vec x)$ za neki (zbog disjunktnosti jedinstveni) $i\in[1\mspace{-1mu}\dd l]$, tada je po teoremu~\ref{tm:grek}, $\f H(\vec x)=\f C_{e_i}(\vec x)=e_i$, pa je
 \begin{equation}
     \f{comp}_k\bigl(\vec x,\f H(\vec x)\bigr)\simeq\f{comp}_k(\vec x,e_i)\simeq\kf{e_i}(\vec x)\simeq\f G_i(\vec x)\simeq\f F(\vec x)\text.
 \end{equation}
@@ -1212,9 +1212,9 @@ Ako pak ne vrijedi $\f R_i(\vec x)$ ni za koji $i$, tada je opet po teoremu~\ref
 Sada parcijalna rekurzivnost slijedi iz~\eqref{eq:gprekdef}, jer je $\f F$ dobivena kompozicijom iz parcijalno rekurzivnih funkcija $\f{comp}_k$, $\f H$ i koordinatnih projekcija.
 \end{proof}
 
-U teoremu~\ref{tm:grek} nismo mogli ispustiti $\f G_0$, jer njena podrazumijevana vrijednost $\varnothing^k$ nije rekurzivna (nije uopće totalna). Ali $\varnothing^k$ jest parcijalno rekurzivna, tako da je ovdje možemo ispustiti --- samo nam treba neki indeks za nju, da bi $\f H$ bila totalna funkcija.
+U teoremu~\ref{tm:grek} nismo mogli ispustiti $\f G_0$, jer njena podrazumijevana vrijednost $\varnothing^k$ nije rekurzivna (nije uopće totalna). Ali $\varnothing^k$ jest parcijalno rekurzivna, tako da ovdje možemo ispustiti granu "inače" --- samo nam treba neki indeks za $\varnothing^k$, da bi $\f H$ bila totalna funkcija.
 
-Za to možemo iskoristiti propoziciju~\ref{prop:computeind}\eqref{it:nprogind} --- svi brojevi iz $\f{Prog}\kompl$ indeksi su prazne funkcije. Posebno lijep takav broj je $0$, koji nije u $\f{Prog}$ jer uopće nije u $\f{Seq}$: $\overline{\f{part}}\bigl(0,\f{lh}(0)\bigr)=\overline{\f{part}}(0,0)=\langle\rangle=1\ne0$.
+Za to možemo iskoristiti propoziciju~\ref{prop:computeind}\eqref{it:nprogind} --- svi brojevi iz $\f{Prog}\kompl$ indeksi su prazne funkcije. Posebno lijep takav broj je $0$, koji nije u $\f{Prog}$ jer uopće nije u $\f{Seq}$: naime, $\overline{\f{part}}\bigl(0,\f{lh}(0)\bigr)=\overline{\f{part}}(0,0)=\langle\rangle=1\ne0$.
 
 \begin{korolar}[{name=[{teorem o grananju, parcijalno rekurzivna verzija, bez "inače"}]}]\label{kor:gprek}
 Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $\f R_1^k$, $\f R_2^k$,~\ldots, $\f R_l^k$ u parovima disjunktne rekurzivne relacije, sve iste mjesnosti.

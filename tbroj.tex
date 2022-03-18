@@ -11,9 +11,9 @@ Neka je $\Sigma$ proizvoljna abeceda te $\N\Sigma$ proizvoljno njeno kodiranje. 
 \end{propozicija}
 
 \begin{proof}
-Teorem~\ref{tm:tikp} (zajedno s teoremom~\ref{tm:pir}) kaže da za svaku $\varphi\in\TComp$ vrijedi $\N\varphi\in\mathscr Comp_1$. Dakle preslikavanje doista "ide kamo treba".
+Teorem~\ref{tm:tikp} (zajedno s teoremom~\ref{tm:pir}) kaže da za svaku $\varphi\in\TComp$ vrijedi\\ $\N\varphi\in\mathscr Comp_1$. Dakle preslikavanje koje promatramo doista "ide kamo treba".
 
-Za injektivnost, neka su $\varphi_1,\varphi_2\in\TComp$ različite. Ako imaju različite domene, bez smanjenja općenitosti možemo pretpostaviti da postoji $w\in\dom{\varphi_1}\!\!\setminus\dom{\varphi_2}$. Tada je $\kr w\in\dom{\N\varphi_1}$, ali isto tako $\kr w\notin\dom{\N\varphi_2}$ jer je kodiranje riječi injekcija, pa $\kr w$ ne može biti jednak nijednom $\kr{w'}$ za $w'\in\dom{\varphi_2}$. To znači da prateće funkcije $\N\varphi_1$ i $\N\varphi_2$ imaju različite domene, pa su različite.
+Za injektivnost, neka su $\varphi_1,\varphi_2\in\TComp$ različite. Ako imaju različite domene, bez smanjenja općenitosti možemo pretpostaviti da postoji $w\in\dom{\varphi_1}\!\!\setminus\dom{\varphi_2}$. Tada je $\kr w\in\dom{\N\varphi_1}$, ali isto tako $\kr w\notin\dom{\N\varphi_2}$ jer je kodiranje riječi injekcija, pa $\kr w$ ne može biti jednak nijednom $\kr{w'}$ za $w'\!\in\dom{\varphi_2}$. To znači da prateće funkcije $\N\varphi_1$ i $\N\varphi_2$ imaju različite domene, pa su različite.
 
 Ako pak $\varphi_1$ i $\varphi_2$ imaju istu domenu, ali se razlikuju na nekoj riječi $w$ iz te domene, tada (opet po injektivnosti kodiranja riječi) vrijedi
 \begin{equation}
@@ -204,14 +204,14 @@ zovemo \emph{binarnom reprezentacijom} funkcije $f$.
 %$\beta\f{mul}^2(\t{\textbullet\textbullet/\textbullet\textbullet\textbullet\textbullet\textbullet})=\t{\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet\textbullet}$, jer je $2\cdot5=10$, dok $\t\textbullet$ i $\t{//}$ nisu u $\dom{\beta\f{mul}^2}$, jer $(1)$ i $(0,0,0)$ nisu ulazi ispravne mjesnosti za $\f{mul}^2$.
 %\end{primjer}
 
-Vjerojatno ste nekad napisali Turingov stroj za $\beta\f{add}^2$, koristeći $\beta\f{add}^2(u\t/v)=uv$, ako su $u,v\in\Sigma_{\t\textbullet}^*$. Ipak, već tada ste zasigurno vidjeli koliko je teško napisati $\beta\f{mul}^2$, a pogotovo $\beta\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\beta\f{part}$?!) da i ne spominjemo.
+Vjerojatno ste nekad napisali Turingov stroj za $\beta\f{add}^2$, koristeći $\beta\f{add}^2(u\t/v)=uv$, ako su $u,v\in\Sigma_{\t\textbullet}^*$. Ipak, već tada ste zasigurno primijetili koliko bi bilo teško napisati $\beta\f{mul}^2$, a pogotovo $\beta\f{pow}$ --- ostale divote iz poglavlja~\ref{ch:univ} ($\beta\f{part}$?!) da i ne spominjemo.
 
 Sljedeći veliki cilj je dokazati da Turingovi strojevi doista mogu računati (binarno reprezentirane) \emph{sve} parcijalno rekurzivne funkcije, pa tako i funkciju $\beta\f{univ}$ --- čineći tako jedan od modela univerzalne izračunljivosti. Prvo ćemo dokazati obrat: one brojevne funkcije čije binarne reprezentacije su Turing-izračunljive, parcijalno su rekurzivne. To nije toliko impresivan rezultat, ali lakši je za dokazati, a osnovnu ideju dokaza moći ćemo upotrijebiti i u dokazu obrata.
 
 %\subsection{Prateća funkcija binarne reprezentacije}
 
-Dakle, neka je $k\in\N_+$ te $f^k$ brojevna funkcija takva da je $\beta f$ Turing-izračunljiva. Kodirajmo $\N\Sigma_\beta$: već smo definirali $\kr{\t\textbullet}=1$, dodefinirajmo još $\kr{\t/}:=2$.
-Po teoremu~\ref{tm:tikp} $\N\beta f$ je parcijalno rekurzivna --- ali nas zanima $f$. Brojevne funkcije $(\N\beta f)^1$ i $f^k$ su povezane preko jezične funkcije $\beta f$. Možemo li naći brojevnu vezu između njih? Precizno, možemo li naći brojevne funkcije $g^1$ i $h^k$ takve da je $f=g\circ\N\beta f\circ h$? Ako bi $g$ i $h$ bile izračunljive i totalne (recimo primitivno rekurzivne), iz toga bi odmah slijedila parcijalna rekurzivnost od $f$.%, jer je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju.
+Dakle, neka je $k\in\N_+$ te $f^k$ brojevna funkcija takva da je $\beta f$ Turing-izračunljiva. Kodirajmo $\N\Sigma_\beta$: otprije imamo $\kr{\t\textbullet}=1$, dodefinirajmo još $\kr{\t/}:=2$.
+Po teoremu~\ref{tm:tikp} $\N\beta f$ je parcijalno rekurzivna --- ali nas zanima $f$. Brojevne funkcije $(\N\beta f)^1$ i $f^k$ su povezane preko jezične funkcije $\beta f$. Možemo li naći brojevnu vezu između njih? Precizno, možemo li naći brojevne funkcije $g^1$ i $h^k$ takve da je $f=g\circ\N\beta f\circ h$? Ako bi $g$ i $h$ bile izračunljive i totalne (recimo, primitivno rekurzivne), iz toga bi odmah slijedila parcijalna rekurzivnost od $f$.%, jer je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju.
 
 U traženju tih funkcija može pomoći dijagram.
 \begin{equation}\label{dia:Nbeta}
@@ -336,8 +336,8 @@ pri čemu je $\f{slh}(0,b)=(\mu t\le 0)\bigl(\sum_{i\le t}\!b^i>0\bigr)=0$ jer j
 Za sve $x,y\in\N$, za sve $b\in\N_+$, vrijedi $\f{slh}(x\conc b y,b)=\f{slh}(x,b)+\f{slh}(y,b)$.
 \end{korolar}
 \begin{proof}
-Neka su $x,y,b$ proizvoljni ($b$ pozitivan). Uzmimo neku $b$-članu abecedu, recimo $[1\dd b]$.
-	Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in[1\dd b]^*$ takve da je $x=\kr u$ i $y=\kr v$ (to su upravo zapisi brojeva $x$ i $y$ u pomaknutoj bazi $b$). Po definiciji $\f{slh}$, vrijedi $\f{slh}(\kr w,b)=\dulj w$ za sve $w\in[1\dd b]^*$, pa imamo
+	Neka su $x,y,b$ proizvoljni ($b$ pozitivan). Uzmimo neku $b$-članu abecedu, primjerice $[1\mspace{-1mu}\dd b]$.
+	Po propoziciji~\ref{pp:bijkr}, postoje $u,v\in[1\mspace{-1mu}\dd b]^*$ takve da je $x=\kr u$ i $y=\kr v$ (to su upravo zapisi brojeva $x$ i $y$ u pomaknutoj bazi $b$). Po definiciji $\f{slh}$, vrijedi $\f{slh}(\kr w,b)=\dulj w$ za sve $w\in[1\mspace{-1mu}\dd b]^*$, pa imamo
 \begin{multline}
     \f{slh}(x,b)+\f{slh}(y,b)=
     \f{slh}(\kr u,b)+\f{slh}(\kr v,b)=
@@ -414,7 +414,7 @@ Za kompoziciju, uzmimo proizvoljni $n\in\N$ i računamo $\f{blh}\bigl(\f{bin}(n)
     \Longleftrightarrow
     t\ge n
 \end{equation}
-pa je najmanji takav $t$ upravo $n=\f I_1^1(n)$.\qedhere
+pa je najmanji takav $t$ upravo $n=\f I_1^1(n)\le2^n-1$.\qedhere
 \end{proof}
 
 %Na komutirajućem dijagramu koji cijelo vrijeme promatramo, $\f{blh}$ bismo mogli prikazati kao strelicu prema gore, s desne strane pravokutnika, ispupčenu još više nego strelica $\f{bin}^1$. Upravo dokazana lema pokazuje da tako dobiveni "polumjesec" također komutira, pa i "proširena elipsa" također komutira --- čime smo napokon prikazali $f$ pomoću $\N\beta f$.
@@ -438,10 +438,10 @@ iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$
 
 Prvi razlog tiče se napomene~\ref{nap:brip}. Zbog $\dom{\f{bin}^k}=\N^k$, traženi desni inverz ima $k$ izlaznih podataka, pa ga reprezentiramo s $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. Te funkcije su neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih ne moramo označavati s dva broja, poput $\f I_n^k$.
 
-Drugo, implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatu strukturu, za čije raščlanjivanje trebamo kompliciranije funkcije, svojevrsnu biblioteku \texttt{<string.h>} za rad s riječima nad binarnom abecedom. U sljedećoj točki napravit ćemo minimum potreban za implementaciju funkcija $\f{arg}_i$.
+Drugo, implementacija je bitno kompliciranija nego u lemi~\ref{lm:blh}. Dok su riječi nad jednočlanom abecedom trivijalno izomorfne s $\N$ ($w\mapsto\dulj w$ je izomorfizam), riječi nad dvočlanom abecedom imaju bogatu strukturu, za čije raščlanjivanje trebamo kompliciranije funkcije --- svojevrsnu biblioteku \texttt{<string.h>} za rad s riječima nad binarnom abecedom. U sljedećoj točki napravit ćemo minimum potreban za implementaciju funkcija $\f{arg}_i$.
 
 Treće, funkcija $\f{bin}^k$ nije surjekcija, pa \emph{nema} totalni desni inverz. Precizno, $\N\beta f$ nije \emph{jednaka} $\f{bin}^1\circ f\circ(\f{arg}_1,\dotsc,\f{arg}_k)$, već je restrikcija te funkcije na $\im{\f{bin}^k}$. %ali da bismo dobili jednakost, morat ćemo eksplicitno eliminirati ulaze "pogrešne mjesnosti" --- na kojima ne smijemo pozvati funkcije $\f{arg}_i$. Naime, zbog parcijalne specifikacije one bi mogle dati nešto što jest u domeni od $f$, pa bi desna strana bila definirana, a lijeva bi bila nedefinirana;
-Recimo u slučaju kad $a$ ima $7$ znamenaka $2$ u pomaknutoj bazi $2$, izraz $\N\beta\f{mul}^3(a)$ nema smisla, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
+Recimo, u slučaju kad $a$ ima $7$ znamenaka $2$ u pomaknutoj bazi $2$, izraz $\N\beta\f{mul}^3(a)$ nema smisla, dok je $2^{\f{arg}_1(a)\cdot\f{arg}_2(a)\cdot\f{arg}_3(a)}-1$ sasvim definirano. Srećom, imamo tehniku (restrikcija na rekurzivan skup) koja će uskladiti domene.
 
 \subsection{Standardna biblioteka za \texorpdfstring{$\Sigma_\beta^*$}{binarne stringove}}\label{sec:stdstring}
 
@@ -520,7 +520,7 @@ Za svaki $n\in\N_+$ vrijedi $n-1\in\N$, pa definiramo
 \begin{equation}
     \f{arg}_n(x):=\f{streak1}(2\conc2x\conc22,n-1)\text.
 \end{equation}
-Neka je $\vec x\in\N^k$ proizvoljan ($k\in\N_+$). Tada u $\beta(\vec x)$ ima točno $k-1$ separatora, pa je $\f{count2}\bigl(\f{bin}(\vec x)\bigr)=k-1$, odnosno za $y:=2\conc2\f{bin}(\vec x)\conc22$ vrijedi $\f{count2}(y)=k-1+2=k+1$. Sada za svaki $i\in[1\dd k]$ vrijedi $\f{arg}_i\bigl(\f{bin}(\vec x)\bigr)=\f{streak1}(y,i-1)$, što je upravo $x_i$ (recimo, za $i=2<k$ imat ćemo $\f{streak1}(\kr{\t{/\textbullet}^{x_1}\!\t{/\textbullet}^{x_2}\!\t/\dotsm\t{/\textbullet}^{x_k}\!\t/},1)=\f{pos2}(y,2)-\f{Sc}\bigl(\f{pos2}(y,1)\bigr)=(1+x_1+1+x_2)-\f{Sc}(1+x_1)=x_2$).
+	Neka je $\vec x\in\N^k$ proizvoljan ($k\in\N_+$). Tada u $\beta(\vec x)$ ima točno $k-1$ separatora, pa je $\f{count2}\bigl(\f{bin}(\vec x)\bigr)=k-1$, odnosno za $y:=2\conc2\f{bin}(\vec x)\conc22$ vrijedi $\f{count2}(y)=k-1+2=k+1$. Sada za svaki $i\in[1\mspace{-1mu}\dd k]$ vrijedi $\f{arg}_i\bigl(\f{bin}(\vec x)\bigr)=\f{streak1}(y,i-1)$, što je upravo $x_i$ (recimo, za $i=2<k$ imat ćemo $\f{streak1}(\kr{\t{/\textbullet}^{x_1}\!\t{/\textbullet}^{x_2}\!\t/\dotsm\t{/\textbullet}^{x_k}\!\t/},1)=\f{pos2}(y,2)-\f{Sc}\bigl(\f{pos2}(y,1)\bigr)=(1+x_1+1+x_2)-\f{Sc}(1+x_1)=x_2$).
 Za $i>k$ imat ćemo $i-1\ge k=\f{count2}(y)-1$, pa će po lemi~\ref{lm:pos2streak1prn} biti $\f{streak1}(y,i-1)=0$, kao što i treba.
 \end{proof}
 

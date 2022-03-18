@@ -4,7 +4,7 @@ U ovom poglavlju dokazat ćemo nekoliko rezultata sa zajedničkom idejom: algori
 
 \section{Specijalizacija}
 
-Kao što smo već nagovijestili, počet ćemo sa \emph{specijalizacijom}: načinom da u od\-re\-đe\-nom algoritmu fiksiramo određeni (zadnji) ulazni podatak na neki konkretni broj. Dosad smo vidjeli mnoge primjere specijalizacije:
+Kao što smo već nagovijestili, počet ćemo sa \emph{specijalizacijom}: postupkom kojim u od\-re\-đe\-nom algoritmu fiksiramo jedan (zadnji) ulazni podatak na neki konkretni broj. Dosad smo vidjeli mnoge primjere specijalizacije:
 
 \begin{itemize}
     \item Funkcija $\f{blh}$ iz leme~\ref{lm:blh} dobivena je specijalizacijom funkcije $\f{slh}$, fiksirajući njen zadnji (drugi) argument na $2$. %\\ Skraćeno 
@@ -49,7 +49,7 @@ Definiciju od $\f g$ možemo zapisati u simboličkom obliku
 Isti kao prethodni --- zapravo lakši, jer ne moramo određivati domenu.
 \end{proof}
 
-Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne eksplicitno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Mogli bismo izračunati (neke) indekse od $\f I_i^k,i\in[1\dd k]$ i $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, kao posebni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
+Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost kroz postojanje indeksa, ona samo kaže da ako $\f f$ ima indeks, tada i $\f g$ ima indeks --- ne kaže, barem ne eksplicitno, kako \emph{izračunati} indeks od $\f g$ pomoću indeksa od $\f f$. Mogli bismo izračunati (neke) indekse od $\f I_i^k,i\in[1\mspace{-1mu}\dd k]$ i $\f C_y^k$ --- te kad bismo imali $\f{compose}$ kao izračunljivu funkciju na indeksima, kao posebni slučaj dobiti i indeks kompozicije~\eqref{eq:paramcompose}. Ipak, lakše je prvo realizirati specijalizaciju u obliku izračunljive funkcije $\f S$%(slovo dolazi od \emph{substitute} ili \emph{specialize}, ovisno o tome pitate li logičare ili programere)%
 , a onda $\f{compose}$ pomoću te funkcije.
 
 Na neki način, $\f S=\N \$$, gdje funkcije kodiramo njihovim indeksima kako je detaljno objašnjeno u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$ te vraća \emph{neki} indeks za $\$(y,\f f)$.
@@ -87,8 +87,8 @@ od dva dijela (razdvojena crtom) --- dakle k\=od spljoštenja bit će dobiven ko
 
 Za donji dio, primijenimo algoritam iz definicije~\ref{def:flat}. Kako je jedini makro zadnja instrukcija u $Q$, ne treba provoditi korak~\eqref{korak:renumeriraj}, već samo korake~\eqref{korak:makni} i~\eqref{korak:dodaj}. Drugim riječima, umjesto jedne instrukcije $y.\;P^*$ treba stajati $n_P$ instrukcij\=a samog programa $P$ --- s rednim brojevima i odredištima pomaknutima za $y$. Za redne brojeve pobrinut će se konkatenacija jer je $\f{lh}\bigl(\overline{\f G}(y)\bigr)=y$; trebamo još pomaknuti odredišta.
 
-Kod dokazivanja konkatenacije primitivno rekurzivnom (lema~\ref{lm:starprn}), vidjeli smo ideju "točkovne definicije konačnog niza"% --- zato je dovoljno objasniti kako pomaknuti odredište pojedine instrukcije
-: drugi kod će biti $\overline{\f H}\bigl(y,e,\f{lh}(e)\bigr)$, gdje je $\f H(y,e,t):=\f{Shift}(y,e[t])$, i još trebamo definirati funkciju $\f{Shift}$ koja pomiče odredište (ako postoji) instrukcije zadane kodom (drugi argument) za $y$ (prvi argument).
+Kod dokazivanja primitivne rekurzivnosti konkatenacije (lema~\ref{lm:starprn}) vidjeli smo ideju "točkovne definicije konačnog niza"% --- zato je dovoljno objasniti kako pomaknuti odredište pojedine instrukcije
+: drugi kod će biti $\overline{\f H}\bigl(y,e,\f{lh}(e)\bigr)$, gdje je $\f H(y,e,t):=\f{Shift}(y,e[t])$, tako da još trebamo definirati funkciju $\f{Shift}$ koja pomiče odredište (ako postoji) instrukcije zadane kodom (drugi argument) za $y$ (prvi argument).
 
 Koristeći komponente $\f{dest}$ i $\f{regn}$ te tipove instrukcija (leme~\ref{lm:regndestprn} i~\ref{lm:InsTYPEprn}), definiramo:
 \begin{equation}
@@ -275,7 +275,7 @@ Ili možemo? Sjetimo se napomene~\ref{nap:blokovi} --- $f$ je upravo "implicitna
 
 Kad bismo samo znali odrediti $f$, dalje bi bilo lako: $g$ i $h$ bismo specijalizirali na isti način kao kod komponiranja. Sigurno $f$ ne možemo odrediti jednoznačno, naprosto jer nije jedinstven: $\f G\pr\f H$, kao i bilo koja izračunljiva funkcija, ima beskonačno mnogo indeksa --- a svi oni mogu poslužiti kao $f$. No ono što nam može biti bitno je da \emph{funkcija} $\kf f^{k+1}=\kf g^k\pr\kf h^{k+2}$ bude jednoznačno određena.
 
-Zanemarujući $g$ i $h$ (jer njih znamo specijalizirati) i "utapajući" $y$ među $\vec x$ te zovući tako dobivenu funkciju $G_k$, vidimo da je općenit oblik naše jednadžbe koju želimo riješiti $\kf f(\vec x)\simeq G_k(\vec x,f)$. Takve \emph{opće rekurzije} tema su iduće točke.
+Zanemarujući $g$ i $h$ (jer njih znamo specijalizirati) i "utapajući" $y$ među $\vec x$ te zovući tako dobivenu funkciju $G_k$, vidimo da je općeniti oblik jednadžbe koju želimo riješiti $\kf f(\vec x)\simeq G_k(\vec x,f)$. Takve \emph{opće rekurzije} tema su iduće točke.
 
 \section{Opće rekurzije}\label{sec:rec}
 
@@ -340,7 +340,7 @@ Pitanja moramo postavljati tim redom, jer npr.\ totalnost rješenja ne znači mn
 
 % \subsection{Opće rekurzije s izračunljivim funkcijama}
 
-Kao i drugdje gdje se gledaju funkcijske jednadžbe (recimo u teoriji običnih diferencijalnih jednadžbi), rijetko se gledaju za sasvim općenite funkcije. Kod diferencijalnih jednadžbi najčešće se bavimo glatkim funkcijama --- ovdje, kod općih rekurzija, bavimo se izračunljivim funkcijama. Zbog teorema ekvivalencije, svejedno je kako manifestiramo tu izračunljivost --- uglavnom ćemo to činiti kroz parcijalnu rekurzivnost ili kroz postojanje indeksa.
+Kao i drugdje gdje se gledaju funkcijske jednadžbe (recimo, u teoriji običnih diferencijalnih jednadžbi), rijetko se gledaju za sasvim općenite funkcije. Kod diferencijalnih jednadžbi najčešće se bavimo glatkim funkcijama --- ovdje, kod općih rekurzija, bavimo se izračunljivim funkcijama. Zbog teorema ekvivalencije, svejedno je kako manifestiramo tu izračunljivost --- uglavnom ćemo to činiti kroz parcijalnu rekurzivnost ili kroz postojanje indeksa.
 
 Dakle, zadane su nam parcijalno rekurzivne funkcije $\f G_1$, $\f G_2$,~\ldots\ preko svojih indeksa $g_1$, $g_2$,~\ldots\ --- i tražimo indeks $f$ funkcije $\f F$ koja zadovoljava opću rekurziju $\f F=\mathcal M(\vec{\f G},\f F)$. Simboličku definiciju $\mathcal M$ je (kao i obično) lakše napisati točkovno: u obliku jedne parcijalno rekurzivne funkcije $\f G$ koja prima ulazne podatke $\vec x$, indekse $\vec g$ i indeks $f$; te vraća vrijednost koja mora biti parcijalno jednaka $\f F(\vec x)\simeq\kf f(\vec x)\simeq\f{comp}(\vec x,f)$.
 
@@ -412,7 +412,7 @@ Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, slu�
 
 Doslovno, to neće ići --- tipovi ne pašu. Drugi argument funkcije \texttt{G} trebao bi biti pokazivač na jednomjesnu funkciju, a \texttt{G} je dvomjesna. C-kompajler će nam samo dati \emph{warning}, jer za njega su svi pokazivači ionako samo "ukrašeni prirodni brojevi" --- baš kao i indeksi u svijetu parcijalno rekurzivnih funkcija --- ali u strože tipiziranom jeziku kompajler bi nam odbio prevesti kod, uz poruku o grešci.
 
-C je ovdje izuzetno zanimljiv, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (provjereno radi na \texttt{gcc} 4.6.3 --- pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li \texttt{gcc} nešto što mi ne znamo?
+C je ovdje izuzetno zanimljiv\!, jer na mnogim kompajlerima, ako zanemarite \emph{warning}, zapravo ćete dobiti ispravno rješenje (provjereno radi na \texttt{gcc} 4.6.3 --- pokušajte na svom omiljenom kompajleru). Kako je to moguće?! Zna li \texttt{gcc} nešto što mi ne znamo?
 
 Ovdje treba znati neke tehničke pojedinosti o kompiliranju jezika C. (Nešto smo već rekli kad smo govorili o funkcijskom makrou.) Kad pozovemo funkciju, njeni argumenti stavljaju se na stog (novi okvir) obrnutim redom, i nakon toga se prenosi kontrola na samu funkciju, koja očekuje argumente na stogu i tamo stavlja povratnu vrijednost. Ovdje smo pozvali funkciju \texttt{G} s dva argumenta: $5$ i \texttt{G}. Unutar koda funkcije \texttt{G}, pokazivač \texttt f pokazuje na funkciju \texttt{G}. Kad smo \texttt f pozvali s jednim argumentom (konkretno, $4$), broj $4$ je stavljen na stog, ali je ispod njega i dalje ostao pokazivač \texttt{G}, koji je funkcija \texttt f veselo koristila kao svoj drugi argument. Dakle, poziv \texttt{f(n-1)} je zapravo interpretiran kao \texttt{f(n-1,G)}. Umjesto broja $4$ jednom će (nakon još nekoliko takvih poziva) na tom mjestu na stogu završiti povratna vrijednost $24$, ali ništa neće dirati ovaj \texttt{G} ispod (cjelobrojno množenje i oduzimanje jednice se obavlja u registrima procesora, ne koristeći stog).
 
@@ -481,7 +481,7 @@ I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćem
 
 Sada ćemo vidjeti kako pomoću teorema rekurzije možemo definirati rekurzivne funkcije. Metoda je uvijek ista: funkcijsku jednadžbu koju želimo riješiti (po $F^k$) zapišemo u obliku opće rekurzije (nađemo funkciju $\f G^{k+1}$) te nam teorem rekurzije dade parcijalno rekurzivno rješenje --- štoviše, dade nam njegov indeks $e_0$. Sada je potrebno dokazati dvije stvari (ako vrijede): prvo, da je $\f F_0:=\kf{e_0}^k$ jedinstveno rješenje, i drugo, da je $\f F_0$ totalna funkcija.
 
-I jedno i drugo su univerzalne tvrdnje na prirodnim brojevima --- jedinstvenost kaže da, kad god je $e_1$ "rješenje", za sve $\vec x\in\N^k$ vrijedi $\f{comp}(\vec x,e_1\!)\simeq\f F_0(\vec x)$; totalnost kaže da za sve $\vec x\in\N^k$ vrijedi $\vec x\in\dom{\f F_0}$ --- te ih je uobičajeno dokazivati indukcijom. Didaktički problem je u tome što ako je ta indukcija dovoljno jednostavna, najčešće je programabilna, pa recimo totalnost ne znači samo rekurzivnost već znači primitivnu rekurzivnost. A tada nam ne treba teorem rekurzije: primitivna rekurzija je dovoljna (kao što je uostalom slučaj i s funkcijom $\f{factorial}$).
+I jedno i drugo su univerzalne tvrdnje na prirodnim brojevima --- jedinstvenost kaže da, kad god je $e_1$ "rješenje", za sve $\vec x\in\N^k$ vrijedi $\f{comp}(\vec x,e_1\!)\simeq\f F_0(\vec x)$; totalnost kaže da za sve $\vec x\in\N^k$ vrijedi $\vec x\in\dom{\f F_0}$ --- te ih je uobičajeno dokazivati indukcijom. Didaktički problem je u tome što ako je ta indukcija dovoljno jednostavna, najčešće je programabilna, pa primjerice totalnost ne znači samo rekurzivnost već znači primitivnu rekurzivnost. A tada nam ne treba teorem rekurzije: primitivna rekurzija je dovoljna (kao što je uostalom slučaj i s funkcijom $\f{factorial}$).
 
 Recimo, ako se totalnost od $\f F_0^1$ može dokazati običnom matematičkom indukcijom, to znači da imamo neku ogradu za broj koraka računanja $\f F_0(0)$ te neki izračunljiv način da iz ograde za broj koraka u računanju $\f F_0(n)$ dobijemo takvu ogradu za $\f F_0(n+1)$ --- a to zapravo znači da $\f F_0$ možemo dobiti (degeneriranom) primitivnom rekurzijom, samo trebamo u funkciji $\f{step}$ ograničiti minimizaciju tom nađenom ogradom. Ako umjesto obične indukcije moramo upotrijebiti jaku indukciju, to na isti način znači da se $\f F_0$ može dobiti rekurzijom s poviješću. U slučaju simultane indukcije, imamo simultanu rekurziju, i tako dalje.
 
@@ -527,7 +527,7 @@ Kako je svaka $\f A_n^2$ izračunljiva, i funkcija $\f A^3$ je intuitivno izrač
     \f A(m+1,0)&:=\f A(m,1)\text,\\
     \f A(m+1,n+1)&:=\f A\bigl(m,\f A(m+1,n)\bigr)\text,
 \end{align}
-u literaturi navodi pod imenom "Ackermannova funkcija", iako su je zapravo smislili R\'osza P\'eter i Raphael Mitchel Robinson. Iako s manje specijalnih slučajeva i zato lakša za proučavanje, ta funkcija je daleko manje motivirana i teško je objasniti zašto joj definicija izgleda baš tako. Može se, iako nije baš jednostavno, dokazati da za sve $m,n\in\N$ vrijedi
+	u literaturi navodi pod imenom "Ackermannova funkcija", iako su je zapravo smislili R\'osza P\'eter i Raphael Mitchel Robinson. Iako s manje specijalnih slučajeva i zato lakša za proučavanje, ta funkcija je daleko manje motivirana i teško je objasniti zašto joj definicija izgleda baš tako. Može se, iako nije baš jednostavno, dokazati~\cite{Ackermann} da za sve $m,n\in\N$ vrijedi
 \begin{equation}
     \f A(m,n)=\f A(2,n+3,m)\dotminus3\text,
 \end{equation}
@@ -742,11 +742,13 @@ O čemu se tu zapravo radi? Reći da je neki broj $e$ element klase $E\mspace{-1
 Neka unija klasa $S:=\bigcup_{e\in A}[e]_{\approx_k}$ tada će odgovarati nekom \emph{skupu} izračunljivih $k$-mjesnih funkcija $\mathcal F:=\{\kf e^k\mid e\in A\}\subseteq\mathscr Comp_k$, i to tako da će praznom skupu $S$ odgovarati prazni skup $\mathcal F$, a skupu $S=\N$ odgovarat će $\mathcal F=\mathscr Comp_k$. Kako je to preslikavanje injekcija, ostalim skupovima brojeva ($\emptyset\subset S\subset\N$) odgovarat će ostali skupovi funkcija ($\emptyset\subset\mathcal F\subset\mathscr Comp_k$). Vrijeme je da to formaliziramo.
 
 \begin{definicija}[{name=[skup indeksa]}]
-Neka je $k\in\N_+$. Za svaki $\mathcal F\subseteq\mathscr Comp_k$ definiramo \emph{skup indeksa}\\ (ili \emph{skup $k$-indeksa}, ako želimo naglasiti $k$) kao
+Neka je $k\in\N_+$. Za svaki $\mathcal F\subseteq\mathscr Comp_k$ definiramo \emph{skup indeksa} %\\ (ili \emph{skup $k$-indeksa}, ako želimo naglasiti $k$)
+	kao
 \begin{equation}
     \kins{\mathcal F}:=\{e\in\N\mid\kf e^k\in\mathcal F\,\}\,\text.
 \end{equation}
-(U oznaci nigdje ne spominjemo $k$, jer se može rekonstruirati iz $\mathcal F$ ako je $\mathcal F$ neprazan --- a $\kins{\emptyset}=\emptyset^1$ bez obzira na $k$.)
+%(U oznaci nigdje ne spominjemo $k$, jer se može rekonstruirati iz $\mathcal F$ ako je $\mathcal F$ neprazan --- a $\kins{\emptyset}=\emptyset^1$ bez obzira na $k$.)
+Oznaka ne spominje $k$ jer se može rekonstruirati iz nepraznog $\mathcal F$, a $\kins\emptyset=\emptyset^1$ za sve $k$.
 \end{definicija}
 
 Primijetite sličnost s definicijom~\eqref{eq:kodLdef} --- kao što smo tamo kodirali riječi zapisom u bazi, ovdje kodiramo funkcije njihovim indeksima. Već smo rekli da relacija $index\subseteq\N\times\N_+\times\mathscr Comp$, zadana s $index(e,k,\f F)\Longleftrightarrow\kf e^k=\f F$, nema funkcijsko svojstvo po prvoj varijabli: ne možemo govoriti o jedinstvenom indeksu neke konkretne funkcije --- ali zato možemo govoriti o skupu indeksa nekog skupa funkcija.
@@ -765,10 +767,10 @@ Na neki način, do na neprebrojivost skupa $\mathcal P(\mathscr Comp_k)$, čini 
 
 % \subsection{Invarijantnost}
 
-Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo recimo %skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi oblika $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
+Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo za primjer %skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi oblika $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
 %
 %Dobro, uzmimo onda neki manji skup, recimo
-jednočlan skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili broj~$1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
+jednočlani skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili broj~$1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.
 
 Dakle, skupovi indeksa nisu bilo kakvi podskupovi od $\N$. Oni moraju biti \emph{invarijantni} na neku relaciju $\approx_k$: ako sadrže $e$, tada moraju sadržavati i sve $f$ takve da je $e\approx_k f$. Na neki način, u takvom skupu se nalaze (kodirani) RAM-programi, ali skup je "neovisan o implementaciji" konkretnog algoritma.
 
@@ -814,7 +816,7 @@ $. Važno je naglasiti da to svojstvo ne ovisi o implementaciji funkcije $\f F$,
 Neka je $k\in\N_+$. Za skup $S\subseteq\N$ kažemo da je \emph{$k$-invarijantan} ako za sve $e,f\in\N$, iz $e\in S$ i $e\approx_k f$ slijedi $f\in S$.
 \end{definicija}
 
-Svojstvo $k$-invarijantnosti pruža brojevnu karakterizaciju skupova indeksa, bez pozivanja na skupove funkcija.
+Invarijantnost karakterizira skupove indeksa brojevno, bez pozivanja na skupove funkcija.
 
 \begin{lema}[{name=[$k$-invarijantnost karakterizira skupove indeksa]}]\label{lm:kinv=sind}
 Neka je $k\in\N_+$ te $S\subseteq\N$.
@@ -890,8 +892,8 @@ Mnoga od tih svojstava (ali ne nužno sva) prirodno svrstavamo u dvije grupe: na
 
 Semantička svojstva su ona vezana uz RAM-izračunavanje: govore o zaustavljanju, totalnosti, funkcijama koje se računaju, njihovim domenama, slikama, grafovima, i sličnom. Važno okvirno pravilo koje pruža dobru intuiciju je: \textbf{sintaksna svojstva su uglavnom odlučiva, semantička svojstva su uglavnom neodlučiva}.
 
-Dobru empirijsku potvrdu prvog dijela pravila vidjeli smo u poglavlju~\ref{ch:univ}, gdje smo hrpu sintaksnih svojstava pokazali odlučivima, i razvili alate koji nam omogućavaju za još veću hrpu to pokazati bez muke. Recimo, $\reg{15}$ je relevantan za $P$ ako i samo ako vrijedi
-$\bigl(\exists i<\f{lh}(e)\bigr)\bigl(\f{regn}(e[i])\ge15\bigr)$ (gdje je $e:=\kprog P$), što je primitivno rekurzivno svojstvo od $e$.
+Dobru empirijsku potvrdu prvog dijela pravila vidjeli smo u poglavlju~\ref{ch:univ}, gdje smo hrpu sintaksnih svojstava pokazali odlučivima, i razvili alate koji nam omogućavaju za još veću hrpu to pokazati bez muke. Recimo, $\reg{15}$ je relevantan za RAM-program $P$ ako i samo ako vrijedi
+$\bigl(\exists i<\f{lh}(e)\bigr)\bigl(\f{regn}(e[i])\ge15\bigr)$, što je primitivno rekurzivno svojstvo od $e=\kprog P$.
 
 S druge strane, Riceov teorem pruža dobar uvid u drugi dio tog pravila. Među semantičkim svojstvima izdvajaju se ona koja govore \emph{samo} o računanoj funkciji, bez ikakvog spominjanja konkretne implementacije. Recimo, "$P$-izračunavanje s $(2,5)$ stane" se može tako zapisati, jer zapravo kaže $(2,5)\in\dom{\f F}$, gdje je $\f F$ funkcija koju $P$ računa. Riceov teorem kaže da su sva takva svojstva sigurno neodlučiva --- osim dva trivijalna, naravno. Primjerice, svojstvo "ovaj RAM-program rješava \emph{halting problem}" jest odlučivo: za svaki RAM-program vratimo $\mathit{false}$. Također, "ovaj RAM-program računa parcijalno rekurzivnu funkciju" jest odlučivo: uvijek vratimo $\mathit{true}$.
 
@@ -899,14 +901,14 @@ S druge strane, parnost broja koraka ne možemo tako napisati. Najlakši način 
 
 Svakako postoje i mnoga "hibridna" svojstva, za utvrđivanje čije odlučivosti je potrebna detaljna analiza --- ali Riceov teorem s jedne i Church--\!Turingova teza s druge strane pružaju dobar dio odgovora na takva pitanja.
 
-Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupovima od $\N$), svođenjem možemo dokazati i razne druge neodlučivosti odnosno nerekurzivnosti: sjetite se korolara~\ref{kor:nrek<nrek}. Neko sasvim općenito uputstvo za korištenje Riceovog teorema moglo bi se napisati u sljedećem obliku:
+Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupovima od~$\N$), svođenjem možemo dokazati i razne druge neodlučivosti odnosno nerekurzivnosti: sjetite se korolara~\ref{kor:nrek<nrek}. Neko sasvim općenito uputstvo za korištenje Riceovog teorema moglo bi se napisati u sljedećem obliku:
 
 \begin{enumerate}
     \item Utvrdimo da trebamo dokazati da neki skup $S$ nije rekurzivan.
     \item\label{korak:skupfun} Pomoću skupa $S$ nađemo skup $\mathcal F$ u kojem se nalaze izračunljive funkcije neke fiksne mjesnosti $k$.
     %\item
     Skup svih indeksa svih funkcija iz $\mathcal F$ označimo s $T:=\kins{\mathcal F}$.
-    \item\label{korak:elemT} Nađemo neki element od $T$ (najčešće tako da nađemo neku jednostavnu funkciju $\f F\in\mathcal F$, napišemo RAM-program koji je računa, i nađemo njegov kod).
+    \item\label{korak:elemT} Nađemo neki element od $T$ (najčešće tako da nađemo neku jednostavnu funkciju iz $\mathcal F\!$, napišemo RAM-program koji je računa, i nađemo njegov k\=od).
     \item Analogno, nađemo neki element od $T\kompl$. Skupa s korakom~\ref{korak:elemT} sada imamo $\emptyset\subset T\subset\N$.
     \item Dokažemo da je $T$ $k$-invarijantan, gdje je $k$ mjesnost koju smo fiksirali u koraku~\ref{korak:skupfun}.
     \item Formalno svedemo $T\!\preceq S$, pišući $\chi_T$ kao kompoziciju $\chi_S$ s nekim rekurzivnim funkcijama.
@@ -914,5 +916,5 @@ Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupo
 \end{enumerate}
 
 \begin{primjer}[{name=[neodlučivost $k$-mjesnog brojevnog problema zaustavljanja]}]
-    Za svaki $k\in\N_+$, skup $Halt_k$ nije rekurzivan. Naime, ako definiramo $T(e):\Longleftrightarrow Halt_k(\vec 0,e)$, skup $T=\kins{\{\f f\in\mathscr Comp_k\mid\vec 0\in\dom{\f f}\}}$ je $k$-invarijantan po lemi~\ref{lm:kinv=sind} te vrijedi $0\notin T$ i $1\in T$. Dakle $T$ nije rekurzivan, pa zbog $Halt_k\preceq T$ niti $Halt_k$ nije rekurzivan.
+    Za svaki $k\in\N_+$, skup $Halt_k$ nije rekurzivan. Naime, ako definiramo $T(e):\Longleftrightarrow Halt_k(\vec 0,e)$, skup $T=\kins{\{\f f\in\mathscr Comp_k\mid\vec 0\in\dom{\f f}\}}$ je $k$-invarijantan po lemi~\ref{lm:kinv=sind} te vrijedi $0\notin T$ i $1\in T$. Dakle $T$ nije rekurzivan, pa zbog $T\preceq Halt_k$ niti $Halt_k$ nije rekurzivan.
 \end{primjer}

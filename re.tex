@@ -80,13 +80,12 @@ Neka je $k\in\N_+$, $\f G^k$ parcijalno rekurzivna funkcija te $R^k$ rekurzivno 
 Funkcija $\f I_2^2$ u dokazu igra istu ulogu kao operator `\texttt,' u jeziku C: izračuna oba operanda i vraća drugi ako oba imaju smisla.
 
 \begin{propozicija}[{name=[rekurzivna prebrojivost presjeka rekurzivno prebrojivih]}]\label{pp:prlre}
-Neka je $k\in\N_+$ te $P^k$ i $R^k$ rekurzivno prebrojive relacije.
-	
+Neka je $k\in\N_+$ te $P^k$ i $R^k$ rekurzivno prebrojive relacije.\\
 	Tada je $P\cap R$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
 	Po definiciji~\ref{def:re} postoji parcijalno rekurzivna funkcija $\f F$ takva da je $\dom{\f F}=P$. Po lemi~\ref{lm:restre} je $\f F|_R$ također parcijalno rekurzivna, s domenom $\dom{\f F}\cap R=P\cap R$.
-%Po definiciji, postoje parcijalno rekurzivne funkcije $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ takve da je za svaki $i\in[1\dd l]$, $R_i=\dom{\f G_i}$. Funkcija $\f F:=\f G_1+\dotsb+\f G_l=\f{add}^l\circ(\f G_1,\dotsc,\f G_l)$ je parcijalno rekurzivna kao kompozicija parcijalno rekurzivnih, a njena domena je
+	%Po definiciji, postoje parcijalno rekurzivne funkcije $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ takve da je za svaki $i\in[1\mspace{-1mu}\dd l]$, $R_i=\dom{\f G_i}$. Funkcija $\f F:=\f G_1+\dotsb+\f G_l=\f{add}^l\circ(\f G_1,\dotsc,\f G_l)$ je parcijalno rekurzivna kao kompozicija parcijalno rekurzivnih, a njena domena je
 %\begin{equation}
     %\dom{\f F}=\bigcap_{i=1}^l\dom{\f G_i}=\bigcap_{i=1}^l R_i
 %\end{equation}
@@ -129,11 +128,11 @@ Pomoću projekcijske karakterizacije možemo dokazati zatvorenost na konačne un
 Neka su $k,l\in\N_+$ te $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ rekurzivno prebrojive relacije, sve iste mjesnosti. Tada je njihova unija $\bigcup_{i=1}^l\! R_i$ također rekurzivno prebrojiva relacija.
 \end{propozicija}
 \begin{proof}
-	Po teoremu~\ref{tm:rpeproj}, za svaki $i\in[1\dd l]$ postoji rekurzivna relacija $\f P^{k+1}_i$ takva da je $R_i=\exists_*\f P_i$. Sada je
+	Po teoremu~\ref{tm:rpeproj}, za svaki $i\in[1\mspace{-1mu}\dd l]$ postoji rekurzivna relacija $\f P^{k+1}_i$ takva da je $R_i=\exists_*\f P_i$. Sada je
 \begin{multline}\label{eq:urere}
     \vec x\in\bigcup\nolimits_{i=1}^l\! R_i=\bigcup\nolimits_{i=1}^l\!\exists_*\f P_i\Longleftrightarrow
-	(\exists i\in[1\dd l])(x\in\exists_*\f P_i)\Longleftrightarrow(\exists i\in[1\dd l])(\exists y\in\N)\f P_i(\vec x,y)\Longleftrightarrow{}\\
-	(\exists y\in\N)(\exists i\in[1\dd l])\bigl((\vec x,y)\in\f P_i\bigr)\Longleftrightarrow
+	(\exists i\in[1\mspace{-1mu}\dd l])(x\in\exists_*\f P_i)\Longleftrightarrow(\exists i\in[1\mspace{-1mu}\dd l])(\exists y\in\N)\f P_i(\vec x,y)\Longleftrightarrow{}\\
+	(\exists y\in\N)(\exists i\in[1\mspace{-1mu}\dd l])\bigl((\vec x,y)\in\f P_i\bigr)\Longleftrightarrow
     (\exists y\in\N)\Bigl((\vec x,y)\in\bigcup\nolimits_{i=1}^l\!\f P_i\Bigr)\Longleftrightarrow\vec x\in\exists_*\Bigl(\,\bigcup\nolimits_{i=1}^l\!\f P_i\Bigr)\text,
 \end{multline}
 te je $\f P:=\bigcup_{i=1}^l\!\f P_i$ rekurzivna po propoziciji~\ref{prop:skupl} --- a onda je $\bigcup_{i=1}^l\! R_i=\exists_*\f P$ rekurzivno prebrojiva po teoremu~\ref{tm:rpeproj}.
@@ -236,7 +235,7 @@ budući da je po lemi~\ref{lm:pairfstsndprn} $\f{fst}\bigl(\f{pair}(y,z)\bigr)=y
 
 %\subsection{Kontrakcija kvantifikatora}
 
-Sada možemo i formalno dokazati da je više projekcija jednako izračunljivo kao i jedna --- jer dvije projekcije su kao jedna projekcija kontrahirane relacije. Intuitivno, recimo za tromjesne rekurzivne relacije, ispitujemo postoje li $y$ i $z$ takvi da vrijedi $\f R(x,y,z)$, tako da parove $(y,z)$ poredamo prema funkciji $\f{pair}$ (npr.\ po sporednim dijagonalama), kako bismo bili sigurni da će svaki doći na red.
+Sada možemo i formalno dokazati da je više projekcija jednako izračunljivo kao i jedna --- jer dvije projekcije su kao jedna projekcija kontrahirane relacije. Intuitivno, primjerice za tromjesne rekurzivne relacije, ispitujemo postoje li $y$ i $z$ takvi da vrijedi $\f R(x,y,z)$, tako da parove $(y,z)$ poredamo prema funkciji $\f{pair}$ (npr.\ po sporednim dijagonalama), kako bismo bili sigurni da će svaki doći na red.
 
 \begin{propozicija}[{name=[projekcija projekcije kao projekcija kontrakcije]}]\label{pp:projproj}
 Za svaku relaciju mjesnosti barem $3$, vrijedi $\exists_*\exists_*P=\exists_*\hat P$.
@@ -312,7 +311,7 @@ je primitivno rekurzivna po propoziciji~\ref{prop:vezn}, kao konjunkcija dvije p
 
 Sljedeći veliki zalogaj je dokazati obrat teorema~\ref{tm:grafprre}. Kod teorema za totalne funkcije koristili smo minimizaciju: po lemi~\ref{lm:projmugraf}, funkcija je jednaka minimizaciji svog grafa. To vrijedi za sve funkcije (čak i za neizračunljive), ali neće nam pomoći ako je graf samo poluodlučiv: skup rekurzivno prebrojivih relacija nije zatvoren na minimizaciju (što bi to uopće značilo?), a i intuitivno, minimizacija poluodlučive relacije ne mora biti izračunljiva.
 
-Razmislimo malo detaljnije o tome. Zamislimo da imamo poluodlučivu relaciju $R^2$ i želimo računati vrijednosti funkcije $f:=\mu R$. Za zadani $x$, recimo $x=5$, dakle, tražimo najmanji $y$ takav da vrijedi $R(5,y)$ --- no problem je u tome što za zadani par $(5,y)$ možemo jedino sa sigurnošću ustanoviti da \emph{jest} u $R$, ne i da nije (ako nije, postupak neće nikada stati). Ako takvog $y$ nema, to da algoritam neće nikad stati je sasvim u redu, ali što ako ga ima? Pomoću paralelizacije možemo pokrenuti sva testiranja $R(5,0)$, $R(5,1)$, $R(5,2)$,~\ldots\ dok neko od njih ne stane --- i ako to upravo bude $R(5,0)$, onda imamo sreće: znamo da je $\f f(5)=0$. No pretpostavimo da smo umjesto toga dobili $R(5,7)$. Iz toga sigurno možemo zaključiti $5\in\exists_*R=\dom{\mu R}=\dom f$, dakle $f(5)$ je neki broj. Štoviše, to je broj koji sigurno nije veći od $7$, ali koji? Imamo $8$ mogućnosti, i dok god testovi $R(5,t),t<7$ ne stanu, ne znamo koja od njih je prava vrijednost izraza $f(5)$. Paradoksalno, ako to \emph{jest} $7$, tada nijedan od tih "manjih testova" neće stati, pa više nećemo dobiti nikakvu novu informaciju. Ako u međuvremenu saznamo da vrijedi i $R(5,11)$, to neće nimalo utjecati na naš problem. Ali zamislimo da smo (nakon još mnogo vremena) dobili da vrijedi $R(5,4)$. Imamo li se razloga radovati? Eliminirali smo brojeve $5$, $6$ i $7$ kao moguće vrijednosti za $f(5)$, ali i dalje ne znamo koliko je~to. Ukratko, na ovaj način možemo dobiti $f(x)$ jedino ako je $f(x)=0$ --- što se ne čini pretjerano korisnim.
+Razmislimo malo detaljnije o tome. Zamislimo da imamo poluodlučivu relaciju $R^2$ i želimo računati vrijednosti funkcije $f:=\mu R$. Za zadani $x$, recimo za $x=5$, dakle, tražimo najmanji $y$ takav da vrijedi $R(5,y)$ --- no problem je u tome što za zadani par $(5,y)$ možemo jedino sa sigurnošću ustanoviti da \emph{jest} u $R$, ne i da nije (ako nije, postupak neće nikada stati). Ako takvog $y$ nema, to da algoritam neće nikad stati je sasvim u redu, ali što ako ga ima? Pomoću paralelizacije možemo pokrenuti sva testiranja $R(5,0)$, $R(5,1)$, $R(5,2)$,~\ldots\ dok neko od njih ne stane --- i ako to upravo bude $R(5,0)$, onda imamo sreće: znamo da je $\f f(5)=0$. No pretpostavimo da smo umjesto toga dobili $R(5,7)$. Iz toga sigurno možemo zaključiti $5\in\exists_*R=\dom{\mu R}=\dom f$, dakle $f(5)$ je neki broj. Štoviše, to je broj koji sigurno nije veći od $7$, ali koji? Imamo $8$ mogućnosti, i dok god testovi $R(5,t),t<7$ ne stanu, ne znamo koja od njih je prava vrijednost izraza $f(5)$. Paradoksalno, ako to \emph{jest} $7$, tada nijedan od tih "manjih testova" neće stati, pa više nećemo dobiti nikakvu novu informaciju. Ako u međuvremenu saznamo da vrijedi i $R(5,11)$, to neće nimalo utjecati na naš problem. Ali zamislimo da smo (nakon još mnogo vremena) dobili da vrijedi $R(5,4)$. Imamo li se razloga radovati? Eliminirali smo brojeve $5$, $6$ i $7$ kao moguće vrijednosti za $f(5)$, ali i dalje ne znamo koliko je~to. Ukratko, na ovaj način možemo dobiti $f(x)$ jedino ako je $f(x)=0$ --- što se ne čini pretjerano korisnim.
 
 Ipak, funkcija $\f g$, koju dobijemo ako za svaki $x$ uzmemo prvi $y$ na koji naiđemo paralelnim izvršavanjem svih testova $R(x,y)$ (recimo, u upravo opisanom scenariju je $\f g(5)=7$), jest izračunljiva, i vidimo da \emph{dominira} funkciju $f$: kad god $f(x)$ ima smisla, ima i $\f g(x)$, i tada je $\f g(x)\ge f(x)$.
 
@@ -391,8 +390,7 @@ Drugim riječima, $G$ i $F$ se podudaraju na zajedničkoj domeni, pa su jednake.
 %Sada još samo treba sve što smo napravili objediniti u jedan teorem.
 
 \begin{teorem}[Teorem o grafu za parcijalne funkcije]\label{tm:graf}
-Neka je $F$ brojevna funkcija.
-
+Neka je $F$ brojevna funkcija.\\
 Tada je $F$ parcijalno rekurzivna ako i samo ako je $\graf F$ rekurzivno prebrojiv\!.
 \end{teorem}
 \begin{proof}
@@ -420,8 +418,7 @@ Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija te $\f R$ rekurzivna re
 Za \emph{simetričnu} razliku, više nije dovoljno zahtijevati da $\f R$ bude rekurzivna, pa čak ni primitivno rekurzivna --- isti kontraprimjer, zapisan u obliku $(P^k)\kompl=P\mathbin\triangle\N^k$, funkcionira. Ali ako je $\f R$ \emph{konačna}, dokaz prolazi.
 
 \begin{lema}[{name=[rekurzivna prebrojivost simetrične razlike s konačnom relacijom]}]\label{lm:retrkon}
-Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija te $\f R^k$ konačna relacija.
-
+Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija te $\f R^k$ konačna relacija.\\
 	Tada je $P\mathbin\triangle\f R$ također rekurzivno prebrojiva.
 \end{lema}
 \begin{proof}
@@ -451,19 +448,20 @@ Time smo opisali već poznatu konstrukciju grananja, ali ovaj put s \emph{poluod
 Na operacijskom sustavu UNIX (i mnogim srodnim sustavima) postoji sistemski poziv \texttt{select} koji, do na implementacijske detalje, radi upravo to: prima listu uvjeta oblika "postoji li vrsta aktivnosti $x$ (čitanje, pisanje, greška,~\ldots) na deskriptoru $y$", i vraća se čim neki od tih uvjeta bude ispunjen. Iz praktičnih razloga, taj poziv ima i granu "inače", u obliku isteka vremena (\emph{timeout}) određenog pri pozivu. Kako nemamo sistemski sat (iako ga možemo emulirati brojenjem koraka izračunavanja --- pokušajte!), nama će taj dio biti beskonačna petlja, što je u skladu s konvencijom da ako u grananju ne navedemo granu $\f G_0$, podrazumijeva se prazna funkcija.
 
 \begin{teorem}[Teorem o grananju, rekurzivno prebrojiva verzija]\label{tm:gre}
-Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u parovima disjunktne rekurzivno prebrojive relacije, sve iste mjesnosti.\newline Tada je i funkcija $\f F:=\IF{R_1:\f G_1,R_2:\f G_2,\dots,R_l:\f G_l}$ također parcijalno rekurzivna.
+Neka su $k,l\in\N_+$, neka su $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_l^k$ parcijalno rekurzivne funkcije, a $R_1^k$, $R_2^k$,~\ldots, $R_l^k$ u parovima disjunktne rekurzivno prebrojive relacije, sve iste mjesnosti.\\
+	Tada je i funkcija $\f F:=\IF{R_1:\f G_1,R_2:\f G_2,\dots,R_l:\f G_l}$ također parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
-	Za početak osigurajmo da nijedna grana nije definirana izvan svog uvjeta. Dakle, za svaki $i\in[1\dd l]$ definiramo $\f H_i:=\f G_i|_{R_i}$. Svaka $\f H_i$ je parcijalno rekurzivna po lemi~\ref{lm:restre}, i vrijedi $\f F=\IF{\dom{\f H_1}\!:\f H_1,\dom{\f H_2}\!:\f H_2,\dots,\dom{\f H_l}\!:\f H_l}$. Doista, domene su im iste: $\bdcup_{i=1}^l\dom{\f H_i}\!=\bdcup_{i=1}^l(\dom{\f G_i}\cap R_i)$; i za svaki $\vec x$ iz te domene postoji jedinstveni $j\in[1\mspace{-1mu}\dd l]$ takav da je $\vec x\in\dom{\f H_{j}}$, pa je $\f F(\vec x)=\f G_{j}(\vec x)=\f H_{j}(\vec x)$.
+	Za početak osigurajmo da nijedna grana nije definirana izvan svog uvjeta. Dakle, za svaki $i\in[1\mspace{-1mu}\dd l]$ definiramo $\f H_i:=\f G_i|_{R_i}$. Svaka $\f H_i$ je parcijalno rekurzivna po lemi~\ref{lm:restre}, i vrijedi $\f F=\IF{\dom{\f H_1}\!:\f H_1,\dom{\f H_2}\!:\f H_2,\dots,\dom{\f H_l}\!:\f H_l}$. Doista, domene su im iste: $\bdcup_{i=1}^l\dom{\f H_i}\!=\bdcup_{i=1}^l(\dom{\f G_i}\cap R_i)$; i za svaki $\vec x$ iz te domene postoji jedinstveni $j\in[1\mspace{-1mu}\dd l]$ takav da je $\vec x\in\dom{\f H_{j}}$, pa je $\f F(\vec x)=\f G_{j}(\vec x)=\f H_{j}(\vec x)$.
 
 Sljedeći korak je dokazati
 \begin{equation}
     \graf{\f F}=\,\bigcup\nolimits_{i=1}^l\graf{\f H_i}\text.
 \end{equation}
 
-Za inkluziju ($\subseteq$), neka je $(\vec x,y)\in\graf{\f F}$. To znači da je $\vec x\in\dom{\f F}$ i $y=\f F(\vec x)$. Prvo znači da postoji (jedinstveni) $j\in[1\dd l]$ takav da vrijedi $\vec x\in\dom{\f H_{j}}$, pa ovo drugo onda znači $y=\f H_{j}(\vec x)$. No tada je $(\vec x,y)\in\graf{\f H_{j}}\!\subseteq\bigcup_{i=1}^l\graf{\f H_i}$.
+	Za inkluziju ($\subseteq$), neka je $(\vec x,y)\in\graf{\f F}$. To znači da je $\vec x\in\dom{\f F}$ i $y=\f F(\vec x)$. Prvo znači da postoji (jedinstveni) $j\in[1\mspace{-1mu}\dd l]$ takav da vrijedi $\vec x\in\dom{\f H_{j}}$, pa ovo drugo onda znači $y=\f H_{j}(\vec x)$. No tada je $(\vec x,y)\in\graf{\f H_{j}}\!\subseteq\bigcup_{i=1}^l\graf{\f H_i}$.
 
-Za inkluziju ($\supseteq$), neka je $(\vec x,y)\in\bigcup_{i=1}^l\graf{\f H_i}$. Tada postoji $j\in[1\dd l]$ takav da je $(\vec x,y)\in\graf{\f H_j}$. To znači da je $\vec x\in\dom{\f H_j}\!=\dom{\f G_j|_{R_j}}\!\!=\dom{\f G_j}\cap R_j\subseteq R_j$, pa je $\f F(\vec x)\simeq\f G_j(\vec x)$. No $\vec x\in\dom{\f G_j}$ znači da postoji $y'\in\N$ takav da je $\f G_j(\vec x)=y'$, pa je i $\f F(\vec x)=y'$. S druge strane $(\vec x,y)\in\graf{\f H_j}\subseteq\graf{\f G_j}$ znači da su $(\vec x,y)$ i $(\vec x,y')$ oba u $\graf{\f G_j}$, iz čega je $y=y'$ jer $\graf{\f G_j}$ ima funkcijsko svojstvo. Slijedi $\f F(\vec x)=y$, odnosno $(\vec x,y)\in\graf{\f F}$.
+	Za inkluziju ($\supseteq$), neka je $(\vec x,y)\in\bigcup_{i=1}^l\graf{\f H_i}$. Tada postoji $j\in[1\mspace{-1mu}\dd l]$ takav da je $(\vec x,y)\in\graf{\f H_j}$. To znači da je $\vec x\in\dom{\f H_j}\!=\dom{\f G_j|_{R_j}}\!\!=\dom{\f G_j}\cap R_j\subseteq R_j$, pa je $\f F(\vec x)\simeq\f G_j(\vec x)$. No $\vec x\in\dom{\f G_j}$ znači da postoji $y'\in\N$ takav da je $\f G_j(\vec x)=y'$, pa je i $\f F(\vec x)=y'$. S druge strane $(\vec x,y)\in\graf{\f H_j}\subseteq\graf{\f G_j}$ znači da su $(\vec x,y)$ i $(\vec x,y')$ oba u $\graf{\f G_j}$, iz čega je $y=y'$ jer $\graf{\f G_j}$ ima funkcijsko svojstvo. Slijedi $\f F(\vec x)=y$, odnosno $(\vec x,y)\in\graf{\f F}$.
 
 Sada primijenimo opisanu tehniku: po teoremu~\ref{tm:grafprre}, svaki $\graf{\f H_i}$ je rekurzivno prebrojiv\!. Po propoziciji~\ref{pp:unlre}, $\graf{\f F}$ je rekurzivno prebrojiv\!. I za kraj, onda je $\f F$ parcijalno rekurzivna po teoremu~\ref{tm:graf}.
 \end{proof}
@@ -477,8 +475,7 @@ Pokušajmo malo formalizirati to objašnjenje. U teoremima~\ref{tm:gprek} i~\ref
 Intuicija je jasna: znamo da možemo čekati na više stvari istovremeno. Ako čekamo na dvije međusobno suprotne stvari, znamo da će se sigurno točno jedna dogoditi.
 
 \begin{teorem}[Postov teorem]\label{tm:Post}
-Neka je $\f R$ brojevna relacija.
-
+Neka je $\f R$ brojevna relacija.\\
     Tada je $\f R$ rekurzivna ako i samo ako su $\f R$ i $\f R\kompl$ obje rekurzivno prebrojive.
 \end{teorem}
 \begin{proof}
@@ -501,7 +498,7 @@ Postov teorem opravdava naziv "poluodlučivost" za intuiciju rekurzivne prebroji
 
 Pomoću Postovog teorema možemo dokazati da razni skupovi nisu rekurzivno prebrojivi. Zapravo, kad god imamo skup koji nije rekurzivan --- a imamo ih hrpu po Riceovom teoremu, na primjer --- znamo da on ili njegov komplement (ili nijedan od njih) nije rekurzivno prebrojiv\!.
 Ipak, za samu egzistenciju skupova koji nisu rekurzivno prebrojivi ne treba nam Postov teorem; to možemo i kardinalnim argumentom.
-Postov teorem često koristimo kad znamo da jedan od ta dva skupa jest rekurzivno prebrojiv, pa onda zaključujemo da drugi nije.
+Postov teorem često koristimo kad znamo da jedan od ta dva skupa jest rekurzivno prebrojiv\!, pa onda zaključujemo da drugi nije.
 
 \begin{korolar}[{name=[kriterij za negaciju rekurzivne prebrojivosti]}]\label{kor:nrekpreb}
 Neka je $R$ rekurzivno prebrojiva relacija koja nije rekurzivna.\\
@@ -523,7 +520,7 @@ Poluodlučive relacije smo uveli kao \emph{domene} izračunljivih funkcija, a on
 
 Povijesno, upravo tako ih je uveo Emil Leon Post~\cite{post}, i zato su nazvani \emph{rekurzivno prebrojivima}: to su oni skupovi koji se mogu rekurzivno prebrojiti (enumerirati), dakle zapisati u obliku $S=\{a_0,a_1,a_2,\dotsc\}$, gdje je preslikavanje $n\mapsto a_n$ rekurzivno. Ako to preslikavanje (s domenom $\N$) označimo s $\f a$, tada je $S=\im{\f a}$. Ipak, u međuvremenu se terminologija malo pomaknula, pa s tom intuicijom danas postoje dva problema.
 
-Prvo, rekurzivnost danas podrazumijeva totalnost, a svaka totalna brojevna funkcija ima nepraznu domenu, pa mora imati i nepraznu sliku. Htjeli bismo da prazan skup $\emptyset^1$ također bude rekurzivno prebrojiv, pa ćemo ga morati odvojiti kao posebni slučaj za totalne funkcije.
+Prvo, rekurzivnost danas podrazumijeva totalnost, a svaka totalna brojevna funkcija ima nepraznu domenu, pa mora imati i nepraznu sliku. Htjeli bismo da prazan skup $\emptyset^1$ također bude rekurzivno prebrojiv\!, pa ćemo ga morati odvojiti kao posebni slučaj za totalne funkcije.
 
 Drugo, enumeracija često podrazumijeva injektivnost, bez ponavljanja elemenata --- no tako možemo dobiti samo \emph{prebrojive} skupove. Konačne skupove bismo također htjeli zvati rekurzivno prebrojivima (jer su rekurzivni --- korolar~\ref{kor:konprn}) pa ćemo morati dopustiti ponavljanja.
 
@@ -542,10 +539,10 @@ Neka je $R$ jednomjesna brojevna relacija ($R\subseteq\N$).
 \begin{proof}
 Kao i u teoremu~\ref{tm:rpeproj}, da \texttt{(3)} povlači \texttt{(2)} je trivijalno: svaka primitivno rekurzivna funkcija je parcijalno rekurzivna, a $\emptyset^1$ je slika parcijalno rekurzivne funkcije $\varnothing^1$ (primjer~\ref{pr:varnothingprek}).
 
-Da \texttt{(2)} povlači \texttt{(1)} je malo kompliciranije, ali i dalje sasvim jasno koristeći ono što znamo o projekcijama: $y\in\im{\f F}$ znači $(\exists\vec x\in\dom{\f F})\bigl(y\simeq\f F(\vec x)\bigr)$, odnosno $\exists\vec x\,\graf{\f F}(\vec x,y)$. Htjeli bismo tu egzistencijalnu kvantifikaciju prikazati kao višestruku projekciju, ali za to nam $y$ treba biti na prvom mjestu. Definiramo $P(y,\vec x):=\graf{\f F}(\vec x,y)$ --- tada je $P\preceq\graf{\f F}$, a po teoremu~\ref{tm:grafprre} je $\graf{\f F}$ rekurzivno prebrojiv, pa je po lemi~\ref{lm:re<re} i $P$ rekurzivno prebrojiva. Sada je $\im{\f F}(y)\Longleftrightarrow\exists\vec x\,P(y,\vec x)$, što je rekurzivno prebrojivo po korolaru~\ref{kor:projre}.
+Da \texttt{(2)} povlači \texttt{(1)} je malo kompliciranije, ali i dalje sasvim jasno koristeći ono što znamo o projekcijama: $y\in\im{\f F}$ znači $(\exists\vec x\in\dom{\f F})\bigl(y\simeq\f F(\vec x)\bigr)$, odnosno $\exists\vec x\,\graf{\f F}(\vec x,y)$. Htjeli bismo tu egzistencijalnu kvantifikaciju prikazati kao višestruku projekciju, ali za to nam $y$ treba biti na prvom mjestu. Definiramo $P(y,\vec x):=\graf{\f F}(\vec x,y)$ --- tada je $P\preceq\graf{\f F}$, a po teoremu~\ref{tm:grafprre} je $\graf{\f F}$ rekurzivno prebrojiv\!, pa je po lemi~\ref{lm:re<re} i $P$ rekurzivno prebrojiva. Sada je $\im{\f F}(y)\Longleftrightarrow\exists\vec x\,P(y,\vec x)$, što je rekurzivno prebrojivo po korolaru~\ref{kor:projre}.
 
 Opet je najzanimljiviji dokaz da \texttt{(1)} povlači \texttt{(3)}. %Krenimo kao u dokazu teorema~\ref{tm:rpeproj}: $R^1$ je rekurzivno prebrojiva, dakle $R=\dom{\f F}$ za neku parcijalno rekurzivnu funkciju $\f F^1$. Također, $\f F$ ima indeks, označimo ga s $e$ (napomena~\ref{nap:>1ind}). Sada znamo
-	Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpeproj} --- možemo \emph{iskoristiti} taj teorem da se dočepamo primitivne rekurzivnosti: postoji primitivno rekurzivna relacija $\f P^2$ takva da je $R^1=\exists_*\f P$. To znači da vrijedi $R(x)\Longleftrightarrow\exists y(x\mathrel{\f P}y)$, i već smo vidjeli u prethodnom odlomku da projekcije možemo zamijeniti dodatnim argumentima. Dakle, htjeli bismo definirati $\f G(x,y):=x$ u slučaju da vrijedi $x\mathrel{\f P}y$ --- no što ako ne vrijedi? Ako \emph{nikada} ne vrijedi, tada je $R=\emptyset$ pa nemamo što dokazivati. Ako pak $R\ne\emptyset$, tada postoji neki fiksni (recimo najmanji) element $r\in R$, koji možemo iskoristiti kao \emph{joker} za $x\not{\mathrel{\f P}}y$. Sve u svemu, funkcija $\f G:=\IF{\f P:\f I_1^2,\,\f C_r^2}$, točkovno
+	Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpeproj} --- možemo \emph{iskoristiti} taj teorem da se dočepamo primitivne rekurzivnosti: postoji primitivno rekurzivna relacija $\f P^2$ takva da je $R^1=\exists_*\f P$. To znači da vrijedi $R(x)\Longleftrightarrow\exists y(x\mathrel{\f P}y)$, i već smo vidjeli u prethodnom odlomku da projekcije možemo zamijeniti dodatnim argumentima. Dakle, htjeli bismo definirati $\f G(x,y):=x$ u slučaju da vrijedi $x\mathrel{\f P}y$ --- no što ako ne vrijedi? Ako \emph{nikada} ne vrijedi, tada je $R=\emptyset$ pa nemamo što dokazivati. Ako pak $R\ne\emptyset$, tada postoji neki fiksni (recimo, najmanji) element $r\in R$, koji možemo iskoristiti kao \emph{joker} za $x\not{\mathrel{\f P}}y$. Sve u svemu, funkcija $\f G:=\IF{\f P:\f I_1^2,\,\f C_r^2}$, točkovno
 %\begin{equation}\label{eq:defG}
     $\f G(x,y):=\begin{smallcases}
 	    x,&\!x\,\mathrel{\f P}\,y\\
@@ -606,7 +603,7 @@ Neka je $L=\dom\varphi$ te $\mathcal T$ Turingov stroj koji računa $\varphi$. P
 Ovo je relativno standardni dokaz koji se napravi u teoriji formalnih jezika, iako je teško raspisati sve detalje. Osnovna ideja je simulacija paralelizacije na Turingovom stroju. Skicu dokaza možete vidjeti u~\cite[\emph{theorem}~3.21]{sipser}.
 
 \item[$(\mathcal E)\Rightarrow(\mathcal R)$]
-Treba provesti čitav postupak iz točke~\ref{sec:tikp} za enumerator $\mathcal E=(Q,\Sigma,\Gamma,\bl,\delta_2,q_0,q_p)$. Umjesto $q_z$, sada $q_p$ kodiramo s $1$ (vrijedi analogon leme~\ref{lm:bsomp-q0neqz}). Funkcija $\delta_2:Q\times\Gamma^2\to Q\times\Gamma^2\times\{-1,1\}^2$ (jer enumerator ima dvije trake) je malo kompliciranija za kodirati, ali iste ideje kao u dokazu leme~\ref{lm:newssdprn} (proširenje konačnih funkcija nulom, korolar~\ref{kor:kon0}) prolaze.
+Treba provesti čitav postupak iz točke~\ref{sec:tikp} za enumerator $\mathcal E=(Q,\Sigma,\Gamma,\bl,\delta_2,q_0,q_p)$. Umjesto $q_z$, sada $q_p$ kodiramo s $1$ (vrijedi analogon leme~\ref{lm:bsomp-q0neqz}). Funkcija $\delta_2:Q\times\Gamma^2\to Q\times\Gamma^2\times\{-1,0,1\}^2$ (jer enumerator ima dvije trake) je malo kompliciranija za kodirati, ali iste ideje kao u dokazu leme~\ref{lm:newssdprn} (proširenje konačnih funkcija nulom, korolar~\ref{kor:kon0}) prolaze.
 
 Dobijemo pet jednomjesnih (primaju samo broj koraka, jer enumerator nema ulaz) funkcij\=a $\f{State}$, $\f{WorkPosition}$, $\f{WorkTape}$, $\f{OutPosition}$ i $\f{OutTape}$, definiranih degeneriranom simultanom primitivnom rekurzijom (vrijedi analogon propozicije~\ref{prop:simultrek} za $k=0$, i dokaže se isto kao propozicija~\ref{prop:F1prn} i korolar~\ref{kor:F1rek} --- uvođenjem irelevantnog argumenta) iz primitivno rekurzivnih funkcija, pa su primitivno rekurzivne. Sada definicija nabrajanja enumeratorom kaže da je $w\in L$ (odnosno $\kr w\in\kr L$) ako i samo ako postoji korak $n$ u kojem je $\f{State}(n)=\N Q(q_p)=1$ i $\f{OutTape}(n)=\knk{w\bl\ldots}=\f{Recode}(\kr w,b',b)$ (s $b'$ i $b$ je označen broj znakova u $\Sigma$ i $\Gamma$ redom). Drugim riječima,
 \begin{equation}
