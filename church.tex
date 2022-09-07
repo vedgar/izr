@@ -8,7 +8,7 @@ Najčešće će $g$ biti karakteristična funkcija, jer obično se postojanje al
 Za brojevni problem $D$ kažemo da je \emph{odlučiv} ako je njegova karakteristična funkcija $\chi_D$ rekurzivna. Za problem $D\subseteq A$ takav da postoji prirodno kodiranje $\N A:A\to\N$, kažemo da je \emph{odlučiv} ako je brojevni problem $\N A[D]$ odlučiv\!.
 \end{definicija}
 
-"Brojevni problemi" nisu ništa drugo nego relacije, ali postavljeni u obliku pitanja, odnosno ispitivanja nekog svojstva. Recimo, $Halt_2=\dom{\f{comp}_2}^3$ možemo promatrati kao problem "za zadane $x,y,e\in\N$, (postoji li i) stane li program koda $e$ s ulazom $(x,y)$?", odnosno "ima li izraz $\kf{e}(x,y)$ smisla?". Već smo nagovijestili da taj problem nije odlučiv\!.
+"Brojevni problemi" nisu ništa drugo nego relacije, ali postavljeni u obliku pitanja, odnosno ispitivanja nekog svojstva. Recimo, $Halt_2=\dom{\f{comp}_2}^3$ možemo promatrati kao problem "za zadane $x,y,e\in\N$, (postoji li i) stane li program koda $e$ s ulazom $(x,y)$?", odnosno "ima li izraz $\kf{e}(x,y)$ vrijednost?". Već smo nagovijestili da taj problem nije odlučiv\!.
 Kako bismo to dokazali? Uzmimo za početak nešto lakše. U napomeni~\ref{nap:diagtot} smo već spomenuli paradoks sličan Russellovom, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_{n\in\N}$, pa smo za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeksa možemo to doslovno napraviti (zovu se indeksi upravo jer je niz $\kf e^1,e\in\N$ popis svih jednomjesnih parcijalno rekurzivnih funkcija, i "indeks funkcije $\f f$" je upravo njen indeks u tom nizu).
 
 \begin{definicija}[{name=[Russellova funkcija i Kleenejev skup]}]
@@ -186,7 +186,7 @@ Postoji još samo jedan slučaj koji nismo uzeli u obzir: što ako je praznina s
 %Jedan od najvažnijih rezultata o neodlučivosti je svakako Churchov teorem o neodlučivosti logike prvog reda.
 U uvodnom kursu matematičke logike obično se za logiku sudova dokažu teoremi adekvatnosti i potpunosti (koji povezuju sintaksni pojam dokazivosti sa semantičkim pojmom valjanosti) te se navedu neki sustavi (npr.\ glavni test) koji u potpunosti određuju je li neka formula valjana ili nije. Drugim riječima, postoji algoritam za utvrđivanje valjanosti. Postoji li \emph{polinomni} algoritam za to, zanimljivije je pitanje koje vodi na slavni milijun dolara vrijedan problem $P\stackrel?=NP$ --- ali barem znamo da je valjanost odlučiva. Štoviše, dobra je vježba, koristeći kodiranje opisano u primjeru~\ref{pr:lskod}, formalno dokazati da je skup $\f{PValid}\subset\f{PF}$, svih kodova valjanih formula logike sudova, primitivno rekurzivan. Praktički jedino na što treba misliti je da je ne možemo kodirati (totalne) interpretacije jer ih ima neprebrojivo mnogo, ali parcijalne interpretacije (s konačnom domenom) možemo.
 
-Za logiku prvog reda također vrijede teoremi adekvatnosti i potpunosti (dakle, postoji dokaz za formulu $\phi$ koji koristi samo aksiome i pravila zaključivanja logike prvog reda, ako i samo ako je $\phi$ istinita u svim $\sigma$-strukturama prvog reda, gdje je $\sigma$ signatura koja sadrži sve nelogičke simbole u $\phi$), i također imamo glavni test, i znamo da je korektan (odgovor koji dade je uvijek točan), ali nije totalan --- mogu postojati beskonačne grane, u kojima algoritam ne daje odgovor. I to nije nedostatak specifičnog algoritma: jedan od prvih i najvažnijih rezultata o neodlučivosti je Churchov teorem da \textbf{problem valjanosti za logiku prvog reda nije odlučiv}. Skraćeno kažemo "logika prvog reda nije odlučiva", jer zapravo nije bitno da se radi o problemu valjanosti. Ekvivalentno možemo promatrati probleme ispunjivosti, oborivosti, proturječnosti, ili zaključivanja (logičke posljedice konačnog skupa formula), i svi su oni međusobno svedivi. Ovdje promatramo problem koji prirodno ima oblik problema zaključivanja, pa se prvo usredotočimo na njegovu vezu s problemom valjanosti.
+Za logiku prvog reda također vrijede teoremi adekvatnosti i potpunosti (dakle, postoji dokaz za formulu $\phi$ koji koristi samo aksiome i pravila zaključivanja logike prvog reda, ako i samo ako je $\phi$ istinita u svim $\sigma$-strukturama prvog reda, gdje je $\sigma$ signatura koja sadrži sve nelogičke simbole u $\phi$), i također imamo glavni test, i znamo da je korektan (odgovor koji dade je uvijek točan), ali nije totalan --- mogu postojati beskonačne grane, u kojima algoritam ne daje odgovor. I to nije nedostatak specifičnog algoritma: jedan od prvih i najvažnijih rezultata o neodlučivosti je Churchov teorem da \textbf{problem valjanosti za logiku prvog reda nije odlučiv}. Skraćeno kažemo "logika prvog reda nije odlučiva", jer zapravo nije bitno da se radi o problemu valjanosti. Ekvivalentno možemo promatrati probleme ispunjivosti, oborivosti, proturječnosti, ili zaključivanja (logičke posljedice konačnog skupa formula), i svi su oni međusobno svedivi. Ovdje ćemo se baviti problemom koji prirodno ima oblik problema zaključivanja, pa se prvo usredotočimo na njegovu vezu s problemom valjanosti.
 
 \begin{definicija}[{name=[problem valjanosti i problem zaključivanja]}]
     Označimo s $F1$ skup svih formula logike prvog reda,\newline
@@ -218,7 +218,7 @@ zbog kojeg je problem zaključivanja s $l+1$ premisom svediv na problem zaključ
 
 Ako formula $\phi_{l+1}$ nije rečenica, umjesto nje možemo promotriti njeno \emph{univerzalno zatvorenje} $\overline{\phi_{l+1}}$, dobiveno univerzalnim kvantificiranjem svih slobodnih varijabli u $\phi_{l+1}$. Iz logike znamo da $\mathfrak N\models\phi_{l+1}$ ako i samo ako $\mathfrak N\models\overline{\phi_{l+1}}$, dakle odgovor na problem zaključivanja neće se promijeniti, a $\overline{\phi_{l+1}}$ jest rečenica, pa možemo primijeniti teorem dedukcije kao u prethodnom odlomku.
 \end{proof}
-Za dovršetak odnosno formalizaciju dokaza još bi trebalo vidjeti da je funkcija koja preslikava $\bigl(\phi_1,\dotsc,\phi_l,\phi_{l+1},\phi\bigr)$ u $\bigl(\phi_1,\dotsc,\phi_l,(\overline{\phi_{l+1}}\to\phi)\bigr)$ rekurzivna (zadana s $l+1$ koordinatnih funkcija na kodovima, prvih $l$ od kojih su inicijalne), što zasad ne možemo jer nemamo kodiranje $F1$ --- ali je intuitivno jasno da to možemo učiniti samo mehaničkim manipulacijama simbolima od kojih se formule sastoje.
+Za dovršetak odnosno formalizaciju dokaza još bi trebalo vidjeti da je funkcija koja preslikava $\bigl(\phi_1,\dotsc,\phi_l,\phi_{l+1},\phi\bigr)$ u $\bigl(\phi_1,\dotsc,\phi_l,(\overline{\phi_{l+1}}\to\phi)\bigr)$ rekurzivna (zadana s $l+1$ koordinatnih funkcija na kodovima, prvih $l$ od kojih su inicijalne), što zasad ne možemo jer nemamo kodiranje skupa~$F1$ --- ali je intuitivno jasno da to možemo učiniti samo mehaničkim manipulacijama simbolima od kojih se formule sastoje.
 
 \subsection{Reprezentacija RAM-konfiguracija formulama prvog reda}
 
@@ -319,7 +319,7 @@ Vrijedi $\mathfrak N\models\pi_{\vec u}$.
 Gledajući~\eqref{eq:defpiu}, tražimo $t\in\N$ takav da je $c_t(\textsc{pc})=0$ i $c_t(\reg j)=\begin{smallcases}
 	u_j,&j\in[1\mspace{-1mu}\dd k]\\
 0,&\text{inače}
-\end{smallcases}\!$; drugim riječima, $c_t$ je početna konfiguracija s ulazom $\vec u$, a ona se sigurno postiže za $t=0$. % (možda i za neke druge $t$, ali jedan nam je dovoljan).
+\end{smallcases}\!$; drugim riječima, $c_t$ treba biti početna konfiguracija s ulazom $\vec u$, a ona se sigurno postiže za $t=0$. % (možda i za neke druge $t$, ali jedan nam je dovoljan).
 \end{proof}
 
 \begin{lema}[{name=[istinitost instrukcijskih formula u $\mathfrak N$]}]\label{lm:Niotai}
@@ -332,19 +332,19 @@ Ako je to \inc, dakle $i.\;\incr j$ za neki $j$, tada mora biti $j<m_P\le m$, i 
 \begin{equation}\label{eq:nextINC}
 	\bigl(v(x_0),\dotsc,v(x_{j-1}),v(x_j)+1,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i+1\bigr)\text.
 \end{equation}
-	S druge strane, $c_t\leadsto c_{t+1}$ po definiciji~\ref{def:compute}, pa po lemi~\ref{lema:ramdet} imamo da je~\eqref{eq:nextINC} upravo $c_{t+1}$ (to ćemo koristiti i kasnije). Drugim riječima, stroj može postići konfiguraciju~\eqref{eq:nextINC}, iz čega slijedi (jer je $v(x_j)+1=\f{Sc}\bigl(v(x_j)\bigr)=\mathsf s^{\mathfrak N}\bigl(v(x_j)\bigr)=v\bigl(\mathsf s(x_j)\bigr)$)
+	S druge strane, $c_t\leadsto c_{t+1}$ po definiciji~\ref{def:compute}, pa po lemi~\ref{lema:ramdet} imamo da je~\eqref{eq:nextINC} upravo $c_{t+1}$ (to ćemo koristiti i kasnije). Drugim riječima, stroj može postići konfiguraciju~\eqref{eq:nextINC}, iz čega slijedi (jer je $v(x_j)+1=\f{Sc}\bigl(v(x_j)\bigr)=\mathsf s^{\mathfrak N}\bigl(v(x_j)\bigr)=\bigl(\mathsf s(x_j)\bigr){}^{\mathfrak N}[v]$)
 \begin{equation}
     \mathfrak N\models_v R_{i+1}\bigl(x_0,\dotsc,x_{j-1},\mathsf s(x_j),x_{j+1},\dotsc,x_{m-1}\bigr)\text,
 \end{equation}
 odnosno u $\mathfrak N$ uz valuaciju $v$ vrijedi i konzekvens formule~\eqref{eq:formINC}, što smo trebali.
 
-	Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, sličnom metodom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $v(\mathsf o)=\mathsf o^{\mathfrak N}=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u
+	Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, sličnom metodom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $\mathsf o^{\mathfrak N}[v]=\mathsf o^{\mathfrak N}=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u
 \begin{equation}
     c_{t+1}=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,l\bigr)\text,
 \end{equation}
 koja je time dostižna (u $t+1$ koraka), pa vrijedi $\mathfrak N\models_v R_l(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$.
 
-Za drugi, pretpostavimo $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf s(x_j),x_{j+1},\dotsc,x_{m-1})$. Kao u \inc-slučaju, $v\bigl(\mathsf s(x_j)\bigr)=v(x_j)+1$, što je pozitivno zbog $v(x_j)\in\dulj{\mathfrak N}=\N$, pa to znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),v(x_j)+1,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$. Po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC-} ta konfiguracija prelazi u $c_{t+1}=\bigl(v(x_0),\dotsc,v(x_{m-1}),0,\dotsc,i+1\bigr)$ te vrijedi $\mathfrak N\models_v R_{i+1}(x_0,\dotsc,x_{m-1})$, čime smo dokazali i drugi kondicional.
+	Za drugi, pretpostavimo $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf s(x_j),x_{j+1},\dotsc,x_{m-1})$. Kao u \inc-slučaju, $\bigl(\mathsf s(x_j)\bigr){}^{\mathfrak N}[v]=v(x_j)+1$, što je pozitivno zbog $v(x_j)\in\dulj{\mathfrak N}=\N$, pa to znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),v(x_j)+1,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$. Po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC-} ta konfiguracija prelazi u $c_{t+1}=\bigl(v(x_0),\dotsc,v(x_{m-1}),0,\dotsc,i+1\bigr)$ te vrijedi $\mathfrak N\models_v R_{i+1}(x_0,\dotsc,x_{m-1})$, čime smo dokazali i drugi kondicional.
 
 Ako je instrukcija $i.\;\goto\;l$ za neki $l\le n$, tada opet uzmemo proizvoljnu valuaciju $v$, i trebamo dokazati da uz nju u $\mathfrak N$ vrijedi formula~\eqref{eq:formGOTO}. To slijedi iz definicije~\ref{def:RAMconf}\eqref{stav:leadGOTO}, jer se stanje registara u ovom slučaju uopće ne mijenja, samo se vrijednost programskog brojača promijeni iz $i$ u $l$.
 \end{proof}
@@ -366,7 +366,7 @@ Sada nam je cilj dokazati obrat propozicije~\ref{pp:models>stop}. Bitna razlika 
 
 Pa neka je $\mathfrak M=(M,\Theta,g,S_0,S_1,\dotsc,S_n)$ proizvoljna $\sigma$-struktura (redom imamo $\mathsf o^{\mathfrak M}=:\Theta\in M$, $\mathsf s^{\mathfrak M}=:g:M\to M$, a za svaki $i\in[0\dd n]$, $R_i^{\mathfrak M}=:S_i\subseteq M^m$), i neka vrijedi $\mathfrak M\models\Gamma_{\vec u}$.
 
-Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo\\ $a_j^t:=\overline{c_t(\reg j)}^{\mathfrak M}=g\bigl(g(\dotsb g(\Theta)\dotsb\mspace{-1mu})\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
+Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ i $j\in[0\dd m\rangle$, označimo\\ $a_j^t:=\overline{c_t(\reg j)}^{\mathfrak M}\!=g\bigl(g(\dotsb g(\Theta)\dotsb\mspace{-1mu})\bigr)$, gdje ima $c_t(\reg j)$ poziva funkcije $g$.
 
 \begin{lema}[{name=[izračunavanje čuva istinitost formula pojedinih konfiguracija]}]\label{lm:formcomputesteps}
 Za svaki $t\in\N$ vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$,\newline odnosno $(a_0^t,a_1^t,\dotsc,a_{m-1}^t)\in S_{c_t(\textsc{pc})}$.
@@ -380,8 +380,7 @@ Ako je ta instrukcija tipa \inc, recimo $i.\;\incr j$ za neki $j<m$, tada u $\ma
 	\bigl(a_0^b,\dotsc,a_{j-1}^b,g(a_j^b),a_{j+1}^b,\dotsc,a_{m-1}^b\bigr)\in S_{i+1}\text,
 \end{equation} uz pretpostavku $(a_0^b,\dotsc,a_{m-1}^b)\in S_i=S_{c_b(\textsc{pc})}$. No ta pretpostavka je upravo pretpostavka indukcije, pa onda vrijedi i~\eqref{eq:korakINC}. A formula~\eqref{eq:korakINC} je upravo formula koja odgovara konfiguraciji $c_{b+1}$, jer je $i+1=c_b(\textsc{pc})+1=c_{b+1}(\textsc{pc})$, i
 \begin{equation}
-	a_j^{b+1}=\overline{c_{b+1}(\reg j)}^{\mathfrak M}=\overline{1+c_b(\reg j)}^{\mathfrak M}=\bigl(\mathsf s\bigl(\overline{c_b(\reg j)}\bigr)\bigr)^{\mathfrak M}
-	=\mathsf s^{\mathfrak M}\bigl(\overline{c_b(\reg j)}^{\mathfrak M}\bigr)=g(a_j^b)\text.
+	a_j^{b+1}=\overline{c_{b+1}(\reg j)}^{\mathfrak M}\!=\overline{1+c_b(\reg j)}^{\mathfrak M}\!=\bigl(\mathsf s\bigl(\overline{c_b(\reg j)}\bigr)\bigr)^{\mathfrak M}\!=\mathsf s^{\mathfrak M}\bigl(\overline{c_b(\reg j)}^{\mathfrak M}\bigr)=g(a_j^b)\text.
 \end{equation}
 	Ako je ta instrukcija tipa \goto, s odredištem $l\le n$, uz istu valuaciju imamo da $\vec a\in S_i$ povlači $\vec a\in S_l$. Tvrdnja $\vec a\in S_i$ je pretpostavka indukcije, dok je $\vec a\in S_l$ upravo tvrdnja koja nam je potrebna za korak (stanje registara ostaje isto, odnosno $a_j^b=a_j^{b+1}$ za svaki $j\in[0\dd m\rangle$).
 
@@ -390,7 +389,7 @@ $v'(x_h):=\begin{smallcases}
 	a_h^b=\overline{c_b(\reg h)}^{\mathfrak M},&h\ne j\\
 	\overline{c_b(\reg j)-1}^{\mathfrak M},&h=j
 \end{smallcases}$.
-Uz tu valuaciju vrijedi antecedens, jer je $v'\bigl(\mathsf s(x_j)\bigr)=a_j^b$ --- pa onda vrijedi i konzekvens, odnosno formula s istim sadržajem registara, osim što je $c_{b+1}(\reg j)$ za jedan manji, i $c_{b+1}(\textsc{pc})$ za jedan veći, kao što i treba biti.
+	Uz tu valuaciju vrijedi antecedens, jer je $\bigl(\mathsf s(x_j)\bigr){}^{\mathfrak M}[v']=a_j^b$ --- pa onda vrijedi i konzekvens, odnosno formula s istim sadržajem registara, osim što je $c_{b+1}(\reg j)$ za jedan manji, i $c_{b+1}(\textsc{pc})$ za jedan veći, kao što i treba biti.
 \end{proof}
 
 \begin{propozicija}[{name=[zaustavljanje povlači zaključivanje]}]\label{pp:stop>models}
@@ -406,7 +405,7 @@ Ako $P$-izračunavanje s $\vec u$ stane, tada $\Gamma_{\vec u}\models\zeta$.
 Ne postoji algoritam koji za proizvoljnu formulu logike prvog reda odlučuje je li valjana.
 \end{teorem}
 \begin{proof}
-Pretpostavimo da imamo takav algoritam $\mathcal A$, i opišimo sljedeći neformalni algoritam za odluku Kleenejevog skupa:
+Pretpostavimo da imamo takav algoritam $\mathcal A$,\\ i opišimo sljedeći neformalni algoritam za odluku Kleenejevog skupa:
 \begin{quote}
 Kao u dokazu korolara~\ref{kor:RAMhaltnodl} (kompiliranjem), dobijemo RAM-program $P_0$ koji računa Russellovu funkciju. Za taj program uvedimo oznake $m$ i $n$ te formule $\iota_i,i<n$ i $\zeta$ nad signaturom $\sigma$ (koja također ovisi o $P_0$ preko $m$).
 
@@ -420,7 +419,7 @@ Za ulaz $u\in\N$ (koji dalje promatramo kao $(u)\in\N^1$):
     \models^?
     %\end{array}}
     \zeta$.
-    \item\label{step:varphi_u} Pretvorimo je (koristeći dokaz propozicije~\ref{pp:valj<>zaklj}) u instancu problema valjanosti neke formule $\varphi_u$.
+    \item\label{step:varphi_u} Pretvorimo je (koristeći dokaz propozicije~\ref{pp:valj<>zaklj})\\ u instancu problema valjanosti neke formule $\varphi_u$.
     \item Provjerimo (koristeći $\mathcal A$) je li tako dobivena formula valjana.
 \end{enumerate}
 \end{quote}
@@ -585,7 +584,7 @@ Zapravo, kako u našem slučaju --- reprezentacija problema zaustavljanja RAM-st
 
 Pogledajmo kako u osnovnom jeziku izgleda formula $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\eqref{step:varphi_u}. To ovisi o instrukcijama programa $P_0$ koji računa Russellovu funkciju, ali dio koji nam je jedini bitan za svođenje je prilično malen i odnosi se samo na formulu $\pi_u$.
 
-Preciznije, neka je $P_0=\begin{prog}t.&I_t\end{prog}_{t<n}$. U $\Gamma_u$ imamo formule $\iota_t,t<n$, čija se univerzalna zatvorenja obrnutim redom prebacuju na desnu stranu~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je tada na desnoj stani označimo s $\psi$), koju ne trebamo univerzalno zatvarati jer je rečenica. Formula $\psi$, iako ogromna, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će biti (jako velika) konstanta.
+Preciznije, neka je $P_0=\begin{prog}t.&I_t\end{prog}_{t<n}$. U $\Gamma_u$ imamo formule $\iota_t,t<n$, čija se univerzalna zatvorenja obrnutim redom prebacuju na desnu stranu~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je tada na desnoj stani označimo s $\psi$), koju ne trebamo univerzalno zatvarati jer je rečenica. Formula $\psi$, iako ogromna, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će biti (vrlo velika) konstanta.
 
     Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsb(\overline{\iota_{n-1}}\to\zeta)\dotsm)\bigr)\bigr)$\text.
 Uz standardne reprezentacije ($\mathsf o$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, a $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), možemo svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Od veznika su nam potrebni kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. Obično je lakše koristiti ovaj drugi pristup.
@@ -685,7 +684,7 @@ U prethodnoj točki uveli smo, za svaki prirodni broj $u$, rečenicu $\varphi_u$
 \end{definicija}
 %Kako je negacija rečenice ponovo rečenica, Gödelov skup je skup rečenica.
 
-\begin{propozicija}[{name=[istinitost Gödelovog skupa rečenica u $\mathfrak N$]}]
+\begin{propozicija}[{name=[istinitost Gödelovog skupa rečenica u $\mathfrak N$]}]\label{pp:NvdGo}
 Vrijedi $\mathfrak N\models\mathscr G\ddot o$.
 \end{propozicija}
 \begin{proof}
@@ -706,7 +705,7 @@ Ključno je vidjeti da je jezik nad $\Sigma_{\log}$,
 	p\in\langle Proof\rangle\Longleftrightarrow\bigl(\forall i<2+\bigl(\num j<\f{slh}(p,12)\bigr)\bigl(\f{sdigit}(p,j,12)=12\bigr)\bigr)\bigl(\varphi_i\in\kr{F1}\land{}\\{}\land\bigl(
 	\varphi_i\in\bigcup\nolimits_{j=1}^{\,5}\kr{Axiom_j}\lor(\exists j<i)(\exists k<i)\f{ModPon}(\varphi_i,\varphi_j,\varphi_k)\lor(\exists j<i)\f{Gen}(\varphi_i,\varphi_j)\bigr)\bigr)
 \end{multline*}
-    Sheme (A1), (A2) i (A3) možemo opisati konkatenacijom, uz ograničavanje kvantifikacije pomoću korolara~\ref{kor:krvw}. Opisat ćemo (A1) --- ostale su dulje ali ne bitno kompliciranije.
+	Sheme (A1), (A2) i (A3) možemo opisati konkatenacijom, uz ograničavanje kvantifikacije pomoću korolara~\ref{kor:krvw}. Opisat ćemo (A1) --- (A2) i (A3) su dulje ali ne bitno kompliciranije.
 \begin{equation*}
 	f\in\kr{Axiom_1}:\Longleftrightarrow(\exists a<f)\,(\exists b<f)\,\bigl(a\in\kr{F1}\land b\in\kr{F1}\land f=\langle\t(\,\rangle\conc{}a\conc{}\langle\t{\,\textrightarrow(\,}\rangle\conc{}b\conc{}\langle\,\t\textrightarrow\,\rangle\conc{}a\conc{}\langle\t{\,))}\rangle\bigr)
 \end{equation*}
@@ -739,7 +738,7 @@ Promotrimo sada sljedeći \emph{paralelni} algoritam:
 
 Ako je $u\in K$, prva dretva će stati, pa će i cijeli algoritam stati i vratiti $1$ --- pod pretpostavkom da druga dretva ne zaustavi algoritam prije. No PA je konzistentna teorija, pa ne dokazuje ono što nije istina. Kako $\neg\varphi_u$ nije istinita u $\mathfrak N$, tako niti $\neg\varphi_u'$ nije istinita u $\N$, dakle ne može se dogoditi da neki $p\in Proof_{\text{PA}}$ završi njome.
 
-S druge strane, ako $u\notin K$, prva dretva po definiciji neće stati, no hoće li druga? Ako bi PA bila i \emph{potpuna} teorija, odnosno dokazivala sve što je istina u strukturi $\N$, tada bi s vremenom na red došao i dokaz za $\neg\varphi_u'$. To bi značilo da za sve $u\notin K$, naš algoritam također stane i vraća $0$.
+	S druge strane, ako $u\notin K$, prva dretva po definiciji neće stati, no hoće li druga? Ako bi PA bila i \emph{potpuna} teorija, odnosno dokazivala sve što je istina u strukturi $\N$, tada bi s vremenom na red došao i dokaz za $\neg\varphi_u'$ (koja jest istinita po propoziciji~\ref{pp:NvdGo}). To bi značilo da za sve $u\notin K$, naš algoritam također stane i vraća $0$.
 
 Sve u svemu, vidimo da neformalni algoritam koji smo napisali računa $\chi_{K}$, što je po Church--\!Turingovoj tezi u kontradikciji s teoremom~\ref{tm:DRnrek}.
 
@@ -748,7 +747,7 @@ Jedina pretpostavka koja može biti pogrešna je da PA dokazuje sve formule obli
 
 \subsection{Problemi u skici dokaza Gödelovog teorema}
 
-U dokazu teorema~\ref{tm:goedel} je mnogo toga napravljeno neformalno. Želja autora bila je prikazati da smo idejno jako blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako ih možemo "zakrpati".
+U dokazu teorema~\ref{tm:goedel} mnogo je toga napravljeno neformalno. Idejno smo veoma blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako ih možemo "zakrpati".
 
 \begin{itemize}
     \item Možemo li doista relacije $R_n$ izraziti pomoću nule, sljedbenika, zbrajanja i mno\-že\-nja? Koristeći funkciju $\f{Reg}$ svaku od njih možemo izraziti kao projekciju primitivno rekurzivne relacije, ali kodiranje potrebno za $\f{Reg}$ bitno koristi potenciranje. Pokazuje se~\cite{smullyan} da je Gödelov teorem mnogo lakše dokazati ako u strukturi $\N$ shvatimo i potenciranje kao osnovnu operaciju. Zapisati potenciranje \emph{logički} pomoću zbrajanja i množenja (ne koristeći primitivnu rekurziju, jer ona ide preko teorije skupova, Dedekindovim teoremom rekurzije), ili alternativno, razviti kodiranje konačnih nizova koje umjesto množenja i potenciranja koristi zbrajanje i množenje, vrlo je teško. Gödelov originalni pristup (funkcija $\beta$ i kineski teorem o ostacima) je zapetljan, ali do danas nismo otkrili ništa bolje. %TODO: navesti Quineove dinamičke zareze

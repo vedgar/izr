@@ -6,8 +6,8 @@ Vidjeli smo već nekoliko puta da domena izračunljive funkcije ne mora biti izr
 
 Pokušajmo ustanoviti što bi bio relacijski pandan parcijalnim funkcijama. Tražiti "parcijalnu karakterističnu funkciju" kao funkciju iz $\N$ u $bool$ je vjerojatno preslabo: korisnost parcijalno rekurzivnih funkcija je u tome što iako nisu definirane svuda, tamo gdje jesu definirane mogu poprimiti proizvoljne vrijednosti. Kad bismo čak i u slučaju da je funkcija definirana mogli dobiti samo jedan bit informacije, imali bismo tri moguća ishoda ($\mathit{true}$, $\mathit{false}$ i "ne znam") koji bi odgovarali četirima mogućim situacijama (u slučaju izostanka izlaza, ulaz i dalje može biti ili ne biti u skupu). Odnosno, parcijalna karakteristična funkcija zadanog skupa nije jednoznačno određena njime.
 
-Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan%: iz leme o restrikciji slijedit će da može biti propisan bilo kojom izračunljivom funkcijom.
-; bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Tu ideju formaliziramo koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi} te dijagram~\eqref{dia:alg}.
+Možemo li postići jednoznačnost, a da i dalje dozvolimo parcijalnost? Odgovor se nameće sam po sebi: specificiramo da ulaz jest\slash nije u skupu upravo ako algoritam stane\slash ne stane s tim ulazom. Sam izlaz nam onda uopće nije bitan --- %: iz leme o restrikciji slijedit će da može biti propisan bilo kojom izračunljivom funkcijom.
+bitno je da smo na taj način specificirali \emph{poluodlučive} probleme: ako je odgovor na pitanje potvrdan, algoritam će nam ga dati (čim stane), ali ako je odgovor negativan, nećemo to nikada saznati izvršavajući algoritam, upravo jer neće nikada stati. Tu ideju formaliziramo koristeći činjenicu da smo uvijek stajanje algoritma koji računa funkciju reprezentirali kroz domenu te funkcije --- pogledajte definicije~\ref{def:compute} i~\ref{def:Tcomputefi} te dijagram~\eqref{dia:alg}.
 
 \begin{definicija}[{name=[rekurzivna prebrojivost]}]\label{def:re}
 Neka je $k\in\N_+$. Za brojevnu relaciju $R^k$ kažemo da je \emph{rekurzivno prebrojiva} ako postoji $\f F\in\mathscr Comp_k$ takva da je $R=\dom{\f F}$.
@@ -77,7 +77,7 @@ Neka je $k\in\N_+$, $\f G^k$ parcijalno rekurzivna funkcija te $R^k$ rekurzivno 
 %\end{equation}
 %te za svaki $\vec x$ iz te zajedničke domene vrijedi $(\f F+\f G)(\vec x)=\f F(\vec x)+\f G(\vec x)=\f F(\vec x)$, jer je $\f G(\vec x)=0$. Dakle, $\f F|_R=\f{add}^2\circ(\f F,\f G)$ je parcijalno rekurzivna kao kompozicija takvih.
 \end{proof}
-Funkcija $\f I_2^2$ u dokazu igra istu ulogu kao operator `\texttt,' u jeziku C: izračuna oba operanda i vraća drugi ako oba imaju smisla.
+Funkcija $\f I_2^2$ u dokazu igra istu ulogu kao operator `\texttt,' u jeziku C: izračuna oba operanda i vraća drugi ako oba imaju vrijednost.
 
 \begin{propozicija}[{name=[rekurzivna prebrojivost presjeka rekurzivno prebrojivih]}]\label{pp:prlre}
 Neka je $k\in\N_+$ te $P^k$ i $R^k$ rekurzivno prebrojive relacije.\\
@@ -313,7 +313,7 @@ Sljedeći veliki zalogaj je dokazati obrat teorema~\ref{tm:grafprre}. Kod teorem
 
 Razmislimo malo detaljnije o tome. Zamislimo da imamo poluodlučivu relaciju $R^2$ i želimo računati vrijednosti funkcije $f:=\mu R$. Za zadani $x$, recimo za $x=5$, dakle, tražimo najmanji $y$ takav da vrijedi $R(5,y)$ --- no problem je u tome što za zadani par $(5,y)$ možemo jedino sa sigurnošću ustanoviti da \emph{jest} u $R$, ne i da nije (ako nije, postupak neće nikada stati). Ako takvog $y$ nema, to da algoritam neće nikad stati je sasvim u redu, ali što ako ga ima? Pomoću paralelizacije možemo pokrenuti sva testiranja $R(5,0)$, $R(5,1)$, $R(5,2)$,~\ldots\ dok neko od njih ne stane --- i ako to upravo bude $R(5,0)$, onda imamo sreće: znamo da je $\f f(5)=0$. No pretpostavimo da smo umjesto toga dobili $R(5,7)$. Iz toga sigurno možemo zaključiti $5\in\exists_*R=\dom{\mu R}=\dom f$, dakle $f(5)$ je neki broj. Štoviše, to je broj koji sigurno nije veći od $7$, ali koji? Imamo $8$ mogućnosti, i dok god testovi $R(5,t),t<7$ ne stanu, ne znamo koja od njih je prava vrijednost izraza $f(5)$. Paradoksalno, ako to \emph{jest} $7$, tada nijedan od tih "manjih testova" neće stati, pa više nećemo dobiti nikakvu novu informaciju. Ako u međuvremenu saznamo da vrijedi i $R(5,11)$, to neće nimalo utjecati na naš problem. Ali zamislimo da smo (nakon još mnogo vremena) dobili da vrijedi $R(5,4)$. Imamo li se razloga radovati? Eliminirali smo brojeve $5$, $6$ i $7$ kao moguće vrijednosti za $f(5)$, ali i dalje ne znamo koliko je~to. Ukratko, na ovaj način možemo dobiti $f(x)$ jedino ako je $f(x)=0$ --- što se ne čini pretjerano korisnim.
 
-Ipak, funkcija $\f g$, koju dobijemo ako za svaki $x$ uzmemo prvi $y$ na koji naiđemo paralelnim izvršavanjem svih testova $R(x,y)$ (recimo, u upravo opisanom scenariju je $\f g(5)=7$), jest izračunljiva, i vidimo da \emph{dominira} funkciju $f$: kad god $f(x)$ ima smisla, ima i $\f g(x)$, i tada je $\f g(x)\ge f(x)$.
+Ipak, funkcija $\f g$, koju dobijemo ako za svaki $x$ uzmemo prvi $y$ na koji naiđemo paralelnim izvršavanjem svih testova $R(x,y)$ (recimo, u upravo opisanom scenariju je $\f g(5)=7$), jest izračunljiva, i vidimo da \emph{dominira} funkciju $f$: kad god $f(x)$ ima vrijednost, ima je i $\f g(x)$, i tada je $\f g(x)\ge f(x)$.
 
 Doduše, nama nije zadana funkcija $f$, nego relacija $R$. Možemo li $\f g$ opisati pomoću $R$? Prvo svojstvo kaže $\dom{\f g}\supseteq\dom f=\dom{\mu R}=\exists_*R$, a drugo kaže (za $x\in\exists_*R$) $f(x)=\mu yR(x,y)\le\f g(x)$, što možemo osigurati tako da tražimo $R\bigl(x,\f g(x)\bigr)$. Reći da to vrijedi za sve $x$ zapravo znači zahtijevati inkluziju $\graf{\f g}\subseteq R$, a tada po lemi~\ref{lm:projmugraf} slijedi (projekcija je monotona --- dokažite!) $\dom{\f g}=\exists_*\graf{\f g}\subseteq\exists_*R$, što s prvim svojstvom daje $\dom{\f g}=\exists_*R$. Formalizirajmo ta svojstva.
 
@@ -337,13 +337,13 @@ tada je $(R_{\vec x})_{\vec x\,\in\,\exists_*\!R}$ indeksirana familija neprazni
 
 U teoriji skupova postoji aksiom izbora, koji kaže da svaka takva familija ima izbornu funkciju, odnosno svaka relacija ima selektor. Zapravo, ovdje aksiom izbora nije ni potreban, jer je skup $\N$ dobro uređen, pa uvijek možemo odabrati najmanji $y$ za svaki $\vec x$ za koji takav $y$ postoji. Drugim riječima, trivijalno je $\mu R$ selektor za $R$. Doista, vrijedi $\dom{\mu R}=\exists_*R$ po definiciji, a za $\graf{\mu R}(\vec x,y)$ vrijedi $y=\mu z R(\vec x,z)=\min R_{\vec x}\in R_{\vec x}$, dakle vrijedi $R_{\vec x}(y)$, odnosno $R(\vec x,y)$.
 
-Nas, međutim, ne zanimaju proizvoljni selektori, već samo oni izračunljivi --- a postupak koji smo opisali (paralelno testiranje svih $R(\vec x,y),y\in\N$) pokazuje da svaka poluodlučiva relacija ima izračunljiv selektor.
+Nas, međutim, ne zanimaju proizvoljni selektori, već samo oni izračunljivi --- a postupak koji smo opisali (paralelno testiranje svih $R(\vec x,y),\;y\in\N$) pokazuje da svaka poluodlučiva relacija ima izračunljiv selektor.
 
-\begin{lema}[Teorem o selektoru]\label{lm:tmsel}
-Svaka rekurzivno prebrojiva relacija (mjesnosti barem~$2$)\\ ima parcijalno rekurzivni selektor.
+\begin{lema}[Teorem o selektoru]\label{lm:tmsel}\ \\
+Svaka rekurzivno prebrojiva relacija (mjesnosti barem~$2$) ima parcijalno rekurzivni selektor.
 \end{lema}
 \begin{proof}
-Neka je $k'\ge2$ te $R^{k'}$ rekurzivno prebrojiva. Označimo $k:=k'-1\in\N_+$. Trebamo parcijalno rekurzivnu funkciju $\f F^k$ takvu da vrijedi $\dom{\f F}=\exists_*R$ i $\graf{\f F}\subseteq R$.
+Neka je $k'\ge2$ te $R^{k'}$ rekurzivno prebrojiva. Označimo $k:=k'-1\in\N_+$.\\ Trebamo parcijalno rekurzivnu funkciju $\f F^k$ takvu da vrijedi $\dom{\f F}=\exists_*R$ i $\graf{\f F}\subseteq R$.
 
 Prvo, projekcijskom karakterizacijom se dočepamo \emph{izračunljive} relacije, po cijenu još jednog egzistencijalnog kvantifikatora: po teoremu~\ref{tm:rpeproj} postoji rekurzivna relacija $\f P^{k+2}$ takva da je $R=\exists_*\f P$.
 
@@ -405,7 +405,7 @@ Jedna posljedica teorema o grafu je poopćenje propozicije~\ref{prop:konprom} na
 
 Što ako bismo smjeli \emph{uklanjati} točke iz domene po volji? \emph{Dodavanje} točaka je neizvedivo za totalne funkcije, ali ako je polazna funkcija parcijalna, možemo i to. Hoćemo li time pokvariti izračunljivost? Pokazuje se da nećemo, ako napravimo konačno mnogo takvih promjena.
 
-Za pripremu dokažimo nekoliko lema koje govore o skupovnim operacijama koje čuvaju parcijalnu rekurzivnost. Za unije i presjeke smo to već vidjeli (propozicije~\ref{pp:unlre} i~\ref{pp:prlre}), sada se pozabavimo razlikama. Napomenimo samo da općenito skupovna razlika dvije rekurzivno prebrojive relacije nije rekurzivno prebrojiva, jer \emph{komplement} kao posebni slučaj razlike ($(R^k)\kompl=\N^k\setminus R\mspace{2mu}$) ne čuva rekurzivnu prebrojivost. Detaljnije ćemo vidjeti što se tu zbiva kad dokažemo Postov teorem.
+Za pripremu dokažimo nekoliko lema koje govore o skupovnim operacijama koje čuvaju rekurzivnu prebrojivost. Za unije i presjeke smo to već vidjeli (propozicije~\ref{pp:unlre} i~\ref{pp:prlre}), sada se pozabavimo razlikama. Napomenimo samo da općenito skupovna razlika dvije rekurzivno prebrojive relacije nije rekurzivno prebrojiva, jer \emph{komplement} kao posebni slučaj razlike ($(R^k)\kompl=\N^k\setminus R\mspace{2mu}$) ne čuva rekurzivnu prebrojivost. Detaljnije ćemo vidjeti što se tu zbiva kad dokažemo Postov teorem.
 
 \begin{lema}[{name=[rekurzivna prebrojivost razlike s rekurzivnom relacijom]}]\label{lm:re-rek}
 Neka je $k\in\N_+$, $P^k$ rekurzivno prebrojiva relacija te $\f R$ rekurzivna relacija.\\
@@ -561,7 +561,7 @@ je primitivno rekurzivna po teoremu~\ref{tm:grek}, i tvrdimo da je $R=\im{\f G}$
 \end{proof}
 
 \begin{napomena}[{name=[enumeracija kao jednomjesna funkcija --- niz]}]
-Enumeracija $\f G$ koju smo konstruirali je dvomjesna: ako baš želimo \emph{niz}, možemo ga definirati kontrakcijom: $\f F(n):=\f G\bigl(\f{fst}(n),\f{snd}(n)\bigr)$. Tehnikama kao u dokazu leme~\ref{lm:hatPeqP} (samo za funkcije umjesto relacija) možemo dokazati $\im{\f F}=\im{\f G}$ --- inkluzija ($\subseteq$) slijedi iz definicije od $\f F$, a ($\supseteq$) iz $\f G(x,y)=\f F\bigl(\f{pair}(x,y)\bigr)$.
+Enumeracija $\f G$ koju smo konstruirali je dvomjesna; ako baš želimo \emph{niz}, možemo ga definirati kontrakcijom: $\f F(n):=\f G\bigl(\f{fst}(n),\f{snd}(n)\bigr)$. Tehnikama kao u dokazu leme~\ref{lm:hatPeqP} (samo za funkcije umjesto relacija) možemo dokazati $\im{\f F}=\im{\f G}$ --- inkluzija ($\subseteq$) slijedi iz definicije od $\f F$, a ($\supseteq$) iz $\f G(x,y)=\f F\bigl(\f{pair}(x,y)\bigr)$.
 
 Simbolički, $\f F=\f G\circ(\f{fst},\f{snd})$, a $\f G=\f F\circ\f{pair}$. Sada su obje inkluzije posljedice toga da za svaku kompoziciju vrijedi $\im{\,H\,\circ\,(G_1,\dotsc,G_l)}\subseteq\mspace{2mu}\im{\,H}$ --- raspišite detalje!
 \end{napomena}
