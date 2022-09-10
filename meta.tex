@@ -157,7 +157,7 @@ Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$\\ takv
 \begin{equation}
     \f S_k^{l+2}(\vec y,z,e):=\f S_k^{l+1}\bigl(\vec y,\f S_{k+l}^2(z,e)\bigr)\text.
 \end{equation}
-    Dakle, $\f S_k^{l+2}$ je definirana kompozicijom iz $\f S_k^{l+1}$ (koja je primitivno rekurzivna po pretpostavci indukcije), $\f S_{k+l}^2$ (koja je primitivno rekurzivna po propoziciji~\ref{pp:tmpar}) i koordinatnih projekcija (koje su primitivno rekurzivne jer su inicijalne), pa je i sama primitivno rekurzivna. Time smo proveli korak indukcije, odnosno za sve pozitivne $k$ i $l$ smo definirali funkciju $\f S_k^{l+1}$ i dokazali da je primitivno rekurzivna.
+    Dakle, $\f S_k^{l+2}$ je definirana kompozicijom iz $\f S_k^{l+1}$ (primitivno rekurzivne po pretpostavci indukcije), $\f S_{k+l}^2$ (primitivno rekurzivne po propoziciji~\ref{pp:tmpar}) i koordinatnih projekcija (primitivno rekurzivnih jer su inicijalne), pa je i sama primitivno rekurzivna. Time smo proveli korak indukcije, odnosno za sve pozitivne $k$ i $l$ smo definirali funkciju $\f S_k^{l+1}$ i dokazali da je primitivno rekurzivna.
 \end{proof}
 
 \begin{primjer}[{name=[specijalizacija zadnja tri od sedam argumenata]}]
@@ -170,7 +170,7 @@ $, i za sve $x,y,z,t\in\N$ bi vrijedilo
 
 % \subsection{Primjena na elementarne operacije s funkcijama}
 
-Sada možemo i vidjeti da je $\N compose$, barem za fiksne mjesnosti $k$ i $l$, primitivno rekurzivna. Tehnika koju ćemo pritom koristiti može se općenito primijeniti na razne funkcije definirane na funkcijama, koje su kodirane preko njihovih indeksa.
+Sada možemo i vidjeti da je $\N compose$, barem za fiksne mjesnosti $k$ i $l$, primitivno rekurzivna. Tehnika koju ćemo pritom koristiti može se općenito primijeniti na razne funkcije višeg reda, definirane na funkcijama koje primaju preko indeksa.
 
 Naglasimo da ovdje \emph{ne} govorimo o primitivnoj rekurzivnosti kompozicije (rezultata komponiranja) niti o primitivnoj rekurzivnosti funkcija koje ulaze u kompoziciju. Radi ilustracije uzmimo $k=l=1$: tada nas ne zanima jesu li $\f G$ i $\f H$ (pa time i $\f F:=\f G\circ\f H$) primitivno rekurzivne. Zanima nas da su \emph{parcijalno} rekurzivne, odnosno da imaju indekse (redom ih označimo s $g$, $h$ i $f$). Govorimo o primitivnoj rekurzivnosti funkcije $\f{compose}_1^2$ koja prima $g$ i $h$ te vraća $f$ --- pogledajte primjer~\ref{pr:parcspecind} za detalje.
 
@@ -194,7 +194,7 @@ Programirat ćemo postupak računanja kompozicije u proizvoljnom $\vec x\in\N^k$
     \f{comp}_k(\vec x,g_l),
     h\bigr)\text.
 \end{equation}
-Funkcija $\f F$ je definirana kompozicijom iz parcijalno rekurzivnih funkcija $\f{comp}_k$ i $\f{comp}_l$ te koordinatnih projekcija --- pa je parcijalno rekurzivna. Po korolaru~\ref{kor:pii}, $\f F$ ima indeks; označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind}).
+Funkcija $\f F$ je definirana kompozicijom iz parcijalno rekurzivnih funkcija $\f{comp}_k$ i $\f{comp}_l$ te koordinatnih projekcija --- pa je parcijalno rekurzivna. Po korolaru~\ref{kor:pii}, $\f F$ ima indeks; označimo jedan njen indeks s $e$ (sjetite se napomene~\ref{nap:>1ind'}).
 
     Funkcija $\f{compose}_k^{l+1}$ prima $\f g_1$,~\ldots, $\f g_l$ i $\f h$ te na njih fiksira zadnjih $l+1$ argumenata od $\f F$:
 \begin{equation}
@@ -407,7 +407,7 @@ U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad rad
 
 % \subsection{Dokaz teorema rekurzije}
 
-Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da bismo doista dobili funkciju koja je rješenje opće rekurzije. U programu~\eqref{eq:wishful} svejedno smo trebali nekako drugačije dobiti \texttt{factorial} koju bismo poslali kao drugi argument funkciji~\texttt{G}. To se čini prilično beskorisnim (jer jednom kad imamo \texttt{factorial}, možemo je direktno pozvati bez petljanja s dijagonalom), ali zapravo je vrlo blizu rješenju.
+Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da bismo doista dobili rješenje opće rekurzije. U programu~\eqref{eq:wishful} svejedno smo trebali nekako drugačije dobiti \texttt{factorial} koju bismo poslali kao drugi argument funkciji~\texttt{G}. To se čini prilično beskorisnim (jer jednom kad imamo \texttt{factorial}, možemo je direktno pozvati bez petljanja s dijagonalom), ali zapravo je vrlo blizu rješenju.
 
 Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, služe istoj svrsi --- računanju faktorijele zadanog broja. Ako nemamo \texttt{factorial}, možemo li umjesto nje upotrijebiti \texttt{G} kao drugi argument od \texttt{G} (efektivno, računati $\partial\texttt G$)?
 
@@ -465,7 +465,7 @@ I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćem
 	Neka je $k\in\N_+$ te $\f G^{k+1}$ parcijalno rekurzivna funkcija. \\ Tada postoji $e\in\f{Prog}$ takav da za sve $\vec x\in\N^k$ vrijedi $\kf e^k(\vec x)\simeq\f G(\vec x,e)$.
 \end{teorem}
 \begin{proof}
-	Definiramo funkciju $\f H^{k+1}\mspace{-2mu}$ točkovno s $\f H(\vec x,f):\simeq\f G\bigl(\vec x,\f D_k(f)\bigr)$. Ta funkcija je parcijalno rekurzivna (dobivena je kompozicijom iz $\f G$, $\f D_k$ i koordinatnih projekcija) pa ima indeks: označimo ga s $h$ (sjetite se napomene~\ref{nap:>1ind}).
+	Definiramo funkciju $\f H^{k+1}\mspace{-2mu}$ točkovno s $\f H(\vec x,f):\simeq\f G\bigl(\vec x,\f D_k(f)\bigr)$. Ta funkcija je parcijalno rekurzivna (dobivena je kompozicijom iz $\f G$, $\f D_k$ i koordinatnih projekcija) pa ima indeks: označimo jedan od njih s $h$ (sjetite se napomene~\ref{nap:>1ind'}).
 
 	Tvrdimo da je $\partial\f H$ rješenje opće rekurzije, odnosno njen indeks $e:=\f D_k(h)\in\f{Prog}$ je traženi broj. Doista, za sve $\vec x\in\N^k$ imamo
 \begin{equation}
@@ -691,7 +691,7 @@ Označimo $m:=k-l\in\N_+$. Za $(\subseteq)$, neka je $e\approx_kf$.
 \end{equation}
 Dakle vrijedi i $\kf e^l=\kf f^l$, pa je $e\approx_lf$.
 
-Za $(\ne)$, moramo naći dva RAM-programa koji su ekvivalentni za sve moguće $l$-torke ulaznih podataka, ali kad počnemo stavljati ulaze i u registre od $\reg{l+1}$ do $\reg k$, više nisu. Za to nam mogu poslužiti $1$ kao indeks nulfunkcije, i $i_k$ kao indeks $k$-te koordinatne projekcije --- pogledajte tekst nakon~\eqref{eq:paramcomposeind} za preciznu definiciju.
+Za $(\ne)$, moramo naći dva RAM-programa koji jesu ekvivalentni za sve moguće $l$-torke ulaznih podataka, ali kad počnemo stavljati ulaze i u registre od $\reg{l+1}$ do $\reg k$, više nisu. Za to nam mogu poslužiti $1$ kao indeks nulfunkcije, i $i_k$ kao indeks $k$-te koordinatne projekcije --- pogledajte tekst nakon~\eqref{eq:paramcomposeind} za preciznu definiciju.
 
 Tada je $1\approx_l i_k$, jer za svaki $\vec x\in\N^l$ vrijedi
 \begin{equation}
@@ -708,14 +708,14 @@ iz čega slijedi $1\napprox_ki_k$.
 
 Kao što rekosmo na početku, indeks $e$ iz teorema rekurzije možemo shvatiti kao neku vrstu "fiksne točke" primitivno rekurzivne funkcije $\f F^1$ zadane s $\f F(e):=\f S_k(e,g)$, gdje je $g$ neki (fiksni) indeks funkcije $\f G$ čiji poziv stoji na desnoj strani opće rekurzije. Dakle, da imamo teorem koji nam kaže da svaka primitivno rekurzivna jednomjesna funkcija ima fiksnu točku, mogli bismo pomoću njega dokazati teorem rekurzije. Ipak, kako zasad stvari stoje, teorem rekurzije smo već dokazali, pa pokušajmo pomoću njega dokazati teorem o fiksnoj točki. Za početak ga pokušajmo formulirati što općenitije.
 
-Prvo, sasvim je jasno da ne možemo tražiti $e=\f F(e)$ --- recimo, to sigurno ne može vrijediti za $\f F=\f{Sc}$, koja je čak inicijalna. % funkcija, ali ne postoji $e$ takav da je $e=\f{Sc}(e)$ (to smo koristili kod Russellove funkcije).
+Prvo, sasvim je jasno da ne možemo tražiti $e=\f F(e)$ --- već za inicijalnu $\f F=\f{Sc}$ takav $e$ ne postoji. % funkcija, ali ne postoji $e$ takav da je $e=\f{Sc}(e)$ (to smo koristili kod Russellove funkcije).
 Ipak možemo tražiti $e\approx_k\f F(e)$ za bilo koji fiksirani $k\in\N_+$ (takav $e$ će ovisiti o $k$; "uniformna" verzija, koja bi imala jedan $e$ za sve $k$, ne vrijedi).
 
 Drugo, $\f F$ ne mora biti primitivno rekurzivna --- vidjet ćemo da je dovoljno da bude rekurzivna. Tada teorem vrijedi i za primitivno rekurzivne funkcije, zbog korolara~\ref{kor:prnrek}. Napomenimo da ne možemo još oslabiti pretpostavku zahtijevajući da je $\f F$ parcijalno rekurzivna: $\varnothing^1=\mu\,\emptyset^2$ je parcijalno rekurzivna prema primjeru~\ref{pr:varnothingprek}, a ne može postojati $e\in\N$ takav da su $e$ i $\varnothing(e)$ $k$-ekvivalentni, jer izraz $\varnothing(e)$ nema vrijednost ni za koji $e$.
 
 Treće, smijemo tražiti da $e$ bude u $\f{Prog}$: dobit ćemo ga iz teorema rekurzije, a on daje samo sintaksno ispravne programe (preko dijagonalne funkcije).
 
-Četvrto, $\f F$ mora biti jednomjesna: broj $k$ je mjesnost funkcije $\kf e^k$, koja je jednaka funkciji $\kf{\f F(e)}^k$. Mjesnost od $\f F$ mora biti $1$ jer želimo u nju uvrstiti $e\in\N^1$.
+Četvrto, $\f F$ mora biti jednomjesna: broj $k$ je mjesnost funkcije $\kf e^k$, jednake funkciji $\kf{\f F(e)}^k$. Mjesnost od $\f F$ mora biti $1$ jer želimo u nju uvrstiti $e\in\N^1$.
 
 I peto, $\f F$ mora biti izračunljiva: nije dovoljno zahtijevati samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $E\mspace{-1mu}mp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{E\mspace{-1mu}mp}(e)$, tada bi $e\in E\mspace{-1mu}mp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija. (Izraz $\kf0(0)$ nema vrijednost po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\nsimeq\kf1(0)$, dakle $\kf0^1\!\ne\kf1^1$.) No $e\notin E\mspace{-1mu}mp$ je također kon\-tra\-dik\-ci\-ja, jer bi to značilo $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=0$, dakle $e\in[0]_{\approx_1}\!=E\mspace{-1mu}mp$. Zaključujemo da $\chi_{E\mspace{-1mu}mp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
 

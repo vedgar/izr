@@ -33,7 +33,7 @@ Paradoks iz uvoda sada se može iskazati ovako: imamo algoritam za $\f{Russell}$
 Ne postoji rekurzivna funkcija $\f r$ takva da je $\f r|_{K}=\f{Russell}$.
 \end{lema}
 \begin{proof}
-Pretpostavimo da takva funkcija postoji. Tada je ona parcijalno rekurzivna, pa po teoremu ekvivalencije ima indeks, označimo ga s $e$ (pogledajte napomenu~\ref{nap:>1ind}); i totalna je, pa postoji $q:=\f r(e)\in\N$. Sada je sljedbenik tog broja jednak
+Pretpostavimo da takva funkcija postoji. Tada je ona parcijalno rekurzivna, pa po teoremu ekvivalencije ima indeks, označimo jedan njen indeks s $e$ (pogledajte napomenu~\ref{nap:>1ind'}); i totalna je, pa postoji $q:=\f r(e)\in\N$. Sada je sljedbenik tog broja jednak
 \begin{equation}
     1+q=1+\f r(e)=1+\kf e(e)=1+\f{comp}(e,e)\text,
 \end{equation}
@@ -170,13 +170,13 @@ To znači da za $\mathcal T_0$ možemo uzeti Turingov stroj koji računa $\rho$ 
 Sad, kada bi postojao algoritam koji bi za svaku riječ nad $\Sigma_{\t\textbullet}$ odlučivao hoće li $\mathcal T_0$-izračunavanje s njome stati, pomoću njega bismo mogli odlučiti $K$, sljedećim algoritmom: za ulaz $u\in\N$, konstruiramo riječ $\t\textbullet^u$, i vratimo stane li $\mathcal T_0$-izračunavanje s njom. Po definiciji~\ref{def:Tcomputefi}, to će biti ako i samo ako je $\t\textbullet^u\in\dom\rho$, što će prema definiciji unarne reprezentacije biti ako i samo ako je $u\in K$. Po Church--\!Turingovoj tezi, to bi značilo da je $K$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
-\begin{propozicija}[Neodlučivost problema zaustavljanja za Turingove strojeve]
+\begin{propozicija}[Neodlučivost problema zaustavljanja za Turingove strojeve]\ \\
 Za svaku abecedu $\Sigma$ postoji Turingov stroj nad njom, čiji je problem zaustavljanja neodlučiv\!.
 \end{propozicija}
 \begin{proof}
 Ako je $\t\textbullet\;\raisebox{1.1pt}{$\in$}\;\Sigma$, možemo primijeniti lemu~\ref{lm:THaltnodl} na Turingov stroj $\mathcal T_0$ nad abecedom $\Sigma$. Kad bi postojao algoritam koji za svaku riječ $w\in\Sigma^*$ točno određuje stane li $\mathcal T_0$-izračunavanje s $w$, to bi posebno moralo vrijediti za sve $w\in\t\textbullet^*\subseteq\Sigma^*$, što je u kontradikciji s lemom~\ref{lm:THaltnodl}.
 
-Ako pak $\t\textbullet\notin\Sigma$, uzmimo neki konkretni znak $\alpha\in\Sigma$ (po definiciji abecede je $\Sigma\ne\emptyset$, pa $\alpha$ postoji), i \emph{zamijenimo} ga s \t\textbullet: gledamo Turingov stroj $\mathcal T_0'$ koji je kao $\mathcal T_0$ iz prethodnog odlomka, osim što umjesto \t\textbullet\ ima $\alpha$ --- kako u $\Sigma$, tako i u $\Gamma$ i u svim prijelazima od $\delta$. S obzirom na to da znakovi radne abecede nemaju nikakvu imanentnu semantiku (osim praznine, ali za to pogledajte sljedeći odlomak), $\mathcal T_0'$-izračunavanje s $\alpha^u$ stane ako i samo ako $\mathcal T_0$-izračunavanje s $\t\textbullet^u$ stane --- pa kad bi neki algoritam za svaku $w\in\Sigma^*$ točno određivao stane li $\mathcal T_0'$-izračunavanje s $w$, tada bi to posebno vrijedilo i za sve riječi oblika $\alpha^u,u\in\N$, pa bismo opet imali kontradikciju s neodlučivošću od $K$ kao u prethodnom odlomku.
+Ako pak $\t\textbullet\notin\Sigma$, uzmimo neki konkretni znak $\alpha\in\Sigma$ (po definiciji abecede je $\Sigma\ne\emptyset$, pa $\alpha$ postoji), i \emph{zamijenimo} ga s \t\textbullet: gledamo Turingov stroj $\mathcal T_0'$ koji izgleda kao $\mathcal T_0$ iz prethodnog odlomka, osim što umjesto \t\textbullet\ ima $\alpha$ --- kako u $\Sigma$, tako i u $\Gamma$ i u svim prijelazima od $\delta$. S obzirom na to da znakovi radne abecede nemaju nikakvu imanentnu semantiku (osim praznine, ali za to pogledajte sljedeći odlomak), $\mathcal T_0'$-izračunavanje s $\alpha^u$ stane ako i samo ako $\mathcal T_0$-izračunavanje s $\t\textbullet^u$ stane --- pa kad bi neki algoritam za svaku $w\in\Sigma^*$ točno određivao stane li $\mathcal T_0'$-izračunavanje s $w$, tada bi to posebno vrijedilo i za sve riječi oblika $\alpha^u,u\in\N$, pa bismo opet imali kontradikciju s neodlučivošću od $K$ kao u prethodnom odlomku.
 
 Postoji još samo jedan slučaj koji nismo uzeli u obzir: što ako je praznina stroja $\mathcal T_0$ upravo~\t\textbullet? Tada ona po definiciji nije u $\Sigma$, ali je ne možemo samo zamijeniti s $\alpha$ jer $\alpha$ jest u $\Sigma$. U tom slučaju odaberemo neki novi znak $\beta\notin\Gamma$, proglasimo ga prazninom, i \t\textbullet\ zamijenimo s $\beta$ u $\Gamma$ i $\delta$. Nakon toga primijenimo postupak iz prethodnog odlomka.
 \end{proof}
@@ -338,11 +338,11 @@ Ako je to \inc, dakle $i.\;\incr j$ za neki $j$, tada mora biti $j<m_P\le m$, i 
 \end{equation}
 odnosno u $\mathfrak N$ uz valuaciju $v$ vrijedi i konzekvens formule~\eqref{eq:formINC}, što smo trebali.
 
-	Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, sličnom metodom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $\mathsf o^{\mathfrak N}[v]=\mathsf o^{\mathfrak N}=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u
+	Ako je instrukcija $i.\;\decr jl$ za neke $j<m$ i $l\le n$, tada trebamo dokazati da u $\mathfrak N$ (uz proizvoljnu valuaciju $v$) vrijedi formula~\eqref{eq:formDEC}. Ta formula je konjunkcija dva kondicionala, pa trebamo dokazati da vrijede oba, sličnom metodom kao u prethodnom odlomku. Za prvi, pretpostavimo da vrijedi $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$. To znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$ (jer je $\mathsf o^{\mathfrak N}[v]=\mathsf o^{\mathfrak N}=0$), no takva konfiguracija po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC0} prelazi u konfiguraciju
 \begin{equation}
     c_{t+1}=\bigl(v(x_0),\dotsc,v(x_{j-1}),0,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,l\bigr)\text,
 \end{equation}
-koja je time dostižna (u $t+1$ koraka), pa vrijedi $\mathfrak N\models_v R_l(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$.
+dostižnu u $t+1$ koraka, pa vrijedi $\mathfrak N\models_v R_l(x_0,\dotsc,x_{j-1},\mathsf o,x_{j+1},\dotsc,x_{m-1})$.
 
 	Za drugi, pretpostavimo $\mathfrak N\models_v R_i(x_0,\dotsc,x_{j-1},\mathsf s(x_j),x_{j+1},\dotsc,x_{m-1})$. Kao u \inc-slučaju, $\bigl(\mathsf s(x_j)\bigr){}^{\mathfrak N}[v]=v(x_j)+1$, što je pozitivno zbog $v(x_j)\in\dulj{\mathfrak N}=\N$, pa to znači da postoji $t$ takav da je $c_t=\bigl(v(x_0),\dotsc,v(x_{j-1}),v(x_j)+1,v(x_{j+1}),\dotsc,v(x_{m-1}),0,\dotsc,i\bigr)$. Po definiciji~\ref{def:RAMconf}\eqref{stav:leadDEC-} ta konfiguracija prelazi u $c_{t+1}=\bigl(v(x_0),\dotsc,v(x_{m-1}),0,\dotsc,i+1\bigr)$ te vrijedi $\mathfrak N\models_v R_{i+1}(x_0,\dotsc,x_{m-1})$, čime smo dokazali i drugi kondicional.
 
@@ -372,7 +372,7 @@ Neka je $(c_t)_{t\in\N}$ $P$-izračunavanje s $\vec u$. Za proizvoljne $t\in\N$ 
 Za svaki $t\in\N$ vrijedi $\mathfrak M\models R_{c_t(\textsc{pc})}\bigl(\overline{c_t(\reg0)},\dotsc,\overline{c_t(\reg{m-1})}\bigr)$,\newline odnosno $(a_0^t,a_1^t,\dotsc,a_{m-1}^t)\in S_{c_t(\textsc{pc})}$.
 \end{lema}
 \begin{proof}
-Indukcijom po $t$. Za $t=0$, tražena formula je upravo $\pi_{\vec u}$, koja je u $\Gamma_{\vec u}$ pa po pretpostavci vrijedi u $\mathfrak M$. Pretpostavimo da tvrdnja vrijedi za $t=b$, i pogledajmo tvrdnju za $t=b+1$. Ako je $c_b$ završna konfiguracija, tada je $c_{b+1}=c_b$ jer završne konfiguracije prelaze (jedino) u same sebe, pa je formula za $c_{b+1}$ ista kao formula za $c_b$, i vrijedi u $\mathfrak M$ po pretpostavci indukcije. Inače, $i:=c_b(\textsc{pc})<n$, pa postoji instrukcija programa $P$ s rednim brojem $i$, i također je $\iota_i\in\Gamma_{\vec u}$, dakle $\mathfrak M\models\iota_i$.
+Indukcijom po $t$. Za $t=0$, tražena formula je upravo $\pi_{\vec u}$, koja se nalazi u $\Gamma_{\vec u}$ pa po pretpostavci vrijedi u $\mathfrak M$. Pretpostavimo da tvrdnja vrijedi za $t=b$, i pogledajmo tvrdnju za $t=b+1$. Ako je $c_b$ završna konfiguracija, tada je $c_{b+1}=c_b$ jer završne konfiguracije prelaze (jedino) u same sebe, pa je formula za $c_{b+1}$ ista kao formula za $c_b$, i vrijedi u $\mathfrak M$ po pretpostavci indukcije. Inače, $i:=c_b(\textsc{pc})<n$, pa postoji instrukcija programa $P$ s rednim brojem $i$, i također je $\iota_i\in\Gamma_{\vec u}$, dakle $\mathfrak M\models\iota_i$.
 
 Ako je ta instrukcija tipa \inc, recimo $i.\;\incr j$ za neki $j<m$, tada u $\mathfrak M$ vrijedi~\eqref{eq:formINC}, odnosno uz valuaciju $v(x_j):=a_j^b$, vrijedi
 \begin{equation}
@@ -438,7 +438,7 @@ Time je dokazan Churchov teorem, ali na neformalnoj razini --- "dokazali" smo da
 
 \subsection{Formule prvog reda kao formalni jezik}
 
-Rekli smo da probleme obično shvaćamo kao jezike: odlučivost problema je tu rekurzivnost (karakteristične funkcije kodiranja) jezika čiji elementi su riječi koje predstavljaju instance problema na koje je odgovor potvrdan. U ovom slučaju, promotrili bismo jezik $\Valid$ nad nekom abecedom $\Sigma_{\log}$ koja je dovoljno bogata da može izraziti svaku formulu logike prvog reda, i u njemu bi se nalazile samo valjane formule. Ako uspijemo dokazati da $\Valid$ nije rekurzivan, "odgurat" ćemo primjenu Church--\!Turingove teze na sam kraj dokaza, i pseudokod u dokazu teorema~\ref{tm:Church} moći ćemo zamijeniti pravom rekurzivnom funkcijom koja svodi $K$ na $\Valid$ (preciznije $\kr{\Valid}$).
+Rekli smo da probleme obično shvaćamo kao jezike: odlučivost problema je tu rekurzivnost (karakteristične funkcije kodiranja) jezika čiji elementi su riječi koje predstavljaju instance problema na koje je odgovor potvrdan. U ovom slučaju, promotrili bismo jezik $\Valid$ (nad nekom abecedom $\Sigma_{\log}$, dovoljno bogatom da može izraziti svaku formulu logike prvog reda) u kojem bi se nalazile samo valjane formule. Ako uspijemo dokazati da $\Valid$ nije rekurzivan, "odgurat" ćemo primjenu Church--\!Turingove teze na sam kraj dokaza, i pseudokod u dokazu teorema~\ref{tm:Church} moći ćemo zamijeniti pravom rekurzivnom funkcijom koja svodi $K$ na $\Valid$ (preciznije $\kr{\Valid}$).
 
 Hoćemo li time dobiti išta vrednije nego u prethodnoj točki? Da, jer imamo garanciju da smo barem svođenje napisali egzaktno --- a ako prihvatimo definiciju~\ref{def:izr}, argument postaje sasvim matematički bez pozivanja na intuiciju pojma algoritma.
 
@@ -446,7 +446,7 @@ Za početak uvedimo abecedu $\Sigma_{\log}$. Koristimo pristup blizak standardno
 
 Taj fenomen je uobičajen u modernim programskim jezicima: imaju hijerarhiju jezičnih "slojeva", koji im omogućuju da njihova teorija ostane utemeljena u teoriji formalnih jezika, a da ipak budu dovoljno izražajni. Recimo, po analogiji s prethodnim odlomkom, najčešće imaju prebrojivo mnogo varijabli (imena za podatke), no sve su one jednostavnim pravilima sastavljene od konačno mnogo mogućih znakova. Konkretno, u programskom jeziku C imena varijabli čine jezik nad $63$-članom abecedom $\{\t\_,\t a,\t b,\t c,\dotsc,\t z,\t A,\t B,\t C,\dotsc,\t Z,\t 0,\t 1,\t 2,\dotsc,\t 9\}$, zadan pravilom da prvi znak ne smije biti znamenka, a čitavo ime ne smije biti nijedna od konačno mnogo ključnih riječi.
 
-Ta \emph{leksička} struktura prirodno se nalazi "ispod" sintaksne strukture programskog jezika, u smislu da se leksički analizator izvršava prije sintaksnog, i predaje mu samo tipove \emph{tokena} koji su pronađeni u izvornom kodu. Recimo, iako su \t{abc} i \t{xy} dvije različite varijable, u sintaksno ispravnom programu možemo zamijeniti jednu drugom i sigurno nećemo uvesti sintaksnu grešku --- iako ćemo vjerojatno uvesti neke semantičke greške poput nedeklariranih varijabli.
+Ta \emph{leksička} struktura prirodno se nalazi "ispod" sintaksne strukture programskog jezika, u smislu da se leksički analizator izvršava prije sintaksnog, i predaje mu samo tipove \emph{tokena} pronađenih u izvornom kodu. Recimo, iako su \t{abc} i \t{xy} dvije različite varijable, u sintaksno ispravnom programu možemo zamijeniti jednu drugom i sigurno nećemo uvesti sintaksnu grešku --- iako ćemo vjerojatno uvesti neke semantičke greške poput nedeklariranih varijabli.
 
 Vrlo je slična stvar i u logici prvog reda: $x_2$ i $x_{58}$ su različite individualne varijable, ali ako sintaksa kaže da na nekom mjestu (recimo neposredno iza kvantifikatora) mora doći varijabla, tada može doći bilo koja varijabla, i formula će ostati sintaksno ispravna. Ili, na početku atomarne formule mora stajati relacijski simbol, ali možemo staviti bilo koji relacijski simbol $R_i$ --- mora biti odgovarajuće mjesnosti, ali to samo znači da se mjesnost može zaključiti iz ostatka atomarne formule, pa je ne treba pisati. Recimo, \t{(R(x)\textrightarrow R(x,x))} je formula u kojoj postoje dva relacijska simbola: $R_0^1$ i $R_0^2$.
 
@@ -584,7 +584,7 @@ Zapravo, kako u našem slučaju --- reprezentacija problema zaustavljanja RAM-st
 
 Pogledajmo kako u osnovnom jeziku izgleda formula $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\eqref{step:varphi_u}. To ovisi o instrukcijama programa $P_0$ koji računa Russellovu funkciju, ali dio koji nam je jedini bitan za svođenje je prilično malen i odnosi se samo na formulu $\pi_u$.
 
-Preciznije, neka je $P_0=\begin{prog}t.&I_t\end{prog}_{t<n}$. U $\Gamma_u$ imamo formule $\iota_t,t<n$, čija se univerzalna zatvorenja obrnutim redom prebacuju na desnu stranu~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu koja je tada na desnoj stani označimo s $\psi$), koju ne trebamo univerzalno zatvarati jer je rečenica. Formula $\psi$, iako ogromna, ne ovisi o $u$ --- ako konstruiramo funkciju od $u$, to će biti (vrlo velika) konstanta.
+Preciznije, neka je $P_0=\begin{prog}t.&I_t\end{prog}_{t<n}$. U $\Gamma_u$ imamo formule $\iota_t,t<n$, čija se univerzalna zatvorenja obrnutim redom prebacuju na desnu stranu~\eqref{eq:prebaci}, gdje na početku stoji samo formula $\zeta$. Na kraju nam na lijevoj strani ostane samo $\pi_u$ (formulu na desnoj stani tada označimo s $\psi$), koju ne trebamo univerzalno zatvarati jer je rečenica. Formula $\psi$, iako ogromna, ne ovisi o $u$ --- ako konstruiramo funkciju argumenta $u$, njen kod će biti (vrlo velika) konstanta.
 
     Dakle, $\varphi_u:=(\pi_u\to\psi)$, gdje je $\psi$ oblika $\bigl(\overline{\iota_0}\to\bigl(\overline{\iota_1}\to(\overline{\iota_2}\to\dotsb(\overline{\iota_{n-1}}\to\zeta)\dotsm)\bigr)\bigr)$\text.
 Uz standardne reprezentacije ($\mathsf o$ kao $c_0$ odnosno \t c, $\mathsf s$ kao $f_0^1$ odnosno \t f, a $R_i$ kao $R_i^m$ odnosno riječ koda $\f{Rel}(i)$), možemo svaku pojedinu atomarnu formulu koja se pojavljuje u $\psi$ zapisati u osnovnom jeziku. Od veznika su nam potrebni kondicionali (koje imamo u osnovnom jeziku, samo moramo pisati vanjske zagrade), i konjunkcije za formule oblika~\eqref{eq:formDEC} --- koje se mogu reprezentirati kako smo to objasnili u~\eqref{eq:Conjunction}, ili proširujući $\Gamma_u$ tako da za svaku instrukciju $I_t$ tipa \dec\ ubacimo \emph{dva} kondicionala (zvat ćemo ih $\iota_t^0$ i $\iota_t^+$) unutra. Obično je lakše koristiti ovaj drugi pristup.
@@ -672,7 +672,7 @@ Kada bi $\Valid$ bio odlučiv\!, po teoremu~\ref{tm:oikr} bi jednomjesna relacij
 
 \section{Prema Gödelovom prvom teoremu nepotpunosti}
 
-Argumentima koji su potrebni za dokaz Churchovog teorema već smo se poprilično približili dokazu Gödelovog prvog teorema, u formulaciji Tarskog: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za potpuni dokaz trebalo bi razraditi još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
+Argumentima potrebnim za dokaz Churchovog teorema već smo se poprilično približili dokazu Gödelovog prvog teorema, u formulaciji Tarskog: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za potpuni dokaz trebalo bi razraditi još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
 
 U prethodnoj točki uveli smo, za svaki prirodni broj $u$, rečenicu $\varphi_u$ koja je valjana ako i samo ako je $u$ element Kleenejevog skupa. Također smo uveli strukturu $\mathfrak N=(\N,0,\f{Sc},\dotsc)$, čiji konstantsko-funkcijski fragment se podudara sa standardnim modelom od PA (prirodni brojevi, nula i sljedbenik).
 
@@ -725,7 +725,7 @@ Modus ponens i generalizaciju je jednostavno zapisati.
 
 	Odnosno, $\alpha$ je dobivena modus ponensom iz $\beta$ i $\gamma$ ako i samo ako je $\beta=(\gamma\to\alpha)$. Također, $\alpha$ je dobivena generalizacijom iz $\beta$ ako postoji $k$ takav da je $\alpha=\forall x_k\beta$. Pri tome je $k<k+1=\dulj{x_k}<\dulj{\forall x_k}<\dulj{\forall x_k\beta}=\dulj{\alpha}\le\kr\alpha=a$ po lemi~\ref{lm:dulj<=kr}, pa možemo ograničiti kvantifikaciju po $k$.
 
-    Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv\!, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, i još provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana, i to je jedna od onih tehničkih poteškoća koje su elegantno izbjegnute u~\cite{smullyan}.
+    Kad smo se koliko-toliko uvjerili da je $Proof$ odlučiv\!, trebamo isto provesti za $Proof_{\text{PA}}$, jezik koji sadrži dokaze u Peanovoj aritmetici. Nije tako strašno: među aksiome treba dodati i nelogičke, Peanove aksiome, i još provjeriti za svaku formulu u dokazu je li instanca sheme aksioma matematičke indukcije. Ovo posljednje je također petljavo, ali iz istog razloga kao (A4): supstitucija je komplicirana, i to je jedna od spomenutih tehničkih poteškoća elegantno izbjegnutih u~\cite{smullyan}.
 
 Promotrimo sada sljedeći \emph{paralelni} algoritam:
 \begin{quote}

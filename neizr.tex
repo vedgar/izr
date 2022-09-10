@@ -60,7 +60,7 @@ Napomenimo, druga i treća stavka zapravo predstavljaju po $(\card\Sigma)!$ tvrd
 
 Opet, sve bitno je već dokazano; slijedi rekapitulacija glavnih ideja.
 \begin{labeling}{\texttt{(A$\Rightarrow$B)}}
-\item[\texttt{(T$\Rightarrow$P)}] Kodirajući sve dijelove Turing-izračunavanja s rječju zadanog koda, dobijemo parcijalnu rekurzivnost funkcije $\N\varphi$ --- teorem~\ref{tm:tikp}.
+\item[\texttt{(T$\Rightarrow$P)}] Kodirajući sve dijelove Turing-izračunavanja s riječju zadanog koda, dobijemo parcijalnu rekurzivnost funkcije $\N\varphi$ --- teorem~\ref{tm:tikp}.
 \item[\texttt{(P$\Rightarrow$R)}] Kompiliramo funkciju $\N\varphi$ u RAM-program --- teorem~\ref{tm:pir}.
 \item[\texttt{(R$\Rightarrow$T)}] Transpiliranjem RAM-programa koji računa $\N\varphi$, u pet faza dobijemo Turingov stroj koji računa $\varphi$ --- teorem~\ref{tm:krit}.\qedhere
 \end{labeling}
@@ -188,13 +188,13 @@ Osim s obzirom na apstraktnost, možemo gledati i kompromise s obzirom na druge 
     \end{tabular}
 \end{equation}
 
-Tablica~\eqref{eq:vrste-alg} je vrlo pojednostavljena --- em postoji mnogo više dimenzija po kojima možemo uspoređivati algoritamske formalizme (strukturalnost, primjenjivost na stvarne probleme, entropija, količina pretpostavljenog znanja,~\ldots), em prikazane dimenzije nisu binarne. Pored jezičnog i brojevnog modela postoje razni drugi, primjerice geometrijski (Wangove domine) ili algebarski (diofantski skupovi), pa čak i topološki (homotopska teorija tipova); dok je "podjela" na konkretno i apstraktno zapravo spektar duž kojeg se mogu smjestiti razni koncepti. Recimo, makro-stroj je mrvicu apstraktniji od RAM-stroja, dok je logika prvog reda malo konkretnija od $\lambda$-računa. Čak ni sustavi koje smo obradili nisu ekstremi na tom spektru: postoje i sustavi poput G\"odel--Herbrandovih jednadžbi, koji su još apstraktniji od parcijalne rekurzivnosti, kao i Minskijevi brojači (\emph{counter machines}) koji su još konkretniji od RAM-strojeva. Model ASM iz napomene~\ref{nap:ASM} proteže se duž cijelog spektra konkretno--apstraktno, jer je njegova osnovna odlika da hvata algoritme na njihovoj \textbf{prirodnoj razini apstrakcije}, koja god ona bila.
+Tablica~\eqref{eq:vrste-alg} je vrlo pojednostavljena --- em postoji mnogo više dimenzija po kojima možemo uspoređivati algoritamske formalizme (strukturalnost, primjenjivost na stvarne probleme, entropija, količina pretpostavljenog znanja,~\ldots), em prikazane dimenzije nisu binarne. Pored jezičnog i brojevnog modela postoje razni drugi, primjerice geometrijski (Wangove domine) ili algebarski (diofantski skupovi), pa čak i topološki (homotopska teorija tipova); dok je "podjela" na konkretno i apstraktno zapravo spektar duž kojeg se mogu smjestiti razni koncepti. Recimo, makro-stroj je mrvicu apstraktniji od RAM-stroja, dok je logika prvog reda malo konkretnija od $\lambda$-računa. Čak ni sustavi koje smo obradili nisu ekstremi na tom spektru: postoje i sustavi poput G\"odel--Herbrandovih jednadžbi, još apstraktniji od parcijalne rekurzivnosti, kao i Minskijevi brojači (\emph{counter machines}), još konkretniji od RAM-strojeva. Model ASM iz napomene~\ref{nap:ASM} proteže se duž cijelog spektra konkretno--apstraktno, jer je njegova osnovna odlika da hvata algoritme na njihovoj \textbf{prirodnoj razini apstrakcije}, koja god ona bila.
 
 Ono što je sada bitno je da između ćelija takve tablice možemo slobodno "putovati" kako nam je drago, dok imamo odgovarajuće teoreme ekvivalencije. Za pojedini redak (vrstu ulaznih odnosno izlaznih podataka) to se može sasvim formalizirati, u smislu da su izračunljive funkcije doslovno iste bez obzira na to koji stupac odaberemo. Za različite retke moramo precizirati kodiranje, no to je najčešće jednostavno i neovisno o tehničkim detaljima (recimo, zapis broja u bazi je vrlo prirodna veza brojevnog i jezičnog modela, i pritom za samu izračunljivost čak nije bitno --- iako za složenost jest --- odaberemo li unarni zapis ili zapis u bazi $b\ge2$).
 
 %\textbf{Church--\!Turingova teza}
 \begin{ctteza}
-Svaka dovoljno općenita formalizacija pojma algoritma na istoj vrsti podataka ra\-ču\-na iste funkcije, a na različitim vrstama podataka računa funkcije koje su vezane prirodnim kodiranjima između tih vrsta podataka.\\ To su upravo \emph{izračunljive} funkcije, one za koje u intuitivnom smislu postoje algoritmi.
+Svaka dovoljno općenita formalizacija pojma algoritma na istoj vrsti podataka ra\-ču\-na iste funkcije, a na različitim vrstama podataka računa funkcije vezane prirodnim kodiranjima između tih vrsta podataka.\\ To su upravo \emph{izračunljive} funkcije --- one za koje u intuitivnom smislu postoje algoritmi.
 \end{ctteza}
 
 Teoremi ekvivalencije mogu se sada izreći kao: sve ćelije u tablici~\eqref{eq:vrste-alg} jesu dovoljno općenite formalizacije pojma algoritma. (Nismo definirali $\lambda$-račun, ali i za njega vrijedi teorem ekvivalencije. Zainteresirani čitatelj može naći detalje u~\cite{lovnicki}.)

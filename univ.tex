@@ -99,7 +99,7 @@ Može biti i $k=1$; jedan važni slučaj je $\f G:=\f Z$. Recimo,
 \begin{equation}
     \overline{\f Z}(5)=\langle\f Z(0),\f Z(1),\f Z(2),\f Z(3),\f Z(4)\rangle=\langle0,0,0,0,0\rangle=2\cdot3\cdot5\cdot7\cdot11=2\,310.
 \end{equation}
-Dakle, funkcija $\overline{\f Z}$ je u uskoj vezi s funkcijom tzv\!.\ \emph{primorijel}, koja je definirana slično kao faktorijel, osim što množi samo prim-brojeve.
+Dakle, funkcija $\overline{\f Z}$ je u uskoj vezi s funkcijom tzv\!.\ \emph{primorijel}, definiranom slično kao faktorijel, osim što množi samo prim-brojeve.
 \end{primjer}
 
 Sada bismo htjeli dokazati rezultat analogan onom u lemi~\ref{lm:sumprodrek}, samo za operator povijesti. Kao što smo već rekli, to će zahtijevati ponešto teorije brojeva.
@@ -174,7 +174,7 @@ Upravo napisani izraz zapravo kaže da je $\f{nextprime}^1$ \emph{rekurzivna} fu
 
     Za primitivnu rekurzivnost, moramo nekako ograničiti minimizaciju, odnosno moramo "isprogramirati" dokaz da je $\mathbb P$ beskonačan. Uzmimo Euklidov dokaz: ako imamo $p_0,p_1,\dotsc,p_n\in\mathbb P$, novi prim-broj možemo dobiti tako da potražimo prim-djelitelj broja $m:=p_0\cdot p_1\mathbin{\dotsm}p_n+1>1$. Aha! Znamo da je djelitelje pozitivnog broja dovoljno tražiti do samog tog broja, dakle samo trebamo primitivno rekurzivno izračunati $m$ iz $n$ i $p_n$. Tu bismo mogli upotrijebiti primorijel iz primjera~\ref{pr:primorijel} --- konkretno, $m=\f{Sc}\bigl(\overline{\f Z}\bigl(\f{Sc}(n)\bigr)\bigr)$ --- ali nažalost još ne znamo da je funkcija $\overline{\f Z}$ primitivno rekurzivna, jer nismo dokazali da povijest čuva primitivnu rekurzivnost. I to s razlogom: pokazat će se da za tu lemu treba rezultat koji upravo dokazujemo.
 
-    Kako se izvući? Spas je u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. To znači da umjesto primorijela možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a vrijedi $p_n!\ge p_0\cdot p_1\mathbin{\dotsm}p_n$ jer je $p_n!$ umnožak svih brojeva na desnoj strani i eventualno još nekih koji su barem $1$.
+    Kako se izvući? Spas je u tome da ne trebamo pomoću $n$ i $p_n$ izračunati baš $m$, nego samo neki broj od kojeg je $m$ manji. Ionako nećemo tražiti njegove prim-djelitelje, nego će nam on samo poslužiti kao gornja granica za traženje sljedećeg prim-broja nakon $p_n$. To znači da umjesto primorijela možemo upotrijebiti faktorijel, za koji znamo da je primitivno rekurzivan (primjer~\ref{pr:factorialprn}), a vrijedi $p_n!\ge p_0\cdot p_1\mathbin{\dotsm}p_n$ jer je $p_n!$ umnožak svih brojeva na desnoj strani i eventualno još nekih --- koji iznose $1$ ili više, pa ne smanjuju umnožak.
 \begin{equation}
     \f{nextprime}(p)=(\mu q\le p!+1)(q\in\mathbb P\land q>p)%\text,
 \end{equation}
@@ -235,7 +235,7 @@ Da zapišemo $\overline{\f G}$ primitivno rekurzivno pomoću $\f G$, trebamo uvr
 \begin{equation}\label{eq:povijestrek}
     \overline{\f G}(\vec x,y)=\prod_{i<y}\f{pow}\bigl(\f{prime}(i),\f{Sc}\,\bigl(\f{G}(\vec x,i)\bigr)\bigr)\text.
 \end{equation}
-Ako $i$-ti faktor u~\eqref{eq:povijestrek} označimo s $\f H(\vec x,i)$, tada je $\f{pow}\circ(\f{prime}\circ\f I_k^k,\f{Sc}\circ\f G)$ sim\-bo\-li\-čka definicija od $\f H^k$ kompozicijom iz funkcija za koje je već dokazano da su primitivno rekurzivne, i funkcije $\f G$ koja je (primitivno) rekurzivna --- pa je $\f H$ (primitivno) rekurzivna. Sada je $\overline{\f G}$ (primitivno) rekurzivna po lemi~\ref{lm:sumprodrek}.
+Ako $i$-ti faktor u~\eqref{eq:povijestrek} označimo s $\f H(\vec x,i)$, tada je $\f{pow}\circ(\f{prime}\circ\f I_k^k,\f{Sc}\circ\f G)$ sim\-bo\-li\-čka definicija od $\f H^k$ kompozicijom iz funkcija za koje je već dokazano da su primitivno rekurzivne, i funkcije $\f G$ koja je (primitivno) rekurzivna po pretpostavci --- pa je $\f H$ (primitivno) rekurzivna. Sada je $\overline{\f G}$ (primitivno) rekurzivna po lemi~\ref{lm:sumprodrek}.
 %
 %Za drugi smjer, zadana nam je $\overline{\f G}$ i želimo iz nje dobiti $\f G$. Pažljivim gledanjem~\eqref{eq:povijest} vidimo da $\overline{\f G}(\vec x,y)$ kodira prvih $y$ vrijednosti oblika $\f G(\vec x,i)$, među kojima \emph{nije} $\f G(\vec x,y)$. (To je čest \emph{bug} u C-programiranju: u polju deklariranom s \texttt{int a[7];} nema elementa \texttt{a[7]}.) Ako želimo dobiti taj broj, moramo zapravo izračunati $\overline{\f G}$ u nekom broju \emph{većem} od $y$ kao zadnjem argumentu. Dovoljno je uzeti $\overline{\f G}(\vec x,y+1)$: tvrdimo
 %\begin{equation}\label{eq:unpovijest}
@@ -289,7 +289,7 @@ Postoji primitivno rekurzivna operacija $*$ takva da za sve $\vec x,\vec y\in\N^
 \end{equation}
 \end{lema}
 \begin{proof}
-Zapravo, operator povijesti nam daje mogućnost pisanja "točkovne definicije" željenog konačnog niza: samo kažemo koju duljinu želimo i zadamo funkciju koja propisuje elemente. Konkretno, ovdje želimo duljinu koja je zbroj duljina od $\vec x$ i od $\vec y$ --- a ako sa $x$ i $y$ označimo operande od $*$, prvih $k:=\f{lh}(x)$ elemenata trebaju biti dobiveni pomoću $\f{part}$ iz $x$, a preostali elementi iz $y$ (s indeksima pomaknutima za $k$).
+Zapravo, operator povijesti nam daje mogućnost pisanja "točkovne definicije" željenog konačnog niza: samo kažemo koju duljinu želimo i zadamo funkciju koja propisuje elemente. Konkretno, ovdje za duljinu želimo zbroj duljina od $\vec x$ i od $\vec y$ --- a ako operande od $*$ označimo s $x$ i $y$, prvih $k:=\f{lh}(x)$ elemenata trebaju biti dobiveni pomoću $\f{part}$ iz $x$, a preostali elementi iz $y$ (s indeksima pomaknutima za $k$).
 
 Preciznije, definirajmo funkciju $\f G^3$ točkovno po slučajevima:
 \begin{align}
@@ -407,7 +407,7 @@ Poznata funkcija definirana rekurzijom s poviješću je Fibonaccijev niz:
     \f{Fib}(n)&:=n\text{, za  $n<2$;}\\
     \f{Fib}(n)&:=\f{Fib}(n-1)+\f{Fib}(n-2)\text{, inače.}
 \end{align}
-Dokažimo da je $\f{Fib}^1$ primitivno rekurzivna. Po propoziciji~\ref{prop:rekpov}, dovoljno je naći primitivno rekurzivnu funkciju $\f G$ koja prima povijest $p:=\overline{\f{Fib}}(n)$ (kod prvih $n$ vrijednosti Fibonaccijevog niza) te vraća sljedeću vrijednost $\f{Fib}(n)$. Kao što smo rekli, $n$ uvijek možemo dobiti kao $\f{lh}(p)$. Pomoću njega možemo i napisati pomoćnu funkciju za indeksiranje "s kraja" (koja je i inače prilično korisna; moderni programski jezici često dozvoljavaju indeksiranje s kraja pomoću negativnih indeksa, ali mi nemamo negativne brojeve pa ćemo upotrijebiti drugu funkciju):
+Dokažimo da je $\f{Fib}^1$ primitivno rekurzivna. Po propoziciji~\ref{prop:rekpov}, dovoljno je naći primitivno rekurzivnu funkciju $\f G$ koja prima povijest $p:=\overline{\f{Fib}}(n)$ (kod prvih $n$ vrijednosti Fibonaccijevog niza) te vraća sljedeću vrijednost $\f{Fib}(n)$. Kao što smo rekli, $n$ uvijek možemo dobiti kao $\f{lh}(p)$. Pomoću njega možemo i napisati pomoćnu funkciju za indeksiranje "s kraja" (moderni programski jezici često dozvoljavaju indeksiranje s kraja pomoću negativnih indeksa, ali mi nemamo negativne brojeve pa ćemo upotrijebiti drugu funkciju):
 \begin{align}\label{eq:rpartdef}
     \f{rpart}(c,i)&:=\begin{cases}
     c[\f{lh}(c)\dotminus\f{Sc}(i)],&i<\f{lh}(c)\\
@@ -462,7 +462,7 @@ Napokon imamo dovoljno alata da možemo proći kroz točku~\ref{sec:RAMizr} i sv
 
 %\subsection{Kodiranje instrukcija i programa}
 
-Dok još nije dio RAM-programa, instrukcija ima samo tip (\inc, \dec\ ili \goto) te, ovisno o tipu, adresu registra na koji djeluje, i\slash ili odredište (na koje zasad nema nikakvih uvjeta). Posljednje dvoje već jesu prirodni brojevi, a tip instrukcije možemo kodirati na način koji je standardan za konačne skupove: fiksiramo neki poredak. Konkretno, uzet ćemo kodiranje koje preslikava $\inc\mapsto0$, $\dec\mapsto\mspace{-1mu}1$ i $\goto\mapsto2$, kao da smo deklarirali
+Dok još nije dio RAM-programa, instrukcija ima samo tip (\inc, \dec\ ili \goto) te, ovisno o tipu, adresu registra na koji djeluje, i\slash ili odredište (na koje zasad nema nikakvih uvjeta). Posljednje dvoje već jesu prirodni brojevi, a tip instrukcije možemo kodirati na način standardan za konačne skupove: fiksiramo neki poredak. Konkretno, uzet ćemo kodiranje koje preslikava $\inc\mapsto0$, $\dec\mapsto\mspace{-1mu}1$ i $\goto\mapsto2$, kao da smo deklarirali
 \begin{equation}\label{eq:enumIns}
 \texttt{enum ins\_type \string{ INC, DEC, GOTO \string};}
 \end{equation}
@@ -832,7 +832,7 @@ Sada je $\f{univ}(x,e)=\f{result}(z)=\f{ex}(\knk{c_{n_0}(\reg0),\dotsc},0)=c_{n_
 Funkcija $\f{univ}$ je univerzalna, jer može simulirati bilo koji RAM-stroj, odnosno ra\-ču\-na\-ti bilo koju RAM-izračunljivu funkciju, pa time (po teoremu~\ref{tm:pir}) i svaku parcijalno rekurzivnu funkciju. Na neki način, $\f{univ}$ predstavlja funkcijski \emph{interpreter} za RAM-stroj, nasuprot imperativnom \emph{kompajleru} za simboličke definicije izgrađenom u poglavlju~\ref{ch:rek}. %No iz raznih razloga, uglavnom tehničkih i povijesnih, zapravo se univerzalna funkcija uvodi na malo drugačiji način.
 No iz tehničkih i povijesnih razloga, univerzalna funkcija obično se uvodi malo drugačije.
 
-Htjeli bismo napisati što jednostavniju "simboličku definiciju" univerzalne funkcije. Definicija~\eqref{eq:univdef} ima nezgodno svojstvo da dvaput koristi $x$ i $e$, odnosno napisana je kao kompozicija dvije funkcije, svaka od kojih ovisi o ulaznim podacima. No vanjska funkcija ne mora primati $x$ i $e$, ako joj unutarnja funkcija pošalje završnu konfiguraciju, ili nešto iz čega se ona može odrediti. Razlog zašto ih trenutno prima je što joj unutarnja funkcija pošalje samo broj koraka, koji je sam po sebi nedovoljan za određivanje završne konfiguracije. No koristeći kodiranje $\N^*\!$, poslana vrijednost može biti proizvoljno komplicirana.
+Htjeli bismo napisati što jednostavniju "simboličku definiciju" univerzalne funkcije. Definicija~\eqref{eq:univdef} ima nezgodno svojstvo da dvaput koristi $x$ i $e$, odnosno napisana je kao kompozicija dvije funkcije, svaka od kojih ovisi o ulaznim podacima. No vanjska funkcija ne mora primati $x$ i $e$, ako joj unutarnja funkcija pošalje završnu konfiguraciju, ili nešto iz čega se ona može odrediti. Razlog zašto ih trenutno prima je u tome što joj unutarnja funkcija pošalje samo broj koraka, sam po sebi nedovoljan za određivanje završne konfiguracije. No koristeći kodiranje $\N^*\!$, poslana vrijednost može biti proizvoljno komplicirana.
 
 Drugo, od osnovnih operatora ($\circ$, $\pr$ i $\mu$) moramo koristiti minimizaciju jer $\f{univ}$ nije totalna --- ali htjeli bismo je koristiti što "kasnije", tako da što veći dio stabla koje predstavlja njenu simboličku definiciju bude primitivno rekurzivan. Tehnikama svođenja iz poglavlja~\ref{ch:ne} može se pokazati da minimizacija ne može biti u korijenu (ne postoji rekurzivna relacija $\f{R}^3$ takva da je $\f{univ}=\mu\,\f{R}$) --- dakle moramo nakon $\mu$ primijeniti još neki operator. To ne može biti $\pr$ jer bismo time opet dobili totalnu funkciju, dakle mora biti kompozicija. Najjednostavnija "normalna forma" koja zadovoljava te uvjete je $\f{univ}^2=\f U^1\circ\mu\f{\check T}^3$ za primitivno rekurzivne $\f U$ i $\f{\check T}$ ($\f U$ je funkcija, $\f{\check T}$ je relacija).
 
@@ -1137,10 +1137,10 @@ Svaka parcijalno rekurzivna funkcija ima indeks.
 Neka je $k\in\N_+$ te $\f f^k$ parcijalno rekurzivna funkcija. Prema teoremu~\ref{tm:pir}, $\f f\in\mathscr Comp$. Sada prema korolaru~\ref{kor:pimi} postoje $k'$ i $e$ takvi da je $\f f^k=\kf e^{k'}$. Jednake funkcije moraju imati iste mjesnosti, pa je zapravo $k'=k$, odnosno $\f f^k=\kf e^k$.
 \end{proof}
 
-\begin{napomena}[{name=[nejedinstvenost indeksa]}]\label{nap:>1ind}
-Često se govori: "\,\ldots,~dakle funkcija $f$ ima indeks, označimo ga s $e_1$". Strogo govoreći, to je pogrešno, jer $f$, ako već ima indeks, sigurno \textbf{nema jedinstveni indeks}: programerska intuicija nam kaže da za svaki RAM-program postoji beskonačno mnogo RAM-programa koji su mu ekvivalentni (možemo dodavati irelevantne ili nedostupne instrukcije). Ipak, kako kasnije najčešće ne koristimo nikakva svojstva tog broja $e_1$ osim da je indeks od $f$, zapravo taj izričaj možemo shvatiti kao pokratu za "\ldots,~dakle funkcija $f$ ima indeks; odaberimo jedan njen indeks, fiksirajmo ga i nazovimo ga $e_1$".
+\begin{napomena}[{name=[nejedinstvenost indeksa]}]\label{nap:>1ind'}
+Ponekad se govori: "\,\ldots,~dakle funkcija $f$ ima indeks, označimo ga s $e_1$". Tu frazu nije dobro koristiti, jer sugerira jedinstvenost indeksa, što je očito pogrešno: programerska intuicija nam kaže da svaki RAM-program ima beskonačno mnogo ekvivalentnih RAM-programa (možemo dodavati irelevantne ili nedostupne instrukcije). Kako kasnije najčešće ne koristimo nikakva svojstva broja $e_1$ osim da je indeks od $f$, zapravo taj izričaj treba shvatiti kao pokratu za "\ldots,~dakle funkcija $f$ ima indeks; odaberimo jedan njen indeks, fiksirajmo ga u daljnjem razmatranju, i nazovimo ga $e_1$"
 
-Alternativno, možemo smatrati da smo uzeli \emph{najmanji} indeks za $f$, koji sigurno postoji ako $f$ ima indeks, i jednoznačno je određen zbog dobre uređenosti od $\N$, ali takav pristup ima jedan bitni nedostatak: često iz specifikacije neke funkcije $f$ možemo \emph{izračunati} neki indeks za $f$, ali ne možemo izračunati najmanji indeks za nju. Ugrubo, možemo provjeravati brojeve $e$ redom, ali uvjet zaustavljanja $\kf e=f$ je jednakost funkcij\=a, koja nije izračunljiva. Čak i da su funkcije totalne (što ne moraju biti), morali bismo provjeriti jednakost za sve $\vec x$ iz $\N^k$, kojih je beskonačno mnogo.
+	Alternativno, možemo smatrati da smo uzeli \emph{najmanji} indeks za $f$, koji sigurno postoji ako $f$ ima indeks, i jednoznačno je određen zbog dobre uređenosti od $\N$, ali takav pristup ima jedan bitni nedostatak: često iz specifikacije neke funkcije $f$ možemo \emph{izračunati} neki indeks za $f$, ali \textbf{ne možemo} izračunati najmanji indeks za nju. Ugrubo, možemo provjeravati brojeve $e$ redom, ali uvjet zaustavljanja $\kf e=f$ je jednakost funkcij\=a, koja nije izračunljiva. Čak i da su funkcije totalne (što ne moraju biti), morali bismo provjeriti jednakost za sve $\vec x$ iz $\N^k$, kojih je beskonačno mnogo.
 \end{napomena}
 
 Drugim, riječima, tromjesna relacija %$index$ (zadana s $\kf e^k=\f f$)
@@ -1149,11 +1149,11 @@ index(e,k,\f f):\Longleftrightarrow \kf e^k=\f f
 \end{equation}
 između $\N$, $\N_+$ i $\mathscr Comp$ nema funkcijsko svojstvo po prvoj varijabli --- ali ima po trećoj: za svaki broj $e$ i mjesnost $k$, propozicija~\ref{prop:computeind} precizno opisuje funkciju $\kf e^k$.
 
-Tako $index$ može poslužiti kao neka vrsta kodiranja: kad želimo algoritmu dati izračunljivu funkciju kao ulazni podatak, ili je vratiti kao izlazni podatak, možemo prenijeti njen indeks $e$ ($k$ se obično vidi iz konteksta). To nije doista kodiranje, jer nije jednoznačna funkcija ako kažemo "bilo koji indeks", a nije izračunljiva funkcija ako kažemo "najmanji indeks" --- pogledajte napomenu~\ref{nap:>1ind}. Ipak, ako takav rad s indeksima shvatimo kao parcijalnu specifikaciju, to može funkcionirati.
+Tako $index$ može poslužiti kao neka vrsta kodiranja: kad želimo algoritmu dati izračunljivu funkciju kao ulazni podatak, ili je vratiti kao izlazni podatak, možemo prenijeti neki njen indeks $e$ ($k$ se obično vidi iz konteksta). To nije doista kodiranje, jer nije jednoznačna funkcija ako kažemo "bilo koji indeks", a nije izračunljiva funkcija ako kažemo "najmanji indeks" --- kao što je opisano u napomeni~\ref{nap:>1ind'}. Ipak, ako takav rad s indeksima shvatimo kao parcijalnu specifikaciju, to može funkcionirati.
 
 \begin{primjer}[{name=[zadavanje funkcije višeg reda na indeksima]}]\label{pr:parcspecind}
 Zamislimo da imamo funkciju $F:\mathscr Comp_2\rightharpoonup\mathscr Comp_3$, koja %. Drugim ri\-je\-či\-ma, $F$
-	preslikava dvomjesne RAM-izračunljive funkcije u tromjesne RAM-izračunljive funkcije. Kao i prije, htjeli bismo izračunljivost funkcije $F$ opisati pomoću izračunljivosti prateće funkcije $\N F$, koja prima indeks funkcije $\f f$ i vraća indeks funkcije $F(\f f)$. Zbog napomene~\ref{nap:>1ind} to nije potpuni opis funkcije $\N F$, ali važno svojstvo koje želimo sačuvati % ne možemo time potpuno opisati, ali možemo reći što od nje tražimo: to 
+	preslikava dvomjesne RAM-izračunljive funkcije u tromjesne RAM-izračunljive funkcije. Kao i prije, htjeli bismo izračunljivost funkcije $F$ opisati pomoću izračunljivosti prateće funkcije $\N F$, koja prima indeks funkcije $\f f$ i vraća indeks funkcije $F(\f f)$. Zbog napomene~\ref{nap:>1ind'} to nije potpuni opis funkcije $\N F$, ali važno svojstvo koje želimo sačuvati % ne možemo time potpuno opisati, ali možemo reći što od nje tražimo: to 
 	je da \emph{za svaki} $e\in\N$ bude
 \begin{equation}\label{eq:parcspecind}
     \kf{\N F(e)}^3=F(\kf e^2)\text.
@@ -1165,9 +1165,9 @@ Takve funkcije možemo i komponirati: ako imamo $G:\mathscr Comp_3\rightharpoonu
 
 \subsection{Restrikcije i grananja parcijalnih funkcija}
 
-To možemo kombinirati s "pravim" kodiranjima: recimo, za svaki $k\in\N_+$, funkcija $apply_k:\N^k\times\mathscr Comp_k\rightharpoonup\N$, koja prima $\vec x^k$ i $\f f^k$, i vraća $\f f(\vec x)$ ako je $\vec x\in\dom{\f f}$, ima svoju prateću funkciju koja prima $\langle\vec x\rangle$ i bilo koji indeks za $\f f$, i vraća $\f f(\vec x)$ ako postoji.
+Sheme poput one iz primjera~\ref{pr:parcspecind} možemo kombinirati s "pravim" kodiranjima: recimo, za svaki $k\in\N_+$, funkcija $apply_k:\N^k\times\mathscr Comp_k\rightharpoonup\N$, koja prima $\vec x^k$ i $\f f^k$, i vraća $\f f(\vec x)$ ako je $\vec x\in\dom{\f f}$, ima svoju prateću funkciju koja prima $\langle\vec x\rangle$ i bilo koji indeks za $\f f$, i vraća $\f f(\vec x)$ ako postoji.
 \begin{equation}\label{eq:Napply}
-    \N apply_k(x,e):\simeq\f{univ}(x,e)\text{, za }\f{lh}(x)\eq k
+    \N apply_k(x,e):\simeq\f{univ}(x,e)\text{,\quad za }\f{lh}(x)\eq k
 \end{equation}
 
 \begin{napomena}[{name=[restrikcija na izračunljiv skup čuva izračunljivost]}]\label{nap:restrprek}
@@ -1190,9 +1190,9 @@ Neka su $k,l\in\N_+$, neka su $\f G_0^k$, $\f G_1^k$, $\f G_2^k$,~\ldots, $\f G_
 	Tada je funkcija $\f F:=\IF{\f R_1:\f G_1,\f R_2:\f G_2,\dots,\f R_l:\f G_l,\f G_0}$ također parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
-Za svaki $i\in[0\dd l]$, funkcija $\f G_i^k$ je parcijalno rekurzivna, pa prema korolaru~\ref{kor:pii} ima indeks, označimo ga s $e_i$ (pogledajte napomenu~\ref{nap:>1ind} za značenje ove fraze). Prema teoremu~\ref{tm:grek} (rekurzivna verzija), funkcija
+Za svaki $i\in[0\dd l]$, funkcija $\f G_i^k$ je parcijalno rekurzivna, pa prema korolaru~\ref{kor:pii} ima indeks; fiksirajmo jedan i označimo ga s $e_i$ (pogledajte napomenu~\ref{nap:>1ind'} za značenje ove fraze). Prema teoremu~\ref{tm:grek} (rekurzivna verzija), funkcija
 %\begin{equation}
-$\f H^k:=\IF{\f R_1:\f C_{e_1}^k,\f R_2:\f C_{e_2}^k,\dots,\f R_l:\f C_{e_l}^k,\f C_{e_0}^k}$
+$\f H^k:=\IF{\f R_1\!:\f C_{e_1}^k,\f R_2:\f C_{e_2}^k,\dots,\f R_l:\f C_{e_l}^k,\f C_{e_0}^k}$
 %\end{equation}
 je rekurzivna (konstante su primitivno rekurzivne pa su rekurzivne, a uvjeti su u parovima disjunktni i rekurzivni po pretpostavci). Tvrdimo da je
 \begin{equation}\label{eq:gprekdef}

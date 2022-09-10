@@ -115,7 +115,7 @@ Da \texttt{(3)} povlači \texttt{(2)} je trivijalno, jer je svaka primitivno rek
 
     Za $\texttt{(2)}\Rightarrow\texttt{(1)}$, $R=\exists_*\f P=\dom{\mu\f P}$ je domena funkcije $\mu\f P$~\eqref{eq:dommu}, koja je parcijalno rekurzivna jer je dobivena minimizacijom rekurzivne relacije.
 
-Najzanimljiviji je dokaz da \texttt{(1)} povlači \texttt{(3)}. Po definiciji rekurzivne prebrojivosti, postoji parcijalno rekurzivna funkcija $\f F$ takva da je $R=\dom{\f F}$. Po korolaru~\ref{kor:pii}, $\f F$ ima indeks, označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind}). Označimo s $k$ mjesnost od $R$ odnosno $\f F$. Tada $R(\vec x)$ možemo zapisati kao $\vec x\in\dom{\f F}=\dom{\kf e^k}$, odnosno ($e$ mora biti kod nekog RAM-programa čije izračunavanje s $\vec x$ stane u nekom broju $n$ koraka) $\exists n\,\f{Final}(\kr{\vec x},e,n)$. Dakle, dobili smo projekciju, sad samo treba ovo pod kvantifikatorom zapisati u odgovarajućem obliku: relacija zadana s
+Najzanimljiviji je dokaz da \texttt{(1)} povlači \texttt{(3)}. Po definiciji rekurzivne prebrojivosti, postoji parcijalno rekurzivna funkcija $\f F$ takva da je $R=\dom{\f F}$. Po korolaru~\ref{kor:pii}, $\f F$ ima indeks; odaberimo jedan njen indeks i označimo ga s $e$ (sjetite se napomene~\ref{nap:>1ind'}). Označimo s $k$ mjesnost od $R$ odnosno $\f F$. Tada $R(\vec x)$ možemo zapisati kao $\vec x\in\dom{\f F}=\dom{\kf e^k}$, odnosno ($e$ mora biti kod nekog RAM-programa čije izračunavanje s $\vec x$ stane u nekom broju $n$ koraka) $\exists n\,\f{Final}(\kr{\vec x},e,n)$. Dakle, dobili smo projekciju, sad samo treba ovo pod kvantifikatorom zapisati u odgovarajućem obliku: relacija zadana s
 \begin{equation}
     \f P(\vec x,n):\Longleftrightarrow\f{Final}(\kr{\vec x},e,n)
 \end{equation}
@@ -287,7 +287,7 @@ Graf svake parcijalno rekurzivne funkcije je rekurzivno prebrojiv\!.
 Ideja je slična kao u dokazu teorema~\ref{tm:rpeproj}\texttt{(3)}; jedina razlika između domene i grafa je što kod grafa moramo voditi računa i o funkcijskim vrijednostima. Zato nam više nije dovoljna relacija $\exists_*\f{Final}$ koja kaže "postoji neki broj koraka do završne konfiguracije", već "postoji neko izračunavanje koje stane" (iz kojeg možemo izvući funkcijsku vrijednost). Srećom, upravo to nam daje Kleenejev teorem o normalnoj formi.
 
 \begin{proof}
-Neka je $k\in\N_+$ te $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi} $\f F$ ima indeks, označimo ga (napomena~\ref{nap:>1ind}) s $e$. Tada po teoremu~\ref{tm:Kleene} imamo: \begin{equation}\label{eq:Grafproj}
+Neka je $k\in\N_+$ te $\f F^k$ parcijalno rekurzivna. Po korolaru~\ref{kor:pimi} $\f F$ ima indeks; fiksirajmo jedan od njih i označimo ga s $e$ (napomena~\ref{nap:>1ind'}). Tada po teoremu~\ref{tm:Kleene} imamo: \begin{equation}\label{eq:Grafproj}
     \graf{\f F}(\vec x,y)\Longleftrightarrow\vec x\in\dom{\kf e^k}\land\kf e^k(\vec x)\simeq y\Longleftrightarrow\exists z\bigl(
     \f T_k(\vec x,e,z)\land
     \f U(z)=y\bigr)\text.
@@ -541,7 +541,7 @@ Kao i u teoremu~\ref{tm:rpeproj}, da \texttt{(3)} povlači \texttt{(2)} je trivi
 
 Da \texttt{(2)} povlači \texttt{(1)} je malo kompliciranije, ali i dalje sasvim jasno koristeći ono što znamo o projekcijama: $y\in\im{\f F}$ znači $(\exists\vec x\in\dom{\f F})\bigl(y\simeq\f F(\vec x)\bigr)$, odnosno $\exists\vec x\,\graf{\f F}(\vec x,y)$. Htjeli bismo tu egzistencijalnu kvantifikaciju prikazati kao višestruku projekciju, ali za to nam $y$ treba biti na prvom mjestu. Definiramo $P(y,\vec x):=\graf{\f F}(\vec x,y)$ --- tada je $P\preceq\graf{\f F}$, a po teoremu~\ref{tm:grafprre} je $\graf{\f F}$ rekurzivno prebrojiv\!, pa je po lemi~\ref{lm:re<re} i $P$ rekurzivno prebrojiva. Sada je $\im{\f F}(y)\Longleftrightarrow\exists\vec x\,P(y,\vec x)$, što je rekurzivno prebrojivo po korolaru~\ref{kor:projre}.
 
-Opet je najzanimljiviji dokaz da \texttt{(1)} povlači \texttt{(3)}. %Krenimo kao u dokazu teorema~\ref{tm:rpeproj}: $R^1$ je rekurzivno prebrojiva, dakle $R=\dom{\f F}$ za neku parcijalno rekurzivnu funkciju $\f F^1$. Također, $\f F$ ima indeks, označimo ga s $e$ (napomena~\ref{nap:>1ind}). Sada znamo
+Opet je najzanimljiviji dokaz da \texttt{(1)} povlači \texttt{(3)}. %Krenimo kao u dokazu teorema~\ref{tm:rpeproj}: $R^1$ je rekurzivno prebrojiva, dakle $R=\dom{\f F}$ za neku parcijalno rekurzivnu funkciju $\f F^1$. Također, $\f F$ ima indeks, odaberimo jedan od njih i označimo ga s $e$ (napomena~\ref{nap:>1ind'}). Sada znamo
 	Ovdje možemo učiniti nešto bolje od oponašanja dokaza teorema~\ref{tm:rpeproj} --- možemo \emph{iskoristiti} taj teorem da se dočepamo primitivne rekurzivnosti: postoji primitivno rekurzivna relacija $\f P^2$ takva da je $R^1=\exists_*\f P$. To znači da vrijedi $R(x)\Longleftrightarrow\exists y(x\mathrel{\f P}y)$, i već smo vidjeli u prethodnom odlomku da projekcije možemo zamijeniti dodatnim argumentima. Dakle, htjeli bismo definirati $\f G(x,y):=x$ u slučaju da vrijedi $x\mathrel{\f P}y$ --- no što ako ne vrijedi? Ako \emph{nikada} ne vrijedi, tada je $R=\emptyset$ pa nemamo što dokazivati. Ako pak $R\ne\emptyset$, tada postoji neki fiksni (recimo, najmanji) element $r\in R$, koji možemo iskoristiti kao \emph{joker} za $x\not{\mathrel{\f P}}y$. Sve u svemu, funkcija $\f G:=\IF{\f P:\f I_1^2,\,\f C_r^2}$, točkovno
 %\begin{equation}\label{eq:defG}
     $\f G(x,y):=\begin{smallcases}
