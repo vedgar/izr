@@ -48,7 +48,7 @@ U literaturi postoje brojne varijante Turingova stroja --- mi slijedimo~\cite{si
 Ulazna abeceda, ili samo \emph{abeceda}, je konačan neprazan skup. Obično je označavamo sa $\Sigma$ i smatramo fiksnom. Njene elemente zovemo \emph{znakovima} --- ne\-od\-re\-đe\-ne znakove (znakovne varijable) pišemo malim grčkim slovima s početka alfabeta ($\alpha$, $\beta$, $\gamma$), dok konkretne znakove pišemo u fontu fiksne širine: $\t a$, $\t b$, $\t 0$, $\t 1$. \emph{Riječ} (nad $\Sigma$) je bilo koji konačan niz znakova, najčešće označen slovom $w$, $v$ ili $u$. Riječi pišemo konkatenacijom (nizanjem) znakova: recimo, riječ $(\t0,\t1,\t1)$ pišemo kao $\t{011}$. Dakle, skup svih riječi je skup $\Sigma^*$ svih konačnih nizova znakova. Duljinu riječi $w$ označavamo s $\dulj{w}$. Prazni niz (duljine $0$) zovemo \emph{praznom riječju} i označavamo s $\varepsilon$. \emph{Jezik} (nad $\Sigma$) je bilo koji podskup od $\Sigma^*$. \emph{Jezična funkcija} (nad $\Sigma$) je bilo koja parcijalna funkcija $\varphi:\Sigma^*\rightharpoonup\Sigma^*$.
 
 \begin{napomena}[{name=[abeceda je dio identiteta jezične funkcije]}]
-Kao i mjesnost kod brojevnih funkcija i relacija, tako i abecedu kod jezika i jezičnih funkcija smatramo dijelom njihovog identiteta; preslikavanje nad $\{\t a,\t b\}$ koje riječi pridružuje njen reverz (obrnuto čitanu riječ), različito je od preslikavanja nad $\{\t a,\t c\}$ zadanog istim pravilom. Ili, jezik svih riječi koje se sastoje samo od znakova $\t a$ i $\t b$ je različit kao jezik nad $\{\t a,\t b,\t c\}$ i kao jezik nad $\{\t a,\t b,\t d\}$ --- iako se u ovom slučaju radi o skupu s istim elementima. Motivacija je slična kao u slučaju praznih relacija: komplementi su različiti, a i karakteristične funkcije jezika su različite (jer imaju različite domene).
+Kao i mjesnost kod brojevnih funkcija i relacija, tako i abecedu kod jezika i jezičnih funkcija smatramo dijelom njihova identiteta; preslikavanje nad $\{\t a,\t b\}$ koje riječi pridružuje njen reverz (obrnuto čitanu riječ), različito je od preslikavanja nad $\{\t a,\t c\}$ zadanog istim pravilom. Ili, jezik svih riječi koje se sastoje samo od znakova $\t a$ i $\t b$ je različit kao jezik nad $\{\t a,\t b,\t c\}$ i kao jezik nad $\{\t a,\t b,\t d\}$ --- iako se u ovom slučaju radi o skupu s istim elementima. Motivacija je slična kao u slučaju praznih relacija: komplementi su različiti, a i karakteristične funkcije jezika su različite (jer imaju različite domene).
 \end{napomena}
 
 \begin{definicija}[{name=[Turingov stroj]}]
@@ -588,7 +588,7 @@ Ako je pak $w\in\dom{\varphi_0}$, tada $\mathcal T_0$-izračunavanje s $w$ stane
 
 \section{Pretvorba RAM-stroja u Turingov stroj}\label{sec:RAM>Turing}
 
-Dokažimo sada obrat teorema~\ref{tm:tikp}. Za parcijalno rekurzivne funkcije imamo kompajler u RAM-strojeve, koji možemo iskoristiti i za kompiliranje u Turingove strojeve. U modernom računarstvu, dolaskom nove arhitekture često ne moramo iznova kompilirati izvorni kod. Ako već imamo kod na sličnoj razini (RAM-program), možemo ga direktno prevesti ("transpilirati") u kompilirani kod za drugu arhitekturu. To ćemo učiniti ovdje.
+Dokažimo sada obrat teorema~\ref{tm:tikp}. Za parcijalno rekurzivne funkcije imamo kompajler u RAM-strojeve, koji možemo iskoristiti i za kompiliranje u Turingove strojeve. U modernom računarstvu, dolaskom nove arhitekture često ne moramo iznova kompilirati izvorni kod. Ako već imamo kod na sličnoj razini (RAM-program), možemo ga neposredno prevesti ("transpilirati") u kompilirani kod za drugu arhitekturu. To ćemo učiniti ovdje.
 
 Kroz čitavu ovu točku imat ćemo fiksiranu abecedu $\Sigma_0$, njeno kodiranje $\N\Sigma_0$, kodiranje $\sigma=\kr{\cdots}=\N\Sigma_0^*$ zapisom u pomaknutoj bazi $b=\card\Sigma_0$, jezičnu funkciju $\varphi_0$ nad $\Sigma_0$ takvu da je $\N\varphi_0\in\mathscr Comp_1$ te fiksni RAM-algoritam $P_0^1$ koji računa $\N\varphi_0$.
 
@@ -616,7 +616,7 @@ Cilj prve faze je pomaknuti riječ za jednu ćeliju desno, stavivši graničnik 
 \end{lema}
 
 \begin{proof}
-	Obično se takav pomak radi s desnog kraja, jer inače moramo izvan trake pamtiti znakove koje prenosimo. No sjetimo se uvoda: za Turingov stroj pomaci su teški a pamćenje znakova lagano --- jer je $\Gamma$ konačan, znakove možemo pamtiti u stanjima stroja. Imat ćemo po jedno stanje $n_\alpha$ za prijenos svakog znaka $\alpha\in\Sigma_0\dcup\{\t\$,\bl\}$. %te još dva posebna stanja $n_{\t\$}$ i $n_{\bl}$. %Možemo standardno otići na kraj trake pa pomicati znak po znak udesno%Standardni način da se to napravi je otići na kraj riječi, pa pomicati slova s kraja redom za po jedno mjesto udesno. To možemo i na Turingovom stroju (pokušajte!), ali možemo i jednostavnije: obrisat ćemo prvi znak (zamijeniti ga s $\t\$$) i \emph{zapamtiti ga} u stanju stroja --- 
+	Obično se takav pomak radi s desnog kraja, jer inače moramo izvan trake pamtiti znakove koje prenosimo. No sjetimo se uvoda: za Turingov stroj pomaci su teški a pamćenje znakova lagano --- jer je $\Gamma$ konačan, znakove možemo pamtiti u stanjima stroja. Imat ćemo po jedno stanje $n_\alpha$ za prijenos svakog znaka $\alpha\in\Sigma_0\dcup\{\t\$,\bl\}$. %te još dva posebna stanja $n_{\t\$}$ i $n_{\bl}$. %Možemo standardno otići na kraj trake pa pomicati znak po znak udesno%Standardni način da se to napravi je otići na kraj riječi, pa pomicati slova s kraja redom za po jedno mjesto udesno. To možemo i na Turingovu stroju (pokušajte!), ali možemo i jednostavnije: obrisat ćemo prvi znak (zamijeniti ga s $\t\$$) i \emph{zapamtiti ga} u stanju stroja --- 
 
     Tada, ako u stanju $n_\alpha$ čitamo znak $\beta$, zamjenjujemo ga s $\alpha$ i pamtimo u stanju $n_\beta$~\eqref{d:10}. To objašnjava i zašto je početno stanje $n_{\t\$}$. Nakon što pročitamo i pomaknemo čitavu riječ, nađemo se u stanju $n_{\bl}$ na prvoj praznini nakon nje. %Zamijenimo je s \t\# i pomaknemo se ulijevo~\eqref{d:12}.
 \end{proof}
@@ -930,7 +930,7 @@ Konkretno, ako (za $m=4$) u nekom trenutku imamo konfiguraciju $(1,4,0,5,0,0,\do
     \t\textopenbullet
     \end{array}\dotsm\text,
 \end{equation}
-iz čega vidimo dvije stvari. Prvo, $\bl$ mora biti ovaj prvi element u $B^m$, koji ima sve kružiće prazne. Tako postižemo da traka bude prazna od nekog mjesta nadalje (konkretno, maksimum svih $m$ vrijednosti u registrima), odnosno da bude s konačnim nosačem. Drugo, naš znak $r_1$, koji smo upotrijebili da postavimo $\reg1$ na ulaznu vrijednost $\kr w$, je treći element u $B^m$, napisan transponirano kao $(\t{\textopenbullet\textbullet\textopenbullet}^{m-2})^\intercal$. Stupčano,
+iz čega vidimo dvije stvari. Prvo, $\bl$ mora biti prvi element naveden u $B^m$, koji ima sve kružiće prazne. Tako postižemo da traka bude prazna od nekog mjesta nadalje (konkretno, maksimum svih $m$ vrijednosti u registrima), odnosno da bude s konačnim nosačem. Drugo, naš znak $r_1$, koji smo upotrijebili da postavimo $\reg1$ na ulaznu vrijednost $\kr w$, je treći element u $B^m$, napisan transponirano kao $(\t{\textopenbullet\textbullet\textopenbullet}^{m-2})^\intercal$. Stupčano,
 \begin{equation}
 \renewcommand{\arraystretch}{0.1}
     \bl\,:=\begin{array}{c}
@@ -1024,7 +1024,7 @@ U dijagramima, na strelici od $q$ prema $q'$ pišemo $\beta\t:\beta'\texttt@j$, 
 
 \subsection{Simulacija RAM-izračunavanja}
 
-\begin{lema}[{name=[{izvršavanje RAM-instrukcija na Turingovom stroju}]}]\label{lm:gadgets}
+\begin{lema}[{name=[{izvršavanje RAM-instrukcija na Turingovu stroju}]}]\label{lm:gadgets}
     Neka je $P_0=:\begin{prog}i.&I_t\end{prog}_{t<n}$ (širine $m$). Tada za svaki $i<n$ postoji fragment Turingova stroja, koji prevodi svaku $m$-reprezentaciju svake $\mathcal S_0$-konfiguracije $c$ kojoj je $c(\textsc{pc})=i$, u neku $m$-reprezentaciju $\mathcal S_0$-konfiguracije $d$, gdje $c\leadsto d$ po programu $P_0$.
 \end{lema}
 \begin{proof}
@@ -1289,6 +1289,15 @@ Za $b=1$ vrijedi jednakost (jer je jedina moguća znamenka $1$).
 Postoji fragment Turingova stroja koji prevodi bilo koju $m$-reprezentaciju završne konfiguracije $(p_n,k,\t\$\bl^{\dulj w}\t\#t\bl\ldots)$, gdje je $k>\dulj w$ i $t$ u tragu $0$ ima oblik $\t\textbullet^y\t\textopenbullet^{\dulj t-y}$, u konfiguraciju $(l_\bl,\dulj v,\t\$v\bl\ldots)$, gdje je $\kr v=y$.% te $u\in(B^m)^*$.
 \end{lema}
 
+\begin{proof}
+%Kao što rekosmo, dokaz je sličan dokazu leme~\ref{lm:faza2}, samo u suprotnom smjeru. 
+Prvo odemo do kraja upotrijebljenog dijela trake~\eqref{d:4a} i tamo zapišemo krajnji graničnik~\eqref{d:4b}. Zatim odemo do početka trake~\eqref{d:4c}, brišući pritom separator~\eqref{d:4d}. Tada se okrenemo~\eqref{d:4e} i idemo desno kroz znakove s \t\textopenbullet\ u tragu $0$~\eqref{d:4f} --- dok ne dođemo do prvog \t\textbullet, koji obrišemo~\eqref{d:4g} i prenesemo lijevo~\eqref{d:4h} do prvog znaka iz $\Sigma_0$. Ako je taj znak "najveći", zamjenjujemo ga "najmanjim"~\eqref{d:4i} i nastavljamo ići lijevo, sve dok ne dođemo do nekog znaka koji možemo "inkrementirati"~\eqref{d:4j}, ili do početnog graničnika~\eqref{d:4k}. U ovom posljednjem slučaju, odemo na kraj riječi koja se mora sastojati samo od znakova $\alpha_1$~\eqref{d:4l} i dopišemo još jedan na kraj~\eqref{d:4m}. Odemo po novi~\t\textbullet\ iz traga $0$\dots\ kada ih sve potrošimo odlazimo lijevo brišući krajnji graničnik i sve ostatke izračunavanja s trake~\eqref{d:4n}, dok ne udarimo u zadnji znak od $v$ (ili početni graničnik ako je $v=\varepsilon$).
+
+%Zatim se krećemo ulijevo kroz znakove \t\textopenbullet\ u tragu $0$~\eqref{
+%Prvo odemo do kraja upotrijebljenog (nepraznog) dijela trake~\eqref{d:71} i tamo zapišemo krajnji graničnik~\eqref{d:72}. Zatim se krećemo ulijevo kroz znakove \t\textopenbullet\ u tragu $0$~\eqref{d:73} dok ne dođemo do \t\textbullet, koji maknemo~\eqref{d:74} i prenosimo ga desno kroz "znamenke" i "stupce bitova"~\eqref{d:75}, dok ne dođemo do krajnjeg graničnika~\eqref{d:76}. Tada se opet krećemo ulijevo inkrementirajući riječ: zamjenjujući "devetke jedinicama"~\eqref{d:77} te inkrementirajući prvu "ne-devetku"~\eqref{d:78}, ili ako takve nema, dodajući "jedinicu" slijeva~\eqref{d:79}. Zatim prođemo kroz ostale znamenke do "praznog prostora"~\eqref{d:70} i opet izvršavamo cijeli postupak dok ne dođemo do separatora \t\#.
+	Argument zašto to funkcionira je praktički isti kao u dokazu leme~\ref{lm:faza2}: nakon svakog "prolaza kroz petlju" imamo traku oblika $\t{\$}ut\t{\$}$ pri čemu $t$ ima $\kr v-\kr u$ znakova \t\textbullet\ u tragu $0$. Na početku je $u=\varepsilon$ pa je to istina ($\kr v-\kr\varepsilon=y-0=y$), svakim prolazom ostaje istina jer se $\kr u$ povećava za $1$ dok se broj znakova \t\textbullet\ u tragu $0$ smanjuje za $1$ --- pa na izlasku iz petlje mora biti $\kr v-\kr u=0$, odnosno zbog injektivnosti kodiranja riječi $u=v$. Još je samo preostalo isprazniti i ostale tragove iz $t$ te obrisati zadnji \t\$.
+%Jedina bitna razlika je što je tamo~\eqref{dia:T2} "radni ciklus" imao dva stanja ($q_0$ i $q_1$), a ovdje ih ima tri ($q_3$, $q_4$ i $q_5$). To je posljedica toga da inkrementiramo "s pogrešne strane", odnosno prenosimo kružiće slijeva nadesno, a kod kretanja zdesna nalijevo moramo pamtiti tražimo li tek znamenku koju ćemo inkrementirati (da bismo zamijenili "devetke jedinicama"), ili smo to već učinili (pa ostavljamo "devetke" na miru).
+\end{proof}
 \noindent\begin{gather*}
 %\SwapAboveDisplaySkip
 \label{d:4a}\tag{$\delta$4a}\delta(p_n,\gamma):=(p_n,\gamma,1)\text{, za sve }\gamma\in\{\t\#\}\cup B^m\setminus\{\bl\}\\
@@ -1316,16 +1325,6 @@ Postoji fragment Turingova stroja koji prevodi bilo koju $m$-reprezentaciju zavr
 %\label{d:79}\tag{$\delta$4i}\delta(q_5,\gamma):=(q_3,\alpha_1,-1)\text{, za sve }\gamma\in B^m\\
 %\label{d:70}\tag{$\delta$4j}\delta(q_3,\alpha):=(q_3,\alpha,-1)\text{, za sve }\alpha\in\Sigma_0
 \end{gather*}
-
-\begin{proof}
-%Kao što rekosmo, dokaz je sličan dokazu leme~\ref{lm:faza2}, samo u suprotnom smjeru. 
-Prvo odemo do kraja upotrijebljenog dijela trake~\eqref{d:4a} i tamo zapišemo krajnji graničnik~\eqref{d:4b}. Zatim odemo do početka trake~\eqref{d:4c}, brišući pritom separator~\eqref{d:4d}. Tada se okrenemo~\eqref{d:4e} i idemo desno kroz znakove s \t\textopenbullet\ u tragu $0$~\eqref{d:4f} --- dok ne dođemo do prvog \t\textbullet, koji obrišemo~\eqref{d:4g} i prenesemo lijevo~\eqref{d:4h} do prvog znaka iz $\Sigma_0$. Ako je taj znak "najveći", zamjenjujemo ga "najmanjim"~\eqref{d:4i} i nastavljamo ići lijevo, sve dok ne dođemo do nekog znaka koji možemo "inkrementirati"~\eqref{d:4j}, ili do početnog graničnika~\eqref{d:4k}. U ovom posljednjem slučaju, odemo na kraj riječi koja se mora sastojati samo od znakova $\alpha_1$~\eqref{d:4l} i dopišemo još jedan na kraj~\eqref{d:4m}. Odemo po novi~\t\textbullet\ iz traga $0$\dots\ kada ih sve potrošimo odlazimo lijevo brišući krajnji graničnik i sve ostatke izračunavanja s trake~\eqref{d:4n}, dok ne udarimo u zadnji znak od $v$ (ili početni graničnik ako je $v=\varepsilon$).
-
-%Zatim se krećemo ulijevo kroz znakove \t\textopenbullet\ u tragu $0$~\eqref{
-%Prvo odemo do kraja upotrijebljenog (nepraznog) dijela trake~\eqref{d:71} i tamo zapišemo krajnji graničnik~\eqref{d:72}. Zatim se krećemo ulijevo kroz znakove \t\textopenbullet\ u tragu $0$~\eqref{d:73} dok ne dođemo do \t\textbullet, koji maknemo~\eqref{d:74} i prenosimo ga desno kroz "znamenke" i "stupce bitova"~\eqref{d:75}, dok ne dođemo do krajnjeg graničnika~\eqref{d:76}. Tada se opet krećemo ulijevo inkrementirajući riječ: zamjenjujući "devetke jedinicama"~\eqref{d:77} te inkrementirajući prvu "ne-devetku"~\eqref{d:78}, ili ako takve nema, dodajući "jedinicu" slijeva~\eqref{d:79}. Zatim prođemo kroz ostale znamenke do "praznog prostora"~\eqref{d:70} i opet izvršavamo cijeli postupak dok ne dođemo do separatora \t\#.
-	Argument zašto to funkcionira je praktički isti kao u dokazu leme~\ref{lm:faza2}: nakon svakog "prolaza kroz petlju" imamo traku oblika $\t{\$}ut\t{\$}$ pri čemu $t$ ima $\kr v-\kr u$ znakova \t\textbullet\ u tragu $0$. Na početku je $u=\varepsilon$ pa je to istina ($\kr v-\kr\varepsilon=y-0=y$), svakim prolazom ostaje istina jer se $\kr u$ povećava za $1$ dok se broj znakova \t\textbullet\ u tragu $0$ smanjuje za $1$ --- pa na izlasku iz petlje mora biti $\kr v-\kr u=0$, odnosno zbog injektivnosti kodiranja riječi $u=v$. Još je samo preostalo isprazniti i ostale tragove iz $t$ te obrisati zadnji \t\$.
-%Jedina bitna razlika je što je tamo~\eqref{dia:T2} "radni ciklus" imao dva stanja ($q_0$ i $q_1$), a ovdje ih ima tri ($q_3$, $q_4$ i $q_5$). To je posljedica toga da inkrementiramo "s pogrešne strane", odnosno prenosimo kružiće slijeva nadesno, a kod kretanja zdesna nalijevo moramo pamtiti tražimo li tek znamenku koju ćemo inkrementirati (da bismo zamijenili "devetke jedinicama"), ili smo to već učinili (pa ostavljamo "devetke" na miru).
-\end{proof}
 \begin{primjer}[{name=[četvrti fragment transpiliranog stroja]}]
 Za $\Sigma_0:=\{\t a,\t b,\t c,\t d\}$, četvrti fragment možemo prikazati dijagramom
 \begin{equation}
@@ -1480,7 +1479,7 @@ Doista, neka je $w\in\Sigma_0^*$ proizvoljna riječ i označimo s $k:=\dulj{w}$ 
 	To znači da ono nikad neće stati (doći do $l_{\t\$}$), jer svaki put od $n_{\t\$}$ do $l_{\t\$}$ vodi kroz stanje $p_n$.
 \end{proof}
 
-Uočimo sličnost provedenog postupka s dokazom propozicije~\ref{prop:semfmacro}. Tamo smo makro-stroju omogućili da u izoliranoj okolini izvrši neki konkretni RAM-program, a ovdje smo to omogućili Turingovom stroju. Kao i u makro-programu~\eqref{mprog:funmakro} iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (konstrukcija početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa) te, ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije i "zatvaranje okvira" pomicanjem ulijevo.
+Uočimo sličnost provedenog postupka s dokazom propozicije~\ref{prop:semfmacro}. Tamo smo makro-stroju omogućili da u izoliranoj okolini izvrši neki konkretni RAM-program, a ovdje smo to omogućili Turingovu stroju. Kao i u makro-programu~\eqref{mprog:funmakro} iz definicije~\ref{def:funmakro}, postupak se sastoji od pet faza: "otvaranje okvira" pomicanjem udesno, prijenos (kodiranje) argumenata u simulaciju (konstrukcija početne konfiguracije), sama simulacija (izvršavanje pojedinih instrukcija RAM-programa) te, ako ona stane, prijenos (dekodiranje) njene povratne vrijednosti iz završne konfiguracije i "zatvaranje okvira" pomicanjem ulijevo.
 
 \begin{primjer}[{name=[transpilirani stroj dodaje znak na kraj riječi]}]\label{pr:+a3}
 Primjer~\ref{pr:+a} sad možemo pratiti kroz čitavo izračunavanje:

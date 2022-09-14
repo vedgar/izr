@@ -1,8 +1,7 @@
-%\section{Turing-izračunljivost brojevnih funkcija}
-\section{Izračunljivost jezik\=a}\label{sec:Todl}
+\subsection{Turing-izračunljivost brojevnih funkcija}
+%\section{Izračunljivost jezik\=a}\label{sec:Todl}
 
-% Ivanov prijedlog: koristiti zareze umjesto / za separator.
-% Nisam siguran kako to sklopiti s nulama u nizu ali možda nije strašno.
+% Ivanov prijedlog: koristiti zareze umjesto / za separator. Nisam siguran kako to sklopiti s nulama u nizu ali možda nije strašno.
 
 Sve dosad napravljeno može se iskazati u jednom vrlo općenitom obliku.
 
@@ -70,7 +69,7 @@ Neka je $F^1$ brojevna funkcija.
 Već rekosmo, ovo je posebni slučaj korolara~\ref{kor:pent}, za unarnu abecedu.
 \end{proof}
 
-%\subsection{Izračunljivost jezika}\label{sec:Todl}
+\section{Izračunljivost jezik\=a}\label{sec:Todl}
 
 Neka je $\Sigma$ proizvoljna abeceda, s $b'$ znakova, $\N\Sigma$ njeno kodiranje te $L\subseteq\Sigma^*$ jezik nad njom. Što bi značilo da je $L$ izračunljiv?
 U brojevnom modelu izračunljivost $L$ gledamo preko kodova: definiramo jednomjesnu brojevnu relaciju
@@ -81,7 +80,7 @@ i prirodno je reći da $L$ ima neko svojstvo izračunljivosti (npr.\ da je primi
 
 Recimo, prazni jezik $\emptyset$ je primitivno rekurzivan jer je $\chi_{\kr\emptyset}\!=\chi_{\mspace{1mu}\emptyset}\!=\!\f Z$ primitivno rekurzivna (čak inicijalna). Također, univerzalni jezik $\Sigma^*$ je primitivno rekurzivan, jer je $\kr{\Sigma^*}=\N\Sigma^*[\Sigma^*]=\im{\N\Sigma^*}\!=\N$, čija je karakteristična funkcija $\f C_1^1=\f{Sc}\circ\f Z$.
 
-U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovom stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takve Turingove strojeve obično zadajemo kao $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_a,q_r)$ --- imaju \emph{dva} završna stanja kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
+U jezičnom modelu, moramo vidjeti što znači da neki Turingov stroj računa $\chi_L$. To je Turingov stroj nad $\Sigma$, i ulaz $w\in\Sigma^*$ mu se daje na isti način kao i običnom Turingovu stroju: kroz početnu konfiguraciju $(q_0,0,w\bl\ldots)$. No za izlaz ($\mathit{true}$ ili $\mathit{false}$, ovisno o tome je li $w\in L$) postoji samo konačno mnogo mogućnosti, pa ga je prirodnije predstaviti stanjem. Zato takve Turingove strojeve obično zadajemo kao $(Q,\Sigma,\Gamma,\bl,\delta,q_0,q_a,q_r)$ --- imaju \emph{dva} završna stanja kojima signaliziraju je li riječ u jeziku ili nije (kažemo da \emph{prihvaćaju} odnosno \emph{odbijaju} riječ).
 
 Na prvi pogled, to je slično stanjima $q_z$ i $q_x$ koje smo imali u dosadašnjim Turingovim strojevima, samo što je konfiguracija sa stanjem $q_r$ (kao i ona s $q_a$) završna: prelazi u samu sebe, a ne po funkciji~$\delta$. Međutim, postoji jedna bitna razlika: kako su karakteristične funkcije nužno totalne, od takvih strojeva zahtijevamo da \textbf{uvijek stanu} (za svaki ulaz dostignu konfiguraciju s jednim od ta dva završna stanja) i zovemo ih \emph{odlučiteljima} (\emph{deciders}). Svaki odlučitelj $\mathcal T$ dijeli $\Sigma^*$ na dva dijela,
 \begin{align}
@@ -135,7 +134,7 @@ Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Riječi \emph{unutar} $
 
 %Kako izvršavanje RAM-programa o kojem govorimo stane za svaki $\kr w$, po korolaru~\ref{kor:faza3} i napomeni~\ref{nap:snstane} slijedi da će Turingov stroj koji konstruiramo stati za svaki $w$ --- samo trebamo malo promijeniti način na koji stane, da ne komunicira izlaz putem trake nego putem završnog stanja.
 
-    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa $P$ koji računa $\chi_{\kr L}$. Srećom, u završnoj konfiguraciji pozicija mu je $0$, pa je vrlo lako vidjeti je li izlazna riječ prazna: znak koji čitamo tada je ili praznina ili element ulazne abecede. Proglasimo $l_{\t\$}$ običnim stanjem, i dodajmo prijelaze %U opisu pete (posljednje) faze rada tog Turingovog stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\t\$}$ s
+    Naš Turingov stroj koji računa $\varphi$ dobiven je transpiliranjem RAM-programa $P$ koji računa $\chi_{\kr L}$. Srećom, u završnoj konfiguraciji pozicija mu je $0$, pa je vrlo lako vidjeti je li izlazna riječ prazna: znak koji čitamo tada je ili praznina ili element ulazne abecede. Proglasimo $l_{\t\$}$ običnim stanjem, i dodajmo prijelaze %U opisu pete (posljednje) faze rada tog Turingova stroja, razlikovali smo slučajeve kad je izlazna riječ prazna i kad nije. Kao što smo upravo vidjeli, to nam može poslužiti za odabir završnog stanja u kojem ćemo završiti --- samo zamijenimo prijelaze iz $m_{\t\$}$ s
 \begin{gather}
     %\SwapAboveDisplaySkip
 \label{eq:d88j}\tag{$\delta$5a}
@@ -147,7 +146,7 @@ Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Riječi \emph{unutar} $
 \end{proof}
 \vspace{-3mm}
 
-Dijagramatski, na kraj Turingovog stroja dodali smo fragment\; %gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
+Dijagramatski, na kraj Turingova stroja dodali smo fragment\; %gornji desni kut~\eqref{dia:T5} zamijenimo s\quad
 \begin{tikzpicture}[baseline=(q9.base)]\label{dia:T5j}
     \node[state] (q9) {$l_{\t\$}$};
 \node[state,accepting,right of=q9] (qt) {$q_a$};
@@ -162,9 +161,9 @@ Dijagramatski, na kraj Turingovog stroja dodali smo fragment\; %gornji desni kut
 
 \section{Turing-izračunljivost višemjesnih funkcija}
 
-Dosadašnji rezultati pokazuju da je za jezične funkcije, i za \emph{jednomjesne} brojevne funkcije, svejedno računamo li ih na Turingovom stroju ili na nekom brojevnom modelu izračunavanja (npr.\ RAM-stroju). Da bismo isto dokazali i za \emph{višemjesne} brojevne funkcije, trebamo precizirati reprezentaciju njihovih ulaza.
+Dosadašnji rezultati pokazuju da je za jezične funkcije, i za \emph{jednomjesne} brojevne funkcije, svejedno računamo li ih na Turingovu stroju ili na nekom brojevnom modelu izračunavanja (npr.\ RAM-stroju). Da bismo isto dokazali i za \emph{višemjesne} brojevne funkcije, trebamo precizirati reprezentaciju njihovih ulaza.
 
-%Zapravo, sve potrebne ideje smo već vidjeli. Za ulazne podatke jednomjesnih funkcija, kao i za izlazne podatke, koristit ćemo unarni zapis: što je prirodnije nego broj $4$ zapisati na traku Turingovog stroja kao \textbullet\textbullet\textbullet\textbullet, a $0$ kao praznu riječ $\varepsilon$\@? Tako smo već prikazivali (u tragovima) sadržaj registara kod simulacije RAM-izračunavanja. Da smo opterećeni složenošću, morali bismo koristiti binarni ili neki drugi "pravi" pozicijski zapis, ali srećom nismo.
+%Zapravo, sve potrebne ideje smo već vidjeli. Za ulazne podatke jednomjesnih funkcija, kao i za izlazne podatke, koristit ćemo unarni zapis: što je prirodnije nego broj $4$ zapisati na traku Turingova stroja kao \textbullet\textbullet\textbullet\textbullet, a $0$ kao praznu riječ $\varepsilon$\@? Tako smo već prikazivali (u tragovima) sadržaj registara kod simulacije RAM-izračunavanja. Da smo opterećeni složenošću, morali bismo koristiti binarni ili neki drugi "pravi" pozicijski zapis, ali srećom nismo.
 
 Već smo u uvodu nagovijestili, koristit ćemo kontrakciju --- u abecedu ćemo dodati separator \t/ kojim ćemo razdvojiti više ulaznih podataka: npr.\ $(1,0,5,0)$ prenijet ćemo kao \t{\textbullet//\textbullet\textbullet\textbullet\textbullet\textbullet/}.
 
@@ -257,7 +256,7 @@ Lijevo je općenita slika, desno je jedan konkretan primjer (računanje $\f{mul}
 \begin{lema}[{name=[brojevni-jezični-brojevni dijagram komutira]}]\label{lm:pravkomut}
 Dijagram prikazan lijevo u~\eqref{dia:Nbeta} (samo pune strelice) komutira.
 \end{lema}
-Drugim riječima, za svaki od ta dva pravokutnika, pa onda i za veliki pravokutnik sastavljen od ta dva, svejedno je kojim putom dođemo od njegovog gornjeg lijevog do donjeg desnog vrha.
+Drugim riječima, za svaki od ta dva pravokutnika, pa onda i za veliki pravokutnik sastavljen od ta dva, svejedno je kojim putom dođemo od njegova gornjeg lijevog do donjeg desnog vrha.
 \begin{proof}
 Prvo trebamo dokazati (gornji pravokutnik) da je $\beta f\circ\beta^k =\beta^1\circ f$. Domena desne funkcije je $\dom f$ jer je $\beta^1$ totalna, a domena lijeve funkcije je $\{\vec x\in\N^k\mid\beta^k(\vec x)\in\dom{\beta f}\}$, što je opet jednako $\dom f$ po definiciji domene $\dom{\beta f}$. Neka je sad $\vec x\in\dom f$ proizvoljan. Na njemu je vrijednost lijeve funkcije $\beta f\bigl(\beta^k(\vec x)\bigr)$, što je po definiciji~\eqref{eq:betaf} jednako $\beta^1\bigl(f(\vec x)\bigr)=(\beta^1\circ f)(\vec x)$. Dakle, $\beta f\circ\beta^k$ i $\beta^1\circ f$ imaju istu domenu i na njoj se podudaraju, pa su to jednake funkcije.
 

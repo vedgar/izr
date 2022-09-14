@@ -35,9 +35,9 @@ Govorili smo o izlaznim podacima u množini, no s obzirom na to da nas samo zani
 \end{napomena}
 
 Kad promatramo broj \emph{ulaznih} podataka (tzv\!.\ \emph{mjesnost}) algoritma, situacija je bitno drugačija. Jasno je da algoritam za npr.\ potenciranje prirodnih brojeva prima bazu i eksponent kao dva ulazna podatka, i ne može se jednostavno zapisati pomoću algoritama koji primaju po jedan ulazni podatak. %Doduše, korištenjem tehnike \emph{currying}, svaku izračunljivu funkciju možemo računati pomoću algoritama koji primaju po \emph{dva} ulazna podatka, i neki autori doista ograničavaju mjesnost na $2$, ali to stvara dosta tehničkih problema za minimalni dobitak.
-Zato ćemo promatrati algoritme proizvoljnih mjesnosti $k\in\N_+$, i smatrati da mjesnost čini bitni dio identiteta algoritma. Primjerice, "zbroji 2 broja" i "zbroji 5 brojeva" su različiti algoritmi, štoviše ovaj prvi se pojavljuje kao korak (nekoliko puta) u ovom drugom.
+Zato ćemo promatrati algoritme proizvoljnih mjesnosti $k\in\N_+$, i smatrati da mjesnost čini bitni dio identiteta algoritma. Primjerice, "zbroji dva broja" i "zbroji pet brojeva" su različiti algoritmi; štoviše, prvi od njih se pojavljuje kao korak (četiri puta) u drugome.
 
-Direktna posljedica toga je da u našem modelu ne postoje algoritmi s "varijabilnim brojem" ulaznih podataka, što je u računarstvu poznato pod nazivom \emph{varargs}. Na nekoliko mjesta gdje nam budu potrebni, modelirat ćemo ih pomoću familije algoritama svih mogućih mjesnosti --- recimo, zbrajanje kao $\f{add}^k,k\in\N_+$. Mjesnost\nomenclature{$\f f^k$}{brojevna funkcija mjesnosti $k$} algoritma ili funkcije ćemo obično pisati u superskriptu ako je želimo naglasiti --- neće dolaziti do zabune s eksponentima jer ni algoritme ni funkcije nećemo potencirati, niti s oznakom $f^{-1}$ za inverznu funkciju jer mjesnost ne može biti negativna.
+Posljedica toga je da u našem modelu ne postoje algoritmi s "varijabilnim brojem" ulaznih podataka, što je u računarstvu poznato pod nazivom \emph{varargs}. Na nekoliko mjesta gdje nam budu potrebni, modelirat ćemo ih pomoću familije algoritama svih mogućih mjesnosti --- recimo, zbrajanje kao $\f{add}^k,k\in\N_+$. Mjesnost\nomenclature{$\f f^k$}{brojevna funkcija mjesnosti $k$} algoritma ili funkcije ćemo obično pisati u superskriptu ako je želimo naglasiti --- neće dolaziti do zabune s eksponentima jer ni algoritme ni funkcije nećemo potencirati, niti s oznakom $f^{-1}$ za inverznu funkciju jer mjesnost ne može biti negativna.
 
 Iako mjesnost smatramo neodvojivim dijelom funkcije odnosno algoritma, u slučaju nespecificirane mjesnosti $k$ nespretno je pisati $x_1,x_2,\dotsc,x_k$ kad god trebamo napisati argumente odnosno ulazne podatke. Zato ćemo često tih $k$ prirodnih brojeva skraćeno pisati $\vec x$\nomenclature{$\vec x$}{nekoliko argumenata čija su imena oblika $x_1$,~\dots,~$x_k$}, ili $\vec x^k$ ako želimo naglasiti koliko ih ima --- no najčešće će se to moći zaključiti iz konteksta: recimo, u $f^7(\vec x,y,z)$, vidimo da je duljina od $\vec x$ jednaka $5$.
 
@@ -85,13 +85,13 @@ Dakle, relacijama ćemo pripisivati svojstva izračunljivosti koja imaju njihove
 
 \section{Osnovni pojmovi i oznake}
 
-Iz prethodne točke zaključujemo da ćemo promatrati (algoritme za) dvije vrste funkcija: jezične i brojevne. Brojevne funkcije su nam važnije i uglavnom ćemo raditi s njima, ali na nekoliko mjesta dobro će nam doći i formalizacija izračunljivosti jezičnih funkcija.
+Dakle, promatrat ćemo (algoritme za) dvije vrste funkcija: jezične i brojevne. Brojevne funkcije su nam važnije i uglavnom ćemo raditi s njima, ali na nekoliko mjesta dobro će nam doći i formalizacija izračunljivosti jezičnih funkcija.
 
 Svaka brojevna funkcija je oblika $f:\N^k\rightharpoonup\N$ za neki $k\in\N_+$. Skraćeno pišemo $f^k$ i broj $k$ zovemo \emph{mjesnost} funkcije $f$. Svaka brojevna funkcija ima jedinstvenu mjesnost --- osim prazne funkcije $\varnothing$ s domenom $\emptyset$. Smatramo da i prazne funkcije imaju fiksnu mjesnost: umjesto jedne funkcije $\varnothing$ promatramo familiju $\varnothing^k,k\in\N_+$, proglašavajući na primjer $\varnothing^3$ i $\varnothing^8$ različitim funkcijama. Formalno to možemo napraviti tako da nam "funkcija" znači uređen par, kojem je prva komponenta uobičajena reprezentacija funkcije (skup uređenih parova~\ldots), a druga komponenta mjesnost --- ali nećemo biti toliko formalni, jer prazne funkcije nisu zanimljive iz perspektive izračunljivosti: računaju ih beskonačne petlje.
 
 (Brojevna) relacija je oblika $R\subseteq\N^k$ za neki $k\in\N_+$. Po analogiji s funkcijama, $k$ zovemo \emph{mjesnost} relacije, i pišemo $R^k$ ako je želimo naglasiti. Kao i za funkcije, iako postoji samo jedan prazan skup, promatrat ćemo familiju $\emptyset^k,k\in\N_+$, smatrajući sve njene elemente različitim relacijama. Na kraju krajeva, njihove karakteristične funkcije \emph{jesu} različite, jer imaju različite domene: recimo, $\dom{\chi_{\emptyset^3}}\!=\N^3$. (Radi se o nulfunkciji $\f C_0^3:\N^3\to\N$; razlikujte nulfunkciju, koja je totalna, od prazne funkcije koja nije definirana nigdje!)
 
-Jezične funkcije ćemo uvijek definirati nad nekom \emph{abecedom} (konačnim nepraznim skupom) $\Sigma$, kao funkcije $\varphi:\Sigma^*\rightharpoonup\Sigma^*$. Elementi od $\Sigma^*:=\bigcup_{k\in\N}\Sigma^k$ su \emph{riječi}: konačni nizovi \emph{znakova} iz $\Sigma$, koje pišemo konkatenacijom --- $\t{aab}$ umjesto $(\t{a},\t{a},\t{b})$. \emph{Prazna riječ} je niz duljine $0$: označavamo je s $\varepsilon$. Iz oblika jezičnih funkcija vidimo da su one jednomjesne: u svrhu reprezentacije funkcija veće mjesnosti, abecedi dodajemo \emph{separator} --- znak koji služi razdvajanju argumenata. Recimo, višemjesne funkcije nad $\{\t{a},\t{b}\}$ možemo reprezentirati kao jednomjesne funkcije nad tročlanom abecedom $\{\t{a},\t{b},\t{,}\}$ --- tako da primjerice $\varphi^4(\t{a},\t{abb},\varepsilon,\t{ba})$ računamo kao $\varphi^1(\t{a{},{}a{}b{}b{},{},{}b{}a})$. Kažemo da je $\varphi^1$ dobivena \emph{kontrakcijom} iz $\varphi^4$. Ovo je malo općenitije od brojevnih višemjesnih funkcija jer možemo imati \emph{varargs} (mjesnost možemo zaključiti brojenjem separatora u ulaznoj ri\-je\-či), ali i dalje nemamo nulmjesne funkcije: $\varphi(\varepsilon)$ je $\varphi^1(\varepsilon)$, ne $\varphi^0()$. %Sličan trik možemo primijeniti i kod brojevnih funkcija, nakon što definiramo kodiranje skupa $\N^*$.
+Jezične funkcije ćemo uvijek definirati nad nekom \emph{abecedom} (konačnim nepraznim skupom) $\Sigma$, kao funkcije $\varphi:\Sigma^*\rightharpoonup\Sigma^*$. Elementi od $\Sigma^*:=\bigcup_{k\in\N}\Sigma^k$ su \emph{riječi}: konačni nizovi \emph{znakova} iz $\Sigma$, koje pišemo konkatenacijom --- $\t{aab}$ umjesto $(\t{a},\t{a},\t{b})$. \emph{Prazna riječ} je niz duljine $0$: označavamo je s $\varepsilon$. Iz oblika jezičnih funkcija vidimo da su one jednomjesne: u svrhu reprezentacije funkcija veće mjesnosti, abecedi dodajemo \emph{separator} --- znak koji služi razdvajanju argumenata. Recimo, višemjesne funkcije nad $\{\t{a},\t{b}\}$ možemo reprezentirati kao jednomjesne funkcije nad $\{\t{a},\t{b},\t{,}\}$ --- tako da primjerice $\varphi^4(\t{a},\t{abb},\varepsilon,\t{ba})$ računamo kao $\varphi^1(\t{a{},{}a{}b{}b{},{},{}b{}a})$. Kažemo da je $\varphi^1$ dobivena \emph{kontrakcijom} iz $\varphi^4$. Ovo je malo općenitije od brojevnih višemjesnih funkcija jer možemo imati \emph{varargs} (mjesnost možemo odrediti brojenjem separatora u ulaznoj ri\-je\-či), ali i dalje nemamo nulmjesne funkcije: $\varphi(\varepsilon)$ je $\varphi^1(\varepsilon)$, ne $\varphi^0()$. %Sličan trik možemo primijeniti i kod brojevnih funkcija, nakon što definiramo kodiranje skupa $\N^*$.
 
 Analogon pojmu relacije u jezičnom slučaju je \emph{jezik}: podskup od $\Sigma^*$. Iako karakteristična funkcija jezika nije ni brojevna ni jezična funkcija (ide sa $\Sigma^*$ u $bool$), svejedno možemo pomoću kodiranja skupa $\Sigma^*$ reprezentirati i izračunljivost jezik\=a. %O tome ćemo također više reći kasnije.
 
@@ -175,7 +175,7 @@ Skup $\mathscr Ins_{\inc}$ svih instrukcija tipa $\inc$ je prebrojiv: preslikava
 	Skup $\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ svih RAM-programa je prebrojiv\!.
 \end{korolar}
 \begin{proof}
-	Direktno iz činjenice da je $\mathscr Ins_{\inc}^{\quad*}\subseteq\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g\subseteq\mathscr Ins^*$, i leme~\ref{lema:alef0ins}. Iz teorije skupova znamo da je skup $A^*$ prebrojiv ako je $A$ prebrojiv\!.
+	To slijedi iz činjenice da je $\mathscr Ins_{\inc}^{\quad*}\subseteq\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g\subseteq\mathscr Ins^*$, i leme~\ref{lema:alef0ins}. Iz teorije skupova znamo da je skup $A^*$ prebrojiv ako je $A$ prebrojiv\!.
 \end{proof}
 
 %\subsection{Konfiguracije i izračunavanja}
@@ -245,7 +245,7 @@ Za postojanje, induktivno definiramo
     c_0&:=\text{početna konfiguracija s ulazom $\vec x$,}\\
     c_{n+1}&:=\text{jedinstvena konfiguracija u koju $c_n$ prelazi (prema lemi~\ref{lema:ramdet}).}
 \end{align}
-Po Dedekindovom teoremu rekurzije, time je dobro definiran niz, i taj niz je po definiciji $P$-iz\-ra\-ču\-na\-va\-nje s $\vec x$.
+Po Dedekindovu teoremu rekurzije, time je dobro definiran niz, i taj niz je po definiciji $P$-iz\-ra\-ču\-na\-va\-nje s $\vec x$.
 
 Za jedinstvenost, pretpostavimo da postoje dva $P$-izračunavanja s $\vec x$, $(c_i)_{i\in\N}$ i $(c_i')_{i\in\N}$.
 Kako je $c\ne c'$, postoji neki $i\in\N$ takav da je $c_i\ne c_i'$, a zbog dobre uređenosti od $\N$ postoji najmanji takav: označimo ga s $i_0$.
@@ -594,7 +594,7 @@ Kad smo već kod neformalnih objašnjenja, izrecimo i osnovni rezultat --- koji 
 Za dva (makro- ili RAM-\!) programa $P$ i $Q$ kažemo da su \emph{ekvivalentni} ako za svaku mjesnost $k\in\N_+$, algoritmi $P^k$ i $Q^k$ računaju istu funkciju.
 \end{definicija}
 
-\begin{teorem}[{name=[ekvivalentnost programa i njegovog spljoštenja]}]\label{tm:rem}
+\begin{teorem}[{name=[ekvivalentnost programa i njegova spljoštenja]}]\label{tm:rem}
 Za svaki makro-program $Q$, RAM-program $Q^\flat$ je ekvivalentan s $Q$.
 \end{teorem}
 \begin{proof}[Skica dokaza]
@@ -604,7 +604,7 @@ Potrebno je vidjeti da funkcija iz $\N^2$ u $\N$, zadana s
 	\end{equation}
 	ima sljedeće ključno svojstvo: svaki prijelaz između RAM-konfiguracija $\bigl(r_0,r_1,\dotsc,v(pc,ac)\bigr)$ i $\bigl(r_0',r_1',\dotsc,v(pc',ac')\bigr)$ po programu $Q^\flat$ odgovara jednom ili više prijelaza između makro-konfiguracija $(r_0,r_1,\dotsc,pc,ac)$ i $(r_0',r_1',\dotsc,pc',ac')$ po programu $Q$. Intuitivno, funkcija $v$ opisuje kako se točno transformiraju redni brojevi instrukcija pri spljoštenju, a usto i preslikava "završnu konfiguraciju programskih brojača" $(n_Q,0)$ u $n_{Q^\flat}$. Recimo, ako je $(i.\,P^*)$ prvi makro u $Q$, iz formule~\eqref{eq:v} slijedi da je $v(j,0):=j$ za sve $j<i$. Na kraju primjera~\ref{pr:flat}, u~\eqref{eq:Qflat}, navedena je funkcija $v$ za konkretni makro-program $Q$ iz primjera~\ref{pr:makro}.
 
-Iz toga onda slijedi da se pri izvršavanju programa i njegovog spljoštenja zapravo izvršavaju iste instrukcije, samo su im odredišta i redni brojevi transformirani po funkciji $v$. Dakle, semantike tih instrukcija --- promjene sadržaja registara --- iste su i odvijaju se na istim registrima, istim redom. To pak znači da ako počnemo od iste konfiguracije (početna konfiguracija s ulazom $\vec x$) što se registara tiče, registri će mijenjati svoje vrijednosti na isti način prilikom izvršavanja $Q$ i $Q^\flat$, pa će posebno i sadržaj registra $\reg0$ biti isti. Štoviše, jer je $v(n_Q,0)=n_{Q^\flat}$, $Q^\flat$-izračunavanje s $\vec x$ će stati ako i samo ako $Q$-izračunavanje s $\vec x$ stane, i tada će u $\reg0$ biti isti broj. Kako je $\vec x$ bio proizvoljan, zaključujemo da su $Q$ i $Q^\flat$ ekvivalentni.
+Iz toga onda slijedi da se pri izvršavanju programa i njegova spljoštenja zapravo izvršavaju iste instrukcije, samo su im odredišta i redni brojevi transformirani po funkciji $v$. Dakle, semantike tih instrukcija --- promjene sadržaja registara --- iste su i odvijaju se na istim registrima, istim redom. To pak znači da ako počnemo od iste konfiguracije (početna konfiguracija s ulazom $\vec x$) što se registara tiče, registri će mijenjati svoje vrijednosti na isti način prilikom izvršavanja $Q$ i $Q^\flat$, pa će posebno i sadržaj registra $\reg0$ biti isti. Štoviše, jer je $v(n_Q,0)=n_{Q^\flat}$, $Q^\flat$-izračunavanje s $\vec x$ će stati ako i samo ako $Q$-izračunavanje s $\vec x$ stane, i tada će u $\reg0$ biti isti broj. Kako je $\vec x$ bio proizvoljan, zaključujemo da su $Q$ i $Q^\flat$ ekvivalentni.
 \end{proof}
 
 \subsection{Primjeri makroa}

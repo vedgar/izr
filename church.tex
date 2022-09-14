@@ -9,7 +9,7 @@ Za brojevni problem $D$ kažemo da je \emph{odlučiv} ako je njegova karakterist
 \end{definicija}
 
 "Brojevni problemi" nisu ništa drugo nego relacije, ali postavljeni u obliku pitanja, odnosno ispitivanja nekog svojstva. Recimo, $Halt_2=\dom{\f{comp}_2}^3$ možemo promatrati kao problem "za zadane $x,y,e\in\N$, (postoji li i) stane li program koda $e$ s ulazom $(x,y)$?", odnosno "ima li izraz $\kf{e}(x,y)$ vrijednost?". Već smo nagovijestili da taj problem nije odlučiv\!.
-Kako bismo to dokazali? Uzmimo za početak nešto lakše. U napomeni~\ref{nap:diagtot} smo već spomenuli paradoks sličan Russellovom, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_{n\in\N}$, pa smo za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeksa možemo to doslovno napraviti (zovu se indeksi upravo jer je niz $\kf e^1,e\in\N$ popis svih jednomjesnih parcijalno rekurzivnih funkcija, i "indeks funkcije $\f f$" je upravo njen indeks u tom nizu).
+Kako bismo to dokazali? Uzmimo za početak nešto lakše. U napomeni~\ref{nap:diagtot} smo već spomenuli paradoks sličan Russellovu, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_{n\in\N}$, pa smo za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeksa možemo to doslovno napraviti (zovu se indeksi upravo jer je niz $\kf e^1,e\in\N$ popis svih jednomjesnih parcijalno rekurzivnih funkcija, i "indeks funkcije $\f f$" je upravo njen indeks u tom nizu).
 
 \begin{definicija}[{name=[Russellova funkcija i Kleenejev skup]}]
 \emph{Russellova funkcija} je jednomjesna funkcija $\f{Russell}^1$ zadana s
@@ -40,7 +40,7 @@ Pretpostavimo da takva funkcija postoji. Tada je ona parcijalno rekurzivna, pa p
 iz čega slijedi $e\in K$ i $\f{Russell}(e)=1+q$. No $\f r(e)=q\ne 1+q$, pa $\f r$ ne može biti proširenje od $\f{Russell}$, kontradikcija.
 \end{proof}
 
-\begin{teorem}[{name=[nerekurzivnost Kleenejevog skupa]}]\label{tm:DRnrek}
+\begin{teorem}[{name=[nerekurzivnost Kleenejeva skupa]}]\label{tm:DRnrek}
 Kleenejev skup $K$ nije rekurzivan.
 \end{teorem}
 \begin{proof}
@@ -222,7 +222,7 @@ Za dovršetak odnosno formalizaciju dokaza još bi trebalo vidjeti da je funkcij
 
 \subsection{Reprezentacija RAM-konfiguracija formulama prvog reda}
 
-Osnovna ideja dokaza Churchovog teorema je svesti problem zaustavljanja za RAM-strojeve na problem zaključivanja. Iz toga će onda Churchov teorem odmah slijediti po propoziciji~\ref{pp:Haltnodl} i korolaru~\ref{kor:nrek<nrek}.
+Osnovna ideja dokaza Churchova teorema je svesti problem zaustavljanja za RAM-strojeve na problem zaključivanja. Iz toga će onda Churchov teorem odmah slijediti po propoziciji~\ref{pp:Haltnodl} i korolaru~\ref{kor:nrek<nrek}.
 
 Dakle, neka su $k\in\N_+$, $P\in\mathscr Pr\mspace{-1mu}o\mspace{-2mu}g$ te $\vec u\in\N^k$ (u logici prvog reda obično individualne varijable označavamo s $x_i$, pa ćemo ovdje koristiti $u_i$ kao uobičajenu oznaku za ulazne podatke). Trebamo konstruirati skup formula $\Gamma$ i formulu $\zeta$, koji ovise o $P$ i $\vec u$, tako da $P$-izračunavanje s $\vec u$ stane ako i samo ako vrijedi $\Gamma\models\zeta$. Štoviše, zbog korolara~\ref{kor:RAMhaltnodl}, zapravo možemo cijelu konstrukciju provesti za fiksni $P$ (i za $k=1$), pa ga nećemo pisati (iako smo svjesni da će $\Gamma$ i $\zeta$ ovisiti o $P$).
 
@@ -399,13 +399,13 @@ Ako $P$-izračunavanje s $\vec u$ stane, tada $\Gamma_{\vec u}\models\zeta$.
 	Pretpostavimo da izračunavanje $(c_t)_{t\in\N}$ stane, odnosno postoji $t_0$ takav da je $c_{t_0}(\textsc{pc})=n$. Da bismo dokazali $\Gamma_{\vec u}\models\zeta$, uzmimo proizvoljnu $\sigma$-strukturu $\mathfrak M$ u kojoj vrijedi $\Gamma_{\vec u}$. Za tu strukturu vrijedi lema~\ref{lm:formcomputesteps}, pa posebno za $t=t_0$ vrijedi $(a_0^{t_0},\dotsc,a_{m-1}^{t_0})\in S_n$. To znači da za svaku valuaciju $v$ možemo naći $v'$ koja se podudara s $v$ u svim varijablama $x_j$ za $j\ge m$, a $v'(x_j)=a_j^{t_0}$ za $j<m$, takvu da vrijedi $\mathfrak M\models_{v'}R_n(x_0,\dotsc,x_{m-1})$. No to upravo znači $\mathfrak M\models\zeta$.
 \end{proof}
 
-%\subsection{Neformalna izreka Churchovog teorema}
+%\subsection{Neformalna izreka Churchova teorema}
 
 \begin{teorem}[Churchov teorem o neodlučivosti logike prvog reda]\label{tm:Church}\ \\
 Ne postoji algoritam koji za proizvoljnu formulu logike prvog reda odlučuje je li valjana.
 \end{teorem}
 \begin{proof}
-Pretpostavimo da imamo takav algoritam $\mathcal A$,\\ i opišimo sljedeći neformalni algoritam za odluku Kleenejevog skupa:
+Pretpostavimo da imamo takav algoritam $\mathcal A$,\\ i opišimo sljedeći neformalni algoritam za odluku Kleenejeva skupa:
 \begin{quote}
 Kao u dokazu korolara~\ref{kor:RAMhaltnodl} (kompiliranjem), dobijemo RAM-program $P_0$ koji računa Russellovu funkciju. Za taj program uvedimo oznake $m$ i $n$ te formule $\iota_i,i<n$ i $\zeta$ nad signaturom $\sigma$ (koja također ovisi o $P_0$ preko $m$).
 
@@ -429,7 +429,7 @@ Taj algoritam odlučuje Kleenejev skup, jer za svaki $u\in\N$ vrijedi:% sljedeć
 \end{equation}
 Prva ekvivalencija je definicija~\ref{def:compute}, jer je $K=\dom{\f{Russell}}$, a $P_0$ računa $\f{Russell}$. Druga ekvivalencija je u jednom smjeru propozicija~\ref{pp:stop>models}, a u drugom smjeru propozicija~\ref{pp:models>stop}. Treća ekvivalencija je dobivena primjenom propozicije~\ref{pp:valj<>zaklj}.
 
-Dakle, pod pretpostavkom da $\mathcal A$ ispravno odlučuje koje su formule prvog reda valjane a koje nisu, upravo opisani neformalni algoritam ispravno odlučuje koji su brojevi elementi Kleenejevog skupa a koji nisu. Po Church--\!Turingovoj tezi, to bi značilo da je relacija $K$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
+Dakle, pod pretpostavkom da $\mathcal A$ ispravno odlučuje koje su formule prvog reda valjane a koje nisu, upravo opisani neformalni algoritam ispravno odlučuje koji su brojevi elementi Kleenejeva skupa a koji nisu. Po Church--\!Turingovoj tezi, to bi značilo da je relacija $K$ rekurzivna, što je u kontradikciji s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
 %\subsection{Formule prvog reda kao formalni jezik}
@@ -503,7 +503,7 @@ Time formula u osnovnom jeziku postaje \t{R(f(f(c),f(c)),f(f(c)))}, s kodom\\ $\
 \end{propozicija}
 \begin{proof}[Skica dokaza] Puni dokaz ovoga odveo bi nas predaleko u teoriju formalnih jezika. Tamo se promatraju razne klase jezika (koje čine tzv\!.\ \emph{Chomskyjevu hijerarhiju}) te \emph{gramatike} i \emph{automati} za njih. Turingovi odlučitelji iz točke~\ref{sec:Todl} vrsta su takvih automata, no postoje i jednostavniji automati, koji prepoznaju jednostavnije jezike.
 
-Specijalno, u sintaksnoj analizi vrlo je bitna klasa \emph{beskontekstnih} jezika, koje generiraju beskontekstne gramatike, a prepoznaju ih potisni automati. Potisni automat je specijalni slučaj (nedeterminističnog višetračnog) Turingovog stroja, a beskontekstna gramatika se može zapisati u \emph{Chomskyjevoj normalnoj formi}, osiguravajući da njegovo izračunavanje uvijek stane --- pa se može smatrati Turingovim odlučiteljem.
+Specijalno, u sintaksnoj analizi vrlo je bitna klasa \emph{beskontekstnih} jezika, koje generiraju beskontekstne gramatike, a prepoznaju ih potisni automati. Potisni automat je specijalni slučaj (nedeterminističnog višetračnog) Turingova stroja, a beskontekstna gramatika se može zapisati u \emph{Chomskyjevoj normalnoj formi}, osiguravajući da njegovo izračunavanje uvijek stane --- pa se može smatrati Turingovim odlučiteljem.
 
 Jedna beskontekstna gramatika za jezik $F1$ zadana je pravilima
 \begin{align}
@@ -531,7 +531,7 @@ Ako je riječ $v$ prava podriječ od $w$, tada je $\kr v<\kr w$.
     Nejednakost~\eqref{eq:injNSz} kaže da manji broj ne može imati dulji zapis u pomaknutoj bazi. Dakle, kraća riječ mora imati manji kod, a očito je $\dulj v<\dulj w$.
 \end{proof}
 
-\subsection{Formalna izreka Churchovog teorema}
+\subsection{Formalna izreka Churchova teorema}
 
 \begin{lema}[{name=[primitivna rekurzivnost leksičke strukture formula prvog reda]}]\label{lm:lexF1}
 Funkcije $\f{Var}$, $\f{Const}$, $\f{Func}$ i $\f{Rel}$, koje preslikavaju $i\in\N$\\ redom u $\kr{x_i}$, $\kr{c_i}$, $\kr{f_i}$ i $\kr{R_i}$, primitivno su rekurzivne.
@@ -622,7 +622,7 @@ Jezikom logike prvog reda:
     \t{($\forall$x$\forall$x'$\forall$x'{}'(R'(x,f(x'),x'{}')\textrightarrow R'{}'(x,x',x'{}'))\textrightarrow}\\
     \t{$\lnot\forall$x$\forall$x'$\forall$x'{}'$\lnot$R'{}'(x,x',x'{}'))))))}\text,
 \end{multline}
-čiji kod ima dvjestotinjak znamenaka --- ali dio koji ovisi o $\vec u$ je samo ovaj prvi red;\\ sve ostalo je konstanta za fiksni RAM-algoritam $P^k$.
+čiji kod ima dvjestotinjak znamenaka --- ali o $\vec u$ ovisi samo prvi red;\\ sve ostalo je konstanta za fiksni RAM-algoritam $P^k$.
 \end{primjer}
 
 \begin{lema}[{name=[primitivna rekurzivnost svođenja $K$ na $\Valid$]}]\label{lm:K<Valid}
@@ -670,11 +670,11 @@ Predpredzadnja ekvivalencija je definicija skupa $\Valid$ (u donjem redu je $\va
 Kada bi $\Valid$ bio odlučiv\!, po teoremu~\ref{tm:oikr} bi jednomjesna relacija $\kr{\Valid}$ bila rekurzivna. Prema propoziciji~\ref{pp:rek<rek}, tada bi i Kleenejev skup bio rekurzivan, što je kontradikcija s teoremom~\ref{tm:DRnrek}.
 \end{proof}
 
-\section{Prema Gödelovom prvom teoremu nepotpunosti}
+\section{Prema Gödelovu prvom teoremu nepotpunosti}
 
-Argumentima potrebnim za dokaz Churchovog teorema već smo se poprilično približili dokazu Gödelovog prvog teorema, u formulaciji Tarskog: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za potpuni dokaz trebalo bi razraditi još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
+Argumentima potrebnim za dokaz Churchova teorema već smo se poprilično približili dokazu Gödelova prvog teorema, u formulaciji Tarskog: \textbf{Postoji istinita rečenica na prirodnim brojevima, nedokaziva u PA\@}. Za potpuni dokaz trebalo bi razraditi još mnogo tehničkih detalja, ali pogledajmo samo osnovnu ideju.
 
-U prethodnoj točki uveli smo, za svaki prirodni broj $u$, rečenicu $\varphi_u$ koja je valjana ako i samo ako je $u$ element Kleenejevog skupa. Također smo uveli strukturu $\mathfrak N=(\N,0,\f{Sc},\dotsc)$, čiji konstantsko-funkcijski fragment se podudara sa standardnim modelom od PA (prirodni brojevi, nula i sljedbenik).
+U prethodnoj točki uveli smo, za svaki prirodni broj $u$, rečenicu $\varphi_u$ koja je valjana ako i samo ako je $u$ element Kleenejeva skupa. Također smo uveli strukturu $\mathfrak N=(\N,0,\f{Sc},\dotsc)$, čiji konstantsko-funkcijski fragment se podudara sa standardnim modelom od PA (prirodni brojevi, nula i sljedbenik).
 
 \begin{definicija}[{name=[Gödelov skup]}]
 \emph{Gödelov skup} je skup rečenic\=a
@@ -684,7 +684,7 @@ U prethodnoj točki uveli smo, za svaki prirodni broj $u$, rečenicu $\varphi_u$
 \end{definicija}
 %Kako je negacija rečenice ponovo rečenica, Gödelov skup je skup rečenica.
 
-\begin{propozicija}[{name=[istinitost Gödelovog skupa rečenica u $\mathfrak N$]}]\label{pp:NvdGo}
+\begin{propozicija}[{name=[istinitost Gödelova skupa rečenica u $\mathfrak N$]}]\label{pp:NvdGo}
 Vrijedi $\mathfrak N\models\mathscr G\ddot o$.
 \end{propozicija}
 \begin{proof}
@@ -700,7 +700,7 @@ Ključno je vidjeti da je jezik nad $\Sigma_{\log}$,
     %Proof\bigl((\psi_i)_{i=0}^n,\psi\bigr):\Longleftrightarrow\text{$(\psi_i)_{i=0}^n$ je dokaz za formulu $\psi$,}
     Proof:=\{\,\psi_0\t\#\,\psi_1\t\#\,\dotsb\,\t\#\,\psi_n\mid (\psi_0,\psi_1,\dots,\psi_n)\text{ je dokaz u logici prvog reda}\,\}\text,
 \end{equation}
-	odlučiv\!. To sigurno nećemo napraviti u potpunosti, ali sve osnovne ideje već imamo. Prvo, slično kao u točki~\ref{sec:stdstring}, možemo napraviti funkcije $\f{arg}'_i$, koje iz kodiranog \t\#-separiranog niza formula ekstrahiraju pojedinu formulu (zapravo njen kod). Dinamizacijom možemo napraviti i $(\f{arg}')^2$, pomoću koje onda možemo govoriti o svim formulama u dokazu (i osigurati da su dijelovi između separatora doista formule). Sad je jasno da, kako bi takav niz bio u $Proof$, svaka formula u njemu mora biti ili instanca sheme aksioma (A1), (A2), (A3), (A4) ili (A5) (iz Hilbertovog računa predikata), ili pak mora biti dobivena modus ponensom ili generalizacijom iz neke prethodne formule. Uz pokrate $\varphi_i$ za $\f{arg}'(p,i)$ te analogno $\varphi_j$ i $\varphi_k$ imamo
+	odlučiv\!. To sigurno nećemo napraviti u potpunosti, ali sve osnovne ideje već imamo. Prvo, slično kao u točki~\ref{sec:stdstring}, možemo napraviti funkcije $\f{arg}'_i$, koje iz kodiranog \t\#-separiranog niza formula ekstrahiraju pojedinu formulu (zapravo njen kod). Dinamizacijom možemo napraviti i $(\f{arg}')^2$, pomoću koje onda možemo govoriti o svim formulama u dokazu (i osigurati da su dijelovi između separatora doista formule). Sad je jasno da, kako bi takav niz bio u $Proof$, svaka formula u njemu mora biti ili instanca sheme aksioma (A1), (A2), (A3), (A4) ili (A5) (iz Hilbertova računa predikata), ili pak mora biti dobivena modus ponensom ili generalizacijom iz neke prethodne formule. Uz pokrate $\varphi_i$ za $\f{arg}'(p,i)$ te analogno $\varphi_j$ i $\varphi_k$ imamo
 \begin{multline*}
 	p\in\langle Proof\rangle\Longleftrightarrow\bigl(\forall i<2+\bigl(\num j<\f{slh}(p,12)\bigr)\bigl(\f{sdigit}(p,j,12)=12\bigr)\bigr)\bigl(\varphi_i\in\kr{F1}\land{}\\{}\land\bigl(
 	\varphi_i\in\bigcup\nolimits_{j=1}^{\,5}\kr{Axiom_j}\lor(\exists j<i)(\exists k<i)\f{ModPon}(\varphi_i,\varphi_j,\varphi_k)\lor(\exists j<i)\f{Gen}(\varphi_i,\varphi_j)\bigr)\bigr)
@@ -745,7 +745,7 @@ Sve u svemu, vidimo da neformalni algoritam koji smo napisali računa $\chi_{K}$
 Jedina pretpostavka koja može biti pogrešna je da PA dokazuje sve formule oblika $\neg\varphi_u', u\in K\kompl$ --- drugim riječima, postoji formula iz $\mathscr G\ddot o$ koja nije dokaziva u PA\@.
 \end{proof}
 
-\subsection{Problemi u skici dokaza Gödelovog teorema}
+\subsection{Problemi u skici dokaza Gödelova teorema}
 
 U dokazu teorema~\ref{tm:goedel} mnogo je toga napravljeno neformalno. Idejno smo veoma blizu, ali tehnička zahtjevnost takvog rezultata je ogromna. Samo navedimo neke najočitije rupe, i ukratko opišimo kako ih možemo "zakrpati".
 

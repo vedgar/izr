@@ -54,7 +54,7 @@ Ipak, ta tvrdnja nije glavna tema ove točke. Konkretizirajući izračunljivost 
 
 Na neki način, $\f S=\N \$$, gdje funkcije kodiramo njihovim indeksima kako je detaljno objašnjeno u primjeru~\ref{pr:parcspecind}. Ukratko, $\f S$ prima $y$ i \emph{bilo koji} indeks za $\f f$ te vraća \emph{neki} indeks za $\$(y,\f f)$.
 
-Bilo bi sjajno kada bismo mogli dobiti $\f S$ kao jednu funkciju, neovisnu o mjesnosti $k$ funkcije $\f f$ --- no to, barem ovako kako smo zamislili indekse, nije moguće. Ta funkcija bi trebala primati $y$ i kod RAM-programa $e$, i vraćati kod novog RAM-programa $e'$ takvog da bude $\kf e(\vec x,y)\simeq\kf{e'}(\vec x)$ za sve $\vec x\in\N^k$. No to znači da \emph{registar} ($\reg{k+1}$) u kojem će pisati ulazni podatak $y$ u odgovarajućem RAM-stroju ovisi o $k$, a $k$ ne možemo zaključiti iz samog RAM-programa odnosno njegovog koda $e$.
+Bilo bi sjajno kada bismo mogli dobiti $\f S$ kao jednu funkciju, neovisnu o mjesnosti $k$ funkcije $\f f$ --- no to, barem ovako kako smo zamislili indekse, nije moguće. Ta funkcija bi trebala primati $y$ i kod RAM-programa $e$, i vraćati kod novog RAM-programa $e'$ takvog da bude $\kf e(\vec x,y)\simeq\kf{e'}(\vec x)$ za sve $\vec x\in\N^k$. No to znači da \emph{registar} ($\reg{k+1}$) u kojem će pisati ulazni podatak $y$ u odgovarajućem RAM-stroju ovisi o $k$, a $k$ ne možemo zaključiti iz samog RAM-programa odnosno njegova koda $e$.
 
 \begin{napomena}[{name=[uniformna verzija teorema o parametru]}]
 Zapravo bismo mogli dokazati i "uniformnu" verziju, kad bismo fiksirali argumente s početka a ne s kraja. Tada bi $y$ uvijek išao u $\reg1$, a sve ostale registre (koji se stvarno spominju u programu, što \emph{možemo} zaključiti iz $e$) bismo pomicali za jedno mjesto udesno. To može poslužiti kao osnova za malo ozbiljniji studentski rad, ali je kompliciranije --- a nama će ova verzija biti dovoljna.
@@ -183,7 +183,7 @@ Ugrubo, \emph{kompilirati} kompoziciju dvije funkcije koje već imamo kompiliran
     \end{equation}
 \end{propozicija}
 \begin{proof}
-Programirat ćemo postupak računanja kompozicije u proizvoljnom $\vec x\in\N^k$, ali ga nećemo pokrenuti --- nego ćemo iz njegovog indeksa specijalizacijom dobiti indeks same kompozicije.
+Programirat ćemo postupak računanja kompozicije u proizvoljnom $\vec x\in\N^k$, ali ga nećemo pokrenuti --- nego ćemo iz njegova indeksa specijalizacijom dobiti indeks same kompozicije.
 
     Dakle, fiksirajmo pozitivne $k$ i $l$ te definirajmo funkciju $\f F^{k+l+1}$ točkovno s
 \begin{equation}\label{eq:defkompcomp}
@@ -407,7 +407,7 @@ U "stvarnom životu" nemamo tih problema, jer je praktički jedino što ikad rad
 
 % \subsection{Dokaz teorema rekurzije}
 
-Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da bismo doista dobili rješenje opće rekurzije. U programu~\eqref{eq:wishful} svejedno smo trebali nekako drugačije dobiti \texttt{factorial} koju bismo poslali kao drugi argument funkciji~\texttt{G}. To se čini prilično beskorisnim (jer jednom kad imamo \texttt{factorial}, možemo je direktno pozvati bez petljanja s dijagonalom), ali zapravo je vrlo blizu rješenju.
+Dijagonaliziranje funkcije, kao što smo vidjeli, još uvijek nije dovoljno da bismo doista dobili rješenje opće rekurzije. U programu~\eqref{eq:wishful} svejedno smo trebali nekako drugačije dobiti \texttt{factorial} koju bismo poslali kao drugi argument funkciji~\texttt{G}. To se čini prilično beskorisnim (jer jednom kad imamo \texttt{factorial}, možemo je odmah pozvati bez petljanja s dijagonalom), ali zapravo je vrlo blizu rješenju.
 
 Luda ideja: funkcije \texttt{factorial} i \texttt{G}, konceptualno gledano, služe istoj svrsi --- računanju faktorijele zadanog broja. Ako nemamo \texttt{factorial}, možemo li umjesto nje upotrijebiti \texttt{G} kao drugi argument od \texttt{G} (efektivno, računati $\partial\texttt G$)?
 
@@ -657,7 +657,7 @@ Možda malo više iznenađujuća činjenica vezana uz familiju relacija $\approx
 	Za svaki $e\in\f{Prog}$ i za svaki $k\in\N_+$ vrijedi $\f S_k(0,e)=e$.
 \end{lema}
 \begin{proof}
-Direktnim uvrštavanjem u definiciju. %Nulto, ako je $e\in\f{Prog}\kompl$, tada je po~\eqref{eq:Skprn} $\f S_k(y,e)=e$ za sve $y\in\N$, pa tako i za $y=0$. Još treba dokazati tvrdnju za $e\in\f{Prog}$.
+%Direktnim uvrštavanjem u definiciju. %Nulto, ako je $e\in\f{Prog}\kompl$, tada je po~\eqref{eq:Skprn} $\f S_k(y,e)=e$ za sve $y\in\N$, pa tako i za $y=0$. Još treba dokazati tvrdnju za $e\in\f{Prog}$.
 
 Prvo, rastavom na slučajeve vidimo da je $\f{Shift}(0,i)=i$ za sve $i\in\N$. Recimo, za $i\in\f{InsDEC}$, postoje $j,l<i$ takvi da je $i=\f{codeDEC}(j,l)=\kr{1,j,l}$. No to znači da je $j=i[1]=\f{regn}(i)$ i $l=i[2]=\f{dest}(i)$, pa je $\f{Shift}(0,i)=\f{codeDEC}(j,l+0)=i$. Ostali slučajevi su još lakši.
 
@@ -719,7 +719,7 @@ Treće, smijemo tražiti da $e$ bude u $\f{Prog}$: dobit ćemo ga iz teorema rek
 
 I peto, $\f F$ mora biti izračunljiva: nije dovoljno zahtijevati samo totalnost. Recimo, promotrimo karakterističnu funkciju klase ekvivalencije $E\mspace{-1mu}mp:=[0]_{\approx_1}$. Kad bi postojao broj $e$ takav da je $e\approx_1\chi_{E\mspace{-1mu}mp}(e)$, tada bi $e\in E\mspace{-1mu}mp$ povlačilo s jedne strane $e\approx_10$, a s druge $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=1$, pa bi po tranzitivnosti bilo $0\approx_1\!1$, kontradikcija. (Izraz $\kf0(0)$ nema vrijednost po propoziciji~\ref{prop:computeind}\eqref{it:nprogind}, a $\kf1(0)=\f Z(0)=0$, pa $\kf0(0)\nsimeq\kf1(0)$, dakle $\kf0^1\!\ne\kf1^1$.) No $e\notin E\mspace{-1mu}mp$ je također kon\-tra\-dik\-ci\-ja, jer bi to značilo $e\approx_1\chi_{E\mspace{-1mu}mp}(e)=0$, dakle $e\in[0]_{\approx_1}\!=E\mspace{-1mu}mp$. Zaključujemo da $\chi_{E\mspace{-1mu}mp}$ nema fiksnu točku, iako je (kao i svaka karakteristična funkcija) totalna.
 
-Primijetite sličnost upravo provedenog razmišljanja s Russellovim paradoksom. Iz toga će slijediti, jednom kad dokažemo teorem o fiksnoj točki, da skup $E\mspace{-1mu}mp$ nije rekurzivan. No zapravo će to biti samo jedna posljedica Riceovog teorema, koji ćemo dokazati kasnije.
+Primijetite sličnost upravo provedenog razmišljanja s Russellovim paradoksom. Iz toga će slijediti, jednom kad dokažemo teorem o fiksnoj točki, da skup $E\mspace{-1mu}mp$ nije rekurzivan. No zapravo će to biti samo jedna posljedica Riceova teorema, koji ćemo dokazati kasnije.
 
 \begin{lema}[Teorem o fiksnoj točki]\label{lm:tmfix}
 Neka je $k\in\N_+$ te $\f F^1$ rekurzivna funkcija.\\
@@ -737,7 +737,7 @@ Zapišimo traženi uvjet pomoću univerzalne funkcije:
 
 % \subsection{Skupovi indeksa}
 
-Vidjeli smo u prethodnoj točki da iz teorema o fiksnoj točki zapravo možemo zaključiti da klasa ekvivalencije $E\mspace{-1mu}mp=[0]_{\approx_1}$ nije rekurzivna: njena karakteristična funkcija ne može imati fiksnu točku, jer to vodi na paradoks vrlo sličan Russellovom. Međutim, taj rezultat je "kap u moru" općenitog rezultata koji kaže da \emph{nijedna} klasa ekvivalencije nijedne relacije $\approx_k$ nije rekurzivna --- štoviše, nijedna \emph{unija} takvih klas\=a ekvivalencije nije rekurzivna, osim trivijalnih unij\=a $\bigcup\emptyset=\emptyset$ (unija nijedne klase) i $\bigcup(\N/_{\!\approx_k\!})=\N$ (unija svih klasa).
+Vidjeli smo u prethodnoj točki da iz teorema o fiksnoj točki zapravo možemo zaključiti da klasa ekvivalencije $E\mspace{-1mu}mp=[0]_{\approx_1}$ nije rekurzivna: njena karakteristična funkcija ne može imati fiksnu točku, jer to vodi na paradoks vrlo sličan Russellovu. Međutim, taj rezultat je "kap u moru" općenitog rezultata koji kaže da \emph{nijedna} klasa ekvivalencije nijedne relacije $\approx_k$ nije rekurzivna --- štoviše, nijedna \emph{unija} takvih klas\=a ekvivalencije nije rekurzivna, osim trivijalnih unij\=a $\bigcup\emptyset=\emptyset$ (unija nijedne klase) i $\bigcup(\N/_{\!\approx_k\!})=\N$ (unija svih klasa).
 
 O čemu se tu zapravo radi? Reći da je neki broj $e$ element klase $E\mspace{-1mu}mp$, zapravo znači reći da je $e\approx_10$, odnosno $\kf e^1=\kf0^1=\varnothing^1$. Drugim riječima, $E\mspace{-1mu}mp$ je upravo skup svih indeksa prazne jednomjesne funkcije. Ako uzmemo neku drugu izračunljivu funkciju, dobit ćemo neku drugu klasu (svih njenih indeksa), i obrnuto, neka druga klasa $[e]_{\approx_k}\!$ će biti skup svih indeksa funkcije $\kf e^k$.
 
@@ -765,7 +765,7 @@ Neka su $\mathcal F,\mathcal G\subseteq\mathscr Comp_k$ različiti. Tada postoji
 	No kad bi bilo i $e\in\kins{\mathcal F\,}$, to bi značilo $\kf e^k\in\mathcal F$, što je nemoguće jer $\f F\notin\mathcal F$. Drugim riječima, $e\in\kins{\mathcal G}\setminus\kins{\mathcal F\,}$, odnosno $\kins{\mathcal F\,}\ne\kins{\mathcal G}$.
 \end{proof}
 
-Na neki način, do na neprebrojivost skupa $\mathcal P(\mathscr Comp_k)$, čini se da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\kins{\mathcal F\,}}$ ima to svojstvo. Čak možemo reći, neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\kins{\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceovog teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
+Na neki način, do na neprebrojivost skupa $\mathcal P(\mathscr Comp_k)$, čini se da imamo "kodiranje" skupova izračunljivih funkcija. Onda bismo mogli reći, po uzoru na točku~\ref{sec:Todl}, da $\mathcal F$ ima neko svojstvo izračunljivosti ako karakteristična funkcija $\chi_{\kins{\mathcal F\,}}$ ima to svojstvo. Čak možemo reći, neko \emph{svojstvo} $\wp$ izračunljivih $k$-mjesnih funkcija je \emph{odlučivo} ako je skup $\kins{\{\f F\in\mathscr Comp_k\mid\wp(\f F)\}}$ rekurzivan. Ali zbog Riceova teorema, takva definicija bi bila sasvim beskorisna: \emph{jedini} rekurzivni skupovi indeksa su $\emptyset$ i $\N$, odnosno jedina odlučiva svojstva izračunljivih funkcija su trivijalna svojstva $\bot$ i $\top$.
 
 % \subsection{Invarijantnost}
 
@@ -901,7 +901,7 @@ S druge strane, parnost broja koraka ne možemo tako napisati. Najlakši način 
 
 Svakako postoje i mnoga "hibridna" svojstva, za utvrđivanje čije odlučivosti je potrebna detaljna analiza --- ali Riceov teorem s jedne i Church--\!Turingova teza s druge strane pružaju dobar dio odgovora na takva pitanja.
 
-Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupovima od~$\N$), svođenjem možemo dokazati i razne druge neodlučivosti odnosno nerekurzivnosti: sjetite se korolara~\ref{kor:nrek<nrek}. Neko sasvim općenito uputstvo za korištenje Riceovog teorema moglo bi se napisati u sljedećem obliku:
+Iako Riceov teorem govori samo o skupovima indeksa (dakle invarijantnim podskupovima od~$\N$), svođenjem možemo dokazati i razne druge neodlučivosti odnosno nerekurzivnosti: sjetite se korolara~\ref{kor:nrek<nrek}. Neko sasvim općenito uputstvo za korištenje Riceova teorema moglo bi se napisati u sljedećem obliku:
 
 \begin{enumerate}
     \item Utvrdimo da trebamo dokazati da neki skup $S$ nije rekurzivan.

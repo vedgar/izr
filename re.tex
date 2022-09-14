@@ -2,7 +2,7 @@
 
 % \section{Domene izračunljivih funkcija}
 
-Vidjeli smo već nekoliko puta da domena izračunljive funkcije ne mora biti izračunljiva, čak smo i stekli neki uvid u razlog toga: radi izbjegavanja Russellovog paradoksa moramo dopustiti i parcijalne izračunljive funkcije, ali relacije (kao što je domena funkcije) smatramo izračunljivima preko njihovih karakterističnih funkcija, koje moraju biti totalne. Zato su rekurzivne relacije "jače" u smislu izražajnosti od parcijalno rekurzivnih funkcija --- zapravo su jednako jake kao i \emph{rekurzivne} funkcije. Na algoritamskoj razini (relacije kao karakteristične funkcije) to je istina po definiciji, a na skupovnoj razini (funkcije kao relacije s funkcijskim svojstvom), to slijedi iz teorema~\ref{tm:graftot} (teorem o grafu za totalne funkcije).
+Vidjeli smo već nekoliko puta da domena izračunljive funkcije ne mora biti izračunljiva, čak smo i stekli neki uvid u razlog toga: radi izbjegavanja Russellova paradoksa moramo dopustiti i parcijalne izračunljive funkcije, ali relacije (kao što je domena funkcije) smatramo izračunljivima preko njihovih karakterističnih funkcija, koje moraju biti totalne. Zato su rekurzivne relacije "jače" u smislu izražajnosti od parcijalno rekurzivnih funkcija --- zapravo su jednako jake kao i \emph{rekurzivne} funkcije. Na algoritamskoj razini (relacije kao karakteristične funkcije) to je istina po definiciji, a na skupovnoj razini (funkcije kao relacije s funkcijskim svojstvom), to slijedi iz teorema~\ref{tm:graftot} (teorem o grafu za totalne funkcije).
 
 Pokušajmo ustanoviti što bi bio relacijski pandan parcijalnim funkcijama. Tražiti "parcijalnu karakterističnu funkciju" kao funkciju iz $\N$ u $bool$ je vjerojatno preslabo: korisnost parcijalno rekurzivnih funkcija je u tome što iako nisu definirane svuda, tamo gdje jesu definirane mogu poprimiti proizvoljne vrijednosti. Kad bismo čak i u slučaju da je funkcija definirana mogli dobiti samo jedan bit informacije, imali bismo tri moguća ishoda ($\mathit{true}$, $\mathit{false}$ i "ne znam") koji bi odgovarali četirima mogućim situacijama (u slučaju izostanka izlaza, ulaz i dalje može biti ili ne biti u skupu). Odnosno, parcijalna karakteristična funkcija zadanog skupa nije jednoznačno određena njime.
 
@@ -202,7 +202,7 @@ i analogno $b=d$, pa je $(a,b)=(c,d)$, odnosno $\f{pair}$ je injekcija.
 što je primitivno rekurzivno jer su $\f{pair}$, $\f{fst}$, $\f{snd}$ i $\chi_=$ takve.
 \end{proof}
 
-Sad kada imamo specifikaciju sparivanja, pogledajmo detaljnije što smo napravili s relacijom $\f{Final}$ na kraju prethodne točke. Dva njena zadnja argumenta ($e$ i $n$) "spojili" smo u jedan, po kojem smo onda enumerirali testove završetka. Tamo smo za $e$ imali samo dvije mogućnosti, $\kprog P$ i $\kprog Q$, ali možemo ih imati i više --- pa čak i sve prirodne brojeve na njihovom mjestu.
+Sad kada imamo specifikaciju sparivanja, pogledajmo detaljnije što smo napravili s relacijom $\f{Final}$ na kraju prethodne točke. Dva njena zadnja argumenta ($e$ i $n$) "spojili" smo u jedan, po kojem smo onda enumerirali testove završetka. Tamo smo za $e$ imali samo dvije mogućnosti, $\kprog P$ i $\kprog Q$, ali možemo ih imati i više --- pa čak i sve prirodne brojeve na njihovu mjestu.
 
 \begin{definicija}[{name=[kontrakcija brojevne relacije]}]
 Neka je $k\in\N_+$ te $P^{k+1}$ relacija. Za $k$-mjesnu relaciju $\hat P$, zadanu s
@@ -361,7 +361,7 @@ pa ako najmanji takav označimo s $v$, vrijedi
 $\hat{\f P}(\vec x,v)$ i $y=\f{fst}(v)$. No ovo prvo po definiciji znači da vrijedi $\f P\bigl(\vec x,\f{fst}(v),\f{snd}(v)\bigr)$, što je zbog drugog ekvivalentno s $\f P\bigl(\vec x,y,\f{snd}(v)\bigr)$. To pak znači da postoji $z\in\N$ (konkretno, $z:=\f{snd}(v)$) takav da je $(\vec x,y,z)\in\f P$, odnosno $(\vec x,y)\in\exists_*\f P=R$.
 \end{proof}
 
-Primijetimo sličnost upravo napisanog dokaza s dokazom Kleenejevog teorema o normalnoj formi: ako definiramo primitivno rekurzivnu relaciju $\f M^4$ s
+Primijetimo sličnost upravo napisanog dokaza s dokazom Kleenejeva teorema o normalnoj formi: ako definiramo primitivno rekurzivnu relaciju $\f M^4$ s
 \begin{equation}
     \f M(x,e,y,n):\Longleftrightarrow\f{Final}(x,e,n)\land\f{result}(\f{Reg}(x,e,n))=y\text,
 \end{equation}
@@ -394,7 +394,7 @@ Neka je $F$ brojevna funkcija.\\
 Tada je $F$ parcijalno rekurzivna ako i samo ako je $\graf F$ rekurzivno prebrojiv\!.
 \end{teorem}
 \begin{proof}
-Smjer ($\Rightarrow$) smo već dokazali, pomoću projekcijske karakterizacije i Kleenejevog teorema o normalnoj formi (teorem~\ref{tm:grafprre}).
+Smjer ($\Rightarrow$) smo već dokazali, pomoću projekcijske karakterizacije i Kleenejeva teorema o normalnoj formi (teorem~\ref{tm:grafprre}).
 
 Za smjer ($\Leftarrow$), neka je $\graf F$ rekurzivno prebrojiv\!. Prema lemi~\ref{lm:tmsel}, postoji parcijalno rekurzivni selektor $\f G$ za $\graf F$. No kako je prema lemi~\ref{lm:selgraf} jedini selektor za $\graf F$ upravo $F$, zaključujemo $F=\f G$, dakle $F$ je parcijalno rekurzivna.
 \end{proof}
@@ -496,7 +496,7 @@ No karakteristična funkcija $\chi_{\f R}$ je uvijek totalna, pa iz njene parcij
 
 Postov teorem opravdava naziv "poluodlučivost" za intuiciju rekurzivne prebrojivosti: figurativno, ako je problem "napola odlučiv" s jedne strane, i "napola" sa suprotne strane, onda je zapravo sasvim odlučiv\!.
 
-Pomoću Postovog teorema možemo dokazati da razni skupovi nisu rekurzivno prebrojivi. Zapravo, kad god imamo skup koji nije rekurzivan --- a imamo ih hrpu po Riceovom teoremu, na primjer --- znamo da on ili njegov komplement (ili nijedan od njih) nije rekurzivno prebrojiv\!.
+Pomoću Postova teorema možemo dokazati da razni skupovi nisu rekurzivno prebrojivi. Zapravo, kad god imamo skup koji nije rekurzivan --- a imamo ih hrpu po Riceovu teoremu, na primjer --- znamo da on ili njegov komplement (ili nijedan od njih) nije rekurzivno prebrojiv\!.
 Ipak, za samu egzistenciju skupova koji nisu rekurzivno prebrojivi ne treba nam Postov teorem; to možemo i kardinalnim argumentom.
 Postov teorem često koristimo kad znamo da jedan od ta dva skupa jest rekurzivno prebrojiv\!, pa onda zaključujemo da drugi nije.
 
@@ -505,10 +505,10 @@ Neka je $R$ rekurzivno prebrojiva relacija koja nije rekurzivna.\\
     Tada $R\kompl$ nije rekurzivno prebrojiva.
 \end{korolar}
 \begin{proof}
-Ovo je samo obrat po kontrapoziciji Postovog teorema.
+Ovo je samo obrat po kontrapoziciji Postova teorema.
 \end{proof}
 
-\begin{primjer}[{name=[komplement Kleenejevog skupa nije rekurzivno prebrojiv]}]
+\begin{primjer}[{name=[komplement Kleenejeva skupa nije rekurzivno prebrojiv]}]
     Po korolaru~\ref{kor:nrekpreb} i napomeni~\ref{nap:Kre!rek}, $K\kompl$ nije rekurzivno prebrojiva.
 
 	(Možete li naći relaciju takvu da ni ona ni njen komplement nisu rekurzivno prebrojive? Pokušajte dokazati da relacija $B^2$ zadana s $B(x,y):\Longleftrightarrow K(x)\leftrightarrow K(y)$, a onda i njena kontrakcija~$\hat B^1$, imaju to svojstvo.)
@@ -600,7 +600,7 @@ Po definiciji, postoji parcijalno rekurzivna funkcija $\f F^1$ takva da je $\dom
 Neka je $L=\dom\varphi$ te $\mathcal T$ Turingov stroj koji računa $\varphi$. Po definiciji~\ref{def:Tcomputefi} imamo da $\mathcal T$\!-izračunavanje s $w$ stane ako i samo ako je $w\in\dom\varphi=L$ --- što po definiciji znači da $\mathcal T$ prepoznaje $L$.
 
 \item[$(\mathcal T)\Rightarrow(\mathcal E)$]
-Ovo je relativno standardni dokaz koji se napravi u teoriji formalnih jezika, iako je teško raspisati sve detalje. Osnovna ideja je simulacija paralelizacije na Turingovom stroju. Skicu dokaza možete vidjeti u~\cite[\emph{theorem}~3.21]{sipser}.
+Ovo je relativno standardni dokaz koji se napravi u teoriji formalnih jezika, iako je teško raspisati sve detalje. Osnovna ideja je simulacija paralelizacije na Turingovu stroju. Skicu dokaza možete vidjeti u~\cite[\emph{theorem}~3.21]{sipser}.
 
 \item[$(\mathcal E)\Rightarrow(\mathcal R)$]
 Treba provesti čitav postupak iz točke~\ref{sec:tikp} za enumerator $\mathcal E=(Q,\Sigma,\Gamma,\bl,\delta_2,q_0,q_p)$. Umjesto $q_z$, sada $q_p$ kodiramo s $1$ (vrijedi analogon leme~\ref{lm:bsomp-q0neqz}). Funkcija $\delta_2:Q\times\Gamma^2\to Q\times\Gamma^2\times\{-1,0,1\}^2$ (jer enumerator ima dvije trake) je malo kompliciranija za kodirati, ali iste ideje kao u dokazu leme~\ref{lm:newssdprn} (proširenje konačnih funkcija nulom, korolar~\ref{kor:kon0}) prolaze.

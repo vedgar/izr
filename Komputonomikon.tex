@@ -51,6 +51,7 @@
 \clearpairofpagestyles \ifoot{\textcolor{gray}{\headmark}} \ofoot*{\pagemark}
 \usepackage[croatian,refpage]{nomencl}
 \makenomenclature
+\usepackage{tocloft}
 % \usepackage{academicons}
 % \usepackage[ttdefault]{AnonymousPro}
 
@@ -190,7 +191,9 @@
 \title{\vspace{-2cm}\normalfont Izračunljivost}
 \subtitle{\normalfont\Huge{za\; računarce}}
 \author{\textit{V\!edran Č\hspace{-0.5mm}ačić}}
-\date{\today} \maketitle \tableofcontents
+\renewcommand\cftchapafterpnum{\vskip 14pt} %set space after each Chapter in the Table of Contents
+\renewcommand\cftsecafterpnum{\vskip 8pt}  %set space after each Section in the Table of Contents
+\date{\today} \maketitle \setcounter{tocdepth}{1} \tableofcontents
 {\renewcommand\thesection{\alph{section}} \include{uvod}}
 \mainmatter
 %\addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
