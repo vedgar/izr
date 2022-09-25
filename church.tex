@@ -9,7 +9,7 @@ Za brojevni problem $D$ kažemo da je \emph{odlučiv} ako je njegova karakterist
 \end{definicija}
 
 "Brojevni problemi" nisu ništa drugo nego relacije, ali postavljeni u obliku pitanja, odnosno ispitivanja nekog svojstva. Recimo, $Halt_2=\dom{\f{comp}_2}^3$ možemo promatrati kao problem "za zadane $x,y,e\in\N$, (postoji li i) stane li program koda $e$ s ulazom $(x,y)$?", odnosno "ima li izraz $\kf{e}(x,y)$ vrijednost?". Već smo nagovijestili da taj problem nije odlučiv\!.
-Kako bismo to dokazali? Uzmimo za početak nešto lakše. U napomeni~\ref{nap:diagtot} smo već spomenuli paradoks sličan Russellovu, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_{n\in\N}$, pa smo za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeksa možemo to doslovno napraviti (zovu se indeksi upravo jer je niz $\kf e^1,e\in\N$ popis svih jednomjesnih parcijalno rekurzivnih funkcija, i "indeks funkcije $\f f$" je upravo njen indeks u tom nizu).
+Kako bismo to dokazali? Uzmimo za početak nešto lakše. U napomeni~\ref{nap:diagtot} smo već spomenuli paradoks sličan Russellovu, koji nastaje ako pretpostavimo da su svi algoritmi totalni: poredali smo sve jednomjesne algoritme u niz $(\mathcal A_n)_{n\in\N}$, pa smo za ulaz $n$ primijenili $\mathcal A_n$ na $n$, i vratili sljedbenik izlaznog podatka. Pomoću indeks\=a možemo to doslovno napraviti (zovemo ih indeksima jer je niz $(\kf e^1)_{e\in\N}$ popis svih jednomjesnih parcijalno rekurzivnih funkcija, i "indeks funkcije $\f f$" je upravo njen indeks u tom nizu).
 
 \begin{definicija}[{name=[Russellova funkcija i Kleenejev skup]}]
 \emph{Russellova funkcija} je jednomjesna funkcija $\f{Russell}^1$ zadana s
@@ -145,7 +145,7 @@ gdje smo koristili korolar~\ref{kor:comptot} da se riješimo sljedbenika.\newlin
 
 U literaturi se $Halt_1$ odnosno $HALT$ (kako gdje) zove \emph{halting problem} (problem zaustavljanja), jer postavlja pitanje stane li određeno izračunavanje (zadano pomoću RAM-programa i ulaza za njega). Mogli bismo dokazati i neodlučivost problema $Halt_k$ za $k\ge 2$ (pokušajte formalno dokazati svođenje $Halt_1(x,e)\Leftrightarrow Halt_k(x,0,0,\dotsc,0,e)$), ali to će slijediti jednom kad dokažemo teorem o parametru.
 
-Po Church--\!Turingovoj tezi, zasad znamo da ne postoji algoritam koji bi za svaki par $(P,u)$ RAM-stroja $P$ i ulaza $u$ za njega odlučivao stane li $P$-izračunavanje s $u$ --- odnosno, za svaki algoritam $\mathcal A$ postoji RAM-program $P$ i prirodni broj $u$ takav da $\mathcal A$ ne daje ispravan odgovor na pitanje stane li $P$-izračunavanje s $u$. Ali vrijedi i više: možemo postići da $P$ ne ovisi o~$\mathcal A$. To je u skladu s univerzalnošću: postoji "najkompliciraniji" RAM-stroj, čiji je problem zaustavljanja najteži.
+Po Church--\!Turingovoj tezi, ne postoji algoritam koji bi za svaki par $(P,u)$ RAM-programa $P$ i njegovog ulaza $u$ odlučivao stane li $P$-izračunavanje s $u$ --- odnosno, za svaki algoritam $\mathcal A$ postoje $P\in\mathscr Prog$ i $u\in\N$ takvi da $\mathcal A$ ne daje ispravan odgovor na pitanje stane li $P$-izračunavanje s $u$. Ali vrijedi i više: možemo postići da $P$ ne ovisi o~$\mathcal A$. To je u skladu s univerzalnošću: postoji "najkompliciraniji" RAM-stroj, čiji je problem zaustavljanja najteži.
 
 \begin{korolar}[{name=[neodlučivost problema zaustavljanja za jedan fiksni RAM-stroj]}]\label{kor:RAMhaltnodl}
 Postoji RAM-program $P_0$, takav da nijedan algoritam ne može točno odrediti,\\ za svaki $u\in\N$, stane li $P_0$-izračunavanje s $u$.
@@ -241,7 +241,7 @@ varijantom Peanove aritmetike, ali zapravo možemo i lakše: budući da je sve �
 
 Naglasimo da \emph{ne} promatramo logiku prvog reda s jednakošću --- nećemo imati potrebu promatrati jednakost kao relacijski simbol s nekim posebnim svojstvima. Usporedba s nulom za instrukcije tipa \dec\ bit će sintaksna.
 
-Formalnije: krenimo od RAM-algoritma $P^k$, duljine $n:=n_P$ i širine $m:=m_{P^k}$. Signatura $\sigma$, nad kojom ćemo graditi naše formule, imat će:
+Formalnije: krenimo od RAM-algoritma $P^k$, duljine $n:=n_P$ i širine $m:=m_{P^k}$.\\ Signatura $\sigma$, nad kojom ćemo graditi naše formule, imat će:
 \begin{itemize}
     \item jedan konstantski simbol $\mathsf o$;
     \item jedan jednomjesni funkcijski simbol $\mathsf s$;
@@ -626,7 +626,7 @@ Jezikom logike prvog reda:
 \end{primjer}
 
 \begin{lema}[{name=[primitivna rekurzivnost svođenja $K$ na $\Valid$]}]\label{lm:K<Valid}
-Funkcija $\f{Phi}$, koja svakom prirodnom broju $u$ pridružuje kod formule $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\,\eqref{step:varphi_u}, primitivno je rekurzivna.
+Funkcija $\f{Phi}$, koja svakom prirodnom broju $u$ pridružuje \\ kod formule $\varphi_u$ iz dokaza teorema~\ref{tm:Church}\,\eqref{step:varphi_u}, primitivno je rekurzivna.
 \end{lema}
 \begin{proof}
     Prvo, označimo s $psi:=\kr{\psi}$ kod formule $\psi$ koja nastane prebacivanjem svih $\overline{\iota_i}$ na desnu stranu relacije $\models$. Taj broj ne ovisi o $u$.

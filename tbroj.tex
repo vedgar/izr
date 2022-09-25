@@ -364,7 +364,9 @@ Zbog asocijativnosti ćemo ubuduće pisati izraze poput $x\conc by\conc bz$ bez 
 Za svaki $k\in\N_+$, funkcija $\f{bin}^k$ je primitivno rekurzivna.
 \end{propozicija}
 \begin{proof}
-Matematičkom indukcijom po $k$. Za $k=1$ (baza), to je upravo lema~\ref{lm:bin1prn}. Pretpostavimo da je $\f{bin}^l$ primitivno rekurzivna za neki $l\in\N_+$. Tada je
+Matematičkom indukcijom po $k$. Za $k=1$ (baza), to je upravo lema~\ref{lm:bin1prn}.
+
+	Pretpostavimo da je $\f{bin}^l$ primitivno rekurzivna za neki $l\in\N_+$. Tada je
 \begin{multline}
     \f{bin}^{l+1}(\vec x,y)=
     \kr{\beta(\vec x,y)}=
@@ -390,7 +392,7 @@ To je jednakost~\eqref{eq:pravkomut} u koju je uvrštena (s obje strane) definic
 
 %\subsection{Inverz binarnog kodiranja}
 
-Da bismo izrazili $f$ pomoću $\N\beta f$, treba nam (izračunljiv) lijevi inverz za $\f{bin}^1$. Kako možemo iz $63=(111111)_2=\f{bin}(6)$ natrag dobiti $6$? Samo treba prebrojiti znamenke.
+Da bismo izrazili $f$ pomoću $\N\beta f$, potreban nam je (izračunljivi) lijevi inverz za $\f{bin}^1$. Kako možemo iz $63=(111111)_2=\f{bin}(6)$ natrag dobiti $6$? Samo prebrojimo znamenke.
 
 \begin{lema}[{name=[primitivna rekurzivnost i specifikacija duljine binarnog zapisa]}]\label{lm:blh}
 Definiramo funkciju $\f{blh}$ s $\f{blh}(n):=\f{slh}(n,2)$.
@@ -420,18 +422,18 @@ pa je najmanji takav $t$ upravo $n=\f I_1^1(n)\le2^n-1$.\qedhere
 Neka je $k\in\N_+$ te $\f f^k$ funkcija takva da je $\beta\f f$ Turing-izračunljiva.\newline Tada je $\f f$ parcijalno rekurzivna.
 \end{teorem}
 \begin{proof}
-    Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\beta$, kodiranje $\{\t\textbullet\mapsto1,\t/\mapsto2\}$ i funkciju $\beta\f f$, $\N\beta\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:blh} i korolara~\ref{kor:binf=Nbetafbin} sada imamo
+    Prema teoremu~\ref{tm:tikp}, primijenjenom na abecedu $\Sigma_\beta$, kodiranje $\{\t\textbullet\mapsto1,\t/\mapsto2\}$\\ i funkciju $\beta\f f$, $\N\beta\f f$ je parcijalno rekurzivna. Iz leme~\ref{lm:blh} i korolara~\ref{kor:binf=Nbetafbin} sada imamo
 \begin{equation}
     \f f=\f I_1^1\circ\f f=\f{blh}\circ\f{bin}^1\!\circ\f f=\f{blh}\circ\N\beta\f f\circ\f{bin}^k\text,
 \end{equation}
-odnosno $\f f$ je dobivena kompozicijom iz tri funkcije, od kojih je srednja parcijalno rekurzivna, a prva i zadnja su primitivno rekurzivne (lema~\ref{lm:blh} i propozicija~\ref{pp:binkprn}), pa su rekurzivne (korolar~\ref{kor:prnrek}) a time i parcijalno rekurzivne. Kako je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju, $\f f$ je parcijalno rekurzivna.
+odnosno $\f f$ je dobivena kompozicijom iz tri funkcije, od kojih je srednja parcijalno rekurzivna, a prva i zadnja su primitivno rekurzivne (lema~\ref{lm:blh} i propozicija~\ref{pp:binkprn}), pa su rekurzivne (korolar~\ref{kor:prnrek}), a time i parcijalno rekurzivne. Kako je skup parcijalno rekurzivnih funkcija zatvoren na kompoziciju, $\f f$ je parcijalno rekurzivna.
 \end{proof}
 
 Istim dijagramom možemo dokazati i obrat teorema~\ref{tm:btip}. Jednadžba
 \begin{equation}
     \f{bin}^1\!\circ f=\N\beta f\circ\f{bin}^k
 \end{equation}
-iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$ iz $f$ --- umjesto desne trebamo obrnuti lijevu stranicu pravokutnika, odnosno naći desni inverz za $\f{bin}^k$. Nažalost, to je iz tri razloga zapetljanije nego ovo što smo napravili u prethodnoj točki.
+iz korolara~\ref{kor:binf=Nbetafbin} može poslužiti i za dobivanje $\N\beta f$ iz $f$ --- umjesto desne trebamo obrnuti lijevu stranicu pravokutnika, odnosno naći desni inverz za $\f{bin}^k$. Nažalost, to je iz tri razloga zapetljanije nego ovo što smo napravili u dokazu teorema~\ref{tm:btip}.
 
 Prvi razlog tiče se napomene~\ref{nap:brip}. Zbog $\dom{\f{bin}^k}=\N^k$, traženi desni inverz ima $k$ izlaznih podataka, pa ga reprezentiramo s $k$ brojevnih funkcija $\f{arg}_1$, $\f{arg}_2$,~\ldots, $\f{arg}_k$ --- tako nazvanih jer ekstrahiraju pojedine argumente funkcije $f$ iz jedinog argumenta $a$ funkcije $\N\beta f$. Te funkcije su neovisne o~$k$: recimo, $\f{arg}_2\bigl(\f{bin}^2(x,y)\bigr)=\f{arg}_2\bigl(\f{bin}^4(x,y,z,t)\bigr)=y$, pa ih ne moramo označavati s dva broja, poput $\f I_n^k$.
 
@@ -470,7 +472,7 @@ Recimo, vrijedi $4=(12)_2=\kr{\t{\textbullet/}}\sqsubseteq_\beta\kr{\t{\textbull
 Za sljedeću lemu, trebat će nam \emph{uokvireni} brojevi: oni čiji zapisi u pomaknutoj bazi~$2$ počinju i završavaju znamenkom $2$. Želimo "isprogramirati" dokaz propozicije~\ref{prop:betabij}, koji ima nekoliko slučajeva ovisno o tome nalazimo li se prije prvog separatora, nakon zadnjeg, ili između njih. Ako riječ ima separatore na oba kraja, svaki $x_i$ možemo odrediti brojeći jedinice između susjednih separatora.
 
 \begin{lema}[{name=[primitivna rekurzivnost raščlambe binarnih zapisa]}]\label{lm:pos2streak1prn}
-Postoje primitivno rekurzivne funkcije $\f{pos2}$ i $\f{streak1}$, takve da za svaki uokvireni broj $x$, za svaki $i\in\N$, vrijedi:
+Postoje primitivno rekurzivne funkcije $\f{pos2}$ i $\f{streak1}$,\\ takve da za svaki uokvireni broj $x$, za svaki $i\in\N$, vrijedi:
 \begin{labeling}{$\f{streak1}(x,i)$}
     \item[$\f{pos2}(x,i)$] je pozicija $i$-te dvojke (ili $\f{blh}(x)$ ako takva ne postoji) te
     \item[$\f{streak1}(x,i)$] je duljina $i$-tog niza uzastopnih jedinica (ili $0$ ako takav ne postoji),
@@ -478,7 +480,7 @@ Postoje primitivno rekurzivne funkcije $\f{pos2}$ i $\f{streak1}$, takve da za s
 počevši od $i=0$ slijeva, u zapisu broja $x$ u pomaknutoj bazi $2$.
 \end{lema}
 \begin{proof}
-Za početak, definirajmo pomoćnu primitivno rekurzivnu (lema~\ref{lm:brojrek}) funkciju koja broji dvojke (separatore) u zapisu broja u pomaknutoj bazi $2$.
+Za početak, definirajmo pomoćnu primitivno rekurzivnu (lema~\ref{lm:brojrek}) funkciju \\ koja broji dvojke (separatore) u zapisu broja u pomaknutoj bazi $2$.
 \begin{equation}
     \f{count2}(x):=\bigl(\num i<\f{blh}(x)\bigr)\bigl(\f{sdigit}(x,i,2)=2\bigr)
 \end{equation}

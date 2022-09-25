@@ -2,7 +2,7 @@
 
 Iz uglavnom povijesnih razloga, prvi doticaj s programiranjem za većinu ljudi bude kroz \emph{imperativno} programiranje: algoritmi kao \emph{programi}, nizovi \emph{naredaba} koje mijenjaju stanje neke zajedničke \emph{memorije} nad kojom se izvršavaju. Mnogo \emph{mainstream} programskih jezika spada u tu paradigmu: gotovo svi jezici niske razine, C, C\texttt{++}, Python, Rust,~\ldots\ (Java preko tog imperativnog sloja prostire "objektno-orijentirani veo", ali fundamentalno, provođenje algoritma je i dalje izvršavanje naredaba i mijenjanje memorije). Kontrola toka (izvršavanje određenih naredbi nula ili više puta, što može ovisiti o stanju memorije) se u takvim jezicima obično ostvaruje \emph{skokovima} (uvjetnim ili bezuvjetnim, kao što su \dec\ ili \goto\ u RAM-stroju), ili na višoj razini, \emph{petljama} koje mijenjaju \emph{kontrolnu varijablu} i testiraju je da bi ustanovile trebaju li se nastaviti izvršavati, ili zaustaviti.
 
-Ipak, postoji i drugi pristup: matematičke formule kojima se definiraju funkcije često mogu poslužiti kao vrsta algoritama za njihovo računanje. Važno je primijetiti da se u tom slučaju nikakve vrijednosti ne mijenjaju: $\f f(x,y):=x^2+3y+2$ nije naredba koja mijenja $x$ niti $y$, već matematička definicija, koja kazuje kako izračunati vrijednosti funkcije $\f f$, primjerice na prirodnim brojevima, ako ih znamo potencirati, množiti i zbrajati.
+Ipak, postoji i drugi pristup: matematičke formule kojima se definiraju funkcije često se mogu shvatiti kao algoritmi za njihovo računanje. Važno je primijetiti da se u tom slučaju nikakve vrijednosti ne mijenjaju: $\f f(x,y):=x^2+3y+2$ nije naredba koja mijenja $x$ niti $y$, već matematička definicija, koja kazuje kako izračunati vrijednosti funkcije $\f f$, primjerice na prirodnim brojevima, ako ih znamo potencirati, množiti i zbrajati.
 
 U toj paradigmi, umjesto praznog programa, imamo aksiom da je nulfunkcija izračunljiva. Umjesto instrukcije \inc\ koja mijenja sadržaj registra na kojem djeluje, imamo funkciju \emph{sljedbenika}, koja proizvodi novi prirodni broj: sljedbenik ulaznog podatka. Umjesto ulaznih registara, imamo \emph{koordinatne projekcije} koje vraćaju pojedini ulazni podatak. Umjesto pomoćnih registara imamo pomoćne funkcije, kojima korak po korak gradimo ono što nam treba. Umjesto slijednog izvršavanja naredaba ovdje imamo \emph{kompoziciju}, kojom npr.\ iz funkcija $\f{add}^3$, $\f{mul}^2$ i $\f{pow}^2$, konstanti $\f C_2^2$ i $\f C_3^2$ te koordinatnih projekcija $\f I_1^2$ i $\f I_2^2$ dobivamo funkciju $\f f$ iz prethodnog odlomka. Umjesto grananja ovdje imamo definiciju funkcije \emph{po slučajevima}, gdje su uvjeti disjunktne relacije (vrijedi najviše jedan od njih; ako ne vrijedi nijedan, funkcija nije definirana). Umjesto petlji (ne možemo mijenjati kontrolnu varijablu!) funkcijsko programiranje koristi \emph{rekurziju}, kao način da se elegantno opiše izračunavanje funkcija više puta s različitim vrijednostima argumenata, a da nikakve varijable pritom ne mijenjaju svoje vrijednosti. 
 
@@ -17,11 +17,11 @@ Ako želimo dobivati izračunljive funkcije slaganjem (kompozicijom, primitivnom
 \begin{itemize}
     \item \emph{nulfunkcija} $\f Z^1$, zadana sa $\f Z(x):=0$;
     \item \emph{sljedbenik} $\f{Sc}^1$, zadana sa $\f{Sc}(x):=x+1$;
-    \item za svaki $k\in\N_+$, za svaki $n\in[1\mspace{-1mu}\dd k]$, \emph{$n$-ta $k$-mjesna koordinatna projekcija} $\f I_n^k$, zadana s $\f I_n(\vec x^k):=\f I_n(x_1,x_2,\dotsc,x_k):=x_n$.\qedhere
+    \item za svaki $k\in\N_+$, za svaki $n\in[1\mspace{-1mu}\dd k]$, \emph{$n$-ta $k$-mjesna koordinatna projekcija} $\f I_n^k$,\\ zadana s $\f I_n(\vec x^k):=\f I_n(x_1,x_2,\dotsc,x_k):=x_n$.\qedhere
 \end{itemize}
 \end{definicija}
 
-Prvu stavku možemo shvatiti kao izračunljivost (karakteristične funkcije) prazne relacije $\emptyset^1$. Treća stavka zapravo govori da je identiteta $id_{\N^*}$ izračunljiva, ako je razdvojimo po mjesnostima u familiju $id^k,k\in\N$ pa u skladu s napomenom~\ref{nap:brip} svaku $id^k=id_{\N^k}$ prikažemo pomoću $k$ koordinatnih funkcija $\f I_n^k,n\in[1\mspace{-1mu}\dd k]$.
+Prvu stavku možemo interpretirati kao izračunljivost (karakteristične funkcije) prazne relacije~$\emptyset^1$. Treća stavka zapravo govori da je identiteta $id_{\N^*}$ izračunljiva, ako je razdvojimo po mjesnostima u familiju $id^k,k\in\N$ pa u skladu s napomenom~\ref{nap:brip} svaku $id^k=id_{\N^k}$ prikažemo pomoću $k$ koordinatnih funkcija $\f I_n^k,n\in[1\mspace{-1mu}\dd k]$.
 
 \begin{napomena}[{name=[totalnost inicijalnih funkcija]}]\label{nap:inittot}
 Sve inicijalne funkcije su totalne: $\dom{\f Z}=\dom{\f{Sc}}=\N$, a $\dom{\f I_n^k}=\N^k$.
@@ -53,7 +53,7 @@ Svaka inicijalna funkcija je makro-izračunljiva.
 Svaka inicijalna funkcija je RAM-izračunljiva.
 \end{korolar}
 \begin{proof}
-Spljoštenja makro-programa iz dokaza propozicije~\ref{prop:initmacro} daju nam RAM-algoritme za inicijalne funkcije.
+Spljoštenja makro-programa iz dokaza propozicije~\ref{prop:initmacro}\\ daju nam RAM-algoritme za inicijalne funkcije.
 \end{proof}
 
 \section{Kompozicija}
@@ -194,7 +194,7 @@ Iz dokaza leme~\ref{lm:compram} je jasno kako točno kompozicija odgovara slijed
 %"Broj ponavljanja je poznat" ne djeluje dovoljno precizno --- zapravo, broj ponavljanja bi trebao biti \emph{izračunljiv} nekom funkcijom $\f B$ istog tipa. Da bismo to omogućili, dat ćemo broj ponavljanja kao dodatni argument $y$ našoj funkciji, pa ćemo kompozicijom s $\f B$ na mjestu tog argumenta dobiti željeni broj ponavljanja. Primjer te tehnike vidjet ćete u napomeni~\ref{nap:sumprodH}.
 %Način da to preciziramo koristit ćemo još mnogo puta u razvoju teorije, pa je dobro zapamtiti ga: broj ponavljanja dat ćemo kao dodatni argument našoj funkciji, a onda ćemo kompozicijom (na mjestu zadnjeg argumenta) s nekom funkcijom za koju već znamo da je izračunljiva, dobiti željeni broj ponavljanja. Usporedite to s napomenom~\ref{nap:blokovi}.
 
-Da bismo funkcionalno opisali petlju, moramo prvo opisati \emph{inicijalizaciju} $\f G$, koja odgovara stanju prije početka izvršavanja petlje, a zatim \emph{tijelo} (ponekad ga zovemo i \emph{korak}) petlje kao funkciju $\f H$ koja preslikava stanje na početku jednog prolaza kroz petlju, u stanje na kraju tog prolaza. %Vrlo grubo rečeno, želimo modelirati funkciju $\f G\pr\f H:=\f H\circ\f H\circ\dotsb\circ\f H\circ\f G$, gdje je broj $\f H$-ova zadan kao posebni argument $y$.
+Za funkcionalni opis petlje moramo prvo opisati \emph{inicijalizaciju} $\f G$, koja odgovara stanju prije početka izvršavanja petlje, a zatim \emph{tijelo} (ponekad zvano \emph{korak}) petlje kao funkciju $\f H$ koja preslikava stanje na početku jednog prolaza kroz petlju, u stanje na kraju tog prolaza. %Vrlo grubo rečeno, želimo modelirati funkciju $\f G\pr\f H:=\f H\circ\f H\circ\dotsb\circ\f H\circ\f G$, gdje je broj $\f H$-ova zadan kao posebni argument $y$.
 
 Programski, primjerice u Pythonu, ograničene petlje kakve promatramo imaju oblik:
 \begin{equation}
@@ -206,7 +206,7 @@ for i in range(y): z = ...z...  # tijelo, ažurira z
 	\end{minipage}
 \end{equation}
 
-U petljama je uobičajeno da tijelo, pored konteksta $\vec x$ i prethodno izračunane vrijednosti $z$, može koristiti i kontrolnu varijablu (u kodu nazvanu $i$), koja broji koliko puta smo već prošli kroz petlju.
+Tijelo, pored konteksta $\vec x$ i prethodno izračunane vrijednosti $z$, obično može koristiti i kontrolnu varijablu (u kodu nazvanu \texttt i), koja broji koliko smo puta prošli kroz petlju.
 
 %Ipak, dozvolit ćemo još jednu stvar uobičajenu u petljama: tijelu petlje $\f H$ kao još jedan argument prenijet ćemo "kontrolnu varijablu", koja broji koliko puta smo već prošli kroz petlju. Imperativni jezici niže razine obično implementiraju "primitivne" petlje kontrolnom varijablom koja ide od $0$ do isključivo $y$, recimo C:
 %\begin{equation}\label{prog:Cprloop}
@@ -317,7 +317,9 @@ Definicija~\ref{def:prn} je elegantna i matematički pogodna za dokazivanje, ali
 Neka je $F$ brojevna funkcija. Tada je $F$ primitivno rekurzivna ako i samo ako se $F$ može dobiti iz inicijalnih funkcija pomoću konačno mnogo primjena kompozicije i primitivne rekurzije.
 \end{propozicija}
 \begin{proof}
-Označimo sa $\mathcal S$ skup funkcija koje se mogu dobiti iz inicijalnih pomoću ko\-nač\-no mnogo primjena kompozicije i primitivne rekurzije. Ako je $F$ inicijalna funkcija, tada ona svakako pripada skupu $\mathcal S$ jer ju je moguće dobiti iz inicijalnih pomoću $0$ primjena kompozicije i primitivne rekurzije.
+Označimo sa $\mathcal S$ skup funkcija koje se mogu dobiti iz inicijalnih pomoću ko\-nač\-no mnogo primjena kompozicije i primitivne rekurzije. 
+
+	Ako je $F$ inicijalna funkcija, tada ona svakako pripada skupu $\mathcal S$ jer ju je moguće dobiti iz inicijalnih pomoću $0$ primjena kompozicije i primitivne rekurzije.
 
 Ako su $k,l\in\N_+$ te $G_1^k,\dotsc,G_l^k,H^l\in\mathcal S$, tada se svaka $G_i$ može dobiti iz inicijalnih pomoću, recimo, $c_i$ primjena kompozicije i $r_i$ primjena primitivne rekurzije. Također se $H$ može dobiti iz inicijalnih, recimo, pomoću $c$ primjena kompozicije i $r$ primjena primitivne rekurzije. Tada se $H\circ(G_1,\dotsc,G_l)$ može dobiti iz inicijalnih funkcija pomoću najviše $1+c+\sum_{i=1}^lc_i$ primjena kompozicije, i najviše $r+\sum_{i=1}^lr_i$ primjena primitivne rekurzije --- što je konačno mnogo, pa je $H\circ(G_1,\dotsc,G_l)\in\mathcal S$.
 
@@ -327,13 +329,13 @@ Prethodna tri odlomka pokazuju da skup $\mathcal S$ sadrži sve inicijalne funkc
 
 Za drugi smjer, neka je $F\in\mathcal S$ proizvoljna funkcija. To znači da se može dobiti iz inicijalnih, recimo, pomoću $c$ primjena kompozicije i $r$ primjena primitivne rekurzije. Dokažimo da je $F$ primitivno rekurzivna, jakom indukcijom po $c+r$.
 
-Ako je $c+r=0$, tada mora biti $c=r=0$, drugim riječima, $F$ mora biti inicijalna. Kako skup primitivno rekurzivnih funkcija sadrži sve inicijalne funkcije, zaključujemo da je $F$ primitivno rekurzivna.
+Ako je $c+r=0$, tada mora biti $c=r=0$, odnosno $F$ mora biti inicijalna. Skup primitivno rekurzivnih funkcija sadrži sve inicijalne funkcije, pa tako i $F$.
 
 Pretpostavimo da za sve $t<c+r$, za svaku funkciju $g\in\mathcal S$ dobivenu s $c'$ primjena kompozicije i $r'$ primjena primitivne rekurzije tako da je $c'+r'=t$, vrijedi da je $g$ primitivno rekurzivna.
 
     Neka je sad $F\in\mathcal S$ dobivena s $c$ primjena kompozicije i $r$ primjena primitivne rekurzije ($c+r>0$), iz inicijalnih funkcija. Tada $F\in\mathcal S$ znači da je ili $F=H\circ(G_1,\dotsc,G_l)$ za neke $G_1,\dotsc,G_l,H\in\mathcal S$, ili pak $F=G\pr H$, za neke totalne $G,H\in\mathcal S$ (odgovarajućih mjesnosti).
 
-	U svakom od tih slučajeva pojedine funkcije, pomoću kojih je dobivena $F$, dobivene su iz inicijalnih funkcija sa strogo manje ukupno primjena kompozicije i primitivne rekurzije: recimo, ako je $F=G\pr H$, tada je $r>0$ te su $G$ i $H$ dobivene iz inicijalnih pomoću najviše $c$ primjena kompozicije i najviše $r-1$ primjena primitivne rekurzije. Po pretpostavci indukcije, $G$ i $H$ su primitivno rekurzivne. Kako je skup primitivno rekurzivnih funkcija zatvoren na primitivnu rekurziju, zaključujemo da je $F=G\pr H$ primitivno rekurzivna. Sasvim analogno bi se dokazalo da je $F$ oblika $H\circ(G_1,\dotsc,G_l)$ primitivno rekurzivna.
+	U svakom od tih slučajeva pojedine funkcije, pomoću kojih je dobivena $F$, dobivene su iz inicijalnih funkcija sa strogo manje ukupno primjena kompozicije i primitivne rekurzije: recimo, ako je $F=G\pr H$, tada je $r>0$ te su $G$ i $H$ dobivene iz inicijalnih pomoću najviše $c$ primjena kompozicije i najviše $r-1$ primjena primitivne rekurzije. Po pretpostavci indukcije, $G$ i $H$ su primitivno rekurzivne. Kako je skup primitivno rekurzivnih funkcija zatvoren na primitivnu rekurziju, zaključujemo da je $F=G\pr H$ primitivno rekurzivna. Analogno bi se dokazalo da je $F$ oblika $H\circ(G_1,\dotsc,G_l)$ primitivno rekurzivna.
 \end{proof}
 
 \begin{napomena}[{name=[ulančavanje simboličkih definicija]}]\label{nap:symbdef}
@@ -386,10 +388,10 @@ Po definiciji~\ref{def:prn}, koristeći korolar~\ref{kor:initram} te leme~\ref{l
 Već smo vidjeli simboličke definicije od $\f{add}^2$ i $\f{mul}^2$, što prema propoziciji~\ref{prop:symbdef} znači da su one primitivno rekurzivne. Sada ćemo vidjeti još brojne druge primjere. Prvo poopćimo primjer~\ref{pr:C23}.
 
 \begin{propozicija}[{name=[primitivna rekurzivnost konstantnih funkcija]}]\label{prop:konst}
-Za sve $n\in\N$ i za sve $k\in\N_+$, konstantna funkcija $\f C_n^k$, zadana s $\f C_n^k(\vec x):=n$, primitivno je rekurzivna.
+Za sve $n\in\N$ i za sve $k\in\N_+$, konstantna funkcija $\f C_n^k$, \\ zadana s $\f C_n^k(\vec x):=n$, primitivno je rekurzivna.
 \end{propozicija}
 \begin{proof}
-Fiksirajmo $k\in\N_+$, i dokažimo tvrdnju "sve $\f C_n^k$ su primitivno rekurzivne", indukcijom po $n$. Baza: $\f C_0^k=\f Z\circ\f I_1^k$ je simbolička definicija od $\f C_0^k$. Doista,
+Fiksirajmo $k\in\N_+$, i dokažimo tvrdnju "sve $\f C_n^k$ su primitivno rekurzivne", \\ indukcijom po $n$. Baza: $\f C_0^k=\f Z\circ\f I_1^k$ je simbolička definicija od $\f C_0^k$. Doista,
 \begin{equation}
     (\f Z\circ\f I_1^k)(\vec x)=\f Z\bigl(\f I_1^k(\vec x)\bigr)=\f Z(x_1\!)=0=\f C_0^k(\vec x)\text.
 \end{equation}
@@ -488,7 +490,7 @@ Rastavom na slučajeve vidimo da je $x>y$ ako i samo ako je $x\dotminus y$ pozit
 
 \section{Minimizacija}
 
-Primitivno rekurzivne funkcije su korisne i pogodne za rad, ali njihova totalnost je na neki način i nedostatak. Recimo, u funkcijskoj paradigmi još uvijek nismo dobili izračunljivost prazne funkcije $\varnothing^1$, što je bilo gotovo trivijalno u RAM-paradigmi. Da bismo dobili i parcijalne (netotalne) funkcije, moramo uvesti novi operator, pored $\circ$ i $\pr$. Taj operator --- \emph{minimizacija} --- djelovat će na \emph{relacijama} (zadanim karakterističnim funkcijama) i tražit će najmanji prirodni broj koji zadovoljava neko svojstvo. Intuitivno, odgovarat će \emph{neograničenim} petljama (poput petlje \texttt{while} u Pythonu, samo s negiranim uvjetom) koje se ne izvršavaju određeni broj puta, nego dok se ne ispuni neki uvjet.
+Primitivno rekurzivne funkcije su korisne i pogodne za rad, ali njihova totalnost je na neki način i nedostatak. Recimo, u funkcijskoj paradigmi još uvijek nismo dobili izračunljivost prazne funkcije $\varnothing^1$, što je bilo gotovo trivijalno u RAM-paradigmi. Da bismo dobili i parcijalne (netotalne) funkcije, moramo uvesti novi operator, pored $\circ$ i $\pr$. Taj operator --- \emph{minimizacija} --- djelovat će na \emph{relacijama} (zadanim karakterističnim funkcijama) i tražit će najmanji prirodni broj koji ima neko svojstvo. Intuitivno, odgovarat će \emph{neograničenim} petljama (poput petlje \texttt{while} u Pythonu, samo s negiranim uvjetom) koje se ne izvršavaju određeni broj puta, nego dok se ne ispuni neki uvjet.
 
 Općenite neograničene petlje su raznolike i između provjeravanja uvjeta mogu na razne načine mijenjati stanje memorije, ali aksiomatski ćemo pretpostaviti samo izračunljivost petlji oblika \texttt{for(unsigned y=0; !R(y); ++y);}. Kasnije ćemo vidjeti da u tom modelu možemo pisati i općenite petlje.
 

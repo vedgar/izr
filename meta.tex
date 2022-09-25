@@ -65,7 +65,7 @@ Zapravo bismo mogli dokazati i "uniformnu" verziju, kad bismo fiksirali argument
 \begin{propozicija}[Teorem o parametru]\label{pp:tmpar}
 	Za svaki $k\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^2:\N^2\to\f{Prog}$, takva da za sve $y,e\in\N$ vrijedi $\kf{\f S_k(y,e)}^k=\$(y,\kf e^{k+1}\mspace{-1mu})$.
 \end{propozicija}
-Funkcijska jednakost o kojoj govori teorem može se zapisati i kao
+Spomenutu funkcijsku jednakost možemo zapisati točkovno:
 \begin{equation}\label{eq:Sfunceq}
     \f{comp}_k\bigl(\vec x,\f S_k(y,e)\bigr)\simeq\f{comp}_{k+1}(\vec x,y,e)\text{, za sve }\vec x\in\N^k
 \end{equation}
@@ -85,7 +85,7 @@ Funkcijska jednakost o kojoj govori teorem može se zapisati i kao
 \end{equation}
 od dva dijela (razdvojena crtom) --- dakle k\=od spljoštenja bit će dobiven konkatenacijom dva koda. Za gornji dio smo tehniku već vidjeli u primjeru~\ref{pr:kodkonst} --- samo umjesto konstante $\kins{\incr0\!}=6$ imamo konstantu $\kins{\incr{k+1}\!}=\f{codeINC}(k+1)=2\cdot3^{k+2}$ ($k$ je fiksan). Dakle, prvi kod je $\overline{\f G}(y)$, za $\f G:=\f C_{\f{codeINC}(k+1)}$.
 
-Za donji dio, primijenimo algoritam iz definicije~\ref{def:flat}. Kako je jedini makro zadnja instrukcija u $Q$, ne treba provoditi korak~\eqref{korak:renumeriraj}, već samo korake~\eqref{korak:makni} i~\eqref{korak:dodaj}. Drugim riječima, umjesto jedne instrukcije $y.\;P^*$ treba stajati $n_P$ instrukcij\=a samog programa $P$ --- s rednim brojevima i odredištima pomaknutima za $y$. Za redne brojeve pobrinut će se konkatenacija jer je $\f{lh}\bigl(\overline{\f G}(y)\bigr)=y$; trebamo još pomaknuti odredišta.
+Za donji dio, primijenimo algoritam iz definicije~\ref{def:flat}. Kako je jedini makro zadnja instrukcija u $Q$, ne treba provoditi korak~\eqref{korak:renumeriraj}, već samo korake~\eqref{korak:makni} i~\eqref{korak:dodaj}. Drugim riječima, umjesto jedne instrukcije $y.\:P^*$ treba stajati $n_P$ instrukcij\=a samog programa $P$ --- s rednim brojevima i odredištima pomaknutima za $y$. Za redne brojeve pobrinut će se konkatenacija jer je $\f{lh}\bigl(\overline{\f G}(y)\bigr)=y$; trebamo još pomaknuti odredišta.
 
 Kod dokazivanja primitivne rekurzivnosti konkatenacije (lema~\ref{lm:starprn}) vidjeli smo ideju "točkovne definicije konačnog niza"% --- zato je dovoljno objasniti kako pomaknuti odredište pojedine instrukcije
 : drugi kod će biti $\overline{\f H}\bigl(y,e,\f{lh}(e)\bigr)$, gdje je $\f H(y,e,t):=\f{Shift}(y,e[t])$, tako da još trebamo definirati funkciju $\f{Shift}$ koja pomiče odredište (ako postoji) instrukcije zadane kodom (drugi argument) za $y$ (prvi argument).
@@ -134,7 +134,7 @@ pa je izlazni podatak doista $\kf e^{k+1}(\vec x,y)\simeq\f{comp}_{k+1}(\vec x,y
 
 \subsection{Teorem o parametrima}
 
-Jednom kad imamo teorem o parametru, njegovom ponovljenom primjenom možemo implementirati i specijalizaciju više zadnjih argumenata izračunljive funkcije odjednom. Primjer, koji može poslužiti i kao ideja dokaza, smo vidjeli u~\eqref{eq:multpar}.
+Jednom kad imamo teorem o parametru, njegovom ponovljenom primjenom možemo specijalizirati i više zadnjih argumenata izračunljive funkcije odjednom. Primjer, ujedno i ideju dokaza, vidjeli smo u~\eqref{eq:multpar}.
 
 \begin{korolar}[{name=[teorem o parametrima]}]\label{kor:pars}
 Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$\\ takva da za sve $\vec x\in\N^k$, za sve $\vec y\in\N^l$, i za sve $e\in\N$, vrijedi
@@ -143,7 +143,9 @@ Za sve $k,l\in\N_+$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$\\ takv
 \end{equation}
 \end{korolar}
 \begin{proof}
-    Fiksirajmo $k$, i dokažimo (za taj $k$) tvrdnju indukcijom po $l$. Kako je $l\in\N_+$, baza je $l=1$, i $\f S_k^{1+1}=\f S_k^2$ je primitivno rekurzivna po propoziciji~\ref{pp:tmpar}.
+    Fiksirajmo $k$, i dokažimo (za taj $k$) tvrdnju indukcijom po $l$. 
+
+	Kako je $l\in\N_+$, baza je $l=1$, i $\f S_k^{1+1}\!=\f S_k^2$ je primitivno rekurzivna po propoziciji~\ref{pp:tmpar}.
 
 	Pretpostavimo sad da za neki $l$ postoji primitivno rekurzivna funkcija $\f S_k^{l+1}$ sa svojstvom~\eqref{eq:Sklspec}. Kako definirati $\f S_k^{l+2}\mspace{1mu}$? Uzmemo proizvoljni $(\vec y,z)\in\N^{l+1}$ i računamo:
 \begin{equation}
@@ -299,7 +301,7 @@ ili simbolički, kao $\f{factorial}=\IF{\N_+:\f{mul}^2\circ(\f I_1^1,\f{factoria
 
 Tu jednakost nema smisla zvati \emph{definicijom} od $\f{factorial}$, jer je cirkularna --- ali ona može poslužiti kao funkcijska \emph{jednadžba} koju trebamo riješiti po "nepoznanici" $\f{factorial}$. Osnovna prednost definicija pred jednadžbama sastoji se u tome da (dobra) definicija uvijek jednoznačno određuje definirani objekt, dok jednadžba ne mora imati rješenje, ili ih može imati više.
 
-Još jedan detalj treba razmotriti: u~\eqref{eq:factorialrek} smo koristili znak jednakosti jer otprije znamo da je faktorijel totalna funkcija --- ali opće rekurzije koje koriste samo totalne funkcije mogu kao rješenja imati parcijalne funkcije koje nisu totalne. Recimo,
+Još jedan detalj treba uzeti u obzir: u~\eqref{eq:factorialrek} smo koristili znak jednakosti jer otprije znamo da je faktorijel totalna funkcija --- ali opće rekurzije koje koriste samo totalne funkcije mogu kao rješenja imati parcijalne funkcije koje nisu totalne. Recimo,
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
                 unsigned h(unsigned n){

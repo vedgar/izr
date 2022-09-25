@@ -662,21 +662,20 @@ Moderna računala rezerviraju poseban dio svoje memorije za stog poziva (\emph{c
 
 Na RAM-arhitekturi nemamo stog poziva, ali ga možemo emulirati pomoću registara. Otvaranje okvira duljine $b$ realizirat ćemo kao pomak prvih $b$ registara za $b$ mjesta udesno (od $\reg{b}$ do uključivo $\reg{2b-1}$), a njegovo zatvaranje kao pomak u suprotnom smjeru. Osigurat ćemo da je $b$ uvijek dovoljno velik da time sačuvamo sve relevantne registre pozivatelja te da osiguramo dovoljno nul\=a na početku za sve relevantne registre pozvane funkcije --- "uvjerivši" njen program da se izvršava na zasebnom RAM-stroju.
 
-Stvarna računala ne implementiraju stog na taj način jer je takav pristup nevjerojatno rastrošan, u prostoru (broju registara) i u vremenu (broju koraka). No kako nas pri proučavanju izračunljivosti zanima samo postojanje algoritama, ne i njihova složenost, taj pristup će nam biti dovoljno dobar.
+Stvarna računala ne implementiraju stog na taj način jer je takav pristup nevjerojatno rastrošan, u prostoru (broju registara) i u vremenu (broju koraka). No kako nas zanima samo postojanje algoritama, ne i njihova složenost, taj pristup će nam biti dovoljno dobar.
 
 %\subsection{Kopiranja}
 
-Upravo konstruirani makroi resetiraju registre koje prenose --- što ako ih želimo sačuvati? Jedina usporedba koju imamo je ona s nulom u instrukciji tipa $\dec$, dakle jedini način da unutar RAM-programa saznamo sadržaj registra je da ga dekrementiramo do nule. No dekrementiranjem možemo inkrementirati $1$ registar (kao u \textsc{remove}), $0$ registara (kao u \textsc{zero}), ili $2$ registra: ako su $i,j,k\in\N$ svi različiti, makro
-
-\noindent{}\begin{equation}
+Upravo konstruirani makroi resetiraju registre koje prenose --- što ako ih želimo sačuvati? Jedina usporedba koju imamo je ona s nulom u instrukciji tipa $\dec$, dakle jedini način da RAM-program sazna sadržaj registra je da ga dekrementira do nule. No dekrementiranjem možemo inkrementirati $1$ registar (kao u \textsc{remove}), $0$ registara (kao u \textsc{zero}), ili $2$ registra: ako su $i,j,k\in\N$ svi različiti, makro
+\vspace{-1em}
+\begin{equation}
     (\textsc{move}\;\reg{i}\;\textsc{to}\;\reg{j}\;\textsc{using}\;\reg{k}):=\begin{prog}
     0.&\textsc{zero}\;\reg{j}\\
-    1.&\textsc{zero}\;\reg{k}\\
-    2.&\decr{i}{6}\\
-    3.&\incr{j}\\
-    4.&\incr{k}\\
-    5.&\goto\;2\\
-    6.&\remove{k}{i}
+    1.&\remove{i}{k}\\
+    2.&\decr{k}{6}\\
+    3.&\incr{i}\\
+    4.&\incr{j}\\
+    5.&\goto\;2
     \end{prog}^{\flat*}
 \end{equation}
 ima semantiku $r_j'=r_i\land r_k'=0$ (nismo napisali $r_i'$, što u skladu s našom konvencijom znači da je $r_i'=r_i$). To se dokaže po koracima, praćenjem stanja relevantnih registara kroz instrukcije:
@@ -685,12 +684,13 @@ ima semantiku $r_j'=r_i\land r_k'=0$ (nismo napisali $r_i'$, što u skladu s na�
 %\SwapAboveDisplaySkip
         & & r_i & r_j & r_k\\\hline
         0.&\textsc{zero}\;\reg{j} & r_i & 0 & r_k\\
-        1.&\textsc{zero}\;\reg{k} & r_i & 0 & 0  \\
-        2.\text{--}\mspace{1mu}5.& \text{(petlja)} &    0   & r_i & r_i \\
-        6.&\textsc{remove $\reg{k}$ to $\reg{i}$}& r_i & r_i & 0
+        1.&\remove{i}{k} & 0 & 0 & r_i  \\
+        2.\text{--}\mspace{1mu}5.& \text{(petlja)} &  r_i & r_i & 0
     \end{array}
 \end{equation}
-Naglasimo da smo za tu operaciju morali "žrtvovati" (resetirati) jedan registar sa strane. Zbog $i\ne k$, uvjet na parametre makroa \textsc{remove} je zadovoljen.
+Naglasimo da smo za tu operaciju morali "žrtvovati" (resetirati) jedan registar sa strane.
+
+Zbog $i\ne k$, uvjet na parametre makroa \textsc{remove} je zadovoljen.
 
 \begin{napomena}[{name=[{terminologija makroa za kopiranje\slash premještanje registara}]}]
 %Terminološki detalj: ako ste navikli na rad s modernim sustavima datoteka,
