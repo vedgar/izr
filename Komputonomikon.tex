@@ -4,7 +4,7 @@
      headings=optiontotoc,
      ]{scrbook}
 %\includeonly{neizr,meta,re} %dolje isključiti list of theorems
-% TODO za iduću godinu:
+% tasks.google.com, lista KNI
 %\usepackage{showframe}
 \raggedbottom
 %\pdfmapline{+dummy-space <dummy-space.pfb}
@@ -12,7 +12,8 @@
 \usepackage[utf8]{inputenc} \usepackage[T1]{fontenc}
 \usepackage[croatian]{babel} \usepackage{csquotes} \MakeOuterQuote{"}
 \usepackage[style=alphabetic]{biblatex} \addbibresource{literatura.bib}
-\usepackage{hyperxmp} \usepackage{hyperref} \usepackage{xcolor} \hypersetup{
+\usepackage{hyperref} \usepackage{hyperxmp} \usepackage{xcolor} \hypersetup{
+    hypertexnames=false,
     unicode, colorlinks, linkcolor={red!50!black},
     citecolor={blue!50!black}, urlcolor={blue!80!black},
     pdftitle={Komputonomikon},
@@ -51,7 +52,6 @@
 \clearpairofpagestyles \ifoot{\textcolor{gray}{\headmark}} \ofoot*{\pagemark}
 \usepackage[croatian,refpage]{nomencl}
 \makenomenclature
-\usepackage{tocloft}
 % \usepackage{academicons}
 % \usepackage[ttdefault]{AnonymousPro}
 
@@ -191,12 +191,12 @@
 \title{\vspace{-2cm}\normalfont Izračunljivost}
 \subtitle{\normalfont\Huge{za\; računarce}}
 \author{\textit{V\!edran Č\hspace{-0.5mm}ačić}}
-\renewcommand\cftchapafterpnum{\vskip 14pt} %set space after each Chapter in the Table of Contents
-\renewcommand\cftsecafterpnum{\vskip 8pt}  %set space after each Section in the Table of Contents
+%\renewcommand\cftchapafterpnum{\vskip 14pt} %set space after each Chapter in the Table of Contents
+%\renewcommand\cftsecafterpnum{\vskip 8pt}  %set space after each Section in the Table of Contents
 \date{\today} \maketitle \setcounter{tocdepth}{1} \tableofcontents
 {\renewcommand\thesection{\alph{section}} \include{uvod}}
 \mainmatter
-%\addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
+\addtocontents{toc}{\protect\enlargethispage{2\baselineskip}}
 \include{ram} %\addtocontents{toc}{\protect\newpage}
 \include{rek} \include{univ} %\addtocontents{toc}{\protect\newpage}
 \include{turing}%\include{tbroj}

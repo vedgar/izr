@@ -142,7 +142,7 @@ Dakle, riječi izvan $L$ ona preslikava u praznu riječ. Riječi \emph{unutar} $
 \label{eq:d89j}\tag{$\delta$5b}
     \delta(l_{\t\$},\bl):=(q_r,\bl,-1)\text.
 \end{gather}
-	Po teoremu~\ref{tm:krit}, dobiveni stroj će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj na kraju izračunavanja pročitati znak iz $\Sigma$ (možemo ga zamijeniti razmakom da traka bude sasvim prazna; to je jedini znak izlaza jer zbog leme~\ref{lm:dulj<=kr} vrijedi $\dulj{\text{izlaz}}\le\kr{\text{izlaz}}=\kr{\varphi(\text{ulaz})}=\chi_{\kr L}(\kr{\text{ulaz}})\le1$) i ući u stanje $q_a$~\eqref{eq:d88j}. Za $w\notin L$ rezultat će biti $\varepsilon$ pa će stroj pročitati prazninu i ući u stanje $q_r$~\eqref{eq:d89j}. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
+	Po teoremu~\ref{tm:krit}, dobiveni stroj će "računati" (pod navodnicima jer odlučitelji zapravo ne služe za računanje funkcija) funkciju $\varphi$, pa će za $w\in L$ rezultat biti neprazan. To znači da će stroj na kraju izračunavanja pročitati znak iz $\Sigma$ (možemo ga zamijeniti prazninom tako da traka bude sasvim prazna; to je jedini znak izlaza jer zbog leme~\ref{lm:dulj<=kr} vrijedi $\dulj{\text{izlaz}}\le\kr{\text{izlaz}}=\kr{\varphi(\text{ulaz})}=\chi_{\kr L}(\kr{\text{ulaz}})\le1$) i ući u stanje $q_a$~\eqref{eq:d88j}. Za $w\notin L$ rezultat će biti $\varepsilon$ pa će stroj pročitati prazninu i ući u stanje $q_r$~\eqref{eq:d89j}. Budući da za svaku riječ $w\in\Sigma^*$ vrijedi jedna od te dvije mogućnosti, zaključujemo da smo doista konstruirali odlučitelj.
 \end{proof}
 \vspace{-3mm}
 
@@ -373,7 +373,7 @@ Matematičkom indukcijom po $k$. Za $k=1$ (baza), to je upravo lema~\ref{lm:bin1
 	\kr{\t\textbullet^{x_1}\!\t/\dotsm\t{/\textbullet}^{x_l}\!\t{/\textbullet}^y}=
     \kr{\beta(\vec x)\t/\beta(y)}={}\\
     \text{[propozicija~\ref{pp:krkonkkr}]}{}=\kr{\beta(\vec x)}\conc 2\kr{\t/}\conc 2\kr{\beta(y)}=
-    \f{bin}^k(\vec x)\conc22\conc2\f{bin}^1(y)\text,
+    \f{bin}^l(\vec x)\conc22\conc2\f{bin}^1(y)\text,
 \end{multline}
 što je primitivno rekurzivno po pretpostavci indukcije, propoziciji~\ref{pp:concprn} i lemi~\ref{lm:bin1prn}.
 \end{proof}

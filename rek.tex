@@ -1,6 +1,6 @@
 \chapter{Rekurzivne funkcije}\label{ch:rek}
 
-Iz uglavnom povijesnih razloga, prvi doticaj s programiranjem za većinu ljudi bude kroz \emph{imperativno} programiranje: algoritmi kao \emph{programi}, nizovi \emph{naredaba} koje mijenjaju stanje neke zajedničke \emph{memorije} nad kojom se izvršavaju. Mnogo \emph{mainstream} programskih jezika spada u tu paradigmu: gotovo svi jezici niske razine, C, C\texttt{++}, Python, Rust,~\ldots\ (Java preko tog imperativnog sloja prostire "objektno-orijentirani veo", ali fundamentalno, provođenje algoritma je i dalje izvršavanje naredaba i mijenjanje memorije). Kontrola toka (izvršavanje određenih naredbi nula ili više puta, što može ovisiti o stanju memorije) se u takvim jezicima obično ostvaruje \emph{skokovima} (uvjetnim ili bezuvjetnim, kao što su \dec\ ili \goto\ u RAM-stroju), ili na višoj razini, \emph{petljama} koje mijenjaju \emph{kontrolnu varijablu} i testiraju je da bi ustanovile trebaju li se nastaviti izvršavati, ili zaustaviti.
+Iz uglavnom povijesnih razloga, prvi doticaj s programiranjem za većinu ljudi bude kroz \emph{imperativno} programiranje: algoritmi kao \emph{programi}, nizovi \emph{naredaba} koje mijenjaju stanje neke zajedničke \emph{memorije} nad kojom se izvršavaju. Mnogo \emph{mainstream} programskih jezika spada u tu paradigmu: gotovo svi jezici niske razine, C, C\texttt{++}, Python, Rust,~\ldots\ (Java preko tog imperativnog sloja prostire "objektni veo", ali fundamentalno, provođenje algoritma je i dalje izvršavanje naredaba i mijenjanje memorije). Kontrola toka (izvršavanje određenih naredbi nula ili više puta, što može ovisiti o stanju memorije) se u takvim jezicima obično ostvaruje \emph{skokovima} (uvjetnim ili bezuvjetnim, kao što su \dec\ ili \goto\ u RAM-stroju), ili na višoj razini, \emph{petljama} koje mijenjaju \emph{kontrolnu varijablu} i testiraju je da bi ustanovile trebaju li se nastaviti izvršavati, ili zaustaviti.
 
 Ipak, postoji i drugi pristup: matematičke formule kojima se definiraju funkcije često se mogu shvatiti kao algoritmi za njihovo računanje. Važno je primijetiti da se u tom slučaju nikakve vrijednosti ne mijenjaju: $\f f(x,y):=x^2+3y+2$ nije naredba koja mijenja $x$ niti $y$, već matematička definicija, koja kazuje kako izračunati vrijednosti funkcije $\f f$, primjerice na prirodnim brojevima, ako ih znamo potencirati, množiti i zbrajati.
 
@@ -78,7 +78,7 @@ Ta dilema je dobro poznata u modernom računarstvu, i oba pristupa nalazimo u da
 \end{verbatim}
 \end{minipage}\end{equation}
 
-Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i podrazumijeva se u gotovo svim imperativnim jezicima, pa i mnogim funkcijskima (kao što je ML\@). Prednost je lakša implementacija, i lakše razmišljanje o kodu (a time i lakši \emph{debugging}). %Primjer u Pythonu:
+Drugi pristup zove se \emph{marljiva} evaluacija (\emph{eager evaluation}) i podrazumijeva se u gotovo svim imperativnim jezicima, pa i u mnogim funkcijskima (kao što je ML\@). Prednost je lakša implementacija, i lakše razmišljanje o kodu (a time i lakši \emph{debugging}). %Primjer u Pythonu:
 \begin{equation}\begin{minipage}{0.8\textwidth}
 \begin{verbatim}
     >>> def i12(x, y): return x
@@ -698,12 +698,15 @@ Ubuduće ćemo samo napisati točkovnu definiciju tražene funkcije iz zadanih f
 Brojevne relacije nestrogog uređaja $\le$ i $\ge$ su primitivno rekurzivne.
 \end{korolar}
 \begin{proof}
-Tvrdnje slijede iz primjera~\ref{pr:m-v}, propozicije~\ref{prop:kompl} te očitih ekvivalencija
-\begin{align}
-    x\le y&\Longleftrightarrow\lnot(x>y) & (\le) &= (>)\kompl\text,\\
-    x\ge y&\Longleftrightarrow\lnot(x<y) & (\ge) &= (<)\kompl
-\end{align}
-(točkovno u lijevom stupcu, simbolički u desnom).
+Tvrdnje slijede iz primjera~\ref{pr:m-v}, propozicije~\ref{prop:kompl} te očitih ekvivalencija\\
+    $x\le y\Longleftrightarrow\lnot(x>y)$, 
+    $x\ge y\Longleftrightarrow\lnot(x<y)$, odnosno
+	$(\le) = (>)\kompl$, $(\ge) = (<)\kompl$.
+%\begin{align}
+    %x\le y&\Longleftrightarrow\lnot(x>y) & (\le) &= (>)\kompl\text,\\
+    %x\ge y&\Longleftrightarrow\lnot(x<y) & (\ge) &= (<)\kompl
+%\end{align}
+%(točkovno u lijevom stupcu, simbolički u desnom).
 \end{proof}
 
 \begin{propozicija}[{name=[logički veznici čuvaju (primitivnu) rekurzivnost]}]\label{prop:vezn}

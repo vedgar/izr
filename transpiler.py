@@ -1,35 +1,31 @@
 import itertools, collections, sys, pdb, typing
 INC, DEC, GOTO = range(3)
+test = 3
 
-test = 5
 if test == 1:
-    eSigma = 'abcde'
+    eSigma = 'ab'
     P = [
-        (0, DEC, 1, 1),
-        (1, DEC, 1, 8),
-        (2, DEC, 1, 8),
-        (3, DEC, 1, 8),
-        (4, DEC, 1, 8),
-        (5, DEC, 1, 8),
-        (6, INC, 0),
-        (7, GOTO, 1),
+        (0, DEC, 1, 5),
+        (1, DEC, 1, 5),
+        (2, DEC, 1, 5),
+        (3, INC, 0),
+        (4, GOTO, 1),
     ]
-    word = 'deda'
+    word = 'bab'
 elif test == 2:
     eSigma = 'abcde'
     P = [
-        (0, DEC, 1, 7),
-        (1, INC, 0),
+        (0, INC, 0),
+        (1, DEC, 1, 7),
         (2, INC, 0),
         (3, INC, 0),
         (4, INC, 0),
         (5, INC, 0),
         (6, GOTO, 0),
-        (7, INC, 0),
     ]
     word = 'ded'
 elif test == 3:
-    eSigma = '123456789A'
+    eSigma = '123456789X'
     P = [
         (0, DEC, 1, 4),
         (1, INC, 2),
@@ -45,11 +41,11 @@ elif test == 3:
         (11, GOTO, 9),
         (12, GOTO, 4),
     ]
-    word = '21'
+    word = '17'
 elif test == 4:
-    eSigma = '*'
+    eSigma = '¤'
     P = []
-    word = '********'
+    word = ''
 elif test == 5:
     eSigma = 'xy'
     P = [
@@ -82,18 +78,25 @@ class TuringMachine(typing.NamedTuple):
                 if debug and q not in visited:
                     if len(states) > 1:
                         statnum = 0
-                        for statkey, statgroup in itertools.groupby(states[1:]):
+                        grouped = itertools.groupby(states[1:])
+                        for statkey, statgroup in grouped:
                             statcount = sum(1 for stat in statgroup)
-                            print(statkey.replace(machine.space, '_'), end='')
-                            if statcount > 1: print('*', statcount, end=' ', sep='')
+                            print(statkey.replace(machine.space, '␣'), end='')
+                            if statcount > 1: print('×', statcount, end=' ', sep='')
                             else: print(end=' ')
                             statnum += 1
-                            if statnum > 99: print(end='...'); break
+                            if statnum > 99:
+                                statcount = statnum = 0
+                                for statkey, statgroup in grouped:
+                                    statnum += 1
+                                    statcount += sum(1 for stat in statgroup)
+                                print(end=f'…×{statcount} @{statnum}')
                         print()
                     states.clear()
                     machine.show(q, pos, tape, steps)
                     visited.add(q)
                 states.append(q)
+            print(end='→ ')
             machine.show(q, pos, tape, steps)
         except KeyError as exc:
             machine.show(q, pos, tape, steps)
@@ -103,11 +106,11 @@ class TuringMachine(typing.NamedTuple):
         while tape and tape[max(tape)] == machine.space: del tape[max(tape)]
         yield str(steps) + ': '
         for i in range(2 + max(tape, default=0)):
-            if i == pos: yield q.replace(machine.space,'_').join('(>')
-            yield '_' if tape[i] == machine.space else tape[i].join('[]')
+            if i == pos: yield q.replace(machine.space,'␣').join('(⟩')
+            yield '␣' if tape[i] == machine.space else tape[i].join('[]')
         if tape[max(tape, default=0)] == machine.space:
             del tape[max(tape)]
-        yield '...'
+        yield '…'
 
     def show(machine, q, pos, tape, steps):
         for key, group in itertools.groupby(machine.show_gen(q, pos, tape, steps)):
@@ -137,8 +140,11 @@ assert Gamma.isdisjoint(Bm)
 Gamma.update(Bm)
 space = '○' * m
 r1 = '○●'.ljust(m, '○')
+nrules = 0
 
 def rule(q1, a1, q2=None, a2=None, d=1):
+    global nrules
+    nrules += 1
     if q2 is None: q2 = q1
     if a2 is None: a2 = a1
     assert q1 in Q
@@ -208,5 +214,6 @@ for γ in Bm: rule('l' + space, γ, 'l' + space, space, -1)  # (δ4n')
 for α, β in itertools.product([space, *Sigma], {*Sigma, '$'}):
     rule('l' + α, β, 'l' + β, α, -1)  # (δ5a)
 
+print('δ[…]=… ×', nrules)
 M = TuringMachine(Q, Sigma, Gamma, space, delta, 'n$', 'l$')
 M.simulate(word, debug=True)

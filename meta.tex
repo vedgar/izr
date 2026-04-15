@@ -375,6 +375,7 @@ Najvažnije svojstvo funkcije $\f F=\kf e^k$ je da mora "znati svoj indeks", odn
 Recimo, u slučaju funkcije \texttt{factorial}, kompajler se pobrine za to da poziv te funkcije u njenom kodu doista pozove nju samu (sa za $1$ manjim argumentom), ali da kojim slučajem kompajler ne podržava rekurziju, mogli bismo (pokazivač na) funkciju \texttt{factorial} prenijeti u samu sebe kao dodatni parametar.
 
 (Naravno, u ovom slučaju to uopće ne rješava problem, jer moramo \emph{imati} funkciju \texttt{factorial} koju ćemo poslati kao argument, ali zasad govorimo samo o specifikaciji.)
+\vspace{0.5em}
 
 \noindent\begin{equation}\label{eq:wishful}
     \begin{minipage}{0.8\textwidth}
@@ -384,7 +385,7 @@ Recimo, u slučaju funkcije \texttt{factorial}, kompajler se pobrine za to da po
                 { return n ? n*f(n-1) : 1; }
             /* ... nekako definiramo factorial */
             int main(void)
-                { return G(5, factorial); } /* ovo vrati 120 */
+                { return G(5, factorial); } /* vrati 120 */
 \end{verbatim}
     \end{minipage}
 \end{equation}
@@ -484,11 +485,11 @@ I to je dokaz teorema rekurzije (za $k=1$)! Ako pažljivo pogledamo, vidjet ćem
 
 Sada ćemo vidjeti kako pomoću teorema rekurzije možemo definirati rekurzivne funkcije. Metoda je uvijek ista: funkcijsku jednadžbu koju želimo riješiti (po $F^k$) zapišemo u obliku opće rekurzije (nađemo funkciju $\f G^{k+1}$) te nam teorem rekurzije dade parcijalno rekurzivno rješenje --- štoviše, dade nam njegov indeks $e_0$. Sada je potrebno dokazati dvije stvari (ako vrijede): prvo, da je $\f F_0:=\kf{e_0}^k$ jedinstveno rješenje, i drugo, da je $\f F_0$ totalna funkcija.
 
-I jedno i drugo su univerzalne tvrdnje na prirodnim brojevima --- jedinstvenost kaže da, kad god je $e_1$ "rješenje", za sve $\vec x\in\N^k$ vrijedi $\f{comp}(\vec x,e_1\!)\simeq\f F_0(\vec x)$; totalnost kaže da za sve $\vec x\in\N^k$ vrijedi $\vec x\in\dom{\f F_0}$ --- te ih je uobičajeno dokazivati indukcijom. Didaktički problem je u tome što ako je ta indukcija dovoljno jednostavna, najčešće je programabilna, pa primjerice totalnost ne znači samo rekurzivnost već znači primitivnu rekurzivnost. A tada nam ne treba teorem rekurzije: primitivna rekurzija je dovoljna (kao što je uostalom slučaj i s funkcijom $\f{factorial}$).
+I jedno i drugo su univerzalne tvrdnje o prirodnim brojevima --- jedinstvenost kaže da, kad god je $e_1$ "rješenje", za sve $\vec x\in\N^k$ vrijedi $\f{comp}(\vec x,e_1\!)\simeq\f F_0(\vec x)$; totalnost kaže da za sve $\vec x\in\N^k$ vrijedi $\vec x\in\dom{\f F_0}$ --- te ih je uobičajeno dokazivati indukcijom. Didaktički problem je u tome što ako je ta indukcija dovoljno jednostavna, najčešće je programabilna, pa primjerice totalnost ne znači samo rekurzivnost već znači primitivnu rekurzivnost. A tada nam ne treba teorem rekurzije: primitivna rekurzija je dovoljna (kao što je uostalom slučaj i s funkcijom $\f{factorial}$).
 
 Recimo, ako se totalnost od $\f F_0^1$ može dokazati običnom matematičkom indukcijom, to znači da imamo neku ogradu za broj koraka računanja $\f F_0(0)$ te neki izračunljiv način da iz ograde za broj koraka u računanju $\f F_0(n)$ dobijemo takvu ogradu za $\f F_0(n+1)$ --- a to zapravo znači da $\f F_0$ možemo dobiti (degeneriranom) primitivnom rekurzijom, samo trebamo u funkciji $\f{step}$ ograničiti minimizaciju tom nađenom ogradom. Ako umjesto obične indukcije moramo upotrijebiti jaku indukciju, to na isti način znači da se $\f F_0$ može dobiti rekurzijom s poviješću. U slučaju simultane indukcije, imamo simultanu rekurziju, i tako dalje.
 
-Vjerojatno najjednostavniji obrazac indukcije koji nije moguće "uloviti" u teoriji primitivno rekurzivnih funkcija je \emph{ugniježđena} indukcija po dvije varijable, gdje iz pretpostavke da tvrdnja vrijedi za neki $m$ i za \emph{sve} $n$, slijedi da vrijedi za $m+1$ i za sve $n$. Jedan od prvih primjera takve funkcije (čija totalnost zahtijeva takav indukcijski obrazac koji nije formalizabilan primitivnom rekurzijom) dao je Hilbertov asistent Wilhelm Friedrich Ackermann 1928.\ godine.
+Vjerojatno najjednostavniji obrazac indukcije koji nije moguće "uloviti" u teoriji primitivno rekurzivnih funkcija je \emph{ugniježđena} indukcija po dvije varijable, gdje iz pretpostavke da tvrdnja vrijedi za neki $m$ i za \emph{sve} $n$, slijedi da vrijedi za $m+1$ i za sve $n$. Jedan od prvih primjera funkcije čija totalnost zahtijeva indukcijski obrazac neuhvatljiv primitivnom rekurzijom, dao je Hilbertov asistent Wilhelm Friedrich Ackermann 1928.\ godine.
 
 Ackermann je promatrao niz aritmetičkih operacija: sljedbenik, zbrajanje, množenje, potenciranje,~\ldots\ nekako je jasno da ga možemo i nastaviti na sličan način; sljedeći član --- tetracija --- je čak korisna operacija u nekim kombinatornim situacijama. Mala nepravilnost: sljedbenik je jednomjesna funkcija, a sve ostale su dvomjesne; zato stavimo $\f A_0^2:=\f{Sc}\circ \f I_2^2$. Ostale funkcije označimo na očiti način: $\f A_1^2:=\f{add}^2$, $\f A_2^2:=\f{mul}^2$, $\f A_3^2:=\f{pow}$, i tako dalje. Osnovna ideja --- svaka osim prve funkcije u tom nizu dobivena je iteracijom prethodne --- se može iskazati kao
 \begin{equation}\label{eq:A2SSdef}
@@ -743,7 +744,7 @@ Vidjeli smo u prethodnoj točki da iz teorema o fiksnoj točki zapravo možemo z
 
 O čemu se tu zapravo radi? Reći da je neki broj $e$ element klase $E\mspace{-1mu}mp$, zapravo znači reći da je $e\approx_10$, odnosno $\kf e^1=\kf0^1=\varnothing^1$. Drugim riječima, $E\mspace{-1mu}mp$ je upravo skup svih indeksa prazne jednomjesne funkcije. Ako uzmemo neku drugu izračunljivu funkciju, dobit ćemo neku drugu klasu (svih njenih indeksa), i obrnuto, neka druga klasa $[e]_{\approx_k}\!$ će biti skup svih indeksa funkcije $\kf e^k$.
 
-Neka unija klasa $S:=\bigcup_{e\in A}[e]_{\approx_k}$ tada će odgovarati nekom \emph{skupu} izračunljivih $k$-mjesnih funkcija $\mathcal F:=\{\kf e^k\mid e\in A\}\subseteq\mathscr Comp_k$, i to tako da će praznom skupu $S$ odgovarati prazni skup $\mathcal F$, a skupu $S=\N$ odgovarat će $\mathcal F=\mathscr Comp_k$. Kako je to preslikavanje injekcija, ostalim skupovima brojeva ($\emptyset\subset S\subset\N$) odgovarat će ostali skupovi funkcija ($\emptyset\subset\mathcal F\subset\mathscr Comp_k$). Vrijeme je da to formaliziramo.
+Neka unija klas\=a $S:=\bigcup_{e\in A}[e]_{\approx_k}$ tada će odgovarati nekom \emph{skupu} izračunljivih $k$-mjesnih funkcija $\mathcal F:=\{\kf e^k\mid e\in A\}\subseteq\mathscr Comp_k$, i to tako da će praznom skupu $S$ odgovarati prazni skup $\mathcal F$, a skupu $S=\N$ odgovarat će $\mathcal F=\mathscr Comp_k$. Kako je to preslikavanje injekcija, ostalim unijama klas\=a ($\emptyset\subset S\subset\N$) odgovarat će ostali skupovi funkcija ($\emptyset\subset\mathcal F\subset\mathscr Comp_k$). Vrijeme je da to formaliziramo.
 
 \begin{definicija}[{name=[skup indeksa]}]
 Neka je $k\in\N_+$. Za svaki $\mathcal F\subseteq\mathscr Comp_k$ definiramo \emph{skup indeksa} %\\ (ili \emph{skup $k$-indeksa}, ako želimo naglasiti $k$)
@@ -771,7 +772,7 @@ Na neki način, do na neprebrojivost skupa $\mathcal P(\mathscr Comp_k)$, čini 
 
 % \subsection{Invarijantnost}
 
-Kako je to moguće? Pa $\N$ ima hrpu rekurzivnih podskupova. Uzmimo za primjer %skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi oblika $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
+Kako je to moguće? Ta $\N$ ima hrpu rekurzivnih podskupova. Uzmimo za primjer %skup parnih brojeva $2\N$. Nije li to skup indeksa nekog netrivijalnog skupa funkcija? Nije, jer se može vidjeti da \emph{svaka} funkcija ima (neki) parni indeks: prazna funkcija ima indeks $0\in2\N$, nulfunkcija ima indeks $\kprog{[0.\;\incr1]}=\kr{\f{codeINC}(1)}=2^{19}\in2\N$, a sve ostale RAM-izračunljive funkcije imaju \emph{samo} parne indekse, jer ih računaju neprazni RAM-programi oblika $(I_0,I_1,\dotsc)$ čiji kodovi su sigurno djeljivi s $2^{\kins{I_0\!}\,+1}$. Drugim riječima, ovo svojstvo izračunljivih funkcija je trivijalno svojstvo $\top$.
 %
 %Dobro, uzmimo onda neki manji skup, recimo
 jednočlani skup $\{1\}$. On je rekurzivan po lemi~\ref{lm:r1prn}, ali nije skup indeksa. Recimo, za $k=1$, u odgovarajućem skupu $\mathcal F$ bila bi funkcija $\f Z$, ali skup svih njenih indeksa je daleko veći od $\{1\}$ --- iz primjera~\ref{pr:alef0ind} vidimo da je beskonačan. Čim smo stavili broj~$1$ unutra, morali smo staviti i čitavu klasu $\kins{\{\f Z\}}=[1]_{\approx_1}$.

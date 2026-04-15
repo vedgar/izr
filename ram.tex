@@ -49,7 +49,7 @@ Pažljiv čitatelj će primijetiti da zahtijevamo da mjesnost bude pozitivna, od
 
 \subsection{Parcijalnost}
 
-Gdje god je dosad bilo govora o općenitim izračunljivim funkcijama, namjerno je upotrijebljen prijedlog "iz": funkcija \emph{iz} $A$ u $B$. Općenito u matematici, takva fraza označava \emph{parcijalne} funkcije, koje ne moraju biti definirane u svim točkama od $A$ (precizno, domena im je podskup od $A$). Recimo, tangens je parcijalna funkcija iz $\mathbb R$ u $\mathbb R$, jer je $\frac{\pi}{2}\in\mathbb R\setminus \dom{\text{tg}}$. Takve funkcije označavamo oznakom $f:A\rightharpoonup B$, za razliku od \emph{totalnih} funkcija koje označavamo $f:A\to B$ i zovemo ih funkcije \emph{sa} $A$ u $B$. 
+Gdje god je dosad bilo govora o općim izračunljivim funkcijama, namjerno je upotrijebljen prijedlog "iz": funkcija \emph{iz} $A$ u $B$. U matematici takva fraza označava \emph{parcijalne} funkcije, koje ne moraju biti definirane u svim točkama od $A$ (precizno, domena im je podskup od $A$). Recimo, tangens je parcijalna funkcija iz $\mathbb R$ u $\mathbb R$, jer je $\frac{\pi}{2}\in\mathbb R\setminus \dom{\text{tg}}$. Takve funkcije označavamo oznakom $f:A\rightharpoonup B$, za razliku od \emph{totalnih} funkcija koje označavamo $f:A\to B$ i zovemo ih funkcije \emph{sa} $A$ u $B$. 
 
 Dopuštajući algoritmima da računaju parcijalne funkcije, zapravo im omogućavamo da je za neke ulazne podatke njihov rad sasvim dobro definiran (dakle, ovdje ne mislimo na izuzetke, \emph{exceptions}, kao što je dijeljenje nulom), ali da ipak ne postoji završna konfiguracija iz koje bismo mogli pročitati izlazni podatak. Nakon malo razmišljanja dolazimo do zaključka da je to jedino moguće tako da algoritam za neke ulaze beskonačno radi, odnosno nikada ne stane.
 
@@ -188,10 +188,10 @@ Neka je $\mathcal S$ RAM-stroj s programom $P$, registrima $\reg j,j\in\N$ te pr
     c:\{\reg{j}\mid j\in\N\}\dcup\{\textsc{pc}\}\to\N
 \end{equation} takvo da je skoro svuda $0$ (skup $c^{-1}[\N_+]$ je konačan), a $c(\textsc{pc})\le n_P$. Skraćeno je pišemo kao $c=\bigl(c(\reg0),c(\reg1),\dotsc,c(\textsc{pc})\bigr)$. Konfiguracija $c$ je \emph{završna} ako je $c(\textsc{pc})=n_P$. \emph{Početna konfiguracija} s ulazom $\vec x=(x_1,x_2,\dotsc,x_k)\in\N^k$ je $(0,x_1,x_2,\dotsc,x_k,0,0,\dotsc,0)$ (u $\reg j$ je $x_j$ za $j\in[1\mspace{-1mu}\dd k]$, a svugdje drugdje su nule).
 
-    Za konfiguracije $c=(r_0,r_1,\dotsc,pc)$ i $d=(r_0',r_1',\dotsc,pc')$ istog RAM-stroja s programom $P=(I_0,\dotsc,I_{n_P-1})$, kažemo da $c$ \emph{prelazi} u $d$ (\emph{po programu} $P$, ili \emph{po instrukciji} $I_{pc}$), i pišemo $c\leadsto d$, ako vrijedi jedno od sljedećeg:
+    Za konfiguracije $c=(r_0,r_1,\dotsc,pc)$ i $c'=(r_0',r_1',\dotsc,pc')$ istog RAM-stroja s programom $P=(I_0,\dotsc,I_{n_P-1})$, kažemo da $c$ \emph{prelazi} u $c'$ (\emph{po programu} $P$, ili \emph{po instrukciji} $I_{pc}$), i pišemo $c\leadsto c'$, ako vrijedi jedno od sljedećeg:
 \begin{enumerate}
     \item\label{stav:leadzav}
-    $c$ je završna ($pc=n_P$) i $c=d$ --- to skraćeno pišemo $c\!\lcirclearrowleft$\!;
+    $c$ je završna ($pc=n_P$) i $c=c'$ --- to skraćeno pišemo $c\!\lcirclearrowleft$;
     \item\label{stav:leadINC}
     $I_{pc}=\incr{j}$ (za neki $j$), $r_j'=r_j+1$, $pc'=pc+1$ te $r'_i=r_i$ za sve $i\ne j$;
     \item\label{stav:leadDEC-}
